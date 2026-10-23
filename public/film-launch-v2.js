@@ -1,0 +1,2 @@
+
+(()=>{const frame=document.querySelector('.film-launch-frame');if(!frame)return;const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced){frame.classList.add('is-visible');return;}const io=new IntersectionObserver(entries=>{for(const e of entries){if(e.isIntersecting){frame.classList.add('is-visible');io.disconnect();break;}}},{threshold:.16});io.observe(frame);})();

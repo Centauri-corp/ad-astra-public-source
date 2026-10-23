@@ -1,0 +1,15 @@
+{
+  "release": "ad-astra-production-repair-2026-10-23",
+  "canonical": "https://adastra.global/",
+  "filmPublicPlayback": false,
+  "publicReferenceCatalog": false,
+  "assetOriginDependency": false,
+  "customerAccess": "clerk-authenticated",
+  "liveEngineAccess": "requires-all-verified-release-gates",
+  "dailyModelBudgetUSD": 10,
+  "rollbackBaseline": "dpl_GUQqWJ3jTy9f73XqfQFvmbqhnHUy",
+  "source": "isolated AD ASTRA source; see release evidence",
+  "indexableRoutes": [
+    "/"
+  ]
+}
