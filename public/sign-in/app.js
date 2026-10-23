@@ -11,9 +11,16 @@
     try {
       const clerk = window.Clerk;
       if (!clerk) throw new Error('clerk_not_loaded');
-      await clerk.load({ui: {ClerkUI: window.__internal_ClerkUICtor}});
+      await clerk.load({
+        ui: {ClerkUI: window.__internal_ClerkUICtor},
+        signInForceRedirectUrl: returnPath,
+        signUpForceRedirectUrl: returnPath
+      });
       if (clerk.session) { location.replace(returnPath); return; }
-      clerk.mountSignIn(mount, {fallbackRedirectUrl: returnPath});
+      clerk.mountSignIn(mount, {
+        forceRedirectUrl: returnPath,
+        signUpForceRedirectUrl: returnPath
+      });
       status.textContent = 'Sign in or create an account to continue.';
     } catch (error) {
       status.textContent = 'Sign-in could not load. Please try again shortly.';
