@@ -29,7 +29,33 @@ async function run(){
   // Independent module instance sees the same real shared state.
   delete require.cache[require.resolve('../lib/quota')];
   assert.equal(Number(await require('../lib/quota').command(['GET',user])),1);
-  console.log('AD_ASTRA_REDIS_ACCEPTANCE_PASS concurrent_user=24 allowed=12 global_attempts=16 allowed=5 atomic_budget=100000 ttl=verified reset=verified persistence=verified');
+  // Corrupt durable state must deny without altering either counter.
+  let corruptCases=0;
+  for(const value of ['-1','0','1.5','9007199254740992','broken']){
+   const badUser=make('bad-user-'+corruptCases),freshBudget=make('fresh-budget-'+corruptCases);
+   await command(['SET',badUser,value,'EX',3600]);
+   assert.deepEqual(await attempt(badUser,freshBudget),[-1,0,60]);
+   assert.equal(await command(['GET',badUser]),value);
+   assert.equal(Number(await command(['EXISTS',freshBudget])),0);corruptCases++;
+  }
+  const invalidLedgers=[['day',currentDay,'used','-1'],['day',currentDay,'used','1.5'],['day',currentDay,'used','broken'],['day',currentDay,'used','9007199254740992'],['day',currentDay],['used','20000'],['other','value'],['day',currentDay+1,'used','20000'],['day','broken','used','20000']];
+  for(const fields of invalidLedgers){
+   const freshUser=make('fresh-user-'+corruptCases),badBudget=make('bad-budget-'+corruptCases);
+   await command(['HSET',badBudget,...fields]);await command(['EXPIRE',badBudget,3600]);
+   const before=await command(['HGETALL',badBudget]);
+   assert.deepEqual(await attempt(freshUser,badBudget),[-1,0,60]);
+   assert.deepEqual(await command(['HGETALL',badBudget]),before);
+   assert.equal(Number(await command(['EXISTS',freshUser])),0);corruptCases++;
+  }
+  for(const target of ['user','budget']){
+   const persistentUser=make('persistent-user-'+target),persistentBudget=make('persistent-budget-'+target);
+   assert.equal((await attempt(persistentUser,persistentBudget))[0],1);
+   await command(['PERSIST',target==='user'?persistentUser:persistentBudget]);
+   assert.deepEqual(await attempt(persistentUser,persistentBudget),[-1,0,60]);
+   assert.equal(await command(['GET',persistentUser]),'1');
+   assert.equal(await command(['HGET',persistentBudget,'used']),'20000');corruptCases++;
+  }
+  console.log('AD_ASTRA_REDIS_ACCEPTANCE_PASS concurrent_user=24 allowed=12 global_attempts=16 allowed=5 atomic_budget=100000 ttl=verified reset=verified persistence=verified corrupt_state='+corruptCases+' denied_without_mutation');
  } finally {if(keys.length)await command(['DEL',...keys]);}
 }
 run().catch(()=>{console.error('AD_ASTRA_REDIS_ACCEPTANCE_FAILED: release blocked; no credential values logged');process.exitCode=1;});
