@@ -105,3 +105,11 @@ test('return paths reject external URLs and preserve approved mode navigation',(
  for(const value of ['https://evil.example','//evil.example','/\\evil.example','javascript:alert(1)','/sign-in/','/%2f%2fevil.example'])assert.equal(safe(value),'/platform/');
  assert.equal(safe('/knowledge/?mode=learn#ask-ad-astra'),'/knowledge/?mode=learn#ask-ad-astra');
 });
+test('session handshake verifies identity without model or quota access',async()=>{
+ const session=require('../api/session');
+ for(const [authorization,code] of [['Bearer '+token(),200],['',401],['Bearer invalid.token.value',401]]){
+  const res=response();await session({method:'POST',headers:{host:'adastra.global',origin:'https://adastra.global','x-ad-astra-request':'public-v1',authorization}},res);
+  assert.equal(res.statusCode,code);assert.equal(res.body.authenticated,code===200);assert.deepEqual(Object.keys(res.body),['authenticated']);
+ }
+ assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));
+});

@@ -24,6 +24,7 @@
         status.textContent = 'Sign in to enter the Ad Astra customer platform.';
         return;
       }
+      await window.adAstraVerifySession(clerk);
       authGate.hidden = true;
       if (returnPath.startsWith('/knowledge/')) { location.replace(returnPath); return; }
       platform.hidden = false;
@@ -35,7 +36,7 @@
       if (signOut) signOut.addEventListener('click', async event => { event.preventDefault(); await clerk.signOut(); location.href = '/platform/'; });
     } catch (error) {
       authGate.hidden = false;
-      status.textContent = 'Sign-in could not load. Please try again shortly.';
+      status.textContent = 'Your account session could not be verified. Please sign in again or try later.';
       console.error('ad_astra_clerk_load_error', error);
     }
   }

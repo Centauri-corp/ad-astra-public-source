@@ -25,6 +25,7 @@
       location.replace('/platform/?return=' + encodeURIComponent(returnPath));
       return null;
     }
+    await window.adAstraVerifySession(clerk);
     $('knowledge-auth').hidden = true;
     $('main').hidden = false;
     return clerk;
