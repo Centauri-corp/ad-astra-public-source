@@ -1,9 +1,21 @@
 'use strict';
 const {test}=require('node:test'),assert=require('node:assert/strict');
-const {readApproved,digest,renderBody}=require('../lib/editorial');
+const {readApproved,digest,renderBody,renderPage}=require('../lib/editorial');
 const doc={_id:'reviewed-page',_rev:'exact-revision',_type:'landingPage',editorialStatus:'approved_for_public',title:'Example',summary:'Example',seoTitle:'Example',seoDescription:'Example',slug:'discover/example',body:[{_type:'block',style:'normal',children:[{_type:'span',text:'<script>alert(1)</script>'}]}]};
 const config=()=>({projectId:'6a4vgjc9',dataset:'production',perspective:'published',approvals:[{id:doc._id,revision:doc._rev,slug:doc.slug,sha256:digest(doc)}]});
 test('empty approval set makes no private request',async()=>{assert.deepEqual(await readApproved({...config(),approvals:[]},null,()=>{throw Error('must not fetch')}),[]);});
 test('only exact approved published revision is selected server side',async()=>{const out=await readApproved(config(),'synthetic',async(url,opts)=>{assert.equal(url.origin,'https://6a4vgjc9.api.sanity.io');assert.equal(url.searchParams.get('perspective'),'published');assert.ok(!url.href.includes('synthetic'));assert.equal(opts.redirect,'error');return{ok:true,json:async()=>({result:[doc]})};});assert.equal(out.length,1);assert.ok(!renderBody(doc).includes('<script>'));});
 test('drafts, versions, unapproved, changed and missing documents fail closed',async()=>{for(const mutate of [d=>({...d,_id:'drafts.'+d._id}),d=>({...d,_id:'versions.release.'+d._id}),d=>({...d,_rev:'changed'}),d=>({...d,editorialStatus:'internal_draft'}),d=>({...d,title:'Unreviewed edit'})])await assert.rejects(readApproved(config(),'synthetic',async()=>({ok:true,json:async()=>({result:[mutate(doc)]})})));await assert.rejects(readApproved(config(),'synthetic',async()=>({ok:true,json:async()=>({result:[]})})));});
 test('wrong dataset, draft perspective and missing credentials cannot read private content',async()=>{for(const patch of [{dataset:'ad-astra-cognitive'},{perspective:'drafts'},{projectId:'unrelated'}])await assert.rejects(readApproved({...config(),...patch},'synthetic'));await assert.rejects(readApproved(config(),''));});
+test('approved editorial fields render safely into the real V3 template',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const template=fs.readFileSync(path.join(__dirname,'../public-v3/discover/ai-reliability/index.html'),'utf8');
+ const candidate={...doc,title:'Approved <title>',summary:'Reviewed & safe',seoTitle:'New title',seoDescription:'Quoted "description"'};
+ const html=renderPage(template,candidate);
+ assert.ok(html.includes('<h1>Approved &lt;title&gt;</h1><p>Reviewed &amp; safe</p>'));
+ assert.ok(html.includes('<title>New title</title>'));
+ assert.ok(html.includes('content="Quoted &quot;description&quot;"'));
+ assert.ok(html.includes('&lt;script&gt;alert(1)&lt;/script&gt;'));
+ assert.ok(html.includes('<nav class="nav"'));
+ assert.throws(()=>renderPage('<html></html>',candidate),/template/);
+});
