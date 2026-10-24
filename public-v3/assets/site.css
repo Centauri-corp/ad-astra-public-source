@@ -20,4 +20,11 @@ html{scroll-padding-top:95px}img,svg,canvas{max-width:100%}h1,h2,h3,h4{overflow-
 @media(hover:none){.navdetails>summary,.mega-links a,.atlas-btn{touch-action:manipulation}}
 @media(forced-colors:active){.atlas-btn,.nav-toggle,.tabs button{border:2px solid ButtonText!important}.atlas-btn:focus-visible,button:focus-visible{outline:3px solid Highlight!important}}
 
-.motion-toggle{position:absolute;bottom:0;left:50%;transform:translateX(-50%);z-index:6;min-height:44px;padding:8px 16px;border:1px solid #e5bc80;background:#07192f;color:#fff4dd;border-radius:8px;font:inherit;font-size:12px;cursor:pointer}.motion-toggle:focus-visible{outline:3px solid #fff;outline-offset:4px}.motion-toggle:disabled{cursor:default}html[data-motion=paused] *,html[data-motion=paused] *:before,html[data-motion=paused] *:after{animation-play-state:paused!important}html[data-motion=paused] .globe canvas{visibility:hidden}html[data-motion=paused] .globe .still{opacity:1!important}html:not(.js) .nav-toggle{display:none}@media(max-width:950px){html:not(.js) .head{flex-wrap:wrap}html:not(.js) .nav{display:flex;position:static;width:100%;max-height:none;overflow:visible}html:not(.js) .mega{position:static}}
+.motion-toggle{position:absolute;bottom:0;left:50%;transform:translateX(-50%);z-index:6;min-height:44px;padding:8px 16px;border:1px solid #e5bc80;background:#07192f;color:#fff4dd;border-radius:8px;font:inherit;font-size:12px;cursor:pointer}.motion-toggle:focus-visible{outline:3px solid #fff;outline-offset:4px}.motion-toggle:disabled{cursor:default}html[data-motion=paused] *,html[data-motion=paused] *:before,html[data-motion=paused] *:after{animation-play-state:paused!important}html[data-motion=paused] .globe canvas{visibility:hidden}html[data-motion=paused] .globe .still{opacity:1!important}/* Native details links remain usable until navigation handlers are ready. */
+html:not(.nav-ready) .nav-toggle{display:none}
+@media(max-width:950px){
+ html:not(.nav-ready) header{height:auto;position:static}
+ html:not(.nav-ready) .head{height:auto;flex-wrap:wrap;padding-block:16px;gap:12px}
+ html:not(.nav-ready) .nav{display:block;position:static;width:100%;margin:0;max-height:none;overflow:visible;box-shadow:none}
+ html:not(.nav-ready) .mega{position:static;transform:none}
+}

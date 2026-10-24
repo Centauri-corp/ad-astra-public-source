@@ -8,7 +8,7 @@
   "scripts": {
     "test": "node --test test/*.test.cjs",
     "check": "node scripts/check-release.cjs && node scripts/check-v3-release.cjs",
-    "build": "node --test test/*.test.cjs && node scripts/sync-editorial.cjs && node scripts/check-v3-release.cjs && node scripts/redis-acceptance.cjs",
+    "build": "node --test test/*.test.cjs && node scripts/sync-editorial.cjs && node scripts/sync-social.cjs && node scripts/check-v3-release.cjs && node scripts/redis-acceptance.cjs",
     "preview": "node scripts/preview.cjs"
   }
 }

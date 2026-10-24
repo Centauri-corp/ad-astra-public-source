@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "node --test test/*.test.cjs && node scripts/sync-editorial.cjs && node scripts/check-v3-release.cjs && node scripts/redis-acceptance.cjs",
+  "buildCommand": "node --test test/*.test.cjs && node scripts/sync-editorial.cjs && node scripts/sync-social.cjs && node scripts/check-v3-release.cjs && node scripts/redis-acceptance.cjs",
   "installCommand": "echo No dependencies required",
   "outputDirectory": "public-v3",
   "functions": {
