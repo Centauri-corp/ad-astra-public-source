@@ -1,6 +1,9 @@
 'use strict';
 const assert=require('node:assert/strict'),crypto=require('node:crypto');
 const {command,SCRIPT}=require('../lib/quota');
+// Redis hash fields are unordered. Compare field/value pairs without weakening
+// the assertion that corrupt-state rejection leaves every stored value intact.
+const hashSnapshot=async key=>{const fields=await command(['HGETALL',key]);return Object.fromEntries(Array.from({length:fields.length/2},(_,i)=>[fields[i*2],fields[i*2+1]]));};
 let phase='setup';
 async function run(){
  if(!process.env.VERCEL){console.log('Redis integration acceptance: deferred to Vercel build with connected secrets');return;}
@@ -49,9 +52,9 @@ async function run(){
    phase='corrupt-budget-'+corruptCases;
    const freshUser=make('fresh-user-'+corruptCases),badBudget=make('bad-budget-'+corruptCases);
    await command(['HSET',badBudget,...fields]);await command(['EXPIRE',badBudget,3600]);
-   const before=await command(['HGETALL',badBudget]);
+   const before=await hashSnapshot(badBudget);
    assert.deepEqual(await attempt(freshUser,badBudget),[-1,0,60]);
-   assert.deepEqual(await command(['HGETALL',badBudget]),before);
+   assert.deepEqual(await hashSnapshot(badBudget),before);
    assert.equal(Number(await command(['EXISTS',freshUser])),0);corruptCases++;
   }
   for(const target of ['user','budget']){
