@@ -1,9 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "node --test test/security.test.cjs && node scripts/check-release.cjs && node scripts/redis-acceptance.cjs",
+  "buildCommand": "node --test test/*.test.cjs && node scripts/sync-editorial.cjs && node scripts/check-v3-release.cjs && node scripts/redis-acceptance.cjs",
   "installCommand": "echo No dependencies required",
-  "outputDirectory": "public",
+  "outputDirectory": "public-v3",
   "functions": {
     "api/ask.js": {
       "maxDuration": 30
@@ -27,43 +27,16 @@
         },
         {
           "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
+          "value": "DENY"
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net 'sha256-ELtAh3qjqT9mt6c/hJSi1TuXPRQ/cz6BOXPxC+BY8dY='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://img.clerk.com; media-src 'self'; connect-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net; frame-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"
+          "value": "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'none'; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'; upgrade-insecure-requests"
         }
       ]
     },
     {
-      "source": "/release-manifest.json",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-store"
-        }
-      ]
-    },
-    {
-      "source": "/assets/:path*",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
-        }
-      ]
-    },
-    {
-      "source": "/(knowledge|platform|sign-in|markets|pricing|services|company|about|film)(.*)",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/(api|lib|scripts|test)(.*)",
+      "source": "/api/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

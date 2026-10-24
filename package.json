@@ -1,7 +1,14 @@
 {
   "name": "ad-astra-public-hardened",
   "private": true,
-  "version": "2.3.0",
-  "engines": {"node":"24.x"},
-  "scripts": {"test":"node --test test/security.test.cjs","check":"node scripts/check-release.cjs"}
+  "version": "3.1.0",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.cjs",
+    "check": "node scripts/check-release.cjs && node scripts/check-v3-release.cjs",
+    "build": "node --test test/*.test.cjs && node scripts/sync-editorial.cjs && node scripts/check-v3-release.cjs && node scripts/redis-acceptance.cjs",
+    "preview": "node scripts/preview.cjs"
+  }
 }

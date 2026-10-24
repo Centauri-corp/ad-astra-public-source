@@ -9,8 +9,8 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-      - run: node --test test/security.test.cjs
-      - run: node scripts/check-release.cjs
+      - run: node --test test/*.test.cjs
+      - run: node scripts/check-release.cjs && node scripts/check-v3-release.cjs
 # Production remains manual: stage on the exact team/project, run real Redis
 # acceptance during the Vercel build, verify the deployment, then promote.
 # Do not add deployment credentials until repository protections are configured.

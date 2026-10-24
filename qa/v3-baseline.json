@@ -1,0 +1,384 @@
+{
+  "deployment": "dpl_4nhEsh9nEo6ZuaiaKticS5Z6EDLH",
+  "checkedAt": "2026-10-24T04:19:40.942Z",
+  "files": [
+    {
+      "path": "accessibility/index.html",
+      "sha1": "386508b38abc525980c653581220b62672432d93",
+      "bytes": 6662,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "architecture/index.html",
+      "sha1": "9c6f8a8ebd65426cbe7254eb073c8e9891f1135e",
+      "bytes": 6835,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "assets/base.css",
+      "sha1": "2a9067a403b259503a0726b071bd75cccf3894e1",
+      "bytes": 16175,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "assets/base.js",
+      "sha1": "14b437d0c0f55e4cec6dec99b3287f0139ec8783",
+      "bytes": 7840,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "assets/orbital.svg",
+      "sha1": "dafd017bb54e7203f6d2ed54661225481e3b95be",
+      "bytes": 9349,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "assets/site.css",
+      "sha1": "114ae09449ab94dd4a9c2606bf62926411a2a35e",
+      "bytes": 6333,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "assets/site.js",
+      "sha1": "ddfbfb2b83462d566917582c890ce485f690a12e",
+      "bytes": 5937,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "assets/world-beyond.svg",
+      "sha1": "1883981def7f0b1a100a69bcf64ab8ed9f0b53fa",
+      "bytes": 10870,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "assets/world-earth.svg",
+      "sha1": "45c2948c61de725c0349eec11f821666a9374a06",
+      "bytes": 11345,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "assets/world-space.svg",
+      "sha1": "5e931569f9dcf57272476bf9f580091b9bb438b2",
+      "bytes": 11062,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "atlas/index.html",
+      "sha1": "9d329a58367031b3c0dd1643d2a58413940d1b64",
+      "bytes": 8672,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "cinematic/index.html",
+      "sha1": "e0fd01bd9c46e99f0d674d296355f65567d609d1",
+      "bytes": 6245,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "company/index.html",
+      "sha1": "98b8bda2b2bbfc9eabb557c0d5e19d2127a65f62",
+      "bytes": 7051,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "contact/index.html",
+      "sha1": "9b4dfc7c52fd9846173a947e344515dcbb294ea4",
+      "bytes": 5974,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "discover/index.html",
+      "sha1": "b27960067686250fa6d65c7677fee50f9340fc9d",
+      "bytes": 7732,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "early-access/index.html",
+      "sha1": "96ea7d4820115e7e2a2caa33c535046d92c88c2b",
+      "bytes": 6028,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "experience/index.html",
+      "sha1": "94784e036a9971d348f02a38059ffafcb1791220",
+      "bytes": 8934,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "explore-an-idea/index.html",
+      "sha1": "47d62c0f385f9956e1fbe8d0e84df04c2f4f6ab6",
+      "bytes": 6988,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "faq/index.html",
+      "sha1": "1a55cdab9614d2e00f24fe40bd86c593f8ad0b19",
+      "bytes": 6693,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "frontier/index.html",
+      "sha1": "0f79ad290b5e04d6d5c1de0b1224e09b5296c1bb",
+      "bytes": 7720,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "index.html",
+      "sha1": "225c32b4366e61fa7c01f808cccba709e701028a",
+      "bytes": 12441,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "intelligence/index.html",
+      "sha1": "3d6e77dfbda27568f94d01866a93b2d85001dba2",
+      "bytes": 8845,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "knowledge/index.html",
+      "sha1": "129a6bab03bc50e4dc98395d84691680bd0d73ef",
+      "bytes": 8810,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "markets/index.html",
+      "sha1": "47d890b0c7a2f11416b37da9cb1e51c1e9a4e65c",
+      "bytes": 8490,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "mission-lab/index.html",
+      "sha1": "c3dfb20cd85406e889cdc0a4b1191f74f6d05f23",
+      "bytes": 6694,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "operating-model/index.html",
+      "sha1": "07758987e5ad14fc3d2ea491f6d87263dca6b58d",
+      "bytes": 6643,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "platform/index.html",
+      "sha1": "dfefe320882c3c5e157ecb9d369b7fc4fab2d043",
+      "bytes": 11913,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "pricing/index.html",
+      "sha1": "6c67b738a8ffa5b2044e3bc72cccd09dd942047b",
+      "bytes": 5999,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "privacy/index.html",
+      "sha1": "38d2bde049c3ebe7d20a5f3711b36afddf2462a4",
+      "bytes": 6095,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "research/index.html",
+      "sha1": "50214a48d072622d65ec481a6c2d20f0df23dfe7",
+      "bytes": 7403,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "robots.txt",
+      "sha1": "788dcbf948a855700bde1d35f903ba8395019d9b",
+      "bytes": 67,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "sitemap.xml",
+      "sha1": "10b28cd7f1a29013cb0116963831c9233d8570b2",
+      "bytes": 1788,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "solutions/index.html",
+      "sha1": "9ce250e93a2690ca8c5fba3a0f48fc58889ef9da",
+      "bytes": 6696,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "technology/index.html",
+      "sha1": "d5927b217685c400fd408c260583830eef0aed94",
+      "bytes": 6680,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "terms/index.html",
+      "sha1": "114e39fafa4d5abd51427e3732071a8e893740b0",
+      "bytes": 6012,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "trust/index.html",
+      "sha1": "70b51016e1cb78be8171f39294eea4455c1ab973",
+      "bytes": 6820,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "updates/index.html",
+      "sha1": "7263aef5d4ac80ffe98ee12960d229d79364839c",
+      "bytes": 6636,
+      "vercelHashVerified": true
+    },
+    {
+      "path": "discover/ai-research-workflow/index.html",
+      "sha1": "85369ae1fd9771526886acf3c22a2a46b723ff2c",
+      "bytes": 7456,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "discover/ai-reliability/index.html",
+      "sha1": "88083401bf870cb3a7a8500416068264793daef8",
+      "bytes": 9715,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "discover/write-professional-email/index.html",
+      "sha1": "39e42ea4ae0992cb325fc4ffd0db86bf85f4e806",
+      "bytes": 7037,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "discover/learn-with-ai/index.html",
+      "sha1": "08c899c11f23a09d40aa907206fd891eb2050cb4",
+      "bytes": 6993,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "discover/verify-ai-answers/index.html",
+      "sha1": "282379875730dd449c000290952f1725e5bab5ab",
+      "bytes": 7351,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "discover/better-ai-prompts/index.html",
+      "sha1": "186bbc054c5068f3d97e533567ffc75407fc7a94",
+      "bytes": 7303,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "discover/learn-complex-topics/index.html",
+      "sha1": "5cd146241b37a288971963194ce3af22b616d7b3",
+      "bytes": 6134,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "discover/plan-project-with-ai/index.html",
+      "sha1": "7707349faaef8e78a6f0a8021cf803a17293d7d7",
+      "bytes": 6915,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "discover/research-with-evidence/index.html",
+      "sha1": "80a0560d7761b62cad6d69cf9ff8e952e980d97e",
+      "bytes": 6223,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "discover/make-a-practical-plan/index.html",
+      "sha1": "94ca563a74131c7d520671ef479386078f56668f",
+      "bytes": 6152,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "discover/write-with-clarity/index.html",
+      "sha1": "49f2795607955d6f3f0d70c2bb06ac9e3be29798",
+      "bytes": 6117,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/consumer-personal-ai/index.html",
+      "sha1": "29adeecf4d9627378fe07ce056376ef0cafaff3f",
+      "bytes": 6277,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/education-learning/index.html",
+      "sha1": "249d160282e7b6c55db5b3f07c1f001496ebabd2",
+      "bytes": 6265,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/business-professional-services/index.html",
+      "sha1": "c16cf56f9758f872459a77edbdfa86c2ed114ae8",
+      "bytes": 6337,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/creative-industries-media/index.html",
+      "sha1": "876cd1db4fb69d13e0995b6a84b1a9a6ff5d20f9",
+      "bytes": 6307,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/science-research/index.html",
+      "sha1": "55dcf2aa3d3f24846feeb266059f9fabcc301d8f",
+      "bytes": 6253,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/digital-commerce/index.html",
+      "sha1": "e2e836c72bb10fb6c0e3d2a1effc254a067a3804",
+      "bytes": 6223,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/manufacturing-energy/index.html",
+      "sha1": "cdf40bbba885c70e1caa3b0929bf02828e7a1f56",
+      "bytes": 6277,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/healthcare-wellness/index.html",
+      "sha1": "c9ce11388c2949bc9499e5754d2c0c97ce9c8056",
+      "bytes": 6271,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/finance-economics/index.html",
+      "sha1": "359ed7226be5767768bf56d70400d9fe83a5bea2",
+      "bytes": 6259,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/logistics-supply-chain/index.html",
+      "sha1": "572c7b6b6c990a65ed50f04c2f8aec97db22a1e6",
+      "bytes": 6289,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/agriculture-food/index.html",
+      "sha1": "56275c077d7ddeb1719fd349f9830f1df3be60fc",
+      "bytes": 6253,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/government-public-services/index.html",
+      "sha1": "2b71a855e61485b2c1c24986e2c40bf5259f6b59",
+      "bytes": 6313,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/legal-compliance/index.html",
+      "sha1": "45412c8e831053ff41e6dde5eddb6ff128fabc32",
+      "bytes": 6253,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/travel-hospitality/index.html",
+      "sha1": "e17c317d620f10f685f7cde0e159982084410fb4",
+      "bytes": 6265,
+      "vercelHashVerified": false
+    },
+    {
+      "path": "markets/real-estate-construction/index.html",
+      "sha1": "7f8d4067184b69a61ca7095676aa669ba84db112",
+      "bytes": 6301,
+      "vercelHashVerified": false
+    }
+  ]
+}
