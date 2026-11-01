@@ -6,7 +6,7 @@ if(process.env.VERCEL_PROJECT_ID)assert.equal(process.env.VERCEL_PROJECT_ID,'prj
 if(process.env.VERCEL_ORG_ID)assert.equal(process.env.VERCEL_ORG_ID,'team_5xblMPo2zEBjbz4KPmeDVHPr');
 const files=walk(path.join(root,'public'));
 for(const f of files){
- const rel=path.relative(path.join(root,'public'),f).replaceAll('\','/');
+ const rel=path.relative(path.join(root,'public'),f).replaceAll('\\','/');
  assert.ok(!/(catalog\.json|\.map$|\.env|\.git|ad-astra-cognitive|company-film|preview-v2\.mp4)/i.test(rel),rel);
  if(!/\.(html|js|css|json|txt|xml)$/.test(f))continue;
  const text=fs.readFileSync(f,'utf8');
