@@ -170,8 +170,8 @@ document.getElementById('save-launch').addEventListener('click', async () => {
   const result = document.getElementById('save-result');
   const url = 'https://adastra.global/';
   try {
-    if (navigator.share) {await navigator.share({title:'Ad Astra', text:'A new horizon for human curiosity. Ad Astra is coming soon.', url}); result.textContent = '';}
-    else if (navigator.clipboard) {await navigator.clipboard.writeText(url); result.textContent = 'Launch-page link copied. Share it with a curious mind.';}
-    else result.textContent = 'Share our launch page: ' + url;
-  } catch (error) {if (error.name !== 'AbortError') result.textContent = 'Share our launch page: ' + url;}
+    if (navigator.share) {await navigator.share({title:'Ad Astra', text:'A new horizon for human curiosity. Explore the Ad Astra vision.', url}); result.textContent = '';}
+    else if (navigator.clipboard) {await navigator.clipboard.writeText(url); result.textContent = 'Website link copied. Share it with a curious mind.';}
+    else result.textContent = 'Share our website: ' + url;
+  } catch (error) {if (error.name !== 'AbortError') result.textContent = 'Share our website: ' + url;}
 });
