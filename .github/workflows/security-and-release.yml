@@ -27,6 +27,8 @@ jobs:
         run: npm test
       - name: Verify static public release gates
         run: npm run check
+      - name: Verify internal links, graphics assets and responsive page structure
+        run: node scripts/site-integrity.cjs
       - name: Reject incorrect customer AI availability claims
         run: |
           node - <<'NODE'
