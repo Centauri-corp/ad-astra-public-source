@@ -36,6 +36,15 @@ for (const file of paths) {
   const source = fs.readFileSync(file,'utf8');
   if (/\.html$/i.test(file)) {
     for (const match of source.matchAll(/\b(?:href|src|poster)=["']([^"']+)["']/gi)) checkTarget(match[1], rel);
+    if(rel === 'index.html') {
+      for(const image of source.matchAll(/<img\\b[^>]*>/gi)) {
+        assert.match(image[0],/\\balt=["'][^"']*["']/i,'Homepage image missing alt text');
+        assert.match(image[0],/\\bwidth=["']\\d+["']/i,'Homepage image missing width');
+        assert.match(image[0],/\\bheight=["']\\d+["']/i,'Homepage image missing height');
+      }
+      assert.match(source,/class="hero-video motion-video"/,'Missing cinematic hero motion fallback');
+      assert.match(source,/poster="assets\\/ad-astra-runway-orbital-poster.jpg"/,'Hero poster fallback required');
+    }
     assert.match(source, /<meta\s+name="viewport"/i,'missing viewport on '+rel);
     assert.match(source, /<title>/i,'missing title on '+rel);
   }
