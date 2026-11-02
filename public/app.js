@@ -226,3 +226,22 @@ for(const button of neuralButtons){
     neuralButtons[next]?.click();
   });
 }
+
+// Separate accessible ambient-motion control; never alters approved neural artwork.
+const neuralEffectsToggle=document.getElementById('neural-effects-toggle');
+if(neuralStage && neuralEffectsToggle){
+  let pausedByUser=false;
+  const syncNeuralFx=()=>{
+    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const globalPaused=document.body.classList.contains('motion-suspended');
+    const paused=pausedByUser||reduced||globalPaused;
+    neuralStage.classList.toggle('neural-fx-paused',paused);
+    neuralEffectsToggle.setAttribute('aria-pressed',String(paused));
+    neuralEffectsToggle.disabled=reduced||globalPaused;
+    neuralEffectsToggle.textContent=reduced?'Reduced motion enabled':globalPaused?'Effects paused globally':pausedByUser?'Resume ambient effects':'Pause ambient effects';
+  };
+  neuralEffectsToggle.addEventListener('click',()=>{pausedByUser=!pausedByUser;syncNeuralFx();});
+  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',syncNeuralFx);
+  new MutationObserver(syncNeuralFx).observe(document.body,{attributes:true,attributeFilter:['class']});
+  syncNeuralFx();
+}
