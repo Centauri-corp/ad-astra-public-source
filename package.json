@@ -2,6 +2,12 @@
   "name": "ad-astra-public-hardened",
   "private": true,
   "version": "2.3.0",
-  "engines": {"node":"24.x"},
-  "scripts": {"test":"node --test test/security.test.cjs","check":"node scripts/check-release.cjs"}
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "test": "node --test test/security.test.cjs",
+    "check": "node scripts/check-release.cjs && node scripts/check-graphics.cjs",
+    "check:graphics": "node scripts/check-graphics.cjs"
+  }
 }
