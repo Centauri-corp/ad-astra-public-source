@@ -28,6 +28,8 @@ function events(target={}) {
 }
 function media(loop=false) {
   const video=events({loop, paused:true, ended:false, muted:false, dataset:{}, classList:classes(), playCalls:0, reject:null});
+  video.sources = [events({dataset:{},closest:()=>video})];
+  video.querySelectorAll = selector => selector==='source' ? video.sources : [];
   let time=0;
   Object.defineProperty(video,'currentTime',{get:()=>time,set:value=>{time=value;video.ended=false;}});
   video.play = () => {
@@ -44,7 +46,7 @@ function fixture({reduced=false,saveData=false}={}) {
   const button=events({dataset:{},disabled:false,innerHTML:'',setAttribute:(key,value)=>{attributes[key]=value;}});
   const body={classList:classes()};
   const document=events({hidden:false,body,querySelector:selector=>selector==='.motion'?button:null,
-    querySelectorAll:selector=>selector==='.motion-video'?[hero,horizon]:[],getElementById:()=>null});
+    querySelectorAll:selector=>selector==='.motion-video'?[hero,horizon]:selector==='.motion-video source'?[...hero.sources,...horizon.sources]:[],getElementById:()=>null});
   const preference=events({matches:reduced});
   let observer;
   class IntersectionObserver {constructor(callback){observer=callback;}observe(){}}
@@ -104,4 +106,13 @@ test('media failure preserves an enabled global pause control for decorative eff
 test('pending playback can be cancelled before a media play request starts',async()=>{
   const f=fixture();f.visible(f.hero);assert.equal(f.attributes['aria-label'],'Cancel loading');f.click();await f.settle();
   assert.equal(f.hero.playCalls,0);assert.equal(f.hero.paused,true);assert.equal(f.attributes['aria-label'],'Play motion');
+});
+test('a non-bubbling source error clears pending playback and keeps global effects controllable',async()=>{
+  const f=fixture();f.hero.play=()=>{f.hero.playCalls++;return new Promise(()=>{});};
+  f.visible(f.hero);await f.settle();assert.equal(f.attributes['aria-label'],'Cancel loading');
+  f.hero.sources[0].emit('error');
+  assert.equal(f.hero.dataset.failed,'true');assert.equal(f.button.disabled,false);
+  assert.equal(f.attributes['aria-label'],'Pause effects');
+  f.click();assert.equal(f.attributes['aria-label'],'Resume effects');
+  assert.equal(f.body.classList.contains('motion-suspended'),true);
 });

@@ -15,7 +15,7 @@ Date: 2026-11-02. Scope: the existing AD ASTRA public project. The website remai
 
 ## Immutable source and private handoff
 
-The repair begins at production commit `6ab3f97f322bbe17f874b6db350f0b337c8abfc4`. Authentication, quotas, release gates and provider-call code are retained byte for byte. Original images and videos are inherited from the same Git tree.
+The repair begins at production commit `6ab3f97f322bbe17f874b6db350f0b337c8abfc4`. Authentication, quotas and provider-call restrictions are retained. Release readiness additionally requires an integrated shared monthly budget path. Original images and videos are inherited from the same Git tree.
 
 The project-level `/platform` rewrite is intentionally not replaced by the newer Clerk-only page: the pinned Daylight handler also enforces paid entitlements. The retrievable Daylight source is incomplete and has no canonical Git commit metadata. Complete immutable source and positive/negative entitlement tests are required before rebuilding it or changing its redirect boundary. General-public availability links now use the same-origin `/access/` page without silently entering this legacy handoff.
 
@@ -24,3 +24,17 @@ The project-level `/platform` rewrite is intentionally not replaced by the newer
 `npm test` includes the unchanged security tests, motion-state regressions and public-journey checks. Media events are deterministic fixtures: they verify controller behavior, not real video decoding or physical-device acceptance. The deployment build still requires static privacy/release checks, complete link/asset integrity and real Redis acceptance. No gate is set to true as a substitute for evidence, and no paid model is invoked by the tests.
 
 Hosted browser, mobile/Safari/VoiceOver, real customer onboarding, tenant/entitlement, billing, cross-vendor expenditure and final film creative acceptance remain explicit release requirements.
+
+## Public provider admission
+
+The legacy public endpoint calls OpenAI directly and has a separate Redis daily
+budget. It does not reserve or settle against the private shared monthly ledger.
+The source-controlled provider policy therefore keeps this path unavailable even
+when every legacy release environment flag is true. A flag cannot substitute for
+an authenticated shared-budget adapter or prove cross-vendor expenditure.
+
+This is a closed admission boundary, not a completed cross-vendor integration.
+The existing JWT, quota and provider tests explicitly mock that boundary to test
+their individual responsibilities. A separate unmocked regression verifies that
+the actual exported API stays unavailable and makes no Redis/provider request.
+The private ledger's historical approvals and additional limits are separate.

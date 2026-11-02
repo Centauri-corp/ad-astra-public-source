@@ -6,6 +6,12 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '../../public');
 const config = require('../../vercel.json');
 const commonHeaders = Object.fromEntries(config.headers[0].headers.map(h => [h.key, h.value]));
+// This fixture deliberately uses loopback HTTP. WebKit applies the production
+// HTTPS-upgrade directive even to loopback, where no TLS listener exists. Keep
+// every other CSP directive; the deployed HTTPS policy stays in vercel.json.
+const cspKey = Object.keys(commonHeaders).find(key => key.toLowerCase() === 'content-security-policy');
+if (cspKey) commonHeaders[cspKey] = commonHeaders[cspKey].split(';')
+  .filter(directive => directive.trim() !== 'upgrade-insecure-requests').join(';');
 const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json','.jpg':'image/jpeg','.png':'image/png','.svg':'image/svg+xml','.mp4':'video/mp4','.woff2':'font/woff2','.txt':'text/plain; charset=utf-8'};
 const server = http.createServer((req, res) => {
   let pathname;

@@ -19,6 +19,23 @@ async function noHorizontalOverflow(page){
   expect(dimensions.body,JSON.stringify(dimensions)).toBeLessThanOrEqual(dimensions.viewport+1);
 }
 async function capture(page,testInfo,name){
+  if(new URL(page.url()).pathname==='/'){
+    // Let the real lazy asset enter the viewport and decode before recording a
+    // full page. A screenshot alone does not trigger offscreen image loading.
+    const experienceImage=page.locator('#experience-image');
+    await experienceImage.scrollIntoViewIfNeeded();
+    await expect.poll(()=>experienceImage.evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
+    await experienceImage.evaluate(img=>img.decode());
+    await page.evaluate(async()=>{
+      window.scrollTo(0,0);
+      await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+    });
+    await noHorizontalOverflow(page);
+    const width=page.viewportSize().width;
+    if([390,1440].includes(width)){
+      await testInfo.attach(`home-header-${width}`,{body:await page.screenshot({fullPage:false,animations:'disabled'}),contentType:'image/png'});
+    }
+  }
   await testInfo.attach(name,{body:await page.screenshot({fullPage:true,animations:'disabled'}),contentType:'image/png'});
 }
 test.beforeEach(async({context})=>isolate(context));
@@ -57,13 +74,16 @@ test('touch navigation closes with Escape and restores focus',async({browser})=>
   await isolate(context);const page=await context.newPage();
   try{
     await page.goto(base+'/');
-    const menu=page.getByRole('button',{name:'Open navigation',exact:true});
+    const menu=page.locator('button.menu');
+    await expect(menu).toHaveAccessibleName('Open navigation');
     await menu.tap();
     await expect(page.locator('#mobile-nav')).toBeVisible();
     await expect(menu).toHaveAttribute('aria-expanded','true');
+    await expect(menu).toHaveAccessibleName('Close navigation');
     await page.keyboard.press('Escape');
     await expect(page.locator('#mobile-nav')).toBeHidden();
     await expect(menu).toBeFocused();
+    await expect(menu).toHaveAccessibleName('Open navigation');
     await noHorizontalOverflow(page);
   }finally{await context.close();}
 });
@@ -133,7 +153,11 @@ test('without JavaScript the private platform has readable access information',a
   try{
     await page.goto(base+'/platform/');
     await expect(page.locator('#platform-auth')).toBeVisible();
-    await expect(page.getByText('JavaScript is required for secure preview sign-in.',{exact:false})).toBeVisible();
+    // Text locators omit noscript nodes even when scripting is disabled and the
+    // fallback is rendered. Address the actual visible fallback element.
+    const fallback=page.locator('#platform-auth noscript p');
+    await expect(fallback).toBeVisible();
+    await expect(fallback).toContainText('JavaScript is required for secure preview sign-in.');
     await expect(page.locator('#platform-content')).toBeHidden();
     await noHorizontalOverflow(page);
   }finally{await context.close();}
