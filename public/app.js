@@ -138,7 +138,7 @@ function syncMotion() {
       if (error.name === 'AbortError') return;
       video.classList.remove('playing');
       if (error.name === 'NotAllowedError') {motionPaused = true; syncMotion();}
-      else video.dataset.failed = 'true';
+      else failMotionMedia(video);
     }).finally(() => {
       pendingVideos.delete(video);
       if (!motionPermitted() || !visibleVideos.has(video)) {
@@ -151,6 +151,13 @@ function syncMotion() {
   });
   syncMotionButton();
 }
+function failMotionMedia(video) {
+  video.dataset.failed = 'true';
+  pendingVideos.delete(video);
+  video.pause();
+  video.classList.remove('playing');
+  syncMotionButton();
+}
 motionVideos.forEach(video => {
   video.muted = true;
   video.addEventListener('playing', () => {
@@ -161,9 +168,16 @@ motionVideos.forEach(video => {
   video.addEventListener('ended', () => {
     video.classList.remove('playing'); pendingVideos.delete(video); syncMotionButton();
   });
-  video.addEventListener('error', () => {
-    video.classList.remove('playing'); video.dataset.failed = 'true';
-    pendingVideos.delete(video); syncMotionButton();
+  video.addEventListener('error', () => failMotionMedia(video));
+});
+// A failed <source> emits its own non-bubbling error. In that case a browser's
+// play() promise can remain pending, so the video error handler is insufficient.
+// Preserve alternate-source fallback until every available source has failed.
+document.querySelectorAll('.motion-video source').forEach(source => {
+  source.addEventListener('error', () => {
+    source.dataset.failed = 'true';
+    const video = source.closest('.motion-video');
+    if (video && [...video.querySelectorAll('source')].every(item => item.dataset.failed === 'true')) failMotionMedia(video);
   });
 });
 if ('IntersectionObserver' in window) {

@@ -1,6 +1,7 @@
 'use strict';
-const {test,beforeEach,after}=require('node:test'), assert=require('node:assert/strict'), crypto=require('node:crypto'), vm=require('node:vm'),fs=require('node:fs'),path=require('node:path');
+const {test,beforeEach,after,mock}=require('node:test'), assert=require('node:assert/strict'), crypto=require('node:crypto'), vm=require('node:vm'),fs=require('node:fs'),path=require('node:path');
 const ask=require('../api/ask'),status=require('../api/status'),auth=require('../lib/auth'),quota=require('../lib/quota'),gates=require('../lib/release-gates');
+const providerBudget=require('../lib/provider-budget-policy');
 const originalEnv={...process.env},originalFetch=global.fetch;
 const pair=crypto.generateKeyPairSync('rsa',{modulusLength:2048});
 const jwk={...pair.publicKey.export({format:'jwk'}),kid:'test-key',use:'sig',alg:'RS256'};
@@ -18,6 +19,9 @@ async function request(options={}){
  const res=response(); await ask(req,res);return res;
 }
 beforeEach(()=>{
+ // Isolate JWT/quota/provider regressions from the intentionally closed shared
+ // budget integration boundary. Dedicated tests below use the real boundary.
+ mock.restoreAll();mock.method(providerBudget,'isProviderBudgetIntegrated',()=>true);
  for(const key of Object.keys(process.env))if(!(key in originalEnv))delete process.env[key];
  Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://redis.invalid',KV_REST_API_TOKEN:'synthetic-test-only',OPENAI_API_KEY:'synthetic-test-only',OPENAI_MODEL:'gpt-4.1-mini-2025-04-14',VERCEL_ENV:'production'});
  for(const flag of gates.FLAGS)process.env[flag]='true';
@@ -30,7 +34,7 @@ beforeEach(()=>{
   throw Error('Unexpected external destination');
  };
 });
-after(()=>{global.fetch=originalFetch;for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];Object.assign(process.env,originalEnv);});
+after(()=>{mock.restoreAll();global.fetch=originalFetch;for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];Object.assign(process.env,originalEnv);});
 test('valid signed session reserves quota before one bounded provider request',async()=>{
  const r=await request();assert.equal(r.statusCode,200);assert.equal(r.headers['cache-control'],'no-store');
  const quotaIndex=calls.findIndex(c=>c.url==='https://redis.invalid'),modelIndex=calls.findIndex(c=>c.url.includes('/chat/completions'));assert.ok(quotaIndex<modelIndex);
@@ -98,6 +102,17 @@ test('provider 429 yields safe 503 without retry or refund',async()=>{
 });
 test('status exposes availability only and requires actual release configuration',()=>{
  process.env.AD_ASTRA_SECURITY_REVIEW_APPROVED='false';const r=response();status({method:'GET'},r);assert.deepEqual(Object.keys(r.body).sort(),['available','message']);assert.equal(r.body.available,false);
+});
+test('all legacy flags and a signed identity cannot bypass missing shared monthly accounting',async()=>{
+ mock.restoreAll();
+ process.env.AD_ASTRA_SHARED_BUDGET_INTEGRATED='true';
+ process.env.AD_ASTRA_SHARED_BUDGET_VERIFIED='true';
+ assert.equal(providerBudget.isProviderBudgetIntegrated('openai-direct'),false);
+ assert.equal(providerBudget.isProviderBudgetIntegrated('__proto__'),false);
+ assert.equal(gates.ready(),false);
+ const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');
+ assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));
+ const availability=response();status({method:'GET'},availability);assert.equal(availability.body.available,false);
 });
 test('return paths reject external URLs and preserve approved mode navigation',()=>{
  const context={window:{},URL,location:{origin:'https://adastra.global'}};vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../public/auth-navigation.js'),'utf8'),context);
