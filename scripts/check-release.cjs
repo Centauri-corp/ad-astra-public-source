@@ -51,4 +51,11 @@ assert.equal((homepage.match(/data-neural-state="/g)||[]).length,6,'All six orig
 assert.doesNotMatch(homepage,/Neural Intelligence OS — live now/i,'Artwork must not imply active AI');
 const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
 assert.ok(vercel.headers[0].headers.find(h=>h.key==='Content-Security-Policy').value.includes('https://cdn.sanity.io'),'Approved Sanity image must be permitted by CSP');
+const neuralCss=fs.readFileSync(path.join(root,'public/style.css'),'utf8');
+const neuralJs=fs.readFileSync(path.join(root,'public/app.js'),'utf8');
+assert.match(neuralCss,/AD ASTRA ambient cinematic neural upgrade v2/,'Neural frame effects not installed');
+assert.match(neuralCss,/prefers-reduced-motion:reduce/,'Effects must have reduced-motion fallback');
+assert.match(neuralCss,/neural-original-master,.hero-neural-master/,'Original sphere pixels may not be animated');
+assert.match(neuralJs,/Neural state keyboard navigation v2/,'Conceptual state keys must work');
+assert.match(neuralJs,/neuralAccentByState/,'Published state accents missing');
 console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-and-company privacy=passed');
