@@ -22,7 +22,11 @@
     const clerk = await loadClerk();
     if (!clerk.session) {
       const returnPath = location.pathname + location.search + location.hash;
-      location.replace('/platform/?return=' + encodeURIComponent(returnPath));
+      const gate = $('knowledge-auth');
+      gate.hidden = false;
+      gate.querySelector('p').textContent = 'The knowledge workspace is a private preview. Public AI access is coming soon.';
+      gate.querySelector('a.button').href = '/sign-in/?return=' + encodeURIComponent(window.adAstraReturnPath(returnPath));
+      gate.querySelector('a.button').textContent = 'Authorized preview sign-in ↗';
       return null;
     }
     await window.adAstraVerifySession(clerk);

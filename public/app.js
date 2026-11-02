@@ -95,27 +95,76 @@ const filmVideo = document.getElementById('company-film');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let motionPaused = reducedMotion.matches || Boolean(navigator.connection?.saveData);
 const visibleVideos = new Set();
+const pendingVideos = new Set();
+function motionPermitted() {
+  return !motionPaused && !document.hidden && !(filmDialog && filmDialog.open);
+}
+function syncMotionButton() {
+  const visible = [...visibleVideos];
+  const usable = visible.filter(video => video.dataset.failed !== 'true');
+  const playing = usable.some(video => !video.paused && !video.ended && video.classList.contains('playing'));
+  const ended = usable.length > 0 && usable.every(video => video.ended && !video.loop);
+  const pending = usable.some(video => pendingVideos.has(video));
+  const mediaUnavailable = visible.length > 0 && usable.length === 0;
+  let action = 'pause', label = 'Pause motion', icon = 'Ⅱ';
+  if (motionPaused || !motionPermitted()) { action = 'play'; label = mediaUnavailable ? 'Resume effects' : 'Play motion'; icon = '▶'; }
+  else if (playing) { action = 'pause'; }
+  else if (ended) { action = 'replay'; label = 'Replay motion'; icon = '↻'; }
+  else if (pending) { action = 'pause'; label = 'Cancel loading'; icon = 'Ⅱ'; }
+  else if (mediaUnavailable) { action = 'pause'; label = 'Pause effects'; }
+  motionButton.dataset.motionAction = action;
+  motionButton.disabled = false;
+  motionButton.setAttribute('aria-pressed', String(action === 'play' || action === 'replay'));
+  motionButton.setAttribute('aria-label', label);
+  motionButton.innerHTML = label + ' <span aria-hidden="true">' + icon + '</span>';
+}
 function syncMotion() {
   document.body.classList.toggle('paused', motionPaused);
-  motionButton.setAttribute('aria-pressed', String(motionPaused));
-  motionButton.innerHTML = motionPaused ? 'Play motion <span aria-hidden="true">▶</span>' : 'Pause motion <span aria-hidden="true">Ⅱ</span>';
-  const permitted = !motionPaused && !document.hidden && !(filmDialog && filmDialog.open);
+  const permitted = motionPermitted();
   document.body.classList.toggle('motion-suspended', !permitted);
   motionVideos.forEach(video => {
-    if (!permitted || !visibleVideos.has(video) || video.dataset.failed === 'true') {video.pause(); return;}
+    if (!permitted || !visibleVideos.has(video) || video.dataset.failed === 'true') {
+      video.pause(); video.classList.remove('playing'); return;
+    }
     // The Runway hero is a camera approach, not a seamless loop. Hold its last frame.
-    if (video.ended && !video.loop) return;
-    video.play().catch(error => {
+    if (video.ended && !video.loop) {video.classList.remove('playing'); return;}
+    if (pendingVideos.has(video) || !video.paused) return;
+    pendingVideos.add(video);
+    Promise.resolve().then(() => {
+      // A preference or visibility change can arrive while playback is pending.
+      if (!motionPermitted() || !visibleVideos.has(video)) return;
+      return video.play();
+    }).catch(error => {
       if (error.name === 'AbortError') return;
       video.classList.remove('playing');
       if (error.name === 'NotAllowedError') {motionPaused = true; syncMotion();}
+      else video.dataset.failed = 'true';
+    }).finally(() => {
+      pendingVideos.delete(video);
+      if (!motionPermitted() || !visibleVideos.has(video)) {
+        video.pause(); video.classList.remove('playing');
+      }
+      document.body.classList.toggle('paused', motionPaused);
+      document.body.classList.toggle('motion-suspended', !motionPermitted());
+      syncMotionButton();
     });
   });
+  syncMotionButton();
 }
 motionVideos.forEach(video => {
   video.muted = true;
-  video.addEventListener('playing', () => video.classList.add('playing'));
-  video.addEventListener('error', () => {video.classList.remove('playing'); video.dataset.failed = 'true';});
+  video.addEventListener('playing', () => {
+    if (!motionPermitted() || !visibleVideos.has(video)) {video.pause(); return;}
+    video.classList.add('playing'); syncMotionButton();
+  });
+  video.addEventListener('pause', () => {video.classList.remove('playing'); syncMotionButton();});
+  video.addEventListener('ended', () => {
+    video.classList.remove('playing'); pendingVideos.delete(video); syncMotionButton();
+  });
+  video.addEventListener('error', () => {
+    video.classList.remove('playing'); video.dataset.failed = 'true';
+    pendingVideos.delete(video); syncMotionButton();
+  });
 });
 if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver(entries => {
@@ -125,8 +174,10 @@ if ('IntersectionObserver' in window) {
   motionVideos.forEach(video => observer.observe(video));
 } else {motionVideos.forEach(video => visibleVideos.add(video));}
 motionButton.addEventListener('click', () => {
-  motionPaused = !motionPaused;
-  if (!motionPaused) motionVideos.forEach(video => {if (video.ended && !video.loop) video.currentTime = 0;});
+  if (motionButton.disabled) return;
+  const action = motionButton.dataset.motionAction;
+  motionPaused = action === 'pause';
+  if (!motionPaused) visibleVideos.forEach(video => {if (video.ended && !video.loop) video.currentTime = 0;});
   syncMotion();
 });
 reducedMotion.addEventListener('change', event => {motionPaused = event.matches; syncMotion();});
