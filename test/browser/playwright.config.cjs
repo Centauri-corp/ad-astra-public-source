@@ -6,7 +6,9 @@ module.exports = defineConfig({
   timeout: 45000,
   expect: {timeout: 10000},
   fullyParallel: false,
-  workers: 2,
+  // Real-time media acceptance is sensitive to CPU contention. Serialize CI so
+  // Chromium and WebKit validate natural playback without competing for decode.
+  workers: process.env.CI ? 1 : 2,
   retries: 0,
   forbidOnly: Boolean(process.env.CI),
   outputDir: 'test-results',
