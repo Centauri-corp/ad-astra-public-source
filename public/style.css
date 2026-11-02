@@ -32,3 +32,8 @@ dialog{width:min(1000px,94vw);border:1px solid #435a6a;border-radius:5px;padding
 .site-header .brand-wordmark{color:#0b1d2b}
 .chapter-nav a{font-size:12px;min-height:44px;display:inline-flex;align-items:center}
 @media(max-width:640px){.hero-actions a{min-height:44px}.chapter-nav a{font-size:12px}}
+
+/* Private-preview release: readable availability indicator at every viewport. */
+.site-header .status{white-space:nowrap;flex-shrink:0;line-height:1.4;font-weight:650}
+@media(max-width:640px){.site-header .status{font-size:8px;letter-spacing:.45px;gap:6px;margin-right:12px}.site-header .status>span{flex-shrink:0}}
+@media(max-width:380px){.site-header .status{font-size:7px;letter-spacing:0;margin-right:7px}.brand-wordmark{letter-spacing:2px}}
