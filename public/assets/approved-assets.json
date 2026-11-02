@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Public graphics release contract. GitHub is the reviewed delivery source; Sanity is never queried by the public site.",
+  "sanitySync": {
+    "enabled": false,
+    "reason": "No connected Sanity approval record is available in this repository.",
+    "requiredBeforeApproval": "A human reviewer must record the Sanity document ID or another authoritative provenance reference for every asset."
+  },
+  "approvedForPublicRelease": false,
+  "approval": {
+    "approvedBy": null,
+    "approvedAt": null,
+    "rightsEvidenceUrl": null,
+    "changeTicket": null
+  },
+  "assets": [
+    {
+      "path": "assets/ad-astra-logo-transparent.png",
+      "sha256": "8bbd03257942401d0d7d04fd6e070f62fcbb805fb12a29ffc3798a36599918cc",
+      "kind": "brand-mark",
+      "provenanceStatus": "awaiting-human-approval",
+      "sourceReference": null,
+      "usage": "public-home"
+    },
+    {
+      "path": "assets/ad-astra-runway-orbital-poster.jpg",
+      "sha256": "454145ffc44572c03751039702d4e436acdd91b2108d1ecf425fe9e02dce8585",
+      "kind": "poster",
+      "provenanceStatus": "awaiting-human-approval",
+      "sourceReference": null,
+      "usage": "public-home"
+    },
+    {
+      "path": "assets/ad-astra-runway-orbital-motion.mp4",
+      "sha256": "3d80d3c0871884ae4d56c7be36ba4e7c60a5668591ef6b517d4d8b7f4ad1d3ac",
+      "kind": "motion",
+      "provenanceStatus": "awaiting-human-approval",
+      "sourceReference": null,
+      "usage": "public-home"
+    },
+    {
+      "path": "assets/ad-astra-runway-horizon-poster.jpg",
+      "sha256": "b61d6821b401159fabc3c9c564540225654621a6d22f97e04e6f99b1dad5839e",
+      "kind": "poster",
+      "provenanceStatus": "awaiting-human-approval",
+      "sourceReference": null,
+      "usage": "public-home-and-film-holding-page"
+    },
+    {
+      "path": "assets/ad-astra-horizon-motion.mp4",
+      "sha256": "7982f2f606f67ce1fda84adbdb91f259ffeb9ca99ab5f806a3a7eaf1507bb925",
+      "kind": "motion",
+      "provenanceStatus": "awaiting-human-approval",
+      "sourceReference": null,
+      "usage": "public-home"
+    }
+  ]
+}
