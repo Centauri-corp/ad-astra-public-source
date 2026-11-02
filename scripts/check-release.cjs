@@ -35,4 +35,7 @@ const homepage=fs.readFileSync(path.join(root,'public/index.html'),'utf8');
 assert.doesNotMatch(homepage,/Open the live engine/i);
 assert.match(homepage,/PLATFORM — COMING SOON/,'Public header must not suggest unrestricted platform availability');
 assert.doesNotMatch(homepage,/>\s*OPEN PLATFORM\s*</i,'Public CTA must not claim general availability');
+assert.match(homepage,/id="neural-intelligence"/,'Neural architecture preview must be present');
+assert.match(homepage,/Neural Intelligence OS — private development/,'Neural preview must disclose private status');
+assert.doesNotMatch(homepage,/Neural Intelligence OS — live now/i,'Neural preview must never claim production access');
 console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-and-company privacy=passed');
