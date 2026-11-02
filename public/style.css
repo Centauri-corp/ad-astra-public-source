@@ -95,3 +95,10 @@ dialog{width:min(1000px,94vw);border:1px solid #435a6a;border-radius:5px;padding
 @media(max-width:640px){.hero:has(.hero-neural-visual){min-height:790px;height:790px}.hero:has(.hero-neural-visual) .hero-content{top:37px;max-width:none}.hero-neural-visual{top:auto;bottom:92px;left:25px;right:25px;width:auto;padding:12px;gap:8px;border-radius:14px}.hero-neural-kicker,.hero-neural-footer{font-size:7px;letter-spacing:.07em}.hero-neural-window{width:100%;max-height:270px}}
 @media(max-width:380px){.hero:has(.hero-neural-visual){min-height:840px;height:840px}.hero-neural-visual{bottom:100px}}
 @media(prefers-reduced-motion:reduce){.hero-neural-visual{scroll-behavior:auto}}
+
+/* Tablet neural hero separation guard: prevent the headline and original-art card from overlapping. */
+@media(min-width:641px) and (max-width:1000px){
+  .hero:has(.hero-neural-visual){height:960px;min-height:960px}
+  .hero:has(.hero-neural-visual) .hero-content{top:8%;max-width:84%}
+  .hero:has(.hero-neural-visual) .hero-neural-visual{top:55%;right:6%;width:min(46vw,440px)}
+}
