@@ -39,7 +39,7 @@ assert.match(homepage,/id="neural-intelligence"/,'Neural architecture preview mu
 assert.match(homepage,/Neural Intelligence OS — private development/,'Neural preview must disclose private status');
 assert.doesNotMatch(homepage,/Neural Intelligence OS — live now/i,'Neural preview must never claim production access');
 assert.match(homepage,/class="neural-original-master"/,'Approved original master must be shown');
-assert.match(homepage,/443f89273eb4071329cac3fa151d2674b37e6eaf-1672x941\\.png/,'Original image checksum-derived asset URL must match');
+assert.ok(homepage.includes('443f89273eb4071329cac3fa151d2674b37e6eaf-1672x941.png'),'Original image checksum-derived asset URL must match');
 assert.equal((homepage.match(/data-neural-state="/g)||[]).length,6,'All six original state selectors required');
 assert.doesNotMatch(homepage,/Neural Intelligence OS — live now/i,'Artwork must not imply active AI');
 const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
