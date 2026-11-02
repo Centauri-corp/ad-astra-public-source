@@ -58,4 +58,14 @@ assert.match(neuralCss,/prefers-reduced-motion:reduce/,'Effects must have reduce
 assert.match(neuralCss,/neural-original-master,.hero-neural-master/,'Original sphere pixels may not be animated');
 assert.match(neuralJs,/Neural state keyboard navigation v2/,'Conceptual state keys must work');
 assert.match(neuralJs,/neuralAccentByState/,'Published state accents missing');
+assert.match(homepage,/class="neural-stage-ambience"/,'Neural ambience is not rendered');
+assert.match(homepage,/id="neural-effects-toggle"/,'Neural motion control missing');
+assert.match(homepage,/class="neural-light-rhythm"/,'Cinematic signal animation missing');
+const fxCSS=fs.readFileSync(path.join(root,'public/style.css'),'utf8');
+const fxJS=fs.readFileSync(path.join(root,'public/app.js'),'utf8');
+assert.match(fxCSS,/neural-cinematic::before\{z-index:0\}/,'Section visual must paint in front of background');
+assert.match(fxCSS,/neural-fx-paused/,'Manual pause must stop ambient effects');
+assert.match(fxCSS,/prefers-reduced-motion:reduce/,'System reduced-motion support required');
+assert.match(fxJS,/neuralEffectsToggle\.addEventListener\('click'/,'Motion button must be wired');
+assert.match(fxCSS,/neural-theatre>\.neural-original-window/,'Original image must remain above decoration');
 console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-and-company privacy=passed');
