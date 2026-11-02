@@ -201,3 +201,28 @@ if(neuralMaster)neuralMaster.addEventListener('error',()=>{
   const fallback=document.querySelector('.neural-art-fallback');
   if(fallback)fallback.hidden=false;
 });
+
+// Neural state keyboard navigation v2 — presentation-only, no AI inference.
+const neuralAccentByState=Object.freeze({
+  analyzing:'#278AFF',reasoning:'#B96BFF',planning:'#44DF96',
+  acting:'#F7C05D',learning:'#FF6987',aligning:'#4BDDF2'
+});
+const neuralStage=document.querySelector('.neural-cinematic');
+for(const button of neuralButtons){
+  button.addEventListener('click',()=>{
+    if(neuralStage && Object.hasOwn(neuralAccentByState,button.dataset.neuralState))
+      neuralStage.style.setProperty('--neural-accent',neuralAccentByState[button.dataset.neuralState]);
+  });
+  button.addEventListener('keydown',event=>{
+    const key=event.key;
+    if(!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp','Home','End'].includes(key))return;
+    event.preventDefault();
+    const index=neuralButtons.indexOf(button);
+    let next=index;
+    if(key==='Home')next=0;
+    else if(key==='End')next=neuralButtons.length-1;
+    else next=(index+(key==='ArrowRight'||key==='ArrowDown'?1:-1)+neuralButtons.length)%neuralButtons.length;
+    neuralButtons[next]?.focus();
+    neuralButtons[next]?.click();
+  });
+}
