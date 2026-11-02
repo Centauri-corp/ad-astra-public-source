@@ -90,6 +90,8 @@ test('touch navigation closes with Escape and restores focus',async({browser})=>
 
 test('neural states and research tabs support keyboard navigation',async({page})=>{
   await page.goto('/');
+  await expect(page.getByRole('group',{name:'Original AD ASTRA neural artwork display',exact:true})).toBeVisible();
+  await expect(page.getByRole('group',{name:'Explore our approach',exact:true})).toBeVisible();
   const neural=page.locator('[data-neural-state="analyzing"]');
   await neural.focus();await page.keyboard.press('ArrowRight');
   await expect(page.locator('[data-neural-state="reasoning"]')).toBeFocused();
@@ -119,19 +121,32 @@ test('real hero MP4 decodes, pauses, ends and replays with one click',async({pag
   const video=page.locator('.hero-video');const control=page.locator('.motion');
   await expect.poll(()=>video.evaluate(v=>v.readyState>=2 || Boolean(v.error))).toBe(true);
   expect(await video.evaluate(v=>v.error?.message||null)).toBeNull();
-  if(await control.getAttribute('data-motion-action')==='play')await control.click();
-  await expect.poll(()=>video.evaluate(v=>!v.paused&&v.currentTime>0&&v.videoWidth>0)).toBe(true);
-  await control.click();await expect.poll(()=>video.evaluate(v=>v.paused)).toBe(true);
-  await expect(control).toHaveAccessibleName('Play motion');
-  await control.click();
-  await expect.poll(()=>video.evaluate(v=>!v.paused)).toBe(true);
-  await video.evaluate(v=>{v.currentTime=Math.max(0,v.duration-0.08);});
-  await expect.poll(()=>video.evaluate(v=>v.ended)).toBe(true);
-  await expect(control).toHaveAccessibleName('Replay motion');
-  await control.click();
-  await expect.poll(()=>video.evaluate(v=>!v.paused&&!v.ended&&v.currentTime<2)).toBe(true);
-  const metadata=await video.evaluate(v=>({duration:v.duration,width:v.videoWidth,height:v.videoHeight,readyState:v.readyState}));
-  await testInfo.attach('decoded-hero-metadata',{body:JSON.stringify(metadata,null,2),contentType:'application/json'});
+  const duration=await video.evaluate(v=>v.duration);
+  expect(Number.isFinite(duration)&&duration>0).toBe(true);
+  await video.evaluate(v=>{
+    window.__adAstraHeroEvents=[];
+    for(const name of ['playing','pause','waiting','seeking','seeked','ended','error']){
+      v.addEventListener(name,event=>window.__adAstraHeroEvents.push({event:name,trusted:event.isTrusted,time:v.currentTime,paused:v.paused,ended:v.ended,readyState:v.readyState}));
+    }
+  });
+  try{
+    if(await control.getAttribute('data-motion-action')==='play')await control.click();
+    await expect.poll(()=>video.evaluate(v=>!v.paused&&v.currentTime>0&&v.videoWidth>0)).toBe(true);
+    await control.click();await expect.poll(()=>video.evaluate(v=>v.paused)).toBe(true);
+    await expect(control).toHaveAccessibleName('Play motion');
+    await control.click();
+    await expect.poll(()=>video.evaluate(v=>!v.paused)).toBe(true);
+    // Visitors have play/pause/replay controls, not a seek bar. Observe the real
+    // clip ending instead of forcing a seek into its final two encoded frames.
+    await expect.poll(()=>video.evaluate(v=>v.ended),{timeout:Math.ceil(duration*1000)+5000}).toBe(true);
+    expect(await page.evaluate(()=>window.__adAstraHeroEvents.some(e=>e.event==='ended'&&e.trusted))).toBe(true);
+    await expect(control).toHaveAccessibleName('Replay motion');
+    await control.click();
+    await expect.poll(()=>video.evaluate(v=>!v.paused&&!v.ended&&v.currentTime>0&&v.currentTime<2)).toBe(true);
+  }finally{
+    const metadata=await video.evaluate(v=>({duration:v.duration,width:v.videoWidth,height:v.videoHeight,readyState:v.readyState,currentTime:v.currentTime,paused:v.paused,ended:v.ended,error:v.error?.message||null,events:window.__adAstraHeroEvents}));
+    await testInfo.attach('decoded-hero-metadata',{body:JSON.stringify(metadata,null,2),contentType:'application/json'});
+  }
 });
 
 test('a failed hero still permits pausing all ambient effects',async({page})=>{

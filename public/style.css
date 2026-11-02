@@ -32,6 +32,10 @@ dialog{width:min(1000px,94vw);border:1px solid #435a6a;border-radius:5px;padding
 .site-header .brand-wordmark{color:#edf4fa}
 .chapter-nav a{font-size:12px;min-height:44px;display:inline-flex;align-items:center}
 @media(max-width:640px){.hero-actions a{min-height:44px}.chapter-nav a{font-size:12px}}
+/* Give each customer-information link a distinct, usable touch target. */
+footer nav{display:flex;flex-wrap:wrap;gap:4px 12px;min-width:0;justify-content:flex-end}
+footer nav a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:8px 2px}
+@media(max-width:640px){footer nav{justify-content:flex-start}}
 
 /* Private-preview release: readable availability indicator at every viewport. */
 .site-header .status{white-space:nowrap;flex-shrink:0;line-height:1.4;font-weight:650}
