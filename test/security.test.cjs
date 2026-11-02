@@ -2,6 +2,7 @@
 const {test,beforeEach,after,mock}=require('node:test'), assert=require('node:assert/strict'), crypto=require('node:crypto'), vm=require('node:vm'),fs=require('node:fs'),path=require('node:path');
 const ask=require('../api/ask'),status=require('../api/status'),auth=require('../lib/auth'),quota=require('../lib/quota'),gates=require('../lib/release-gates');
 const providerBudget=require('../lib/provider-budget-policy');
+const sharedBudget=require('../lib/shared-budget');
 const originalEnv={...process.env},originalFetch=global.fetch;
 const pair=crypto.generateKeyPairSync('rsa',{modulusLength:2048});
 const jwk={...pair.publicKey.export({format:'jwk'}),kid:'test-key',use:'sig',alg:'RS256'};
@@ -14,14 +15,18 @@ function token(overrides={},head={}){
 }
 function response(){return {headers:{},setHeader(k,v){this.headers[k.toLowerCase()]=v;},end(v){this.body=v?JSON.parse(v):null;}};}
 async function request(options={}){
- const req={method:'POST',headers:{host:'adastra.global',origin:'https://adastra.global','content-type':'application/json','x-ad-astra-request':'public-v1',authorization:'Bearer '+token(),...options.headers},body:{question:'Explain gravity simply.',mode:'ask'},...options};
- req.headers={host:'adastra.global',origin:'https://adastra.global','content-type':'application/json','x-ad-astra-request':'public-v1',authorization:'Bearer '+token(),...options.headers};
+ const req={method:'POST',headers:{host:'adastra.global',origin:'https://adastra.global','content-type':'application/json','x-ad-astra-request':'public-v1','idempotency-key':crypto.randomUUID(),authorization:'Bearer '+token(),...options.headers},body:{question:'Explain gravity simply.',mode:'ask'},...options};
+ req.headers={host:'adastra.global',origin:'https://adastra.global','content-type':'application/json','x-ad-astra-request':'public-v1','idempotency-key':crypto.randomUUID(),authorization:'Bearer '+token(),...options.headers};
  const res=response(); await ask(req,res);return res;
 }
 beforeEach(()=>{
  // Isolate JWT/quota/provider regressions from the intentionally closed shared
  // budget integration boundary. Dedicated tests below use the real boundary.
  mock.restoreAll();mock.method(providerBudget,'isProviderBudgetIntegrated',()=>true);
+ // Real monthly admission/receipt behavior is exercised in shared-budget.test.
+ // Keep the existing JWT/Redis regressions independent of that service fixture.
+ mock.method(sharedBudget,'configuration',()=>({}));
+ mock.method(sharedBudget,'createClient',()=>({reserve:async()=>({}),execute:async(_admission,dispatch)=>({value:(await dispatch()).value,accounting:'fixture'})}));
  for(const key of Object.keys(process.env))if(!(key in originalEnv))delete process.env[key];
  Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://redis.invalid',KV_REST_API_TOKEN:'synthetic-test-only',OPENAI_API_KEY:'synthetic-test-only',OPENAI_MODEL:'gpt-4.1-mini-2025-04-14',VERCEL_ENV:'production'});
  for(const flag of gates.FLAGS)process.env[flag]='true';
