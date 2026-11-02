@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "node --test test/security.test.cjs && node scripts/check-release.cjs && node scripts/redis-acceptance.cjs",
+  "buildCommand": "node --test test/*.test.cjs && node scripts/check-release.cjs && node scripts/site-integrity.cjs && node scripts/redis-acceptance.cjs",
   "installCommand": "echo No dependencies required",
   "outputDirectory": "public",
   "functions": {
@@ -31,7 +31,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net 'sha256-ELtAh3qjqT9mt6c/hJSi1TuXPRQ/cz6BOXPxC+BY8dY='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://img.clerk.com; media-src 'self'; connect-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net; frame-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net 'sha256-ELtAh3qjqT9mt6c/hJSi1TuXPRQ/cz6BOXPxC+BY8dY='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://img.clerk.com https://cdn.sanity.io; media-src 'self'; connect-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net; frame-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"
         }
       ]
     },
@@ -54,7 +54,7 @@
       ]
     },
     {
-      "source": "/(knowledge|platform|sign-in|markets|pricing|services|company|about|film)(.*)",
+      "source": "/(intelligence|brain|access|knowledge|platform|sign-in|markets|pricing|services|about|film|privacy|terms|contact|security|trust)(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
