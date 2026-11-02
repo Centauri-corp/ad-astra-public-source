@@ -82,3 +82,16 @@ dialog{width:min(1000px,94vw);border:1px solid #435a6a;border-radius:5px;padding
 @media(max-width:920px){.neural-head{grid-template-columns:1fr;gap:14px}.neural-experience-console{grid-template-columns:1fr}.neural-cinematic .neural-preview-graph{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:540px){.neural-topline,.neural-theatre-upper,.neural-theatre-lower,.neural-architecture-heading{font-size:8px;letter-spacing:.06em}.neural-head{margin:30px 0}.neural-theatre{padding:12px;border-radius:13px}.neural-original-window{margin:12px auto}.neural-state-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.neural-state-crop{width:50px}.neural-state-meta strong{font-size:9px}.neural-experience-console{padding:14px}.neural-cinematic .neural-preview-graph{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.neural-state{transition:none}}
+
+/* Approved original master, visible above the fold; visual crop is non-destructive. */
+.hero-neural-visual{position:absolute;z-index:0;right:4%;top:23%;width:min(43vw,620px);min-width:0;display:flex;flex-direction:column;gap:14px;padding:18px;border:1px solid #8fcff07a;border-radius:22px;background:linear-gradient(145deg,#04121ee8,#0f2a40df);box-shadow:0 26px 100px #0009,0 0 75px #3b8bb52a;color:#d3ecf8;cursor:pointer}
+.hero-neural-visual:focus-visible{outline:3px solid #b2e2ff;outline-offset:5px}
+.hero-neural-kicker,.hero-neural-footer{display:flex;justify-content:space-between;gap:12px;font-size:9px;letter-spacing:.11em;line-height:1.4}
+.hero-neural-window{display:block;position:relative;aspect-ratio:726/467;width:100%;overflow:hidden;isolation:isolate;flex-shrink:0}
+.hero-neural-master{display:block;position:absolute;max-width:none;width:230.303%;height:auto;left:-67.493%;top:-14.561%}
+.hero-neural-footer{color:#a5cfe3}
+@media(min-width:1001px){.hero:has(.hero-neural-visual) .hero-content{max-width:44%;top:17%}.hero:has(.hero-neural-visual) .hero h1{font-size:clamp(55px,6.2vw,92px)}}
+@media(max-width:1000px){.hero:has(.hero-neural-visual){min-height:860px;height:860px;max-height:none}.hero-neural-visual{top:49%;width:min(52vw,520px);right:6%;padding:14px}.hero:has(.hero-neural-visual) .hero-content{top:9%;max-width:80%}}
+@media(max-width:640px){.hero:has(.hero-neural-visual){min-height:790px;height:790px}.hero:has(.hero-neural-visual) .hero-content{top:37px;max-width:none}.hero-neural-visual{top:auto;bottom:92px;left:25px;right:25px;width:auto;padding:12px;gap:8px;border-radius:14px}.hero-neural-kicker,.hero-neural-footer{font-size:7px;letter-spacing:.07em}.hero-neural-window{width:100%;max-height:270px}}
+@media(max-width:380px){.hero:has(.hero-neural-visual){min-height:840px;height:840px}.hero-neural-visual{bottom:100px}}
+@media(prefers-reduced-motion:reduce){.hero-neural-visual{scroll-behavior:auto}}
