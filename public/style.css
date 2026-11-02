@@ -50,3 +50,35 @@ dialog{width:min(1000px,94vw);border:1px solid #435a6a;border-radius:5px;padding
 .neural-preview-graph span{color:#ddeaf2;font-size:14px;line-height:1.6}
 @media(max-width:760px){.neural-preview-grid{grid-template-columns:1fr}.neural-preview-graph li{min-height:145px}}
 @media(max-width:420px){.neural-preview-graph{grid-template-columns:1fr}.neural-preview-graph li{min-height:110px}}
+
+/* Original owner-approved neural sphere: source pixels and crop coordinates preserved. */
+.neural-cinematic{background:radial-gradient(ellipse at 50% 22%,#16405b 0%,#071421 55%,#030a12 100%);color:#f1f6fb;overflow:hidden}
+.neural-content{max-width:1440px;margin:0 auto}
+.neural-topline,.neural-architecture-heading,.neural-theatre-upper,.neural-theatre-lower{display:flex;justify-content:space-between;gap:20px;color:#83afca;font-size:10px;letter-spacing:.14em}
+.neural-topline{padding-bottom:17px;border-bottom:1px solid #6f9db733}
+.neural-head{display:grid;grid-template-columns:1.2fr .8fr;align-items:end;gap:60px;margin:45px 0}
+.neural-head h2{font-size:clamp(42px,6vw,88px);line-height:1.02;margin-top:22px;font-weight:550}
+.neural-head h2 em{color:#85cffa;font-weight:450}
+.neural-head>p{font-size:16px;color:#b8cada;max-width:440px}
+.neural-theatre{position:relative;display:flex;flex-direction:column;align-items:center;padding:25px;background:linear-gradient(130deg,#071b30,#0a2537 55%,#0c1a30);border:1px solid #5f9bbe65;border-radius:24px;box-shadow:0 40px 100px #0008,inset 0 0 90px #4a99b014}
+.neural-theatre-upper,.neural-theatre-lower{width:100%;color:#93c7df}
+.neural-original-window{position:relative;width:min(100%,726px);aspect-ratio:726/467;overflow:hidden;flex-shrink:0;margin:25px auto;isolation:isolate}
+.neural-original-master{position:absolute;max-width:none;width:230.303%;height:auto;left:-67.493%;top:-14.561%;display:block}
+.neural-experience-console{display:grid;grid-template-columns:minmax(200px,.7fr) minmax(0,1.3fr);gap:32px;align-items:center;margin:26px 0 70px;padding:25px;border:1px solid #598db547;border-radius:18px;background:#071a2d}
+.neural-current h3{font-size:clamp(24px,3.4vw,43px);margin:12px 0;color:#e4f5fd}
+.neural-current p:last-child{color:#b6d1df;font-size:13px}
+.neural-state-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.neural-state{display:flex;align-items:center;gap:10px;text-align:left;min-width:0;border:1px solid #597d954d;background:#10283c;color:#d8eaf4;border-radius:9px;padding:9px;transition:border-color .2s,background .2s}
+.neural-state:hover,.neural-state.is-active{background:#173d55;border-color:#a0dafa}
+.neural-state-crop{width:66px;aspect-ratio:201/125;overflow:hidden;position:relative;display:block;flex-shrink:0}
+.neural-state-crop img{position:absolute;width:831.841%;height:auto;max-width:none;left:var(--state-x);top:-449.6%}
+.neural-state-meta{min-width:0;display:flex;flex-direction:column;gap:5px}
+.neural-state-meta strong{font-size:10px;letter-spacing:.07em}
+.neural-state-meta small{font-size:9px;color:#94bdcf}
+.neural-architecture-heading{border-top:1px solid #9ac4e34a;padding:19px 0}
+.neural-cinematic .neural-preview-graph{grid-template-columns:repeat(4,minmax(0,1fr))}
+.neural-cinematic .neural-preview-graph li{min-height:155px}
+.neural-cinematic .neural-preview-status{color:#9bd4f2;font-size:12px;margin-top:30px;letter-spacing:.04em}
+@media(max-width:920px){.neural-head{grid-template-columns:1fr;gap:14px}.neural-experience-console{grid-template-columns:1fr}.neural-cinematic .neural-preview-graph{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){.neural-topline,.neural-theatre-upper,.neural-theatre-lower,.neural-architecture-heading{font-size:8px;letter-spacing:.06em}.neural-head{margin:30px 0}.neural-theatre{padding:12px;border-radius:13px}.neural-original-window{margin:12px auto}.neural-state-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.neural-state-crop{width:50px}.neural-state-meta strong{font-size:9px}.neural-experience-console{padding:14px}.neural-cinematic .neural-preview-graph{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.neural-state{transition:none}}
