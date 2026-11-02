@@ -41,6 +41,9 @@ assert.doesNotMatch(homepage,/Neural Intelligence OS — live now/i,'Neural prev
 assert.match(homepage,/class="neural-original-master"/,'Approved original master must be shown');
 assert.match(homepage,/class="hero-neural-visual"/,'Owner-approved sphere must be visible within the hero');
 assert.match(homepage,/class="hero-neural-master"/,'Hero must use the approved original image crop');
+const responsiveStyle=fs.readFileSync(path.join(root,'public/style.css'),'utf8');
+assert.ok(responsiveStyle.includes('Tablet neural hero separation guard'),'Tablet spacing guard is required');
+assert.ok(responsiveStyle.includes('prefers-reduced-motion'),'Static accessibility presentation must remain available');
 assert.ok(!/\b(?:href|src)="\/api\/ask"/.test(homepage),'Public hero must not expose AI inference');
 
 assert.ok(homepage.includes('443f89273eb4071329cac3fa151d2674b37e6eaf-1672x941.png'),'Original image checksum-derived asset URL must match');
