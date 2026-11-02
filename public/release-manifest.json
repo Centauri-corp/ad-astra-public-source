@@ -4,6 +4,8 @@
   "filmPublicPlayback": false,
   "publicReferenceCatalog": false,
   "assetOriginDependency": false,
+  "graphicsAssetContract": "assets/approved-assets.json",
+  "graphicsApprovalRequired": true,
   "customerAccess": "clerk-authenticated",
   "liveEngineAccess": "requires-all-verified-release-gates",
   "dailyModelBudgetUSD": 10,
