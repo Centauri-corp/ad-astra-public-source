@@ -175,3 +175,29 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     else result.textContent = 'Share our website: ' + url;
   } catch (error) {if (error.name !== 'AbortError') result.textContent = 'Share our website: ' + url;}
 });
+
+
+// Public artwork state selection only; never calls private AI services.
+const neuralStateDescriptions = Object.freeze({
+  analyzing:'Exploring questions, evidence and patterns.',
+  reasoning:'Tracing possible connections between ideas.',
+  planning:'Organizing steps and alternative directions.',
+  acting:'Considering the responsible next action.',
+  learning:'Revisiting evidence and new perspectives.',
+  aligning:'Keeping human intent, permissions and oversight central.'
+});
+const neuralButtons=[...document.querySelectorAll('[data-neural-state]')];
+const neuralTitle=document.getElementById('neural-state-title');
+const neuralDescription=document.getElementById('neural-state-description');
+neuralButtons.forEach(button=>button.addEventListener('click',()=>{
+  const state=button.dataset.neuralState;
+  if(!Object.hasOwn(neuralStateDescriptions,state))return;
+  neuralButtons.forEach(item=>{const selected=item===button;item.classList.toggle('is-active',selected);item.setAttribute('aria-pressed',String(selected));});
+  neuralTitle.textContent=state.charAt(0).toUpperCase()+state.slice(1);
+  neuralDescription.textContent=neuralStateDescriptions[state]+' A conceptual artwork state, not a live system measurement.';
+}));
+const neuralMaster=document.querySelector('.neural-original-master');
+if(neuralMaster)neuralMaster.addEventListener('error',()=>{
+  const fallback=document.querySelector('.neural-art-fallback');
+  if(fallback)fallback.hidden=false;
+});
