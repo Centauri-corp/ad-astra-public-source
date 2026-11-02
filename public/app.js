@@ -175,3 +175,73 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     else result.textContent = 'Share our website: ' + url;
   } catch (error) {if (error.name !== 'AbortError') result.textContent = 'Share our website: ' + url;}
 });
+
+
+// Public artwork state selection only; never calls private AI services.
+const neuralStateDescriptions = Object.freeze({
+  analyzing:'Exploring questions, evidence and patterns.',
+  reasoning:'Tracing possible connections between ideas.',
+  planning:'Organizing steps and alternative directions.',
+  acting:'Considering the responsible next action.',
+  learning:'Revisiting evidence and new perspectives.',
+  aligning:'Keeping human intent, permissions and oversight central.'
+});
+const neuralButtons=[...document.querySelectorAll('[data-neural-state]')];
+const neuralTitle=document.getElementById('neural-state-title');
+const neuralDescription=document.getElementById('neural-state-description');
+neuralButtons.forEach(button=>button.addEventListener('click',()=>{
+  const state=button.dataset.neuralState;
+  if(!Object.hasOwn(neuralStateDescriptions,state))return;
+  neuralButtons.forEach(item=>{const selected=item===button;item.classList.toggle('is-active',selected);item.setAttribute('aria-pressed',String(selected));});
+  neuralTitle.textContent=state.charAt(0).toUpperCase()+state.slice(1);
+  neuralDescription.textContent=neuralStateDescriptions[state]+' A conceptual artwork state, not a live system measurement.';
+}));
+const neuralMaster=document.querySelector('.neural-original-master');
+if(neuralMaster)neuralMaster.addEventListener('error',()=>{
+  const fallback=document.querySelector('.neural-art-fallback');
+  if(fallback)fallback.hidden=false;
+});
+
+// Neural state keyboard navigation v2 — presentation-only, no AI inference.
+const neuralAccentByState=Object.freeze({
+  analyzing:'#278AFF',reasoning:'#B96BFF',planning:'#44DF96',
+  acting:'#F7C05D',learning:'#FF6987',aligning:'#4BDDF2'
+});
+const neuralStage=document.querySelector('.neural-cinematic');
+for(const button of neuralButtons){
+  button.addEventListener('click',()=>{
+    if(neuralStage && Object.hasOwn(neuralAccentByState,button.dataset.neuralState))
+      neuralStage.style.setProperty('--neural-accent',neuralAccentByState[button.dataset.neuralState]);
+  });
+  button.addEventListener('keydown',event=>{
+    const key=event.key;
+    if(!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp','Home','End'].includes(key))return;
+    event.preventDefault();
+    const index=neuralButtons.indexOf(button);
+    let next=index;
+    if(key==='Home')next=0;
+    else if(key==='End')next=neuralButtons.length-1;
+    else next=(index+(key==='ArrowRight'||key==='ArrowDown'?1:-1)+neuralButtons.length)%neuralButtons.length;
+    neuralButtons[next]?.focus();
+    neuralButtons[next]?.click();
+  });
+}
+
+// Separate accessible ambient-motion control; never alters approved neural artwork.
+const neuralEffectsToggle=document.getElementById('neural-effects-toggle');
+if(neuralStage && neuralEffectsToggle){
+  let pausedByUser=false;
+  const syncNeuralFx=()=>{
+    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const globalPaused=document.body.classList.contains('motion-suspended');
+    const paused=pausedByUser||reduced||globalPaused;
+    neuralStage.classList.toggle('neural-fx-paused',paused);
+    neuralEffectsToggle.setAttribute('aria-pressed',String(paused));
+    neuralEffectsToggle.disabled=reduced||globalPaused;
+    neuralEffectsToggle.textContent=reduced?'Reduced motion enabled':globalPaused?'Effects paused globally':pausedByUser?'Resume ambient effects':'Pause ambient effects';
+  };
+  neuralEffectsToggle.addEventListener('click',()=>{pausedByUser=!pausedByUser;syncNeuralFx();});
+  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',syncNeuralFx);
+  new MutationObserver(syncNeuralFx).observe(document.body,{attributes:true,attributeFilter:['class']});
+  syncNeuralFx();
+}
