@@ -102,3 +102,48 @@ dialog{width:min(1000px,94vw);border:1px solid #435a6a;border-radius:5px;padding
   .hero:has(.hero-neural-visual) .hero-content{top:8%;max-width:84%}
   .hero:has(.hero-neural-visual) .hero-neural-visual{top:55%;right:6%;width:min(46vw,440px)}
 }
+
+/* AD ASTRA ambient cinematic neural upgrade v2. The original PNG is unchanged.
+   Effects apply to the surrounding frame only, never the approved image pixels. */
+.neural-cinematic{--neural-accent:#278AFF;position:relative;isolation:isolate}
+.neural-cinematic::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;opacity:.55;background:
+  radial-gradient(ellipse at 8% 12%,#176ef51e,transparent 44%),
+  radial-gradient(ellipse at 92% 65%,#42bfc41b,transparent 37%)}
+.neural-theatre{isolation:isolate;--border-glow:#42bfc4}
+.neural-theatre::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
+  background:radial-gradient(ellipse at 50% 42%,#42bfc427,transparent 62%)}
+.neural-theatre::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;
+  border:1px solid #a1ecff48;box-shadow:inset 0 1px 0 #ffffff18}
+.hero-neural-visual{isolation:isolate;overflow:hidden;--neural-hero-glow:#42bfc4}
+.hero-neural-visual::before{content:"";position:absolute;inset:-35%;z-index:-1;pointer-events:none;
+  background:conic-gradient(from 40deg at 50% 50%,transparent 0deg,#42bfc421 36deg,transparent 84deg,#9064e91e 136deg,transparent 196deg,#e5b45b21 251deg,transparent 315deg);
+  animation:astra-frame-rotation 48s linear infinite}
+.hero-neural-visual::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+  border-radius:inherit;box-shadow:inset 0 0 32px #42bfc41d}
+.neural-state{--state-accent:#278AFF;position:relative;min-height:58px;outline-offset:3px}
+.neural-state[data-neural-state="reasoning"]{--state-accent:#B96BFF}
+.neural-state[data-neural-state="planning"]{--state-accent:#44DF96}
+.neural-state[data-neural-state="acting"]{--state-accent:#F7C05D}
+.neural-state[data-neural-state="learning"]{--state-accent:#FF6987}
+.neural-state[data-neural-state="aligning"]{--state-accent:#4BDDF2}
+.neural-state.is-active{border-color:var(--state-accent);box-shadow:inset 3px 0 0 var(--state-accent),0 0 25px color-mix(in srgb,var(--state-accent) 18%,transparent)}
+.neural-state:focus-visible{outline:3px solid #E5B45B;outline-offset:3px}
+.neural-current h3{transition:color .25s}
+.neural-cinematic .neural-current h3{color:var(--neural-accent)}
+.neural-theatre .neural-original-window{filter:none;transform:none;animation:none}
+.neural-theatre .neural-original-master,.hero-neural-master,.neural-state-crop img{filter:none;transform:none;animation:none!important}
+.neural-theatre-upper,.neural-theatre-lower,.hero-neural-kicker,.hero-neural-footer{position:relative;z-index:4}
+@keyframes astra-frame-rotation{to{transform:rotate(360deg)}}
+@media(hover:hover) and (pointer:fine){
+  .hero-neural-visual{transition:border-color .2s,box-shadow .25s}
+  .hero-neural-visual:hover{border-color:#c1edff;box-shadow:0 28px 110px #000a,0 0 70px #42bfc429}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-neural-visual::before{animation:none}
+  .neural-current h3,.hero-neural-visual{transition:none}
+}
+@media(forced-colors:active){
+  .neural-state.is-active{outline:2px solid Highlight;outline-offset:0}
+  .hero-neural-visual,.neural-theatre{border:1px solid CanvasText}
+}
+@media(max-width:640px){.neural-state{min-height:54px}.hero-neural-visual::before{animation-duration:80s}}
