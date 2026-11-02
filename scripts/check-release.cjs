@@ -33,4 +33,6 @@ const knowledge=fs.readFileSync(path.join(root,'public/knowledge/index.html'),'u
 assert.match(knowledge,/Interactive AI responses are paused pending release checks/i);
 const homepage=fs.readFileSync(path.join(root,'public/index.html'),'utf8');
 assert.doesNotMatch(homepage,/Open the live engine/i);
+assert.match(homepage,/PLATFORM — COMING SOON/,'Public header must not suggest unrestricted platform availability');
+assert.doesNotMatch(homepage,/>\s*OPEN PLATFORM\s*</i,'Public CTA must not claim general availability');
 console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-and-company privacy=passed');
