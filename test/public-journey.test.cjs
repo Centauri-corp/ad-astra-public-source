@@ -6,10 +6,10 @@ test('public customer entry stays on the canonical Coming Soon route',()=>{
   assert.match(home,/class="status" href="\/access\/"/);
   assert.match(access,/https:\/\/adastra\.global\/access\//);
   assert.match(access,/Public access coming soon/);assert.match(access,/noindex,follow/);
-  assert.doesNotMatch(access,/<form|<iframe|daylight|api\/ask/i);
+  assert.doesNotMatch(access,/<iframe|daylight|api\/ask/i);
   const scripts=[...access.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map(match=>match[1]);
   assert.deepEqual(scripts,['/access/app.js']);
-  assert.match(access,/role="form" aria-labelledby="early-access-title"/);
+  assert.match(access,/<form\b[^>]*id="early-access-form"[^>]*aria-labelledby="early-access-title"/);
 });
 test('intelligence and brain entry routes exist with accurate release information',()=>{
   for(const route of ['intelligence','brain']){
