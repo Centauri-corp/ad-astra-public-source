@@ -38,7 +38,7 @@ assert.doesNotMatch(homepage,/Open the live engine/i);
 assert.match(homepage,/PLATFORM — COMING SOON/,'Public header must not suggest unrestricted platform availability');
 assert.doesNotMatch(homepage,/>\s*OPEN PLATFORM\s*</i,'Public CTA must not claim general availability');
 assert.match(homepage,/id="neural-intelligence"/,'Neural architecture preview must be present');
-assert.match(homepage,/Neural Intelligence OS — private development/,'Neural preview must disclose private status');
+assert.match(homepage,/Ad Astra Intelligence OS — public access coming soon/,'Neural preview must disclose public availability status');
 assert.doesNotMatch(homepage,/Neural Intelligence OS — live now/i,'Neural preview must never claim production access');
 assert.match(homepage,/class="neural-original-master"/,'Approved original master must be shown');
 assert.match(homepage,/class="hero-neural-visual"/,'Owner-approved sphere must be visible within the hero');
