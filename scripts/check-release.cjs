@@ -10,7 +10,7 @@ for(const f of files){
  assert.ok(!/(catalog\.json|\.map$|\.env|\.git|ad-astra-cognitive|company-film|preview-v2\.mp4)/i.test(rel),rel);
  if(!/\.(html|js|css|json|txt|xml)$/.test(f))continue;
  const text=fs.readFileSync(f,'utf8');
- assert.ok(!/sk-proj-[A-Za-z0-9_-]{16}|SANITY_API_TOKEN|Bearer sk-|energy-america|ad-astra-cognitive|chatgpt\.site/i.test(text),'Public privacy scan: '+rel);
+ assert.ok(!/sk-proj-[A-Za-z0-9_-]{16}|SANITY_API_TOKEN|Bearer sk-|energy-america|ad-astra-cognitive|chatgpt\.site|cdn\.sanity\.io|sanity\.io/i.test(text),'Public privacy scan: '+rel);
  if(rel.endsWith('.html')){
   assert.ok(text.includes('rel="canonical"'),rel+' missing canonical');
   if(['index.html','company/index.html'].includes(rel))assert.ok(/name="robots" content="index,follow"/.test(text),rel+' missing index'); else assert.ok(/name="robots" content="noindex,follow"/.test(text),rel+' missing noindex');
