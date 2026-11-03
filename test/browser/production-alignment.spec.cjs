@@ -54,6 +54,6 @@ test('branded 404 provides accessible recovery routes',async({page})=>{
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href','https://adastra.global/404.html');
   await expect(page.locator('h1')).toContainText('Beyond this');
   await expect(page.locator('a[href="/products/"]')).toHaveCount(2);
-  await expect(page.locator('a[href="/access/#early-access-title"]')).toBeVisible();
+  await expect(page.locator('.not-found-map a[href="/access/#early-access-title"]')).toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
 });
