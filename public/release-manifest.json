@@ -19,7 +19,7 @@
     "video": "public-motion-study-premiere-gated"
   },
   "autonomousOperations": {
-    "mode": "private-audit-and-draft",
+    "mode": "private-scheduled-read-only-audit",
     "cadence": "*/15 * * * * UTC",
     "externalWrites": false,
     "outboundSends": false,
