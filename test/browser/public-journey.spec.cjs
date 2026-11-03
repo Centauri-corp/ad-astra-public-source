@@ -1,4 +1,4 @@
-'use strict';
+['/brain/','A visible architecture']'use strict';
 const {test,expect}=require('@playwright/test');
 const axe=require('axe-core');
 const base='http://127.0.0.1:4173';
