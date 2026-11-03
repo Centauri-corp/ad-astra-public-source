@@ -21,7 +21,7 @@
       if (!clerk.session) {
         authGate.hidden = false;
         authGate.querySelector('a.button').href = '/sign-in/?return=' + encodeURIComponent(returnPath);
-        status.textContent = 'Sign in to enter the Ad Astra customer platform.';
+        status.textContent = 'Private preview access requires an existing authorized account. General customer enrollment is coming soon.';
         return;
       }
       await window.adAstraVerifySession(clerk);
@@ -33,11 +33,18 @@
       const label = user?.primaryEmailAddress?.emailAddress || user?.username || 'Signed in';
       status.textContent = `Signed in as ${label}`;
       const signOut = document.getElementById('platform-sign-out');
-      if (signOut) signOut.addEventListener('click', async event => { event.preventDefault(); await clerk.signOut(); location.href = '/platform/'; });
+      if (signOut) {
+        signOut.hidden = false;
+        signOut.addEventListener('click', async event => {
+          event.preventDefault();
+          try { await clerk.signOut(); location.href = '/platform/'; }
+          catch { platform.hidden = true; authGate.hidden = false; status.textContent = 'Sign-out could not be confirmed. Please try signing out again before leaving a shared device.'; }
+        });
+      }
     } catch (error) {
       authGate.hidden = false;
       status.textContent = 'Your account session could not be verified. Please sign in again or try later.';
-      console.error('ad_astra_clerk_load_error', error);
+      platform.hidden = true;
     }
   }
   init();

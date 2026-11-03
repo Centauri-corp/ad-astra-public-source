@@ -7,6 +7,6 @@
   },
   "scripts": {
     "test": "node --test test/*.test.cjs",
-    "check": "node scripts/check-release.cjs"
+    "check": "node scripts/check-release.cjs && node scripts/check-commercial.cjs"
   }
 }
