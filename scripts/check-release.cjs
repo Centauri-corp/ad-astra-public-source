@@ -47,5 +47,6 @@ assert.ok(microgrids.includes('48-hour deployment or zero utility hookup cannot 
 assert.ok(microgrids.includes('Project financing and hardware availability have not been independently verified'));
 assert.ok(microgrids.includes('20FT / TACTICAL MICRO-POD')&&microgrids.includes('40FT / STRATEGIC NODE'));
 assert.ok(microgrids.includes('Neither footprint bypasses municipal permission'));
+assert.ok(microgrids.includes('selenium interlayer')&&microgrids.includes('pressure-vessel safety case'));
 assert.ok(pricing.includes('For individuals')&&pricing.includes('For organizations')&&pricing.includes('No payment is requested'));
 console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-only privacy=passed');
