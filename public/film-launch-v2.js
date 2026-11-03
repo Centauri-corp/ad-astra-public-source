@@ -55,6 +55,8 @@
     if(document.getElementById('products-overview'))return;
     const company=document.getElementById('company');
     if(!company)return;
+    const companyLabel=company.querySelector('.section-label span:first-child');
+    if(companyLabel&&companyLabel.textContent.trim()==='04 / THE COMPANY')companyLabel.textContent='05 / THE COMPANY';
     const template=document.createElement('template');
     template.innerHTML=`
       <section class="home-products" id="products-overview" aria-labelledby="home-products-title">
