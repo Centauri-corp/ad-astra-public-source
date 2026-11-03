@@ -31,7 +31,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net 'sha256-ELtAh3qjqT9mt6c/hJSi1TuXPRQ/cz6BOXPxC+BY8dY='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://img.clerk.com https://cdn.sanity.io; media-src 'self'; connect-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net https://wewznejqpnsmiwkbozgw.supabase.co; frame-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net 'sha256-ELtAh3qjqT9mt6c/hJSi1TuXPRQ/cz6BOXPxC+BY8dY='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://img.clerk.com; media-src 'self'; connect-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net https://wewznejqpnsmiwkbozgw.supabase.co; frame-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"
         }
       ]
     },
