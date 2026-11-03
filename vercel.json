@@ -67,7 +67,7 @@
       ]
     },
     {
-      "source": "/(intelligence|brain|access|knowledge|platform|sign-in|markets|pricing|services|about|film|privacy|terms|contact|security|trust)(.*)",
+      "source": "/(intelligence|brain|access|knowledge|platform|sign-in|markets|products|pricing|services|about|film|privacy|terms|contact|security|trust)(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",

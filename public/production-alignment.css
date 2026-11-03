@@ -1,0 +1,42 @@
+/* Production-safe product discovery and branded error experience. */
+.desktop-nav>.products-nav-link{display:flex;align-items:center;min-height:var(--header);padding:32px 0;font-size:13px;font-weight:550;white-space:nowrap;transition:color .2s}
+.desktop-nav>.products-nav-link:hover,.desktop-nav>.products-nav-link:focus-visible{color:#276b8d}
+#mobile-nav .products-mobile-nav{border-top:1px solid #d8dfdf;border-bottom:1px solid #d8dfdf}
+.home-products{background:#07111c;color:#edf4f7;padding:94px 0 100px;overflow:hidden}
+.home-products .section-label{color:#9fb7c5}
+.home-products .section-label::after{background:#496170}
+.home-products-heading{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:8%;align-items:end;margin:42px 0 38px}
+.home-products-heading h2{max-width:760px}
+.home-products-heading h2 em{color:#a9c9d9}
+.home-products-heading>div:last-child{display:grid;gap:18px}
+.home-products-heading p{color:#aec1cc;font-size:14px;line-height:1.85}
+.home-products-actions{display:flex;gap:12px;flex-wrap:wrap}
+.home-products-actions .button{min-height:48px}
+.home-products-actions .button.secondary{background:transparent;color:#dff1f7;border:1px solid #567080}
+.home-products-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.home-product-family{position:relative;min-height:238px;padding:26px;border:1px solid #284151;background:linear-gradient(145deg,#102432,#091823);overflow:hidden;display:flex;flex-direction:column}
+.home-product-family::after{content:"";position:absolute;width:220px;height:220px;right:-100px;bottom:-120px;border-radius:50%;background:radial-gradient(circle,#8fd7f41c,transparent 67%);pointer-events:none}
+.home-product-family:nth-child(even){border-color:#5b503d;background:linear-gradient(145deg,#1a2430,#0a1721)}
+.home-product-family>span{font-size:9px;letter-spacing:1.7px;color:#9fc9d9}
+.home-product-family h3{font-size:24px;line-height:1.18;margin:18px 0 13px;color:#f2f7f8}
+.home-product-family p{color:#aebfca;font-size:13px;line-height:1.75}
+.home-product-family a{margin-top:auto;padding-top:22px;color:#d8bf91;font-size:11px;font-weight:600;letter-spacing:.5px;position:relative;z-index:1}
+.home-products-boundary{display:flex;justify-content:space-between;gap:30px;align-items:flex-start;margin-top:28px;padding-top:24px;border-top:1px solid #29414f;color:#9fb4c0;font-size:11px;line-height:1.75}
+.home-products-boundary strong{color:#d8bf91;font-weight:600}
+.not-found-page{min-height:100vh;background:radial-gradient(circle at 75% 15%,#17384d,transparent 34rem),#07111c;color:#eef6fb}
+.not-found-page header{position:static;background:#07111ce8;border-color:#ffffff18}
+.not-found-page header nav a{color:#b7c9d4}
+.not-found-shell{min-height:calc(100vh - 160px);max-width:1180px;margin:0 auto;padding:clamp(76px,11vw,150px) clamp(20px,6vw,80px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:9%;align-items:center}
+.not-found-code{font-size:11px;letter-spacing:.24em;color:#8fd7f4}
+.not-found-shell h1{font-size:clamp(58px,9vw,128px);line-height:.92;margin:22px 0 28px;max-width:8ch}
+.not-found-shell h1 em{display:block;color:#d8bf91;font-style:normal}
+.not-found-shell .lead{color:#c4d3dc;max-width:42ch}
+.not-found-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.not-found-actions .button.secondary{background:transparent;color:#e6f0f4;border:1px solid #607786}
+.not-found-map{border-left:1px solid #405968;padding-left:34px}
+.not-found-map span{display:block;color:#8fd7f4;font-size:9px;letter-spacing:.18em;margin-bottom:12px}
+.not-found-map a{display:block;padding:14px 0;border-bottom:1px solid #29414f;color:#dbe8ee}
+@media(max-width:980px){.home-products-heading{grid-template-columns:1fr;gap:24px}.home-products-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.not-found-shell{grid-template-columns:1fr}.not-found-map{border-left:0;border-top:1px solid #405968;padding:28px 0 0}}
+@media(max-width:900px){.desktop-nav>.products-nav-link{display:none}}
+@media(max-width:620px){.home-products{padding:70px 0}.home-products-grid{grid-template-columns:1fr}.home-product-family{min-height:auto}.home-products-boundary{display:block}.home-products-boundary span{display:block;margin-top:10px}.not-found-shell h1{font-size:60px}.not-found-actions{display:grid}.not-found-actions .button{width:100%}}
+@media(prefers-reduced-motion:reduce){.home-product-family::after{display:none}.desktop-nav>.products-nav-link{transition:none}}
