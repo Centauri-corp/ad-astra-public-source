@@ -81,7 +81,9 @@ test('no-JavaScript presentation remains readable without pretend controls',asyn
   await page.goto('http://127.0.0.1:4173/brain/');
   await expect(page.locator('#example-title')).toHaveText('Make the question specific.');
   await expect(page.locator('#example-next')).toBeDisabled();
-  await expect(page.locator('noscript')).toContainText('JavaScript is off');
+  // Match the rendered paragraph: Playwright intentionally excludes NOSCRIPT wrappers from text matching.
+  await expect(page.locator('noscript .brain-disclosure')).toBeVisible();
+  await expect(page.locator('noscript .brain-disclosure')).toContainText('JavaScript is off');
   await expect(page.locator('.brain-flow li')).toHaveCount(4);
  }finally{await context.close();}
 });
