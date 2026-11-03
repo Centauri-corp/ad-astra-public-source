@@ -1,0 +1,53 @@
+/* AD ASTRA private preview sign-in: scoped layout for existing accounts only.
+   Do not affect public research, markets, account creation or model execution. */
+.sign-in-shell {
+  padding-top: clamp(24px, 4vw, 48px);
+  padding-bottom: clamp(48px, 7vw, 88px);
+}
+.sign-in-shell .market-hero {
+  max-width: 720px;
+}
+.sign-in-shell .market-hero h1 {
+  font-size: clamp(36px, 4.5vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  margin: 12px 0 16px;
+}
+.sign-in-shell .market-hero .lead {
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.5;
+  margin: 0 0 18px;
+}
+.sign-in-shell #sign-in {
+  width: 100%;
+  max-width: 480px;
+  min-width: 0;
+  margin: 0 0 16px;
+}
+.sign-in-shell #sign-in .cl-footerAction {
+  display: none !important;
+}
+.sign-in-shell #sign-in .cl-cardBox,
+.sign-in-shell #sign-in .cl-card {
+  max-width: 100%;
+  min-width: 0;
+}
+.sign-in-shell .button {
+  min-height: 44px;
+}
+@media (max-width: 560px) {
+  .sign-in-shell {
+    padding-top: 20px;
+  }
+  .sign-in-shell .market-hero h1 {
+    font-size: clamp(32px, 10vw, 44px);
+  }
+  .sign-in-shell #sign-in {
+    max-width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sign-in-shell * {
+    scroll-behavior: auto;
+  }
+}
