@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "canonical": "https://adastra.global/",
+  "publicLaunchEnabled": false,
+  "visualArchitecture": {
+    "sceneOrder": ["arrival", "vision", "approach", "experiences", "horizon", "company", "signature"],
+    "palette": { "navy": "#07111c", "cyan": "#8ee8f4", "violet": "#9a7cff", "gold": "#f2c879" },
+    "threeD": { "privatePreviewOnly": true, "fallback": "static-neural-sphere-with-alt-text", "reducedMotion": true },
+    "neuralArt": { "publicModelGeneratedAssets": false, "textEmbeddedInImages": false }
+  },
+  "seo": {
+    "indexableRoutes": ["/"],
+    "nonHomeRoutes": "noindex,follow",
+    "sitemap": "homepage-only"
+  },
+  "growthAutomation": {
+    "mode": "private-gated",
+    "externalCrmWrites": false,
+    "outboundSends": false
+  }
+}

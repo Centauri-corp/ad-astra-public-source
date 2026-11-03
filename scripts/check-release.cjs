@@ -19,4 +19,15 @@ for(const f of files){
 const film=fs.readFileSync(path.join(root,'public/film/index.html'),'utf8');assert.ok(!/<video|<audio|<iframe/i.test(film));
 const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,1);assert.ok(sitemap.includes('<loc>https://adastra.global/</loc>'));
 assert.equal(JSON.parse(fs.readFileSync(path.join(root,'vercel.json'))).git.deploymentEnabled,false);
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'public/release-manifest.json')));
+const experience=JSON.parse(fs.readFileSync(path.join(root,'public/experience-manifest.json')));
+assert.equal(manifest.publicLaunchEnabled,false);assert.equal(manifest.engineAvailable,false);
+assert.equal(manifest.customerPortal,'authenticated-preview');
+assert.equal(manifest.customerAiModel,'gpt-4.1-mini-2025-04-14');
+assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
+assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','approach','experiences','horizon','company','signature']);
+assert.deepEqual(experience.seo.indexableRoutes,['/']);
+assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);
+assert.equal(experience.growthAutomation.externalCrmWrites,false);
+assert.equal(experience.growthAutomation.outboundSends,false);
 console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-only privacy=passed');
