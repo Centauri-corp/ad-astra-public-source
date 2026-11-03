@@ -45,6 +45,19 @@ test('valid signed session reserves quota before one bounded provider request',a
  const quotaIndex=calls.findIndex(c=>c.url==='https://redis.invalid'),modelIndex=calls.findIndex(c=>c.url.includes('/chat/completions'));assert.ok(quotaIndex<modelIndex);
  const payload=JSON.parse(calls[modelIndex].options.body);assert.equal(payload.max_tokens,700);assert.equal(payload.store,false);assert.equal(payload.model,'gpt-4.1-mini-2025-04-14');assert.ok(calls[modelIndex].options.signal);
 });
+test('conflicting AI Gateway model configuration keeps the release gate closed',()=>{
+ const original=process.env.AI_GATEWAY_MODEL;
+ try{
+  delete process.env.AI_GATEWAY_MODEL;
+  assert.equal(gates.ready(),true);
+  process.env.AI_GATEWAY_MODEL='different-unreleased-model';
+  assert.equal(gates.ready(),false);
+  process.env.AI_GATEWAY_MODEL='gpt-4.1-mini-2025-04-14';
+  assert.equal(gates.ready(),true);
+ }finally{
+  if(original===undefined)delete process.env.AI_GATEWAY_MODEL;else process.env.AI_GATEWAY_MODEL=original;
+ }
+});
 test('every absent or false release flag prevents all quota and model calls',async()=>{
  for(const flag of gates.FLAGS){process.env[flag]='false';calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));process.env[flag]='true';}
  delete process.env.AD_ASTRA_SECURITY_REVIEW_APPROVED;assert.equal((await request()).statusCode,503);
