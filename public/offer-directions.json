@@ -1,0 +1,35 @@
+{
+  "status": "coming_soon",
+  "paidEnrollmentOpen": false,
+  "checkoutEnabled": false,
+  "message": "Plans are being prepared. Paid enrollment is not open.",
+  "directions": [
+    {
+      "name": "AI Pro",
+      "audience": "individual",
+      "availability": "in_development",
+      "price": null,
+      "checkout_enabled": false
+    },
+    {
+      "name": "Business Agents",
+      "audience": "business",
+      "availability": "in_development",
+      "price": null,
+      "checkout_enabled": false
+    },
+    {
+      "name": "Enterprise Intelligence OS",
+      "audience": "enterprise",
+      "availability": "in_development",
+      "price": null,
+      "checkout_enabled": false
+    }
+  ],
+  "cta": {
+    "kind": "early_access",
+    "label": "Request early access",
+    "href": "/access/#early-access-title"
+  },
+  "offers": []
+}

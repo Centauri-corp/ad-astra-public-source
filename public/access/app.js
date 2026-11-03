@@ -80,7 +80,7 @@
         throw error;
       }
       resetFields();
-      announce('Your early-access request was received. We will use the email you provided for AD ASTRA launch and preview updates.', 'success');
+      announce('Your early-access request was received. No account or subscription was created. Existing communication preferences still apply.', 'success');
     } catch (error) {
       const code = error && error.name === 'AbortError' ? 'service_unavailable' : error?.message;
       announce(messages[code] || 'The request could not be completed. Please try again shortly.', 'error');

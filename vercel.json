@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "node --test test/*.test.cjs && node scripts/check-release.cjs && node scripts/site-integrity.cjs && node scripts/redis-acceptance.cjs",
+  "buildCommand": "node --test test/*.test.cjs && node scripts/check-release.cjs && node scripts/check-commercial.cjs && node scripts/site-integrity.cjs && node scripts/redis-acceptance.cjs",
   "installCommand": "echo No dependencies required",
   "outputDirectory": "public",
   "functions": {
@@ -38,6 +38,19 @@
     {
       "source": "/release-manifest.json",
       "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/offer-directions.json",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
         {
           "key": "Cache-Control",
           "value": "no-store"
