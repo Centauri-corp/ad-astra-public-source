@@ -1,8 +1,8 @@
-['/brain/','A visible architecture']'use strict';
+'use strict';
 const {test,expect}=require('@playwright/test');
 const axe=require('axe-core');
 const base='http://127.0.0.1:4173';
-const informationPages=[['/access/','A new horizon.'],['/intelligence/','Better questions.'],['/brain/','Explore the']];
+const informationPages=[['/access/','A new horizon.'],['/intelligence/','Better questions.'],['/brain/','A visible architecture']];
 
 async function isolate(context){
   // Only public art/fonts and the local source fixture may be contacted.
@@ -54,7 +54,7 @@ for(const width of [320,390,768,1024,1440]){
       if(route!=='/'){
         await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href',`https://adastra.global${route}`);
         await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','noindex,follow');
-        await expect(page.locator('form')).toHaveCount(0);
+        await expect(page.locator('form')).toHaveCount(route==='/access/'?1:0);
       }
       await capture(page,testInfo,`page-${route.replaceAll('/','')||'home'}-${width}`);
     });
