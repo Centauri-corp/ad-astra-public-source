@@ -90,7 +90,10 @@
     }
   }
 
-  submit.addEventListener('click', send);
+  panel.addEventListener('submit', (event) => {
+    event.preventDefault();
+    send();
+  });
   panel.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && !event.isComposing && event.target?.type !== 'checkbox') {
       event.preventDefault();
