@@ -54,7 +54,8 @@ test('new production styles cover responsive and reduced-motion behavior', () =>
 });
 
 test('branded 404 is crawl-safe and provides bounded recovery routes', () => {
-  assert.match(notFound, /name="robots" content="noindex,nofollow"/);
+  assert.match(notFound, /name="robots" content="noindex,follow"/);
+  assert.match(notFound, /rel="canonical" href="https:\/\/adastra\.global\/404\.html"/);
   assert.match(notFound, /Page not found \| AD ASTRA/);
   for (const route of ['/', '/products/', '/brain/', '/trust/', '/access/#early-access-title']) {
     assert.ok(notFound.includes(`href="${route}"`), `missing recovery route ${route}`);
