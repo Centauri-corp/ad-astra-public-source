@@ -46,11 +46,11 @@ assert.ok(responsiveStyle.includes('Tablet neural hero separation guard'),'Table
 assert.ok(responsiveStyle.includes('prefers-reduced-motion'),'Static accessibility presentation must remain available');
 assert.ok(!/\b(?:href|src)="\/api\/ask"/.test(homepage),'Public hero must not expose AI inference');
 
-assert.ok(homepage.includes('443f89273eb4071329cac3fa151d2674b37e6eaf-1672x941.png'),'Original image checksum-derived asset URL must match');
+assert.ok(homepage.includes('assets/ad-astra-runway-orbital-poster.jpg'),'Approved local neural fallback asset must be present');
 assert.equal((homepage.match(/data-neural-state="/g)||[]).length,6,'All six original state selectors required');
 assert.doesNotMatch(homepage,/Neural Intelligence OS — live now/i,'Artwork must not imply active AI');
 const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'),'utf8'));
-assert.ok(vercel.headers[0].headers.find(h=>h.key==='Content-Security-Policy').value.includes('https://cdn.sanity.io'),'Approved Sanity image must be permitted by CSP');
+assert.doesNotMatch(vercel.headers[0].headers.find(h=>h.key==='Content-Security-Policy').value,/cdn\.sanity\.io/i,'Public CSP must not depend on external Sanity artwork');
 const neuralCss=fs.readFileSync(path.join(root,'public/style.css'),'utf8');
 const neuralJs=fs.readFileSync(path.join(root,'public/app.js'),'utf8');
 assert.match(neuralCss,/AD ASTRA ambient cinematic neural upgrade v2/,'Neural frame effects not installed');
