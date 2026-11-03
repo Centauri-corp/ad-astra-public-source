@@ -135,7 +135,7 @@ test('all legacy flags and a signed identity cannot bypass missing shared monthl
 test('return paths reject external URLs and preserve approved mode navigation',()=>{
  const context={window:{},URL,location:{origin:'https://adastra.global'}};vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../public/auth-navigation.js'),'utf8'),context);
  const safe=context.window.adAstraReturnPath;
- for(const value of ['https://evil.example','//evil.example','/\\evil.example','javascript:alert(1)','/sign-in/','/%2f%2fevil.example'])assert.equal(safe(value),'/platform/');
+ for(const value of ['https://evil.example','//evil.example','/\\evil.example','javascript:alert(1)','/sign-in/','/%2f%2fevil.example'])assert.equal(safe(value,'/access/');
  assert.equal(safe('/knowledge/?mode=learn#ask-ad-astra'),'/knowledge/?mode=learn#ask-ad-astra');
 });
 test('session handshake verifies identity without model or quota access',async()=>{
