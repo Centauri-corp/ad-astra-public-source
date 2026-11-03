@@ -12,11 +12,11 @@ const functionSource=fs.readFileSync(path.join(root,'supabase/functions/astra-ea
 const endpoint='https://wewznejqpnsmiwkbozgw.supabase.co/functions/v1/astra-early-access';
 
 test('early access is consent gated without claiming account or AI activation',()=>{
-  assert.match(html,/role="form" aria-labelledby="early-access-title"/);
+  assert.match(html,/<form\b[^>]*id="early-access-form"[^>]*aria-labelledby="early-access-title"/);
   assert.match(html,/id="early-email"[^>]+required/);
   assert.match(html,/id="early-consent"[^>]+required/);
   assert.match(html,/does not create an account, start a subscription or enable AI execution/i);
-  assert.doesNotMatch(html,/<form\b/i,'The existing public information-page acceptance keeps native forms absent.');
+  assert.match(html,/<form\b/i,'Early access must use native form semantics.');
   assert.equal(manifest.earlyAccessIntake,'public-consent-gated-no-spend');
 });
 
