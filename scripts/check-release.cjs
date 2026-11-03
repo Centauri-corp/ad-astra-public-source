@@ -43,5 +43,7 @@ assert.ok(positioning.includes('not available for purchase')||positioning.includ
 assert.ok(microgrids.includes('name="robots" content="noindex,follow"'));
 for(const region of ['NORTH AMERICA','EUROPE + UK','MATURE APAC','EMERGING MARKETS'])assert.ok(microgrids.includes(region));
 assert.ok(microgrids.includes('No autonomous energy dispatch')&&microgrids.includes('No yield or bill reduction is promised'));
+assert.ok(microgrids.includes('48-hour deployment or zero utility hookup cannot be assumed'));
+assert.ok(microgrids.includes('Project financing and hardware availability have not been independently verified'));
 assert.ok(pricing.includes('For individuals')&&pricing.includes('For organizations')&&pricing.includes('No payment is requested'));
 console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-only privacy=passed');
