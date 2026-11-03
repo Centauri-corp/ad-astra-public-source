@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "registry": "AD ASTRA Command model and release registry",
+  "asOf": "2026-11-02",
+  "releaseStatus": "production_hold",
+  "customerInferenceVerified": false,
+  "publicCatalogEnabled": false,
+  "checkoutEnabled": false,
+  "models": [
+    {
+      "modelId": "gpt-4.1-mini-2025-04-14",
+      "surface": "public-guided-engine",
+      "provider": "OpenAI",
+      "modes": ["ask", "research", "create", "learn", "explore"],
+      "configuredIn": "api/ask.js",
+      "executionStatus": "configured_release_gated",
+      "customerFacing": true,
+      "publicUse": false,
+      "executionVerified": false
+    },
+    {
+      "modelId": "google/gemini-3.1-flash-image",
+      "surface": "private-neural-artwork",
+      "provider": "Vercel AI Gateway",
+      "modes": ["neural_artwork"],
+      "configuredIn": "transcript-only reference; private source not in this repository",
+      "executionStatus": "reported_not_verified",
+      "customerFacing": false,
+      "publicUse": false,
+      "executionVerified": false
+    },
+    {
+      "modelId": null,
+      "surface": "ai-gateway-catalog",
+      "provider": "Vercel AI Gateway",
+      "modes": ["discovery"],
+      "catalogEntryCount": 436,
+      "configuredIn": "transcript-only discovery snapshot",
+      "executionStatus": "discovery_snapshot_only",
+      "customerFacing": false,
+      "publicUse": false,
+      "executionVerified": false
+    },
+    {
+      "modelId": null,
+      "surface": "autonomous-agents",
+      "provider": "private AD ASTRA runtime",
+      "modes": ["agent_execution"],
+      "configuredIn": "transcript-only implementation report",
+      "executionStatus": "implementation_present_not_verified",
+      "customerFacing": false,
+      "publicUse": false,
+      "executionVerified": false
+    },
+    {
+      "modelId": null,
+      "surface": "agi-asi-research",
+      "provider": "research",
+      "modes": ["research"],
+      "configuredIn": "AD ASTRA research boundary",
+      "executionStatus": "research_only",
+      "customerFacing": false,
+      "publicUse": false,
+      "executionVerified": false
+    }
+  ],
+  "requiredBeforePublicUse": [
+    "authenticated_customer_canary",
+    "all_release_flags_verified",
+    "durable_quota_and_budget_reconciliation",
+    "provider_receipt_reconciliation",
+    "runtime_security_review",
+    "human_release_approval"
+  ]
+}
