@@ -37,7 +37,7 @@
         signOut.hidden = false;
         signOut.addEventListener('click', async event => {
           event.preventDefault();
-          try { await clerk.signOut(); location.href = '/platform/'; }
+          try { await clerk.signOut(); location.href = '/access/'; }
           catch { platform.hidden = true; authGate.hidden = false; status.textContent = 'Sign-out could not be confirmed. Please try signing out again before leaving a shared device.'; }
         });
       }
