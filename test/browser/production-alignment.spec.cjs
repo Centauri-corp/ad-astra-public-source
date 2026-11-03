@@ -50,7 +50,8 @@ test('branded 404 provides accessible recovery routes',async({page})=>{
   const response=await page.goto('/404.html');
   expect(response.status()).toBe(200);
   await expect(page).toHaveTitle('Page not found | AD ASTRA');
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','noindex,nofollow');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','noindex,follow');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href','https://adastra.global/404.html');
   await expect(page.locator('h1')).toContainText('Beyond this');
   await expect(page.locator('a[href="/products/"]')).toHaveCount(2);
   await expect(page.locator('a[href="/access/#early-access-title"]')).toBeVisible();
