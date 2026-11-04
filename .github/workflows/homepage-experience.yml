@@ -22,7 +22,7 @@ jobs:
         run: npx playwright install --with-deps chromium webkit
       - name: Verify product-led homepage journeys
         working-directory: test/browser
-        run: npx playwright test homepage-experience.spec.cjs graphics-promotion.spec.cjs
+        run: npx playwright test homepage-experience.spec.cjs graphics-promotion.spec.cjs site-surface-audit.spec.cjs
       - name: Retain homepage evidence for review
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

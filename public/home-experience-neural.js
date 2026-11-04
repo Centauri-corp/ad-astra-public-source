@@ -48,15 +48,19 @@
   }
 
   function createNeuralModel(canvas, stage, controls, readout) {
-    const context = canvas.getContext('2d', {alpha: true});
+    let context;
+    try { context = canvas.getContext('2d', {alpha: true}); }
+    catch { /* Optional graphics must not stop product navigation. */ }
     if (!context) {
       stage.classList.add('hx-model-fallback');
+      controls.querySelectorAll('button').forEach(button => { button.disabled = true; });
+      readout.querySelector('small').textContent = 'Static illustration / interactive rendering unavailable';
       return;
     }
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     let mode = 'knowledge';
-    let paused = reduced.matches;
+    let paused = reduced.matches || Boolean(navigator.connection?.saveData);
     let visible = true;
     let animationFrame = 0;
     let width = 0;
@@ -67,6 +71,7 @@
     let targetX = rotationX;
     let targetY = rotationY;
     let lastTime = performance.now();
+    let sceneTime = 0;
 
     const nodeCount = 78;
     const nodes = Array.from({length: nodeCount}, (_, index) => ({index, cluster: index % 6, seed: (index * 0.61803398875) % 1}));
@@ -137,7 +142,7 @@
       canvas.style.width = width + 'px';
       canvas.style.height = height + 'px';
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
-      draw(performance.now());
+      draw(sceneTime);
     }
 
     function draw(time) {
@@ -180,17 +185,26 @@
     }
 
     function frame(time) {
-      if (!visible) {
-        animationFrame = requestAnimationFrame(frame);
-        return;
-      }
+      animationFrame = 0;
+      if (paused || !visible || document.hidden) return;
       const delta = Math.min(32, time - lastTime);
       lastTime = time;
+      sceneTime += delta;
       rotationX += (targetX - rotationX) * 0.045;
       rotationY += (targetY - rotationY) * 0.045;
-      if (!paused) targetY += delta * 0.00011;
-      draw(time);
+      targetY += delta * 0.00011;
+      draw(sceneTime);
       animationFrame = requestAnimationFrame(frame);
+    }
+
+    function syncAnimation() {
+      if (paused || !visible || document.hidden) {
+        cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+      } else if (!animationFrame) {
+        lastTime = performance.now();
+        animationFrame = requestAnimationFrame(frame);
+      }
     }
 
     function setMode(nextMode) {
@@ -205,7 +219,7 @@
       if (title) title.textContent = data.title;
       if (description) description.textContent = data.description;
       stage.style.setProperty('--hx-model-accent', data.accent);
-      draw(performance.now());
+      draw(sceneTime);
     }
 
     controls.querySelectorAll('[data-model]').forEach((button) => button.addEventListener('click', () => setMode(button.dataset.model)));
@@ -217,7 +231,7 @@
         paused = !paused;
         motionButton.setAttribute('aria-pressed', String(paused));
         motionButton.textContent = paused ? 'Play model' : 'Pause model';
-        draw(performance.now());
+        syncAnimation();
       });
     }
 
@@ -226,6 +240,10 @@
       const rect = stage.getBoundingClientRect();
       targetY = ((event.clientX - rect.left) / rect.width - 0.5) * 1.25;
       targetX = ((event.clientY - rect.top) / rect.height - 0.5) * -0.72;
+      if (paused) {
+        rotationX = targetX; rotationY = targetY;
+        draw(sceneTime);
+      }
     });
     stage.addEventListener('pointerleave', () => {
       targetX = -0.18;
@@ -235,27 +253,30 @@
     resizeObserver.observe(stage);
     const intersectionObserver = new IntersectionObserver((entries) => {
       visible = entries.some((entry) => entry.isIntersecting);
+      syncAnimation();
     }, {rootMargin: '180px'});
     intersectionObserver.observe(stage);
 
     const reducedChange = () => {
-      paused = reduced.matches;
+      paused = reduced.matches || Boolean(navigator.connection?.saveData);
       if (motionButton) {
         motionButton.setAttribute('aria-pressed', String(paused));
         motionButton.textContent = paused ? 'Play model' : 'Pause model';
       }
-      draw(performance.now());
+      syncAnimation();
     };
     if (typeof reduced.addEventListener === 'function') reduced.addEventListener('change', reducedChange);
 
-    document.addEventListener('visibilitychange', () => {
-      visible = !document.hidden;
-    });
+    document.addEventListener('visibilitychange', syncAnimation);
 
     setMode('knowledge');
     resize();
-    animationFrame = requestAnimationFrame(frame);
-    window.addEventListener('pagehide', () => cancelAnimationFrame(animationFrame), {once: true});
+    syncAnimation();
+    window.addEventListener('pagehide', () => {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+    });
+    window.addEventListener('pageshow', syncAnimation);
   }
 
   function hexToRgba(hex, alpha) {

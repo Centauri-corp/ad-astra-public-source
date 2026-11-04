@@ -17,6 +17,40 @@ const frames = page => page.evaluate(() => new Promise(resolve => {
   requestAnimationFrame(next);
 }));
 
+test('reduced-motion product model holds actual pixels until explicitly played', async ({page}) => {
+  await open(page);
+  const canvas = page.locator('#hx-neural-canvas');
+  await canvas.scrollIntoViewIfNeeded();
+  await frames(page);
+  const pixels = () => canvas.evaluate(node => node.toDataURL());
+  const still = await pixels();
+  await frames(page);
+  expect(await pixels()).toBe(still);
+  await page.locator('.hx-model-motion').click();
+  await expect.poll(pixels).not.toBe(still);
+  await page.locator('.hx-model-motion').click();
+  const paused = await pixels();
+  await frames(page);
+  expect(await pixels()).toBe(paused);
+});
+
+test('unavailable product canvas does not prevent product and solution navigation', async ({page}) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (...args) {
+      if (this.id === 'hx-neural-canvas') throw new Error('Canvas unavailable');
+      return original.apply(this, args);
+    };
+  });
+  await open(page);
+  await expect(page.locator('.hx-product-card')).toHaveCount(6);
+  await expect(page.locator('.hx-model-motion')).toBeDisabled();
+  await expect(page.locator('.hx-model-readout')).toContainText('Static illustration');
+  expect(errors).toEqual([]);
+});
+
 test('hero motion renders, freezes and resumes without a blank fallback', async ({page}) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
