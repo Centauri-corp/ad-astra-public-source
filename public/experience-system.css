@@ -1,0 +1,19 @@
+/* Shared informational-page polish; no homepage media, forms or identity logic changed. */
+html body{font-family:Manrope,'DM Sans',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body>header{padding:18px clamp(20px,5vw,72px);gap:24px;background:rgba(7,17,28,.94);border-bottom-color:rgba(178,208,224,.2)}
+body>header .brand{font-size:13px;letter-spacing:.25em;line-height:1.5;color:#edf6fb;flex-shrink:0}
+body>header .brand span{font-size:8px;letter-spacing:.17em;margin-top:4px;color:#b6cbd7}
+body>header nav{gap:clamp(14px,2vw,28px)}
+body>header nav a{font-size:12px;color:#bbceda;position:relative;min-height:44px}
+body>header nav a[aria-current=page]{color:#eff9ff}
+body>header nav a[aria-current=page]:after{content:'';position:absolute;bottom:2px;left:0;right:0;height:1px;background:#a6dce8}
+body>header nav a[href='/access/#early-access-title']{padding:0 14px;border:1px solid #516c7e;border-radius:4px;color:#e8f5fa}
+.market-shell .market-card,.market-shell .plan{border-radius:8px;background:linear-gradient(140deg,rgba(24,47,64,.86),rgba(9,25,39,.94));border-color:#354c5c;box-shadow:0 12px 32px #0002}
+.market-shell .market-card h2{font-weight:450;letter-spacing:-.03em}
+.market-shell .market-card p,.market-shell .plan ul{color:#bdd0dc;line-height:1.8}
+.market-shell .market-hero h1{letter-spacing:-.055em;line-height:1.06;font-weight:450}
+.market-shell .market-hero .button,.market-shell .company-copy .button{border-radius:4px;background:#dfeef5;color:#07111c;border-color:#dfeef5;min-height:46px;font-weight:500}
+.market-shell .market-hero .button.alt,.market-shell .company-copy .button.alt{background:transparent;color:#c1e4ed;border-color:#527387}
+body>footer{font-size:12px;color:#b3c8d6;border-top-color:#2f4657}
+@media(max-width:560px){body>header{padding:16px 20px;gap:12px}body>header nav{gap:6px 16px;justify-content:flex-start;width:100%}body>header nav a{font-size:11px;min-height:42px}body>header nav a[href='/access/#early-access-title']{padding:0 10px}body>header .brand span{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.market-shell .market-card{transition:none;transform:none}}

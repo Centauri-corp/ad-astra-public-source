@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0",
+  "status": "proposed-unverified",
+  "lastReviewed": "2026-11-03",
+  "parent": "Centauri Renewable Corporation (subject to verified corporate records)",
+  "operator": "AD ASTRA",
+  "controlPlane": "CRC-COMMAND (read-only by default)",
+  "researchOrigin": "Centauri Labs (separate CRC research organization)",
+  "decisionsRequireVerifiedAppointment": true,
+  "divisions": [
+    {
+      "id": 1,
+      "name": "Corporate Strategy & Governance",
+      "accountableRole": "CEO",
+      "mandate": "Corporate governance and group alignment",
+      "sourceOfTruth": "Corporate authority register",
+      "kpi": "Board reporting and policy register",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 2,
+      "name": "Intelligence OS",
+      "accountableRole": "CTO / Chief AI Officer",
+      "mandate": "Model routing, reasoning APIs and inference",
+      "sourceOfTruth": "Model gateway config and evaluation registry",
+      "kpi": "Inference SLO and evaluated model releases",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 3,
+      "name": "Autonomous Agents",
+      "accountableRole": "Chief AI Officer",
+      "mandate": "Agent execution, durable workflows and tools",
+      "sourceOfTruth": "Agent task ledger",
+      "kpi": "Authorized completion and exception rate",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 4,
+      "name": "AI/AGI/ASI Research",
+      "accountableRole": "Chief AI Officer",
+      "mandate": "Research sandbox, evaluations and safety",
+      "sourceOfTruth": "Controlled research registry",
+      "kpi": "Documented evaluations and approved transfers",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 5,
+      "name": "Product & Frontend",
+      "accountableRole": "Chief Product Officer",
+      "mandate": "Web, mobile, design, UX and accessibility",
+      "sourceOfTruth": "Product backlog and customer UX metrics",
+      "kpi": "Accessibility and conversion quality",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 6,
+      "name": "Backend & Cloud Engineering",
+      "accountableRole": "CTO",
+      "mandate": "APIs, service contracts, identity integrations and data access",
+      "sourceOfTruth": "API contracts and application repository",
+      "kpi": "Test coverage and service correctness",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 7,
+      "name": "Enterprise Solutions",
+      "accountableRole": "COO",
+      "mandate": "Enterprise implementation, statements of work and delivery",
+      "sourceOfTruth": "Approved contract and delivery tracker",
+      "kpi": "On-time implementations and service margin",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 8,
+      "name": "Global Revenue & CRM",
+      "accountableRole": "CRO",
+      "mandate": "Pipeline, sales owners, revenue forecasting, subscriptions alignment",
+      "sourceOfTruth": "Zoho CRM for approved AD ASTRA tenant",
+      "kpi": "Qualified pipeline and collected revenue",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 9,
+      "name": "Global SEO, Marketing & Media",
+      "accountableRole": "CRO / Marketing Director",
+      "mandate": "Content, organic acquisition, brand and campaigns",
+      "sourceOfTruth": "Sanity publishing registry and analytics",
+      "kpi": "Qualified organic conversions",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 10,
+      "name": "Finance & Procurement",
+      "accountableRole": "CFO",
+      "mandate": "Treasury, accounting, procurement and cost controls",
+      "sourceOfTruth": "Accounting and billing ledgers",
+      "kpi": "Reconciled cash and budget variance",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 11,
+      "name": "Security, Trust & Legal",
+      "accountableRole": "Security Lead / General Counsel",
+      "mandate": "Security, privacy, legal approvals and incidents",
+      "sourceOfTruth": "Security case and policy register",
+      "kpi": "Security findings and remediation time",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 12,
+      "name": "Customer Success & Support",
+      "accountableRole": "COO",
+      "mandate": "Onboarding, support, retention, renewals",
+      "sourceOfTruth": "Customer service system",
+      "kpi": "Time to first value and renewal rates",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 13,
+      "name": "Infrastructure & Site Reliability",
+      "accountableRole": "CTO / SRE Lead",
+      "mandate": "Deployments, availability, backups, restore and observability",
+      "sourceOfTruth": "Vercel and operations incident ledger",
+      "kpi": "Availability, MTTR and restore test",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    },
+    {
+      "id": 14,
+      "name": "Scientific & Industrial Integration",
+      "accountableRole": "CTO / Program Lead",
+      "mandate": "Authorized industrial integrations and transfer from research",
+      "sourceOfTruth": "Intercompany integration and IP register",
+      "kpi": "Approved integration acceptance",
+      "namedExecutive": null,
+      "appointmentVerified": false,
+      "financialOwnerVerified": false
+    }
+  ],
+  "crossCuttingControls": [
+    "Enterprise Architecture",
+    "Data Governance",
+    "Independent QA and Release Assurance",
+    "Program Management Office"
+  ],
+  "externalBusinessesNotDivisions": [
+    "Centauri Labs",
+    "Energy America / EA-VOLT",
+    "EA Solar",
+    "Mutual Moon",
+    "Centauri Bio Science"
+  ]
+}
