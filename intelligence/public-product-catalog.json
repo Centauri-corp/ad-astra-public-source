@@ -1,0 +1,320 @@
+{
+  "schemaVersion": "1.0",
+  "name": "AD ASTRA Public Intelligence Platform",
+  "catalogStatus": "proposed-unverified",
+  "updated": "2026-11-03",
+  "releasePolicy": {
+    "default": "not-released",
+    "researchClaimsMustBeQualified": true,
+    "customerBillingRequiresVerifiedEntitlement": true,
+    "modelRequestsRequireExistingReleaseGates": true,
+    "noAutonomousHighRiskActions": true
+  },
+  "engineLayers": [
+    {
+      "id": "experience",
+      "name": "Experience Layer",
+      "services": [
+        "public-web",
+        "customer-workspace",
+        "enterprise-admin",
+        "developer-portal",
+        "mobile-clients"
+      ]
+    },
+    {
+      "id": "identity",
+      "name": "Identity and Tenancy",
+      "services": [
+        "oidc",
+        "tenant-access",
+        "entitlements",
+        "rate-limits"
+      ]
+    },
+    {
+      "id": "gateway",
+      "name": "Intelligence Model Gateway",
+      "services": [
+        "model-routing",
+        "input-validation",
+        "quota-reservations",
+        "provider-availability",
+        "output-review"
+      ]
+    },
+    {
+      "id": "reasoning",
+      "name": "Reasoning and Knowledge",
+      "services": [
+        "conversation-context",
+        "retrieval-with-citations",
+        "tools-with-permissions",
+        "model-evaluation"
+      ]
+    },
+    {
+      "id": "agents",
+      "name": "Agent Orchestration",
+      "services": [
+        "durable-tasks",
+        "human-approvals",
+        "tool-authorizations",
+        "audit-trail",
+        "retry-policy"
+      ]
+    },
+    {
+      "id": "business",
+      "name": "Business Operations",
+      "services": [
+        "crm-events",
+        "billing-reconciliation",
+        "customer-lifecycle",
+        "content-publishing"
+      ]
+    },
+    {
+      "id": "research",
+      "name": "Research Sandbox",
+      "services": [
+        "model-evaluations",
+        "experimental-reasoning",
+        "safety-assessment",
+        "scientific-coordination"
+      ]
+    },
+    {
+      "id": "control",
+      "name": "Assurance and Observability",
+      "services": [
+        "security-monitoring",
+        "incident-response",
+        "spend-controls",
+        "rollback",
+        "release-tests"
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "individual-ai",
+      "name": "AD ASTRA Intelligence",
+      "segment": "individual",
+      "description": "Human-directed question answering, learning and knowledge workflows",
+      "status": "release-gated",
+      "ownerDivision": 2,
+      "capabilities": [
+        "ask",
+        "research",
+        "create",
+        "learn",
+        "explore"
+      ],
+      "pricingState": "not-approved"
+    },
+    {
+      "id": "pro-workspace",
+      "name": "AD ASTRA Pro Workspace",
+      "segment": "professional",
+      "description": "Extended knowledge spaces, projects and collaborative productivity",
+      "status": "planned",
+      "ownerDivision": 5,
+      "capabilities": [
+        "projects",
+        "knowledge-management",
+        "workspace-history"
+      ],
+      "pricingState": "not-approved"
+    },
+    {
+      "id": "agent-studio",
+      "name": "AD ASTRA Agent Studio",
+      "segment": "business",
+      "description": "Configurable human-supervised AI workflows and agent templates",
+      "status": "planned",
+      "ownerDivision": 3,
+      "capabilities": [
+        "agent-builder",
+        "approval-workflows",
+        "execution-monitoring"
+      ],
+      "pricingState": "not-approved"
+    },
+    {
+      "id": "enterprise-os",
+      "name": "AD ASTRA Enterprise Intelligence OS",
+      "segment": "enterprise",
+      "description": "Organization-level AI workspaces, policy, audit and integrations",
+      "status": "planned",
+      "ownerDivision": 7,
+      "capabilities": [
+        "sso",
+        "rbac",
+        "private-knowledge",
+        "audit-console"
+      ],
+      "pricingState": "not-approved"
+    },
+    {
+      "id": "developer-api",
+      "name": "AD ASTRA Developer Platform",
+      "segment": "developer",
+      "description": "Governed APIs, usage dashboards and integration documentation",
+      "status": "planned",
+      "ownerDivision": 6,
+      "capabilities": [
+        "api-access",
+        "webhooks",
+        "sdk-documentation"
+      ],
+      "pricingState": "not-approved"
+    },
+    {
+      "id": "ai-employees",
+      "name": "AD ASTRA AI Employees",
+      "segment": "business",
+      "description": "Implementation-led customer service, scheduling and workflow automation with human supervision",
+      "status": "planned",
+      "ownerDivision": 7,
+      "capabilities": [
+        "customer-inbox",
+        "appointment-booking",
+        "workflow-triage"
+      ],
+      "pricingState": "not-approved"
+    },
+    {
+      "id": "research-atlas",
+      "name": "AD ASTRA Research Atlas",
+      "segment": "research",
+      "description": "Scientific knowledge mapping, evidence exploration and controlled research environments",
+      "status": "research",
+      "ownerDivision": 4,
+      "capabilities": [
+        "evidence-maps",
+        "comparative-research",
+        "evaluation-registry"
+      ],
+      "pricingState": "not-for-sale"
+    },
+    {
+      "id": "industry-intelligence",
+      "name": "AD ASTRA Industry Intelligence",
+      "segment": "enterprise",
+      "description": "Permissioned analytics and automation for industrial and scientific workflows",
+      "status": "planned",
+      "ownerDivision": 14,
+      "capabilities": [
+        "manufacturing-analysis",
+        "energy-forecasting",
+        "research-workflows"
+      ],
+      "pricingState": "custom-unapproved"
+    },
+    {
+      "id": "creative-intelligence",
+      "name": "AD ASTRA Creative Studio",
+      "segment": "creator",
+      "description": "Creative ideation, content planning and governed media workflows",
+      "status": "planned",
+      "ownerDivision": 5,
+      "capabilities": [
+        "concept-development",
+        "content-workflows"
+      ],
+      "pricingState": "not-approved"
+    }
+  ],
+  "solutions": [
+    {
+      "id": "customer-service",
+      "name": "Customer Support Intelligence",
+      "segment": "business",
+      "productIds": [
+        "ai-employees",
+        "enterprise-os"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "sales-crm",
+      "name": "Sales & CRM Intelligence",
+      "segment": "business",
+      "productIds": [
+        "ai-employees",
+        "industry-intelligence"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "document-knowledge",
+      "name": "Document & Knowledge Intelligence",
+      "segment": "enterprise",
+      "productIds": [
+        "enterprise-os",
+        "research-atlas"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "marketing-growth",
+      "name": "Marketing & SEO Intelligence",
+      "segment": "business",
+      "productIds": [
+        "creative-intelligence",
+        "ai-employees"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "education",
+      "name": "Learning & Research Assistance",
+      "segment": "individual",
+      "productIds": [
+        "individual-ai",
+        "research-atlas"
+      ],
+      "status": "release-gated"
+    },
+    {
+      "id": "developer-workflows",
+      "name": "Developer & Workflow Automation",
+      "segment": "developer",
+      "productIds": [
+        "developer-api",
+        "agent-studio"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "manufacturing-energy",
+      "name": "Manufacturing & Energy Intelligence",
+      "segment": "enterprise",
+      "productIds": [
+        "industry-intelligence"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "scientific-discovery",
+      "name": "Scientific Research Support",
+      "segment": "research",
+      "productIds": [
+        "research-atlas",
+        "industry-intelligence"
+      ],
+      "status": "research"
+    },
+    {
+      "id": "enterprise-operations",
+      "name": "Enterprise Operations Intelligence",
+      "segment": "enterprise",
+      "productIds": [
+        "enterprise-os",
+        "agent-studio"
+      ],
+      "status": "planned"
+    }
+  ]
+}
