@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0",
+  "compiledOn": "2026-11-03",
+  "authority": "historical-evidence-only",
+  "executionAuthorized": false,
+  "sources": [
+    {
+      "id": "transcript-index",
+      "name": "AD-ASTRA-COMMAND-TRANSCRIPT-INDEX.md",
+      "type": "user-project-file",
+      "status": "retrieved",
+      "scope": "selected historical conversations, not complete ChatGPT account export"
+    },
+    {
+      "id": "model-registry",
+      "name": "ad-astra-command-models.json",
+      "type": "user-project-file",
+      "status": "retrieved",
+      "scope": "2026-11-02 model release-status snapshot"
+    },
+    {
+      "id": "audit",
+      "name": "AD-ASTRA-END-TO-END-AUDIT-2026-11-03.md",
+      "type": "user-project-file",
+      "status": "retrieved",
+      "scope": "historical browser, release and origin findings"
+    },
+    {
+      "id": "production-pass",
+      "name": "AD-ASTRA-PRODUCTION-PASS-2026-11-03.md",
+      "type": "user-project-file",
+      "status": "retrieved",
+      "scope": "historical private-service and preview checks"
+    },
+    {
+      "id": "github-pr16",
+      "name": "ad-astra-public-source PR #16",
+      "type": "live-github",
+      "status": "open",
+      "scope": "base fix/preview-signin-layout-20261103, not main"
+    },
+    {
+      "id": "github-pr17",
+      "name": "ad-astra-public-source PR #17",
+      "type": "live-github",
+      "status": "open",
+      "scope": "production-pass branch, protected-main review pending"
+    },
+    {
+      "id": "github-pr22",
+      "name": "ad-astra-public-source PR #22",
+      "type": "live-github",
+      "status": "open",
+      "scope": "governance, policy, frontend and product catalog changes"
+    }
+  ],
+  "reconciled": [
+    {
+      "id": "public-model",
+      "finding": "Public source configures gpt-4.1-mini-2025-04-14 with Ask, Research, Create, Learn, Explore",
+      "status": "source-verified",
+      "release": "gated"
+    },
+    {
+      "id": "artwork-model",
+      "finding": "google/gemini-3.1-flash-image appears in private neural artwork transcript",
+      "status": "transcript-only",
+      "release": "not-activated"
+    },
+    {
+      "id": "agent-runtime",
+      "finding": "Automated agents described in earlier workstreams",
+      "status": "implementation-unverified",
+      "release": "not-activated"
+    },
+    {
+      "id": "research",
+      "finding": "AGI/ASI goals are research programs, not customer-ready model capabilities",
+      "status": "documented-strategy",
+      "release": "not-activated"
+    },
+    {
+      "id": "preview-origin",
+      "finding": "Historical audit identified origin_denied for preview early-access intake; change staged in PR #16",
+      "status": "historical-staged-not-retested",
+      "release": "blocked-pending-test"
+    },
+    {
+      "id": "mainline",
+      "finding": "PR #16 targets a feature branch and PR #17 remains open against protected main",
+      "status": "live-github-verified",
+      "release": "not-promoted"
+    },
+    {
+      "id": "legal-readiness",
+      "finding": "Legal, security and operator pages were drafts in historical audit",
+      "status": "historical-needs-reverification",
+      "release": "blocked-pending-approval"
+    },
+    {
+      "id": "redis",
+      "finding": "Historical production-pass reported missing public-source Redis binding",
+      "status": "historical-needs-reverification",
+      "release": "fail-closed"
+    },
+    {
+      "id": "billing",
+      "finding": "Test prices configured in historical production-pass but checkout and entitlements disabled",
+      "status": "historical-needs-reverification",
+      "release": "not-activated"
+    },
+    {
+      "id": "frontend",
+      "finding": "New eight-surface frontend registry and noindex product showcase are committed on PR #22",
+      "status": "source-committed",
+      "release": "not-promoted"
+    },
+    {
+      "id": "business",
+      "finding": "14 divisions with accountable roles proposed; legal appointments not verified",
+      "status": "proposed",
+      "release": "not-certified"
+    }
+  ],
+  "rules": {
+    "doNotEnablePublicInferenceWithoutRuntimeAcceptance": true,
+    "doNotMergeFromTranscriptClaims": true,
+    "doNotPromoteNonMain": true,
+    "doNotBypassRedis": true,
+    "doNotEnableCheckoutOrOutbound": true,
+    "preserveHumanApproval": true,
+    "unreconciledSourcesRemainUnknown": true
+  }
+}
