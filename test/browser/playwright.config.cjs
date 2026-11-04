@@ -6,8 +6,6 @@ module.exports = defineConfig({
   timeout: 45000,
   expect: {timeout: 10000},
   fullyParallel: false,
-  // Real-time media acceptance is sensitive to CPU contention. Serialize CI so
-  // Chromium and WebKit validate natural playback without competing for decode.
   workers: process.env.CI ? 1 : 2,
   retries: 0,
   forbidOnly: Boolean(process.env.CI),
@@ -26,7 +24,7 @@ module.exports = defineConfig({
   ],
   webServer: {
     command: 'node serve.cjs',
-    url: 'http://127.0.0.1:4173/access/',
+    url: 'http://127.0.0.1:4173/resources/',
     reuseExistingServer: false,
     timeout: 10000
   }
