@@ -31,7 +31,7 @@ test('solutions reference known products and cannot imply generally available',(
 
 test('public product preview is noindex and carries disclosure',()=>{
  const page=fs.readFileSync(path.join(__dirname,'../public/products/index.html'),'utf8');
- assert.match(page,/<meta name="robots" content="noindex,nofollow,noarchive">/);
+ assert.match(page,/<meta name="robots" content="noindex,follow">/);
  assert.match(page,/Product concepts and research programs are not presented as available services/);
  assert.match(page,/No product purchases or unrestricted AI activation/);
  assert.doesNotMatch(page,/<form\\b/i);
