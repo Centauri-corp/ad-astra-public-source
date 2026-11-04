@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: '24'
       - name: Verify homepage product and neural contracts
-        run: node --test test/homepage-experience.test.cjs
+        run: node --test test/homepage-experience.test.cjs test/neural-motion-regression.test.cjs
       - name: Install pinned browser test dependencies
         working-directory: test/browser
         run: npm install --ignore-scripts --no-audit --no-fund
@@ -22,7 +22,7 @@ jobs:
         run: npx playwright install --with-deps chromium webkit
       - name: Verify product-led homepage journeys
         working-directory: test/browser
-        run: npx playwright test homepage-experience.spec.cjs
+        run: npx playwright test homepage-experience.spec.cjs neural-motion.spec.cjs
       - name: Retain homepage evidence for review
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
