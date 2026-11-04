@@ -4,8 +4,40 @@
   "filmPublicPlayback": false,
   "publicReferenceCatalog": false,
   "assetOriginDependency": false,
+  "publicLaunchEnabled": false,
+  "engineAvailable": false,
+  "customerPortal": "authenticated-preview",
+  "customerAiModel": "gpt-4.1-mini-2025-04-14",
+  "customerModes": ["ask", "research", "create", "learn", "explore"],
   "customerAccess": "clerk-authenticated",
   "liveEngineAccess": "requires-all-verified-release-gates",
+  "contentSurfaces": {
+    "company": "public-versioned",
+    "productsAndServices": "public-market-direction",
+    "customerPortal": "authenticated-preview",
+    "neuralArtwork": "private-review-only",
+    "video": "public-motion-study-premiere-gated"
+  },
+  "autonomousOperations": {
+    "mode": "private-scheduled-read-only-audit",
+    "cadence": "*/15 * * * * UTC",
+    "externalWrites": false,
+    "outboundSends": false,
+    "automaticPublication": false
+  },
+  "intelligenceLayers": {
+    "narrowAi": "guided-preview",
+    "agi": "research-direction",
+    "asi": "hypothetical-horizon",
+    "liveTelemetry": false
+  },
+  "videoBlueprint": {
+    "title": "The Architecture of Alignment",
+    "targetDurationSeconds": 60,
+    "publicPlayback": "premiere-gated",
+    "scenes": ["hook", "narrow-core", "agi-research", "asi-horizon-return"],
+    "claimBoundary": "conceptual-research-framing"
+  },
   "dailyModelBudgetUSD": 10,
   "rollbackBaseline": "dpl_GUQqWJ3jTy9f73XqfQFvmbqhnHUy",
   "source": "isolated AD ASTRA source; see release evidence",

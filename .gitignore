@@ -3,3 +3,6 @@
 node_modules/
 *.log
 test-output.txt
+test/browser/browser-results.json
+test/browser/playwright-report/
+test/browser/test-results/

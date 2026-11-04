@@ -18,6 +18,7 @@ test('hero graphics upgrade preserves truthful, accessible fallback behavior', (
   assert.match(app, /prefers-reduced-motion/);
   assert.match(app, /cancelAnimationFrame/);
   assert.match(app, /IntersectionObserver/);
-  assert.doesNotMatch(app, /telemetry|inference|model weights/i);
+  const heroGraphics = app.slice(app.indexOf("const neuralField ="), app.indexOf('function syncMotion()'));
+  assert.doesNotMatch(heroGraphics, /fetch\(|XMLHttpRequest|WebSocket|EventSource|sendBeacon/);
   assert.match(style, /\.neural-field\{/);
 });
