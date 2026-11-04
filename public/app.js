@@ -95,27 +95,90 @@ const filmVideo = document.getElementById('company-film');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let motionPaused = reducedMotion.matches || Boolean(navigator.connection?.saveData);
 const visibleVideos = new Set();
+const pendingVideos = new Set();
+function motionPermitted() {
+  return !motionPaused && !document.hidden && !(filmDialog && filmDialog.open);
+}
+function syncMotionButton() {
+  const visible = [...visibleVideos];
+  const usable = visible.filter(video => video.dataset.failed !== 'true');
+  const playing = usable.some(video => !video.paused && !video.ended && video.classList.contains('playing'));
+  const ended = usable.length > 0 && usable.every(video => video.ended && !video.loop);
+  const pending = usable.some(video => pendingVideos.has(video));
+  const mediaUnavailable = visible.length > 0 && usable.length === 0;
+  let action = 'pause', label = 'Pause motion', icon = 'Ⅱ';
+  if (motionPaused || !motionPermitted()) { action = 'play'; label = mediaUnavailable ? 'Resume effects' : 'Play motion'; icon = '▶'; }
+  else if (playing) { action = 'pause'; }
+  else if (ended) { action = 'replay'; label = 'Replay motion'; icon = '↻'; }
+  else if (pending) { action = 'pause'; label = 'Cancel loading'; icon = 'Ⅱ'; }
+  else if (mediaUnavailable) { action = 'pause'; label = 'Pause effects'; }
+  motionButton.dataset.motionAction = action;
+  motionButton.disabled = false;
+  motionButton.setAttribute('aria-pressed', String(action === 'play' || action === 'replay'));
+  motionButton.setAttribute('aria-label', label);
+  motionButton.innerHTML = label + ' <span aria-hidden="true">' + icon + '</span>';
+}
 function syncMotion() {
   document.body.classList.toggle('paused', motionPaused);
-  motionButton.setAttribute('aria-pressed', String(motionPaused));
-  motionButton.innerHTML = motionPaused ? 'Play motion <span aria-hidden="true">▶</span>' : 'Pause motion <span aria-hidden="true">Ⅱ</span>';
-  const permitted = !motionPaused && !document.hidden && !(filmDialog && filmDialog.open);
+  const permitted = motionPermitted();
   document.body.classList.toggle('motion-suspended', !permitted);
   motionVideos.forEach(video => {
-    if (!permitted || !visibleVideos.has(video) || video.dataset.failed === 'true') {video.pause(); return;}
+    if (!permitted || !visibleVideos.has(video) || video.dataset.failed === 'true') {
+      video.pause(); video.classList.remove('playing'); return;
+    }
     // The Runway hero is a camera approach, not a seamless loop. Hold its last frame.
-    if (video.ended && !video.loop) return;
-    video.play().catch(error => {
+    if (video.ended && !video.loop) {video.classList.remove('playing'); return;}
+    if (pendingVideos.has(video) || !video.paused) return;
+    pendingVideos.add(video);
+    Promise.resolve().then(() => {
+      // A preference or visibility change can arrive while playback is pending.
+      if (!motionPermitted() || !visibleVideos.has(video)) return;
+      return video.play();
+    }).catch(error => {
       if (error.name === 'AbortError') return;
       video.classList.remove('playing');
       if (error.name === 'NotAllowedError') {motionPaused = true; syncMotion();}
+      else failMotionMedia(video);
+    }).finally(() => {
+      pendingVideos.delete(video);
+      if (!motionPermitted() || !visibleVideos.has(video)) {
+        video.pause(); video.classList.remove('playing');
+      }
+      document.body.classList.toggle('paused', motionPaused);
+      document.body.classList.toggle('motion-suspended', !motionPermitted());
+      syncMotionButton();
     });
   });
+  syncMotionButton();
+}
+function failMotionMedia(video) {
+  video.dataset.failed = 'true';
+  pendingVideos.delete(video);
+  video.pause();
+  video.classList.remove('playing');
+  syncMotionButton();
 }
 motionVideos.forEach(video => {
   video.muted = true;
-  video.addEventListener('playing', () => video.classList.add('playing'));
-  video.addEventListener('error', () => {video.classList.remove('playing'); video.dataset.failed = 'true';});
+  video.addEventListener('playing', () => {
+    if (!motionPermitted() || !visibleVideos.has(video)) {video.pause(); return;}
+    video.classList.add('playing'); syncMotionButton();
+  });
+  video.addEventListener('pause', () => {video.classList.remove('playing'); syncMotionButton();});
+  video.addEventListener('ended', () => {
+    video.classList.remove('playing'); pendingVideos.delete(video); syncMotionButton();
+  });
+  video.addEventListener('error', () => failMotionMedia(video));
+});
+// A failed <source> emits its own non-bubbling error. In that case a browser's
+// play() promise can remain pending, so the video error handler is insufficient.
+// Preserve alternate-source fallback until every available source has failed.
+document.querySelectorAll('.motion-video source').forEach(source => {
+  source.addEventListener('error', () => {
+    source.dataset.failed = 'true';
+    const video = source.closest('.motion-video');
+    if (video && [...video.querySelectorAll('source')].every(item => item.dataset.failed === 'true')) failMotionMedia(video);
+  });
 });
 if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver(entries => {
@@ -125,8 +188,10 @@ if ('IntersectionObserver' in window) {
   motionVideos.forEach(video => observer.observe(video));
 } else {motionVideos.forEach(video => visibleVideos.add(video));}
 motionButton.addEventListener('click', () => {
-  motionPaused = !motionPaused;
-  if (!motionPaused) motionVideos.forEach(video => {if (video.ended && !video.loop) video.currentTime = 0;});
+  if (motionButton.disabled) return;
+  const action = motionButton.dataset.motionAction;
+  motionPaused = action === 'pause';
+  if (!motionPaused) visibleVideos.forEach(video => {if (video.ended && !video.loop) video.currentTime = 0;});
   syncMotion();
 });
 reducedMotion.addEventListener('change', event => {motionPaused = event.matches; syncMotion();});
@@ -170,8 +235,78 @@ document.getElementById('save-launch').addEventListener('click', async () => {
   const result = document.getElementById('save-result');
   const url = 'https://adastra.global/';
   try {
-    if (navigator.share) {await navigator.share({title:'Ad Astra', text:'A new horizon for human curiosity. Ad Astra is coming soon.', url}); result.textContent = '';}
-    else if (navigator.clipboard) {await navigator.clipboard.writeText(url); result.textContent = 'Launch-page link copied. Share it with a curious mind.';}
-    else result.textContent = 'Share our launch page: ' + url;
-  } catch (error) {if (error.name !== 'AbortError') result.textContent = 'Share our launch page: ' + url;}
+    if (navigator.share) {await navigator.share({title:'Ad Astra', text:'A new horizon for human curiosity. Explore the Ad Astra vision.', url}); result.textContent = '';}
+    else if (navigator.clipboard) {await navigator.clipboard.writeText(url); result.textContent = 'Website link copied. Share it with a curious mind.';}
+    else result.textContent = 'Share our website: ' + url;
+  } catch (error) {if (error.name !== 'AbortError') result.textContent = 'Share our website: ' + url;}
 });
+
+
+// Public artwork state selection only; never calls private AI services.
+const neuralStateDescriptions = Object.freeze({
+  analyzing:'Exploring questions, evidence and patterns.',
+  reasoning:'Tracing possible connections between ideas.',
+  planning:'Organizing steps and alternative directions.',
+  acting:'Considering the responsible next action.',
+  learning:'Revisiting evidence and new perspectives.',
+  aligning:'Keeping human intent, permissions and oversight central.'
+});
+const neuralButtons=[...document.querySelectorAll('[data-neural-state]')];
+const neuralTitle=document.getElementById('neural-state-title');
+const neuralDescription=document.getElementById('neural-state-description');
+neuralButtons.forEach(button=>button.addEventListener('click',()=>{
+  const state=button.dataset.neuralState;
+  if(!Object.hasOwn(neuralStateDescriptions,state))return;
+  neuralButtons.forEach(item=>{const selected=item===button;item.classList.toggle('is-active',selected);item.setAttribute('aria-pressed',String(selected));});
+  neuralTitle.textContent=state.charAt(0).toUpperCase()+state.slice(1);
+  neuralDescription.textContent=neuralStateDescriptions[state]+' A conceptual artwork state, not a live system measurement.';
+}));
+const neuralMaster=document.querySelector('.neural-original-master');
+if(neuralMaster)neuralMaster.addEventListener('error',()=>{
+  const fallback=document.querySelector('.neural-art-fallback');
+  if(fallback)fallback.hidden=false;
+});
+
+// Neural state keyboard navigation v2 — presentation-only, no AI inference.
+const neuralAccentByState=Object.freeze({
+  analyzing:'#278AFF',reasoning:'#B96BFF',planning:'#44DF96',
+  acting:'#F7C05D',learning:'#FF6987',aligning:'#4BDDF2'
+});
+const neuralStage=document.querySelector('.neural-cinematic');
+for(const button of neuralButtons){
+  button.addEventListener('click',()=>{
+    if(neuralStage && Object.hasOwn(neuralAccentByState,button.dataset.neuralState))
+      neuralStage.style.setProperty('--neural-accent',neuralAccentByState[button.dataset.neuralState]);
+  });
+  button.addEventListener('keydown',event=>{
+    const key=event.key;
+    if(!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp','Home','End'].includes(key))return;
+    event.preventDefault();
+    const index=neuralButtons.indexOf(button);
+    let next=index;
+    if(key==='Home')next=0;
+    else if(key==='End')next=neuralButtons.length-1;
+    else next=(index+(key==='ArrowRight'||key==='ArrowDown'?1:-1)+neuralButtons.length)%neuralButtons.length;
+    neuralButtons[next]?.focus();
+    neuralButtons[next]?.click();
+  });
+}
+
+// Separate accessible ambient-motion control; never alters approved neural artwork.
+const neuralEffectsToggle=document.getElementById('neural-effects-toggle');
+if(neuralStage && neuralEffectsToggle){
+  let pausedByUser=false;
+  const syncNeuralFx=()=>{
+    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const globalPaused=document.body.classList.contains('motion-suspended');
+    const paused=pausedByUser||reduced||globalPaused;
+    neuralStage.classList.toggle('neural-fx-paused',paused);
+    neuralEffectsToggle.setAttribute('aria-pressed',String(paused));
+    neuralEffectsToggle.disabled=reduced||globalPaused;
+    neuralEffectsToggle.textContent=reduced?'Reduced motion enabled':globalPaused?'Effects paused globally':pausedByUser?'Resume ambient effects':'Pause ambient effects';
+  };
+  neuralEffectsToggle.addEventListener('click',()=>{pausedByUser=!pausedByUser;syncNeuralFx();});
+  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',syncNeuralFx);
+  new MutationObserver(syncNeuralFx).observe(document.body,{attributes:true,attributeFilter:['class']});
+  syncNeuralFx();
+}

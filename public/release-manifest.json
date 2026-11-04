@@ -6,6 +6,7 @@
   "assetOriginDependency": false,
   "customerAccess": "clerk-authenticated",
   "liveEngineAccess": "requires-all-verified-release-gates",
+  "earlyAccessIntake": "public-consent-gated-no-spend",
   "dailyModelBudgetUSD": 10,
   "rollbackBaseline": "dpl_GUQqWJ3jTy9f73XqfQFvmbqhnHUy",
   "source": "isolated AD ASTRA source; see release evidence",

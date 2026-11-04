@@ -22,7 +22,11 @@
     const clerk = await loadClerk();
     if (!clerk.session) {
       const returnPath = location.pathname + location.search + location.hash;
-      location.replace('/platform/?return=' + encodeURIComponent(returnPath));
+      const gate = $('knowledge-auth');
+      gate.hidden = false;
+      gate.querySelector('p').textContent = 'The knowledge workspace is a private preview. Public AI access is coming soon.';
+      gate.querySelector('a.button').href = '/sign-in/?return=' + encodeURIComponent(window.adAstraReturnPath(returnPath));
+      gate.querySelector('a.button').textContent = 'Authorized preview sign-in ↗';
       return null;
     }
     await window.adAstraVerifySession(clerk);
@@ -39,6 +43,9 @@
     const status = $('live-ai-status');
     const answer = $('live-ai-answer');
     const answerText = $('live-ai-text');
+    // Retain one logical request key after an uncertain response. Retrying the
+    // same question must not silently create another billable operation.
+    let pendingRequest = null;
     document.querySelectorAll('[data-mode]').forEach(link => link.addEventListener('click', () => {
       const requested = link.dataset.mode;
       if (modeLabels[requested]) mode.value = requested;
@@ -59,22 +66,29 @@
       answer.hidden = true;
       answerText.textContent = '';
       try {
+        const requestBody = JSON.stringify({question:value,mode:mode.value,references:[]});
+        if (!pendingRequest || pendingRequest.body !== requestBody) {
+          pendingRequest = {body:requestBody,key:crypto.randomUUID()};
+        }
         const token = await clerk.session.getToken();
         if (!token) throw new Error('authentication_required');
         const response = await fetch('/api/ask', {
           method: 'POST', credentials: 'same-origin', signal: AbortSignal.timeout(25000),
-          headers: {'Content-Type': 'application/json', 'X-Ad-Astra-Request': 'public-v1', 'Authorization': `Bearer ${token}`},
-          body: JSON.stringify({question: value, mode: mode.value, references: []})
+          headers: {'Content-Type': 'application/json', 'X-Ad-Astra-Request': 'public-v1', 'Authorization': `Bearer ${token}`, 'Idempotency-Key':pendingRequest.key},
+          body: pendingRequest.body
         });
         const data = await response.json();
         if (!response.ok || !data.ok) throw new Error(data?.error || 'unavailable');
+        pendingRequest = null;
         answerText.textContent = data.answer;
         answer.hidden = false;
         status.textContent = 'Response ready. Verify important claims.';
         answer.scrollIntoView({behavior: 'smooth', block: 'nearest'});
       } catch (error) {
-        status.textContent = ['rate_limit_reached','daily_capacity_reached'].includes(error.message)
-          ? 'You have reached the hourly request limit. Please try again later.'
+        status.textContent = error.message === 'operation_already_recorded'
+          ? 'This request is already recorded and will not be sent again. Please check its result before submitting it as a new request.'
+          : ['rate_limit_reached','daily_capacity_reached','monthly_capacity_reached'].includes(error.message)
+          ? 'Request capacity has been reached. Please try again later.'
           : ['authentication_required','authentication_invalid'].includes(error.message)
             ? 'Please sign in again to continue.'
             : 'The live engine is unavailable right now. Please try again shortly.';

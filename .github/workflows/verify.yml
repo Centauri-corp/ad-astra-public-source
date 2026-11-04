@@ -9,11 +9,11 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24'
-      - run: node --test test/security.test.cjs test/governance.test.js test/backend-foundation.test.cjs test/frontend-experience.test.cjs test/intelligence-catalog.test.cjs test/transcript-reconciliation.test.cjs
-      - run: node scripts/check-release.cjs
-# Production remains manual: stage on exact team/project, run real Redis
-# acceptance during the Vercel build, verify deployment, then promote.
-# No production credential in this workflow.
+      - run: npm test
+      - run: npm run check
+# All inherited source, commercial and release checks are retained.
+# Browser acceptance remains a separate complete Chromium and WebKit workflow.
+# No production credentials, automatic deployment or approval bypass here.
