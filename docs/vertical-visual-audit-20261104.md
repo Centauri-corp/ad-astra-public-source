@@ -15,11 +15,16 @@ Scope: informational candidate in PR #24, continuing reconciled live lineage at
   the existing release-controls section on the same page.
 - Browser CI now checks every generated public HTML page for canonical/indexing
   policy and existing local destinations, not just homepage links.
+- Secondary public pages now share `public/page-evolution.css`: a bounded orbital
+  visual system, responsive decorative layers, card depth treatment and explicit
+  reduced-motion behavior. It is local presentation only and does not imply live
+  telemetry, model-generated artwork or external data access.
 
 ## Local verification
 
-- 27 public source/security tests passed; static release checker passed.
-- 22 Chromium browser tests passed, including actual canvas pixel freeze/resume,
+- 28 public source/security tests passed; static release checker passed.
+- 9 targeted Chromium browser tests passed after the shared visual-system change,
+  including actual canvas pixel freeze/resume,
   failed-canvas recovery, responsive widths, keyboard navigation, no-JS catalog,
   and all 29 static HTML page routes.
 - WebKit requires the GitHub runner's system dependencies. Local Chromium is not
