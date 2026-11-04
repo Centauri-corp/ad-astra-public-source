@@ -25,17 +25,40 @@ assert.equal(manifest.publicLaunchEnabled,false);assert.equal(manifest.engineAva
 assert.equal(manifest.customerPortal,'authenticated-preview');
 assert.equal(manifest.customerAiModel,'gpt-4.1-mini-2025-04-14');
 assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
-assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','approach','experiences','horizon','company','signature']);
+assert.deepEqual(experience.visualArchitecture.sceneOrder,[
+ 'arrival','customer-pathways','neural-product-model','intelligence-layers','products','solutions','film-study','vision','approach','experiences','horizon','company','signature'
+]);
 assert.deepEqual(experience.seo.indexableRoutes,['/']);
-assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);
+assert.equal(experience.publicLaunchEnabled,false);
+assert.equal(experience.homepageExperience.status,'preview-candidate');
+assert.equal(experience.homepageExperience.productFamilies,6);
+assert.equal(experience.homepageExperience.productDirections,25);
+assert.equal(experience.homepageExperience.solutionPathways,6);
+assert.equal(experience.homepageExperience.knowledgeDomains,12);
+assert.equal(experience.homepageExperience.resourceCandidates,42);
+assert.equal(experience.homepageExperience.generalAvailabilityClaim,false);
+assert.equal(experience.visualArchitecture.threeD.publicProceduralPreview,true);
+assert.equal(experience.visualArchitecture.threeD.liveModelTelemetry,false);
+assert.equal(experience.visualArchitecture.threeD.externalPromptTransmission,false);
+assert.equal(experience.visualArchitecture.threeD.reducedMotion,true);
+assert.deepEqual(experience.visualArchitecture.threeD.modes,['knowledge-graph','agent-orchestration','earth-space']);
+assert.equal(experience.productExperience.families.length,6);
+assert.equal(experience.productExperience.solutions.length,6);
+assert.equal(experience.productExperience.availabilityLanguageRequired,true);
+assert.equal(experience.productExperience.nonfunctionalControlsForbidden,true);
 assert.equal(experience.growthAutomation.externalCrmWrites,false);
 assert.equal(experience.growthAutomation.outboundSends,false);
+assert.equal(experience.growthAutomation.automaticPublication,false);
 assert.equal(experience.growthAutomation.mode,'private-scheduled-read-only-audit');
 assert.equal(manifest.autonomousOperations.mode,experience.growthAutomation.mode);
 assert.equal(manifest.autonomousOperations.cadence,experience.growthAutomation.cadence);
 assert.equal(manifest.autonomousOperations.externalWrites,false);
 assert.equal(manifest.autonomousOperations.outboundSends,false);
 assert.equal(manifest.autonomousOperations.automaticPublication,false);
+const loader=fs.readFileSync(path.join(root,'public/knowledge/experience-links.js'),'utf8');
+for(const asset of ['/home-experience.css','/home-neural.css','/home-experience-data.js','/home-experience-ui.js','/home-experience-neural.js','/home-experience.js'])assert.ok(loader.includes(asset),'missing homepage asset '+asset);
+assert.ok(loader.includes("ROOT_PATHS = new Set(['/','/index.html'])")||loader.includes("ROOT_PATHS = new Set(['/', '/index.html'])"));
+assert.ok(!/fetch\(|XMLHttpRequest|WebSocket|EventSource|sendBeacon/.test(fs.readFileSync(path.join(root,'public/home-experience-neural.js'),'utf8')));
 const markets=fs.readFileSync(path.join(root,'public/markets/index.html'),'utf8');
 const positioning=fs.readFileSync(path.join(root,'public/markets/positioning/index.html'),'utf8');
 const microgrids=fs.readFileSync(path.join(root,'public/markets/positioning/microgrids/index.html'),'utf8');
@@ -54,4 +77,4 @@ assert.ok(microgrids.includes('20FT / TACTICAL MICRO-POD')&&microgrids.includes(
 assert.ok(microgrids.includes('Neither footprint bypasses municipal permission'));
 assert.ok(microgrids.includes('selenium interlayer')&&microgrids.includes('pressure-vessel safety case'));
 assert.ok(pricing.includes('For individuals')&&pricing.includes('For organizations')&&pricing.includes('No payment is requested'));
-console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-only privacy=passed');
+console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-only homepage=product-led neural=local-only privacy=passed');
