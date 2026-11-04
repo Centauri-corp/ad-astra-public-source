@@ -3,5 +3,5 @@
   "private": true,
   "version": "2.3.0",
   "engines": {"node":"24.x"},
-  "scripts": {"test":"node --test test/security.test.cjs","check":"node scripts/check-release.cjs"}
+  "scripts": {"test":"node --test test/security.test.cjs test/graphics.test.cjs","check":"node scripts/check-release.cjs"}
 }

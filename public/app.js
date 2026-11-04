@@ -95,6 +95,78 @@ const filmVideo = document.getElementById('company-film');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let motionPaused = reducedMotion.matches || Boolean(navigator.connection?.saveData);
 const visibleVideos = new Set();
+const neuralField = document.getElementById('neural-field');
+const neuralFieldContext = neuralField?.getContext('2d', {alpha:true});
+const heroSection = document.querySelector('.hero');
+const neuralFieldNodes = Array.from({length:34}, (_, index) => {
+  const angle = index * 2.399963 + 0.35;
+  const radius = 0.16 + (index % 7) * 0.018;
+  return {angle, radius, depth:0.55 + ((index * 17) % 43) / 100, phase:(index * 0.73) % 6.28};
+});
+let neuralFieldVisible = true;
+let neuralFieldFrame = 0;
+function resizeNeuralField() {
+  if (!neuralField || !neuralFieldContext) return;
+  const rect = neuralField.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  neuralField.width = Math.max(1, Math.round(rect.width * dpr));
+  neuralField.height = Math.max(1, Math.round(rect.height * dpr));
+  neuralFieldContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+function drawNeuralField(now = 0) {
+  if (!neuralField || !neuralFieldContext) return;
+  const width = neuralField.clientWidth;
+  const height = neuralField.clientHeight;
+  if (!width || !height) return;
+  const context = neuralFieldContext;
+  const time = now * 0.00035;
+  const scale = Math.min(width, height);
+  const centerX = width * 0.73;
+  const centerY = height * 0.44;
+  context.clearRect(0, 0, width, height);
+  const points = neuralFieldNodes.map(node => {
+    const pulse = Math.sin(time * 2 + node.phase) * 0.012;
+    const orbit = node.angle + time * (0.17 + node.depth * 0.08);
+    return {
+      x:centerX + Math.cos(orbit) * scale * (node.radius + pulse),
+      y:centerY + Math.sin(orbit * 1.13) * scale * (node.radius * 0.64 + pulse),
+      size:1.1 + node.depth * 1.7,
+      depth:node.depth
+    };
+  });
+  context.lineWidth = 0.7;
+  for (let i = 0; i < points.length; i += 1) {
+    for (let j = i + 1; j < points.length; j += 1) {
+      const dx = points[i].x - points[j].x;
+      const dy = points[i].y - points[j].y;
+      const distance = Math.hypot(dx, dy);
+      if (distance > scale * 0.105) continue;
+      context.strokeStyle = `rgba(142, 215, 244, ${Math.max(0.025, 0.15 - distance / scale)})`;
+      context.beginPath(); context.moveTo(points[i].x, points[i].y); context.lineTo(points[j].x, points[j].y); context.stroke();
+    }
+  }
+  points.forEach((point, index) => {
+    context.fillStyle = index % 5 === 0 ? 'rgba(226, 207, 155, .8)' : 'rgba(158, 224, 245, .7)';
+    context.beginPath(); context.arc(point.x, point.y, point.size, 0, Math.PI * 2); context.fill();
+  });
+}
+function animateNeuralField(now) {
+  neuralFieldFrame = 0;
+  if (!motionPaused && neuralFieldVisible && !document.hidden) {
+    drawNeuralField(now);
+    neuralFieldFrame = requestAnimationFrame(animateNeuralField);
+  }
+}
+function syncNeuralField() {
+  if (!neuralFieldContext) return;
+  if (!motionPaused && neuralFieldVisible && !document.hidden) {
+    if (!neuralFieldFrame) neuralFieldFrame = requestAnimationFrame(animateNeuralField);
+  } else {
+    if (neuralFieldFrame) cancelAnimationFrame(neuralFieldFrame);
+    neuralFieldFrame = 0;
+    drawNeuralField(0);
+  }
+}
 function syncMotion() {
   document.body.classList.toggle('paused', motionPaused);
   motionButton.setAttribute('aria-pressed', String(motionPaused));
@@ -111,6 +183,7 @@ function syncMotion() {
       if (error.name === 'NotAllowedError') {motionPaused = true; syncMotion();}
     });
   });
+  syncNeuralField();
 }
 motionVideos.forEach(video => {
   video.muted = true;
@@ -119,11 +192,18 @@ motionVideos.forEach(video => {
 });
 if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => entry.isIntersecting ? visibleVideos.add(entry.target) : visibleVideos.delete(entry.target));
+    entries.forEach(entry => {
+      if (entry.target === heroSection) neuralFieldVisible = entry.isIntersecting;
+      else if (entry.isIntersecting) visibleVideos.add(entry.target);
+      else visibleVideos.delete(entry.target);
+    });
     syncMotion();
   }, {threshold:0.01});
   motionVideos.forEach(video => observer.observe(video));
+  if (heroSection) observer.observe(heroSection);
 } else {motionVideos.forEach(video => visibleVideos.add(video));}
+resizeNeuralField();
+window.addEventListener('resize', () => {resizeNeuralField(); syncNeuralField();}, {passive:true});
 motionButton.addEventListener('click', () => {
   motionPaused = !motionPaused;
   if (!motionPaused) motionVideos.forEach(video => {if (video.ended && !video.loop) video.currentTime = 0;});
