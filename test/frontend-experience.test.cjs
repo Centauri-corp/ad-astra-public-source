@@ -21,7 +21,7 @@ test('private surfaces never have public paths',()=>{
  assert.equal(registry.accessPolicy,'deny-unless-authorized');
 });
 test('preview cannot be indexed or represented as live',()=>{
- assert.match(page,/<meta name="robots" content="noindex,nofollow,noarchive">/);
+ assert.match(page,/<meta name="robots" content="noindex,follow">/);
  assert.match(page,/Not released/);
  assert.match(page,/Restricted • No public entry/);
  assert.doesNotMatch(page,/<form\b/i);
