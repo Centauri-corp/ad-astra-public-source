@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0",
+  "releaseStatus": "design-preview",
+  "accessPolicy": "deny-unless-authorized",
+  "surfaces": [
+    {
+      "id": "public",
+      "name": "Public Experience",
+      "path": "/",
+      "audience": "public",
+      "launchState": "existing-controlled",
+      "ownerDivision": 5
+    },
+    {
+      "id": "intelligence",
+      "name": "AI Workspace",
+      "path": "/knowledge/",
+      "audience": "authenticated",
+      "launchState": "release-gated",
+      "ownerDivision": 2
+    },
+    {
+      "id": "agents",
+      "name": "Agent Studio",
+      "path": null,
+      "audience": "authenticated",
+      "launchState": "not-released",
+      "ownerDivision": 3
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise Portal",
+      "path": null,
+      "audience": "enterprise-admin",
+      "launchState": "not-released",
+      "ownerDivision": 7
+    },
+    {
+      "id": "developer",
+      "name": "Developer Platform",
+      "path": null,
+      "audience": "developer",
+      "launchState": "not-released",
+      "ownerDivision": 6
+    },
+    {
+      "id": "research",
+      "name": "Research Experience",
+      "path": null,
+      "audience": "approved-research",
+      "launchState": "not-released",
+      "ownerDivision": 4
+    },
+    {
+      "id": "commercial",
+      "name": "Commercial Portal",
+      "path": "/pricing/",
+      "audience": "public",
+      "launchState": "informational-noindex",
+      "ownerDivision": 8
+    },
+    {
+      "id": "internal",
+      "name": "Internal Operations",
+      "path": null,
+      "audience": "internal-approved",
+      "launchState": "not-released",
+      "ownerDivision": 1
+    }
+  ],
+  "requiredCrossCuttingControls": [
+    "accessibility",
+    "content-approval",
+    "tenant-authorization",
+    "subscription-entitlements",
+    "audit-events",
+    "privacy-safe-analytics",
+    "reduced-motion",
+    "release-gates"
+  ],
+  "internalRoutesMustNeverBeServedByPublicSite": true
+}
