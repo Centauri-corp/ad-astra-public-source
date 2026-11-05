@@ -27,3 +27,11 @@ test('access is usable without scripts and keeps an independent canonical and no
   assert.match(html, /rel="canonical" href="https:\/\/adastra.global\/access\/"/);
   assert.equal((html.match(/Choose (Ask|Research|Create|Learn|Explore)/g)||[]).length,5);
 });
+test('homepage structured data has an exact allowed CSP hash', () => {
+  const {createHash}=require('node:crypto');
+  const html=fs.readFileSync('public/index.html','utf8');
+  const policy=require('../vercel.json').headers[0].headers.find(item=>item.key==='Content-Security-Policy').value;
+  const scripts=[...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)];
+  assert.ok(scripts.length>0);
+  for(const [,body] of scripts) assert.ok(policy.includes("'sha256-"+createHash('sha256').update(body).digest('base64')+"'"),'inline script is blocked by CSP');
+});
