@@ -116,8 +116,12 @@ function resizeNeuralField() {
   if (!neuralField || !neuralFieldContext) return;
   const rect = neuralField.getBoundingClientRect();
   const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-  neuralField.width = Math.max(1, Math.round(rect.width * dpr));
-  neuralField.height = Math.max(1, Math.round(rect.height * dpr));
+  const width = Math.max(1, Math.round(rect.width * dpr));
+  const height = Math.max(1, Math.round(rect.height * dpr));
+  if (neuralField.width !== width || neuralField.height !== height) {
+    neuralField.width = width;
+    neuralField.height = height;
+  }
   neuralFieldContext.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 function drawNeuralField(now = 0) {
@@ -213,6 +217,14 @@ if ('IntersectionObserver' in window) {
 } else {motionVideos.forEach(video => visibleVideos.add(video));}
 resizeNeuralField();
 drawNeuralField(neuralFieldTime);
+// Styles and progressive enhancement can resize the hero without a window
+// resize event. Redraw the paused frame at its actual display resolution too.
+if (neuralField && neuralFieldContext && 'ResizeObserver' in window) {
+  new ResizeObserver(() => {
+    resizeNeuralField();
+    drawNeuralField(neuralFieldTime);
+  }).observe(neuralField);
+}
 window.addEventListener('resize', () => {resizeNeuralField(); drawNeuralField(neuralFieldTime); syncNeuralField();}, {passive:true});
 motionButton.addEventListener('click', () => {
   motionPaused = !motionPaused;

@@ -11,6 +11,11 @@ async function open(page) {
 }
 
 const field = page => page.locator('#neural-field').evaluate(canvas => canvas.toDataURL());
+const fieldSized = page => page.locator('#neural-field').evaluate(canvas => {
+  const rect = canvas.getBoundingClientRect();
+  const dpr = Math.min(devicePixelRatio || 1, 1.5);
+  return canvas.width === Math.round(rect.width * dpr) && canvas.height === Math.round(rect.height * dpr);
+});
 const frames = page => page.evaluate(() => new Promise(resolve => {
   let count = 0;
   function next() { if (++count === 12) resolve(); else requestAnimationFrame(next); }
@@ -55,6 +60,7 @@ test('hero motion renders, freezes and resumes without a blank fallback', async 
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await open(page);
+  await expect.poll(() => fieldSized(page)).toBe(true);
   await expect(page.locator('.motion')).toHaveAttribute('aria-pressed', 'true');
   const still = await field(page);
   expect(still.length).toBeGreaterThan(500);
@@ -88,6 +94,24 @@ test('unavailable hero canvas retains poster and working navigation', async ({pa
   await page.locator('.motion').click();
   await expect(page.locator('.motion')).toHaveAttribute('aria-pressed', 'false');
   expect(errors).toEqual([]);
+});
+
+test('hero backing pixels follow CSS reflow without a window resize', async ({page}) => {
+  await open(page);
+  await expect.poll(() => fieldSized(page)).toBe(true);
+  const canvas = page.locator('#neural-field');
+  const originalWidth = await canvas.evaluate(node => node.width);
+  await canvas.evaluate(node => { node.style.width = '63%'; });
+  await expect.poll(() => canvas.evaluate(node => node.width)).toBeLessThan(originalWidth);
+  await expect.poll(() => canvas.evaluate(node => {
+    const rect = node.getBoundingClientRect();
+    const dpr = Math.min(devicePixelRatio || 1, 1.5);
+    return node.width === Math.round(rect.width * dpr) && node.height === Math.round(rect.height * dpr);
+  })).toBe(true);
+  await frames(page);
+  const paused = await field(page);
+  await frames(page);
+  expect(await field(page)).toBe(paused);
 });
 
 test('every enhanced homepage local destination exists', async ({page, request}) => {

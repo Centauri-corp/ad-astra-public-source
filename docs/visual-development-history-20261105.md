@@ -48,3 +48,8 @@ does not see workspace libraries, so local runs use its documented host-check
 override after verifying real library loading and a successful WebKit launch.
 Browser assertions remain enabled. The repository CI uses its normal browser
 dependency installation and does not inherit this local runtime override.
+
+Manual screenshots exposed a WebKit layout race: the hero backing canvas could
+remain at 300×150 while CSS displayed it at 1440×916. The hero now observes its
+rendered size and redraws the paused frame when layout changes. The regression
+suite checks backing resolution and CSS-only reflow in both browser engines.
