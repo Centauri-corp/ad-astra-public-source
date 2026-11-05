@@ -6,7 +6,8 @@
   "outputDirectory": "public",
   "functions": {
     "api/ask.js": {"maxDuration": 30},
-    "api/resources.js": {"maxDuration": 10}
+    "api/resources.js": {"maxDuration": 10},
+    "api/pipeline-readiness.js": {"maxDuration": 30}
   },
   "headers": [
     {

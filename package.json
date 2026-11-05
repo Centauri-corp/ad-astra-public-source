@@ -6,8 +6,9 @@
     "node": "24.x"
   },
   "scripts": {
-    "test": "node --test test/security.test.cjs test/shared-budget.test.cjs test/resource-gateway.test.cjs test/homepage-experience.test.cjs test/graphics.test.cjs test/graphics-evidence-gate.test.cjs test/private-graphics-verifier.test.cjs",
+    "test": "node --test test/security.test.cjs test/shared-budget.test.cjs test/resource-gateway.test.cjs test/homepage-experience.test.cjs test/graphics.test.cjs test/graphics-evidence-gate.test.cjs test/private-graphics-verifier.test.cjs test/pipeline-integrations.test.cjs",
     "check": "node scripts/check-release.cjs",
-    "graphics:audit": "node scripts/graphics-readiness.cjs"
+    "graphics:audit": "node scripts/graphics-readiness.cjs",
+    "integration:audit": "node scripts/integration-readiness.cjs"
   }
 }
