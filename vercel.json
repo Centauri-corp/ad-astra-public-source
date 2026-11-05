@@ -16,13 +16,13 @@
         {"key": "Referrer-Policy", "value": "strict-origin-when-cross-origin"},
         {"key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()"},
         {"key": "X-Frame-Options", "value": "SAMEORIGIN"},
-        {"key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net 'sha256-ELtAh3qjqT9mt6c/hJSi1TuXPRQ/cz6BOXPxC+BY8dY='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://img.clerk.com; media-src 'self'; connect-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net; frame-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"}
+        {"key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net 'sha256-7rISYvoMBxEiQKP1BgPYutqhag1aSAQgweY9S4fGYbs='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://img.clerk.com; media-src 'self'; connect-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net; frame-src 'self' https://clerk.adastra.global https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"}
       ]
     },
     {"source": "/release-manifest.json", "headers": [{"key": "Cache-Control", "value": "no-store"}]},
     {"source": "/assets/:path*", "headers": [{"key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800"}]},
     {
-      "source": "/(knowledge|platform|sign-in|markets|pricing|services|company|about|film|resources|products)(.*)",
+      "source": "/(knowledge|platform|sign-in|access|markets|pricing|services|company|about|film|resources|products)(.*)",
       "headers": [{"key": "X-Robots-Tag", "value": "noindex, follow"}]
     },
     {
