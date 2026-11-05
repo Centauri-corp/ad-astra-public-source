@@ -4,7 +4,7 @@
   "version": "2.4.0",
   "engines": {"node":"24.x"},
   "scripts": {
-    "test": "node --test test/access.test.cjs test/security.test.cjs test/shared-budget.test.cjs test/resource-gateway.test.cjs test/homepage-experience.test.cjs test/graphics.test.cjs",
+    "test": "node --test test/access.test.cjs test/security.test.cjs test/shared-budget.test.cjs test/resource-gateway.test.cjs test/homepage-experience.test.cjs test/graphics.test.cjs test/stripe-webhook.test.cjs",
     "check": "node scripts/check-release.cjs"
   }
 }
