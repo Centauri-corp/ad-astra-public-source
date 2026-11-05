@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "scope": "Private graphics, neural, model and video pipeline diagnostics",
+  "databaseMigration": "add_server_only_pipeline_readiness_rpc_v1",
+  "databaseFunction": "public.astra_pipeline_readiness_v1",
+  "contentType": "astraIntegrationStage",
+  "contentGroup": "graphics-pipeline-v1",
+  "sourcePullRequest": 25,
+  "supersededSourcePullRequest": 24,
+  "httpRoute": "/api/pipeline-readiness",
+  "defaultEnabled": false,
+  "customerAccessAllowed": false,
+  "editorialStateIsAuthorization": false,
+  "catalystDispatchEnabled": false,
+  "modelExecutionEnabled": false,
+  "billingEnabled": false,
+  "automaticPromotion": false,
+  "publicPublication": false,
+  "budgetCeilingUSD": 500
+}
