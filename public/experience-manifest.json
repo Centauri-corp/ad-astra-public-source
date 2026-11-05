@@ -1,0 +1,126 @@
+{
+  "version": 2,
+  "canonical": "https://adastra.global/",
+  "publicLaunchEnabled": false,
+  "homepageExperience": {
+    "status": "preview-candidate",
+    "customerJourney": [
+      "hero-outcome",
+      "goal-pathways",
+      "neural-product-model",
+      "intelligence-layers",
+      "product-families",
+      "solution-pathways",
+      "trust-and-governance",
+      "company-story"
+    ],
+    "productFamilies": 6,
+    "productDirections": 25,
+    "solutionPathways": 6,
+    "knowledgeDomains": 12,
+    "resourceCandidates": 42,
+    "generalAvailabilityClaim": false
+  },
+  "visualArchitecture": {
+    "sceneOrder": [
+      "arrival",
+      "customer-pathways",
+      "neural-product-model",
+      "intelligence-layers",
+      "products",
+      "solutions",
+      "film-study",
+      "vision",
+      "approach",
+      "experiences",
+      "horizon",
+      "company",
+      "signature"
+    ],
+    "palette": {
+      "navy": "#07111c",
+      "cyan": "#8ee8f4",
+      "violet": "#9a7cff",
+      "gold": "#f2c879"
+    },
+    "threeD": {
+      "publicProceduralPreview": true,
+      "liveModelTelemetry": false,
+      "externalPromptTransmission": false,
+      "modes": ["knowledge-graph", "agent-orchestration", "earth-space"],
+      "fallback": "static-neural-study-with-disclosure",
+      "reducedMotion": true,
+      "input": "pointer-optional"
+    },
+    "neuralArt": {
+      "publicModelGeneratedAssets": false,
+      "textEmbeddedInImages": false,
+      "publicPreview": "procedural-local-visual-model",
+      "hybridPipeline": [
+        "proxy-form",
+        "camera-motion",
+        "neural-layer-concept",
+        "human-review"
+      ]
+    },
+    "intelligenceLayers": [
+      {"id": "narrow-ai", "status": "guided-preview", "liveTelemetry": false},
+      {"id": "agi", "status": "research-direction", "liveTelemetry": false},
+      {"id": "asi", "status": "hypothetical-horizon", "liveTelemetry": false}
+    ],
+    "motionPreview": {
+      "hero": true,
+      "filmStudy": true,
+      "publicPremierePlayback": false,
+      "reducedMotionFallback": "poster-frame"
+    },
+    "videoBlueprint": {
+      "title": "The Architecture of Alignment",
+      "targetDurationSeconds": 60,
+      "publicPlayback": "premiere-gated",
+      "scenes": ["hook", "narrow-core", "agi-research", "asi-horizon-return"],
+      "claimBoundary": "conceptual-research-framing"
+    }
+  },
+  "productExperience": {
+    "families": [
+      {"id": "core-intelligence", "status": "guided-preview"},
+      {"id": "creative-studio", "status": "planned"},
+      {"id": "specialist-intelligence", "status": "research-direction"},
+      {"id": "business-commerce", "status": "planned"},
+      {"id": "developer-platform", "status": "planned"},
+      {"id": "autonomous-workflows", "status": "private-development"}
+    ],
+    "solutions": [
+      "research-knowledge",
+      "creative-production",
+      "customer-operations",
+      "enterprise-intelligence",
+      "earth-space",
+      "engineering-industry"
+    ],
+    "availabilityLanguageRequired": true,
+    "nonfunctionalControlsForbidden": true
+  },
+  "seo": {
+    "indexableRoutes": ["/"],
+    "nonHomeRoutes": "noindex,follow",
+    "sitemap": "homepage-only",
+    "dynamicEnhancementRequiresSourceConsolidationBeforeGeneralAvailability": true
+  },
+  "growthAutomation": {
+    "mode": "private-scheduled-read-only-audit",
+    "cadence": "*/15 * * * * UTC",
+    "externalCrmWrites": false,
+    "outboundSends": false,
+    "automaticPublication": false
+  },
+  "contentSurfaces": {
+    "company": "public-versioned",
+    "productsAndServices": "public-status-qualified-preview",
+    "customerPortal": "authenticated-preview",
+    "neuralArtwork": "public-procedural-model-private-asset-review",
+    "video": "public-motion-study-premiere-gated",
+    "resourceGateway": "catalog-only-connectors-inactive"
+  }
+}

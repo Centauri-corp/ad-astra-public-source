@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "scope": "Informational graphics release only",
+  "requiredAssetSlots": [
+    "neural",
+    "products",
+    "film"
+  ],
+  "privateBuckets": [
+    "astra-graphics-private",
+    "astra-video-private"
+  ],
+  "requiredEvidence": [
+    "tenant",
+    "versionId",
+    "sha256",
+    "storageReceipt",
+    "humanRightsReview",
+    "independentCreativeReview",
+    "visualQA",
+    "filmPlayback",
+    "exactMergedCommit",
+    "independentGitHubReview",
+    "exactProductionStage",
+    "rollback"
+  ],
+  "publicAI": false,
+  "billing": false,
+  "filmPremiere": false,
+  "automaticPublication": false,
+  "modelBudgetCeilingUSD": 500,
+  "actualApprovedAssets": [],
+  "productionEligible": false
+}

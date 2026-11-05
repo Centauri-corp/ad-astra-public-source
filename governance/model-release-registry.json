@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "models": [
+    {
+      "id": "gpt-4.1-mini-2025-04-14",
+      "role": "guided-customer-answer-candidate",
+      "environment": "public-server",
+      "status": "gated",
+      "publicUse": false,
+      "paidExecution": false
+    },
+    {
+      "id": "openai/gpt-6-luna-fast",
+      "role": "private-operator-intelligence",
+      "environment": "private-intelligence-foundation",
+      "status": "private",
+      "publicUse": false,
+      "paidExecution": false
+    },
+    {
+      "id": "google/gemini-3.1-flash-image",
+      "role": "review-gated-neural-artwork",
+      "environment": "private-graphics-worker",
+      "status": "private-review-only",
+      "publicUse": false,
+      "paidExecution": false
+    },
+    {
+      "id": "ollama",
+      "role": "local-development-evaluation",
+      "environment": "developer-workstation",
+      "status": "runtime-evidence-not-present",
+      "publicUse": false,
+      "paidExecution": false
+    },
+    {
+      "id": "codex",
+      "role": "source-development-and-audit",
+      "environment": "development-workstream",
+      "status": "repository-and-visible-context-reconciled",
+      "publicUse": false,
+      "paidExecution": false
+    }
+  ],
+  "reconciliation": {
+    "sources": ["repository", "pull-requests", "visible-task-context"],
+    "allChatTranscriptsRecovered": false,
+    "unverifiedRuntimeClaimsPromoted": false
+  },
+  "release": {
+    "customerModelEnabled": false,
+    "ollamaProductionServing": false,
+    "codexProductionRuntime": false,
+    "humanAuthorizationRequired": true
+  }
+}

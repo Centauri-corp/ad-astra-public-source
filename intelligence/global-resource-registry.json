@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "2026-11-03.v1",
+  "name": "AD ASTRA Global Public Knowledge & Intelligence Network",
+  "owner": "Centauri Renewables Corporation",
+  "operator": "AD ASTRA",
+  "status": "production-candidate-catalog",
+  "productionActivation": false,
+  "publicInferenceActivation": false,
+  "defaultIntegrationMode": "read-only",
+  "externalContentTrustedAsInstructions": false,
+  "programOwnership": {
+    "accountableDivision": 14,
+    "connectorEngineeringDivision": 6,
+    "intelligenceIntegrationDivision": 2,
+    "securityLegalLicensingDivision": 11,
+    "infrastructureDivision": 13
+  },
+  "releasePolicy": {
+    "defaultStatus": "discovered",
+    "externalWritesAllowed": false,
+    "paidProviderCallsAllowed": false,
+    "professionalDecisionAuthority": false,
+    "humanApprovalRequiredForProduction": true,
+    "licenseReviewRequired": true,
+    "providerIdentityVerificationRequired": true
+  },
+  "domains": [
+    {"id":"space-earth","label":"Space & Earth","productExperience":"Astra Earth / Astra Space","safetyProfile":"scientific-provenance"},
+    {"id":"arts-culture","label":"Arts & Culture","productExperience":"Astra Arts","safetyProfile":"rights-and-attribution"},
+    {"id":"medical-health","label":"Medical & Health","productExperience":"Astra Health Knowledge / Astra Anatomy","safetyProfile":"medical-education-only"},
+    {"id":"science","label":"Science","productExperience":"Astra Research","safetyProfile":"scientific-provenance"},
+    {"id":"engineering","label":"Engineering","productExperience":"Astra Engineering","safetyProfile":"professional-review-required"},
+    {"id":"geotechnology","label":"Geotechnology","productExperience":"Astra Geotech","safetyProfile":"coordinate-and-accuracy-disclosure"},
+    {"id":"education","label":"Education","productExperience":"Astra Learn","safetyProfile":"educational-guidance"},
+    {"id":"law-civic","label":"Law & Civic","productExperience":"Astra Civic","safetyProfile":"jurisdiction-and-effective-date"},
+    {"id":"economics","label":"Economics","productExperience":"Astra Economics","safetyProfile":"series-methodology-disclosure"},
+    {"id":"environment","label":"Environment","productExperience":"Astra Environment","safetyProfile":"scientific-provenance"},
+    {"id":"technology","label":"Technology","productExperience":"Astra Developer / Technology Intelligence","safetyProfile":"technical-verification"},
+    {"id":"accessibility","label":"Accessibility","productExperience":"Astra Accessibility","safetyProfile":"inclusive-design"}
+  ],
+  "connectorCandidates": [
+    {"resourceId":"nasa-earthdata","adapter":"mcp","endpoint":"https://cmr.earthdata.nasa.gov/mcp/v1","phase":"phase-1","mode":"read-only","status":"not-connected"},
+    {"resourceId":"copernicus-data-space","adapter":"stac-odata","endpoint":"https://dataspace.copernicus.eu/","phase":"phase-1","mode":"read-only","status":"not-connected"},
+    {"resourceId":"usgs-national-map","adapter":"official-api","endpoint":"https://apps.nationalmap.gov/services/","phase":"phase-1","mode":"read-only","status":"not-connected"},
+    {"resourceId":"openalex","adapter":"rest","endpoint":"https://api.openalex.org/","phase":"phase-1","mode":"read-only","status":"not-connected"},
+    {"resourceId":"smithsonian-open-access","adapter":"rest","endpoint":"https://api.si.edu/openaccess/api/v1.0/","phase":"phase-1","mode":"read-only","status":"not-connected"}
+  ],
+  "resources": [
+    {"id":"smithsonian-open-access","provider":"Smithsonian Institution","name":"Smithsonian Open Access","group":"arts-culture","domains":["arts-culture","science","education"],"officialUrl":"https://www.si.edu/openaccess","access":"public-api-key-conditional","authentication":"resource-specific","rightsStatus":"per-asset-review","phase":"phase-1","releaseStatus":"discovered"},
+    {"id":"met-collection-api","provider":"The Metropolitan Museum of Art","name":"Collection API","group":"arts-culture","domains":["arts-culture","education"],"officialUrl":"https://metmuseum.github.io/","access":"public","authentication":"none","rightsStatus":"asset-specific","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"europeana-api","provider":"Europeana","name":"Europeana APIs","group":"arts-culture","domains":["arts-culture","education"],"officialUrl":"https://pro.europeana.eu/page/apis","access":"registered","authentication":"api-key","rightsStatus":"asset-specific","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"wikimedia-commons","provider":"Wikimedia Foundation","name":"Wikimedia Commons","group":"arts-culture","domains":["arts-culture","education","science"],"officialUrl":"https://commons.wikimedia.org/","access":"public","authentication":"none","rightsStatus":"per-file-license","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"moma-open-data","provider":"Museum of Modern Art","name":"MoMA Collection Data","group":"arts-culture","domains":["arts-culture","education"],"officialUrl":"https://github.com/MuseumofModernArt/collection","access":"public-metadata","authentication":"none","rightsStatus":"images-conditional","phase":"backlog","releaseStatus":"discovered"},
+    {"id":"internet-archive","provider":"Internet Archive","name":"Internet Archive Developer Services","group":"arts-culture","domains":["arts-culture","education","technology"],"officialUrl":"https://archive.org/developers/","access":"public-and-registered","authentication":"resource-specific","rightsStatus":"item-specific","phase":"backlog","releaseStatus":"discovered"},
+
+    {"id":"ncbi-eutilities","provider":"National Center for Biotechnology Information","name":"NCBI E-utilities / PubMed","group":"medical-health","domains":["medical-health","science","education"],"officialUrl":"https://www.ncbi.nlm.nih.gov/books/NBK25501/","access":"public","authentication":"optional-api-key","rightsStatus":"terms-review","phase":"phase-3","releaseStatus":"discovered"},
+    {"id":"clinicaltrials-api","provider":"National Library of Medicine","name":"ClinicalTrials.gov API","group":"medical-health","domains":["medical-health","science"],"officialUrl":"https://clinicaltrials.gov/data-api/api","access":"public","authentication":"none","rightsStatus":"terms-review","phase":"phase-3","releaseStatus":"discovered"},
+    {"id":"openfda","provider":"U.S. Food and Drug Administration","name":"openFDA APIs","group":"medical-health","domains":["medical-health","science"],"officialUrl":"https://open.fda.gov/apis/","access":"public","authentication":"optional-api-key","rightsStatus":"not-clinical-decision-authority","phase":"phase-3","releaseStatus":"discovered"},
+    {"id":"who-data","provider":"World Health Organization","name":"WHO Data","group":"medical-health","domains":["medical-health","economics","environment"],"officialUrl":"https://data.who.int/","access":"public","authentication":"resource-specific","rightsStatus":"terms-review","phase":"phase-4","releaseStatus":"discovered"},
+    {"id":"nih-3d","provider":"National Institutes of Health","name":"NIH 3D","group":"medical-health","domains":["medical-health","education","science"],"officialUrl":"https://3d.nih.gov/","access":"public-repository","authentication":"resource-specific","rightsStatus":"model-specific","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"pubchem-pug-rest","provider":"National Center for Biotechnology Information","name":"PubChem PUG REST","group":"medical-health","domains":["medical-health","science","education"],"officialUrl":"https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest","access":"public","authentication":"none","rightsStatus":"terms-review","phase":"phase-3","releaseStatus":"discovered"},
+
+    {"id":"nist-data","provider":"National Institute of Standards and Technology","name":"NIST Data and Reference Resources","group":"engineering","domains":["engineering","science","technology"],"officialUrl":"https://data.nist.gov/","access":"mixed","authentication":"resource-specific","rightsStatus":"collection-specific","phase":"phase-3","releaseStatus":"discovered"},
+    {"id":"materials-project","provider":"Materials Project","name":"Materials Project API","group":"engineering","domains":["engineering","science","technology"],"officialUrl":"https://materialsproject.org/","access":"registered","authentication":"api-key","rightsStatus":"terms-review","phase":"phase-3","releaseStatus":"discovered"},
+    {"id":"doe-osti","provider":"U.S. Department of Energy Office of Scientific and Technical Information","name":"OSTI APIs","group":"engineering","domains":["engineering","science","technology"],"officialUrl":"https://www.osti.gov/api","access":"public","authentication":"resource-specific","rightsStatus":"terms-review","phase":"phase-3","releaseStatus":"discovered"},
+    {"id":"nlr-pvwatts","provider":"National Laboratory of the Rockies","name":"PVWatts V8","group":"engineering","domains":["engineering","space-earth","environment"],"officialUrl":"https://developer.nrel.gov/docs/solar/pvwatts/v8/","access":"api-key","authentication":"api-key","rightsStatus":"terms-review","phase":"phase-3","releaseStatus":"discovered"},
+    {"id":"osha-open-data","provider":"Occupational Safety and Health Administration","name":"OSHA Data","group":"engineering","domains":["engineering","law-civic","economics"],"officialUrl":"https://www.osha.gov/data","access":"public","authentication":"resource-specific","rightsStatus":"terms-review","phase":"backlog","releaseStatus":"discovered"},
+    {"id":"cern-open-data","provider":"CERN","name":"CERN Open Data","group":"engineering","domains":["science","engineering","technology"],"officialUrl":"https://opendata.cern.ch/","access":"public-release-specific","authentication":"none","rightsStatus":"release-specific","phase":"phase-4","releaseStatus":"discovered"},
+
+    {"id":"usgs-national-map","provider":"U.S. Geological Survey","name":"The National Map Services","group":"geotechnology","domains":["geotechnology","space-earth","engineering","environment"],"officialUrl":"https://apps.nationalmap.gov/services/","access":"public","authentication":"none","rightsStatus":"terms-review","phase":"phase-1","releaseStatus":"discovered"},
+    {"id":"usgs-earthquake","provider":"U.S. Geological Survey","name":"Earthquake Catalog API","group":"geotechnology","domains":["geotechnology","science","environment"],"officialUrl":"https://earthquake.usgs.gov/fdsnws/event/1/","access":"public","authentication":"none","rightsStatus":"terms-review","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"copernicus-data-space","provider":"European Union Copernicus Programme","name":"Copernicus Data Space Ecosystem","group":"geotechnology","domains":["space-earth","geotechnology","environment","science"],"officialUrl":"https://dataspace.copernicus.eu/","access":"public-and-registered","authentication":"resource-specific","rightsStatus":"terms-review","phase":"phase-1","releaseStatus":"discovered"},
+    {"id":"opentopography","provider":"OpenTopography","name":"OpenTopography APIs","group":"geotechnology","domains":["geotechnology","engineering","science"],"officialUrl":"https://opentopography.org/developers","access":"tiered","authentication":"api-key","rightsStatus":"commercial-restrictions-review","phase":"phase-3","releaseStatus":"discovered"},
+    {"id":"openstreetmap","provider":"OpenStreetMap Foundation","name":"OpenStreetMap Data","group":"geotechnology","domains":["geotechnology","technology","environment"],"officialUrl":"https://www.openstreetmap.org/","access":"public","authentication":"service-specific","rightsStatus":"odbl","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"nasa-earthdata","provider":"NASA","name":"NASA Earthdata","group":"geotechnology","domains":["space-earth","science","environment","geotechnology"],"officialUrl":"https://www.earthdata.nasa.gov/","access":"public-and-registered","authentication":"none-for-mcp-discovery","rightsStatus":"resource-specific","phase":"phase-1","releaseStatus":"discovered"},
+
+    {"id":"openalex","provider":"OurResearch","name":"OpenAlex API","group":"education-research","domains":["education","science","technology"],"officialUrl":"https://docs.openalex.org/","access":"public-basic","authentication":"optional-api-key","rightsStatus":"terms-review","phase":"phase-1","releaseStatus":"discovered"},
+    {"id":"crossref","provider":"Crossref","name":"Crossref REST API","group":"education-research","domains":["education","science"],"officialUrl":"https://api.crossref.org/","access":"public","authentication":"polite-pool-identity","rightsStatus":"metadata-terms","phase":"phase-1","releaseStatus":"discovered"},
+    {"id":"osf","provider":"Center for Open Science","name":"Open Science Framework API","group":"education-research","domains":["education","science"],"officialUrl":"https://developer.osf.io/","access":"public-and-authenticated","authentication":"resource-specific","rightsStatus":"project-specific","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"arxiv","provider":"arXiv","name":"arXiv API","group":"education-research","domains":["education","science","technology"],"officialUrl":"https://info.arxiv.org/help/api/index.html","access":"public","authentication":"none","rightsStatus":"usage-rules","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"unesco-uis","provider":"UNESCO Institute for Statistics","name":"UIS Data","group":"education-research","domains":["education","economics","law-civic"],"officialUrl":"https://uis.unesco.org/en/data","access":"public","authentication":"endpoint-validation-pending","rightsStatus":"terms-review","phase":"phase-4","releaseStatus":"discovered"},
+    {"id":"wikidata","provider":"Wikimedia Foundation","name":"Wikidata","group":"education-research","domains":["education","science","arts-culture","technology"],"officialUrl":"https://www.wikidata.org/wiki/Wikidata:Data_access","access":"public","authentication":"none","rightsStatus":"open-data-terms","phase":"phase-2","releaseStatus":"discovered"},
+
+    {"id":"faostat","provider":"Food and Agriculture Organization of the United Nations","name":"FAOSTAT","group":"environment-development","domains":["environment","economics","medical-health","education"],"officialUrl":"https://www.fao.org/faostat/en/#data","access":"public","authentication":"resource-specific","rightsStatus":"terms-review","phase":"phase-3","releaseStatus":"discovered"},
+    {"id":"noaa-ncei","provider":"National Oceanic and Atmospheric Administration","name":"NOAA NCEI Data Access","group":"environment-development","domains":["environment","space-earth","science"],"officialUrl":"https://www.ncei.noaa.gov/access","access":"public-api-conditions","authentication":"resource-specific","rightsStatus":"terms-review","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"ecmwf-open-data","provider":"European Centre for Medium-Range Weather Forecasts","name":"ECMWF Open Data","group":"environment-development","domains":["environment","space-earth","science"],"officialUrl":"https://www.ecmwf.int/en/forecasts/datasets/open-data","access":"open-subset","authentication":"resource-specific","rightsStatus":"attribution-terms","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"gbif","provider":"Global Biodiversity Information Facility","name":"GBIF APIs","group":"environment-development","domains":["environment","science","education"],"officialUrl":"https://techdocs.gbif.org/en/openapi/","access":"public","authentication":"resource-specific","rightsStatus":"dataset-specific","phase":"phase-3","releaseStatus":"discovered"},
+    {"id":"world-bank-indicators","provider":"World Bank","name":"World Development Indicators API","group":"environment-development","domains":["economics","environment","education","medical-health"],"officialUrl":"https://datahelpdesk.worldbank.org/knowledgebase/articles/889392","access":"public","authentication":"none","rightsStatus":"terms-review","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"geo-knowledge-hub","provider":"Group on Earth Observations","name":"GEO Knowledge Hub","group":"environment-development","domains":["environment","space-earth","science"],"officialUrl":"https://gkhub.earthobservations.org/","access":"public-discovery","authentication":"resource-specific","rightsStatus":"package-specific","phase":"phase-3","releaseStatus":"discovered"},
+
+    {"id":"w3c-wai","provider":"World Wide Web Consortium","name":"Web Accessibility Initiative","group":"public-benefit","domains":["accessibility","technology","engineering"],"officialUrl":"https://www.w3.org/WAI/","access":"public","authentication":"none","rightsStatus":"document-specific","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"us-code","provider":"U.S. House Office of the Law Revision Counsel","name":"United States Code","group":"public-benefit","domains":["law-civic","education"],"officialUrl":"https://uscode.house.gov/","access":"public","authentication":"none","rightsStatus":"official-publication","phase":"phase-3","releaseStatus":"discovered"},
+    {"id":"govinfo-api","provider":"U.S. Government Publishing Office","name":"GovInfo APIs","group":"public-benefit","domains":["law-civic","education"],"officialUrl":"https://www.govinfo.gov/developers","access":"public-api-key","authentication":"api-key","rightsStatus":"terms-review","phase":"phase-3","releaseStatus":"discovered"},
+    {"id":"census-api","provider":"U.S. Census Bureau","name":"Census Data APIs","group":"public-benefit","domains":["economics","law-civic","education"],"officialUrl":"https://www.census.gov/data/developers.html","access":"public","authentication":"optional-api-key","rightsStatus":"terms-review","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"fred-api","provider":"Federal Reserve Bank of St. Louis","name":"FRED API","group":"public-benefit","domains":["economics","education"],"officialUrl":"https://fred.stlouisfed.org/docs/api/fred/","access":"registered","authentication":"api-key","rightsStatus":"terms-review","phase":"phase-2","releaseStatus":"discovered"},
+    {"id":"open-food-facts","provider":"Open Food Facts","name":"Open Food Facts API","group":"public-benefit","domains":["medical-health","environment","education"],"officialUrl":"https://openfoodfacts.github.io/openfoodfacts-server/api/","access":"public","authentication":"resource-specific","rightsStatus":"odbl-and-media-specific","phase":"phase-3","releaseStatus":"discovered"}
+  ]
+}

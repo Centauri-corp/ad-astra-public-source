@@ -1,0 +1,15 @@
+/* Shared secondary-page visual system. Decorative layers are local, bounded and
+   never imply live telemetry, model output or external data access. */
+@keyframes page-orbit-drift{0%,100%{transform:rotate(-7deg) scale(1)}50%{transform:rotate(3deg) scale(1.03)}}
+.market-shell,.product-shell{position:relative;isolation:isolate;overflow:hidden}
+.market-shell::before,.product-shell::before{content:"";position:absolute;z-index:-2;top:0;right:-14vw;width:min(680px,70vw);height:680px;opacity:.62;pointer-events:none;background:radial-gradient(circle at center,rgba(142,232,244,.14),transparent 18%,rgba(154,124,255,.08) 38%,transparent 67%),repeating-radial-gradient(ellipse at center,rgba(142,232,244,.17) 0 1px,transparent 1px 36px);transform:rotate(-12deg);animation:page-orbit-drift 18s ease-in-out infinite}
+.market-shell::after,.product-shell::after{content:"AD ASTRA / VISUAL SYSTEM";position:absolute;z-index:-1;top:clamp(170px,18vw,280px);right:clamp(20px,7vw,100px);color:rgba(142,232,244,.3);font:600 9px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.22em;writing-mode:vertical-rl;pointer-events:none}
+.market-hero,.company-copy,.product-hero{position:relative}
+.market-hero::after,.company-copy::after,.product-hero::after{content:"";position:absolute;left:-20px;bottom:-30px;width:170px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent);box-shadow:0 0 24px rgba(142,232,244,.45);pointer-events:none}
+.hero{position:relative;isolation:isolate;overflow:hidden}
+.hero::before{content:"";position:absolute;z-index:-1;inset:-25%;opacity:.3;pointer-events:none;background:repeating-linear-gradient(105deg,transparent 0 38px,rgba(142,232,244,.12) 39px 40px,transparent 41px 86px);transform:rotate(-8deg)}
+.hero::after{content:"";position:absolute;z-index:-1;right:-12%;top:8%;width:min(560px,72vw);aspect-ratio:1;border:1px solid rgba(142,232,244,.22);border-radius:50%;box-shadow:0 0 0 24px rgba(142,232,244,.04),0 0 0 52px rgba(154,124,255,.04);pointer-events:none}
+.market-card,.division-card,.family-card,.deliverable-grid article,.card,.path{transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}
+.market-card:hover,.market-card:focus-within,.division-card:hover,.family-card:hover,.deliverable-grid article:hover,.card:hover,.path:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.2)}
+@media(max-width:640px){.market-shell::after,.product-shell::after{top:160px;right:20px;font-size:7px}.market-shell::before,.product-shell::before{right:-45vw;opacity:.42}.hero::after{right:-35%;top:12%;opacity:.7}}
+@media(prefers-reduced-motion:reduce){.market-shell::before,.product-shell::before{animation:none}.market-card:hover,.market-card:focus-within,.division-card:hover,.family-card:hover,.deliverable-grid article:hover,.card:hover,.path:hover{transform:none}}

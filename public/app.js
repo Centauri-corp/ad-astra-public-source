@@ -95,6 +95,91 @@ const filmVideo = document.getElementById('company-film');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let motionPaused = reducedMotion.matches || Boolean(navigator.connection?.saveData);
 const visibleVideos = new Set();
+const neuralField = document.getElementById('neural-field');
+let neuralFieldContext;
+try { neuralFieldContext = neuralField?.getContext('2d', {alpha:true}); }
+catch { /* Decorative graphics are optional; retain the hero poster. */ }
+const heroSection = document.querySelector('.hero');
+const neuralFieldNodes = Array.from({length:34}, (_, index) => {
+  const angle = index * 2.399963 + 0.35;
+  const radius = 0.16 + (index % 7) * 0.018;
+  return {angle, radius, depth:0.55 + ((index * 17) % 43) / 100, phase:(index * 0.73) % 6.28};
+});
+let neuralFieldVisible = true;
+let neuralFieldFrame = 0;
+let neuralFieldTime = 0;
+let neuralFieldLastTime = null;
+function neuralFieldMotionPermitted() {
+  return !motionPaused && neuralFieldVisible && !document.hidden && !filmDialog?.open;
+}
+function resizeNeuralField() {
+  if (!neuralField || !neuralFieldContext) return;
+  const rect = neuralField.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  const width = Math.max(1, Math.round(rect.width * dpr));
+  const height = Math.max(1, Math.round(rect.height * dpr));
+  if (neuralField.width !== width || neuralField.height !== height) {
+    neuralField.width = width;
+    neuralField.height = height;
+  }
+  neuralFieldContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+function drawNeuralField(now = 0) {
+  if (!neuralField || !neuralFieldContext) return;
+  const width = neuralField.clientWidth;
+  const height = neuralField.clientHeight;
+  if (!width || !height) return;
+  const context = neuralFieldContext;
+  const time = now * 0.00035;
+  const scale = Math.min(width, height);
+  const centerX = width * 0.73;
+  const centerY = height * 0.44;
+  context.clearRect(0, 0, width, height);
+  const points = neuralFieldNodes.map(node => {
+    const pulse = Math.sin(time * 2 + node.phase) * 0.012;
+    const orbit = node.angle + time * (0.17 + node.depth * 0.08);
+    return {
+      x:centerX + Math.cos(orbit) * scale * (node.radius + pulse),
+      y:centerY + Math.sin(orbit * 1.13) * scale * (node.radius * 0.64 + pulse),
+      size:1.1 + node.depth * 1.7,
+      depth:node.depth
+    };
+  });
+  context.lineWidth = 0.7;
+  for (let i = 0; i < points.length; i += 1) {
+    for (let j = i + 1; j < points.length; j += 1) {
+      const dx = points[i].x - points[j].x;
+      const dy = points[i].y - points[j].y;
+      const distance = Math.hypot(dx, dy);
+      if (distance > scale * 0.105) continue;
+      context.strokeStyle = `rgba(142, 215, 244, ${Math.max(0.025, 0.15 - distance / scale)})`;
+      context.beginPath(); context.moveTo(points[i].x, points[i].y); context.lineTo(points[j].x, points[j].y); context.stroke();
+    }
+  }
+  points.forEach((point, index) => {
+    context.fillStyle = index % 5 === 0 ? 'rgba(226, 207, 155, .8)' : 'rgba(158, 224, 245, .7)';
+    context.beginPath(); context.arc(point.x, point.y, point.size, 0, Math.PI * 2); context.fill();
+  });
+}
+function animateNeuralField(now) {
+  neuralFieldFrame = 0;
+  if (neuralFieldMotionPermitted()) {
+    if (neuralFieldLastTime !== null) neuralFieldTime += Math.min(now - neuralFieldLastTime, 100);
+    neuralFieldLastTime = now;
+    drawNeuralField(neuralFieldTime);
+    neuralFieldFrame = requestAnimationFrame(animateNeuralField);
+  }
+}
+function syncNeuralField() {
+  if (!neuralFieldContext) return;
+  if (neuralFieldMotionPermitted()) {
+    if (!neuralFieldFrame) neuralFieldFrame = requestAnimationFrame(animateNeuralField);
+  } else {
+    if (neuralFieldFrame) cancelAnimationFrame(neuralFieldFrame);
+    neuralFieldFrame = 0;
+    neuralFieldLastTime = null;
+  }
+}
 function syncMotion() {
   document.body.classList.toggle('paused', motionPaused);
   motionButton.setAttribute('aria-pressed', String(motionPaused));
@@ -111,6 +196,7 @@ function syncMotion() {
       if (error.name === 'NotAllowedError') {motionPaused = true; syncMotion();}
     });
   });
+  syncNeuralField();
 }
 motionVideos.forEach(video => {
   video.muted = true;
@@ -119,11 +205,27 @@ motionVideos.forEach(video => {
 });
 if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => entry.isIntersecting ? visibleVideos.add(entry.target) : visibleVideos.delete(entry.target));
+    entries.forEach(entry => {
+      if (entry.target === heroSection) neuralFieldVisible = entry.isIntersecting;
+      else if (entry.isIntersecting) visibleVideos.add(entry.target);
+      else visibleVideos.delete(entry.target);
+    });
     syncMotion();
   }, {threshold:0.01});
   motionVideos.forEach(video => observer.observe(video));
+  if (heroSection) observer.observe(heroSection);
 } else {motionVideos.forEach(video => visibleVideos.add(video));}
+resizeNeuralField();
+drawNeuralField(neuralFieldTime);
+// Styles and progressive enhancement can resize the hero without a window
+// resize event. Redraw the paused frame at its actual display resolution too.
+if (neuralField && neuralFieldContext && 'ResizeObserver' in window) {
+  new ResizeObserver(() => {
+    resizeNeuralField();
+    drawNeuralField(neuralFieldTime);
+  }).observe(neuralField);
+}
+window.addEventListener('resize', () => {resizeNeuralField(); drawNeuralField(neuralFieldTime); syncNeuralField();}, {passive:true});
 motionButton.addEventListener('click', () => {
   motionPaused = !motionPaused;
   if (!motionPaused) motionVideos.forEach(video => {if (video.ended && !video.loop) video.currentTime = 0;});
@@ -175,3 +277,96 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     else result.textContent = 'Share our launch page: ' + url;
   } catch (error) {if (error.name !== 'AbortError') result.textContent = 'Share our launch page: ' + url;}
 });
+
+// Local-only neural field visualizer. It is deliberately decoupled from server
+// telemetry, model weights and customer prompts; it provides a bounded visual
+// simulation for the public intelligence-layer concept.
+(() => {
+  const section = document.getElementById('intelligence-layer');
+  const canvas = document.getElementById('neural-field-canvas');
+  if (!section || !canvas) return;
+  const tabs = [...section.querySelectorAll('.intelligence-tab')];
+  const label = document.getElementById('intelligence-readout-label');
+  const value = document.getElementById('intelligence-readout-value');
+  const activityLabel = document.getElementById('intelligence-activity');
+  const input = document.getElementById('intelligence-input');
+  const form = document.getElementById('intelligence-prompt');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const labels = {
+    1: ['NARROW AI / BOUNDED SIGNAL FLOW', 'A clean, predictable field for focused tasks.'],
+    2: ['AGI / CROSS-DOMAIN TOPOLOGY', 'A research-direction field for connected reasoning.'],
+    3: ['ASI / HYPOTHETICAL HORIZON', 'A denser visual horizon for multi-threaded possibility.']
+  };
+  let tier = 1, activity = 0, targetActivity = 0, visible = true, frame = 0, started = performance.now();
+  const gl = canvas.getContext('webgl', { alpha: true, antialias: false, powerPreference: 'low-power' });
+  if (!gl) {
+    canvas.hidden = true;
+    activityLabel.textContent = 'STATIC FALLBACK / WEBGL UNAVAILABLE';
+    return;
+  }
+  const vertexSource = [
+    'attribute vec2 position;',
+    'void main(){gl_Position=vec4(position,0.0,1.0);}'
+  ].join('\n');
+  const fragmentSource = [
+    'precision highp float;',
+    'uniform vec2 u_resolution;',
+    'uniform float u_time;',
+    'uniform float u_tier;',
+    'uniform float u_activity;',
+    'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+    'float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hash(i),hash(i+vec2(1.0,0.0)),f.x),mix(hash(i+vec2(0.0,1.0)),hash(i+vec2(1.0)),f.x),f.y);}',
+    'float fbm(vec2 p){float v=0.0,a=0.5;mat2 r=mat2(0.88,0.48,-0.48,0.88);for(int i=0;i<4;i++){v+=a*noise(p);p=r*p*2.0+17.0;a*=0.5;}return v;}',
+    'void main(){vec2 p=(gl_FragCoord.xy-0.5*u_resolution.xy)/u_resolution.y;float speed=u_tier==3.0?1.8:(u_tier==2.0?1.15:0.65);float t=u_time*speed;vec2 q=vec2(fbm(p+vec2(t*.08)),fbm(p+vec2(3.2-t*.05)));float f=fbm(p+q*.8+u_activity*.08);vec3 base=vec3(.006,.018,.04);vec3 cyan=vec3(.0,.32,.48);vec3 green=vec3(.0,.5,.3);vec3 violet=vec3(.4,.05,.7);vec3 accent=u_tier==1.0?cyan:(u_tier==2.0?green:violet);float glow=smoothstep(.35,.85,f)*(0.32+u_activity*.08);float ripple=u_activity*.12/(length(p)+.35);vec3 color=mix(base,accent,glow)+vec3(.08,.2,.3)*ripple;gl_FragColor=vec4(color,1.0);}'
+  ].join('\n');
+  function shader(type, source) {
+    const item = gl.createShader(type); if (!item) return null;
+    gl.shaderSource(item, source); gl.compileShader(item);
+    if (!gl.getShaderParameter(item, gl.COMPILE_STATUS)) { gl.deleteShader(item); return null; }
+    return item;
+  }
+  const vertex = shader(gl.VERTEX_SHADER, vertexSource), fragment = shader(gl.FRAGMENT_SHADER, fragmentSource);
+  const program = gl.createProgram();
+  if (!vertex || !fragment || !program) { canvas.hidden = true; activityLabel.textContent = 'STATIC FALLBACK / SHADER UNAVAILABLE'; return; }
+  gl.attachShader(program, vertex); gl.attachShader(program, fragment); gl.linkProgram(program);
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) { canvas.hidden = true; activityLabel.textContent = 'STATIC FALLBACK / SHADER UNAVAILABLE'; return; }
+  gl.useProgram(program);
+  const buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
+  const position = gl.getAttribLocation(program, 'position'); gl.enableVertexAttribArray(position); gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+  const uniforms = {
+    resolution: gl.getUniformLocation(program, 'u_resolution'),
+    time: gl.getUniformLocation(program, 'u_time'),
+    tier: gl.getUniformLocation(program, 'u_tier'),
+    activity: gl.getUniformLocation(program, 'u_activity')
+  };
+  function resize() {
+    const rect = section.getBoundingClientRect(), ratio = Math.min(devicePixelRatio || 1, 1.5);
+    const width = Math.max(1, Math.floor(rect.width * ratio)), height = Math.max(1, Math.floor(rect.height * ratio));
+    if (canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; gl.viewport(0, 0, width, height); }
+  }
+  function render(now) {
+    frame = requestAnimationFrame(render);
+    if (!visible || document.hidden) return;
+    resize();
+    targetActivity *= 0.96; activity += (targetActivity - activity) * 0.12;
+    gl.uniform2f(uniforms.resolution, canvas.width, canvas.height);
+    gl.uniform1f(uniforms.time, (now - started) / 1000);
+    gl.uniform1f(uniforms.tier, tier);
+    gl.uniform1f(uniforms.activity, activity);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  }
+  function setTier(next) {
+    tier = next;
+    section.dataset.tier = String(tier);
+    tabs.forEach(tab => { const active = Number(tab.dataset.tier) === tier; tab.classList.toggle('active', active); tab.setAttribute('aria-selected', String(active)); });
+    const current = labels[tier]; label.textContent = current[0]; value.textContent = current[1];
+    targetActivity = Math.max(targetActivity, tier * .45);
+  }
+  tabs.forEach(tab => tab.addEventListener('click', () => setTier(Number(tab.dataset.tier))));
+  input?.addEventListener('input', () => { targetActivity = Math.min(3, .35 + input.value.length / 45); activityLabel.textContent = 'LOCAL SIMULATION / RIPPLE INTENSITY ' + Math.round(targetActivity * 33) + '%'; });
+  form?.addEventListener('submit', event => { event.preventDefault(); targetActivity = 3; activityLabel.textContent = 'LOCAL SIMULATION / RIPPLE REGISTERED'; setTimeout(() => { activityLabel.textContent = 'LOCAL SIMULATION / NO PROMPT IS SENT'; }, 1400); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(entries => { visible = entries.some(entry => entry.isIntersecting); }, { threshold: .01 }).observe(section);
+  if (reducedMotion.matches) { targetActivity = .2; }
+  resize(); render(performance.now());
+})();
