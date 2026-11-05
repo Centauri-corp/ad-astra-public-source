@@ -96,4 +96,16 @@ assert.ok(microgrids.includes('20FT / TACTICAL MICRO-POD')&&microgrids.includes(
 assert.ok(microgrids.includes('Neither footprint bypasses municipal permission'));
 assert.ok(microgrids.includes('selenium interlayer')&&microgrids.includes('pressure-vessel safety case'));
 assert.ok(pricing.includes('For individuals')&&pricing.includes('For organizations')&&pricing.includes('No payment is requested'));
+
+const visualCriteria=JSON.parse(fs.readFileSync(path.join(root,'governance/graphics-release-criteria.json'),'utf8'));
+assert.equal(visualCriteria.schemaVersion,1);
+assert.deepEqual(visualCriteria.requiredAssetSlots,['neural','products','film']);
+assert.equal(visualCriteria.actualApprovedAssets.length,0);
+assert.equal(visualCriteria.productionEligible,false);
+assert.equal(visualCriteria.publicAI,false);
+assert.equal(visualCriteria.billing,false);
+assert.equal(visualCriteria.filmPremiere,false);
+assert.equal(visualCriteria.automaticPublication,false);
+assert.equal(visualCriteria.modelBudgetCeilingUSD,500);
+
 console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-only homepage=product-led neural=local-only privacy=passed');
