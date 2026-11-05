@@ -552,3 +552,35 @@
   color: #99afbf;
   line-height: 1.55;
 }
+
+/* Keep the original editorial sections readable in the enhanced home theme. */
+body.hx-enhanced #vision .section-label,
+body.hx-enhanced #company .section-label {
+  color: #a8b6bf;
+}
+
+body.hx-enhanced .intro-grid p:not(.lead),
+body.hx-enhanced .company-grid p:not(.lead) {
+  color: #b9c7cf;
+}
+
+body.hx-enhanced #possibilities .section-top > p {
+  color: #535e64;
+}
+
+body.hx-enhanced .experience-content .example > span {
+  color: #53666b;
+}
+
+body.hx-enhanced #research-toggle {
+  color: #c0d8e5;
+}
+
+body.hx-enhanced .company-principles article > span,
+body.hx-enhanced #questions .eyebrow {
+  color: #d3bc99;
+}
+
+body.hx-enhanced .company-principles p {
+  color: #a9bac4;
+}
