@@ -61,9 +61,10 @@
       try {
         const token = await clerk.session.getToken();
         if (!token) throw new Error('authentication_required');
+        const pendingRequest = { key: crypto.randomUUID() };
         const response = await fetch('/api/ask', {
           method: 'POST', credentials: 'same-origin', signal: AbortSignal.timeout(25000),
-          headers: {'Content-Type': 'application/json', 'X-Ad-Astra-Request': 'public-v1', 'Authorization': `Bearer ${token}`},
+          headers: {'Content-Type': 'application/json', 'X-Ad-Astra-Request': 'public-v1', 'Authorization': `Bearer ${token}`, 'Idempotency-Key': pendingRequest.key},
           body: JSON.stringify({question: value, mode: mode.value, references: []})
         });
         const data = await response.json();

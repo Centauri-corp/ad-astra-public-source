@@ -11,6 +11,10 @@
   "customerModes": ["ask", "research", "create", "learn", "explore"],
   "customerAccess": "clerk-authenticated",
   "liveEngineAccess": "requires-all-verified-release-gates",
+  "customerBudgetBridge": {
+    "publicAdapter": "implemented-candidate",
+    "productionAccepted": false
+  },
   "contentSurfaces": {
     "company": "public-versioned",
     "productsAndServices": "public-market-direction",
