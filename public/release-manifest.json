@@ -11,6 +11,13 @@
   "customerModes": ["ask", "research", "create", "learn", "explore"],
   "customerAccess": "clerk-authenticated",
   "liveEngineAccess": "requires-all-verified-release-gates",
+  "customerBudgetBridge": {
+    "publicAdapter": "implemented-candidate",
+    "privateBridge": "source-candidate",
+    "identityMappingAccepted": false,
+    "providerReceiptReconciliationAccepted": false,
+    "productionAccepted": false
+  },
   "contentSurfaces": {
     "company": "public-versioned",
     "productsAndServices": "public-market-direction",
@@ -39,6 +46,7 @@
     "claimBoundary": "conceptual-research-framing"
   },
   "dailyModelBudgetUSD": 10,
+  "sharedMonthlyModelCeilingUSD": 500,
   "rollbackBaseline": "dpl_GUQqWJ3jTy9f73XqfQFvmbqhnHUy",
   "source": "isolated AD ASTRA source; see release evidence",
   "indexableRoutes": [

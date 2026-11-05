@@ -21,10 +21,29 @@ const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');asser
 assert.equal(JSON.parse(fs.readFileSync(path.join(root,'vercel.json'))).git.deploymentEnabled,false);
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'public/release-manifest.json')));
 const experience=JSON.parse(fs.readFileSync(path.join(root,'public/experience-manifest.json')));
+const models=JSON.parse(fs.readFileSync(path.join(root,'governance/model-release-registry.json')));
 assert.equal(manifest.publicLaunchEnabled,false);assert.equal(manifest.engineAvailable,false);
 assert.equal(manifest.customerPortal,'authenticated-preview');
 assert.equal(manifest.customerAiModel,'gpt-4.1-mini-2025-04-14');
 assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
+assert.equal(manifest.customerBudgetBridge.publicAdapter,'implemented-candidate');
+assert.equal(manifest.customerBudgetBridge.productionAccepted,false);
+assert.equal(manifest.sharedMonthlyModelCeilingUSD,500);
+assert.equal(models.schemaVersion,1);
+assert.equal(models.release.customerModelEnabled,false);
+assert.equal(models.release.ollamaProductionServing,false);
+assert.equal(models.release.codexProductionRuntime,false);
+assert.equal(models.reconciliation.allChatTranscriptsRecovered,false);
+assert.ok(models.models.every(model=>model.publicUse===false&&model.paidExecution===false));
+const publicAsk=fs.readFileSync(path.join(root,'api/ask.js'),'utf8');
+const sharedBudget=fs.readFileSync(path.join(root,'lib/shared-budget.js'),'utf8');
+const providerBudget=fs.readFileSync(path.join(root,'lib/provider-budget-policy.js'),'utf8');
+const knowledgeApp=fs.readFileSync(path.join(root,'public/knowledge/app.js'),'utf8');
+assert.ok(publicAsk.includes("require('../lib/shared-budget')"));
+assert.ok(publicAsk.includes("'idempotency-key'"));
+assert.ok(sharedBudget.includes('ad-astra-customer-budget/v1'));
+assert.ok(providerBudget.includes('sharedLedgerIntegrated: false'));
+assert.ok(knowledgeApp.includes("'Idempotency-Key': pendingRequest.key"));
 assert.deepEqual(experience.visualArchitecture.sceneOrder,[
  'arrival','customer-pathways','neural-product-model','intelligence-layers','products','solutions','film-study','vision','approach','experiences','horizon','company','signature'
 ]);

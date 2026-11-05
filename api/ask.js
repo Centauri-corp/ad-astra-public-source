@@ -3,6 +3,7 @@ const crypto = require('node:crypto');
 const { authenticateRequest } = require('../lib/auth');
 const { reserve, LIMIT } = require('../lib/quota');
 const { ready } = require('../lib/release-gates');
+const sharedBudget = require('../lib/shared-budget');
 const MODES = Object.freeze({ ask: 'clarify the question and give a useful next step', research: 'separate claims, evidence, uncertainty and a research path', create: 'develop a concept with options, constraints and a small experiment', learn: 'explain progressively with an example and a check for understanding', explore: 'compare possibilities, constraints and what would falsify each one' });
 const MAX_BODY = 14000;
 function sameOrigin(req) {
@@ -48,11 +49,29 @@ module.exports = async function ask(req, res) {
   const auth = await authenticateRequest(req);
   if (!auth.ok) return reply(auth.status,{error:auth.error,message:auth.status === 401 ? 'Please sign in again to continue.' : 'Secure sign-in is temporarily unavailable.'});
   if (!ready()) return reply(503,{error:'release_not_ready',message:'The live engine is paused while release checks are completed.'},{'Retry-After':300});
+  let budget;
+  try {
+    budget = sharedBudget.createClient({claims:auth.claims,customerToken:req.headers.authorization.slice(7)});
+    const key = process.env.OPENAI_API_KEY;
+    if (typeof key !== 'string' || key.length < 16 || key.length > 4096 || /\s/.test(key)) throw new Error('provider_configuration');
+  } catch { return reply(503,{error:'shared_budget_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60}); }
+  const idempotencyKey = req.headers?.['idempotency-key'];
+  if (typeof idempotencyKey !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(idempotencyKey)) {
+    return reply(428,{error:'operation_key_required',message:'Refresh this page before submitting a new request.'});
+  }
   let quota;
   try { quota = await reserve(auth.claims); } catch { return reply(503,{error:'quota_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60}); }
   const headers = {'X-RateLimit-Limit':LIMIT,'X-RateLimit-Remaining':quota.remaining,'X-Ad-Astra-Quota-Mode':'durable'};
   if (!quota.allowed) return reply(429,{error:quota.budgetReached ? 'daily_capacity_reached' : 'rate_limit_reached',message:'Request capacity has been reached. Please try again later.'},{...headers,'Retry-After':quota.retryAfter});
+  let admission;
+  try { admission = await budget.reserve({idempotencyKey,question:prompt,mode}); }
+  catch(error) {
+    const code = error instanceof sharedBudget.BudgetError ? error.code : 'shared_budget_unavailable';
+    const status = error instanceof sharedBudget.BudgetError ? error.status : 503;
+    return reply(status,{error:code,message:status === 409 ? 'This request is already recorded. It will not be sent again.' : 'This request could not be authorized.'},{...headers,'Retry-After':60});
+  }
   try {
+    const result = await budget.execute(admission,async()=>{
     const messages = [
       {role:'system',content:`You are Ad Astra, a careful human-directed thinking assistant. Your task is to ${MODES[mode]}. Answer directly in under 500 words. Separate evidence, assumptions and uncertainty. You cannot browse, retrieve private data, remember conversations or take external actions. Never invent citations or claim source verification. For medical, legal or financial decisions provide general information and recommend qualified advice. Decline unsafe instructions.`},
       {role:'user',content:prompt}
@@ -67,6 +86,13 @@ module.exports = async function ask(req, res) {
     const data = await response.json();
     const answer = data?.choices?.[0]?.message?.content;
     if (typeof answer !== 'string' || !answer.trim()) throw new Error('empty_response');
-    return reply(200,{ok:true,mode,answer:answer.trim().slice(0,6000),disclosure:'AI-generated response. Verify important claims against primary sources.'},headers);
+    const receipt = data.model === sharedBudget.POLICY.model && /^chatcmpl-[A-Za-z0-9_-]{8,160}$/.test(data.id || '')
+      ? {id:data.id,model:data.model} : null;
+    const providerRequestId = response.headers?.get('x-request-id');
+    if (receipt && /^[A-Za-z0-9_-]{8,160}$/.test(providerRequestId || '')) receipt.request_id = providerRequestId;
+    return {value:answer.trim().slice(0,6000),receipt};
+    });
+    if (result.accounting === 'pending') console.warn('ad_astra_accounting_pending',{requestId});
+    return reply(200,{ok:true,mode,answer:result.value,disclosure:'AI-generated response. Verify important claims against primary sources.'},headers);
   } catch { return reply(503,{error:'ai_unavailable',message:'Ad Astra could not complete this response. Please try again later.'},{...headers,'Retry-After':60}); }
 };
