@@ -14,7 +14,7 @@ function token(overrides={},head={}){
 function response(){return {headers:{},setHeader(k,v){this.headers[k.toLowerCase()]=v;},end(v){this.body=v?JSON.parse(v):null;}};}
 async function request(options={}){
  const req={method:'POST',headers:{host:'adastra.global',origin:'https://adastra.global','content-type':'application/json','x-ad-astra-request':'public-v1',authorization:'Bearer '+token(),...options.headers},body:{question:'Explain gravity simply.',mode:'ask'},...options};
- req.headers={host:'adastra.global',origin:'https://adastra.global','content-type':'application/json','x-ad-astra-request':'public-v1',authorization:'Bearer '+token(),...options.headers};
+ req.headers={host:'adastra.global',origin:'https://adastra.global','content-type':'application/json','x-ad-astra-request':'public-v1','idempotency-key':crypto.randomUUID(),authorization:'Bearer '+token(),...options.headers};
  const res=response(); await ask(req,res);return res;
 }
 beforeEach(()=>{

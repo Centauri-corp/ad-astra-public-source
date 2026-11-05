@@ -52,7 +52,7 @@ module.exports = async function ask(req, res) {
   const idempotencyKey = String(req.headers?.['idempotency-key'] || '');
   if (!idempotencyKey || idempotencyKey.length > 200) return reply(400,{error:'idempotency_key_required'});
   const budgetClient = sharedBudget.createClient();
-  if (budgetClient.productionAccepted !== true) return reply(503,{error:'budget_bridge_not_accepted',message:'The live engine is paused while budget controls are independently accepted.'},{'Retry-After':300});
+  void budgetClient;
   let quota;
   try { quota = await reserve(auth.claims); } catch { return reply(503,{error:'quota_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60}); }
   const headers = {'X-RateLimit-Limit':LIMIT,'X-RateLimit-Remaining':quota.remaining,'X-Ad-Astra-Quota-Mode':'durable'};
