@@ -1,0 +1,31 @@
+name: AD ASTRA production customer QC
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  production-qc:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      AD_ASTRA_QC_ORIGIN: https://adastra.global
+      AD_ASTRA_PRODUCTION_ACTIVATION_VERIFIED: ${{ secrets.AD_ASTRA_PRODUCTION_ACTIVATION_VERIFIED }}
+      AD_ASTRA_SUPABASE_SECURITY_ADVISORS_GREEN: ${{ secrets.AD_ASTRA_SUPABASE_SECURITY_ADVISORS_GREEN }}
+      AD_ASTRA_SUPABASE_LIFECYCLE_MIGRATION_APPLIED: ${{ secrets.AD_ASTRA_SUPABASE_LIFECYCLE_MIGRATION_APPLIED }}
+      AD_ASTRA_STRIPE_WEBHOOK_DELIVERY_VERIFIED: ${{ secrets.AD_ASTRA_STRIPE_WEBHOOK_DELIVERY_VERIFIED }}
+      AD_ASTRA_STRIPE_SANDBOX_LIFECYCLE_ACCEPTED: ${{ secrets.AD_ASTRA_STRIPE_SANDBOX_LIFECYCLE_ACCEPTED }}
+      AD_ASTRA_CLERK_ENTITLEMENT_ACCEPTED: ${{ secrets.AD_ASTRA_CLERK_ENTITLEMENT_ACCEPTED }}
+      AD_ASTRA_CUSTOMER_TWO_ACCOUNT_ACCEPTED: ${{ secrets.AD_ASTRA_CUSTOMER_TWO_ACCOUNT_ACCEPTED }}
+      AD_ASTRA_INDEPENDENT_REVIEW_APPROVED: ${{ secrets.AD_ASTRA_INDEPENDENT_REVIEW_APPROVED }}
+      AD_ASTRA_CRM_PRODUCTION_VERIFIED: ${{ secrets.AD_ASTRA_CRM_PRODUCTION_VERIFIED }}
+      AD_ASTRA_VERCEL_PREVIEW_REVIEWED: ${{ secrets.AD_ASTRA_VERCEL_PREVIEW_REVIEWED }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run qc:production
