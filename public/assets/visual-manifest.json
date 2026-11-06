@@ -3,16 +3,78 @@
   "purpose": "Public visual inventory for the Ad Astra homepage and Astra Lumen experience",
   "publicSafe": true,
   "assets": [
-    {"id":"astra-lumen-neural-brain","path":"/assets/astra-lumen-neural-brain.png","role":"hero neural artwork","alt":"Luminous blue and violet neural brain with connected signal nodes"},
-    {"id":"astra-lumen-neural-profile","path":"/assets/astra-lumen-neural-profile.png","role":"neural profile artwork","alt":"Side profile of a luminous neural figure with a glowing connected brain"},
-    {"id":"astra-lumen-neural-horizon","path":"/assets/astra-lumen-neural-horizon.png","role":"horizon artwork and video poster","alt":"Neural light field opening across a dark horizon"},
-    {"id":"ad-astra-runway-horizon-poster","path":"/assets/ad-astra-runway-horizon-poster.jpg","role":"motion fallback poster","alt":"Cinematic horizon with a restrained neural light motif"},
-    {"id":"ad-astra-runway-orbital-poster","path":"/assets/ad-astra-runway-orbital-poster.jpg","role":"motion fallback poster","alt":"Orbital intelligence field with cyan and champagne signal paths"},
-    {"id":"runway-curiosity-notes","path":"/assets/runway-curiosity-notes.jpg","role":"research mode artwork","alt":"Open notebook with handwritten research notes"},
-    {"id":"runway-orbital-intelligence","path":"/assets/runway-orbital-intelligence.jpg","role":"intelligence mode artwork","alt":"Abstract orbital light structure representing connected intelligence"},
-    {"id":"adobe-curiosity","path":"/assets/adobe-curiosity.jpg","role":"curiosity mode artwork","alt":"Person observing a bright atmospheric horizon"},
-    {"id":"adobe-horizon","path":"/assets/adobe-horizon.jpg","role":"horizon mode artwork","alt":"Softly lit horizon suggesting a new direction"},
-    {"id":"ad-astra-logo-transparent","path":"/assets/ad-astra-logo-transparent.png","role":"brand mark","alt":"Ad Astra orbital logo"}
+    {
+      "id": "astra-lumen-neural-brain",
+      "path": "/assets/astra-lumen-neural-brain.png",
+      "role": "hero neural artwork",
+      "alt": "Luminous blue and violet neural brain with connected signal nodes"
+    },
+    {
+      "id": "astra-lumen-neural-profile",
+      "path": "/assets/astra-lumen-neural-profile.png",
+      "role": "neural profile artwork",
+      "alt": "Side profile of a luminous neural figure with a glowing connected brain"
+    },
+    {
+      "id": "astra-lumen-neural-horizon",
+      "path": "/assets/astra-lumen-neural-horizon.png",
+      "role": "horizon artwork and video poster",
+      "alt": "Neural light field opening across a dark horizon"
+    },
+    {
+      "id": "ad-astra-runway-horizon-poster",
+      "path": "/assets/ad-astra-runway-horizon-poster.jpg",
+      "role": "motion fallback poster",
+      "alt": "Cinematic horizon with a restrained neural light motif"
+    },
+    {
+      "id": "ad-astra-runway-orbital-poster",
+      "path": "/assets/ad-astra-runway-orbital-poster.jpg",
+      "role": "motion fallback poster",
+      "alt": "Orbital intelligence field with cyan and champagne signal paths"
+    },
+    {
+      "id": "runway-curiosity-notes",
+      "path": "/assets/runway-curiosity-notes.jpg",
+      "role": "research mode artwork",
+      "alt": "Open notebook with handwritten research notes"
+    },
+    {
+      "id": "runway-orbital-intelligence",
+      "path": "/assets/runway-orbital-intelligence.jpg",
+      "role": "intelligence mode artwork",
+      "alt": "Abstract orbital light structure representing connected intelligence"
+    },
+    {
+      "id": "adobe-curiosity",
+      "path": "/assets/adobe-curiosity.jpg",
+      "role": "curiosity mode artwork",
+      "alt": "Person observing a bright atmospheric horizon"
+    },
+    {
+      "id": "adobe-horizon",
+      "path": "/assets/adobe-horizon.jpg",
+      "role": "horizon mode artwork",
+      "alt": "Softly lit horizon suggesting a new direction"
+    },
+    {
+      "id": "ad-astra-logo-transparent",
+      "path": "/assets/ad-astra-logo-transparent.png",
+      "role": "brand mark",
+      "alt": "Ad Astra orbital logo"
+    },
+    {
+      "id": "astra-lumen-neural-profile-canvas",
+      "path": "/assets/astra-lumen-neural-profile-canvas.png",
+      "role": "public neural canvas artwork",
+      "alt": "Cyan neural profile with a violet connected brain and orbital field"
+    },
+    {
+      "id": "astra-lumen-neural-profile-canvas-mobile",
+      "path": "/assets/astra-lumen-neural-profile-canvas-mobile.png",
+      "role": "mobile neural canvas artwork",
+      "alt": "Mobile composition of a cyan neural profile with a violet connected brain"
+    }
   ],
   "withheld": [
     "Internal neural-sphere screenshots remain private-only and are not published."
