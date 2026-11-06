@@ -233,10 +233,11 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     'uniform float u_tier;',
     'uniform float u_activity;',
     'uniform float u_amplitude;',
+    'uniform float u_state;',
     'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
     'float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hash(i),hash(i+vec2(1.0,0.0)),f.x),mix(hash(i+vec2(0.0,1.0)),hash(i+vec2(1.0)),f.x),f.y);}',
     'float fbm(vec2 p){float v=0.0,a=0.5;mat2 r=mat2(0.88,0.48,-0.48,0.88);for(int i=0;i<4;i++){v+=a*noise(p);p=r*p*2.0+17.0;a*=0.5;}return v;}',
-    'void main(){vec2 p=(gl_FragCoord.xy-0.5*u_resolution.xy)/u_resolution.y;float speed=u_tier==3.0?1.8:(u_tier==2.0?1.15:0.65);float t=u_time*speed;float voice=u_amplitude*(.18+.12*sin(t*7.0));vec2 q=vec2(fbm(p+vec2(t*.08+voice)),fbm(p+vec2(3.2-t*.05-voice)));float f=fbm(p+q*.8+u_activity*.08+voice);vec3 base=vec3(.004,.012,.024);vec3 cyan=vec3(.0,.46,.58);vec3 green=vec3(.08,.56,.42);vec3 violet=vec3(.48,.18,.78);vec3 accent=u_tier==1.0?cyan:(u_tier==2.0?green:violet);float glow=smoothstep(.35,.85,f)*(0.34+u_activity*.1+u_amplitude*.22);float ripple=(u_activity*.14+u_amplitude*.28)/(length(p)+.35);vec3 champagne=vec3(.91,.79,.56);vec3 color=mix(base,accent,glow)+champagne*ripple*.16+vec3(.05,.16,.24)*ripple;gl_FragColor=vec4(color,1.0);}'
+    'void main(){vec2 p=(gl_FragCoord.xy-0.5*u_resolution.xy)/u_resolution.y;float speed=u_tier==3.0?1.8:(u_tier==2.0?1.15:0.65);float t=u_time*speed;float voice=u_amplitude*(.18+.12*sin(t*7.0));float statePulse=u_state==1.0?sin(t*18.0)*.035:(u_state==2.0?sin(t*24.0)*.08:0.0);vec2 q=vec2(fbm(p+vec2(t*.08+voice+statePulse)),fbm(p+vec2(3.2-t*.05-voice-statePulse)));float f=fbm(p+q*.8+u_activity*.08+voice);vec3 base=vec3(.004,.012,.024);vec3 cyan=vec3(.0,.46,.58);vec3 green=vec3(.08,.56,.42);vec3 violet=vec3(.48,.18,.78);vec3 champagne=vec3(.91,.79,.56);vec3 accent=u_state==1.0?violet:(u_state==2.0?champagne:(u_tier==1.0?cyan:(u_tier==2.0?green:violet)));float glow=smoothstep(.35,.85,f)*(0.34+u_activity*.1+u_amplitude*.22+abs(statePulse)*1.8);float ripple=(u_activity*.14+u_amplitude*.28+abs(statePulse)*.5)/(length(p)+.35);vec3 color=mix(base,accent,glow)+champagne*ripple*.16+vec3(.05,.16,.24)*ripple;gl_FragColor=vec4(color,1.0);}'
   ].join('\n');
   function shader(type, source) {
     const item = gl.createShader(type); if (!item) return null;
@@ -258,7 +259,8 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     time: gl.getUniformLocation(program, 'u_time'),
     tier: gl.getUniformLocation(program, 'u_tier'),
     activity: gl.getUniformLocation(program, 'u_activity')
-    ,amplitude: gl.getUniformLocation(program, 'u_amplitude')
+    ,amplitude: gl.getUniformLocation(program, 'u_amplitude'),
+    state: gl.getUniformLocation(program, 'u_state')
   };
   function resize() {
     const rect = section.getBoundingClientRect(), ratio = Math.min(devicePixelRatio || 1, 1.5);
@@ -290,6 +292,10 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     amplitude += (Math.min(1, rms * 4.6) - amplitude) * .18;
     return amplitude;
   }
+  function voiceStateCode() {
+    const state = section.dataset.voiceState;
+    return state === 'thinking' ? 1 : state === 'speaking' ? 2 : 0;
+  }
   function render(now) {
     frame = requestAnimationFrame(render);
     if (!visible || document.hidden) return;
@@ -302,6 +308,7 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     gl.uniform1f(uniforms.tier, tier);
     gl.uniform1f(uniforms.activity, activity);
     gl.uniform1f(uniforms.amplitude, sampleAudio());
+    gl.uniform1f(uniforms.state, voiceStateCode());
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   }
   function setTier(next) {
