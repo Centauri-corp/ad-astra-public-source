@@ -1,10 +1,10 @@
 'use strict';
 const {test,beforeEach,after}=require('node:test'), assert=require('node:assert/strict'), crypto=require('node:crypto'), vm=require('node:vm'),fs=require('node:fs'),path=require('node:path');
-const ask=require('../api/ask'),status=require('../api/status'),auth=require('../lib/auth'),quota=require('../lib/quota'),gates=require('../lib/release-gates');
+const ask=require('../api/ask'),status=require('../api/status'),auth=require('../lib/auth'),quota=require('../lib/quota'),idempotency=require('../lib/idempotency'),gates=require('../lib/release-gates');
 const originalEnv={...process.env},originalFetch=global.fetch;
 const pair=crypto.generateKeyPairSync('rsa',{modulusLength:2048});
 const jwk={...pair.publicKey.export({format:'jwk'}),kid:'test-key',use:'sig',alg:'RS256'};
-let calls=[],redisResult=[1,11,3600],providerStatus=200;
+let calls=[],redisResult=[1,11,3600],providerStatus=200,idempotencyMode='new';
 function token(overrides={},head={}){
  const now=Math.floor(Date.now()/1000);
  const claims={iss:'https://clerk.adastra.global',aud:'ad-astra-workspace',azp:'https://adastra.global',sub:'user_testA',sid:'sess_testA',iat:now,nbf:now-1,exp:now+60,ad_astra_entitlements:['live_ai'],...overrides};
@@ -13,19 +13,34 @@ function token(overrides={},head={}){
 }
 function response(){return {headers:{},setHeader(k,v){this.headers[k.toLowerCase()]=v;},end(v){this.body=v?JSON.parse(v):null;}};}
 async function request(options={}){
- const req={method:'POST',headers:{host:'adastra.global',origin:'https://adastra.global','content-type':'application/json','x-ad-astra-request':'public-v1',authorization:'Bearer '+token(),...options.headers},body:{question:'Explain gravity simply.',mode:'ask'},...options};
- req.headers={host:'adastra.global',origin:'https://adastra.global','content-type':'application/json','x-ad-astra-request':'public-v1',authorization:'Bearer '+token(),...options.headers};
+ const idempotencyKey=options.idempotencyKey===undefined?'request-test-001':options.idempotencyKey;
+ const req={method:'POST',headers:{host:'adastra.global',origin:'https://adastra.global','content-type':'application/json','x-ad-astra-request':'public-v1',authorization:'Bearer '+token(),'idempotency-key':idempotencyKey,...options.headers},body:{question:'Explain gravity simply.',mode:'ask'},...options};
+ req.headers={host:'adastra.global',origin:'https://adastra.global','content-type':'application/json','x-ad-astra-request':'public-v1',authorization:'Bearer '+token(),'idempotency-key':idempotencyKey,...options.headers};
  const res=response(); await ask(req,res);return res;
 }
 beforeEach(()=>{
  for(const key of Object.keys(process.env))if(!(key in originalEnv))delete process.env[key];
  Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://redis.invalid',KV_REST_API_TOKEN:'synthetic-test-only',OPENAI_API_KEY:'synthetic-test-only',OPENAI_MODEL:'gpt-4.1-mini-2025-04-14',VERCEL_ENV:'production'});
  for(const flag of gates.FLAGS)process.env[flag]='true';
- calls=[];redisResult=[1,11,3600];providerStatus=200;
+ calls=[];redisResult=[1,11,3600];providerStatus=200;idempotencyMode='new';
  global.fetch=async(url,options)=>{
   calls.push({url,options});
   if(url.includes('/.well-known/jwks.json'))return {ok:true,json:async()=>({keys:[jwk]})};
-  if(url==='https://redis.invalid')return {ok:true,json:async()=>({result:redisResult})};
+  if(url==='https://redis.invalid'){
+   const args=JSON.parse(options.body),script=String(args[1]||'');
+   if(script.includes("COMPLETE:"))return {ok:true,json:async()=>({result:1})};
+   if(script.includes('DEL'))return {ok:true,json:async()=>({result:1})};
+   if(script.includes('PENDING:')){
+    if(idempotencyMode==='replay'){
+     const record={fingerprint:args[4],status:200,payload:{ok:true,mode:'ask',answer:'Replayed fixture',disclosure:'AI-generated response. Verify important claims against primary sources.'},headers:{'X-Ad-Astra-Quota-Mode':'durable'}};
+     return {ok:true,json:async()=>({result:[0,'COMPLETE:'+Buffer.from(JSON.stringify(record)).toString('base64url')]})};
+    }
+    if(idempotencyMode==='in_progress')return {ok:true,json:async()=>({result:[0,'PENDING:'+args[4]]})};
+    if(idempotencyMode==='conflict')return {ok:true,json:async()=>({result:[0,'PENDING:other-fingerprint']})};
+    return {ok:true,json:async()=>({result:[1,'PENDING:'+args[4]]})};
+   }
+   return {ok:true,json:async()=>({result:redisResult})};
+  }
   if(url==='https://api.openai.com/v1/chat/completions')return {ok:providerStatus===200,status:providerStatus,json:async()=>({choices:[{message:{content:'Synthetic fixture response'}}]})};
   throw Error('Unexpected external destination');
  };
@@ -33,8 +48,29 @@ beforeEach(()=>{
 after(()=>{global.fetch=originalFetch;for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];Object.assign(process.env,originalEnv);});
 test('valid signed session reserves quota before one bounded provider request',async()=>{
  const r=await request();assert.equal(r.statusCode,200);assert.equal(r.headers['cache-control'],'no-store');
- const quotaIndex=calls.findIndex(c=>c.url==='https://redis.invalid'),modelIndex=calls.findIndex(c=>c.url.includes('/chat/completions'));assert.ok(quotaIndex<modelIndex);
+ const redisCalls=calls.filter(c=>c.url==='https://redis.invalid');
+ const beginIndex=calls.findIndex(c=>c.url==='https://redis.invalid'&&String(JSON.parse(c.options.body)[1]).includes('PENDING:'));
+ const quotaIndex=calls.findIndex(c=>c.url==='https://redis.invalid'&&String(JSON.parse(c.options.body)[1]).includes('local now'));
+ const modelIndex=calls.findIndex(c=>c.url.includes('/chat/completions'));
+ const completeIndex=calls.findIndex(c=>c.url==='https://redis.invalid'&&String(JSON.parse(c.options.body)[1]).includes('COMPLETE:'));
+ assert.equal(redisCalls.length,3);assert.ok(beginIndex<quotaIndex&&quotaIndex<modelIndex&&modelIndex<completeIndex);
  const payload=JSON.parse(calls[modelIndex].options.body);assert.equal(payload.max_tokens,700);assert.equal(payload.store,false);assert.equal(payload.model,'gpt-4.1-mini-2025-04-14');assert.ok(calls[modelIndex].options.signal);
+});
+test('idempotency key is required before durable quota or model dispatch',async()=>{
+ const r=await request({headers:{'idempotency-key':''}});assert.equal(r.statusCode,400);assert.equal(r.body.error,'idempotency_key_required');assert.equal(calls.filter(c=>c.url==='https://redis.invalid').length,0);assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,0);
+});
+test('completed idempotency replays the original result without another quota or model call',async()=>{
+ assert.equal((await request()).statusCode,200);calls=[];idempotencyMode='replay';
+ const r=await request();assert.equal(r.statusCode,200);assert.equal(r.body.answer,'Replayed fixture');assert.equal(r.headers['idempotency-replayed'],'true');assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,0);assert.equal(calls.filter(c=>c.url==='https://redis.invalid').length,1);
+});
+test('pending and conflicting idempotency keys fail closed',async()=>{
+ idempotencyMode='in_progress';let r=await request();assert.equal(r.statusCode,409);assert.equal(r.body.error,'idempotency_in_progress');
+ idempotencyMode='conflict';r=await request({body:{question:'Explain inertia simply.',mode:'ask'}});assert.equal(r.statusCode,409);assert.equal(r.body.error,'idempotency_conflict');assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,0);
+});
+test('idempotency namespace binds tenant and signed identity',()=>{
+ const base={iss:'https://clerk.adastra.global',sub:'user_testA',org_id:'tenant_a'};
+ assert.notEqual(idempotency.keyFor(base,'request-test-001'),idempotency.keyFor({...base,sub:'user_testB'},'request-test-001'));
+ assert.notEqual(idempotency.keyFor(base,'request-test-001'),idempotency.keyFor({...base,org_id:'tenant_b'},'request-test-001'));
 });
 test('every absent or false release flag prevents all quota and model calls',async()=>{
  for(const flag of gates.FLAGS){
@@ -106,13 +142,13 @@ test('budget is required and never exceeds the owner-approved ceiling',async()=>
  assert.ok(!calls.some(c=>c.url.includes('/chat/completions')));
 });
 test('quota keys use signed identity, ignore spoofed IP and survive module reload',async()=>{
- await request({headers:{'x-forwarded-for':'1.2.3.4'}});const first=JSON.parse(calls.find(c=>c.url==='https://redis.invalid').options.body);
- calls=[];await request({headers:{'x-forwarded-for':'9.8.7.6'}});const second=JSON.parse(calls.find(c=>c.url==='https://redis.invalid').options.body);
+ await request({headers:{'x-forwarded-for':'1.2.3.4'}});const quotaCall=()=>calls.find(c=>c.url==='https://redis.invalid'&&String(JSON.parse(c.options.body)[1]).includes('local now'));const first=JSON.parse(quotaCall().options.body);
+ calls=[];await request({headers:{'x-forwarded-for':'9.8.7.6'}});const second=JSON.parse(quotaCall().options.body);
  assert.deepEqual(first.slice(3,5),second.slice(3,5));assert.ok(!first[3].includes('user_testA'));
  delete require.cache[require.resolve('../lib/quota')];calls=[];await require('../lib/quota').reserve({iss:'https://clerk.adastra.global',sub:'user_testA'});assert.equal(JSON.parse(calls[0].options.body)[3],first[3]);
 });
 test('provider 429 yields safe 503 without retry or refund',async()=>{
- providerStatus=429;const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'ai_unavailable');assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,1);assert.equal(calls.filter(c=>c.url==='https://redis.invalid').length,1);
+ providerStatus=429;const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'ai_unavailable');assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,1);assert.equal(calls.filter(c=>c.url==='https://redis.invalid').length,3);
  assert.ok(!JSON.stringify(r.body).includes('synthetic-test-only'));
 });
 test('status exposes availability only and requires actual release configuration',()=>{
