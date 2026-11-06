@@ -37,8 +37,14 @@ test('valid signed session reserves quota before one bounded provider request',a
  const payload=JSON.parse(calls[modelIndex].options.body);assert.equal(payload.max_tokens,700);assert.equal(payload.store,false);assert.equal(payload.model,'gpt-4.1-mini-2025-04-14');assert.ok(calls[modelIndex].options.signal);
 });
 test('every absent or false release flag prevents all quota and model calls',async()=>{
- for(const flag of gates.FLAGS){process.env[flag]='false';calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));process.env[flag]='true';}
- delete process.env.AD_ASTRA_SECURITY_REVIEW_APPROVED;assert.equal((await request()).statusCode,503);
+ for(const flag of gates.FLAGS){
+  for(const value of [undefined,'false']){
+   if(value===undefined)delete process.env[flag];else process.env[flag]=value;
+   calls=[];const r=await request();assert.equal(r.statusCode,503,flag);assert.equal(r.body.error,'release_not_ready');
+   assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')),flag);
+  }
+  process.env[flag]='true';
+ }
 });
 test('signed customer entitlement is required before quota or model dispatch',async()=>{
  for(const value of [undefined,null,[],['research'],true,'live_ai']){

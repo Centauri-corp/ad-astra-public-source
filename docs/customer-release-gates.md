@@ -8,9 +8,15 @@ As checked on 2026-11-06, `https://adastra.global/platform/` returns HTTP 302 to
 
 ## Implemented application guards
 
-The public AI endpoint verifies a short-lived Clerk-signed token, requires the exact `ad_astra_entitlements` array to contain `live_ai`, and checks release flags before reserving quota or invoking a model. A missing, misspelled or browser-forged claim fails closed. The new `AD_ASTRA_CUSTOMER_ENTITLEMENTS_VERIFIED=true` flag is an operator attestation, not a substitute for per-customer entitlement. Its absence keeps `/api/status` unavailable.
+The public AI endpoint verifies a short-lived Clerk-signed token, requires the exact `ad_astra_entitlements` array to contain `live_ai`, and checks release flags before reserving quota or invoking a model. A missing, misspelled or browser-forged claim fails closed. `AD_ASTRA_CUSTOMER_ENTITLEMENTS_VERIFIED=true` and `AD_ASTRA_STRIPE_BILLING_VERIFIED=true` are operator attestations, not substitutes for a per-customer entitlement. Either flag being absent keeps `/api/status` unavailable.
 
 The trusted identity provider must provision `ad_astra_entitlements` from server-controlled customer access records, never from client-writable metadata. Confirm how upgrades, expiry, refunds, cancellation and organization membership change that claim. The present public source has no billing webhook, entitlement synchronization or live two-customer acceptance evidence. Until those exist, leave the new flag unset or false.
+
+## Stripe billing hold
+
+The AD ASTRA Stripe account was checked on 2026-11-06: it had two live-mode monthly prices, no subscriptions, and no webhook endpoints. Both products were labelled `sandbox` in metadata and described as sandbox-only despite `livemode=true`. The Supabase project `ad-astra-intelligence-os` had zero subscriptions and zero entitlement events, and `billing_live` was false. Its deployed `stripe-webhook` handles only `invoice.paid` for a pre-existing subscription mapping and records a receipt; it does not provision a customer or entitlement. No checkout or live sale should be enabled on this evidence.
+
+Keep `AD_ASTRA_STRIPE_BILLING_VERIFIED` unset or false until a separate Stripe sandbox has exercised an authenticated customer-to-tenant binding, subscription creation and renewal, failed payment, cancellation, refund, dispute and fraud-warning handling, idempotent webhook delivery, entitlement issuance/revocation, and stale-token expiry. The production webhook endpoint must be installed and its signature-verified event delivery confirmed before setting the flag true. Live prices and tax handling need product-owner review; Stripe Tax must not be assumed to collect tax without applicable registrations. Never place Stripe or Supabase secret keys in browser code or a committed file.
 
 ## Promotion sequence
 
