@@ -7,7 +7,7 @@ const jwk={...pair.publicKey.export({format:'jwk'}),kid:'test-key',use:'sig',alg
 let calls=[],redisResult=[1,11,3600],providerStatus=200;
 function token(overrides={},head={}){
  const now=Math.floor(Date.now()/1000);
- const claims={iss:'https://clerk.adastra.global',aud:'ad-astra-workspace',azp:'https://adastra.global',sub:'user_testA',sid:'sess_testA',iat:now,nbf:now-1,exp:now+60,...overrides};
+ const claims={iss:'https://clerk.adastra.global',aud:'ad-astra-workspace',azp:'https://adastra.global',sub:'user_testA',sid:'sess_testA',iat:now,nbf:now-1,exp:now+60,ad_astra_entitlements:['live_ai'],...overrides};
  const parts=[{alg:'RS256',kid:jwk.kid,typ:'JWT',...head},claims].map(x=>Buffer.from(JSON.stringify(x)).toString('base64url'));
  return parts.join('.')+'.'+crypto.sign('RSA-SHA256',Buffer.from(parts.join('.')),pair.privateKey).toString('base64url');
 }
@@ -39,6 +39,19 @@ test('valid signed session reserves quota before one bounded provider request',a
 test('every absent or false release flag prevents all quota and model calls',async()=>{
  for(const flag of gates.FLAGS){process.env[flag]='false';calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));process.env[flag]='true';}
  delete process.env.AD_ASTRA_SECURITY_REVIEW_APPROVED;assert.equal((await request()).statusCode,503);
+});
+test('signed customer entitlement is required before quota or model dispatch',async()=>{
+ for(const value of [undefined,null,[],['research'],true,'live_ai']){
+  calls=[];
+  const r=await request({headers:{authorization:'Bearer '+token({ad_astra_entitlements:value})}});
+  assert.equal(r.statusCode,403);
+  assert.equal(r.body.error,'entitlement_required');
+  assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));
+ }
+ const parts=token({ad_astra_entitlements:[]}).split('.');
+ const body=JSON.parse(Buffer.from(parts[1],'base64url'));body.ad_astra_entitlements=['live_ai'];
+ parts[1]=Buffer.from(JSON.stringify(body)).toString('base64url');
+ assert.equal((await request({headers:{authorization:'Bearer '+parts.join('.')}})).statusCode,401);
 });
 test('auth mode cannot become public, absent auth configuration denies',async()=>{
  for(const value of ['public','disabled','']){process.env.AD_ASTRA_ACCESS_MODE=value;assert.equal((await request()).statusCode,503);}
@@ -112,4 +125,32 @@ test('session handshake verifies identity without model or quota access',async()
   assert.equal(res.statusCode,code);assert.equal(res.body.authenticated,code===200);assert.deepEqual(Object.keys(res.body),['authenticated']);
  }
  assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));
+});
+test('browser session verification distinguishes invalid identity from service outage',async()=>{
+ const context={window:{},URL,URLSearchParams,location:{origin:'https://adastra.global'},AbortSignal,fetch:async()=>({ok:false,status:401})};
+ vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../public/auth-navigation.js'),'utf8'),context);
+ const clerk={session:{getToken:async()=>token()}};
+ await assert.rejects(context.window.adAstraVerifySession(clerk),{message:'authentication_invalid'});
+ context.fetch=async()=>({ok:false,status:503});
+ await assert.rejects(context.window.adAstraVerifySession(clerk),{message:'verification_unavailable'});
+ context.fetch=async()=>({ok:true,status:200,json:async()=>({authenticated:true})});
+ await context.window.adAstraVerifySession(clerk);
+});
+test('sign-in redirects only a server-verified session and offers recovery otherwise',async()=>{
+ const script=fs.readFileSync(path.join(__dirname,'../public/sign-in/app.js'),'utf8');
+ async function render(verified,session=true){
+  const elements=Object.fromEntries(['sign-in-status','sign-in','sign-in-reset','sign-in-retry'].map(id=>[id,{hidden:true,events:{},addEventListener(event,fn){this.events[event]=fn;}}]));
+  const navigations=[];let mounted=0,loads=0,signOuts=0;
+  const location={search:'?return=%2Fknowledge%2F',replace(value){navigations.push(value);},reload(){loads++;}};
+  const clerk={session:session?{getToken:async()=>token()}:null,load:async()=>{},mountSignIn:()=>{mounted++;},signOut:async()=>{signOuts++;}};
+  const context={window:{Clerk:clerk,adAstraReturnPath:()=>'/knowledge/',adAstraVerifySession:async()=>{if(verified)throw new Error(verified);}},location,document:{getElementById:id=>elements[id]},URLSearchParams,console};
+  vm.runInNewContext(script,context);
+  await new Promise(resolve=>setImmediate(resolve));
+  return {elements,navigations,mounted,loads:()=>loads,signOuts:()=>signOuts};
+ }
+ const valid=await render(null);assert.deepEqual(valid.navigations,['/knowledge/']);assert.equal(valid.mounted,0);
+ const invalid=await render('authentication_invalid');assert.equal(invalid.navigations.length,0);assert.equal(invalid.elements['sign-in-reset'].hidden,false);
+ await invalid.elements['sign-in-reset'].events.click();assert.equal(invalid.signOuts(),1);assert.equal(invalid.loads(),1);
+ const unavailable=await render('verification_unavailable');assert.equal(unavailable.navigations.length,0);assert.equal(unavailable.elements['sign-in-reset'].hidden,true);assert.equal(unavailable.elements['sign-in-retry'].hidden,false);
+ const newUser=await render(null,false);assert.equal(newUser.mounted,1);assert.equal(newUser.navigations.length,0);
 });

@@ -3,6 +3,7 @@ const crypto = require('node:crypto');
 const { authenticateRequest } = require('../lib/auth');
 const { reserve, LIMIT } = require('../lib/quota');
 const { ready } = require('../lib/release-gates');
+const { hasLiveAiEntitlement } = require('../lib/entitlements');
 const MODES = Object.freeze({ ask: 'clarify the question and give a useful next step', research: 'separate claims, evidence, uncertainty and a research path', create: 'develop a concept with options, constraints and a small experiment', learn: 'explain progressively with an example and a check for understanding', explore: 'compare possibilities, constraints and what would falsify each one' });
 const MAX_BODY = 14000;
 function sameOrigin(req) {
@@ -48,6 +49,7 @@ module.exports = async function ask(req, res) {
   const auth = await authenticateRequest(req);
   if (!auth.ok) return reply(auth.status,{error:auth.error,message:auth.status === 401 ? 'Please sign in again to continue.' : 'Secure sign-in is temporarily unavailable.'});
   if (!ready()) return reply(503,{error:'release_not_ready',message:'The live engine is paused while release checks are completed.'},{'Retry-After':300});
+  if (!hasLiveAiEntitlement(auth.claims)) return reply(403,{error:'entitlement_required',message:'Live AI access is not available for this account.'});
   let quota;
   try { quota = await reserve(auth.claims); } catch { return reply(503,{error:'quota_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60}); }
   const headers = {'X-RateLimit-Limit':LIMIT,'X-RateLimit-Remaining':quota.remaining,'X-Ad-Astra-Quota-Mode':'durable'};
