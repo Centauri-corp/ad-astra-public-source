@@ -232,10 +232,11 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     'uniform float u_time;',
     'uniform float u_tier;',
     'uniform float u_activity;',
+    'uniform float u_amplitude;',
     'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
     'float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hash(i),hash(i+vec2(1.0,0.0)),f.x),mix(hash(i+vec2(0.0,1.0)),hash(i+vec2(1.0)),f.x),f.y);}',
     'float fbm(vec2 p){float v=0.0,a=0.5;mat2 r=mat2(0.88,0.48,-0.48,0.88);for(int i=0;i<4;i++){v+=a*noise(p);p=r*p*2.0+17.0;a*=0.5;}return v;}',
-    'void main(){vec2 p=(gl_FragCoord.xy-0.5*u_resolution.xy)/u_resolution.y;float speed=u_tier==3.0?1.8:(u_tier==2.0?1.15:0.65);float t=u_time*speed;vec2 q=vec2(fbm(p+vec2(t*.08)),fbm(p+vec2(3.2-t*.05)));float f=fbm(p+q*.8+u_activity*.08);vec3 base=vec3(.004,.012,.024);vec3 cyan=vec3(.0,.46,.58);vec3 green=vec3(.08,.56,.42);vec3 violet=vec3(.48,.18,.78);vec3 accent=u_tier==1.0?cyan:(u_tier==2.0?green:violet);float glow=smoothstep(.35,.85,f)*(0.34+u_activity*.1);float ripple=u_activity*.14/(length(p)+.35);vec3 champagne=vec3(.91,.79,.56);vec3 color=mix(base,accent,glow)+champagne*ripple*.16+vec3(.05,.16,.24)*ripple;gl_FragColor=vec4(color,1.0);}'
+    'void main(){vec2 p=(gl_FragCoord.xy-0.5*u_resolution.xy)/u_resolution.y;float speed=u_tier==3.0?1.8:(u_tier==2.0?1.15:0.65);float t=u_time*speed;float voice=u_amplitude*(.18+.12*sin(t*7.0));vec2 q=vec2(fbm(p+vec2(t*.08+voice)),fbm(p+vec2(3.2-t*.05-voice)));float f=fbm(p+q*.8+u_activity*.08+voice);vec3 base=vec3(.004,.012,.024);vec3 cyan=vec3(.0,.46,.58);vec3 green=vec3(.08,.56,.42);vec3 violet=vec3(.48,.18,.78);vec3 accent=u_tier==1.0?cyan:(u_tier==2.0?green:violet);float glow=smoothstep(.35,.85,f)*(0.34+u_activity*.1+u_amplitude*.22);float ripple=(u_activity*.14+u_amplitude*.28)/(length(p)+.35);vec3 champagne=vec3(.91,.79,.56);vec3 color=mix(base,accent,glow)+champagne*ripple*.16+vec3(.05,.16,.24)*ripple;gl_FragColor=vec4(color,1.0);}'
   ].join('\n');
   function shader(type, source) {
     const item = gl.createShader(type); if (!item) return null;
@@ -257,11 +258,37 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     time: gl.getUniformLocation(program, 'u_time'),
     tier: gl.getUniformLocation(program, 'u_tier'),
     activity: gl.getUniformLocation(program, 'u_activity')
+    ,amplitude: gl.getUniformLocation(program, 'u_amplitude')
   };
   function resize() {
     const rect = section.getBoundingClientRect(), ratio = Math.min(devicePixelRatio || 1, 1.5);
     const width = Math.max(1, Math.floor(rect.width * ratio)), height = Math.max(1, Math.floor(rect.height * ratio));
     if (canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; gl.viewport(0, 0, width, height); }
+  }
+  let audioContext = null, audioAnalyser = null, audioStream = null, audioData = null, amplitude = 0;
+  async function startAudioMeter() {
+    if (audioAnalyser || !navigator.mediaDevices?.getUserMedia) return false;
+    try {
+      audioStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false });
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      audioAnalyser = audioContext.createAnalyser(); audioAnalyser.fftSize = 512; audioAnalyser.smoothingTimeConstant = .78;
+      audioData = new Uint8Array(audioAnalyser.fftSize);
+      audioContext.createMediaStreamSource(audioStream).connect(audioAnalyser);
+      return true;
+    } catch { audioStream?.getTracks().forEach(track => track.stop()); audioStream = null; return false; }
+  }
+  function stopAudioMeter() {
+    audioStream?.getTracks().forEach(track => track.stop()); audioStream = null;
+    audioAnalyser?.disconnect(); audioAnalyser = null; audioData = null;
+    audioContext?.close(); audioContext = null; amplitude = 0;
+  }
+  function sampleAudio() {
+    if (!audioAnalyser || !audioData || reducedMotion.matches) { amplitude *= .9; return amplitude; }
+    audioAnalyser.getByteTimeDomainData(audioData);
+    let sum = 0; for (const value of audioData) { const normalized = (value - 128) / 128; sum += normalized * normalized; }
+    const rms = Math.sqrt(sum / audioData.length);
+    amplitude += (Math.min(1, rms * 4.6) - amplitude) * .18;
+    return amplitude;
   }
   function render(now) {
     frame = requestAnimationFrame(render);
@@ -274,6 +301,7 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     gl.uniform1f(uniforms.time, reducedMotion.matches ? 0 : (now - started) / 1000);
     gl.uniform1f(uniforms.tier, tier);
     gl.uniform1f(uniforms.activity, activity);
+    gl.uniform1f(uniforms.amplitude, sampleAudio());
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   }
   function setTier(next) {
@@ -324,10 +352,12 @@ document.getElementById('save-launch').addEventListener('click', async () => {
       setVoiceState(classifyVoice(transcript), transcript);
     };
     recognition.onerror = () => { voiceButton.setAttribute('aria-pressed', 'false'); setVoiceState('idle'); voiceHelp.textContent = 'No audio left this browser. Try the local visual prompt above.'; };
-    recognition.onend = () => voiceButton.setAttribute('aria-pressed', 'false');
-    voiceButton?.addEventListener('click', () => {
+    recognition.onend = () => { voiceButton.setAttribute('aria-pressed', 'false'); stopAudioMeter(); };
+    voiceButton?.addEventListener('click', async () => {
       if (voiceButton.getAttribute('aria-pressed') === 'true') { recognition.stop(); setVoiceState('idle'); return; }
-      try { recognition.start(); } catch { setVoiceState('idle'); }
+      const audioReady = await startAudioMeter();
+      voiceHelp.textContent = audioReady ? 'LOCAL AUDIO REACTIVITY / amplitude drives the neural field in this browser.' : 'Microphone access was unavailable. Voice intent can still use the browser speech interface.';
+      try { recognition.start(); } catch { stopAudioMeter(); setVoiceState('idle'); }
     });
   }
   if ('IntersectionObserver' in window) new IntersectionObserver(entries => { visible = entries.some(entry => entry.isIntersecting); }, { threshold: .01 }).observe(section);
