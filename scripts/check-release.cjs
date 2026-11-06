@@ -26,7 +26,8 @@ const manifest=JSON.parse(fs.readFileSync(path.join(root,'public/release-manifes
 const experience=JSON.parse(fs.readFileSync(path.join(root,'public/experience-manifest.json')));
 assert.equal(manifest.publicLaunchEnabled,false);assert.equal(manifest.engineAvailable,false);
 assert.equal(manifest.customerPortal,'authenticated-preview');
-assert.equal(manifest.customerAiModel,'gpt-4.1-mini-2025-04-14');
+assert.equal(manifest.customerAiModel,'astra-lumen');
+assert.equal(manifest.connectedPublicModelCount,1);
 assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
 assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','approach','experiences','horizon','company','signature']);
 assert.deepEqual(experience.seo.indexableRoutes,['/']);

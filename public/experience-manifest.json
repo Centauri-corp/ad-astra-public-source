@@ -8,6 +8,7 @@
     "threeD": { "privatePreviewOnly": true, "fallback": "static-neural-sphere-with-alt-text", "reducedMotion": true },
     "neuralArt": {
       "publicModelGeneratedAssets": false,
+      "publicStaticAssets": true,
       "textEmbeddedInImages": false,
       "publicPreview": "research-direction-only",
       "hybridPipeline": ["proxy-form", "camera-motion", "neural-layer-concept", "human-review"]
@@ -42,7 +43,7 @@
     "company": "public-versioned",
     "productsAndServices": "public-market-direction",
     "customerPortal": "authenticated-preview",
-    "neuralArtwork": "private-review-only",
+    "neuralArtwork": "public-static-preview-private-generation",
     "video": "public-motion-study-premiere-gated"
   }
 }
