@@ -4,6 +4,12 @@
   "publicSafe": true,
   "assets": [
     {
+      "id": "astra-lumen-neural-concierge",
+      "path": "/assets/astra-lumen-neural-concierge.png",
+      "role": "public neural concierge artwork",
+      "alt": "Cinematic side profile of a luminous neural figure with cyan rim light, violet pathways, and a warm gold brain core"
+    },
+    {
       "id": "astra-lumen-neural-brain",
       "path": "/assets/astra-lumen-neural-brain.png",
       "role": "hero neural artwork",
