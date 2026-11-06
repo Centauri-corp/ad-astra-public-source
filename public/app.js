@@ -286,6 +286,50 @@ document.getElementById('save-launch').addEventListener('click', async () => {
   tabs.forEach(tab => tab.addEventListener('click', () => setTier(Number(tab.dataset.tier))));
   input?.addEventListener('input', () => { targetActivity = Math.min(3, .35 + input.value.length / 45); activityLabel.textContent = 'LOCAL SIMULATION / RIPPLE INTENSITY ' + Math.round(targetActivity * 33) + '%'; });
   form?.addEventListener('submit', event => { event.preventDefault(); targetActivity = 3; activityLabel.textContent = 'LOCAL SIMULATION / RIPPLE REGISTERED'; setTimeout(() => { activityLabel.textContent = 'LOCAL SIMULATION / NO PROMPT IS SENT'; }, 1400); });
+  const voiceButton = document.getElementById('voice-command');
+  const voiceState = document.getElementById('voice-state');
+  const voiceHelp = document.getElementById('voice-help');
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const voiceStates = {
+    idle: {label: 'VOICE CONCIERGE / IDLE', intensity: .15, message: 'LOCAL VISUAL / IDLE FIELD'},
+    listening: {label: 'VOICE CONCIERGE / LISTENING', intensity: .65, message: 'LOCAL VOICE / LISTENING FOR A COMMAND'},
+    thinking: {label: 'VOICE CONCIERGE / THINKING', intensity: 1.8, message: 'LOCAL VISUAL / PROCESSING STATE'},
+    speaking: {label: 'VOICE CONCIERGE / SPEAKING', intensity: 2.6, message: 'LOCAL VISUAL / OUTPUT STATE'}
+  };
+  let recognition = null, voiceTimer = 0;
+  function setVoiceState(next, transcript = '') {
+    const state = voiceStates[next] || voiceStates.idle;
+    section.dataset.voiceState = next;
+    voiceState.textContent = state.label;
+    activityLabel.textContent = transcript ? `${state.message} / “${transcript.slice(0, 54)}”` : state.message;
+    targetActivity = Math.max(targetActivity, state.intensity);
+    if (next !== 'idle') { clearTimeout(voiceTimer); voiceTimer = setTimeout(() => setVoiceState('idle'), 3600); }
+  }
+  function classifyVoice(text) {
+    const valueText = String(text || '').toLowerCase();
+    if (/\b(idle|pause|stop|quiet)\b/.test(valueText)) return 'idle';
+    if (/\b(listen|wake|hello|activate)\b/.test(valueText)) return 'listening';
+    if (/\b(speak|answer|respond|output)\b/.test(valueText)) return 'speaking';
+    return 'thinking';
+  }
+  if (!SpeechRecognition) {
+    voiceButton?.setAttribute('disabled', '');
+    voiceHelp.textContent = 'Voice commands are unavailable in this browser. Use the local visual prompt above.';
+  } else {
+    recognition = new SpeechRecognition();
+    recognition.continuous = false; recognition.interimResults = true; recognition.lang = 'en-US';
+    recognition.onstart = () => { voiceButton.setAttribute('aria-pressed', 'true'); setVoiceState('listening'); };
+    recognition.onresult = event => {
+      const transcript = Array.from(event.results).map(result => result[0]?.transcript || '').join(' ').trim();
+      setVoiceState(classifyVoice(transcript), transcript);
+    };
+    recognition.onerror = () => { voiceButton.setAttribute('aria-pressed', 'false'); setVoiceState('idle'); voiceHelp.textContent = 'No audio left this browser. Try the local visual prompt above.'; };
+    recognition.onend = () => voiceButton.setAttribute('aria-pressed', 'false');
+    voiceButton?.addEventListener('click', () => {
+      if (voiceButton.getAttribute('aria-pressed') === 'true') { recognition.stop(); setVoiceState('idle'); return; }
+      try { recognition.start(); } catch { setVoiceState('idle'); }
+    });
+  }
   if ('IntersectionObserver' in window) new IntersectionObserver(entries => { visible = entries.some(entry => entry.isIntersecting); }, { threshold: .01 }).observe(section);
   if (reducedMotion.matches) { targetActivity = .2; }
   resize(); render(performance.now());
