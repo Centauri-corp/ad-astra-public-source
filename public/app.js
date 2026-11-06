@@ -269,7 +269,9 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     resize();
     targetActivity *= 0.96; activity += (targetActivity - activity) * 0.12;
     gl.uniform2f(uniforms.resolution, canvas.width, canvas.height);
-    gl.uniform1f(uniforms.time, (now - started) / 1000);
+    // Keep the procedural field genuinely still for reduced-motion users;
+    // disabling CSS animations alone does not stop shader time from advancing.
+    gl.uniform1f(uniforms.time, reducedMotion.matches ? 0 : (now - started) / 1000);
     gl.uniform1f(uniforms.tier, tier);
     gl.uniform1f(uniforms.activity, activity);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
