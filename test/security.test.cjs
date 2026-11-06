@@ -1,6 +1,7 @@
 'use strict';
 const {test,beforeEach,after}=require('node:test'), assert=require('node:assert/strict'), crypto=require('node:crypto'), vm=require('node:vm'),fs=require('node:fs'),path=require('node:path');
 const ask=require('../api/ask'),status=require('../api/status'),auth=require('../lib/auth'),quota=require('../lib/quota'),gates=require('../lib/release-gates');
+const models=require('../api/models'),catalog=require('../lib/model-catalog');
 const originalEnv={...process.env},originalFetch=global.fetch;
 const pair=crypto.generateKeyPairSync('rsa',{modulusLength:2048});
 const jwk={...pair.publicKey.export({format:'jwk'}),kid:'test-key',use:'sig',alg:'RS256'};
@@ -98,6 +99,20 @@ test('provider 429 yields safe 503 without retry or refund',async()=>{
 });
 test('status exposes availability only and requires actual release configuration',()=>{
  process.env.AD_ASTRA_SECURITY_REVIEW_APPROVED='false';const r=response();status({method:'GET'},r);assert.deepEqual(Object.keys(r.body).sort(),['available','message']);assert.equal(r.body.available,false);
+});
+test('public model catalog exposes stable names without provider details',()=>{
+ const r=response();models({method:'GET'},r);assert.equal(r.statusCode,200);assert.equal(r.headers['cache-control'],'public, max-age=300, stale-while-revalidate=3600');
+ const body=r.body;assert.equal(body.family,'Ad Astra');assert.equal(body.models.length,1);assert.deepEqual(body.models.map(m=>m.id),catalog.MODELS.map(m=>m.id));
+ for(const model of body.models){assert.ok(model.name.startsWith('Astra '));assert.ok(!('provider' in model));assert.ok(!('apiKey' in model));}
+});
+test('public agent surface is present and portal routes redirect away',()=>{
+ const agent=fs.readFileSync(path.join(__dirname,'../public/agent/index.html'),'utf8');
+ assert.match(agent,/Astra\s*<br><em>Lumen\.<\/em>/);
+ assert.match(agent,/Start with curiosity/);
+ const vercel=JSON.parse(fs.readFileSync(path.join(__dirname,'../vercel.json'),'utf8'));
+ assert.deepEqual(vercel.redirects.map(r=>[r.source,r.destination]),[
+  ['/platform/:path*','/'],['/knowledge/:path*','/agent/'],['/sign-in/:path*','/']
+ ]);
 });
 test('return paths reject external URLs and preserve approved mode navigation',()=>{
  const context={window:{},URL,location:{origin:'https://adastra.global'}};vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../public/auth-navigation.js'),'utf8'),context);

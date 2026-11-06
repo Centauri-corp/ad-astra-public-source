@@ -31,3 +31,23 @@ dialog{width:min(1000px,94vw);border:1px solid #435a6a;border-radius:5px;padding
 .brand-wordmark{font-family:Manrope,Arial,sans-serif;font-size:15px;font-weight:500;letter-spacing:4.5px;color:#edf4fa;white-space:nowrap}
 @media(max-width:900px){.brand{gap:9px}.brand-wordmark{font-size:13px;letter-spacing:3.5px}}
 @media(max-width:640px){.brand{gap:7px}.brand-symbol{width:41px;height:36px}.brand .brand-symbol img{width:140px;height:52px;top:-14.6px}.brand-wordmark{font-size:11px;letter-spacing:2.9px}}
+
+/* Astra Lumen neural artwork */
+.neural-hero{object-position:68% center;filter:saturate(1.08) contrast(1.08)}
+.neural-brain-visual{overflow:hidden;background:radial-gradient(ellipse at center,#2b658b8c 0%,#0b2232 42%,transparent 72%)}
+.neural-brain-shell{position:absolute;left:50%;top:50%;width:230px;height:175px;transform:translate(-50%,-50%) rotate(-8deg);border:2px solid #cbe9f2b8;border-radius:48% 52% 45% 55%;box-shadow:inset 0 0 24px #6edcff80,0 0 40px #55d9ff55}
+.neural-brain-shell:before,.neural-brain-shell:after{content:'';position:absolute;inset:14px;border:1px solid #70ddff9c;border-radius:45% 55% 50% 48%;transform:rotate(17deg)}
+.neural-brain-shell:after{inset:28px;border-color:#e0c28caa;transform:rotate(-26deg)}
+.neural-synapses{position:absolute;left:50%;top:50%;width:170px;height:120px;transform:translate(-50%,-50%);background:radial-gradient(circle at 18% 42%,#9cf1ff 0 2px,transparent 3px),radial-gradient(circle at 42% 22%,#fff0c9 0 2px,transparent 3px),radial-gradient(circle at 72% 36%,#9cf1ff 0 2px,transparent 3px),radial-gradient(circle at 58% 76%,#9cf1ff 0 2px,transparent 3px),radial-gradient(circle at 85% 72%,#fff0c9 0 2px,transparent 3px);opacity:.9;box-shadow:0 0 30px #55d9ff55;animation:neural-pulse 4s ease-in-out infinite}
+.neural-brain-glow{position:absolute;left:50%;top:50%;width:120px;height:100px;transform:translate(-50%,-50%);border-radius:50%;background:#e8c98766;filter:blur(24px);animation:neural-pulse 4s ease-in-out infinite alternate}
+@keyframes neural-pulse{0%,100%{opacity:.65;transform:translate(-50%,-50%) scale(.96)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+.paused .neural-synapses,.paused .neural-brain-glow,.motion-suspended .neural-synapses,.motion-suspended .neural-brain-glow{animation-play-state:paused}
+.neural-brain-shell{transform:translate(-50%,-50%) rotate(-8deg) rotateX(var(--brain-tilt-y,0deg)) rotateY(var(--brain-tilt-x,0deg));transition:transform .18s ease-out}
+.neural-brain-visual[data-sensor="active"] .neural-synapses{box-shadow:0 0 42px #55d9ff99}
+.neural-brain-visual:before{content:'PUBLIC NEURAL INTELLIGENCE';position:absolute;top:18px;left:22px;color:#a9dff0;font-size:7px;letter-spacing:2.2px;z-index:3}
+.neural-brain-visual:after{content:'ASTRA LUMEN / 01';position:absolute;right:22px;bottom:22px;color:#d9c3a0;font-size:7px;letter-spacing:1.8px;z-index:3}
+.neural-brain-shell{background:linear-gradient(115deg,#dff8ff22 0 42%,#c9a86a30 43% 56%,#7ee7ff20 57%);}
+.neural-brain-shell:before{box-shadow:inset 26px 0 0 #62dcff12,inset -26px 0 0 #f1d39b18}
+.neural-brain-visual .knowledge-core>span{color:#a9e8ff;letter-spacing:4px}
+.neural-brain-visual .knowledge-core strong{color:#f4ead6;text-shadow:0 0 18px #7ddfff80}
+.neural-brain-visual .knowledge-core small{color:#93c4d7}

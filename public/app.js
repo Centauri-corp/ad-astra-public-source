@@ -4,9 +4,9 @@
 const modes = {
   ask: {number:'01 / ASK', title:['Find the question','behind the question.'], description:'Move from a broad idea to a focused inquiry. Explore assumptions, connect context and identify what is worth investigating next.', example:'“What would change if energy were abundant?”', image:'adobe-curiosity.jpg', alt:'A hand sketches connected ideas in a notebook beside a luminous conceptual interface'},
   research: {number:'02 / RESEARCH', title:['See the evidence.','Connect the ideas.'], description:'Bring different perspectives into view. Our research direction emphasizes sources, uncertainty and connections across disciplines.', example:'“How do energy, water and agriculture shape one another?”', image:'runway-curiosity-notes.jpg', alt:'Handwritten research notes in an open notebook outdoors'},
-  create: {number:'03 / CREATE', title:['Give a bold idea','a clearer shape.'], description:'Explore alternative approaches, develop a concept and find new ways to express it. Human intention guides the creative process.', example:'“Imagine a learning environment built around curiosity.”', image:'ad-astra-runway-orbital-poster.jpg', alt:'A luminous sphere with cyan and gold orbital paths against a dark galaxy'},
-  learn: {number:'04 / LEARN', title:['Understand more.','Keep going further.'], description:'Approach a complex subject through questions, explanations and connections. Build understanding at a pace that supports deeper thought.', example:'“Explain orbital mechanics through everyday experiences.”', image:'runway-orbital-intelligence.jpg', alt:'A luminous sphere with orbital paths representing connected knowledge'},
-  explore: {number:'05 / EXPLORE', title:['Look beyond','the familiar.'], description:'Follow an idea across science, technology and human experience. Discover new perspectives and questions worth pursuing.', example:'“What could living beyond Earth teach us about life here?”', image:'ad-astra-runway-horizon-poster.jpg', alt:'Golden connection arcs above Earth’s blue horizon at dawn'}
+  create: {number:'03 / CREATE', title:['Give a bold idea','a clearer shape.'], description:'Explore alternative approaches, develop a concept and find new ways to express it. Human intention guides the creative process.', example:'“Imagine a learning environment built around curiosity.”', image:'astra-lumen-neural-profile.png', alt:'A luminous neural profile with connected cyan and violet pathways'},
+  learn: {number:'04 / LEARN', title:['Understand more.','Keep going further.'], description:'Approach a complex subject through questions, explanations and connections. Build understanding at a pace that supports deeper thought.', example:'“Explain orbital mechanics through everyday experiences.”', image:'astra-lumen-neural-brain.png', alt:'A translucent neural brain with cyan synapses and gold orbital paths'},
+  explore: {number:'05 / EXPLORE', title:['Look beyond','the familiar.'], description:'Follow an idea across science, technology and human experience. Discover new perspectives and questions worth pursuing.', example:'“What could living beyond Earth teach us about life here?”', image:'astra-lumen-neural-horizon.png', alt:'A neural intelligence lattice rising over an illuminated Earth horizon'}
 };
 const tabs = [...document.querySelectorAll('[role="tab"]')];
 const experienceImage = document.getElementById('experience-image');
@@ -146,6 +146,26 @@ approachSteps.forEach(step => step.addEventListener('toggle', () => {
   highlightStep(approachSteps.find(other => other.open)?.dataset.step);
 }));
 highlightStep('question');
+
+// The public neural artwork responds locally to visitor motion. No sensor data leaves the page.
+const neuralVisual = document.querySelector('.neural-brain-visual');
+if (neuralVisual) {
+  const setNeuralMotion = (x, y) => {
+    const tiltX = Math.max(-9, Math.min(9, x * 9));
+    const tiltY = Math.max(-7, Math.min(7, y * 7));
+    neuralVisual.style.setProperty('--brain-tilt-x', `${tiltX}deg`);
+    neuralVisual.style.setProperty('--brain-tilt-y', `${-tiltY}deg`);
+    neuralVisual.dataset.sensor = 'active';
+  };
+  neuralVisual.addEventListener('pointermove', event => {
+    const rect = neuralVisual.getBoundingClientRect();
+    setNeuralMotion((event.clientX - rect.left) / rect.width * 2 - 1, (event.clientY - rect.top) / rect.height * 2 - 1);
+  }, {passive:true});
+  neuralVisual.addEventListener('pointerleave', () => setNeuralMotion(0, 0));
+  if ('DeviceOrientationEvent' in window && !reducedMotion.matches) {
+    window.addEventListener('deviceorientation', event => setNeuralMotion((event.gamma || 0) / 30, (event.beta || 0) / 45), {passive:true});
+  }
+}
 
 const sceneNames = {arrival:'ARRIVAL', vision:'THE VISION', approach:'OUR APPROACH', experiences:'FIVE WAYS FORWARD', horizon:'NEW HORIZON', company:'THE COMPANY', signature:'STAY CURIOUS'};
 const chapters = [...document.querySelectorAll('.chapter-nav a')];

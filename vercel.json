@@ -9,6 +9,11 @@
       "maxDuration": 30
     }
   },
+  "redirects": [
+    { "source": "/platform/:path*", "destination": "/", "permanent": false },
+    { "source": "/knowledge/:path*", "destination": "/agent/", "permanent": false },
+    { "source": "/sign-in/:path*", "destination": "/", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)",

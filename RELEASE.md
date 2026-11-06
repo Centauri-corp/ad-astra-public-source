@@ -12,6 +12,6 @@ The owner authorized a maximum $10 daily model budget on 23 October 2026. Config
 
 Stage a production build without assigning domains, verify its exact deployment, recheck current alias for concurrent changes, then promote. Preserve the prior deployment and reassert manual domain assignment. The prior live-AI deployment contains weaker controls; use it only for urgent site recovery with AI explicitly disabled and a new tested build if required.
 
-Home is the only indexable route in this repair. Existing customer, market and pricing pages remain accessible with noindex while approval is unresolved. Film stays withheld. Private Sanity datasets and v2 design drafts are not published.
+Home is the only indexable route in this repair. The public Astra Lumen agent surface and supporting market pages remain noindex while approval is unresolved. Customer portal routes redirect away from the public experience. Film stays withheld. Private Sanity datasets and v2 design drafts are not published.
 
 The GitHub verification workflow is source only until pushed to a dedicated verified repository and required branch checks are configured. It deliberately has no production deployment credential.
