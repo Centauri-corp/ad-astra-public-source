@@ -12,5 +12,7 @@ window.adAstraVerifySession = async function(clerk) {
   const token = await clerk.session.getToken();
   if(!token)throw new Error('authentication_required');
   const response = await fetch('/api/session',{method:'POST',credentials:'same-origin',cache:'no-store',signal:AbortSignal.timeout(6000),headers:{Authorization:`Bearer ${token}`,'X-Ad-Astra-Request':'public-v1'}});
-  if(!response.ok || (await response.json()).authenticated!==true)throw new Error('authentication_invalid');
+  if(response.status===401)throw new Error('authentication_invalid');
+  if(!response.ok)throw new Error('verification_unavailable');
+  if((await response.json()).authenticated!==true)throw new Error('authentication_invalid');
 };

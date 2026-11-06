@@ -2,7 +2,9 @@
 const crypto = require('node:crypto');
 const { authenticateRequest } = require('../lib/auth');
 const { reserve, LIMIT } = require('../lib/quota');
+const { begin, complete, release } = require('../lib/idempotency');
 const { ready } = require('../lib/release-gates');
+const { hasLiveAiEntitlement } = require('../lib/entitlements');
 const MODES = Object.freeze({ ask: 'clarify the question and give a useful next step', research: 'separate claims, evidence, uncertainty and a research path', create: 'develop a concept with options, constraints and a small experiment', learn: 'explain progressively with an example and a check for understanding', explore: 'compare possibilities, constraints and what would falsify each one' });
 const MAX_BODY = 14000;
 function sameOrigin(req) {
@@ -24,6 +26,13 @@ async function parseBody(req) {
     chunks.push(bytes);
   }
   return JSON.parse(Buffer.concat(chunks).toString('utf8'));
+}
+function requestFingerprint(prompt, mode, references) {
+  return crypto.createHash('sha256').update(JSON.stringify({
+    question: prompt,
+    mode,
+    references: references === undefined ? null : references,
+  })).digest('hex');
 }
 module.exports = async function ask(req, res) {
   const requestId = crypto.randomUUID(), startedAt = Date.now();
@@ -48,10 +57,32 @@ module.exports = async function ask(req, res) {
   const auth = await authenticateRequest(req);
   if (!auth.ok) return reply(auth.status,{error:auth.error,message:auth.status === 401 ? 'Please sign in again to continue.' : 'Secure sign-in is temporarily unavailable.'});
   if (!ready()) return reply(503,{error:'release_not_ready',message:'The live engine is paused while release checks are completed.'},{'Retry-After':300});
+  if (!hasLiveAiEntitlement(auth.claims)) return reply(403,{error:'entitlement_required',message:'Live AI access is not available for this account.'});
+  const idempotencyKey = String(req.headers?.['idempotency-key'] || '');
+  if (!/^[A-Za-z0-9._~-]{8,200}$/.test(idempotencyKey)) return reply(400,{error:'idempotency_key_required'});
+  const fingerprint = requestFingerprint(prompt, mode, body.references);
+  let idempotency;
+  try { idempotency = await begin(auth.claims, idempotencyKey, fingerprint); }
+  catch (error) {
+    const status = error.message === 'idempotency_conflict' ? 409 : 503;
+    const headers = status === 503 ? {'Retry-After':60} : {};
+    return reply(status,{error:status === 409 ? 'idempotency_conflict' : 'idempotency_unavailable',message:status === 409 ? 'Reuse the same key only for the original request.' : 'The live engine is temporarily unavailable.'},headers);
+  }
+  if (idempotency.status === 'in_progress') return reply(409,{error:'idempotency_in_progress',message:'The original request is still being reconciled. Reuse the same key later.'},{'Retry-After':5});
+  if (idempotency.status === 'replay') return reply(idempotency.record.status,idempotency.record.payload,{...idempotency.record.headers,'Idempotency-Replayed':'true'});
   let quota;
-  try { quota = await reserve(auth.claims); } catch { return reply(503,{error:'quota_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60}); }
+  try { quota = await reserve(auth.claims); }
+  catch {
+    try { await release(auth.claims, idempotencyKey, fingerprint); }
+    catch { return reply(503,{error:'idempotency_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60}); }
+    return reply(503,{error:'quota_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60});
+  }
   const headers = {'X-RateLimit-Limit':LIMIT,'X-RateLimit-Remaining':quota.remaining,'X-Ad-Astra-Quota-Mode':'durable'};
-  if (!quota.allowed) return reply(429,{error:quota.budgetReached ? 'daily_capacity_reached' : 'rate_limit_reached',message:'Request capacity has been reached. Please try again later.'},{...headers,'Retry-After':quota.retryAfter});
+  if (!quota.allowed) {
+    try { await release(auth.claims, idempotencyKey, fingerprint); }
+    catch { return reply(503,{error:'idempotency_unavailable',message:'The live engine is temporarily unavailable.'},{...headers,'Retry-After':60}); }
+    return reply(429,{error:quota.budgetReached ? 'daily_capacity_reached' : 'rate_limit_reached',message:'Request capacity has been reached. Please try again later.'},{...headers,'Retry-After':quota.retryAfter});
+  }
   try {
     const messages = [
       {role:'system',content:`You are Ad Astra, a careful human-directed thinking assistant. Your task is to ${MODES[mode]}. Answer directly in under 500 words. Separate evidence, assumptions and uncertainty. You cannot browse, retrieve private data, remember conversations or take external actions. Never invent citations or claim source verification. For medical, legal or financial decisions provide general information and recommend qualified advice. Decline unsafe instructions.`},
@@ -67,6 +98,14 @@ module.exports = async function ask(req, res) {
     const data = await response.json();
     const answer = data?.choices?.[0]?.message?.content;
     if (typeof answer !== 'string' || !answer.trim()) throw new Error('empty_response');
-    return reply(200,{ok:true,mode,answer:answer.trim().slice(0,6000),disclosure:'AI-generated response. Verify important claims against primary sources.'},headers);
-  } catch { return reply(503,{error:'ai_unavailable',message:'Ad Astra could not complete this response. Please try again later.'},{...headers,'Retry-After':60}); }
+    const payload = {ok:true,mode,answer:answer.trim().slice(0,6000),disclosure:'AI-generated response. Verify important claims against primary sources.'};
+    try { await complete(auth.claims, idempotencyKey, fingerprint, 200, payload, headers); }
+    catch { return reply(503,{error:'idempotency_unavailable',message:'The live engine is temporarily unavailable.'},{...headers,'Retry-After':60}); }
+    return reply(200,payload,headers);
+  } catch {
+    const payload = {error:'ai_unavailable',message:'Ad Astra could not complete this response. Please try again later.'};
+    try { await complete(auth.claims, idempotencyKey, fingerprint, 503, payload, {...headers,'Retry-After':60}); }
+    catch { return reply(503,{error:'idempotency_unavailable',message:'The live engine is temporarily unavailable.'},{...headers,'Retry-After':60}); }
+    return reply(503,payload,{...headers,'Retry-After':60});
+  }
 };

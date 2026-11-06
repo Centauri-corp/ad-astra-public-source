@@ -1,0 +1,25 @@
+name: AD ASTRA production customer QC
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  production-qc:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      AD_ASTRA_QC_ORIGIN: https://adastra.global
+      AD_ASTRA_PRODUCTION_ACTIVATION_VERIFIED: ${{ secrets.AD_ASTRA_PRODUCTION_ACTIVATION_VERIFIED }}
+      AD_ASTRA_RELEASE_COMMIT: ${{ secrets.AD_ASTRA_RELEASE_COMMIT }}
+      AD_ASTRA_RELEASE_EVIDENCE_JSON: ${{ secrets.AD_ASTRA_RELEASE_EVIDENCE_JSON }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: node scripts/production-evidence.cjs --self-test
+      - run: npm run qc:production

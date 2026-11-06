@@ -11,6 +11,7 @@ jobs:
           persist-credentials: false
       - run: node --test test/security.test.cjs
       - run: node scripts/check-release.cjs
+      - run: node scripts/customer-route-smoke.cjs
 # Production remains manual: stage on the exact team/project, run real Redis
 # acceptance during the Vercel build, verify the deployment, then promote.
 # Do not add deployment credentials until repository protections are configured.
