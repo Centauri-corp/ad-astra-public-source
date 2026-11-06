@@ -8,6 +8,7 @@ const path = require('node:path');
 const os = require('node:os');
 const { execFileSync } = require('node:child_process');
 const { spawnSync } = require('node:child_process');
+const { validateProductionEvidence } = require('./production-evidence.cjs');
 
 const root = path.join(__dirname, '..');
 const origin = process.env.AD_ASTRA_QC_ORIGIN || 'https://adastra.global';
@@ -128,20 +129,21 @@ function sourceChecks() {
 }
 
 function evidenceChecks() {
-  const evidence = [
-    ['AD_ASTRA_SUPABASE_SECURITY_ADVISORS_GREEN', 'Supabase security advisors green'],
-    ['AD_ASTRA_SUPABASE_LIFECYCLE_MIGRATION_APPLIED', 'Supabase lifecycle migration applied'],
-    ['AD_ASTRA_STRIPE_WEBHOOK_DELIVERY_VERIFIED', 'Stripe production webhook delivery verified'],
-    ['AD_ASTRA_STRIPE_SANDBOX_LIFECYCLE_ACCEPTED', 'Stripe sandbox lifecycle acceptance passed'],
-    ['AD_ASTRA_CLERK_ENTITLEMENT_ACCEPTED', 'Clerk entitlement provisioning acceptance passed'],
-    ['AD_ASTRA_CUSTOMER_TWO_ACCOUNT_ACCEPTED', 'two-account customer isolation acceptance passed'],
-    ['AD_ASTRA_INDEPENDENT_REVIEW_APPROVED', 'independent human review approved'],
-    ['AD_ASTRA_CRM_PRODUCTION_VERIFIED', 'CRM/Catalyst production verification passed'],
-    ['AD_ASTRA_VERCEL_PREVIEW_REVIEWED', 'exact Vercel preview reviewed'],
-  ];
-  for (const [name, description] of evidence) {
-    if (process.env[name] !== 'true') failures.push(`${description} (${name})`);
+  const raw = process.env.AD_ASTRA_RELEASE_EVIDENCE_JSON;
+  if (!raw) {
+    failures.push('release evidence envelope (AD_ASTRA_RELEASE_EVIDENCE_JSON)');
+    return;
   }
+  let parsed;
+  try { parsed = JSON.parse(raw); }
+  catch (error) {
+    failures.push(`release evidence envelope is invalid JSON (${error.message})`);
+    return;
+  }
+  for (const error of validateProductionEvidence(parsed, {
+    expectedRepository: process.env.GITHUB_REPOSITORY || undefined,
+    expectedCommit: process.env.AD_ASTRA_RELEASE_COMMIT || undefined,
+  })) failures.push(`release evidence: ${error}`);
 }
 
 (async () => {
