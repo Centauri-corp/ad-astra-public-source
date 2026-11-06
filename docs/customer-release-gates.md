@@ -4,7 +4,7 @@ The public site at `adastra.global` is a different Vercel project from the priva
 
 ## Current hold
 
-As checked on 2026-11-06, `https://adastra.global/platform/` returns HTTP 302 to `vercel.com/sso-api` for the protected `ad-astra-daylight` deployment. A customer's Clerk account cannot pass that Vercel deployment-level check. The routing rule `ad-astra-customer-platform-continuity-v517` also rewrites `/customer/` and `/api/customer-platform` to Daylight. The latter contains a paid-access handler that has not been completely audited here. Do not remove the rewrite or open Daylight to the public until that handler is reviewed, preserved or migrated, and tested.
+As checked on 2026-11-06, `https://adastra.global/platform/` is served by the public customer project and returns HTTP 200. Legacy `/customer/` URLs return a same-origin HTTP 308 redirect to `/platform/`. The routing rule `ad-astra-customer-platform-continuity-v517` keeps only `/api/customer-platform` on the protected Daylight deployment; that legacy handler remains behind Vercel SSO and is not the public customer API. Do not open Daylight or route paid AI access through that handler until it is independently reviewed, preserved or migrated, and tested.
 
 ## Implemented application guards
 
@@ -25,4 +25,4 @@ Keep `AD_ASTRA_STRIPE_BILLING_VERIFIED` unset or false until a separate Stripe s
 3. Preserve or migrate the paid-access handler. Stage the route change, test a customer Clerk sign-in at `adastra.global/platform/` without Vercel SSO, and test direct API access, signed-out access and cross-account isolation. Do not alter Foundation SSO.
 4. Stage a production build without assigning the domain; run the full browser → API → entitlement → quota → provider → response flow, budget acceptance and rollback drill. Promote only the tested build after independent review and authorized release approval.
 
-`npm test` and `npm run check` cover code-level guards. Run `npm run smoke:customer-route` to detect a customer path rewritten to Vercel SSO. These checks do not prove live customer sign-in, paid entitlement lifecycle, cross-tenant isolation or provider cost reconciliation.
+`npm test` and `npm run check` cover code-level guards. Run `npm run smoke:customer-route` to verify the public platform, legacy redirect, protected legacy handler boundary and status endpoint. These checks do not prove live customer sign-in, paid entitlement lifecycle, cross-tenant isolation or provider cost reconciliation.

@@ -12,7 +12,12 @@ function check(route) {
   const status = Number(rawStatus);
   const target = redirect ? new URL(redirect, origin) : null;
   const sso = target?.hostname === 'vercel.com' && target.pathname === '/sso-api';
-  const safeRedirect = !target || (target.origin === origin && target.pathname.startsWith('/sign-in/'));
+  if (route === '/api/customer-platform') {
+    assert.ok(sso, `${route}: legacy handler is no longer protected by its Vercel boundary`);
+    console.log(`${route}: protected legacy handler (Vercel SSO)`);
+    return;
+  }
+  const safeRedirect = !target || (target.origin === origin && (target.pathname === '/platform/' || target.pathname.startsWith('/sign-in/')));
   assert.ok(!sso, `${route}: Vercel SSO blocks customer access`);
   assert.ok(status >= 200 && status < 500 && safeRedirect, `${route}: unexpected status or redirect (${status})`);
   console.log(`${route}: HTTP ${status}${target ? ' -> ' + target.pathname : ''}`);
