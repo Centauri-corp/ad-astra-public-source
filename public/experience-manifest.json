@@ -91,18 +91,14 @@
     "nonHomeRoutes": "noindex,follow",
     "sitemap": "homepage-only"
   },
-  "growthAutomation": {
-    "mode": "private-scheduled-read-only-audit",
-    "cadence": "*/15 * * * * UTC",
-    "externalCrmWrites": false,
-    "outboundSends": false,
-    "automaticPublication": false
-  },
   "contentSurfaces": {
     "company": "public-versioned",
     "productsAndServices": "public-market-direction",
-    "customerPortal": "authenticated-preview",
     "neuralArtwork": "public-static-preview-private-generation",
     "video": "public-motion-study-premiere-gated"
+  },
+  "publicBoundary": {
+    "backendOperations": "hidden",
+    "externalWrites": false
   }
 }
