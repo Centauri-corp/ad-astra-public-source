@@ -26,3 +26,20 @@
 @media(max-width:820px){.concierge-grid{grid-template-columns:1fr}}
 @media(max-width:560px){.concierge-preview{margin-top:56px}.concierge-form,.concierge-response{padding:20px}.concierge-form-footer{display:grid;align-items:start}.concierge-form .button{justify-self:start}.concierge-response h3{font-size:24px}}
 @media(prefers-reduced-motion:reduce){.concierge-form textarea:focus-visible{outline-offset:1px}}
+
+.concierge-modes{display:flex;gap:8px;margin:0 0 18px;padding:0;border:0}
+.concierge-modes legend{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.concierge-modes label{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:var(--muted);font-size:12px;cursor:pointer}
+.concierge-modes label:has(input:checked){border-color:rgba(142,232,244,.6);color:var(--cyan);background:rgba(142,232,244,.08)}
+.concierge-modes input{position:absolute;opacity:0;pointer-events:none}
+.concierge-modes label:focus-within{outline:2px solid var(--cyan);outline-offset:2px}
+.agent-neural-art[data-state="thinking"]{border-color:rgba(154,124,255,.7);box-shadow:0 24px 70px rgba(73,47,142,.34),0 0 0 1px rgba(154,124,255,.18)}
+.agent-neural-art[data-state="guided"]{border-color:rgba(242,200,121,.72);box-shadow:0 24px 70px rgba(156,110,48,.28),0 0 0 1px rgba(242,200,121,.16)}
+.agent-neural-art[data-state="thinking"] img{filter:saturate(1.28) contrast(1.1) hue-rotate(8deg)}
+.agent-neural-art[data-state="guided"] img{filter:saturate(1.2) contrast(1.08)}
+.concierge-response[data-state="thinking"]{border-color:rgba(154,124,255,.55)}
+.concierge-response[data-state="thinking"] h3,.concierge-response[data-state="thinking"] p{opacity:.6}
+@media(prefers-reduced-motion:no-preference){.agent-neural-art[data-state="thinking"] img{animation:agent-pulse 1.2s ease-in-out infinite}.agent-neural-art[data-state="guided"]{animation:agent-guided-glow 1.4s ease-out}}
+@keyframes agent-pulse{50%{transform:scale(1.025);filter:saturate(1.35) contrast(1.12) hue-rotate(10deg)}}
+@keyframes agent-guided-glow{0%{box-shadow:0 24px 70px rgba(156,110,48,.1)}100%{box-shadow:0 24px 70px rgba(156,110,48,.28),0 0 0 1px rgba(242,200,121,.16)}}
+@media(prefers-reduced-motion:reduce){.agent-neural-art[data-state="thinking"] img,.agent-neural-art[data-state="guided"]{animation:none}}
