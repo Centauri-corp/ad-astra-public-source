@@ -84,7 +84,23 @@
       "fallback": "static-neural-sphere-with-alt-text",
       "geometry": "spiral-neural-point-cloud",
       "public3dPointCloud": true
-    }
+    },
+    "publicSequence": [
+      "arrival",
+      "neural-lab",
+      "intelligence-layer",
+      "customer-experience",
+      "experiences",
+      "video-sneak",
+      "film",
+      "systems",
+      "vision",
+      "approach",
+      "horizon",
+      "company",
+      "questions",
+      "signature"
+    ]
   },
   "seo": {
     "indexableRoutes": [
