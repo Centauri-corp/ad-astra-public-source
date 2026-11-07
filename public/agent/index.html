@@ -9,6 +9,7 @@
   <link rel="canonical" href="https://adastra.global/agent/">
   <link rel="stylesheet" href="/markets/style.css">
   <link rel="stylesheet" href="/markets/agent.css">
+  <script src="/markets/agent.js" defer></script>
 </head>
 <body>
   <header><a class="brand" href="/">AD ASTRA<span>BEYOND THE EXPECTED</span></a><nav aria-label="Primary"><a href="/markets/">Markets</a><a href="/pricing/">Plans</a><a href="/company/">Company</a></nav></header>
@@ -23,6 +24,23 @@
     </div>
     <section aria-labelledby="agent-capabilities"><div class="phase-heading"><h2 id="agent-capabilities">A clear starting point.</h2><p>One model, deliberately focused.</p></div><div class="market-grid"><article class="market-card"><span class="eyebrow">01 / ASK</span><h2>Find the question</h2><p>Turn a broad thought into a focused inquiry.</p></article><article class="market-card"><span class="eyebrow">02 / LEARN</span><h2>Build understanding</h2><p>Work through a subject with examples and checks.</p></article><article class="market-card"><span class="eyebrow">03 / PRINCIPLE</span><h2>Keep judgment central</h2><p>Use the model to support your direction, never replace it.</p></article></div></section>
     <aside class="market-note"><strong>Start with curiosity</strong><p>Bring Astra Lumen a question worth exploring. The experience is designed to help you see the shape of a problem, find a useful next step and keep your own judgment in the loop.</p></aside>
+    <section class="concierge-preview" aria-labelledby="concierge-title">
+      <div class="phase-heading"><h2 id="concierge-title">Try a guided first step.</h2><p>Public preview · local only</p></div>
+      <div class="concierge-grid">
+        <form id="concierge-form" class="concierge-form">
+          <label for="concierge-input">Bring Astra Lumen a question</label>
+          <textarea id="concierge-input" name="question" rows="5" maxlength="280" placeholder="What would you like to understand more clearly?" aria-describedby="concierge-help"></textarea>
+          <div class="concierge-form-footer"><small id="concierge-help">Your question stays in this browser. This preview does not send prompts anywhere.</small><button class="button" type="submit">Shape the first step <span aria-hidden="true">↗</span></button></div>
+        </form>
+        <div id="concierge-response" class="concierge-response" role="status" aria-live="polite" tabindex="-1" hidden>
+          <span class="eyebrow">ASTRA LUMEN / GUIDED START</span>
+          <h3 id="concierge-response-title"></h3>
+          <p id="concierge-response-body"></p>
+          <p class="concierge-response-next"><strong>Next move</strong><span id="concierge-response-next"></span></p>
+        </div>
+      </div>
+    </section>
+
   </main>
   <footer><span>Human curiosity. Connected knowledge. Independent judgment.</span><a href="/">Back to Ad Astra ↗</a></footer>
 </body>
