@@ -237,7 +237,7 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
     'float spiralLine(vec2 p,float arm,float t){float r=length(p);float a=atan(p.y,p.x);float twist=a+log(r+.12)*(3.1+arm*.08)-t;float wave=abs(sin((twist+arm*1.256637)*2.0));float line=1.0-smoothstep(0.0,.18,wave);float pulse=.5+.5*sin(twist*10.0+r*24.0-t*2.0);return line*(.35+.65*pulse)*smoothstep(1.22,.06,r);}',
     'void main(){vec2 p=(gl_FragCoord.xy-.5*u_resolution.xy)/u_resolution.y;float speed=u_tier==3.0?1.8:(u_tier==2.0?1.15:.65);float t=u_time*speed;float voice=u_amplitude*(.18+.12*sin(t*7.0));float statePulse=u_state==1.0?sin(t*18.0)*.035:(u_state==2.0?sin(t*24.0)*.08:0.0);vec2 q=p+vec2(voice+statePulse);float spiral=0.0;float nodes=0.0;for(int arm=0;arm<5;arm++){float line=spiralLine(q,float(arm),t);spiral=max(spiral,line);nodes+=line*(.5+.5*sin(float(arm)*4.0+t*3.0));}float r=length(q);float core=exp(-r*9.0);float halo=exp(-r*2.4);vec2 starCell=floor((q+vec2(2.0))*72.0);float stars=step(.997,hash(starCell));vec3 base=vec3(.002,.008,.018);vec3 cyan=vec3(.0,.46,.58);vec3 green=vec3(.08,.56,.42);vec3 violet=vec3(.48,.18,.78);vec3 champagne=vec3(.91,.79,.56);vec3 accent=u_state==1.0?violet:(u_state==2.0?champagne:(u_tier==1.0?cyan:(u_tier==2.0?green:violet)));float intensity=.48+u_activity*.16+u_amplitude*.32+abs(statePulse)*2.0;vec3 color=base+accent*(spiral*intensity+core*(1.15+u_amplitude*.8)+halo*.16)+champagne*nodes*.08+vec3(.15,.34,.45)*stars;gl_FragColor=vec4(color,1.0);}'
-  ].join('\\n');
+  ].join('\n');
   function shader(type, source) {
     const item = gl.createShader(type); if (!item) return null;
     gl.shaderSource(item, source); gl.compileShader(item);
