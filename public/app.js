@@ -261,6 +261,55 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     ,amplitude: gl.getUniformLocation(program, 'u_amplitude'),
     state: gl.getUniformLocation(program, 'u_state')
   };
+  const pointVertexSource = [
+    'attribute vec3 a_position3d;',
+    'attribute float a_arm3d;',
+    'attribute float a_size3d;',
+    'uniform float u_time3d;',
+    'uniform float u_tier3d;',
+    'uniform float u_amplitude3d;',
+    'varying float v_arm3d;',
+    'void main(){float speed=u_tier3d==3.0?1.7:(u_tier3d==2.0?1.15:.72);float t=u_time3d*speed;vec3 p=a_position3d;float r=length(p.xy);float angle=t*.18+r*1.9;float cs=cos(angle),sn=sin(angle);p.xy=mat2(cs,-sn,sn,cs)*p.xy;p.xy*=1.0+u_amplitude3d*.12+sin(t*2.0+r*8.0+a_arm3d)*.025;p.z+=sin(t*1.7+r*13.0+a_arm3d*2.0)*.05;float depth=2.3-p.z;gl_Position=vec4(p.xy*(1.35/depth),p.z/depth,1.0);gl_PointSize=(a_size3d*(1.0+u_amplitude3d*.7)+1.2)*(2.8/depth);v_arm3d=a_arm3d;}'
+  ].join('\\n');
+  const pointFragmentSource = [
+    'precision mediump float;',
+    'uniform float u_state3d;',
+    'uniform float u_activity3d;',
+    'varying float v_arm3d;',
+    'void main(){vec2 d=gl_PointCoord-vec2(.5);float edge=smoothstep(.5,.05,length(d));vec3 cyan=vec3(.16,.82,.92);vec3 violet=vec3(.58,.32,.96);vec3 gold=vec3(.96,.76,.42);vec3 color=mod(v_arm3d,2.0)<1.0?cyan:violet;if(u_state3d==1.0)color=mix(color,violet,.55);if(u_state3d==2.0)color=mix(color,gold,.68);gl_FragColor=vec4(color*(1.0+u_activity3d*.24),edge*(.5+u_activity3d*.16));}'
+  ].join('\\n');
+  const pointVertex = shader(gl.VERTEX_SHADER, pointVertexSource), pointFragment = shader(gl.FRAGMENT_SHADER, pointFragmentSource);
+  const pointProgram = gl.createProgram();
+  let pointBuffer = null, pointCount = 0, pointUniforms = null;
+  if (pointVertex && pointFragment && pointProgram) {
+    gl.attachShader(pointProgram, pointVertex); gl.attachShader(pointProgram, pointFragment); gl.linkProgram(pointProgram);
+    if (gl.getProgramParameter(pointProgram, gl.LINK_STATUS)) {
+      const pointData = [], armTotal = 5, pointsPerArm = 190;
+      for (let arm = 0; arm < armTotal; arm++) {
+        for (let index = 0; index < pointsPerArm; index++) {
+          const progress = index / (pointsPerArm - 1), radius = .07 + progress * 1.08;
+          const angle = arm * Math.PI * 2 / armTotal + progress * Math.PI * 3.6;
+          const wobble = Math.sin(index * .72 + arm) * .014;
+          pointData.push(Math.cos(angle) * radius + wobble, Math.sin(angle) * radius + wobble, (1 - progress) * .58 - .28 + Math.sin(angle * 2 + arm) * .1, arm, 1.0 + (index % 5) * .22);
+        }
+      }
+      for (let index = 0; index < 150; index++) {
+        const angle = index * 2.39996, radius = .06 + (index % 17) / 17 * .25;
+        pointData.push(Math.cos(angle) * radius, Math.sin(angle) * radius, .42 - radius * .7, index % armTotal, 1.3 + (index % 4) * .18);
+      }
+      pointBuffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, pointBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pointData), gl.STATIC_DRAW);
+      pointCount = pointData.length / 5;
+      pointUniforms = {
+        time: gl.getUniformLocation(pointProgram, 'u_time3d'),
+        tier: gl.getUniformLocation(pointProgram, 'u_tier3d'),
+        amplitude: gl.getUniformLocation(pointProgram, 'u_amplitude3d'),
+        state: gl.getUniformLocation(pointProgram, 'u_state3d'),
+        activity: gl.getUniformLocation(pointProgram, 'u_activity3d')
+      };
+      gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+    }
+  }
   function resize() {
     const rect = section.getBoundingClientRect(), ratio = Math.min(devicePixelRatio || 1, 1.5);
     const width = Math.max(1, Math.floor(rect.width * ratio)), height = Math.max(1, Math.floor(rect.height * ratio));
