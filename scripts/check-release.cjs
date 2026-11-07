@@ -1,6 +1,8 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.join(__dirname,'..');
+const {validateReleaseFiles}=require('./validate-release-policy.cjs');
+validateReleaseFiles(root);
 const catalog=require('../lib/model-catalog');
 assert.equal(catalog.MODELS.length,1);
 assert.deepEqual(catalog.MODELS.map(m=>m.id),['astra-lumen']);
@@ -10,10 +12,10 @@ if(process.env.VERCEL_ORG_ID)assert.equal(process.env.VERCEL_ORG_ID,'team_5xblMP
 const files=walk(path.join(root,'public'));
 for(const f of files){
  const rel=path.relative(path.join(root,'public'),f).replaceAll('\\','/');
- assert.ok(!/(catalog\.json|\.map$|\.env|\.git|ad-astra-cognitive|company-film|preview-v2\.mp4)/i.test(rel),rel);
+ assert.ok(!/(catalog\.json|release-policy\.json|\.map$|\.env|\.git|ad-astra-cognitive|company-film|preview-v2\.mp4)/i.test(rel),rel);
  if(!/\.(html|js|css|json|txt|xml)$/.test(f))continue;
  const text=fs.readFileSync(f,'utf8');
- assert.ok(!/sk-proj-[A-Za-z0-9_-]{16}|SANITY_API_TOKEN|Bearer sk-|energy-america|ad-astra-cognitive|chatgpt\.site/i.test(text),'Public privacy scan: '+rel);
+ assert.ok(!/sk-proj-[A-Za-z0-9_-]{16}|SANITY_API_TOKEN|Bearer sk-|energy-america|ad-astra-cognitive|chatgpt\.site|independentReleaseApprovalRequired|private-scheduled-read-only-audit/i.test(text),'Public privacy scan: '+rel);
  if(rel.endsWith('.html')){
   assert.ok(text.includes('rel="canonical"'),rel+' missing canonical');
   if(rel!=='index.html')assert.ok(/name="robots" content="noindex,follow"/.test(text),rel+' missing noindex');
@@ -37,6 +39,9 @@ assert.ok(agent.includes('id="concierge-form"')&&agent.includes('Public preview 
 assert.ok(agentJs.includes('Audio stays in this browser')||agent.includes('does not send prompts anywhere'),'Public preview disclosure missing');
 assert.ok(!/fetch\s*\(/i.test(agentJs),'Public preview must remain local-only');
 assert.doesNotThrow(()=>new Function(agentJs),'Public preview script syntax invalid');
+assert.ok(!/<form\b/i.test(agent),'Local preview must not have a native submission fallback');
+assert.ok(/<button\b[^>]*id="concierge-start"[^>]*type="button"[^>]*\bdisabled/.test(agent),'Local preview action must be non-submitting and disabled before initialization');
+assert.ok(!/<textarea\b[^>]*\bname=/i.test(agent)&&agent.includes('id="concierge-unavailable"'),'Local preview fallback privacy boundary missing');
 assert.ok(agent.includes('name="concierge-mode"')&&agent.includes('value="ask"')&&agent.includes('value="learn"'),'Public preview modes missing');
 assert.ok(agentJs.includes('selectedMode')&&agentJs.includes('dataset.state'),'Public preview state wiring missing');
 assert.ok(agent.includes('id="customer-platform"')&&agent.includes('Architecture preview · not connected')&&agent.includes('performs no writes'),'Customer platform preview boundary missing');
@@ -86,4 +91,9 @@ assert.ok(microgrids.includes('20FT / TACTICAL MICRO-POD')&&microgrids.includes(
 assert.ok(microgrids.includes('Neither footprint bypasses municipal permission'));
 assert.ok(microgrids.includes('selenium interlayer')&&microgrids.includes('pressure-vessel safety case'));
 assert.ok(pricing.includes('For individuals')&&pricing.includes('For organizations')&&pricing.includes('No payment is requested'));
+const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json')));
+assert.deepEqual(vercel.rewrites,[
+ {source:'/intelligence/',destination:'/platform/'},
+ {source:'/brain/',destination:'/knowledge/'}
+]);
 console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-only privacy=passed');

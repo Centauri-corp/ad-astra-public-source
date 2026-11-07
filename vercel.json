@@ -1,9 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "node --test test/security.test.cjs && node scripts/check-release.cjs && node scripts/redis-acceptance.cjs",
+  "buildCommand": "node --test test/*.test.cjs && node scripts/check-release.cjs && node scripts/redis-acceptance.cjs",
   "installCommand": "echo No dependencies required",
   "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/intelligence/", "destination": "/platform/" },
+    { "source": "/brain/", "destination": "/knowledge/" }
+  ],
   "functions": {
     "api/ask.js": {
       "maxDuration": 30

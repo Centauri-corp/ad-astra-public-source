@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "releaseScope": "public-informational-preview",
+  "customerAccess": "withheld",
+  "automationMode": "private-scheduled-read-only-audit",
+  "externalWrites": false,
+  "externalCrmWrites": false,
+  "outboundSends": false,
+  "automaticPublication": false,
+  "billingEnabled": false,
+  "liveAiEnabled": false,
+  "customerProvisioning": false,
+  "independentReleaseApprovalRequired": true
+}
