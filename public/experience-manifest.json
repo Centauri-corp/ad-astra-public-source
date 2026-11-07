@@ -72,7 +72,7 @@
     },
     "publicSpiralFramework": {
       "enabled": true,
-      "renderer": "procedural-webgl-shader",
+      "renderer": "procedural-webgl-spiral-point-cloud",
       "states": [
         "idle",
         "listening",
@@ -81,7 +81,9 @@
       ],
       "audioReactive": true,
       "publicPreviewOnly": true,
-      "fallback": "static-neural-sphere-with-alt-text"
+      "fallback": "static-neural-sphere-with-alt-text",
+      "geometry": "spiral-neural-point-cloud",
+      "public3dPointCloud": true
     }
   },
   "seo": {
