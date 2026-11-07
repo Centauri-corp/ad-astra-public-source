@@ -4,6 +4,12 @@
   "publicSafe": true,
   "assets": [
     {
+      "id": "astra-polaris-platform-mockup",
+      "path": "/assets/astra-polaris-platform-mockup.png",
+      "role": "public customer platform mockup",
+      "alt": "Futuristic Ad Astra customer platform concept with a glowing neural brain, global network arcs and modular workspace panels"
+    },
+    {
       "id": "astra-lumen-neural-concierge",
       "path": "/assets/astra-lumen-neural-concierge.png",
       "role": "public neural concierge artwork",
