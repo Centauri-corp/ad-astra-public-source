@@ -31,6 +31,15 @@ assert.ok(agent.includes('id="concierge-form"')&&agent.includes('Public preview 
 assert.ok(agentJs.includes('Audio stays in this browser')||agent.includes('does not send prompts anywhere'),'Public preview disclosure missing');
 assert.ok(!/fetch\s*\(/i.test(agentJs),'Public preview must remain local-only');
 assert.doesNotThrow(()=>new Function(agentJs),'Public preview script syntax invalid');
+const homepageVideos=homepage.match(/<video\\b[^>]*>/gi)||[];
+assert.ok(homepageVideos.length>=1,'Homepage motion visuals missing');
+for(const tag of homepageVideos){
+ assert.ok(/class="[^"]*motion-video/.test(tag),'Homepage video missing motion-video class');
+ assert.ok(/poster="/.test(tag),'Homepage video missing poster fallback');
+ assert.ok(/muted/.test(tag)&&/playsinline/.test(tag),'Homepage video must be silent and inline');
+}
+assert.ok(homepage.includes('class="motion"')&&homepage.includes('Pause motion'),'Homepage motion control missing');
+
 const film=fs.readFileSync(path.join(root,'public/film/index.html'),'utf8');assert.ok(!/<video|<audio|<iframe/i.test(film));
 const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,1);assert.ok(sitemap.includes('<loc>https://adastra.global/</loc>'));
 assert.equal(JSON.parse(fs.readFileSync(path.join(root,'vercel.json'))).git.deploymentEnabled,false);
