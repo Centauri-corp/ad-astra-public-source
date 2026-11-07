@@ -270,14 +270,14 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     'uniform float u_amplitude3d;',
     'varying float v_arm3d;',
     'void main(){float speed=u_tier3d==3.0?1.7:(u_tier3d==2.0?1.15:.72);float t=u_time3d*speed;vec3 p=a_position3d;float r=length(p.xy);float angle=t*.18+r*1.9;float cs=cos(angle),sn=sin(angle);p.xy=mat2(cs,-sn,sn,cs)*p.xy;p.xy*=1.0+u_amplitude3d*.12+sin(t*2.0+r*8.0+a_arm3d)*.025;p.z+=sin(t*1.7+r*13.0+a_arm3d*2.0)*.05;float depth=2.3-p.z;gl_Position=vec4(p.xy*(1.35/depth),p.z/depth,1.0);gl_PointSize=(a_size3d*(1.0+u_amplitude3d*.7)+1.2)*(2.8/depth);v_arm3d=a_arm3d;}'
-  ].join('\\n');
+  ].join('\n');
   const pointFragmentSource = [
     'precision mediump float;',
     'uniform float u_state3d;',
     'uniform float u_activity3d;',
     'varying float v_arm3d;',
     'void main(){vec2 d=gl_PointCoord-vec2(.5);float edge=smoothstep(.5,.05,length(d));vec3 cyan=vec3(.16,.82,.92);vec3 violet=vec3(.58,.32,.96);vec3 gold=vec3(.96,.76,.42);vec3 color=mod(v_arm3d,2.0)<1.0?cyan:violet;if(u_state3d==1.0)color=mix(color,violet,.55);if(u_state3d==2.0)color=mix(color,gold,.68);gl_FragColor=vec4(color*(1.0+u_activity3d*.24),edge*(.5+u_activity3d*.16));}'
-  ].join('\\n');
+  ].join('\n');
   const pointVertex = shader(gl.VERTEX_SHADER, pointVertexSource), pointFragment = shader(gl.FRAGMENT_SHADER, pointFragmentSource);
   const pointProgram = gl.createProgram();
   let pointBuffer = null, pointCount = 0, pointUniforms = null;
