@@ -85,12 +85,6 @@
     </section>
   </main>
   <footer><span>Human curiosity. Connected knowledge. Independent judgment.</span><a href="/">Back to Ad Astra ↗</a></footer>
-  <script>
-    const tabs=[...document.querySelectorAll('.profile-tab')];
-    const label=document.getElementById('profile-label');
-    const copy=document.getElementById('profile-copy');
-    const workspace=document.getElementById('workspace-profile');
-    tabs.forEach((tab,index)=>tab.addEventListener('click',()=>{tabs.forEach(item=>{item.classList.toggle('active',item===tab);item.setAttribute('aria-selected',String(item===tab));});label.textContent=tab.dataset.label;copy.textContent=tab.dataset.copy;workspace.textContent=tab.dataset.label;tabs[index].focus();}));
-  </script>
+  <script defer src="/platform-preview/app.js"></script>
 </body>
 </html>
