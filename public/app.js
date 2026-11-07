@@ -358,6 +358,24 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     gl.uniform1f(uniforms.amplitude, sampleAudio());
     gl.uniform1f(uniforms.state, voiceStateCode());
     gl.drawArrays(gl.TRIANGLES, 0, 6);
+    if (pointProgram && pointBuffer && pointUniforms) {
+      gl.useProgram(pointProgram);
+      gl.bindBuffer(gl.ARRAY_BUFFER, pointBuffer);
+      const stride = 5 * 4;
+      const position3d = gl.getAttribLocation(pointProgram, 'a_position3d');
+      const arm3d = gl.getAttribLocation(pointProgram, 'a_arm3d');
+      const size3d = gl.getAttribLocation(pointProgram, 'a_size3d');
+      gl.enableVertexAttribArray(position3d); gl.vertexAttribPointer(position3d, 3, gl.FLOAT, false, stride, 0);
+      gl.enableVertexAttribArray(arm3d); gl.vertexAttribPointer(arm3d, 1, gl.FLOAT, false, stride, 3 * 4);
+      gl.enableVertexAttribArray(size3d); gl.vertexAttribPointer(size3d, 1, gl.FLOAT, false, stride, 4 * 4);
+      gl.uniform1f(pointUniforms.time, reducedMotion.matches ? 0 : (now - started) / 1000);
+      gl.uniform1f(pointUniforms.tier, tier);
+      gl.uniform1f(pointUniforms.amplitude, amplitude);
+      gl.uniform1f(pointUniforms.state, voiceStateCode());
+      gl.uniform1f(pointUniforms.activity, activity);
+      gl.drawArrays(gl.POINTS, 0, pointCount);
+      gl.useProgram(program);
+    }
   }
   function setTier(next) {
     tier = next;
