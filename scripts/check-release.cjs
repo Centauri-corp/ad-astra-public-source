@@ -1,6 +1,8 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.join(__dirname,'..');
+const {validateReleaseFiles}=require('./validate-release-policy.cjs');
+validateReleaseFiles(root);
 const catalog=require('../lib/model-catalog');
 assert.equal(catalog.MODELS.length,1);
 assert.deepEqual(catalog.MODELS.map(m=>m.id),['astra-lumen']);
@@ -10,10 +12,10 @@ if(process.env.VERCEL_ORG_ID)assert.equal(process.env.VERCEL_ORG_ID,'team_5xblMP
 const files=walk(path.join(root,'public'));
 for(const f of files){
  const rel=path.relative(path.join(root,'public'),f).replaceAll('\\','/');
- assert.ok(!/(catalog\.json|\.map$|\.env|\.git|ad-astra-cognitive|company-film|preview-v2\.mp4)/i.test(rel),rel);
+ assert.ok(!/(catalog\.json|release-policy\.json|\.map$|\.env|\.git|ad-astra-cognitive|company-film|preview-v2\.mp4)/i.test(rel),rel);
  if(!/\.(html|js|css|json|txt|xml)$/.test(f))continue;
  const text=fs.readFileSync(f,'utf8');
- assert.ok(!/sk-proj-[A-Za-z0-9_-]{16}|SANITY_API_TOKEN|Bearer sk-|energy-america|ad-astra-cognitive|chatgpt\.site/i.test(text),'Public privacy scan: '+rel);
+ assert.ok(!/sk-proj-[A-Za-z0-9_-]{16}|SANITY_API_TOKEN|Bearer sk-|energy-america|ad-astra-cognitive|chatgpt\.site|independentReleaseApprovalRequired|private-scheduled-read-only-audit/i.test(text),'Public privacy scan: '+rel);
  if(rel.endsWith('.html')){
   assert.ok(text.includes('rel="canonical"'),rel+' missing canonical');
   if(rel!=='index.html')assert.ok(/name="robots" content="noindex,follow"/.test(text),rel+' missing noindex');
@@ -25,6 +27,7 @@ assert.ok(homepage.includes('Astra Lumen'),'Public homepage missing connected mo
 const publicApp=fs.readFileSync(path.join(root,'public/app.js'),'utf8');
 assert.ok(homepage.includes('PUBLIC SPIRAL NEURAL FRAMEWORK / PROCEDURAL WEBGL'),'Public spiral framework label missing');
 assert.ok(publicApp.includes('spiralLine')&&publicApp.includes('u_state'),'Public spiral shader state wiring missing');
+assert.ok(publicApp.includes('a_position3d')&&publicApp.includes('gl.drawArrays(gl.POINTS'),'Public 3D spiral point cloud missing');
 
 const homepageStyle=fs.readFileSync(path.join(root,'public/style.css'),'utf8');
 assert.ok(/@media\(max-width:640px\)/.test(homepageStyle),'Homepage missing mobile breakpoint');
@@ -61,11 +64,13 @@ assert.equal(manifest.customerAiModel,'astra-lumen');
 assert.equal(manifest.connectedPublicModelCount,1);
 assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
 assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','approach','experiences','horizon','company','signature']);
+assert.deepEqual(experience.visualArchitecture.publicSequence,['arrival','neural-lab','intelligence-layer','customer-experience','experiences','video-sneak','film','systems','vision','approach','horizon','company','questions','signature']);
 assert.deepEqual(experience.seo.indexableRoutes,['/']);
 assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);
 assert.equal(experience.visualArchitecture.publicSpiralFramework.enabled,true);
 assert.equal(experience.visualArchitecture.publicSpiralFramework.publicPreviewOnly,true);
 assert.equal(experience.visualArchitecture.publicSpiralFramework.audioReactive,true);
+assert.equal(experience.visualArchitecture.publicSpiralFramework.public3dPointCloud,true);
 const markets=fs.readFileSync(path.join(root,'public/markets/index.html'),'utf8');
 const positioning=fs.readFileSync(path.join(root,'public/markets/positioning/index.html'),'utf8');
 const microgrids=fs.readFileSync(path.join(root,'public/markets/positioning/microgrids/index.html'),'utf8');

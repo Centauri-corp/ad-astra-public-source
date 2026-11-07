@@ -72,7 +72,7 @@
     },
     "publicSpiralFramework": {
       "enabled": true,
-      "renderer": "procedural-webgl-shader",
+      "renderer": "procedural-webgl-spiral-point-cloud",
       "states": [
         "idle",
         "listening",
@@ -81,8 +81,26 @@
       ],
       "audioReactive": true,
       "publicPreviewOnly": true,
-      "fallback": "static-neural-sphere-with-alt-text"
-    }
+      "fallback": "static-neural-sphere-with-alt-text",
+      "geometry": "spiral-neural-point-cloud",
+      "public3dPointCloud": true
+    },
+    "publicSequence": [
+      "arrival",
+      "neural-lab",
+      "intelligence-layer",
+      "customer-experience",
+      "experiences",
+      "video-sneak",
+      "film",
+      "systems",
+      "vision",
+      "approach",
+      "horizon",
+      "company",
+      "questions",
+      "signature"
+    ]
   },
   "seo": {
     "indexableRoutes": [
