@@ -22,6 +22,10 @@ for(const f of files){
 const homepage=fs.readFileSync(path.join(root,'public/index.html'),'utf8');
 assert.ok(!/private|audit|CRM|operations|customer workspace|external writes/i.test(homepage),'Public homepage exposes internal operations');
 assert.ok(homepage.includes('Astra Lumen'),'Public homepage missing connected model identity');
+const publicApp=fs.readFileSync(path.join(root,'public/app.js'),'utf8');
+assert.ok(homepage.includes('PUBLIC SPIRAL NEURAL FRAMEWORK / PROCEDURAL WEBGL'),'Public spiral framework label missing');
+assert.ok(publicApp.includes('spiralLine')&&publicApp.includes('u_state'),'Public spiral shader state wiring missing');
+
 const homepageStyle=fs.readFileSync(path.join(root,'public/style.css'),'utf8');
 assert.ok(/@media\(max-width:640px\)/.test(homepageStyle),'Homepage missing mobile breakpoint');
 assert.ok(/@media\(prefers-reduced-motion:reduce\)/.test(homepageStyle),'Homepage missing reduced-motion fallback');
@@ -57,6 +61,9 @@ assert.deepEqual(manifest.customerModes,['ask','research','create','learn','expl
 assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','approach','experiences','horizon','company','signature']);
 assert.deepEqual(experience.seo.indexableRoutes,['/']);
 assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);
+assert.equal(experience.visualArchitecture.publicSpiralFramework.enabled,true);
+assert.equal(experience.visualArchitecture.publicSpiralFramework.publicPreviewOnly,true);
+assert.equal(experience.visualArchitecture.publicSpiralFramework.audioReactive,true);
 assert.equal(experience.growthAutomation.externalCrmWrites,false);
 assert.equal(experience.growthAutomation.outboundSends,false);
 assert.equal(experience.growthAutomation.mode,'private-scheduled-read-only-audit');
