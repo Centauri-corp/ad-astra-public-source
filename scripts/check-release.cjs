@@ -59,6 +59,7 @@ assert.equal(manifest.customerAiModel,'astra-lumen');
 assert.equal(manifest.connectedPublicModelCount,1);
 assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
 assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','approach','experiences','horizon','company','signature']);
+assert.deepEqual(experience.visualArchitecture.publicSequence,['arrival','neural-lab','intelligence-layer','customer-experience','experiences','video-sneak','film','systems','vision','approach','horizon','company','questions','signature']);
 assert.deepEqual(experience.seo.indexableRoutes,['/']);
 assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);
 assert.equal(experience.visualArchitecture.publicSpiralFramework.enabled,true);
