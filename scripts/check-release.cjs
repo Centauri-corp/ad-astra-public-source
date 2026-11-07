@@ -49,6 +49,7 @@ for(const tag of homepageVideos){
  assert.ok(/muted/.test(tag)&&/playsinline/.test(tag),'Homepage video must be silent and inline');
 }
 assert.ok(homepage.includes('class="motion"')&&homepage.includes('Pause motion'),'Homepage motion control missing');
+assert.ok(homepage.includes('class="motion-note"')&&homepage.includes('reduced-motion')&&homepage.includes('poster frames'),'Homepage reduced-motion disclosure missing');
 
 const film=fs.readFileSync(path.join(root,'public/film/index.html'),'utf8');assert.ok(!/<video|<audio|<iframe/i.test(film));
 const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,1);assert.ok(sitemap.includes('<loc>https://adastra.global/</loc>'));
