@@ -31,7 +31,7 @@ assert.ok(agent.includes('id="concierge-form"')&&agent.includes('Public preview 
 assert.ok(agentJs.includes('Audio stays in this browser')||agent.includes('does not send prompts anywhere'),'Public preview disclosure missing');
 assert.ok(!/fetch\s*\(/i.test(agentJs),'Public preview must remain local-only');
 assert.doesNotThrow(()=>new Function(agentJs),'Public preview script syntax invalid');
-const homepageVideos=homepage.match(/<video\\b[^>]*>/gi)||[];
+const homepageVideos=homepage.match(/<video\b[^>]*>/gi)||[];
 assert.ok(homepageVideos.length>=1,'Homepage motion visuals missing');
 for(const tag of homepageVideos){
  assert.ok(/class="[^"]*motion-video/.test(tag),'Homepage video missing motion-video class');
