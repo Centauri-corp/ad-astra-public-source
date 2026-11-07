@@ -89,4 +89,9 @@ assert.ok(microgrids.includes('20FT / TACTICAL MICRO-POD')&&microgrids.includes(
 assert.ok(microgrids.includes('Neither footprint bypasses municipal permission'));
 assert.ok(microgrids.includes('selenium interlayer')&&microgrids.includes('pressure-vessel safety case'));
 assert.ok(pricing.includes('For individuals')&&pricing.includes('For organizations')&&pricing.includes('No payment is requested'));
+const vercel=JSON.parse(fs.readFileSync(path.join(root,'vercel.json')));
+assert.deepEqual(vercel.rewrites,[
+ {source:'/intelligence/',destination:'/platform/'},
+ {source:'/brain/',destination:'/knowledge/'}
+]);
 console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-only privacy=passed');
