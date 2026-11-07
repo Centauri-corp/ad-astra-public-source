@@ -128,3 +128,65 @@ test('session handshake verifies identity without model or quota access',async()
  }
  assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));
 });
+
+test('local guided preview has no native form or serializable question fallback',()=>{
+ const html=fs.readFileSync(path.join(__dirname,'../public/agent/index.html'),'utf8');
+ assert.doesNotMatch(html,/<form\b/i);
+ assert.match(html,/<div\b[^>]*id="concierge-form"[^>]*role="group"/);
+ assert.doesNotMatch(html,/<textarea\b[^>]*\bname=/i);
+ assert.match(html,/<button\b[^>]*id="concierge-start"[^>]*type="button"[^>]*\bdisabled/);
+ assert.match(html,/id="concierge-unavailable"/);
+});
+
+function guidedPreviewFixture({missingId}={}){
+ const elements={};
+ function element(id){return elements[id]={value:'',hidden:true,disabled:true,dataset:{},listeners:{},textContent:'',
+  addEventListener(type,handler){this.listeners[type]=handler;},
+  focus(){this.focused=true;},querySelector(){return elements.label;}};}
+ for(const id of ['concierge-form','concierge-input','concierge-start','concierge-unavailable',
+  'concierge-response','concierge-response-title','concierge-response-body','concierge-response-next','label','neural'])element(id);
+ const modes=['ask','learn'].map(value=>({...element(value),value,checked:value==='ask'}));
+ elements['concierge-unavailable'].hidden=false;
+ const network=()=>{throw Error('Guided preview must not make network or storage calls');};
+ const context={document:{getElementById:id=>id===missingId?null:elements[id],
+  querySelectorAll:()=>modes,querySelector:()=>elements.neural},window:{setTimeout:fn=>fn()},
+  fetch:network,XMLHttpRequest:network,WebSocket:network,localStorage:{setItem:network},navigator:{sendBeacon:network}};
+ const source=fs.readFileSync(path.join(__dirname,'../public/markets/agent.js'),'utf8');
+ vm.runInNewContext(source,context);
+ return {elements,modes};
+}
+
+test('local preview enables its non-submit button only after binding a local handler',()=>{
+ const {elements}=guidedPreviewFixture();
+ assert.equal(typeof elements['concierge-start'].listeners.click,'function');
+ assert.equal(elements['concierge-start'].disabled,false);
+ assert.equal(elements['concierge-unavailable'].hidden,true);
+ assert.equal(elements['concierge-form'].listeners.submit,undefined);
+ elements['concierge-input'].value='A synthetic local-only question';
+ elements['concierge-start'].listeners.click();
+ assert.match(elements['concierge-response-title'].textContent,/question underneath/);
+ assert.equal(elements['concierge-response'].dataset.state,'guided');
+ assert.equal(elements['concierge-response'].focused,true);
+});
+
+test('local preview retains Learn mode and input validation without remote calls',()=>{
+ const {elements,modes}=guidedPreviewFixture();
+ modes[0].checked=false;modes[1].checked=true;
+ modes[1].listeners.change();
+ assert.match(elements['concierge-input'].placeholder,/step by step/);
+ elements['concierge-input'].value='An example learning question';
+ elements['concierge-start'].listeners.click();
+ assert.match(elements['concierge-response-title'].textContent,/part you want to make clear/);
+ elements['concierge-input'].value='  ';
+ elements['concierge-start'].listeners.click();
+ assert.match(elements['concierge-response-title'].textContent,/little more shape/);
+});
+
+test('an incomplete local preview stays disabled with its fallback message visible',()=>{
+ for(const missingId of ['concierge-input','concierge-start','concierge-response','concierge-response-title',
+  'concierge-response-body','concierge-response-next','concierge-unavailable']){
+  const {elements}=guidedPreviewFixture({missingId});
+  assert.equal(elements['concierge-start'].disabled,true,missingId);
+  assert.equal(elements['concierge-unavailable'].hidden,false,missingId);
+ }
+});

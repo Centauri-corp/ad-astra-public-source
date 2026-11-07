@@ -35,6 +35,9 @@ assert.ok(agent.includes('id="concierge-form"')&&agent.includes('Public preview 
 assert.ok(agentJs.includes('Audio stays in this browser')||agent.includes('does not send prompts anywhere'),'Public preview disclosure missing');
 assert.ok(!/fetch\s*\(/i.test(agentJs),'Public preview must remain local-only');
 assert.doesNotThrow(()=>new Function(agentJs),'Public preview script syntax invalid');
+assert.ok(!/<form\b/i.test(agent),'Local preview must not have a native submission fallback');
+assert.ok(/<button\b[^>]*id="concierge-start"[^>]*type="button"[^>]*\bdisabled/.test(agent),'Local preview action must be non-submitting and disabled before initialization');
+assert.ok(!/<textarea\b[^>]*\bname=/i.test(agent)&&agent.includes('id="concierge-unavailable"'),'Local preview fallback privacy boundary missing');
 assert.ok(agent.includes('name="concierge-mode"')&&agent.includes('value="ask"')&&agent.includes('value="learn"'),'Public preview modes missing');
 assert.ok(agentJs.includes('selectedMode')&&agentJs.includes('dataset.state'),'Public preview state wiring missing');
 assert.ok(agent.includes('id="customer-platform"')&&agent.includes('Architecture preview · not connected')&&agent.includes('performs no writes'),'Customer platform preview boundary missing');

@@ -1,13 +1,18 @@
 'use strict';
 
-const form = document.getElementById('concierge-form');
+(() => {
 const input = document.getElementById('concierge-input');
+const startButton = document.getElementById('concierge-start');
+const unavailable = document.getElementById('concierge-unavailable');
 const response = document.getElementById('concierge-response');
 const responseTitle = document.getElementById('concierge-response-title');
 const responseBody = document.getElementById('concierge-response-body');
 const responseNext = document.getElementById('concierge-response-next');
 const modeInputs = [...document.querySelectorAll('input[name="concierge-mode"]')];
 const neuralArt = document.querySelector('.agent-neural-art');
+
+// No native form exists: a disabled/missing script must never submit a question.
+if (![input, startButton, unavailable, response, responseTitle, responseBody, responseNext].every(Boolean)) return;
 
 const guides = {
   ask: {
@@ -47,8 +52,7 @@ modeInputs.forEach(item => item.addEventListener('change', () => {
   setState('idle');
 }));
 
-form.addEventListener('submit', event => {
-  event.preventDefault();
+startButton.addEventListener('click', () => {
   const question = input.value.trim();
   const mode = selectedMode();
   const guide = guides[mode] || guides.ask;
@@ -77,3 +81,7 @@ form.addEventListener('submit', event => {
 });
 
 input.placeholder = placeholders[selectedMode()];
+// Enable interaction only after its browser-local handler is installed.
+startButton.disabled = false;
+unavailable.hidden = true;
+})();
