@@ -1,5 +1,5 @@
 'use strict';
-const { publicModels } = require('../lib/model-catalog');
+const { publicModels, publicMarketProfiles } = require('../lib/model-catalog');
 
 module.exports = function models(req, res) {
   if (req.method !== 'GET') {
@@ -12,5 +12,14 @@ module.exports = function models(req, res) {
   res.setHeader('Cache-Control', 'public, max-age=300, stale-while-revalidate=3600');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   const models = publicModels();
-  return res.end(JSON.stringify({ family: 'Ad Astra', tagline: 'Human-directed intelligence for complex questions', connectedModel: models[0]?.id || null, connectedModelCount: models.length, models }));
+  const profiles = publicMarketProfiles();
+  return res.end(JSON.stringify({
+    family: 'Ad Astra',
+    tagline: 'Human-directed intelligence for complex questions',
+    architecture: 'one-connected-model-with-sector-profiles',
+    connectedModel: models[0]?.id || null,
+    connectedModelCount: models.length,
+    models,
+    profiles
+  }));
 };

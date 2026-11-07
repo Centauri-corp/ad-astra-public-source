@@ -6,20 +6,32 @@
   "assetOriginDependency": false,
   "publicLaunchEnabled": false,
   "engineAvailable": false,
+  "customerPortal": "authenticated-preview",
   "customerAiModel": "astra-lumen",
   "connectedPublicModelCount": 1,
-  "customerModes": [
-    "ask",
-    "research",
-    "create",
-    "learn",
-    "explore"
-  ],
+  "publicModelName": "Astra Polaris",
+  "marketProfileArchitecture": "one-connected-model-with-sector-profiles",
+  "marketProfileCount": 24,
+  "customerModes": ["ask", "research", "create", "learn", "explore"],
+  "customerAccess": "clerk-authenticated",
+  "liveEngineAccess": "requires-all-verified-release-gates",
+  "customerBudgetBridge": {
+    "publicAdapter": "implemented-candidate",
+    "productionAccepted": false
+  },
   "contentSurfaces": {
     "company": "public-versioned",
     "productsAndServices": "public-market-direction",
+    "customerPortal": "authenticated-preview",
     "neuralArtwork": "public-static-preview-private-generation",
     "video": "public-motion-study-premiere-gated"
+  },
+  "autonomousOperations": {
+    "mode": "private-scheduled-read-only-audit",
+    "cadence": "*/15 * * * * UTC",
+    "externalWrites": false,
+    "outboundSends": false,
+    "automaticPublication": false
   },
   "intelligenceLayers": {
     "narrowAi": "guided-preview",
@@ -31,20 +43,13 @@
     "title": "The Architecture of Alignment",
     "targetDurationSeconds": 60,
     "publicPlayback": "premiere-gated",
-    "scenes": [
-      "hook",
-      "narrow-core",
-      "agi-research",
-      "asi-horizon-return"
-    ],
+    "scenes": ["hook", "narrow-core", "agi-research", "asi-horizon-return"],
     "claimBoundary": "conceptual-research-framing"
   },
+  "dailyModelBudgetUSD": 10,
+  "rollbackBaseline": "dpl_GUQqWJ3jTy9f73XqfQFvmbqhnHUy",
+  "source": "isolated AD ASTRA source; see release evidence",
   "indexableRoutes": [
     "/"
-  ],
-  "publicBoundary": {
-    "backendOperations": "hidden",
-    "externalWrites": false,
-    "publicExperience": "Astra Lumen visual preview"
-  }
+  ]
 }

@@ -102,12 +102,13 @@ test('status exposes availability only and requires actual release configuration
 });
 test('public model catalog exposes stable names without provider details',()=>{
  const r=response();models({method:'GET'},r);assert.equal(r.statusCode,200);assert.equal(r.headers['cache-control'],'public, max-age=300, stale-while-revalidate=3600');
- const body=r.body;assert.equal(body.family,'Ad Astra');assert.equal(body.models.length,1);assert.deepEqual(body.models.map(m=>m.id),catalog.MODELS.map(m=>m.id));
+ const body=r.body;assert.equal(body.family,'Ad Astra');assert.equal(body.architecture,'one-connected-model-with-sector-profiles');assert.equal(body.models.length,1);assert.deepEqual(body.models.map(m=>m.id),catalog.MODELS.map(m=>m.id));assert.equal(body.profiles.length,catalog.MARKET_PROFILES.length);
  for(const model of body.models){assert.ok(model.name.startsWith('Astra '));assert.ok(!('provider' in model));assert.ok(!('apiKey' in model));}
+ for(const profile of body.profiles){assert.ok(profile.name.startsWith('Astra '));assert.equal(profile.foundationModel,'astra-lumen');assert.ok(!('provider' in profile));assert.ok(!('apiKey' in profile));}
 });
 test('public agent surface is present and portal routes redirect away',()=>{
  const agent=fs.readFileSync(path.join(__dirname,'../public/agent/index.html'),'utf8');
- assert.match(agent,/Astra\s*<br><em>Lumen\.<\/em>/);
+ assert.match(agent,/Astra\s*<br><em>Polaris\.<\/em>/);
  assert.match(agent,/Start with curiosity/);
  const vercel=JSON.parse(fs.readFileSync(path.join(__dirname,'../vercel.json'),'utf8'));
  assert.deepEqual(vercel.redirects.map(r=>[r.source,r.destination]),[

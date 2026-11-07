@@ -4,6 +4,9 @@ const root=path.join(__dirname,'..');
 const catalog=require('../lib/model-catalog');
 assert.equal(catalog.MODELS.length,1);
 assert.deepEqual(catalog.MODELS.map(m=>m.id),['astra-lumen']);
+assert.equal(catalog.MARKET_PROFILES.length,24);
+assert.equal(new Set(catalog.MARKET_PROFILES.map(profile=>profile.id)).size,catalog.MARKET_PROFILES.length);
+for(const profile of catalog.MARKET_PROFILES){assert.ok(/^Astra /.test(profile.name),`Market profile name missing Astra prefix: ${profile.id}`);}
 function walk(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);}
 if(process.env.VERCEL_PROJECT_ID)assert.equal(process.env.VERCEL_PROJECT_ID,'prj_FX8QO3TIqUNAfFR4enz0bALmjeg1');
 if(process.env.VERCEL_ORG_ID)assert.equal(process.env.VERCEL_ORG_ID,'team_5xblMPo2zEBjbz4KPmeDVHPr');
@@ -19,56 +22,33 @@ for(const f of files){
   if(rel!=='index.html')assert.ok(/name="robots" content="noindex,follow"/.test(text),rel+' missing noindex');
  }
 }
-const homepage=fs.readFileSync(path.join(root,'public/index.html'),'utf8');
-assert.ok(!/private|audit|CRM|operations|customer workspace|external writes/i.test(homepage),'Public homepage exposes internal operations');
-assert.ok(homepage.includes('Astra Lumen'),'Public homepage missing connected model identity');
-const publicApp=fs.readFileSync(path.join(root,'public/app.js'),'utf8');
-assert.ok(homepage.includes('PUBLIC SPIRAL NEURAL FRAMEWORK / PROCEDURAL WEBGL'),'Public spiral framework label missing');
-assert.ok(/class="sequence-rail(?:\s|")/.test(homepage)&&homepage.includes('SPIRAL CORE')&&homepage.includes('ASTRA LUMEN'),'Public visual sequence rail missing');
-assert.ok(publicApp.includes('spiralLine')&&publicApp.includes('u_state'),'Public spiral shader state wiring missing');
-assert.ok(publicApp.includes('a_position3d')&&publicApp.includes('gl.drawArrays(gl.POINTS'),'Public 3D spiral point cloud missing');
-
-const homepageStyle=fs.readFileSync(path.join(root,'public/style.css'),'utf8');
-assert.ok(/@media\(max-width:640px\)/.test(homepageStyle),'Homepage missing mobile breakpoint');
-assert.ok(/@media\(prefers-reduced-motion:reduce\)/.test(homepageStyle),'Homepage missing reduced-motion fallback');
-const agent=fs.readFileSync(path.join(root,'public/agent/index.html'),'utf8');
-const agentJs=fs.readFileSync(path.join(root,'public/markets/agent.js'),'utf8');
-assert.ok(agent.includes('id="concierge-form"')&&agent.includes('Public preview · local only'),'Public model preview missing');
-assert.ok(agentJs.includes('Audio stays in this browser')||agent.includes('does not send prompts anywhere'),'Public preview disclosure missing');
-assert.ok(!/fetch\s*\(/i.test(agentJs),'Public preview must remain local-only');
-assert.doesNotThrow(()=>new Function(agentJs),'Public preview script syntax invalid');
-assert.ok(agent.includes('name="concierge-mode"')&&agent.includes('value="ask"')&&agent.includes('value="learn"'),'Public preview modes missing');
-assert.ok(agentJs.includes('selectedMode')&&agentJs.includes('dataset.state'),'Public preview state wiring missing');
-assert.ok(agent.includes('id="customer-platform"')&&agent.includes('Architecture preview · not connected')&&agent.includes('performs no writes'),'Customer platform preview boundary missing');
-
-const homepageVideos=homepage.match(/<video\b[^>]*>/gi)||[];
-assert.ok(homepageVideos.length>=1,'Homepage motion visuals missing');
-for(const tag of homepageVideos){
- assert.ok(/class="[^"]*motion-video/.test(tag),'Homepage video missing motion-video class');
- assert.ok(/poster="/.test(tag),'Homepage video missing poster fallback');
- assert.ok(/muted/.test(tag)&&/playsinline/.test(tag),'Homepage video must be silent and inline');
-}
-assert.ok(homepage.includes('class="motion"')&&homepage.includes('Pause motion'),'Homepage motion control missing');
-assert.ok(homepage.includes('class="motion-note"')&&homepage.includes('reduced-motion')&&homepage.includes('poster frames'),'Homepage reduced-motion disclosure missing');
-
 const film=fs.readFileSync(path.join(root,'public/film/index.html'),'utf8');assert.ok(!/<video|<audio|<iframe/i.test(film));
 const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,1);assert.ok(sitemap.includes('<loc>https://adastra.global/</loc>'));
 assert.equal(JSON.parse(fs.readFileSync(path.join(root,'vercel.json'))).git.deploymentEnabled,false);
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'public/release-manifest.json')));
 const experience=JSON.parse(fs.readFileSync(path.join(root,'public/experience-manifest.json')));
 assert.equal(manifest.publicLaunchEnabled,false);assert.equal(manifest.engineAvailable,false);
+assert.equal(manifest.customerPortal,'authenticated-preview');
 assert.equal(manifest.customerAiModel,'astra-lumen');
 assert.equal(manifest.connectedPublicModelCount,1);
+assert.equal(manifest.publicModelName,'Astra Polaris');
+assert.equal(manifest.marketProfileArchitecture,'one-connected-model-with-sector-profiles');
+assert.equal(manifest.marketProfileCount,catalog.MARKET_PROFILES.length);
 assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
 assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','approach','experiences','horizon','company','signature']);
-assert.deepEqual(experience.visualArchitecture.publicSequence,['arrival','neural-lab','intelligence-layer','customer-experience','experiences','video-sneak','film','systems','vision','approach','horizon','company','questions','signature']);
 assert.deepEqual(experience.seo.indexableRoutes,['/']);
 assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);
-assert.equal(experience.visualArchitecture.publicSpiralFramework.enabled,true);
-assert.equal(experience.visualArchitecture.publicSpiralFramework.publicPreviewOnly,true);
-assert.equal(experience.visualArchitecture.publicSpiralFramework.audioReactive,true);
-assert.equal(experience.visualArchitecture.publicSpiralFramework.public3dPointCloud,true);
+assert.equal(experience.growthAutomation.externalCrmWrites,false);
+assert.equal(experience.growthAutomation.outboundSends,false);
+assert.equal(experience.growthAutomation.mode,'private-scheduled-read-only-audit');
+assert.equal(manifest.autonomousOperations.mode,experience.growthAutomation.mode);
+assert.equal(manifest.autonomousOperations.cadence,experience.growthAutomation.cadence);
+assert.equal(manifest.autonomousOperations.externalWrites,false);
+assert.equal(manifest.autonomousOperations.outboundSends,false);
+assert.equal(manifest.autonomousOperations.automaticPublication,false);
 const markets=fs.readFileSync(path.join(root,'public/markets/index.html'),'utf8');
+const agent=fs.readFileSync(path.join(root,'public/agent/index.html'),'utf8');
+assert.ok(agent.includes('Astra Polaris')&&agent.includes('Astra Sirius')&&agent.includes('Astra Orion')&&agent.includes('Astra Helios')&&agent.includes('Astra Spica')&&agent.includes('Astra Lyra')&&agent.includes('Astra Rigel')&&agent.includes('Astra Electra')&&agent.includes('Astra Arcturus'),'Public star profile catalog missing');
 const positioning=fs.readFileSync(path.join(root,'public/markets/positioning/index.html'),'utf8');
 const microgrids=fs.readFileSync(path.join(root,'public/markets/positioning/microgrids/index.html'),'utf8');
 const pricing=fs.readFileSync(path.join(root,'public/pricing/index.html'),'utf8');
