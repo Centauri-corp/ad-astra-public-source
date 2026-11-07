@@ -77,4 +77,5 @@ dialog{width:min(1000px,94vw);border:1px solid #435a6a;border-radius:5px;padding
 @media(prefers-reduced-motion:reduce){.sequence-rail{scroll-behavior:auto}}
 
 .motion-note{font-size:8px;line-height:1.45;letter-spacing:.35px;color:#8da8b5;max-width:240px}
+.video-transcript{margin-top:16px;border-top:1px solid #ffffff20;padding-top:12px}.video-transcript summary{display:flex;justify-content:space-between;gap:16px;color:#9ddcf4;font-size:10px;letter-spacing:.08em;text-transform:uppercase}.video-transcript summary span{font-size:16px;line-height:1}.video-transcript p{margin-top:10px;color:#b8c8d1;font-size:11px;line-height:1.6}
 @media(max-width:640px){.hero-bottom{flex-wrap:wrap}.motion-note{order:5;flex-basis:100%;max-width:220px;font-size:7px}}
