@@ -25,6 +25,7 @@ assert.ok(homepage.includes('Astra Lumen'),'Public homepage missing connected mo
 const publicApp=fs.readFileSync(path.join(root,'public/app.js'),'utf8');
 assert.ok(homepage.includes('PUBLIC SPIRAL NEURAL FRAMEWORK / PROCEDURAL WEBGL'),'Public spiral framework label missing');
 assert.ok(publicApp.includes('spiralLine')&&publicApp.includes('u_state'),'Public spiral shader state wiring missing');
+assert.ok(publicApp.includes('a_position3d')&&publicApp.includes('gl.drawArrays(gl.POINTS'),'Public 3D spiral point cloud missing');
 
 const homepageStyle=fs.readFileSync(path.join(root,'public/style.css'),'utf8');
 assert.ok(/@media\(max-width:640px\)/.test(homepageStyle),'Homepage missing mobile breakpoint');
@@ -63,6 +64,7 @@ assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);
 assert.equal(experience.visualArchitecture.publicSpiralFramework.enabled,true);
 assert.equal(experience.visualArchitecture.publicSpiralFramework.publicPreviewOnly,true);
 assert.equal(experience.visualArchitecture.publicSpiralFramework.audioReactive,true);
+assert.equal(experience.visualArchitecture.publicSpiralFramework.public3dPointCloud,true);
 const markets=fs.readFileSync(path.join(root,'public/markets/index.html'),'utf8');
 const positioning=fs.readFileSync(path.join(root,'public/markets/positioning/index.html'),'utf8');
 const microgrids=fs.readFileSync(path.join(root,'public/markets/positioning/microgrids/index.html'),'utf8');
