@@ -24,7 +24,7 @@ assert.ok(!/private|audit|CRM|operations|customer workspace|external writes/i.te
 assert.ok(homepage.includes('Astra Lumen'),'Public homepage missing connected model identity');
 const publicApp=fs.readFileSync(path.join(root,'public/app.js'),'utf8');
 assert.ok(homepage.includes('PUBLIC SPIRAL NEURAL FRAMEWORK / PROCEDURAL WEBGL'),'Public spiral framework label missing');
-assert.ok(/class="sequence-rail(?:\\s|")/.test(homepage)&&homepage.includes('SPIRAL CORE')&&homepage.includes('ASTRA LUMEN'),'Public visual sequence rail missing');
+assert.ok(/class="sequence-rail(?:\s|")/.test(homepage)&&homepage.includes('SPIRAL CORE')&&homepage.includes('ASTRA LUMEN'),'Public visual sequence rail missing');
 assert.ok(publicApp.includes('spiralLine')&&publicApp.includes('u_state'),'Public spiral shader state wiring missing');
 assert.ok(publicApp.includes('a_position3d')&&publicApp.includes('gl.drawArrays(gl.POINTS'),'Public 3D spiral point cloud missing');
 
