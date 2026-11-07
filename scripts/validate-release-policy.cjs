@@ -5,6 +5,7 @@ const path = require('node:path');
 
 // Source policy for the withheld customer release. These are required boundaries,
 // not observations of provider state, acceptance receipts or release approval.
+// Repository access still governs source visibility; never put secrets here.
 const required = Object.freeze({
   schemaVersion: 1,
   releaseScope: 'public-informational-preview',

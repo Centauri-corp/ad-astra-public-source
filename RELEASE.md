@@ -18,8 +18,10 @@ The GitHub verification workflow is source only until pushed to a dedicated veri
 
 ## Withheld preview policy validation
 
-`release-policy.json` is the private, versioned source policy for the informational
+`release-policy.json` is the build-only, versioned source policy for the informational
 preview. It belongs at the repository root, outside the static `public` output.
+This is not a secret store: repository readers can read the policy. It contains
+required restrictions, not credentials, private provider configuration or receipts.
 The release checker requires every restricted capability to be explicitly false,
 customer access to remain withheld, read-only automation and independent release
 approval to remain required. Missing, null, string-valued or unrecognized policy
