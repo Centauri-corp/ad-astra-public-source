@@ -75,3 +75,6 @@ dialog{width:min(1000px,94vw);border:1px solid #435a6a;border-radius:5px;padding
 .sequence-rail i{color:#516d7a;font-style:normal;font-size:15px}
 @media(max-width:640px){.sequence-rail{justify-content:flex-start;overflow:auto;gap:12px;padding:18px 25px 28px;scrollbar-width:none}.sequence-rail::-webkit-scrollbar{display:none}.sequence-rail i{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.sequence-rail{scroll-behavior:auto}}
+
+.motion-note{font-size:8px;line-height:1.45;letter-spacing:.35px;color:#8da8b5;max-width:240px}
+@media(max-width:640px){.hero-bottom{flex-wrap:wrap}.motion-note{order:5;flex-basis:100%;max-width:220px;font-size:7px}}
