@@ -25,6 +25,11 @@ assert.ok(homepage.includes('Astra Lumen'),'Public homepage missing connected mo
 const homepageStyle=fs.readFileSync(path.join(root,'public/style.css'),'utf8');
 assert.ok(/@media\(max-width:640px\)/.test(homepageStyle),'Homepage missing mobile breakpoint');
 assert.ok(/@media\(prefers-reduced-motion:reduce\)/.test(homepageStyle),'Homepage missing reduced-motion fallback');
+const agent=fs.readFileSync(path.join(root,'public/agent/index.html'),'utf8');
+const agentJs=fs.readFileSync(path.join(root,'public/markets/agent.js'),'utf8');
+assert.ok(agent.includes('id="concierge-form"')&&agent.includes('Public preview · local only'),'Public model preview missing');
+assert.ok(agentJs.includes('Audio stays in this browser')||agent.includes('does not send prompts anywhere'),'Public preview disclosure missing');
+assert.ok(!/fetch\\s*\\(/i.test(agentJs),'Public preview must remain local-only');
 const film=fs.readFileSync(path.join(root,'public/film/index.html'),'utf8');assert.ok(!/<video|<audio|<iframe/i.test(film));
 const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,1);assert.ok(sitemap.includes('<loc>https://adastra.global/</loc>'));
 assert.equal(JSON.parse(fs.readFileSync(path.join(root,'vercel.json'))).git.deploymentEnabled,false);
