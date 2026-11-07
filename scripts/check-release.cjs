@@ -53,6 +53,7 @@ const preview=fs.readFileSync(path.join(root,'public/platform-preview/index.html
 assert.ok(preview.includes('CUSTOMER PLATFORM MOCKUP')&&preview.includes('Astra Polaris')&&preview.includes('PREVIEW BOUNDARY'),'Customer platform preview missing boundary');
 assert.ok(preview.includes('no customer prompts')&&preview.includes('backend writes'),'Customer platform preview exposes an unsafe surface');
 assert.ok(preview.includes('/assets/astra-polaris-platform-mockup.png')&&preview.includes('global network'),'Customer platform mockup visual missing');
+for(const label of ['QUESTION STUDIO','RESEARCH ATLAS','CREATIVE ORBIT','LEARNING LENS','HORIZON SCANNER','PROJECT ORBIT','KNOWLEDGE ROOMS','SIGNAL MONITOR','PROFILE CONSTELLATIONS','GLOBAL NETWORK','ACCESS LAYER','GOVERNANCE DECK'])assert.ok(preview.includes(label),`Customer product missing: ${label}`);
 const positioning=fs.readFileSync(path.join(root,'public/markets/positioning/index.html'),'utf8');
 const microgrids=fs.readFileSync(path.join(root,'public/markets/positioning/microgrids/index.html'),'utf8');
 const pricing=fs.readFileSync(path.join(root,'public/pricing/index.html'),'utf8');
