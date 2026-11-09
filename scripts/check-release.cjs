@@ -10,7 +10,46 @@ for(const profile of catalog.MARKET_PROFILES){assert.ok(/^Astra /.test(profile.n
 function walk(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);}
 if(process.env.VERCEL_PROJECT_ID)assert.equal(process.env.VERCEL_PROJECT_ID,'prj_FX8QO3TIqUNAfFR4enz0bALmjeg1');
 if(process.env.VERCEL_ORG_ID)assert.equal(process.env.VERCEL_ORG_ID,'team_5xblMPo2zEBjbz4KPmeDVHPr');
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'public/release-manifest.json')));
+const experience=JSON.parse(fs.readFileSync(path.join(root,'public/experience-manifest.json')));
+const routeEvidence=JSON.parse(fs.readFileSync(path.join(root,'public/route-release-evidence.json')));
+const approvedRoutes=routeEvidence.approvedRoutes;
+const requiredRouteGates=['contentAndClaims','brandAndRights','seoTechnicalQa','accessibilityResponsiveQa','privacyAndAnalyticsQa','independentReview','humanReleaseAuthorization'];
+assert.equal(routeEvidence.schema,'ad-astra-public-route-release-evidence/v1');
+assert.equal(routeEvidence.releaseScope,'public-marketing-site-only');
+assert.equal(routeEvidence.customerProductLaunchEnabled,false);
+assert.deepEqual(routeEvidence.requiredRouteGates,requiredRouteGates);
+assert.deepEqual(routeEvidence.availabilityClaims,{globalAvailability:false,approvedRegions:[]});
+assert.deepEqual(routeEvidence.capabilityBoundary,{engineExecution:false,customerProductAccess:false,crmWrites:false,billing:false,outboundMessaging:false,paidAdvertising:false});
+assert.equal(manifest.releaseScope,'public-marketing-site-only');
+assert.equal(manifest.routeEvidenceFile,'route-release-evidence.json');
+assert.equal(experience.releaseScope,'public-marketing-site-only');
+assert.equal(experience.seo.routeEvidenceFile,'route-release-evidence.json');
+assert.deepEqual(manifest.indexableRoutes,approvedRoutes,'Release indexable routes must equal evidence-approved routes');
+assert.deepEqual(experience.seo.indexableRoutes,approvedRoutes,'Experience indexable routes must equal evidence-approved routes');
+assert.equal(new Set(approvedRoutes).size,approvedRoutes.length,'Duplicate approved routes');
+const approvedSet=new Set(approvedRoutes);
+const routeRecords=new Map(routeEvidence.routes.map(record=>[record.path,record]));
+assert.equal(routeRecords.size,routeEvidence.routes.length,'Duplicate route evidence records');
+assert.deepEqual([...routeRecords.values()].filter(record=>record.decision==='approved').map(record=>record.path).sort(),[...approvedRoutes].sort(),'Approved route decisions must match approvedRoutes');
+for(const route of approvedRoutes){
+ assert.ok(/^\/(?:[a-z0-9-]+\/)*$/.test(route),`Invalid approved route: ${route}`);
+ const record=routeRecords.get(route);
+ assert.ok(record&&record.decision==='approved',`Approved route lacks an approved evidence record: ${route}`);
+ for(const gate of requiredRouteGates)assert.ok(record.gates?.[gate]?.status==='accepted'&&typeof record.gates[gate].evidenceRef==='string'&&record.gates[gate].evidenceRef.length>0,`Approved route evidence missing ${gate}: ${route}`);
+}
+if(approvedRoutes.length){
+ for(const key of ['googleSearchConsole','bingWebmaster'])assert.ok(routeEvidence.searchProperties[key]?.status==='verified'&&typeof routeEvidence.searchProperties[key].evidenceRef==='string'&&routeEvidence.searchProperties[key].evidenceRef.length>0,`Search property evidence missing: ${key}`);
+}
 const files=walk(path.join(root,'public'));
+const htmlRoute=file=>{const rel=path.relative(path.join(root,'public'),file).replaceAll('\\','/');return rel==='index.html'?'/':'/'+rel.replace(/index\.html$/,'');};
+const availableRoutes=new Set(files.filter(file=>file.endsWith('.html')).map(htmlRoute));
+assert.deepEqual([...routeRecords.keys()].sort(),[...availableRoutes].sort(),'Every public HTML route must have an evidence record');
+for(const route of approvedRoutes)assert.ok(availableRoutes.has(route),`Approved route does not exist: ${route}`);
+for(const record of routeRecords.values()){
+ const unresolved=requiredRouteGates.filter(gate=>record.gates?.[gate]?.status!=='accepted'||typeof record.gates[gate].evidenceRef!=='string'||record.gates[gate].evidenceRef.length===0);
+ if(record.decision==='pending')assert.deepEqual(record.missingGates??unresolved,unresolved,`Pending route missing-gate list drifted: ${record.path}`);
+}
 for(const f of files){
  const rel=path.relative(path.join(root,'public'),f).replaceAll('\\','/');
  assert.ok(!/(catalog\.json|\.map$|\.env|\.git|ad-astra-cognitive|company-film|preview-v2\.mp4)/i.test(rel),rel);
@@ -18,29 +57,47 @@ for(const f of files){
  const text=fs.readFileSync(f,'utf8');
  assert.ok(!/sk-proj-[A-Za-z0-9_-]{16}|SANITY_API_TOKEN|Bearer sk-|energy-america|ad-astra-cognitive|chatgpt\.site/i.test(text),'Public privacy scan: '+rel);
  if(rel.endsWith('.html')){
-  assert.ok(text.includes('rel="canonical"'),rel+' missing canonical');
-  if(rel!=='index.html')assert.ok(/name="robots" content="noindex,follow"/.test(text),rel+' missing noindex');
+  const route=htmlRoute(f);
+  const expectedRobots=approvedSet.has(route)?'index,follow':'noindex,follow';
+  const canonicalTags=[...text.matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"/gi)];
+  assert.equal(canonicalTags.length,1,rel+' must have exactly one canonical link');
+  assert.equal(canonicalTags[0][1],'https://adastra.global'+route,rel+' canonical does not match its route');
+  const robotsTags=[...text.matchAll(/<meta\s+name="robots"\s+content="([^"]+)"/gi)];
+  assert.equal(robotsTags.length,1,rel+' must have exactly one robots directive');
+  assert.equal(robotsTags[0][1],expectedRobots,rel+' robots policy does not match route evidence');
+  assert.match(text,/<title>[^<]+<\/title>/i,rel+' missing title');
+  assert.match(text,/<meta name="description" content="[^"]+"/i,rel+' missing description');
  }
 }
 const film=fs.readFileSync(path.join(root,'public/film/index.html'),'utf8');assert.ok(!/<video|<audio|<iframe/i.test(film));
 const homepage=fs.readFileSync(path.join(root,'public/index.html'),'utf8');
+assert.ok(homepage.includes('src="/assets/brand/ad-astra-mark.svg"'),'Homepage must use the approved AD ASTRA orbital mark');
+assert.ok(homepage.includes('class="brand-wordmark" aria-hidden="true">AD ASTRA</span>'),'Homepage must retain the semantic AD ASTRA wordmark');
+assert.ok(fs.existsSync(path.join(root,'public/assets/brand/ad-astra-mark.svg')),'Missing first-party AD ASTRA orbital mark');
+const visualManifest=JSON.parse(fs.readFileSync(path.join(root,'public/assets/visual-manifest.json')));
+assert.ok(visualManifest.assets.some(asset=>asset.id==='ad-astra-orbital-mark'&&asset.path==='/assets/brand/ad-astra-mark.svg'),'Visual manifest must identify the deployed AD ASTRA orbital mark');
 assert.ok(homepage.includes('ad-astra-runway-orbital-motion.vtt')&&homepage.includes('ad-astra-horizon-motion.vtt'),'Public motion previews missing caption tracks');
 assert.equal((homepage.match(/class="video-transcript"/g)||[]).length,2,'Public motion previews missing text transcripts');
 for(const caption of ['ad-astra-runway-orbital-motion.vtt','ad-astra-horizon-motion.vtt']){const captionPath=path.join(root,'public/assets',caption);assert.ok(fs.existsSync(captionPath),`Missing caption track: ${caption}`);assert.ok(fs.readFileSync(captionPath,'utf8').startsWith('WEBVTT'),`Invalid caption track: ${caption}`);}
-const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,1);assert.ok(sitemap.includes('<loc>https://adastra.global/</loc>'));
+const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');
+const sitemapRoutes=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1]);
+const expectedSitemapRoutes=approvedRoutes.map(route=>'https://adastra.global'+route);
+assert.deepEqual(sitemapRoutes,expectedSitemapRoutes,'Sitemap must exactly match evidence-approved routes');
+const robots=fs.readFileSync(path.join(root,'public/robots.txt'),'utf8');assert.ok(robots.includes('Allow: /')&&robots.includes('Disallow: /api/')&&robots.includes('Sitemap: https://adastra.global/sitemap.xml'));
 assert.equal(JSON.parse(fs.readFileSync(path.join(root,'vercel.json'))).git.deploymentEnabled,false);
-const manifest=JSON.parse(fs.readFileSync(path.join(root,'public/release-manifest.json')));
-const experience=JSON.parse(fs.readFileSync(path.join(root,'public/experience-manifest.json')));
 assert.equal(manifest.publicLaunchEnabled,false);assert.equal(manifest.engineAvailable,false);
 assert.equal(manifest.customerPortal,'authenticated-preview');
 assert.equal(manifest.customerAiModel,'astra-lumen');
 assert.equal(manifest.connectedPublicModelCount,1);
 assert.equal(manifest.publicModelName,'Astra Polaris');
+assert.equal(manifest.indexingPolicy,'noindex-until-page-evidence-approved');
 assert.equal(manifest.marketProfileArchitecture,'one-connected-model-with-sector-profiles');
 assert.equal(manifest.marketProfileCount,catalog.MARKET_PROFILES.length);
 assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
 assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','approach','experiences','horizon','company','signature']);
-assert.deepEqual(experience.seo.indexableRoutes,['/']);
+assert.deepEqual(experience.visualArchitecture.palette,{navy:'#07111c',cyan:'#9bdfe3',violet:'#9a7cff',gold:'#e9c990'});
+assert.equal(experience.seo.indexingPolicy,'noindex-until-page-evidence-approved');
+assert.equal(experience.seo.homepageRobots,approvedSet.has('/')?'index,follow':'noindex,follow');
 assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);
 assert.equal(experience.growthAutomation.externalCrmWrites,false);
 assert.equal(experience.growthAutomation.outboundSends,false);
@@ -75,4 +132,4 @@ assert.ok(microgrids.includes('20FT / TACTICAL MICRO-POD')&&microgrids.includes(
 assert.ok(microgrids.includes('Neither footprint bypasses municipal permission'));
 assert.ok(microgrids.includes('selenium interlayer')&&microgrids.includes('pressure-vessel safety case'));
 assert.ok(pricing.includes('For individuals')&&pricing.includes('For organizations')&&pricing.includes('No payment is requested'));
-console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-only privacy=passed');
+console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=none-until-evidence-approved privacy=passed');

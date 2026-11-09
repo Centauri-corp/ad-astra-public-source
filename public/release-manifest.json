@@ -1,10 +1,14 @@
 {
-  "release": "ad-astra-production-repair-2026-10-23",
+  "release": "ad-astra-marketing-site-rc-2026-11-09",
   "canonical": "https://adastra.global/",
+  "releaseScope": "public-marketing-site-only",
+  "routeEvidenceFile": "route-release-evidence.json",
   "filmPublicPlayback": false,
   "publicReferenceCatalog": false,
   "assetOriginDependency": false,
   "publicLaunchEnabled": false,
+  "indexingPolicy": "noindex-until-page-evidence-approved",
+  "indexableRoutes": [],
   "engineAvailable": false,
   "customerPortal": "authenticated-preview",
   "customerAiModel": "astra-lumen",
@@ -48,8 +52,5 @@
   },
   "dailyModelBudgetUSD": 10,
   "rollbackBaseline": "dpl_GUQqWJ3jTy9f73XqfQFvmbqhnHUy",
-  "source": "isolated AD ASTRA source; see release evidence",
-  "indexableRoutes": [
-    "/"
-  ]
+  "source": "isolated AD ASTRA source; see release evidence"
 }

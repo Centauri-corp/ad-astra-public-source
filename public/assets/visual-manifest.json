@@ -70,10 +70,10 @@
       "alt": "Softly lit horizon suggesting a new direction"
     },
     {
-      "id": "ad-astra-logo-transparent",
-      "path": "/assets/ad-astra-logo-transparent.png",
-      "role": "brand mark",
-      "alt": "Ad Astra orbital logo"
+      "id": "ad-astra-orbital-mark",
+      "path": "/assets/brand/ad-astra-mark.svg",
+      "role": "first-party orbital brand symbol paired with the semantic wordmark",
+      "alt": ""
     },
     {
       "id": "astra-lumen-neural-profile-canvas",
