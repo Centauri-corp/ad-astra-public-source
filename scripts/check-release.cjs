@@ -24,6 +24,11 @@ for(const f of files){
 }
 const film=fs.readFileSync(path.join(root,'public/film/index.html'),'utf8');assert.ok(!/<video|<audio|<iframe/i.test(film));
 const homepage=fs.readFileSync(path.join(root,'public/index.html'),'utf8');
+assert.ok(homepage.includes('src="/assets/brand/ad-astra-mark.svg"'),'Homepage must use the approved AD ASTRA orbital mark');
+assert.ok(homepage.includes('class="brand-wordmark" aria-hidden="true">AD ASTRA</span>'),'Homepage must retain the semantic AD ASTRA wordmark');
+assert.ok(fs.existsSync(path.join(root,'public/assets/brand/ad-astra-mark.svg')),'Missing first-party AD ASTRA orbital mark');
+const visualManifest=JSON.parse(fs.readFileSync(path.join(root,'public/assets/visual-manifest.json')));
+assert.ok(visualManifest.assets.some(asset=>asset.id==='ad-astra-orbital-mark'&&asset.path==='/assets/brand/ad-astra-mark.svg'),'Visual manifest must identify the deployed AD ASTRA orbital mark');
 assert.ok(homepage.includes('ad-astra-runway-orbital-motion.vtt')&&homepage.includes('ad-astra-horizon-motion.vtt'),'Public motion previews missing caption tracks');
 assert.equal((homepage.match(/class="video-transcript"/g)||[]).length,2,'Public motion previews missing text transcripts');
 for(const caption of ['ad-astra-runway-orbital-motion.vtt','ad-astra-horizon-motion.vtt']){const captionPath=path.join(root,'public/assets',caption);assert.ok(fs.existsSync(captionPath),`Missing caption track: ${caption}`);assert.ok(fs.readFileSync(captionPath,'utf8').startsWith('WEBVTT'),`Invalid caption track: ${caption}`);}

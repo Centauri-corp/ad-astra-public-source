@@ -25,13 +25,13 @@ dialog{width:min(1000px,94vw);border:1px solid #435a6a;border-radius:5px;padding
 .nav-menu>summary>span{color:#adc1ce}.nav-menu[open]>summary{color:#a9d8ef}
 .mega-menu{color:var(--ink)}.mega-menu .text-link{border-bottom-color:#9eb2bc}
 .menu{color:inherit}.status{color:#c6d6e1}.status>span{background:#8bc8df}
-/* Preserve the approved orbital mark; restore its name as crisp, accessible type. */
+/* First-party orbital symbol; the wordmark remains semantic HTML text. */
 .brand{display:flex;align-items:center;gap:12px;width:auto;flex-shrink:0}
-.brand::after{display:none}.brand-symbol{width:52px;height:45px;position:relative;overflow:hidden;display:block;flex-shrink:0}
-.brand .brand-symbol img{position:absolute;top:-18.2px;left:0;width:175px;height:65px;max-width:none;object-fit:fill}
+.brand::after{content:none}.brand-symbol{width:48px;height:48px;display:grid;place-items:center;flex-shrink:0}
+.brand .brand-symbol img{position:static;width:100%;height:100%;max-width:100%;object-fit:contain}
 .brand-wordmark{font-family:Manrope,Arial,sans-serif;font-size:15px;font-weight:500;letter-spacing:4.5px;color:#edf4fa;white-space:nowrap}
 @media(max-width:900px){.brand{gap:9px}.brand-wordmark{font-size:13px;letter-spacing:3.5px}}
-@media(max-width:640px){.brand{gap:7px}.brand-symbol{width:41px;height:36px}.brand .brand-symbol img{width:140px;height:52px;top:-14.6px}.brand-wordmark{font-size:11px;letter-spacing:2.9px}}
+@media(max-width:640px){.brand{gap:7px}.brand-symbol{width:40px;height:40px}.brand-wordmark{font-size:11px;letter-spacing:2.9px}}
 
 /* Astra Lumen neural artwork */
 .neural-hero{object-position:68% center;filter:saturate(1.08) contrast(1.08)}
