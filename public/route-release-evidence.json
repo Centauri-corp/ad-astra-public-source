@@ -1,0 +1,74 @@
+{
+  "schema": "ad-astra-public-route-release-evidence/v1",
+  "releaseScope": "public-marketing-site-only",
+  "customerProductLaunchEnabled": false,
+  "requiredRouteGates": [
+    "contentAndClaims",
+    "brandAndRights",
+    "seoTechnicalQa",
+    "accessibilityResponsiveQa",
+    "privacyAndAnalyticsQa",
+    "independentReview",
+    "humanReleaseAuthorization"
+  ],
+  "approvedRoutes": [],
+  "routes": [
+    {
+      "path": "/",
+      "decision": "pending",
+      "gates": {
+        "contentAndClaims": { "status": "missing", "evidenceRef": null },
+        "brandAndRights": { "status": "missing", "evidenceRef": null },
+        "seoTechnicalQa": { "status": "missing", "evidenceRef": null },
+        "accessibilityResponsiveQa": { "status": "missing", "evidenceRef": null },
+        "privacyAndAnalyticsQa": { "status": "missing", "evidenceRef": null },
+        "independentReview": { "status": "missing", "evidenceRef": null },
+        "humanReleaseAuthorization": { "status": "missing", "evidenceRef": null }
+      }
+    },
+    { "path": "/about/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/agent/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/company/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/film/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/knowledge/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/agriculture-food/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/business-professional-services/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/consumer-personal-ai/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/creative-industries-media/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/digital-commerce/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/education-learning/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/finance-economics/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/government-public-services/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/healthcare-wellness/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/legal-compliance/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/logistics-supply-chain/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/manufacturing-energy/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/positioning/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/positioning/microgrids/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/real-estate-construction/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/science-research/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/travel-hospitality/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/platform-preview/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/platform/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/pricing/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/services/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/sign-in/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] }
+  ],
+  "searchProperties": {
+    "googleSearchConsole": { "status": "not-verified", "evidenceRef": null },
+    "bingWebmaster": { "status": "not-verified", "evidenceRef": null }
+  },
+  "capabilityBoundary": {
+    "engineExecution": false,
+    "customerProductAccess": false,
+    "crmWrites": false,
+    "billing": false,
+    "outboundMessaging": false,
+    "paidAdvertising": false
+  },
+  "availabilityClaims": {
+    "globalAvailability": false,
+    "approvedRegions": []
+  }
+}
