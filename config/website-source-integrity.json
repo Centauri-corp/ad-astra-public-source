@@ -281,13 +281,13 @@
     },
     {
       "path": "public/intelligence/index.html",
-      "bytes": 7282,
-      "sha256": "5a87f86912c9e0b0b0a1486844ece86db590761227e0bca1ea5bc52470444871"
+      "bytes": 9015,
+      "sha256": "2970208e0580227755d8fdff9f97b863bcab5cfeba4e58d0b35bab1ca6e57899"
     },
     {
       "path": "public/intelligence/style.css",
-      "bytes": 2762,
-      "sha256": "b0916285768ffc085410a433e227b1e41046b5e9fa9768c025cec99093624127"
+      "bytes": 10439,
+      "sha256": "1719a7d42c7c1bb57a8dc46a5008705b5421f75934fcc53dbdb29006f41de6c7"
     },
     {
       "path": "public/knowledge/app.js",
@@ -555,5 +555,5 @@
       "sha256": "25897eaf6ae90a32c52466935ac92b88e1163118139ca47b199183a774eada04"
     }
   ],
-  "fingerprint": "d2fb51c488aa25b6e841f38595b8751b01060b042b2f742fd89024dd88a32a43"
+  "fingerprint": "4e6a005f74ab3dcc29d3bb614c12785ca6f3b71101b0bb9ab5227c3f17f97cfe"
 }
