@@ -15,9 +15,17 @@ fs.mkdirSync(out,{recursive:true});
     errors=[];const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:20000});await page.waitForTimeout(80);
     const state=await page.evaluate(()=>({resolvedPath:location.pathname,overflow:document.documentElement.scrollWidth>innerWidth+1,visibleH1s:[...document.querySelectorAll('h1')].filter(e=>e.checkVisibility()).length,brokenImages:[...document.images].filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.getAttribute('src')),products:!!document.querySelector('a[href="/products/"]'),availability:!!document.querySelector('a[href="/status/"]')}));
     report.pages.push({route,width,status:response.status(),...state,errors:[...errors]});
-    if(['/products/','/products/core-intelligence/','/status/'].includes(route)&&[390,1440].includes(width)){const file=path.join(out,`candidate-${route.split('/').filter(Boolean).join('-')}-${width}.png`);await page.screenshot({path:file,fullPage:true});report.screenshots.push(path.relative(root,file));}
+    if(['/intelligence/','/products/','/products/core-intelligence/','/status/'].includes(route)&&[390,1440].includes(width)){const file=path.join(out,`candidate-${route.split('/').filter(Boolean).join('-')}-${width}.png`);await page.evaluate(async()=>{for(const image of document.images)image.loading='eager';await Promise.all([...document.images].map(image=>image.decode().catch(()=>{})));});await page.screenshot({path:file,fullPage:true});report.screenshots.push(path.relative(root,file));}
    }
   }
+  await page.goto(base+'/intelligence/');
+  assert.equal(await page.getByRole('heading',{level:1}).count(),1);
+  assert.equal(await page.locator('.thinking-modes a').count(),5);
+  assert.equal(await page.locator('input,textarea,video,audio,iframe').count(),0);
+  await page.locator('.thinking-modes a[href="/products/?mode=research"]').click();
+  assert.equal(new URL(page.url()).searchParams.get('mode'),'research');
+  assert.equal(await page.locator('button[data-mode="research"]').getAttribute('aria-pressed'),'true');
+  report.interactions.push({name:'intelligence page to research product filter without AI execution',result:'PASS'});
   await page.goto(base+'/products/');
   const families=require('../config/public-product-families.json').families;
   for(const mode of ['all','ask','research','create','learn','explore']){await page.locator(`button[data-mode="${mode}"]`).click();const shown=await page.locator('[data-family]:visible').count();assert.equal(shown,mode==='all'?6:families.filter(f=>f.modes.includes(mode)).length);}

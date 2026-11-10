@@ -2,6 +2,15 @@
   "name": "ad-astra-public-hardened",
   "private": true,
   "version": "2.3.0",
-  "engines": {"node":"24.x"},
-  "scripts": {"products:build":"node scripts/build-products.cjs","status:build":"node scripts/build-operating-status.cjs","test":"node scripts/build-products.cjs --check && node scripts/build-operating-status.cjs --check && node scripts/check-release.cjs && node --test test/*.test.cjs","check":"node scripts/build-products.cjs --check && node scripts/build-operating-status.cjs --check && node scripts/check-release.cjs"}
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "products:build": "node scripts/build-products.cjs",
+    "status:build": "node scripts/build-operating-status.cjs",
+    "test": "node scripts/build-products.cjs --check && node scripts/build-operating-status.cjs --check && node scripts/check-release.cjs && node scripts/website-source-integrity.cjs && node --test test/*.test.cjs",
+    "check": "node scripts/build-products.cjs --check && node scripts/build-operating-status.cjs --check && node scripts/check-release.cjs && node scripts/website-source-integrity.cjs",
+    "sources:write": "node scripts/website-source-integrity.cjs --write",
+    "sources:check": "node scripts/website-source-integrity.cjs"
+  }
 }

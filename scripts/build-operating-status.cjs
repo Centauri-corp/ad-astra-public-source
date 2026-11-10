@@ -37,7 +37,7 @@ ${cards}
   </section>
   <p class="availability-note">These statuses describe product availability. They are not a service uptime measurement.</p>
 </main>
-<footer><span>AD ASTRA · Human-directed discovery</span><a href="/products/">Explore product directions</a></footer>
+<footer><span>AD ASTRA · Human-directed discovery</span><a href="/products/">Explore product directions</a><a href="/intelligence/">Connected intelligence</a></footer>
 </body>
 </html>
 `;
