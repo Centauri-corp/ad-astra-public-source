@@ -11,3 +11,7 @@ Verification covers 38 pages at 320, 390, 768 and 1440 pixels, the intelligence-
 The private repository holds the source-by-source inventory, exact PR #37 recovery archive and restored historical patch archives. Code recovery is not runtime integration. Its competing backend/security/database changes and incomplete conversation/media sources retain explicit unresolved status.
 
 Continue public PR #33 and private PR #41. Both require independent review of their final exact commits. The observed live baseline before this change is deployment `dpl_HPSJroLom9Q7wBEz7wN4TfehJYtt`, source `4e341a5d4bb3b27442339eda43fff1c61fc4f1e0`. Record a fresh alias read before staging or promotion; this document does not perform deployment.
+
+## Visual revision
+
+The intelligence page uses a full-width neural image, large restrained typography, a compact five-mode rail, a light product-family section and a short film panel. The earlier rounded card grid, illustrative chat and repeated process explanations were removed. The page remains static and usable without JavaScript or motion.
