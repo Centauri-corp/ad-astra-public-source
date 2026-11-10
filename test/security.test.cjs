@@ -3,6 +3,8 @@ const {test,beforeEach,after}=require('node:test'), assert=require('node:assert/
 const ask=require('../api/ask'),status=require('../api/status'),auth=require('../lib/auth'),quota=require('../lib/quota'),gates=require('../lib/release-gates');
 const models=require('../api/models'),catalog=require('../lib/model-catalog');
 const originalEnv={...process.env},originalFetch=global.fetch;
+const release=require('../public/release-manifest.json'),routing=require('../vercel.json');
+const originalRelease=structuredClone(release),originalRedirects=structuredClone(routing.redirects);
 const pair=crypto.generateKeyPairSync('rsa',{modulusLength:2048});
 const jwk={...pair.publicKey.export({format:'jwk'}),kid:'test-key',use:'sig',alg:'RS256'};
 let calls=[],redisResult=[1,11,3600],providerStatus=200;
@@ -19,6 +21,8 @@ async function request(options={}){
  const res=response(); await ask(req,res);return res;
 }
 beforeEach(()=>{
+ // In-memory accepted-source fixture only; never edits public manifests.
+ release.publicLaunchEnabled=true;release.engineAvailable=true;routing.redirects=[];
  for(const key of Object.keys(process.env))if(!(key in originalEnv))delete process.env[key];
  Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://redis.invalid',KV_REST_API_TOKEN:'synthetic-test-only',OPENAI_API_KEY:'synthetic-test-only',OPENAI_MODEL:'gpt-4.1-mini-2025-04-14',VERCEL_ENV:'production'});
  for(const flag of gates.FLAGS)process.env[flag]='true';
@@ -31,7 +35,15 @@ beforeEach(()=>{
   throw Error('Unexpected external destination');
  };
 });
-after(()=>{global.fetch=originalFetch;for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];Object.assign(process.env,originalEnv);});
+after(()=>{global.fetch=originalFetch;Object.assign(release,originalRelease);routing.redirects=originalRedirects;for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];Object.assign(process.env,originalEnv);});
+test('runtime switches cannot bypass a marketing-only source or closed customer routes',async()=>{
+ for(const key of ['publicLaunchEnabled','engineAvailable']){release[key]=false;calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));release[key]=true;}
+ for(const source of ['/platform/:path*','/sign-in/:path*']){routing.redirects=[{source,destination:'/',permanent:false}];calls=[];assert.equal((await request()).statusCode,503);assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));}
+});
+test('all five contracted modes use a bounded provider request in the synthetic fixture',async()=>{
+ const ids=require('../lib/modes').MODE_IDS;assert.deepEqual(ids,release.customerModes);assert.deepEqual(catalog.MODELS[0].modes,ids);
+ for(const mode of ids){calls=[];const r=await request({body:{question:'Compare two clear alternatives.',mode}});assert.equal(r.statusCode,200);assert.equal(r.body.mode,mode);assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,1);}
+});
 test('valid signed session reserves quota before one bounded provider request',async()=>{
  const r=await request();assert.equal(r.statusCode,200);assert.equal(r.headers['cache-control'],'no-store');
  const quotaIndex=calls.findIndex(c=>c.url==='https://redis.invalid'),modelIndex=calls.findIndex(c=>c.url.includes('/chat/completions'));assert.ok(quotaIndex<modelIndex);

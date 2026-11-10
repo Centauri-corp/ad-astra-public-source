@@ -1,0 +1,16 @@
+{
+  "schema": "ad-astra-public-visual-architecture/v1",
+  "modelName": "Astra Polaris",
+  "status": "design-preview",
+  "modes": ["ask", "research", "create", "learn", "explore"],
+  "tokens": {"background":"#080f17","surface":"#0d1d2b","text":"#edf3f3","muted":"#aec5c6","cyan":"#9bdfe3","champagne":"#e9c990","cobalt":"#214b78","cobaltText":"#aec9ed"},
+  "motion": {"autoplay":false,"reducedMotion":"static-equivalent","audio":false},
+  "experiences": {
+    "core-intelligence": {"prompt":"Help me compare two study plans for a new subject.","steps":["Clarify the goal","Compare the options","Choose the next question"],"outputs":["Question checklist","Plan comparison","Learning outline"]},
+    "creative-studio": {"prompt":"Shape a visual direction for a community learning project.","steps":["Define the brief","Explore visual directions","Refine with human feedback"],"outputs":["Creative brief","Visual direction","Review checklist"]},
+    "specialist-intelligence": {"prompt":"Map the evidence and open questions in a research topic.","steps":["Frame the research","Compare sources","Request specialist review"],"outputs":["Research outline","Evidence questions","Uncertainty notes"]},
+    "business-commerce": {"prompt":"Compare approaches to a customer support handoff.","steps":["Describe the customer need","Compare approaches","Prepare a team review"],"outputs":["Decision brief","Communication draft","Handoff checklist"]},
+    "developer-platform": {"prompt":"Outline a read-only interface between two application services.","steps":["Define the interface","Identify boundaries","Plan verification"],"outputs":["Interface outline","Failure cases","Test plan"]},
+    "autonomous-workflows": {"prompt":"Plan a support-request workflow with a human approval step.","steps":["Assign owners","Add approval checkpoints","Define stop conditions"],"outputs":["Workflow outline","Approval checkpoints","Recovery plan"]}
+  }
+}

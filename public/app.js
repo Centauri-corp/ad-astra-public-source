@@ -217,9 +217,15 @@ document.getElementById('save-launch').addEventListener('click', async () => {
   };
   let tier = 1, activity = 0, targetActivity = 0, visible = true, frame = 0, started = performance.now();
   const gl = canvas.getContext('webgl', { alpha: true, antialias: false, powerPreference: 'low-power' });
+  // Even without WebGL, never allow a local demo form to navigate or submit.
+  form?.addEventListener('submit', event => event.preventDefault());
   if (!gl) {
     canvas.hidden = true;
     activityLabel.textContent = 'STATIC FALLBACK / WEBGL UNAVAILABLE';
+    document.getElementById('voice-command')?.setAttribute('disabled', '');
+    document.getElementById('voice-help').textContent = 'The interactive visual demo is unavailable. Explore the static artwork and product directions instead.';
+    if (input) input.disabled = true;
+    form?.querySelector('button')?.setAttribute('disabled', '');
     return;
   }
   const vertexSource = [
@@ -315,22 +321,26 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     const width = Math.max(1, Math.floor(rect.width * ratio)), height = Math.max(1, Math.floor(rect.height * ratio));
     if (canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; gl.viewport(0, 0, width, height); }
   }
-  let audioContext = null, audioAnalyser = null, audioStream = null, audioData = null, amplitude = 0;
+  let audioContext = null, audioAnalyser = null, audioStream = null, audioData = null, amplitude = 0, audioGeneration = 0;
   async function startAudioMeter() {
     if (audioAnalyser || !navigator.mediaDevices?.getUserMedia) return false;
+    const generation = ++audioGeneration;
     try {
-      audioStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false });
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false });
+      if (generation !== audioGeneration || document.hidden) { stream.getTracks().forEach(track => track.stop()); return false; }
+      audioStream = stream;
       audioContext = new (window.AudioContext || window.webkitAudioContext)();
       audioAnalyser = audioContext.createAnalyser(); audioAnalyser.fftSize = 512; audioAnalyser.smoothingTimeConstant = .78;
       audioData = new Uint8Array(audioAnalyser.fftSize);
       audioContext.createMediaStreamSource(audioStream).connect(audioAnalyser);
       return true;
-    } catch { audioStream?.getTracks().forEach(track => track.stop()); audioStream = null; return false; }
+    } catch { stopAudioMeter(); return false; }
   }
   function stopAudioMeter() {
+    audioGeneration++;
     audioStream?.getTracks().forEach(track => track.stop()); audioStream = null;
     audioAnalyser?.disconnect(); audioAnalyser = null; audioData = null;
-    audioContext?.close(); audioContext = null; amplitude = 0;
+    audioContext?.close()?.catch(() => {}); audioContext = null; amplitude = 0;
   }
   function sampleAudio() {
     if (!audioAnalyser || !audioData || reducedMotion.matches) { amplitude *= .9; return amplitude; }
@@ -397,14 +407,21 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     thinking: {label: 'VOICE CONCIERGE / THINKING', intensity: 1.8, message: 'LOCAL VISUAL / PROCESSING STATE'},
     speaking: {label: 'VOICE CONCIERGE / SPEAKING', intensity: 2.6, message: 'LOCAL VISUAL / OUTPUT STATE'}
   };
-  let recognition = null, voiceTimer = 0;
+  let recognition = null, voiceTimer = 0, voiceStarting = false, voiceActivation = 0;
+  function stopVoice() {
+    voiceActivation++; voiceStarting = false; clearTimeout(voiceTimer);
+    try { recognition?.abort(); } catch {}
+    stopAudioMeter(); voiceButton?.setAttribute('aria-pressed', 'false'); voiceButton?.setAttribute('aria-busy', 'false');
+    setVoiceState('idle');
+  }
   function setVoiceState(next, transcript = '') {
     const state = voiceStates[next] || voiceStates.idle;
     section.dataset.voiceState = next;
     voiceState.textContent = state.label;
     activityLabel.textContent = transcript ? `${state.message} / “${transcript.slice(0, 54)}”` : state.message;
     targetActivity = Math.max(targetActivity, state.intensity);
-    if (next !== 'idle') { clearTimeout(voiceTimer); voiceTimer = setTimeout(() => setVoiceState('idle'), 3600); }
+    clearTimeout(voiceTimer);
+    if (next !== 'idle') { voiceTimer = setTimeout(() => setVoiceState('idle'), 3600); }
   }
   function classifyVoice(text) {
     const valueText = String(text || '').toLowerCase();
@@ -422,17 +439,29 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     recognition.onstart = () => { voiceButton.setAttribute('aria-pressed', 'true'); setVoiceState('listening'); };
     recognition.onresult = event => {
       const transcript = Array.from(event.results).map(result => result[0]?.transcript || '').join(' ').trim();
-      setVoiceState(classifyVoice(transcript), transcript);
+      const state = classifyVoice(transcript);
+      if (state === 'idle') stopVoice(); else setVoiceState(state, transcript);
     };
     recognition.onerror = () => { voiceButton.setAttribute('aria-pressed', 'false'); setVoiceState('idle'); stopAudioMeter(); voiceHelp.textContent = 'Speech recognition was unavailable. Use the visual prompt above.'; };
     recognition.onend = () => { voiceButton.setAttribute('aria-pressed', 'false'); stopAudioMeter(); };
     voiceButton?.addEventListener('click', async () => {
-      if (voiceButton.getAttribute('aria-pressed') === 'true') { recognition.stop(); setVoiceState('idle'); return; }
+      if (voiceStarting) { stopVoice(); return; }
+      if (voiceButton.getAttribute('aria-pressed') === 'true') { stopVoice(); return; }
+      voiceStarting = true; const activation = ++voiceActivation; voiceButton.setAttribute('aria-busy', 'true');
       const audioReady = await startAudioMeter();
+      if (activation !== voiceActivation || document.hidden) { stopAudioMeter(); return; }
+      voiceStarting = false; voiceButton.setAttribute('aria-busy', 'false');
+      if (!audioReady) { voiceHelp.textContent = 'Microphone access was not granted. Use the local visual prompt instead.'; setVoiceState('idle'); return; }
       voiceHelp.textContent = audioReady ? 'LOCAL AUDIO REACTIVITY / amplitude drives the neural field in this browser.' : 'Microphone access was unavailable. Voice intent can still use the browser speech interface.';
       try { recognition.start(); } catch { stopAudioMeter(); setVoiceState('idle'); }
     });
   }
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopVoice(); });
+  window.addEventListener('pagehide', stopVoice);
+  canvas.addEventListener('webglcontextlost', event => {
+    event.preventDefault(); stopVoice(); cancelAnimationFrame(frame); canvas.hidden = true;
+    voiceButton?.setAttribute('disabled', ''); activityLabel.textContent = 'STATIC FALLBACK / WEBGL CONTEXT LOST';
+  });
   if ('IntersectionObserver' in window) new IntersectionObserver(entries => { visible = entries.some(entry => entry.isIntersecting); }, { threshold: .01 }).observe(section);
   if (reducedMotion.matches) { targetActivity = .2; }
   resize(); render(performance.now());

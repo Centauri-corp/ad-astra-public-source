@@ -1,6 +1,7 @@
 {
   "version": 1,
-  "purpose": "Public visual inventory for the Ad Astra homepage and Astra Lumen experience",
+  "purpose": "Public visual inventory for the AD ASTRA homepage and Astra Polaris experience",
+  "productArchitectureManifest": "/assets/products/manifest.json",
   "publicSafe": true,
   "assets": [
     {

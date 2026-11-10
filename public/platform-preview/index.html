@@ -59,11 +59,11 @@
         <div class="platform-topbar"><div><span class="tiny-label">CUSTOMER WORKSPACE</span><strong id="workspace-profile">Astra Sirius / General public</strong></div><span class="topbar-state"><span class="status-dot"></span>Preview mode</span></div>
         <div class="workspace-grid">
           <section class="workspace-card question-card" aria-labelledby="question-title">
-            <div class="card-kicker"><span class="eyebrow">01 / START HERE</span><span class="signal-chip">PROFILE READY</span></div>
+            <div class="card-kicker"><span class="eyebrow">01 / START HERE</span><span class="signal-chip">DESIGN PREVIEW</span></div>
             <h2 id="question-title">What would you like to understand?</h2>
             <p class="muted">A focused prompt gives Astra Polaris a stronger starting point.</p>
             <div class="prompt-box"><span>Ask a question worth exploring…</span><span class="prompt-cursor"></span></div>
-            <div class="prompt-footer"><span>Evidence-aware · human-directed</span><button type="button" class="send-button" aria-label="Preview send action">↗</button></div>
+            <div class="prompt-footer"><span>Evidence-aware · human-directed</span><button type="button" class="send-button" disabled aria-label="Sending is unavailable in this design preview">↗</button></div>
           </section>
 
           <section class="workspace-card neural-card" aria-labelledby="neural-title">
@@ -76,17 +76,17 @@
             <div class="card-kicker"><span class="eyebrow">03 / MARKET PROFILE</span><span class="signal-chip gold">LOCAL SELECTOR</span></div>
             <h2 id="profile-title">Choose your working constellation.</h2>
             <div class="profile-switcher" role="tablist" aria-label="Market profile preview">
-              <button class="profile-tab active" role="tab" aria-selected="true" data-profile="sirius" data-label="Astra Sirius / General public" data-copy="Everyday questions, planning and learning.">Sirius</button>
-              <button class="profile-tab" role="tab" aria-selected="false" data-profile="helios" data-label="Astra Helios / DOE and energy" data-copy="Energy systems, research and program planning.">Helios</button>
-              <button class="profile-tab" role="tab" aria-selected="false" data-profile="rigel" data-label="Astra Rigel / Mechanical engineering" data-copy="Mechanical systems, review and maintenance planning.">Rigel</button>
-              <button class="profile-tab" role="tab" aria-selected="false" data-profile="arcturus" data-label="Astra Arcturus / Weather and climate" data-copy="Forecast interpretation, resilience and climate planning.">Arcturus</button>
+              <button class="profile-tab active" role="tab" aria-selected="true" id="profile-tab-sirius" aria-controls="profile-panel" tabindex="0" data-profile="sirius" data-label="Astra Sirius / General public" data-copy="Everyday questions, planning and learning.">Sirius</button>
+              <button class="profile-tab" role="tab" aria-selected="false" id="profile-tab-helios" aria-controls="profile-panel" tabindex="-1" data-profile="helios" data-label="Astra Helios / DOE and energy" data-copy="Energy systems, research and program planning.">Helios</button>
+              <button class="profile-tab" role="tab" aria-selected="false" id="profile-tab-rigel" aria-controls="profile-panel" tabindex="-1" data-profile="rigel" data-label="Astra Rigel / Mechanical engineering" data-copy="Mechanical systems, review and maintenance planning.">Rigel</button>
+              <button class="profile-tab" role="tab" aria-selected="false" id="profile-tab-arcturus" aria-controls="profile-panel" tabindex="-1" data-profile="arcturus" data-label="Astra Arcturus / Weather and climate" data-copy="Forecast interpretation, resilience and climate planning.">Arcturus</button>
             </div>
-            <div class="profile-readout"><span class="profile-star" id="profile-star">✦</span><div><strong id="profile-label">Astra Sirius / General public</strong><p id="profile-copy">Everyday questions, planning and learning.</p></div></div>
+            <div class="profile-readout" id="profile-panel" role="tabpanel" aria-labelledby="profile-tab-sirius" tabindex="0"><span class="profile-star" id="profile-star">✦</span><div><strong id="profile-label">Astra Sirius / General public</strong><p id="profile-copy">Everyday questions, planning and learning.</p></div></div>
           </section>
 
           <section class="workspace-card network-card" id="network" aria-labelledby="network-title">
             <div class="card-kicker"><span class="eyebrow">04 / GLOBAL NETWORK</span><span class="signal-chip">READ-ONLY MAP</span></div>
-            <div class="network-heading"><h2 id="network-title">A connected world, locally framed.</h2><span class="network-count">07 regions</span></div>
+            <div class="network-heading"><h2 id="network-title">A connected world, locally framed.</h2><span class="network-count">Concept map</span></div>
             <div class="network-map" aria-label="Abstract global network map"><span class="map-line line-a"></span><span class="map-line line-b"></span><span class="map-line line-c"></span><i class="map-node node-a"></i><i class="map-node node-b"></i><i class="map-node node-c"></i><i class="map-node node-d"></i><i class="map-node node-e"></i></div>
             <div class="region-row"><span><i></i>North America</span><span><i></i>Europe + UK</span><span><i></i>Asia Pacific</span><span><i></i>Africa + Middle East</span></div>
           </section>
@@ -101,7 +101,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Human curiosity. Connected knowledge. Independent judgment.</span><a href="/">Back to Ad Astra ↗</a></footer>
+  <footer><span>Human curiosity. Connected knowledge. Independent judgment.</span><a href="/">Back to Ad Astra ↗</a><nav class="release-links" aria-label="Products and availability"><a href="/products/">Product families</a><a href="/status/">Current availability</a></nav></footer>
   <script defer src="/platform-preview/app.js"></script>
 </body>
 </html>

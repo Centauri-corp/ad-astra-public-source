@@ -20,6 +20,7 @@ const html = `<!doctype html>
   <meta name="robots" content="noindex,follow">
   <link rel="canonical" href="https://adastra.global/status/">
   <link rel="stylesheet" href="/markets/style.css">
+  <link rel="stylesheet" href="/assets/brand/product-tokens.css">
   <link rel="stylesheet" href="/products/style.css">
   <link rel="stylesheet" href="/status/style.css">
   <script defer src="/status/status.js"></script>

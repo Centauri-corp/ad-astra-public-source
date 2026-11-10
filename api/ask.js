@@ -4,7 +4,7 @@ const { authenticateRequest } = require('../lib/auth');
 const { reserve, LIMIT } = require('../lib/quota');
 const { ready } = require('../lib/release-gates');
 const sharedBudget = require('../lib/shared-budget');
-const MODES = Object.freeze({ ask: 'clarify the question and give a useful next step', research: 'separate claims, evidence, uncertainty and a research path', create: 'develop a concept with options, constraints and a small experiment', learn: 'explain progressively with an example and a check for understanding', explore: 'compare possibilities, constraints and what would falsify each one' });
+const { MODES } = require('../lib/modes');
 const MAX_BODY = 14000;
 function sameOrigin(req) {
   const host = String(req.headers?.host || '').toLowerCase();
