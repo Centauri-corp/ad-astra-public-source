@@ -1,0 +1,73 @@
+{
+  "schema": "ad-astra-public-product-families/v1",
+  "source": {
+    "repository": "zohebkhanfiji-ux/ad-astra-internal-source",
+    "commit": "318fc520685df55422404ec078e16f50ae392b43",
+    "architecture": "config/pgas-division.json",
+    "visualDirection": "config/product-graphics-design.json"
+  },
+  "scope": "public-family-descriptions-only",
+  "availability": "in-development",
+  "families": [
+    {
+      "id": "core-intelligence",
+      "name": "Core Intelligence",
+      "summary": "A clearer starting point for everyday questions, writing and learning.",
+      "audience": "People working through an idea, a decision or a new subject.",
+      "outcome": "A focused question, a structured explanation or an editable first draft.",
+      "modes": ["ask", "learn", "research"],
+      "motif": "Connections that bring a question into focus",
+      "accent": "cyan"
+    },
+    {
+      "id": "creative-studio",
+      "name": "Creative Studio",
+      "summary": "Turn a creative brief into a direction you can shape and review.",
+      "audience": "Creators and teams developing a story, visual concept or media brief.",
+      "outcome": "An editable concept and visual direction with room for human refinement.",
+      "modes": ["create", "explore"],
+      "motif": "Layers of craft around a human-directed idea",
+      "accent": "champagne"
+    },
+    {
+      "id": "specialist-intelligence",
+      "name": "Specialist Intelligence",
+      "summary": "Explore complex subjects with evidence and qualified human oversight.",
+      "audience": "Researchers and specialists comparing questions across disciplines.",
+      "outcome": "A research brief that keeps sources, uncertainty and review needs visible.",
+      "modes": ["research", "learn", "explore"],
+      "motif": "Evidence connected to an accountable review",
+      "accent": "cyan"
+    },
+    {
+      "id": "business-commerce",
+      "name": "Business & Commerce",
+      "summary": "Give business questions a practical brief and a considered next step.",
+      "audience": "Teams planning customer work, operations and commercial decisions.",
+      "outcome": "A comparison, communication draft or handoff for your team to review.",
+      "modes": ["ask", "research", "create"],
+      "motif": "A question becoming an actionable handoff",
+      "accent": "champagne"
+    },
+    {
+      "id": "developer-platform",
+      "name": "Developer Platform",
+      "summary": "Design testable connections between models, tools and applications.",
+      "audience": "Developers evaluating integration and application architecture.",
+      "outcome": "An integration direction with explicit interfaces and verification needs.",
+      "modes": ["create", "research"],
+      "motif": "Bounded interfaces with traceable connections",
+      "accent": "cobalt"
+    },
+    {
+      "id": "autonomous-workflows",
+      "name": "Autonomous Workflows",
+      "summary": "Plan coordinated work with visible human approval checkpoints.",
+      "audience": "Teams designing repeatable tasks, reviews and accountable handoffs.",
+      "outcome": "A workflow plan with clear owners, limits and stop points.",
+      "modes": ["ask", "create", "explore"],
+      "motif": "An ordered path with deliberate checkpoints",
+      "accent": "champagne"
+    }
+  ]
+}
