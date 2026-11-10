@@ -1,0 +1,244 @@
+{
+  "schema": "ad-astra-product-visual-assets/v1",
+  "scope": "design-preview",
+  "assets": [
+    {
+      "assetId": "architecture",
+      "productFamily": null,
+      "surface": "product-overview-and-detail",
+      "purpose": "Astra Polaris connects six product directions around human intention.",
+      "owner": "AD ASTRA",
+      "source": "first-party-code-authored",
+      "editableSource": "scripts/lib/product-architecture.cjs",
+      "exports": [
+        "/assets/products/architecture.svg"
+      ],
+      "dimensions": {
+        "width": 800,
+        "height": 460
+      },
+      "duration": null,
+      "frameRate": null,
+      "format": "svg",
+      "fileSize": 1237,
+      "sha256": "fc5882f51f1d240f3f875aa832b8045a0d7b4f9a471b69a2ae1eeafec287fa88",
+      "rights": {
+        "status": "first-party-candidate-pending-review"
+      },
+      "aiDisclosure": "No generative model used.",
+      "altText": "Astra Polaris connects six product directions around human intention.",
+      "responsiveVariants": [
+        "scalable-svg"
+      ],
+      "reducedMotionFallback": "/assets/products/architecture.svg",
+      "approvalState": "pending-review",
+      "approvedVersion": null,
+      "releaseDate": null,
+      "rollbackVersion": null
+    },
+    {
+      "assetId": "core-intelligence",
+      "productFamily": "core-intelligence",
+      "surface": "product-overview-and-detail",
+      "purpose": "Connections that bring a question into focus",
+      "owner": "AD ASTRA",
+      "source": "first-party-code-authored",
+      "editableSource": "scripts/lib/product-architecture.cjs",
+      "exports": [
+        "/assets/products/core-intelligence.svg"
+      ],
+      "dimensions": {
+        "width": 800,
+        "height": 460
+      },
+      "duration": null,
+      "frameRate": null,
+      "format": "svg",
+      "fileSize": 667,
+      "sha256": "d5b046088ad380cd6b7c1b796d88907b413977e6b3f553300c5bb7c3936f70f8",
+      "rights": {
+        "status": "first-party-candidate-pending-review"
+      },
+      "aiDisclosure": "No generative model used.",
+      "altText": "Connections that bring a question into focus",
+      "responsiveVariants": [
+        "scalable-svg"
+      ],
+      "reducedMotionFallback": "/assets/products/core-intelligence.svg",
+      "approvalState": "pending-review",
+      "approvedVersion": null,
+      "releaseDate": null,
+      "rollbackVersion": null
+    },
+    {
+      "assetId": "creative-studio",
+      "productFamily": "creative-studio",
+      "surface": "product-overview-and-detail",
+      "purpose": "Layers of craft around a human-directed idea",
+      "owner": "AD ASTRA",
+      "source": "first-party-code-authored",
+      "editableSource": "scripts/lib/product-architecture.cjs",
+      "exports": [
+        "/assets/products/creative-studio.svg"
+      ],
+      "dimensions": {
+        "width": 800,
+        "height": 460
+      },
+      "duration": null,
+      "frameRate": null,
+      "format": "svg",
+      "fileSize": 584,
+      "sha256": "30660f455bd327d5cb241d9445d5446227f2fafef92b91670721654ca8169a8a",
+      "rights": {
+        "status": "first-party-candidate-pending-review"
+      },
+      "aiDisclosure": "No generative model used.",
+      "altText": "Layers of craft around a human-directed idea",
+      "responsiveVariants": [
+        "scalable-svg"
+      ],
+      "reducedMotionFallback": "/assets/products/creative-studio.svg",
+      "approvalState": "pending-review",
+      "approvedVersion": null,
+      "releaseDate": null,
+      "rollbackVersion": null
+    },
+    {
+      "assetId": "specialist-intelligence",
+      "productFamily": "specialist-intelligence",
+      "surface": "product-overview-and-detail",
+      "purpose": "Evidence connected to an accountable review",
+      "owner": "AD ASTRA",
+      "source": "first-party-code-authored",
+      "editableSource": "scripts/lib/product-architecture.cjs",
+      "exports": [
+        "/assets/products/specialist-intelligence.svg"
+      ],
+      "dimensions": {
+        "width": 800,
+        "height": 460
+      },
+      "duration": null,
+      "frameRate": null,
+      "format": "svg",
+      "fileSize": 615,
+      "sha256": "806083b10848d9f899e7e64f91e99579edcb5a0c4b3636b86002790e417b1776",
+      "rights": {
+        "status": "first-party-candidate-pending-review"
+      },
+      "aiDisclosure": "No generative model used.",
+      "altText": "Evidence connected to an accountable review",
+      "responsiveVariants": [
+        "scalable-svg"
+      ],
+      "reducedMotionFallback": "/assets/products/specialist-intelligence.svg",
+      "approvalState": "pending-review",
+      "approvedVersion": null,
+      "releaseDate": null,
+      "rollbackVersion": null
+    },
+    {
+      "assetId": "business-commerce",
+      "productFamily": "business-commerce",
+      "surface": "product-overview-and-detail",
+      "purpose": "A question becoming an actionable handoff",
+      "owner": "AD ASTRA",
+      "source": "first-party-code-authored",
+      "editableSource": "scripts/lib/product-architecture.cjs",
+      "exports": [
+        "/assets/products/business-commerce.svg"
+      ],
+      "dimensions": {
+        "width": 800,
+        "height": 460
+      },
+      "duration": null,
+      "frameRate": null,
+      "format": "svg",
+      "fileSize": 662,
+      "sha256": "c1d3c2d4a1681efe4de2128c35ef5526acd7e44282c05f4d77b4b326b93b0bf9",
+      "rights": {
+        "status": "first-party-candidate-pending-review"
+      },
+      "aiDisclosure": "No generative model used.",
+      "altText": "A question becoming an actionable handoff",
+      "responsiveVariants": [
+        "scalable-svg"
+      ],
+      "reducedMotionFallback": "/assets/products/business-commerce.svg",
+      "approvalState": "pending-review",
+      "approvedVersion": null,
+      "releaseDate": null,
+      "rollbackVersion": null
+    },
+    {
+      "assetId": "developer-platform",
+      "productFamily": "developer-platform",
+      "surface": "product-overview-and-detail",
+      "purpose": "Bounded interfaces with traceable connections",
+      "owner": "AD ASTRA",
+      "source": "first-party-code-authored",
+      "editableSource": "scripts/lib/product-architecture.cjs",
+      "exports": [
+        "/assets/products/developer-platform.svg"
+      ],
+      "dimensions": {
+        "width": 800,
+        "height": 460
+      },
+      "duration": null,
+      "frameRate": null,
+      "format": "svg",
+      "fileSize": 612,
+      "sha256": "f96ea7cbc68020606d2482e7feb6dbef8933724bec3519d98fa2904d98e6963d",
+      "rights": {
+        "status": "first-party-candidate-pending-review"
+      },
+      "aiDisclosure": "No generative model used.",
+      "altText": "Bounded interfaces with traceable connections",
+      "responsiveVariants": [
+        "scalable-svg"
+      ],
+      "reducedMotionFallback": "/assets/products/developer-platform.svg",
+      "approvalState": "pending-review",
+      "approvedVersion": null,
+      "releaseDate": null,
+      "rollbackVersion": null
+    },
+    {
+      "assetId": "autonomous-workflows",
+      "productFamily": "autonomous-workflows",
+      "surface": "product-overview-and-detail",
+      "purpose": "An ordered path with deliberate checkpoints",
+      "owner": "AD ASTRA",
+      "source": "first-party-code-authored",
+      "editableSource": "scripts/lib/product-architecture.cjs",
+      "exports": [
+        "/assets/products/autonomous-workflows.svg"
+      ],
+      "dimensions": {
+        "width": 800,
+        "height": 460
+      },
+      "duration": null,
+      "frameRate": null,
+      "format": "svg",
+      "fileSize": 715,
+      "sha256": "77fa4c0bcd959f5194adef54527c6518fe4cdd457b1e5e06ad90e1bcb20bea04",
+      "rights": {
+        "status": "first-party-candidate-pending-review"
+      },
+      "aiDisclosure": "No generative model used.",
+      "altText": "An ordered path with deliberate checkpoints",
+      "responsiveVariants": [
+        "scalable-svg"
+      ],
+      "reducedMotionFallback": "/assets/products/autonomous-workflows.svg",
+      "approvalState": "pending-review",
+      "approvedVersion": null,
+      "releaseDate": null,
+      "rollbackVersion": null
+    }
+  ]
+}

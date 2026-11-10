@@ -1,0 +1,40 @@
+{
+  "name": "@ad-astra/customer-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.22.1 <25"
+  },
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1 --port 4176",
+    "preview": "node scripts/start-preview.mjs",
+    "preview:start": "node scripts/start-preview.mjs --production",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1 --port 4176",
+    "check": "next typegen && tsc --noEmit",
+    "test": "node --conditions=react-server --experimental-strip-types --test tests/*.test.ts",
+    "test:runtime": "node --test tests/runtime/*.test.mjs",
+    "test:browser": "playwright test"
+  },
+  "dependencies": {
+    "@ai-sdk/react": "4.0.170",
+    "@clerk/backend": "3.27.0",
+    "@xyflow/react": "12.12.1",
+    "ai": "7.0.166",
+    "lucide-react": "1.70.0",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "server-only": "0.0.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "tailwindcss": "4.3.5",
+    "typescript": "7.0.2"
+  }
+}

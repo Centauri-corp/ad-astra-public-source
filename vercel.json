@@ -9,11 +9,7 @@
       "maxDuration": 30
     }
   },
-  "redirects": [
-    { "source": "/platform/:path*", "destination": "/", "permanent": false },
-    { "source": "/knowledge/:path*", "destination": "/agent/", "permanent": false },
-    { "source": "/sign-in/:path*", "destination": "/", "permanent": false }
-  ],
+  "redirects": [],
   "headers": [
     {
       "source": "/(.*)",
@@ -59,7 +55,7 @@
       ]
     },
     {
-      "source": "/(knowledge|platform|sign-in|markets|pricing|products|status|services|company|about|film)(.*)",
+      "source": "/(intelligence|knowledge|platform|sign-in|markets|pricing|products|status|services|company|about|film)(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",

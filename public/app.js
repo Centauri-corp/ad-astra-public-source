@@ -4,11 +4,11 @@
 const modes = {
   ask: {number:'01 / ASK', title:['Find the question','behind the question.'], description:'Move from a broad idea to a focused inquiry. Explore assumptions, connect context and identify what is worth investigating next.', example:'“What would change if energy were abundant?”', image:'adobe-curiosity.jpg', alt:'A hand sketches connected ideas in a notebook beside a luminous conceptual interface'},
   research: {number:'02 / RESEARCH', title:['See the evidence.','Connect the ideas.'], description:'Bring different perspectives into view. Our research direction emphasizes sources, uncertainty and connections across disciplines.', example:'“How do energy, water and agriculture shape one another?”', image:'runway-curiosity-notes.jpg', alt:'Handwritten research notes in an open notebook outdoors'},
-  create: {number:'03 / CREATE', title:['Give a bold idea','a clearer shape.'], description:'Explore alternative approaches, develop a concept and find new ways to express it. Human intention guides the creative process.', example:'“Imagine a learning environment built around curiosity.”', image:'astra-lumen-neural-profile.png', alt:'A luminous neural profile with connected cyan and violet pathways'},
+  create: {number:'03 / CREATE', title:['Give a bold idea','a clearer shape.'], description:'Explore alternative approaches, develop a concept and find new ways to express it. Human intention guides the creative process.', example:'“Imagine a learning environment built around curiosity.”', image:'ad-astra-product-ecosystem-v1.png', alt:'A connected product ecosystem of luminous intelligence nodes'},
   learn: {number:'04 / LEARN', title:['Understand more.','Keep going further.'], description:'Approach a complex subject through questions, explanations and connections. Build understanding at a pace that supports deeper thought.', example:'“Explain orbital mechanics through everyday experiences.”', image:'astra-lumen-neural-brain.png', alt:'A translucent neural brain with cyan synapses and gold orbital paths'},
-  explore: {number:'05 / EXPLORE', title:['Look beyond','the familiar.'], description:'Follow an idea across science, technology and human experience. Discover new perspectives and questions worth pursuing.', example:'“What could living beyond Earth teach us about life here?”', image:'astra-lumen-neural-horizon.png', alt:'A neural intelligence lattice rising over an illuminated Earth horizon'}
+  explore: {number:'05 / EXPLORE', title:['Look beyond','the familiar.'], description:'Follow an idea across science, technology and human experience. Discover new perspectives and questions worth pursuing.', example:'“What could living beyond Earth teach us about life here?”', image:'ad-astra-hero-cinematic-4mp.png', alt:'A human profile held within a luminous cyan and violet neural constellation'}
 };
-const tabs = [...document.querySelectorAll('[role="tab"]')];
+const tabs = [...document.querySelectorAll('#possibilities [role="tab"][data-mode]')];
 const experienceImage = document.getElementById('experience-image');
 function selectMode(tab) {
   const mode = modes[tab?.dataset.mode];
@@ -212,14 +212,20 @@ document.getElementById('save-launch').addEventListener('click', async () => {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const labels = {
     1: ['NARROW AI / BOUNDED SIGNAL FLOW', 'A clean, predictable field for focused tasks.'],
-    2: ['AGI / CROSS-DOMAIN TOPOLOGY', 'A research-direction field for connected reasoning.'],
-    3: ['ASI / HYPOTHETICAL HORIZON', 'A denser visual horizon for multi-threaded possibility.']
+    2: ['AGI / ENGINEERING DEVELOPMENT', 'A research visualization for connected reasoning.'],
+    3: ['ASI / ENGINEERING RESEARCH', 'A conceptual visualization for advanced intelligence research.']
   };
   let tier = 1, activity = 0, targetActivity = 0, visible = true, frame = 0, started = performance.now();
   const gl = canvas.getContext('webgl', { alpha: true, antialias: false, powerPreference: 'low-power' });
+  // Even without WebGL, never allow a local demo form to navigate or submit.
+  form?.addEventListener('submit', event => event.preventDefault());
   if (!gl) {
     canvas.hidden = true;
     activityLabel.textContent = 'STATIC FALLBACK / WEBGL UNAVAILABLE';
+    document.getElementById('voice-command')?.setAttribute('disabled', '');
+    document.getElementById('voice-help').textContent = 'The interactive visual demo is unavailable. Explore the static artwork and product directions instead.';
+    if (input) input.disabled = true;
+    form?.querySelector('button')?.setAttribute('disabled', '');
     return;
   }
   const vertexSource = [
@@ -315,22 +321,26 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     const width = Math.max(1, Math.floor(rect.width * ratio)), height = Math.max(1, Math.floor(rect.height * ratio));
     if (canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; gl.viewport(0, 0, width, height); }
   }
-  let audioContext = null, audioAnalyser = null, audioStream = null, audioData = null, amplitude = 0;
+  let audioContext = null, audioAnalyser = null, audioStream = null, audioData = null, amplitude = 0, audioGeneration = 0;
   async function startAudioMeter() {
     if (audioAnalyser || !navigator.mediaDevices?.getUserMedia) return false;
+    const generation = ++audioGeneration;
     try {
-      audioStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false });
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false });
+      if (generation !== audioGeneration || document.hidden) { stream.getTracks().forEach(track => track.stop()); return false; }
+      audioStream = stream;
       audioContext = new (window.AudioContext || window.webkitAudioContext)();
       audioAnalyser = audioContext.createAnalyser(); audioAnalyser.fftSize = 512; audioAnalyser.smoothingTimeConstant = .78;
       audioData = new Uint8Array(audioAnalyser.fftSize);
       audioContext.createMediaStreamSource(audioStream).connect(audioAnalyser);
       return true;
-    } catch { audioStream?.getTracks().forEach(track => track.stop()); audioStream = null; return false; }
+    } catch { stopAudioMeter(); return false; }
   }
   function stopAudioMeter() {
+    audioGeneration++;
     audioStream?.getTracks().forEach(track => track.stop()); audioStream = null;
     audioAnalyser?.disconnect(); audioAnalyser = null; audioData = null;
-    audioContext?.close(); audioContext = null; amplitude = 0;
+    audioContext?.close()?.catch(() => {}); audioContext = null; amplitude = 0;
   }
   function sampleAudio() {
     if (!audioAnalyser || !audioData || reducedMotion.matches) { amplitude *= .9; return amplitude; }
@@ -380,11 +390,18 @@ document.getElementById('save-launch').addEventListener('click', async () => {
   function setTier(next) {
     tier = next;
     section.dataset.tier = String(tier);
-    tabs.forEach(tab => { const active = Number(tab.dataset.tier) === tier; tab.classList.toggle('active', active); tab.setAttribute('aria-selected', String(active)); });
+    tabs.forEach(tab => { const active = Number(tab.dataset.tier) === tier; tab.classList.toggle('active', active); tab.setAttribute('aria-selected', String(active)); tab.tabIndex = active ? 0 : -1; });
     const current = labels[tier]; label.textContent = current[0]; value.textContent = current[1];
     targetActivity = Math.max(targetActivity, tier * .45);
   }
-  tabs.forEach(tab => tab.addEventListener('click', () => setTier(Number(tab.dataset.tier))));
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => setTier(Number(tab.dataset.tier)));
+    tab.addEventListener('keydown', event => {
+      const next = {ArrowRight:(index+1)%tabs.length, ArrowLeft:(index+tabs.length-1)%tabs.length, Home:0, End:tabs.length-1}[event.key];
+      if (next === undefined) return;
+      event.preventDefault(); setTier(Number(tabs[next].dataset.tier)); tabs[next].focus();
+    });
+  });
   input?.addEventListener('input', () => { targetActivity = Math.min(3, .35 + input.value.length / 45); activityLabel.textContent = 'LOCAL SIMULATION / RIPPLE INTENSITY ' + Math.round(targetActivity * 33) + '%'; });
   form?.addEventListener('submit', event => { event.preventDefault(); targetActivity = 3; activityLabel.textContent = 'LOCAL SIMULATION / RIPPLE REGISTERED'; setTimeout(() => { activityLabel.textContent = 'LOCAL SIMULATION / NO PROMPT IS SENT'; }, 1400); });
   const voiceButton = document.getElementById('voice-command');
@@ -397,14 +414,21 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     thinking: {label: 'VOICE CONCIERGE / THINKING', intensity: 1.8, message: 'LOCAL VISUAL / PROCESSING STATE'},
     speaking: {label: 'VOICE CONCIERGE / SPEAKING', intensity: 2.6, message: 'LOCAL VISUAL / OUTPUT STATE'}
   };
-  let recognition = null, voiceTimer = 0;
+  let recognition = null, voiceTimer = 0, voiceStarting = false, voiceActivation = 0;
+  function stopVoice() {
+    voiceActivation++; voiceStarting = false; clearTimeout(voiceTimer);
+    try { recognition?.abort(); } catch {}
+    stopAudioMeter(); voiceButton?.setAttribute('aria-pressed', 'false'); voiceButton?.setAttribute('aria-busy', 'false');
+    setVoiceState('idle');
+  }
   function setVoiceState(next, transcript = '') {
     const state = voiceStates[next] || voiceStates.idle;
     section.dataset.voiceState = next;
     voiceState.textContent = state.label;
     activityLabel.textContent = transcript ? `${state.message} / “${transcript.slice(0, 54)}”` : state.message;
     targetActivity = Math.max(targetActivity, state.intensity);
-    if (next !== 'idle') { clearTimeout(voiceTimer); voiceTimer = setTimeout(() => setVoiceState('idle'), 3600); }
+    clearTimeout(voiceTimer);
+    if (next !== 'idle') { voiceTimer = setTimeout(() => setVoiceState('idle'), 3600); }
   }
   function classifyVoice(text) {
     const valueText = String(text || '').toLowerCase();
@@ -422,17 +446,29 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     recognition.onstart = () => { voiceButton.setAttribute('aria-pressed', 'true'); setVoiceState('listening'); };
     recognition.onresult = event => {
       const transcript = Array.from(event.results).map(result => result[0]?.transcript || '').join(' ').trim();
-      setVoiceState(classifyVoice(transcript), transcript);
+      const state = classifyVoice(transcript);
+      if (state === 'idle') stopVoice(); else setVoiceState(state, transcript);
     };
     recognition.onerror = () => { voiceButton.setAttribute('aria-pressed', 'false'); setVoiceState('idle'); stopAudioMeter(); voiceHelp.textContent = 'Speech recognition was unavailable. Use the visual prompt above.'; };
     recognition.onend = () => { voiceButton.setAttribute('aria-pressed', 'false'); stopAudioMeter(); };
     voiceButton?.addEventListener('click', async () => {
-      if (voiceButton.getAttribute('aria-pressed') === 'true') { recognition.stop(); setVoiceState('idle'); return; }
+      if (voiceStarting) { stopVoice(); return; }
+      if (voiceButton.getAttribute('aria-pressed') === 'true') { stopVoice(); return; }
+      voiceStarting = true; const activation = ++voiceActivation; voiceButton.setAttribute('aria-busy', 'true');
       const audioReady = await startAudioMeter();
+      if (activation !== voiceActivation || document.hidden) { stopAudioMeter(); return; }
+      voiceStarting = false; voiceButton.setAttribute('aria-busy', 'false');
+      if (!audioReady) { voiceHelp.textContent = 'Microphone access was not granted. Use the local visual prompt instead.'; setVoiceState('idle'); return; }
       voiceHelp.textContent = audioReady ? 'LOCAL AUDIO REACTIVITY / amplitude drives the neural field in this browser.' : 'Microphone access was unavailable. Voice intent can still use the browser speech interface.';
       try { recognition.start(); } catch { stopAudioMeter(); setVoiceState('idle'); }
     });
   }
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopVoice(); });
+  window.addEventListener('pagehide', stopVoice);
+  canvas.addEventListener('webglcontextlost', event => {
+    event.preventDefault(); stopVoice(); cancelAnimationFrame(frame); canvas.hidden = true;
+    voiceButton?.setAttribute('disabled', ''); activityLabel.textContent = 'STATIC FALLBACK / WEBGL CONTEXT LOST';
+  });
   if ('IntersectionObserver' in window) new IntersectionObserver(entries => { visible = entries.some(entry => entry.isIntersecting); }, { threshold: .01 }).observe(section);
   if (reducedMotion.matches) { targetActivity = .2; }
   resize(); render(performance.now());

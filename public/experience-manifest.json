@@ -16,8 +16,8 @@
     },
     "intelligenceLayers": [
       { "id": "narrow-ai", "status": "guided-preview", "liveTelemetry": false },
-      { "id": "agi", "status": "research-direction", "liveTelemetry": false },
-      { "id": "asi", "status": "hypothetical-horizon", "liveTelemetry": false }
+      { "id": "agi", "status": "research-direction", "developmentStage": "engineering-development", "productWorkstreams": ["specialist-intelligence", "developer-platform", "autonomous-workflows"], "liveTelemetry": false },
+      { "id": "asi", "status": "hypothetical-horizon", "developmentStage": "engineering-research", "productWorkstreams": ["specialist-intelligence", "developer-platform", "autonomous-workflows"], "liveTelemetry": false }
     ],
     "motionPreview": { "hero": true, "filmStudy": true, "publicPremierePlayback": false, "reducedMotionFallback": "poster-frame" },
     "videoBlueprint": {

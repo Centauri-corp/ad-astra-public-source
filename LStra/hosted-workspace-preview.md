@@ -1,0 +1,9 @@
+# AD ASTRA hosted review increment
+
+The owner requested a usable hosted workspace link, feature integration and the next evolution. PR #35 was squash-merged into the workspace feature branch through GitHub's normal merge API, without overriding checks or recording independent approval. The latest website design candidate `a64cc1fdd6480c9b9a49d74d3ca8b0e831fba6d3` was merged into that integration branch so its artwork and source-integrity inventory are preserved.
+
+The next increment prepares an isolated review deployment: package-local Vercel configuration, provider-owned preview-origin resolution, and `/api/preview` plus a footer link identifying the exact deployed source. Explicit origins still take precedence. Browser/request headers cannot change the trusted origin. Vercel production still denies the application. Metadata and sample response flags cannot grant customer access.
+
+The separate hosting project is `ad-astra-workspace-preview` (`prj_OdP72mTu74XTNnwpw4bFVj6fpjcf`) in the existing AD ASTRA Vercel team. Its root is `apps/customer-workspace`, framework Next.js, runtime Node 24.x, and only non-secret preview configuration is added. No existing production environment values are copied. Deployment protection is retained. The marketing project and `adastra.global` alias are not changed.
+
+Verification includes the preserved website suite, session and event contracts, hosted-origin/metadata tests, default/production runtime denial, compiled-client exclusions and browser interactions. Hosted URLs, source SHA, deployment state and read-back observations are retained in ignored `LStra/evidence/` after the deployment attempt. A successful hosted sample is not customer authentication acceptance, tenant datastore QA, media rights, commercial readiness or independent approval. No live model, database, billing or CRM operation is enabled.

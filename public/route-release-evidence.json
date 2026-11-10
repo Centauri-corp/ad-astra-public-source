@@ -53,9 +53,16 @@
     { "path": "/platform/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/pricing/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/products/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/products/core-intelligence/", "decision": "pending", "missingGates": ["contentAndClaims","brandAndRights","seoTechnicalQa","accessibilityResponsiveQa","privacyAndAnalyticsQa","independentReview","humanReleaseAuthorization"] },
+    { "path": "/products/creative-studio/", "decision": "pending", "missingGates": ["contentAndClaims","brandAndRights","seoTechnicalQa","accessibilityResponsiveQa","privacyAndAnalyticsQa","independentReview","humanReleaseAuthorization"] },
+    { "path": "/products/specialist-intelligence/", "decision": "pending", "missingGates": ["contentAndClaims","brandAndRights","seoTechnicalQa","accessibilityResponsiveQa","privacyAndAnalyticsQa","independentReview","humanReleaseAuthorization"] },
+    { "path": "/products/business-commerce/", "decision": "pending", "missingGates": ["contentAndClaims","brandAndRights","seoTechnicalQa","accessibilityResponsiveQa","privacyAndAnalyticsQa","independentReview","humanReleaseAuthorization"] },
+    { "path": "/products/developer-platform/", "decision": "pending", "missingGates": ["contentAndClaims","brandAndRights","seoTechnicalQa","accessibilityResponsiveQa","privacyAndAnalyticsQa","independentReview","humanReleaseAuthorization"] },
+    { "path": "/products/autonomous-workflows/", "decision": "pending", "missingGates": ["contentAndClaims","brandAndRights","seoTechnicalQa","accessibilityResponsiveQa","privacyAndAnalyticsQa","independentReview","humanReleaseAuthorization"] },
     { "path": "/services/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/sign-in/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
-    { "path": "/status/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] }
+    { "path": "/status/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    {"path": "/intelligence/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"]}
   ],
   "searchProperties": {
     "googleSearchConsole": { "status": "not-verified", "evidenceRef": null },

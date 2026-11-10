@@ -15,11 +15,13 @@ const html = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="/assets/brand/ad-astra-mark.svg" type="image/svg+xml">
   <title>Product availability | AD ASTRA</title>
   <meta name="description" content="See the current AD ASTRA website, engine, product, workspace, CRM and subscription availability.">
   <meta name="robots" content="noindex,follow">
   <link rel="canonical" href="https://adastra.global/status/">
   <link rel="stylesheet" href="/markets/style.css">
+  <link rel="stylesheet" href="/assets/brand/product-tokens.css">
   <link rel="stylesheet" href="/products/style.css">
   <link rel="stylesheet" href="/status/style.css">
   <script defer src="/status/status.js"></script>
@@ -36,7 +38,7 @@ ${cards}
   </section>
   <p class="availability-note">These statuses describe product availability. They are not a service uptime measurement.</p>
 </main>
-<footer><span>AD ASTRA · Human-directed discovery</span><a href="/products/">Explore product directions</a></footer>
+<footer><span>AD ASTRA · Human-directed discovery</span><a href="/products/">Explore product directions</a><a href="/intelligence/">Connected intelligence</a></footer>
 </body>
 </html>
 `;

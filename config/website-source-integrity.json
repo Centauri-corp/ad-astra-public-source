@@ -1,0 +1,579 @@
+{
+  "schema": "ad-astra-website-source-integrity/v1",
+  "scope": "public-marketing-site-and-existing-api",
+  "status": "candidate",
+  "releaseAuthorization": false,
+  "surfaces": [
+    "public",
+    "api",
+    "lib"
+  ],
+  "files": [
+    {
+      "path": "api/ask.js",
+      "bytes": 6183,
+      "sha256": "df3e7758eb7450f9d646535d10d892477af183b9f9282f1575840d1777021af3"
+    },
+    {
+      "path": "api/models.js",
+      "bytes": 916,
+      "sha256": "b6dd6f1d88b9b781d4f4758058439979c4f66ca9b1c8e60f7aebf089dc866b71"
+    },
+    {
+      "path": "api/operating-status.js",
+      "bytes": 643,
+      "sha256": "21df305a12f1c974aee14440d0aae8c135be7eb397dc56744462182da7e15043"
+    },
+    {
+      "path": "api/session.js",
+      "bytes": 816,
+      "sha256": "c5965fdb673ee6782b5ebe0eb1ba33194c192def8266985456585104ad48e2bb"
+    },
+    {
+      "path": "api/status.js",
+      "bytes": 654,
+      "sha256": "3718cc1f1a69946341301fc35308ec668c9bd7a788d9bcf9d192b010e2bc38bb"
+    },
+    {
+      "path": "lib/auth.js",
+      "bytes": 4742,
+      "sha256": "86771b59484435890eec436f731f7646baf529d56cb77253a243d3f65d44e73a"
+    },
+    {
+      "path": "lib/model-catalog.js",
+      "bytes": 4996,
+      "sha256": "58f3195ada06f8fa0c4e040f2e73e4b40f89f64c0ee4eccc3713c29181fd5ea9"
+    },
+    {
+      "path": "lib/modes.js",
+      "bytes": 586,
+      "sha256": "2775782c723070a975aac4706d9cae743dcab278cd10e2f8a3f87e691f97428b"
+    },
+    {
+      "path": "lib/operating-status.js",
+      "bytes": 2555,
+      "sha256": "13aff7f93669a99a67f79e03e255186bead1f9cc72b7d5cd3ef605d7ec539093"
+    },
+    {
+      "path": "lib/provider-budget-policy.js",
+      "bytes": 358,
+      "sha256": "c1ce1016e9acf450ec4f164dfdbf928514a3ecc717f0d4160987203f7b07e958"
+    },
+    {
+      "path": "lib/quota.js",
+      "bytes": 3564,
+      "sha256": "5d0c0acfec04400cf114753837f132024c1986c050794a6ee695d8bf8fd8c526"
+    },
+    {
+      "path": "lib/release-gates.js",
+      "bytes": 1070,
+      "sha256": "20a26e76ef573c3ecc90b73760f3f7af910907253e2388f42a9c127a45d25fac"
+    },
+    {
+      "path": "lib/shared-budget.js",
+      "bytes": 421,
+      "sha256": "002340da93ade4f2ca927a6d07e988779cc0c412a1ce7e0394d39673aeff2263"
+    },
+    {
+      "path": "public/about/index.html",
+      "bytes": 1515,
+      "sha256": "fd1942fcdcb99ab93768b540744e09db0ac3b0147c6d743a51f69263f8101e3f"
+    },
+    {
+      "path": "public/agent/index.html",
+      "bytes": 5965,
+      "sha256": "95f1af8f1972d108ea004a6d7c342bbc131e3ce00a908643d03d97ab38216d2f"
+    },
+    {
+      "path": "public/app.js",
+      "bytes": 31711,
+      "sha256": "df6cb2e77de0deddaa22ffcb66c9fc0f7037e02a6c89fc93cb5cab722635b369"
+    },
+    {
+      "path": "public/assets/ad-astra-hero-cinematic-4mp.png",
+      "bytes": 2866213,
+      "sha256": "2185f36fbb6bb45eed6c2550a55aa9a73fa64070a09e72cb14493cb3c0a89981"
+    },
+    {
+      "path": "public/assets/ad-astra-hero-cinematic-v1.png",
+      "bytes": 2091163,
+      "sha256": "7c590c66b94a56625bc0facd5c6c14c56523ea1935201f095425556b42cdef5b"
+    },
+    {
+      "path": "public/assets/ad-astra-horizon-motion.mp4",
+      "bytes": 4603640,
+      "sha256": "7982f2f606f67ce1fda84adbdb91f259ffeb9ca99ab5f806a3a7eaf1507bb925"
+    },
+    {
+      "path": "public/assets/ad-astra-horizon-motion.vtt",
+      "bytes": 130,
+      "sha256": "162ee6b64a690dfcab0f4f9fd8895f3528654015b2db771abb8d9f3342c6e6b0"
+    },
+    {
+      "path": "public/assets/ad-astra-logo-transparent.png",
+      "bytes": 400252,
+      "sha256": "8bbd03257942401d0d7d04fd6e070f62fcbb805fb12a29ffc3798a36599918cc"
+    },
+    {
+      "path": "public/assets/ad-astra-product-ecosystem-v1.png",
+      "bytes": 1887325,
+      "sha256": "3d8f0ca4f6b36663655cb13e7b7747978380f3df7985c9e149a499c504e4309a"
+    },
+    {
+      "path": "public/assets/ad-astra-runway-horizon-poster.jpg",
+      "bytes": 97839,
+      "sha256": "b61d6821b401159fabc3c9c564540225654621a6d22f97e04e6f99b1dad5839e"
+    },
+    {
+      "path": "public/assets/ad-astra-runway-orbital-motion.mp4",
+      "bytes": 6890827,
+      "sha256": "3d80d3c0871884ae4d56c7be36ba4e7c60a5668591ef6b517d4d8b7f4ad1d3ac"
+    },
+    {
+      "path": "public/assets/ad-astra-runway-orbital-motion.vtt",
+      "bytes": 131,
+      "sha256": "ddcbd17d324798ed59e060d9b85b6fe123d901148aafb9f352694e2d9b2d0bea"
+    },
+    {
+      "path": "public/assets/ad-astra-runway-orbital-poster.jpg",
+      "bytes": 57667,
+      "sha256": "454145ffc44572c03751039702d4e436acdd91b2108d1ecf425fe9e02dce8585"
+    },
+    {
+      "path": "public/assets/ad-astra-voice-motion-v1.png",
+      "bytes": 1806717,
+      "sha256": "76ef0ae6552838557e25ae233663bed3c28679af201be412039f4e25609254fd"
+    },
+    {
+      "path": "public/assets/adobe-curiosity.jpg",
+      "bytes": 389921,
+      "sha256": "baf8df60f77ee5744a5f77f2cfc58e8f45e94f5f1139c01600c4eb60fc175542"
+    },
+    {
+      "path": "public/assets/adobe-horizon.jpg",
+      "bytes": 213219,
+      "sha256": "f4b56c712dd45e6bf814c9e1048e7fc199c6391aa319ba49cd6eeb8b67055627"
+    },
+    {
+      "path": "public/assets/astra-lumen-neural-brain.png",
+      "bytes": 2017700,
+      "sha256": "89a362f8460fa88703189c23926006629f595ada14598f4300d2725ce34f2578"
+    },
+    {
+      "path": "public/assets/astra-lumen-neural-concierge.png",
+      "bytes": 2004414,
+      "sha256": "37b138dddd78d27c62533cc4a466f562d14be431a56e47afd50491a1956312bf"
+    },
+    {
+      "path": "public/assets/astra-lumen-neural-horizon.png",
+      "bytes": 2682226,
+      "sha256": "fb434157e453bd461a4e2f9a067d2812bf4c97f45142c9dedcf6352bdbf176d3"
+    },
+    {
+      "path": "public/assets/astra-lumen-neural-profile-canvas-mobile.png",
+      "bytes": 208292,
+      "sha256": "fcc09ab707b05d56de0a9b9fdf29f95469bed583d1bb4362a9dcadce9cc645a7"
+    },
+    {
+      "path": "public/assets/astra-lumen-neural-profile-canvas.png",
+      "bytes": 419442,
+      "sha256": "df461e51f8e383a2a2b0bbeb2a058ca3b61a418b398b4ef366603187028fc607"
+    },
+    {
+      "path": "public/assets/astra-lumen-neural-profile.png",
+      "bytes": 2635014,
+      "sha256": "3c1dc5d7a6ba184189a959b35f76cb0aebdb216ce214c28585c4e64d34b1d68e"
+    },
+    {
+      "path": "public/assets/astra-polaris-platform-mockup.png",
+      "bytes": 2065547,
+      "sha256": "dee732442551a015eaeaf29ee7ab99a996edfe0605e0c281102fbfe17a3fb38d"
+    },
+    {
+      "path": "public/assets/brand/ad-astra-mark.svg",
+      "bytes": 604,
+      "sha256": "041f448e91faa5ee2097c5fb301b53aedec92f4199fadd403903440f876b383c"
+    },
+    {
+      "path": "public/assets/brand/product-tokens.css",
+      "bytes": 395,
+      "sha256": "f461b14b9fc187bf132018337331264d8b78035f7fd266353155b64bb952ed0c"
+    },
+    {
+      "path": "public/assets/products/architecture.svg",
+      "bytes": 1237,
+      "sha256": "fc5882f51f1d240f3f875aa832b8045a0d7b4f9a471b69a2ae1eeafec287fa88"
+    },
+    {
+      "path": "public/assets/products/autonomous-workflows.svg",
+      "bytes": 715,
+      "sha256": "77fa4c0bcd959f5194adef54527c6518fe4cdd457b1e5e06ad90e1bcb20bea04"
+    },
+    {
+      "path": "public/assets/products/business-commerce.svg",
+      "bytes": 662,
+      "sha256": "c1d3c2d4a1681efe4de2128c35ef5526acd7e44282c05f4d77b4b326b93b0bf9"
+    },
+    {
+      "path": "public/assets/products/core-intelligence.svg",
+      "bytes": 667,
+      "sha256": "d5b046088ad380cd6b7c1b796d88907b413977e6b3f553300c5bb7c3936f70f8"
+    },
+    {
+      "path": "public/assets/products/creative-studio.svg",
+      "bytes": 584,
+      "sha256": "30660f455bd327d5cb241d9445d5446227f2fafef92b91670721654ca8169a8a"
+    },
+    {
+      "path": "public/assets/products/developer-platform.svg",
+      "bytes": 612,
+      "sha256": "f96ea7cbc68020606d2482e7feb6dbef8933724bec3519d98fa2904d98e6963d"
+    },
+    {
+      "path": "public/assets/products/manifest.json",
+      "bytes": 8117,
+      "sha256": "0095e368a21f6d36953833628592c1209eb516292a17d0bba44e89524c85beb4"
+    },
+    {
+      "path": "public/assets/products/specialist-intelligence.svg",
+      "bytes": 615,
+      "sha256": "806083b10848d9f899e7e64f91e99579edcb5a0c4b3636b86002790e417b1776"
+    },
+    {
+      "path": "public/assets/runway-curiosity-notes.jpg",
+      "bytes": 149477,
+      "sha256": "ddce7b38ddfbf7dfcca273180c79bc7c1a76c42f03cd96f0e776857291ed8dd2"
+    },
+    {
+      "path": "public/assets/runway-orbital-intelligence.jpg",
+      "bytes": 66181,
+      "sha256": "465694e51845fc462f818ea144460f086f3a8c194bdaccb1eab88967ccaf5212"
+    },
+    {
+      "path": "public/assets/visual-manifest.json",
+      "bytes": 6163,
+      "sha256": "5af7ef578623e2c38f90635cf6db0a91f739f49cc04e3e156f233f18098cc70b"
+    },
+    {
+      "path": "public/auth-navigation.js",
+      "bytes": 1094,
+      "sha256": "ee64cec7a7f319a3e2b6adda1bce40962cab721cfe34dec58180551425c375d2"
+    },
+    {
+      "path": "public/company/index.html",
+      "bytes": 1723,
+      "sha256": "e19ffdf52b9abbcf4cd24f23eb765a9e2f43e21a6839327249372bb848bbe8d3"
+    },
+    {
+      "path": "public/engine-status.js",
+      "bytes": 591,
+      "sha256": "1b1e7fe73a7e3708d8414cd0d76988bce93bc672e30714cc6442fc4629e85531"
+    },
+    {
+      "path": "public/experience-manifest.json",
+      "bytes": 2519,
+      "sha256": "1af5fe19fd8347c6d0387e3a8818b5af83d1891d8e1bb4045285636f5e1c2ab4"
+    },
+    {
+      "path": "public/film-delivery.css",
+      "bytes": 215,
+      "sha256": "15446e711152d387cfe0069a4dba68bc34bc55507ae560300b4bef556b73466f"
+    },
+    {
+      "path": "public/film-launch-v2.css",
+      "bytes": 4108,
+      "sha256": "30392f79b5d2f5c954bebe49c2e7fd23ef0c23976596e3c6e2f8b25d16f7e92d"
+    },
+    {
+      "path": "public/film-launch-v2.js",
+      "bytes": 401,
+      "sha256": "4c8f2a7fdbfd92b9e0ccaed3b4372c05e6757a210cae5c5a9f0db236aae81032"
+    },
+    {
+      "path": "public/film/index.html",
+      "bytes": 6691,
+      "sha256": "40f9cc2f2da3e7a944e00c44bb014ef2eb3134c64d18fddd3e3b88f7b6d87b8d"
+    },
+    {
+      "path": "public/index.html",
+      "bytes": 37448,
+      "sha256": "845890a99cc483c92fc017538ce9f963d83022194044348265acd2d32782f93e"
+    },
+    {
+      "path": "public/intelligence/index.html",
+      "bytes": 9095,
+      "sha256": "6054dc3b70d5d4b2387d65a37e1426532cbd2f1a28b4ca8cbc71ecafc4a95c37"
+    },
+    {
+      "path": "public/intelligence/style.css",
+      "bytes": 10439,
+      "sha256": "1719a7d42c7c1bb57a8dc46a5008705b5421f75934fcc53dbdb29006f41de6c7"
+    },
+    {
+      "path": "public/knowledge/app.js",
+      "bytes": 4279,
+      "sha256": "8c216428a9956899669484e50927db9494cbfd28b037fb1ba53620548a4c5d2b"
+    },
+    {
+      "path": "public/knowledge/experience-links.js",
+      "bytes": 676,
+      "sha256": "116d4f090169bd6f9877fdf89d8ea1680ae6195f689d55906aa8202acb0c917f"
+    },
+    {
+      "path": "public/knowledge/index.html",
+      "bytes": 6855,
+      "sha256": "6b49fa5c7648a523fbefe40e3fc00589dd1edecbb2c6a6632a5949ea071dcf7a"
+    },
+    {
+      "path": "public/knowledge/style.css",
+      "bytes": 10564,
+      "sha256": "2280f9e1a1d5b930060c46a15a82e2c6cb11e193f7c0e439f0be073ec19b987b"
+    },
+    {
+      "path": "public/markets/agent.css",
+      "bytes": 1738,
+      "sha256": "84f60a925551f7899732a0dd17b9a8911f39457b4e4108679164315ba0c22183"
+    },
+    {
+      "path": "public/markets/agent.js",
+      "bytes": 2867,
+      "sha256": "405cffda80ac9b4490202a00962da006cb0543d1516b82fd6eb33e4feff4123b"
+    },
+    {
+      "path": "public/markets/agriculture-food/index.html",
+      "bytes": 2643,
+      "sha256": "2babca0235cbdd3d63903725dc6281704aed920bad4ef5ae642964ab7f3fe0ef"
+    },
+    {
+      "path": "public/markets/app.js",
+      "bytes": 323,
+      "sha256": "5c3b077f093bbd857a30284f932996e66cd6e01ccc5036c9ec375fee94d4f8a6"
+    },
+    {
+      "path": "public/markets/business-professional-services/index.html",
+      "bytes": 2843,
+      "sha256": "fb1c639d0452846750e626aabd3b2dad3cd2eedbba0be680093cde5850f1cce1"
+    },
+    {
+      "path": "public/markets/consumer-personal-ai/index.html",
+      "bytes": 2796,
+      "sha256": "49e741808dd3a9712978b61ddd885fca44f406973258905fc232c36e19b24b84"
+    },
+    {
+      "path": "public/markets/creative-industries-media/index.html",
+      "bytes": 2737,
+      "sha256": "40db802ae619325fa2c77399c30bbcb0101f6dde9b98e2a558f59a825d007460"
+    },
+    {
+      "path": "public/markets/digital-commerce/index.html",
+      "bytes": 2737,
+      "sha256": "1d2b2c5b1f34fd940a1c586b92bc5616ed6f457a24556a0ded33f798dadc276d"
+    },
+    {
+      "path": "public/markets/education-learning/index.html",
+      "bytes": 2714,
+      "sha256": "fb1cb2f668a38d570b2320ae0fa325ea86fbb3a6418d65dcd564082e04f9a70a"
+    },
+    {
+      "path": "public/markets/finance-economics/index.html",
+      "bytes": 2724,
+      "sha256": "721b40e66252ce093f52188938b01dfd35a8c19677f55d1ba355d913a54f8c8d"
+    },
+    {
+      "path": "public/markets/government-public-services/index.html",
+      "bytes": 2736,
+      "sha256": "43ddf2ed38956c19d812982b26523bee7971de23208aa44148cc8a893dcd5cbd"
+    },
+    {
+      "path": "public/markets/healthcare-wellness/index.html",
+      "bytes": 2752,
+      "sha256": "254a77a21b0969e0df78ef93aeb6017bbd703e204e706c43fdaf81cffd24db0c"
+    },
+    {
+      "path": "public/markets/index.html",
+      "bytes": 6378,
+      "sha256": "2ff200fd386d62c47b85d95507bb047c1a74b241f29bba2c87abe94f93143591"
+    },
+    {
+      "path": "public/markets/legal-compliance/index.html",
+      "bytes": 2702,
+      "sha256": "d263d90df3ddf89a07f872704f072740d6be4bf74eb52fd779e276c15c4622f9"
+    },
+    {
+      "path": "public/markets/logistics-supply-chain/index.html",
+      "bytes": 2696,
+      "sha256": "c28c29e7ddd2f35abbcf1cd4cfef2d4b5bbd1858eddf138b5f7308a7c450d221"
+    },
+    {
+      "path": "public/markets/manufacturing-energy/index.html",
+      "bytes": 2757,
+      "sha256": "b82b2f295658d4d2ce251c32a8bf561e0544f43c54f0c5fae4d90fc68a014960"
+    },
+    {
+      "path": "public/markets/positioning/index.html",
+      "bytes": 5692,
+      "sha256": "77581430847dcb9cca103fe2d01108d1aa416823830b19215d70bd08b9062437"
+    },
+    {
+      "path": "public/markets/positioning/microgrids/index.html",
+      "bytes": 10607,
+      "sha256": "050c027a420bf8272fc1e9943acb49a0ddcba7c8304000493059bcb507b4eb75"
+    },
+    {
+      "path": "public/markets/positioning/style.css",
+      "bytes": 1308,
+      "sha256": "378e96d57a63f68d568b9873419cb907cdb41f40a6c612d2faabbe456e533f01"
+    },
+    {
+      "path": "public/markets/real-estate-construction/index.html",
+      "bytes": 2698,
+      "sha256": "11ef9600ae5921502f7a5991d8ccbadd4842e6881244a20506c8902dac07aac8"
+    },
+    {
+      "path": "public/markets/science-research/index.html",
+      "bytes": 2774,
+      "sha256": "7a2ebaf2d91a2622a406acd48a3b806756b3bc442908b032683854bd2f6c72c7"
+    },
+    {
+      "path": "public/markets/style.css",
+      "bytes": 5092,
+      "sha256": "d0756dcda65c17594a12dbe1dae844d6949d585d98e84ae30de159b0c7af038d"
+    },
+    {
+      "path": "public/markets/travel-hospitality/index.html",
+      "bytes": 2621,
+      "sha256": "8664a3bb7b431d1fa08bd0a5c71a6243a5fc45e9cc78d98b4c5390440e257e23"
+    },
+    {
+      "path": "public/platform-preview/app.js",
+      "bytes": 1307,
+      "sha256": "134f738608f2cd371113389510de93869c331d890d5223e933fa8e714522001c"
+    },
+    {
+      "path": "public/platform-preview/index.html",
+      "bytes": 12071,
+      "sha256": "1bddd00d83bc163de0b587c26fe4451c50f91ab0a811a2af500c0c32c7ead584"
+    },
+    {
+      "path": "public/platform-preview/style.css",
+      "bytes": 13323,
+      "sha256": "7324df59747ec033c72e051425442d67e11bcede9118c59194a9130116b9e7e6"
+    },
+    {
+      "path": "public/platform/app.js",
+      "bytes": 1922,
+      "sha256": "c5648882edc2e3b5a385758c862d6210a7b2c1bf1531420de98215f6c475a8ca"
+    },
+    {
+      "path": "public/platform/index.html",
+      "bytes": 6547,
+      "sha256": "b2b6d2a6cf75857b0b9e9a62763e3b50a49476880d5734489f6d40a065c1dd96"
+    },
+    {
+      "path": "public/pricing/index.html",
+      "bytes": 3827,
+      "sha256": "748c96fa6c142d4c5757f820a09d93541fb376b31e5a30a8b1821a9ce49662ff"
+    },
+    {
+      "path": "public/products/autonomous-workflows/index.html",
+      "bytes": 3373,
+      "sha256": "e4722186824c09bf36803f61dd459f4b17ae8e43e8167b6e1df8541f083bbb1e"
+    },
+    {
+      "path": "public/products/business-commerce/index.html",
+      "bytes": 3395,
+      "sha256": "88b721f61f8e79a65f94ba78a2bcc6bfbd09f709c24ef2cca519b4d46df2441d"
+    },
+    {
+      "path": "public/products/core-intelligence/index.html",
+      "bytes": 3374,
+      "sha256": "ac8b527966a9c255b6b38ef88bc2e9d7a00a193e4f44e154616a3a53039e72bf"
+    },
+    {
+      "path": "public/products/creative-studio/index.html",
+      "bytes": 3347,
+      "sha256": "e2e1010a1f7cef3c1222d75202cb0e455b4826ab91c334c0bea5c493f6ce71a7"
+    },
+    {
+      "path": "public/products/developer-platform/index.html",
+      "bytes": 3354,
+      "sha256": "16ee187b2cca060200f68d747b3d855dc2ce2f5a0ffad04a34fd0ac2194a1c83"
+    },
+    {
+      "path": "public/products/discovery.js",
+      "bytes": 1276,
+      "sha256": "66b839bf57ab44690049eea9ec0473b96208b043370a7541a1bcca66c880897b"
+    },
+    {
+      "path": "public/products/index.html",
+      "bytes": 9764,
+      "sha256": "61ed1119010dfe53f83dfb5f831cd7935d6ea0d76e31c65d1182528d1ed8d553"
+    },
+    {
+      "path": "public/products/specialist-intelligence/index.html",
+      "bytes": 3424,
+      "sha256": "7b1fa3d3f86f9d47779e48fa4765e99898859a5f1f94d04c45f4c34cd813be8d"
+    },
+    {
+      "path": "public/products/style.css",
+      "bytes": 6035,
+      "sha256": "dc7a00763620f08cb4b8146e762153d6955f8eb614f09961275fd430f79cadca"
+    },
+    {
+      "path": "public/release-manifest.json",
+      "bytes": 2213,
+      "sha256": "cd66facfce0f801c2410f6d7220dc318bd7558e889ceca5ec215f30932d5920e"
+    },
+    {
+      "path": "public/robots.txt",
+      "bytes": 83,
+      "sha256": "c351ba3cc2e51a16387ae95775f5e770f6403c4002e17a664b467e3e3a52712a"
+    },
+    {
+      "path": "public/route-release-evidence.json",
+      "bytes": 10462,
+      "sha256": "aac73f72deee96553a87d64a111301da5564942dcfc1e73a247f0e7999c7c756"
+    },
+    {
+      "path": "public/services/index.html",
+      "bytes": 1545,
+      "sha256": "526f80e5841a671cf3d6b6857920cca50f78a252bfa3686a547d3fe3dff32155"
+    },
+    {
+      "path": "public/sign-in/app.js",
+      "bytes": 1029,
+      "sha256": "8876f0aad069446f14baf7e923f4025820dfd83951b7167f6515e528bd6d47d5"
+    },
+    {
+      "path": "public/sign-in/index.html",
+      "bytes": 2344,
+      "sha256": "e021e52c25df8a4c834c011ae2efd87119cd1377f59455f084b7328093e77599"
+    },
+    {
+      "path": "public/sitemap.xml",
+      "bytes": 109,
+      "sha256": "63835cfef3e52851c5fda3c47603a3a40f7da0784eedf8c8b068effb20e07ac2"
+    },
+    {
+      "path": "public/status/index.html",
+      "bytes": 5507,
+      "sha256": "c780cb5e7281e1d7b9ffe03cd82ab81940cbb6390385bc428ef1996c85f9363a"
+    },
+    {
+      "path": "public/status/status.js",
+      "bytes": 2762,
+      "sha256": "371a5351fa9799bca651d3c689f1acd05bc0e9e8cf0b313feeb5f1ef1f1be8e5"
+    },
+    {
+      "path": "public/status/style.css",
+      "bytes": 1414,
+      "sha256": "51b71c5e3851aa4fda82d9506a1374cdb5451c0cdeb4d044cd779ce854fc9373"
+    },
+    {
+      "path": "public/style.css",
+      "bytes": 52882,
+      "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
+    }
+  ],
+  "fingerprint": "72a7ed0f57ed5a9e42f863e1960da4241e7b89f23696b0af989b7742308bd058"
+}
