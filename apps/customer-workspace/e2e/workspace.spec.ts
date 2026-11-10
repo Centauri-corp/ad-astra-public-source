@@ -3,6 +3,126 @@ import fs from "node:fs";
 import path from "node:path";
 const evidence = path.resolve(import.meta.dirname, "../../../LStra/evidence");
 test.beforeAll(() => fs.mkdirSync(evidence, { recursive: true }));
+test("access readiness reads configuration only on demand, without tokens or chat text", async ({
+  page,
+}) => {
+  const requests: {
+    method: string;
+    body: string | null;
+    authorization?: string;
+    cookie?: string;
+  }[] = [];
+  page.on("request", (request) => {
+    if (request.url().endsWith("/api/access-status")) {
+      const headers = request.headers();
+      requests.push({
+        method: request.method(),
+        body: request.postData(),
+        authorization: headers.authorization,
+        cookie: headers.cookie,
+      });
+    }
+  });
+  await page.goto("/");
+  await page
+    .getByLabel("Your question — stays in this tab")
+    .fill("LOCAL-ACCESS-PRIVACY-CANARY");
+  await page
+    .getByRole("button", { name: "Preview boundaries and privacy" })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Customer access readiness" }),
+  ).toBeVisible();
+  expect(requests).toHaveLength(0);
+  await page
+    .getByRole("button", { name: "Check access configuration" })
+    .click();
+  await expect(page.locator(".access-readiness [role=status]")).toContainText(
+    "QA verification is not configured",
+  );
+  expect(requests).toEqual([
+    { method: "GET", body: null, authorization: undefined, cookie: undefined },
+  ]);
+  await page.screenshot({
+    path: path.join(evidence, "workspace-access-readiness.png"),
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  const modal = await page.getByRole("dialog").boundingBox();
+  expect(modal!.width).toBeLessThanOrEqual(358);
+  expect(modal!.height).toBeLessThanOrEqual(812);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth > innerWidth,
+    ),
+  ).toBe(false);
+  await page.screenshot({
+    path: path.join(evidence, "workspace-access-readiness-mobile.png"),
+    fullPage: true,
+  });
+});
+test("unavailable or unsafe readiness metadata cannot paint public access as approved", async ({
+  page,
+}) => {
+  const metadata = {
+    schema: "ad-astra-access/v1",
+    identityProvider: "clerk",
+    sessionBoundary: "qa-configured",
+    customerAccess: false,
+    providerQaAccepted: false,
+    liveChat: false,
+    persistence: false,
+    privilegedActions: false,
+  };
+  await page.route("**/api/access-status", (route) =>
+    route.fulfill({ json: metadata }),
+  );
+  await page.goto("/");
+  await page
+    .getByRole("button", { name: "Preview boundaries and privacy" })
+    .click();
+  await page
+    .getByRole("button", { name: "Check access configuration" })
+    .click();
+  await expect(page.locator(".access-readiness [role=status]")).toContainText(
+    "customer access are not approved",
+  );
+  await page.unroute("**/api/access-status");
+  await page.route("**/api/access-status", (route) =>
+    route.fulfill({ json: { ...metadata, customerAccess: true } }),
+  );
+  await page
+    .getByRole("button", { name: "Check access configuration" })
+    .click();
+  await expect(page.locator(".access-readiness [role=status]")).toContainText(
+    "Status unavailable",
+  );
+  await page.unroute("**/api/access-status");
+  await page
+    .getByRole("button", { name: "Check access configuration" })
+    .click();
+  await expect(page.locator(".access-readiness [role=status]")).toContainText(
+    "QA verification is not configured",
+  );
+});
+test("unconfigured session handshake cannot be bypassed by forged browser identity", async ({
+  request,
+}) => {
+  const response = await request.post("/api/session", {
+    headers: {
+      origin: "http://127.0.0.1:4176",
+      "x-ad-astra-preview": "workflow-v1",
+      authorization: "Bearer a.b.c",
+      "x-tenant-id": "other",
+      "x-role": "admin",
+    },
+  });
+  expect(response.status()).toBe(503);
+  expect(await response.json()).toEqual({
+    authenticated: false,
+    error: "authentication_unavailable",
+  });
+});
 test("desktop workspace loads with seven read-only nodes, CSP and conservative indexing", async ({
   page,
 }) => {

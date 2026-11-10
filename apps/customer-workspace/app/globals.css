@@ -944,6 +944,9 @@ svg {
   min-height: 30px;
 }
 .notes-dialog {
+  margin: auto;
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
   max-width: min(560px, calc(100vw - 32px));
   padding: 28px;
   background: #10202b;
@@ -955,6 +958,31 @@ svg {
 .notes-dialog::backdrop {
   background: #02060bc9;
   backdrop-filter: blur(6px);
+}
+.access-readiness {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  margin-block: 20px;
+  background: #0b1722;
+}
+.access-readiness h3 {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+.access-readiness button {
+  min-height: 44px;
+  border: 1px solid #9bdfe360;
+  border-radius: 5px;
+  padding: 10px 14px;
+  background: #142b38;
+  color: var(--cyan);
+  font-size: 12px;
+}
+.access-readiness .access-boundary {
+  font-size: 11px;
+  color: var(--muted);
 }
 .notes-head {
   display: flex;

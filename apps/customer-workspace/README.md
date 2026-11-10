@@ -40,12 +40,31 @@ Typed text is escaped plain React text and remains only in the current tab's mem
 
 `AD_ASTRA_WORKSPACE_PREVIEW=true` plus `AD_ASTRA_WORKSPACE_ORIGIN=<exact origin>` enables the non-production preview. **`VERCEL_ENV=production` always denies it even when that flag is set.** An unset or invalid configuration returns HTTP 404. Do not copy any secrets into these values, expose API keys to React, or point this package at `adastra.global`.
 
-No authentication library or database has been provisioned here. The existing foundation's **Clerk identity direction is preserved as a pending contract**, not replaced by Supabase Auth. Any future Supabase persistence/vector work must first define verified identity-to-tenant mapping, server-derived authorization, RLS policies and real two-tenant acceptance. A local fixture or graph checkpoint is not a provider receipt or independent approval.
+The existing foundation's **Clerk identity direction is preserved**, not replaced by Supabase Auth. The server-only session verifier is implemented for QA; provider sign-in and customer access are not accepted. No database or identity account has been provisioned. Any future persistence/vector work must first define verified identity-to-tenant mapping, server-derived authorization, row policies and real two-tenant acceptance. A local fixture or graph checkpoint is not a provider receipt or independent approval.
+
+## Session and tenant-scope QA increment
+
+`POST /api/session` is a bodyless, same-origin bearer-token handshake. With explicit non-production QA configuration it uses the pinned `@clerk/backend` 3.27.0 verifier and a server-side public PEM, without remote key lookup, secret-key fallback or account/record API calls. It validates RS256 signature, issuer, audience, exact authorized party, numeric dates, maximum five-minute token lifetime, user/session IDs and session state. Delegated/machine tokens and ambiguous organization claims are refused. Cookie-only calls, query/body tenant fields and forged role headers cannot substitute for verified identity. The response contains only authentication outcome, scope type and closed release flags—not tokens or account/tenant identifiers.
+
+The signed session determines a **personal or active-organization scope namespace**, supporting Clerk legacy and v2 claims. `sameVerifiedScope` rejects different namespaces, cloned/forged principals and expired principals. These namespaces are **not** Catalyst/Supabase tenant UUIDs or database memberships. Before querying real data, a reviewed server-side membership resolver must map this identity to the canonical tenant, enforce resource permissions and apply database row policies. No data store or customer record is accessed by this increment.
+
+The following protected server configuration is required for QA only:
+
+- `AD_ASTRA_WORKSPACE_PREVIEW=true` and `AD_ASTRA_WORKSPACE_ORIGIN=<exact loopback or staging origin>`.
+- `AD_ASTRA_WORKSPACE_SESSION_QA=true`.
+- `AD_ASTRA_AUTH_ISSUER=https://clerk.adastra.global` and `AD_ASTRA_AUTH_AUDIENCE=ad-astra-workspace`, preserving the existing foundation contract. This does not establish that the provider/domain has been accepted.
+- `CLERK_JWT_KEY=<the approved provider's public PEM>`. Configure it securely in the protected Development/QA environment, never in React or a `NEXT_PUBLIC_*` variable. This verifier does not need a Clerk secret API key.
+
+Do not use the locally generated test key as provider evidence or configure production from it. Public-key rotation must be owner-controlled; an absent, invalid or undersized key fails closed. `VERCEL_ENV=production` denies the preview and handshake even with all QA values present.
+
+`GET /api/access-status` returns allowlisted configuration metadata only; the preview notes panel reads it on demand without credentials. `qa-configured` does **not** mean accepted, authenticated, tenant-isolated or live. The client rejects metadata that attempts to claim activation. Customer access, provider QA acceptance, persistence and privileged actions remain false.
+
+Fixtures create ephemeral RSA keys in memory. Their signatures and two-scope checks establish local code behavior only. Offline verification cannot detect provider-side session revocation before token expiry; sign-in, recovery, immediate logout/revocation, key rotation and authenticated two-tenant database QA remain required before a customer release. No sign-in UI or provider logout flow is claimed by this package.
 
 ## Next controlled increment
 
 1. Review the exact source commit and this preview's desktop/mobile behavior independently.
-2. Integrate the approved identity/session path and server-derived tenant context; verify sign-in, expiry, recovery, logout and authorization before enabling customer access.
+2. Connect approved provider sign-in and the canonical tenant membership resolver to the QA session boundary; verify sign-in, expiry, recovery, immediate logout/revocation and database authorization before enabling customer access.
 3. Add approved retrieval and model execution behind the existing release/usage/permission boundaries. Replace synthetic events only with documented execution statuses, never private reasoning.
 4. Accept tenant isolation, cost limits, cancellation/error paths, audit redaction and data retention before enabling persistence or privileged actions.
 5. Obtain exact-candidate human release authorization and follow the existing controlled deployment/promotion process. This package does not clear prior external release gates.
