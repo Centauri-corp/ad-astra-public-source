@@ -86,8 +86,18 @@
     },
     {
       "path": "public/app.js",
-      "bytes": 31299,
-      "sha256": "7d9c77786faf0aadb80d7c2f4f237b5fae6c109af4a0308ea2054dc533ac1fb7"
+      "bytes": 31711,
+      "sha256": "df6cb2e77de0deddaa22ffcb66c9fc0f7037e02a6c89fc93cb5cab722635b369"
+    },
+    {
+      "path": "public/assets/ad-astra-hero-cinematic-4mp.png",
+      "bytes": 2866213,
+      "sha256": "2185f36fbb6bb45eed6c2550a55aa9a73fa64070a09e72cb14493cb3c0a89981"
+    },
+    {
+      "path": "public/assets/ad-astra-hero-cinematic-v1.png",
+      "bytes": 2091163,
+      "sha256": "7c590c66b94a56625bc0facd5c6c14c56523ea1935201f095425556b42cdef5b"
     },
     {
       "path": "public/assets/ad-astra-horizon-motion.mp4",
@@ -96,13 +106,18 @@
     },
     {
       "path": "public/assets/ad-astra-horizon-motion.vtt",
-      "bytes": 254,
-      "sha256": "5b7e2bee4f9f0c4563825cffb59ebb56bc90690e4b8f79b6250adc5a1fda0173"
+      "bytes": 130,
+      "sha256": "162ee6b64a690dfcab0f4f9fd8895f3528654015b2db771abb8d9f3342c6e6b0"
     },
     {
       "path": "public/assets/ad-astra-logo-transparent.png",
       "bytes": 400252,
       "sha256": "8bbd03257942401d0d7d04fd6e070f62fcbb805fb12a29ffc3798a36599918cc"
+    },
+    {
+      "path": "public/assets/ad-astra-product-ecosystem-v1.png",
+      "bytes": 1887325,
+      "sha256": "3d8f0ca4f6b36663655cb13e7b7747978380f3df7985c9e149a499c504e4309a"
     },
     {
       "path": "public/assets/ad-astra-runway-horizon-poster.jpg",
@@ -116,13 +131,18 @@
     },
     {
       "path": "public/assets/ad-astra-runway-orbital-motion.vtt",
-      "bytes": 265,
-      "sha256": "ceae3fb9b07c63e271243b933107e493088300faa9d2dd107f82e815b8fe786a"
+      "bytes": 131,
+      "sha256": "ddcbd17d324798ed59e060d9b85b6fe123d901148aafb9f352694e2d9b2d0bea"
     },
     {
       "path": "public/assets/ad-astra-runway-orbital-poster.jpg",
       "bytes": 57667,
       "sha256": "454145ffc44572c03751039702d4e436acdd91b2108d1ecf425fe9e02dce8585"
+    },
+    {
+      "path": "public/assets/ad-astra-voice-motion-v1.png",
+      "bytes": 1806717,
+      "sha256": "76ef0ae6552838557e25ae233663bed3c28679af201be412039f4e25609254fd"
     },
     {
       "path": "public/assets/adobe-curiosity.jpg",
@@ -231,8 +251,8 @@
     },
     {
       "path": "public/assets/visual-manifest.json",
-      "bytes": 3625,
-      "sha256": "d9c0b2461ddceb9d7b330c8d83b5fc212a9ec9cbc0ccedcdaf983d71eb92404e"
+      "bytes": 6163,
+      "sha256": "5af7ef578623e2c38f90635cf6db0a91f739f49cc04e3e156f233f18098cc70b"
     },
     {
       "path": "public/auth-navigation.js",
@@ -251,8 +271,8 @@
     },
     {
       "path": "public/experience-manifest.json",
-      "bytes": 2234,
-      "sha256": "dc67966692a594f09588567151897625b781fc830234047e6488632e6e2c823b"
+      "bytes": 2519,
+      "sha256": "1af5fe19fd8347c6d0387e3a8818b5af83d1891d8e1bb4045285636f5e1c2ab4"
     },
     {
       "path": "public/film-delivery.css",
@@ -276,8 +296,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 34806,
-      "sha256": "8151929522308efcfdaa662a24d23ef1ac7f33af19232b2c09a3e44192b63c87"
+      "bytes": 37448,
+      "sha256": "845890a99cc483c92fc017538ce9f963d83022194044348265acd2d32782f93e"
     },
     {
       "path": "public/intelligence/index.html",
@@ -551,9 +571,9 @@
     },
     {
       "path": "public/style.css",
-      "bytes": 50148,
-      "sha256": "5273dc51eb8ba9e58b9713154e9abcc351a69c68aa650861b078f533cc29fe60"
+      "bytes": 52882,
+      "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "8d44abbd346a1a7337e9b726256bb21547af3bc3b3b089bb0b3617d99a1146a9"
+  "fingerprint": "72a7ed0f57ed5a9e42f863e1960da4241e7b89f23696b0af989b7742308bd058"
 }

@@ -2,6 +2,8 @@
   "schema": "ad-astra-public-visual-architecture/v1",
   "modelName": "Astra Polaris",
   "status": "design-preview",
+  "developmentStage": "engineering-development",
+  "engineeringBoundary": "AGI and ASI are research-engineering workstreams for product and service design; neither is a deployed public capability.",
   "modes": ["ask", "research", "create", "learn", "explore"],
   "tokens": {"background":"#080f17","surface":"#0d1d2b","text":"#edf3f3","muted":"#aec5c6","cyan":"#9bdfe3","champagne":"#e9c990","cobalt":"#214b78","cobaltText":"#aec9ed"},
   "motion": {"autoplay":false,"reducedMotion":"static-equivalent","audio":false},

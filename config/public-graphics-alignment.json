@@ -31,11 +31,12 @@
   "pageGroups": {
     "homepage": {
       "routes": ["/"],
-      "hero": "/assets/astra-lumen-neural-brain.png",
+      "hero": "/assets/ad-astra-hero-cinematic-4mp.png",
       "motion": "/assets/ad-astra-runway-orbital-motion.mp4",
-      "motionPoster": "/assets/astra-lumen-neural-brain.png",
-      "neuralStudy": "/assets/astra-lumen-neural-profile-canvas.png",
-      "mobileNeuralStudy": "/assets/astra-lumen-neural-profile-canvas-mobile.png",
+      "motionPoster": "/assets/ad-astra-hero-cinematic-4mp.png",
+      "neuralStudy": "/assets/ad-astra-voice-motion-v1.png",
+      "mobileNeuralStudy": "/assets/ad-astra-voice-motion-v1.png",
+      "productConstellation": "/assets/ad-astra-product-ecosystem-v1.png",
       "status": "public visual study; motion and engine remain gated"
     },
     "intelligence": {

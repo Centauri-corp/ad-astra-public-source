@@ -3,7 +3,68 @@
   "purpose": "Public visual inventory for the AD ASTRA homepage and Astra Polaris experience",
   "productArchitectureManifest": "/assets/products/manifest.json",
   "publicSafe": true,
+  "promotionPolicy": "Candidate assets require human visual review and release-gate approval before public promotion.",
   "assets": [
+    {
+      "id": "ad-astra-hero-cinematic-4mp",
+      "path": "/assets/ad-astra-hero-cinematic-4mp.png",
+      "role": "homepage hero candidate",
+      "kind": "image",
+      "dimensions": "2688x1536",
+      "visualDirection": "high-resolution cinematic AI-realistic blended artwork",
+      "provenance": "Adobe Firefly generation, 2026-11-10",
+      "reviewStatus": "candidate",
+      "alt": "A human profile held within a luminous cyan and violet neural constellation"
+    },
+    {
+      "id": "ad-astra-hero-cinematic-v1",
+      "path": "/assets/ad-astra-hero-cinematic-v1.png",
+      "role": "homepage hero fallback candidate",
+      "kind": "image",
+      "dimensions": "1672x941",
+      "visualDirection": "cinematic AI-realistic blended artwork",
+      "provenance": "Ad Astra visual generation, 2026-11-10",
+      "reviewStatus": "candidate",
+      "alt": "A human profile held within a luminous cyan and violet neural constellation"
+    },
+    {
+      "id": "ad-astra-product-ecosystem-v1",
+      "path": "/assets/ad-astra-product-ecosystem-v1.png",
+      "role": "product constellation artwork",
+      "kind": "image",
+      "dimensions": "1448x1086",
+      "visualDirection": "cinematic AI-realistic blended artwork",
+      "provenance": "Ad Astra visual generation, 2026-11-10",
+      "reviewStatus": "candidate",
+      "alt": "A connected product ecosystem of luminous intelligence nodes"
+    },
+    {
+      "id": "ad-astra-voice-motion-v1",
+      "path": "/assets/ad-astra-voice-motion-v1.png",
+      "role": "voice and motion study artwork",
+      "kind": "image",
+      "dimensions": "1672x941",
+      "visualDirection": "cinematic AI-realistic blended artwork",
+      "provenance": "Ad Astra visual generation, 2026-11-10",
+      "reviewStatus": "candidate",
+      "alt": "A voice waveform flowing into a connected neural field"
+    },
+    {
+      "id": "ad-astra-runway-orbital-motion",
+      "path": "/assets/ad-astra-runway-orbital-motion.mp4",
+      "role": "homepage motion fallback",
+      "kind": "video",
+      "provenance": "Existing first-party motion study",
+      "reviewStatus": "development-preview"
+    },
+    {
+      "id": "ad-astra-horizon-motion",
+      "path": "/assets/ad-astra-horizon-motion.mp4",
+      "role": "product ecosystem motion fallback",
+      "kind": "video",
+      "provenance": "Existing first-party motion study",
+      "reviewStatus": "production-preview"
+    },
     {
       "id": "astra-polaris-platform-mockup",
       "path": "/assets/astra-polaris-platform-mockup.png",

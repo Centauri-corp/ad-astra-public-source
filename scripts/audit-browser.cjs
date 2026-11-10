@@ -15,6 +15,7 @@ fs.mkdirSync(out,{recursive:true});
     errors=[];const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:20000});await page.waitForTimeout(80);
     const state=await page.evaluate(()=>({resolvedPath:location.pathname,overflow:document.documentElement.scrollWidth>innerWidth+1,visibleH1s:[...document.querySelectorAll('h1')].filter(e=>e.checkVisibility()).length,brokenImages:[...document.images].filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.getAttribute('src')),products:!!document.querySelector('a[href="/products/"]'),availability:!!document.querySelector('a[href="/status/"]')}));
     report.pages.push({route,width,status:response.status(),...state,errors:[...errors]});
+    if(route==='/'&&[390,1440].includes(width)){const file=path.join(out,`candidate-home-${width}.png`);await page.screenshot({path:file});report.screenshots.push(path.relative(root,file));}
     if(['/intelligence/','/products/','/products/core-intelligence/','/status/'].includes(route)&&[390,1440].includes(width)){const file=path.join(out,`candidate-${route.split('/').filter(Boolean).join('-')}-${width}.png`);await page.evaluate(async()=>{for(const image of document.images)image.loading='eager';await Promise.all([...document.images].map(image=>image.decode().catch(()=>{})));});await page.screenshot({path:file,fullPage:true});report.screenshots.push(path.relative(root,file));}
    }
   }
@@ -26,6 +27,27 @@ fs.mkdirSync(out,{recursive:true});
   assert.equal(new URL(page.url()).searchParams.get('mode'),'research');
   assert.equal(await page.locator('button[data-mode="research"]').getAttribute('aria-pressed'),'true');
   report.interactions.push({name:'intelligence page to research product filter without AI execution',result:'PASS'});
+  await page.goto(base+'/');
+  const researchTabs=page.locator('#possibilities [role="tab"]');
+  const tierState=await page.locator('.intelligence-tab').evaluateAll(tabs=>tabs.map(t=>t.getAttribute('aria-selected')));
+  await researchTabs.last().focus();await page.keyboard.press('ArrowRight');
+  assert.equal(await researchTabs.first().getAttribute('aria-selected'),'true');
+  await page.keyboard.press('ArrowLeft');assert.equal(await researchTabs.last().getAttribute('aria-selected'),'true');
+  assert.deepEqual(await page.locator('.intelligence-tab').evaluateAll(tabs=>tabs.map(t=>t.getAttribute('aria-selected'))),tierState);
+  assert.equal(await page.locator('#possibilities [role="tab"][tabindex="0"]').count(),1);
+  report.interactions.push({name:'homepage mode keyboard navigation stays within its tab group',result:'PASS'});
+  for(const video of await page.locator('.video-sneak video').all()){
+   const result=await video.evaluate(async element=>{
+    element.load();
+    if(element.readyState<1)await new Promise((resolve,reject)=>{const timeout=setTimeout(()=>reject(Error('Video metadata timeout')),10000);element.addEventListener('loadedmetadata',()=>{clearTimeout(timeout);resolve();},{once:true});element.addEventListener('error',()=>{clearTimeout(timeout);reject(Error('Video decode error'));},{once:true});});
+    const track=element.querySelector('track');const captions=await (await fetch(track.src)).text();
+    const endTimes=[...captions.matchAll(/--> (\d\d):(\d\d):(\d\d\.\d{3})/g)].map(m=>Number(m[1])*3600+Number(m[2])*60+Number(m[3]));
+    return {duration:element.duration,endTimes};
+   });
+   assert.ok(Number.isFinite(result.duration)&&result.duration>0);
+   assert.ok(result.endTimes.length>0&&result.endTimes.every(end=>end<=result.duration));
+  }
+  report.interactions.push({name:'motion preview captions end within decoded video durations',result:'PASS'});
   await page.goto(base+'/products/');
   const families=require('../config/public-product-families.json').families;
   for(const mode of ['all','ask','research','create','learn','explore']){await page.locator(`button[data-mode="${mode}"]`).click();const shown=await page.locator('[data-family]:visible').count();assert.equal(shown,mode==='all'?6:families.filter(f=>f.modes.includes(mode)).length);}

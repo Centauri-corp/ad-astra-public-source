@@ -4,11 +4,11 @@
 const modes = {
   ask: {number:'01 / ASK', title:['Find the question','behind the question.'], description:'Move from a broad idea to a focused inquiry. Explore assumptions, connect context and identify what is worth investigating next.', example:'“What would change if energy were abundant?”', image:'adobe-curiosity.jpg', alt:'A hand sketches connected ideas in a notebook beside a luminous conceptual interface'},
   research: {number:'02 / RESEARCH', title:['See the evidence.','Connect the ideas.'], description:'Bring different perspectives into view. Our research direction emphasizes sources, uncertainty and connections across disciplines.', example:'“How do energy, water and agriculture shape one another?”', image:'runway-curiosity-notes.jpg', alt:'Handwritten research notes in an open notebook outdoors'},
-  create: {number:'03 / CREATE', title:['Give a bold idea','a clearer shape.'], description:'Explore alternative approaches, develop a concept and find new ways to express it. Human intention guides the creative process.', example:'“Imagine a learning environment built around curiosity.”', image:'astra-lumen-neural-profile.png', alt:'A luminous neural profile with connected cyan and violet pathways'},
+  create: {number:'03 / CREATE', title:['Give a bold idea','a clearer shape.'], description:'Explore alternative approaches, develop a concept and find new ways to express it. Human intention guides the creative process.', example:'“Imagine a learning environment built around curiosity.”', image:'ad-astra-product-ecosystem-v1.png', alt:'A connected product ecosystem of luminous intelligence nodes'},
   learn: {number:'04 / LEARN', title:['Understand more.','Keep going further.'], description:'Approach a complex subject through questions, explanations and connections. Build understanding at a pace that supports deeper thought.', example:'“Explain orbital mechanics through everyday experiences.”', image:'astra-lumen-neural-brain.png', alt:'A translucent neural brain with cyan synapses and gold orbital paths'},
-  explore: {number:'05 / EXPLORE', title:['Look beyond','the familiar.'], description:'Follow an idea across science, technology and human experience. Discover new perspectives and questions worth pursuing.', example:'“What could living beyond Earth teach us about life here?”', image:'astra-lumen-neural-horizon.png', alt:'A neural intelligence lattice rising over an illuminated Earth horizon'}
+  explore: {number:'05 / EXPLORE', title:['Look beyond','the familiar.'], description:'Follow an idea across science, technology and human experience. Discover new perspectives and questions worth pursuing.', example:'“What could living beyond Earth teach us about life here?”', image:'ad-astra-hero-cinematic-4mp.png', alt:'A human profile held within a luminous cyan and violet neural constellation'}
 };
-const tabs = [...document.querySelectorAll('[role="tab"]')];
+const tabs = [...document.querySelectorAll('#possibilities [role="tab"][data-mode]')];
 const experienceImage = document.getElementById('experience-image');
 function selectMode(tab) {
   const mode = modes[tab?.dataset.mode];
@@ -212,8 +212,8 @@ document.getElementById('save-launch').addEventListener('click', async () => {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const labels = {
     1: ['NARROW AI / BOUNDED SIGNAL FLOW', 'A clean, predictable field for focused tasks.'],
-    2: ['AGI / CROSS-DOMAIN TOPOLOGY', 'A research-direction field for connected reasoning.'],
-    3: ['ASI / HYPOTHETICAL HORIZON', 'A denser visual horizon for multi-threaded possibility.']
+    2: ['AGI / ENGINEERING DEVELOPMENT', 'A research visualization for connected reasoning.'],
+    3: ['ASI / ENGINEERING RESEARCH', 'A conceptual visualization for advanced intelligence research.']
   };
   let tier = 1, activity = 0, targetActivity = 0, visible = true, frame = 0, started = performance.now();
   const gl = canvas.getContext('webgl', { alpha: true, antialias: false, powerPreference: 'low-power' });
@@ -390,11 +390,18 @@ document.getElementById('save-launch').addEventListener('click', async () => {
   function setTier(next) {
     tier = next;
     section.dataset.tier = String(tier);
-    tabs.forEach(tab => { const active = Number(tab.dataset.tier) === tier; tab.classList.toggle('active', active); tab.setAttribute('aria-selected', String(active)); });
+    tabs.forEach(tab => { const active = Number(tab.dataset.tier) === tier; tab.classList.toggle('active', active); tab.setAttribute('aria-selected', String(active)); tab.tabIndex = active ? 0 : -1; });
     const current = labels[tier]; label.textContent = current[0]; value.textContent = current[1];
     targetActivity = Math.max(targetActivity, tier * .45);
   }
-  tabs.forEach(tab => tab.addEventListener('click', () => setTier(Number(tab.dataset.tier))));
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => setTier(Number(tab.dataset.tier)));
+    tab.addEventListener('keydown', event => {
+      const next = {ArrowRight:(index+1)%tabs.length, ArrowLeft:(index+tabs.length-1)%tabs.length, Home:0, End:tabs.length-1}[event.key];
+      if (next === undefined) return;
+      event.preventDefault(); setTier(Number(tabs[next].dataset.tier)); tabs[next].focus();
+    });
+  });
   input?.addEventListener('input', () => { targetActivity = Math.min(3, .35 + input.value.length / 45); activityLabel.textContent = 'LOCAL SIMULATION / RIPPLE INTENSITY ' + Math.round(targetActivity * 33) + '%'; });
   form?.addEventListener('submit', event => { event.preventDefault(); targetActivity = 3; activityLabel.textContent = 'LOCAL SIMULATION / RIPPLE REGISTERED'; setTimeout(() => { activityLabel.textContent = 'LOCAL SIMULATION / NO PROMPT IS SENT'; }, 1400); });
   const voiceButton = document.getElementById('voice-command');
