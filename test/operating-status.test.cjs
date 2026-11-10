@@ -22,7 +22,7 @@ test('engine availability requires runtime readiness, release acceptance and a c
 test('enabling the engine cannot claim CRM, billing, outreach or product availability', () => {
   const report = operatingStatus(true, openRoutes);
   for (const id of ['crm', 'billing', 'outreach', 'products', 'workspace']) assert.notEqual(state(report, id), 'available', id);
-  assert.equal(report.services.find(service => service.id === 'workspace').href, '/platform/');
+  assert.equal(report.services.find(service => service.id === 'workspace').href, '/platform-preview/');
   assert.equal(operatingStatus(false).services.find(service => service.id === 'workspace').href, '/platform-preview/');
 });
 

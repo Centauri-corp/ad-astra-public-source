@@ -46,7 +46,7 @@ dialog{width:min(1000px,94vw);border:1px solid #435a6a;border-radius:5px;padding
 .neural-brain-shell{transform:translate(-50%,-50%) rotate(-8deg) rotateX(var(--brain-tilt-y,0deg)) rotateY(var(--brain-tilt-x,0deg));transition:transform .18s ease-out}
 .neural-brain-visual[data-sensor="active"] .neural-synapses{box-shadow:0 0 42px #55d9ff99}
 .neural-brain-visual:before{content:'PUBLIC NEURAL INTELLIGENCE';position:absolute;top:18px;left:22px;color:#a9dff0;font-size:7px;letter-spacing:2.2px;z-index:3}
-.neural-brain-visual:after{content:'ASTRA LUMEN / 01';position:absolute;right:22px;bottom:22px;color:#d9c3a0;font-size:7px;letter-spacing:1.8px;z-index:3}
+.neural-brain-visual:after{content:'ASTRA POLARIS / 01';position:absolute;right:22px;bottom:22px;color:#d9c3a0;font-size:7px;letter-spacing:1.8px;z-index:3}
 .neural-brain-shell{background:linear-gradient(115deg,#dff8ff22 0 42%,#c9a86a30 43% 56%,#7ee7ff20 57%);}
 .neural-brain-shell:before{box-shadow:inset 26px 0 0 #62dcff12,inset -26px 0 0 #f1d39b18}
 .neural-brain-visual .knowledge-core>span{color:#a9e8ff;letter-spacing:4px}

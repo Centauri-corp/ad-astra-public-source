@@ -51,8 +51,8 @@
     },
     {
       "path": "lib/operating-status.js",
-      "bytes": 2682,
-      "sha256": "de0fb5f4b42e63b6184a797be504afaa3714db6f3ff9d157f17ffd869380f32c"
+      "bytes": 2555,
+      "sha256": "13aff7f93669a99a67f79e03e255186bead1f9cc72b7d5cd3ef605d7ec539093"
     },
     {
       "path": "lib/provider-budget-policy.js",
@@ -76,13 +76,13 @@
     },
     {
       "path": "public/about/index.html",
-      "bytes": 1441,
-      "sha256": "ee15c08e2e5263a6017f8d7113adaf32ea589bb501efb3e3cf025483e80c1a9f"
+      "bytes": 1515,
+      "sha256": "fd1942fcdcb99ab93768b540744e09db0ac3b0147c6d743a51f69263f8101e3f"
     },
     {
       "path": "public/agent/index.html",
-      "bytes": 5885,
-      "sha256": "39eb67559f3fa4f05365fd99af048b228a1c738c09ec99d6e4f4b58254c6267b"
+      "bytes": 5965,
+      "sha256": "95f1af8f1972d108ea004a6d7c342bbc131e3ce00a908643d03d97ab38216d2f"
     },
     {
       "path": "public/app.js",
@@ -241,8 +241,8 @@
     },
     {
       "path": "public/company/index.html",
-      "bytes": 1649,
-      "sha256": "d337ac37bf16ccf0c7a16794c361d32363866caf615c1d6659a7829b402041a0"
+      "bytes": 1723,
+      "sha256": "e19ffdf52b9abbcf4cd24f23eb765a9e2f43e21a6839327249372bb848bbe8d3"
     },
     {
       "path": "public/engine-status.js",
@@ -271,18 +271,18 @@
     },
     {
       "path": "public/film/index.html",
-      "bytes": 6611,
-      "sha256": "d9faee82fe46da16cff53a57a359e505337aafb931e4e196211ab7d698a4ec3d"
+      "bytes": 6691,
+      "sha256": "40f9cc2f2da3e7a944e00c44bb014ef2eb3134c64d18fddd3e3b88f7b6d87b8d"
     },
     {
       "path": "public/index.html",
-      "bytes": 34726,
-      "sha256": "cbb6e76717ae350318014b29ec4c3fe8f571b2107d18b585e09f27df89049124"
+      "bytes": 34806,
+      "sha256": "8151929522308efcfdaa662a24d23ef1ac7f33af19232b2c09a3e44192b63c87"
     },
     {
       "path": "public/intelligence/index.html",
-      "bytes": 9015,
-      "sha256": "2970208e0580227755d8fdff9f97b863bcab5cfeba4e58d0b35bab1ca6e57899"
+      "bytes": 9095,
+      "sha256": "6054dc3b70d5d4b2387d65a37e1426532cbd2f1a28b4ca8cbc71ecafc4a95c37"
     },
     {
       "path": "public/intelligence/style.css",
@@ -301,8 +301,8 @@
     },
     {
       "path": "public/knowledge/index.html",
-      "bytes": 6778,
-      "sha256": "7139282f31bdef747dd977baa096ebacb7ec6a0fd0febde6b39c7e8ba5961650"
+      "bytes": 6855,
+      "sha256": "6b49fa5c7648a523fbefe40e3fc00589dd1edecbb2c6a6632a5949ea071dcf7a"
     },
     {
       "path": "public/knowledge/style.css",
@@ -321,8 +321,8 @@
     },
     {
       "path": "public/markets/agriculture-food/index.html",
-      "bytes": 2569,
-      "sha256": "6e7d7807d60f1b03c1e21ab39ae146232a9712e55268c76c5dc6c4d5e0e071cd"
+      "bytes": 2643,
+      "sha256": "2babca0235cbdd3d63903725dc6281704aed920bad4ef5ae642964ab7f3fe0ef"
     },
     {
       "path": "public/markets/app.js",
@@ -331,73 +331,73 @@
     },
     {
       "path": "public/markets/business-professional-services/index.html",
-      "bytes": 2769,
-      "sha256": "cfa8f40d904fbabbdd5eca0c3e09850cf72e313d051ed868252b1936d9e40861"
+      "bytes": 2843,
+      "sha256": "fb1c639d0452846750e626aabd3b2dad3cd2eedbba0be680093cde5850f1cce1"
     },
     {
       "path": "public/markets/consumer-personal-ai/index.html",
-      "bytes": 2722,
-      "sha256": "a644457aed16c25831e4a87424eb553b112dffad81315ac4bb58049970df8239"
+      "bytes": 2796,
+      "sha256": "49e741808dd3a9712978b61ddd885fca44f406973258905fc232c36e19b24b84"
     },
     {
       "path": "public/markets/creative-industries-media/index.html",
-      "bytes": 2663,
-      "sha256": "b1eaf793e5dbab1d2d2ebb0c34b1c9179f46caed8539cfdb695221660f133e36"
+      "bytes": 2737,
+      "sha256": "40db802ae619325fa2c77399c30bbcb0101f6dde9b98e2a558f59a825d007460"
     },
     {
       "path": "public/markets/digital-commerce/index.html",
-      "bytes": 2663,
-      "sha256": "5b3fd4f3c94c2c75bda20a9e27877a4fa9f945e6781f911bc97a5b127ae62e07"
+      "bytes": 2737,
+      "sha256": "1d2b2c5b1f34fd940a1c586b92bc5616ed6f457a24556a0ded33f798dadc276d"
     },
     {
       "path": "public/markets/education-learning/index.html",
-      "bytes": 2640,
-      "sha256": "d990c9d2a667b06e0e019743ec83db87f645c236ce59d953128411704eeef2c0"
+      "bytes": 2714,
+      "sha256": "fb1cb2f668a38d570b2320ae0fa325ea86fbb3a6418d65dcd564082e04f9a70a"
     },
     {
       "path": "public/markets/finance-economics/index.html",
-      "bytes": 2650,
-      "sha256": "4b46b3ec9cc259c0cd9fae59885b88a4bc5fc8be8d6752475e53d24d0558f5fc"
+      "bytes": 2724,
+      "sha256": "721b40e66252ce093f52188938b01dfd35a8c19677f55d1ba355d913a54f8c8d"
     },
     {
       "path": "public/markets/government-public-services/index.html",
-      "bytes": 2662,
-      "sha256": "7cb6156032b650b3560e478212f5b009432d32205d6d6bf428af337edbe65609"
+      "bytes": 2736,
+      "sha256": "43ddf2ed38956c19d812982b26523bee7971de23208aa44148cc8a893dcd5cbd"
     },
     {
       "path": "public/markets/healthcare-wellness/index.html",
-      "bytes": 2678,
-      "sha256": "d2bdd0f08ffb7cfd3519e00b4bccb0cd6067e9d36553c4ec25d3677c84496e1f"
+      "bytes": 2752,
+      "sha256": "254a77a21b0969e0df78ef93aeb6017bbd703e204e706c43fdaf81cffd24db0c"
     },
     {
       "path": "public/markets/index.html",
-      "bytes": 6304,
-      "sha256": "526643ee9a138f9888d3eb1fd62c2180575a18201cb83bee552ae10b200bba50"
+      "bytes": 6378,
+      "sha256": "2ff200fd386d62c47b85d95507bb047c1a74b241f29bba2c87abe94f93143591"
     },
     {
       "path": "public/markets/legal-compliance/index.html",
-      "bytes": 2628,
-      "sha256": "545d10a14638224d8074bb0ba05f82b6b09095cf17ea889ecef9eb1794ab7724"
+      "bytes": 2702,
+      "sha256": "d263d90df3ddf89a07f872704f072740d6be4bf74eb52fd779e276c15c4622f9"
     },
     {
       "path": "public/markets/logistics-supply-chain/index.html",
-      "bytes": 2622,
-      "sha256": "81b843e4001965e7f1852a103c4bb24324cc404bb5b25098625932a20534ec5b"
+      "bytes": 2696,
+      "sha256": "c28c29e7ddd2f35abbcf1cd4cfef2d4b5bbd1858eddf138b5f7308a7c450d221"
     },
     {
       "path": "public/markets/manufacturing-energy/index.html",
-      "bytes": 2683,
-      "sha256": "2d2f0cb547dd5ad5ef30c22a2094b80b5708d6e4c7669347c13a4dde51a9b142"
+      "bytes": 2757,
+      "sha256": "b82b2f295658d4d2ce251c32a8bf561e0544f43c54f0c5fae4d90fc68a014960"
     },
     {
       "path": "public/markets/positioning/index.html",
-      "bytes": 5615,
-      "sha256": "47d5445ccc964e70efe8adb29de4ff9b7457e3cd05c41d37823835f1a42f3e61"
+      "bytes": 5692,
+      "sha256": "77581430847dcb9cca103fe2d01108d1aa416823830b19215d70bd08b9062437"
     },
     {
       "path": "public/markets/positioning/microgrids/index.html",
-      "bytes": 10530,
-      "sha256": "b52f2876db2791d57a7424806f4084bfbe3332a743f93fcf69e593cfc3b9cbdc"
+      "bytes": 10607,
+      "sha256": "050c027a420bf8272fc1e9943acb49a0ddcba7c8304000493059bcb507b4eb75"
     },
     {
       "path": "public/markets/positioning/style.css",
@@ -406,13 +406,13 @@
     },
     {
       "path": "public/markets/real-estate-construction/index.html",
-      "bytes": 2624,
-      "sha256": "1f57db13224dd4c43888c1704f43c5d4dc5a5fd52816fd6fab84938a5d9f5d99"
+      "bytes": 2698,
+      "sha256": "11ef9600ae5921502f7a5991d8ccbadd4842e6881244a20506c8902dac07aac8"
     },
     {
       "path": "public/markets/science-research/index.html",
-      "bytes": 2700,
-      "sha256": "b9fdc4a59329878014ed93085178f7332fc6f7aa8b0321f5bb434c6a140574f4"
+      "bytes": 2774,
+      "sha256": "7a2ebaf2d91a2622a406acd48a3b806756b3bc442908b032683854bd2f6c72c7"
     },
     {
       "path": "public/markets/style.css",
@@ -421,8 +421,8 @@
     },
     {
       "path": "public/markets/travel-hospitality/index.html",
-      "bytes": 2547,
-      "sha256": "d7d8f2ef76e35f52155da0839020ed78889c0f2a2e015c9b0c156b6f78f4c4b2"
+      "bytes": 2621,
+      "sha256": "8664a3bb7b431d1fa08bd0a5c71a6243a5fc45e9cc78d98b4c5390440e257e23"
     },
     {
       "path": "public/platform-preview/app.js",
@@ -431,8 +431,8 @@
     },
     {
       "path": "public/platform-preview/index.html",
-      "bytes": 11991,
-      "sha256": "9af4948e2fcaa8933025cfa878590f412d164055660cc1c9d6d4f969fa260135"
+      "bytes": 12071,
+      "sha256": "1bddd00d83bc163de0b587c26fe4451c50f91ab0a811a2af500c0c32c7ead584"
     },
     {
       "path": "public/platform-preview/style.css",
@@ -446,13 +446,13 @@
     },
     {
       "path": "public/platform/index.html",
-      "bytes": 6491,
-      "sha256": "9a1dade36327d7f00b9b91c3263eabe05877175d73194ea76366c6089702e074"
+      "bytes": 6547,
+      "sha256": "b2b6d2a6cf75857b0b9e9a62763e3b50a49476880d5734489f6d40a065c1dd96"
     },
     {
       "path": "public/pricing/index.html",
-      "bytes": 3750,
-      "sha256": "7b4cc82aedef67b94e77d91eff98a329e1a9614e8e883663c58bd506bd0645f6"
+      "bytes": 3827,
+      "sha256": "748c96fa6c142d4c5757f820a09d93541fb376b31e5a30a8b1821a9ce49662ff"
     },
     {
       "path": "public/products/autonomous-workflows/index.html",
@@ -516,8 +516,8 @@
     },
     {
       "path": "public/services/index.html",
-      "bytes": 1471,
-      "sha256": "75788725574a4f36efbf79219f5744080c4dc58d3350c66cf8641742edfc201c"
+      "bytes": 1545,
+      "sha256": "526f80e5841a671cf3d6b6857920cca50f78a252bfa3686a547d3fe3dff32155"
     },
     {
       "path": "public/sign-in/app.js",
@@ -526,8 +526,8 @@
     },
     {
       "path": "public/sign-in/index.html",
-      "bytes": 2267,
-      "sha256": "230dad4e07f33f4399118108fcecafa8ab319fafbb587203069d984236055447"
+      "bytes": 2344,
+      "sha256": "e021e52c25df8a4c834c011ae2efd87119cd1377f59455f084b7328093e77599"
     },
     {
       "path": "public/sitemap.xml",
@@ -536,8 +536,8 @@
     },
     {
       "path": "public/status/index.html",
-      "bytes": 5427,
-      "sha256": "3f3750a75e183a81754ff7cb508b03179794706b88b4403b15e3e2c3d0042607"
+      "bytes": 5507,
+      "sha256": "c780cb5e7281e1d7b9ffe03cd82ab81940cbb6390385bc428ef1996c85f9363a"
     },
     {
       "path": "public/status/status.js",
@@ -551,9 +551,9 @@
     },
     {
       "path": "public/style.css",
-      "bytes": 50146,
-      "sha256": "25897eaf6ae90a32c52466935ac92b88e1163118139ca47b199183a774eada04"
+      "bytes": 50148,
+      "sha256": "5273dc51eb8ba9e58b9713154e9abcc351a69c68aa650861b078f533cc29fe60"
     }
   ],
-  "fingerprint": "4e6a005f74ab3dcc29d3bb614c12785ca6f3b71101b0bb9ab5227c3f17f97cfe"
+  "fingerprint": "8d44abbd346a1a7337e9b726256bb21547af3bc3b3b089bb0b3617d99a1146a9"
 }

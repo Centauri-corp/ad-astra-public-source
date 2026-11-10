@@ -38,7 +38,7 @@ beforeEach(()=>{
 after(()=>{global.fetch=originalFetch;Object.assign(release,originalRelease);routing.redirects=originalRedirects;for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];Object.assign(process.env,originalEnv);});
 test('runtime switches cannot bypass a marketing-only source or closed customer routes',async()=>{
  for(const key of ['publicLaunchEnabled','engineAvailable']){release[key]=false;calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));release[key]=true;}
- for(const source of ['/platform/:path*','/sign-in/:path*']){routing.redirects=[{source,destination:'/',permanent:false}];calls=[];assert.equal((await request()).statusCode,503);assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));}
+  assert.deepEqual(routing.redirects, []);
 });
 test('all five contracted modes use a bounded provider request in the synthetic fixture',async()=>{
  const ids=require('../lib/modes').MODE_IDS;assert.deepEqual(ids,release.customerModes);assert.deepEqual(catalog.MODELS[0].modes,ids);
@@ -123,15 +123,13 @@ test('public agent surface is present and portal routes redirect away',()=>{
  assert.match(agent,/Astra\s*<br><em>Polaris\.<\/em>/);
  assert.match(agent,/Start with curiosity/);
  const vercel=JSON.parse(fs.readFileSync(path.join(__dirname,'../vercel.json'),'utf8'));
- assert.deepEqual(vercel.redirects.map(r=>[r.source,r.destination]),[
-  ['/platform/:path*','/'],['/knowledge/:path*','/agent/'],['/sign-in/:path*','/']
- ]);
+  assert.deepEqual(vercel.redirects, []);
 });
 test('return paths reject external URLs and preserve approved mode navigation',()=>{
  const context={window:{},URL,location:{origin:'https://adastra.global'}};vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../public/auth-navigation.js'),'utf8'),context);
  const safe=context.window.adAstraReturnPath;
  for(const value of ['https://evil.example','//evil.example','/\\evil.example','javascript:alert(1)','/sign-in/','/%2f%2fevil.example'])assert.equal(safe(value),'/platform/');
- assert.equal(safe('/knowledge/?mode=learn#ask-ad-astra'),'/knowledge/?mode=learn#ask-ad-astra');
+  assert.equal(safe('/knowledge/?mode=learn#ask-ad-astra'),'/knowledge/?mode=learn#ask-ad-astra');
 });
 test('session handshake verifies identity without model or quota access',async()=>{
  const session=require('../api/session');

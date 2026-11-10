@@ -1,0 +1,150 @@
+{
+  "schema": "ad-astra-public-graphics-alignment/v1",
+  "status": "production-candidate",
+  "scope": "public-pages-only",
+  "sourceContracts": [
+    "config/public-visual-architecture.json",
+    "config/public-product-families.json",
+    "public/assets/visual-manifest.json",
+    "public/assets/products/manifest.json"
+  ],
+  "brand": {
+    "mark": "/assets/brand/ad-astra-mark.svg",
+    "wordmark": "AD ASTRA",
+    "palette": {
+      "background": "#080f17",
+      "surface": "#0d1d2b",
+      "text": "#edf3f3",
+      "muted": "#aec5c6",
+      "cyan": "#9bdfe3",
+      "champagne": "#e9c990",
+      "cobalt": "#214b78",
+      "violet": "#9a7cff"
+    },
+    "rules": [
+      "Use the orbital SVG mark for public headers, favicons and product surfaces.",
+      "Use Astra Polaris for the public model direction; do not render legacy model names in visible UI.",
+      "Keep public artwork and video conceptual unless a reviewed production record says otherwise.",
+      "Every motion asset has a static poster, text description and reduced-motion behavior."
+    ]
+  },
+  "pageGroups": {
+    "homepage": {
+      "routes": ["/"],
+      "hero": "/assets/astra-lumen-neural-brain.png",
+      "motion": "/assets/ad-astra-runway-orbital-motion.mp4",
+      "motionPoster": "/assets/astra-lumen-neural-brain.png",
+      "neuralStudy": "/assets/astra-lumen-neural-profile-canvas.png",
+      "mobileNeuralStudy": "/assets/astra-lumen-neural-profile-canvas-mobile.png",
+      "status": "public visual study; motion and engine remain gated"
+    },
+    "intelligence": {
+      "routes": ["/intelligence/"],
+      "hero": "/assets/astra-lumen-neural-profile.png",
+      "filmPoster": "/assets/ad-astra-runway-orbital-poster.jpg",
+      "status": "public connected-intelligence direction"
+    },
+    "products": {
+      "routes": [
+        "/products/",
+        "/products/core-intelligence/",
+        "/products/creative-studio/",
+        "/products/specialist-intelligence/",
+        "/products/business-commerce/",
+        "/products/developer-platform/",
+        "/products/autonomous-workflows/"
+      ],
+      "architecture": "/assets/products/architecture.svg",
+      "status": "six product families in development; generated diagrams are pending visual and rights review"
+    },
+    "platformPreview": {
+      "routes": ["/platform-preview/"],
+      "hero": "/assets/astra-polaris-platform-mockup.png",
+      "neuralCard": "/assets/astra-lumen-neural-concierge.png",
+      "status": "static public mockup; no customer data or live service"
+    },
+    "modelAndMarkets": {
+      "routes": ["/agent/", "/markets/", "/markets/*", "/company/", "/about/", "/services/", "/pricing/"],
+      "primaryArt": "/assets/astra-lumen-neural-concierge.png",
+      "secondaryArt": [
+        "/assets/adobe-curiosity.jpg",
+        "/assets/adobe-horizon.jpg",
+        "/assets/runway-curiosity-notes.jpg",
+        "/assets/runway-orbital-intelligence.jpg"
+      ],
+      "status": "public proposal and research direction"
+    },
+    "film": {
+      "routes": ["/film/"],
+      "poster": "/assets/ad-astra-runway-horizon-poster.jpg",
+      "motionStudy": "/assets/ad-astra-horizon-motion.mp4",
+      "captionTrack": "/assets/ad-astra-horizon-motion.vtt",
+      "status": "premiere-gated visual study; final 60-second film is not published"
+    },
+    "availability": {
+      "routes": ["/status/"],
+      "art": "none",
+      "status": "text-first service availability and fallback-safe page"
+    },
+    "authenticatedRoutes": {
+      "routes": ["/platform/", "/knowledge/", "/sign-in/"],
+      "art": "text-first guarded surfaces",
+      "status": "customer access remains gated; resources must load with correct MIME types"
+    }
+  },
+  "productFamilies": {
+    "core-intelligence": {
+      "asset": "/assets/products/core-intelligence.svg",
+      "accent": "cyan",
+      "modes": ["ask", "learn", "research"],
+      "visualBrief": "Human curiosity becoming verifiable information",
+      "requiredFutureProof": ["question-to-evidence example", "editable outline", "uncertainty note"]
+    },
+    "creative-studio": {
+      "asset": "/assets/products/creative-studio.svg",
+      "accent": "champagne",
+      "modes": ["create", "explore"],
+      "visualBrief": "Materials-to-media craft with human-directed refinement",
+      "requiredFutureProof": ["brief", "source frames", "reviewed visual direction"]
+    },
+    "specialist-intelligence": {
+      "asset": "/assets/products/specialist-intelligence.svg",
+      "accent": "cyan",
+      "modes": ["research", "learn", "explore"],
+      "visualBrief": "Evidence paired with documented specialist oversight",
+      "requiredFutureProof": ["source comparison", "uncertainty", "qualified review"]
+    },
+    "business-commerce": {
+      "asset": "/assets/products/business-commerce.svg",
+      "accent": "champagne",
+      "modes": ["ask", "research", "create"],
+      "visualBrief": "Operational evidence, decisions and measurable handoffs",
+      "requiredFutureProof": ["decision brief", "team handoff", "review trail"]
+    },
+    "developer-platform": {
+      "asset": "/assets/products/developer-platform.svg",
+      "accent": "cobalt",
+      "modes": ["create", "research"],
+      "visualBrief": "Bounded interfaces, provenance and testable connections",
+      "requiredFutureProof": ["interface contract", "failure case", "verification evidence"]
+    },
+    "autonomous-workflows": {
+      "asset": "/assets/products/autonomous-workflows.svg",
+      "accent": "champagne",
+      "modes": ["ask", "create", "explore"],
+      "visualBrief": "Human-directed orchestration with visible approval checkpoints",
+      "requiredFutureProof": ["pending approval", "denied/error state", "recovery path"]
+    }
+  },
+  "reviewGates": [
+    "source and file hash",
+    "rights and provenance",
+    "visual integrity and crop",
+    "mobile and reduced motion",
+    "browser decode",
+    "accessible alternative",
+    "claim evidence",
+    "owner release signoff"
+  ],
+  "privateBoundary": "Private neural-sphere screenshots, internal generated assets, credentials, customer records and unverified commercial media remain excluded from public pages."
+}

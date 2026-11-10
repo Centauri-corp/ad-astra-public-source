@@ -15,6 +15,7 @@ const html = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="/assets/brand/ad-astra-mark.svg" type="image/svg+xml">
   <title>Product availability | AD ASTRA</title>
   <meta name="description" content="See the current AD ASTRA website, engine, product, workspace, CRM and subscription availability.">
   <meta name="robots" content="noindex,follow">
