@@ -41,7 +41,7 @@ const html = `<!doctype html>
 </head>
 <body>
 <a class="skip-products" href="#main">Skip to products</a>
-<header><a class="brand product-brand" href="/" aria-label="AD ASTRA home"><img src="/assets/brand/ad-astra-mark.svg" width="40" height="40" alt="">AD ASTRA</a><nav aria-label="Primary"><a href="/products/" aria-current="page">Products</a><a href="/markets/">Solutions</a><a href="/pricing/">Plans</a><a href="/agent/">Astra Polaris</a></nav></header>
+<header><a class="brand product-brand" href="/" aria-label="AD ASTRA home"><img src="/assets/brand/ad-astra-mark.svg" width="40" height="40" alt="">AD ASTRA</a><nav aria-label="Primary"><a href="/products/" aria-current="page">Products</a><a href="/markets/">Solutions</a><a href="/pricing/">Plans</a><a href="/status/">Availability</a></nav></header>
 <main class="market-shell" id="main">
   <section class="market-hero" aria-labelledby="products-title"><p class="eyebrow">AD ASTRA / PRODUCT DIRECTIONS</p><h1 id="products-title">Find your<br><em>next direction.</em></h1><p class="lead">Six product families. Five ways to think. Start with the work you want to do.</p><p>Ask, Research, Create, Learn and Explore describe ways of working. The families below organize the experiences we are developing around those modes.</p><p class="preview-note">These are product directions in development. They are not available for purchase or activation, and do not establish regional availability.</p><a class="button" href="/platform-preview/">View the workspace design</a></section>
   <nav class="family-jump" aria-label="Product families">${catalog.families.map(f => `<a href="#${f.id}">${escape(f.name)}</a>`).join('')}</nav>
@@ -50,7 +50,7 @@ ${cards}
   </section>
   <aside class="market-note"><strong>Your judgment stays central</strong><p>Specialist directions do not replace qualified professional advice. Workflow and developer directions do not grant autonomous execution or API access.</p><p><a href="/pricing/">Review plan direction</a> · <a href="/markets/">Explore proposed solutions</a></p></aside>
 </main>
-<footer><span>AD ASTRA · Human-directed discovery</span><a href="/">Back to AD ASTRA</a></footer>
+<footer><span>AD ASTRA · Human-directed discovery</span><a href="/agent/">Explore Astra Polaris</a><a href="/status/">Product availability</a><a href="/">Back to AD ASTRA</a></footer>
 </body>
 </html>
 `;

@@ -11,6 +11,12 @@
   "indexableRoutes": [],
   "engineAvailable": false,
   "customerPortal": "authenticated-preview",
+  "operatingStatus": {
+    "page": "/status/",
+    "api": "/api/operating-status",
+    "basis": "release-configuration",
+    "uptimeMonitoring": false
+  },
   "customerAiModel": "astra-lumen",
   "connectedPublicModelCount": 1,
   "publicModelName": "Astra Polaris",

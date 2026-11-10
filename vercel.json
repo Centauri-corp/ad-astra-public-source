@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "node --test test/security.test.cjs && node scripts/check-release.cjs && node scripts/redis-acceptance.cjs",
+  "buildCommand": "npm test && node scripts/redis-acceptance.cjs",
   "installCommand": "echo No dependencies required",
   "outputDirectory": "public",
   "functions": {
@@ -59,7 +59,7 @@
       ]
     },
     {
-      "source": "/(knowledge|platform|sign-in|markets|pricing|products|services|company|about|film)(.*)",
+      "source": "/(knowledge|platform|sign-in|markets|pricing|products|status|services|company|about|film)(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
