@@ -35,6 +35,7 @@ import {
 } from "@/lib/contract";
 import { NODE_INFO, SCENARIOS } from "@/lib/scenarios";
 import { BrandMark } from "./brand-mark";
+import { AccessReadiness } from "./access-readiness";
 const WorkflowGraph = dynamic(() => import("./workflow-graph"), {
   ssr: false,
   loading: () => (
@@ -553,10 +554,12 @@ export function Workspace() {
             Graph editing and live chat endpoints deny execution on the server.
           </li>
           <li>
-            Customer identity remains a Clerk integration contract;
-            authentication and tenant acceptance are not implemented here.
+            The Clerk session and tenant-scope boundary is implemented for QA.
+            Customer sign-in, provider acceptance and database isolation remain
+            gated.
           </li>
         </ul>
+        <AccessReadiness />
         <p className="notes-version">
           Graph: {GRAPH_VERSION}
           <br />
