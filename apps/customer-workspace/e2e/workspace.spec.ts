@@ -3,6 +3,61 @@ import fs from "node:fs";
 import path from "node:path";
 const evidence = path.resolve(import.meta.dirname, "../../../LStra/evidence");
 test.beforeAll(() => fs.mkdirSync(evidence, { recursive: true }));
+test("protected-preview cookies stay same-origin and never replace customer identity or send prompts", async ({
+  page,
+  context,
+}) => {
+  await context.addCookies([
+    {
+      name: "_vercel_jwt",
+      value: "synthetic-platform-session",
+      domain: "127.0.0.1",
+      path: "/",
+      httpOnly: true,
+      sameSite: "Lax",
+    },
+  ]);
+  const calls: Promise<{
+    path: string;
+    cookie?: string;
+    authorization?: string;
+    body: string | null;
+  }>[] = [];
+  page.on("request", (request) => {
+    if (/\/api\/(demo|access-status)$/.test(request.url())) {
+      calls.push(
+        request.allHeaders().then((headers) => ({
+          path: new URL(request.url()).pathname,
+          cookie: headers.cookie,
+          authorization: headers.authorization,
+          body: request.postData(),
+        })),
+      );
+    }
+  });
+  await page.goto("/");
+  await page
+    .getByRole("button", { name: "Preview boundaries and privacy" })
+    .click();
+  await page
+    .getByRole("button", { name: "Check access configuration" })
+    .click();
+  await expect(page.locator(".access-readiness [role=status]")).toContainText(
+    "Customer access remains gated",
+  );
+  await page.keyboard.press("Escape");
+  await page
+    .getByLabel("Your question — stays in this tab")
+    .fill("LOCAL-HOSTING-PRIVACY-CANARY");
+  await page.getByRole("button", { name: "Preview selected scenario" }).click();
+  await expect(page.locator(".run-state")).toHaveText("Sample complete");
+  expect(calls).toHaveLength(2);
+  for (const call of await Promise.all(calls)) {
+    expect(call.cookie).toBe("_vercel_jwt=synthetic-platform-session");
+    expect(call.authorization).toBeUndefined();
+    expect(call.body ?? "").not.toContain("LOCAL-HOSTING-PRIVACY-CANARY");
+  }
+});
 test("access readiness reads configuration only on demand, without tokens or chat text", async ({
   page,
 }) => {

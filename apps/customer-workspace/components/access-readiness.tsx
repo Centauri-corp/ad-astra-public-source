@@ -12,7 +12,7 @@ export function AccessReadiness() {
     setState("loading");
     try {
       const response = await fetch("/api/access-status", {
-        credentials: "omit",
+        credentials: "same-origin",
         cache: "no-store",
         signal: AbortSignal.timeout(5000),
       });

@@ -78,7 +78,9 @@ export function Workspace({
       new DefaultChatTransport<WorkspaceMessage>({
         api: "/api/demo",
         headers: { "X-Ad-Astra-Preview": "workflow-v1" },
-        credentials: "omit",
+        // Same-origin HttpOnly platform cookies keep protected previews usable.
+        // The demo never treats cookies as customer identity or sends raw text.
+        credentials: "same-origin",
         prepareSendMessagesRequest: () => ({ body: { ...requestRef.current } }),
       }),
   );
