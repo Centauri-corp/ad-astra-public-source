@@ -59,7 +59,7 @@
       ]
     },
     {
-      "source": "/(knowledge|platform|sign-in|markets|pricing|services|company|about|film)(.*)",
+      "source": "/(knowledge|platform|sign-in|markets|pricing|products|services|company|about|film)(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",

@@ -52,6 +52,7 @@
     { "path": "/platform-preview/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/platform/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/pricing/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/products/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/services/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/sign-in/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] }
   ],

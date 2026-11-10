@@ -424,7 +424,7 @@ document.getElementById('save-launch').addEventListener('click', async () => {
       const transcript = Array.from(event.results).map(result => result[0]?.transcript || '').join(' ').trim();
       setVoiceState(classifyVoice(transcript), transcript);
     };
-    recognition.onerror = () => { voiceButton.setAttribute('aria-pressed', 'false'); setVoiceState('idle'); voiceHelp.textContent = 'No audio left this browser. Try the local visual prompt above.'; };
+    recognition.onerror = () => { voiceButton.setAttribute('aria-pressed', 'false'); setVoiceState('idle'); stopAudioMeter(); voiceHelp.textContent = 'Speech recognition was unavailable. Use the visual prompt above.'; };
     recognition.onend = () => { voiceButton.setAttribute('aria-pressed', 'false'); stopAudioMeter(); };
     voiceButton?.addEventListener('click', async () => {
       if (voiceButton.getAttribute('aria-pressed') === 'true') { recognition.stop(); setVoiceState('idle'); return; }
