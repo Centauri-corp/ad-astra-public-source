@@ -53,7 +53,11 @@ const stateLabel = {
   cancelled: "Sample stopped",
 };
 
-export function Workspace() {
+export function Workspace({
+  sourceCommit = null,
+}: {
+  sourceCommit?: string | null;
+}) {
   const [scenario, setScenario] = useState<ScenarioId>("research");
   const [input, setInput] = useState("");
   const [run, setRun] = useState(() => createRun());
@@ -506,6 +510,14 @@ export function Workspace() {
                 <ShieldCheck size={12} />
                 No private reasoning or live telemetry
               </span>
+              {sourceCommit && (
+                <a
+                  href={`https://github.com/zohebkhanfiji-ux/ad-astra-public-source/commit/${sourceCommit}`}
+                  aria-label={`Preview source commit ${sourceCommit}`}
+                >
+                  Build {sourceCommit.slice(0, 7)}
+                </a>
+              )}
               <button onClick={() => setShowNotes(true)}>
                 About this preview
                 <ArrowUpRight size={11} />

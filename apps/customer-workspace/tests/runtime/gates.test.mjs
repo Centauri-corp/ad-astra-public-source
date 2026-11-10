@@ -71,6 +71,7 @@ for (const scenario of [
             AD_ASTRA_WORKSPACE_PREVIEW: scenario.flag,
             AD_ASTRA_WORKSPACE_ORIGIN: origin,
             VERCEL_ENV: scenario.environment,
+            VERCEL_GIT_COMMIT_SHA: "a".repeat(40),
           },
           stdio: ["ignore", "pipe", "pipe"],
         },
@@ -126,6 +127,7 @@ for (const scenario of [
             (await fetch(`${origin}/api/access-status`)).status,
             404,
           );
+          assert.equal((await fetch(`${origin}/api/preview`)).status, 404);
         } else {
           const headers = {
             origin,
@@ -177,6 +179,10 @@ for (const scenario of [
           assert.equal(metadata.sessionBoundary, "qa-configured");
           assert.equal(metadata.customerAccess, false);
           assert.equal(metadata.providerQaAccepted, false);
+          const build = await (await fetch(`${origin}/api/preview`)).json();
+          assert.equal(build.sourceCommit, "a".repeat(40));
+          assert.equal(build.customerAccess, false);
+          assert.equal(build.liveChat, false);
         }
         assert.equal(
           (await fetch(`${origin}/api/chat`, { method: "POST" })).status,

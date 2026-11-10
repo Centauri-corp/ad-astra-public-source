@@ -1,7 +1,17 @@
 export function previewOrigin(
   env: Readonly<Record<string, string | undefined>>,
 ): string | null {
-  const raw = env.AD_ASTRA_WORKSPACE_ORIGIN;
+  // Provider-owned deployment metadata only; never infer trust from Host,
+  // forwarded headers or a browser-supplied URL. Explicit configuration wins.
+  let raw = env.AD_ASTRA_WORKSPACE_ORIGIN;
+  if (raw === undefined && env.VERCEL === "1" && env.VERCEL_ENV === "preview") {
+    const host = env.VERCEL_URL;
+    if (
+      host &&
+      /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.vercel\.app$/.test(host)
+    )
+      raw = `https://${host}`;
+  }
   if (!raw) return null;
   try {
     const url = new URL(raw);

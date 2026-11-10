@@ -40,6 +40,14 @@ Typed text is escaped plain React text and remains only in the current tab's mem
 
 `AD_ASTRA_WORKSPACE_PREVIEW=true` plus `AD_ASTRA_WORKSPACE_ORIGIN=<exact origin>` enables the non-production preview. **`VERCEL_ENV=production` always denies it even when that flag is set.** An unset or invalid configuration returns HTTP 404. Do not copy any secrets into these values, expose API keys to React, or point this package at `adastra.global`.
 
+### Hosted review build
+
+Use a separate Vercel preview project with Root Directory `apps/customer-workspace`, Next.js and Node 24.x. The package's own `vercel.json` installs the lockfile, checks types/contracts and builds. Git auto-deployment stays disabled; never repoint the existing marketing project to this package.
+
+For that isolated project set only `AD_ASTRA_WORKSPACE_PREVIEW=true` on the **Preview** target. With `VERCEL=1` and `VERCEL_ENV=preview`, the origin may be derived from Vercel's validated `VERCEL_URL` deployment hostname. An explicit `AD_ASTRA_WORKSPACE_ORIGIN` takes precedence—even an invalid/empty explicit value fails closed. Request `Host`/forwarding headers never select the trusted origin. Use the exact deployment URL supplied for review; another alias is not implicitly authorized for demo POST requests.
+
+`GET /api/preview` exposes only the provider-supplied, validated source commit (or null) and fixed synthetic/closed-service flags. When available, the workflow footer links to that exact GitHub commit. Deployment metadata is not release approval. Hosting this synthetic review build does not require or enable provider keys, authenticated customer data, billing, CRM or live AI. Platform deployment protection remains in place; authorized reviewers may need to sign in to Vercel.
+
 The existing foundation's **Clerk identity direction is preserved**, not replaced by Supabase Auth. The server-only session verifier is implemented for QA; provider sign-in and customer access are not accepted. No database or identity account has been provisioned. Any future persistence/vector work must first define verified identity-to-tenant mapping, server-derived authorization, row policies and real two-tenant acceptance. A local fixture or graph checkpoint is not a provider receipt or independent approval.
 
 ## Session and tenant-scope QA increment
