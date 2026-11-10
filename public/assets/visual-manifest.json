@@ -3,6 +3,8 @@
   "purpose": "Public visual inventory for the AD ASTRA homepage and Astra Polaris experience",
   "productArchitectureManifest": "/assets/products/manifest.json",
   "publicSafe": true,
+  "storyCollectionManifest": "/assets/story/manifest.json",
+  "currentStoryDirection": "Human vision, AI, products, AGI engineering research, global positioning, space and ASI research horizon. All conceptual; human visual and rights review pending.",
   "promotionPolicy": "Candidate assets require human visual review and release-gate approval before public promotion.",
   "assets": [
     {

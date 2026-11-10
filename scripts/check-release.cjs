@@ -76,8 +76,13 @@ assert.ok(homepage.includes('class="brand-wordmark" aria-hidden="true">AD ASTRA<
 assert.ok(fs.existsSync(path.join(root,'public/assets/brand/ad-astra-mark.svg')),'Missing first-party AD ASTRA orbital mark');
 const visualManifest=JSON.parse(fs.readFileSync(path.join(root,'public/assets/visual-manifest.json')));
 assert.ok(visualManifest.assets.some(asset=>asset.id==='ad-astra-orbital-mark'&&asset.path==='/assets/brand/ad-astra-mark.svg'),'Visual manifest must identify the deployed AD ASTRA orbital mark');
-assert.ok(homepage.includes('ad-astra-runway-orbital-motion.vtt')&&homepage.includes('ad-astra-horizon-motion.vtt'),'Public motion previews missing caption tracks');
-assert.equal((homepage.match(/class="video-transcript"/g)||[]).length,2,'Public motion previews missing text transcripts');
+// The cinematic rebuild uses optional CSS motion, not autoplay video/audio.
+// Caption assets remain checked for the archived motion studies, but the new
+// homepage must not quietly reintroduce media, microphone or prompt execution.
+assert.ok(!/<video|<audio|<iframe|<form\b/.test(homepage),'Homepage must stay a readable, non-executing story');
+assert.ok(homepage.includes('data-motion-toggle')&&homepage.includes('/design-system.js'),'Ambient motion needs an explicit pause control');
+for(const id of ['intelligence','vision','products','agi','global','beyond'])assert.ok(homepage.includes('/assets/story/'+id+'-1672.webp'),'Missing story chapter art: '+id);
+assert.ok(homepage.includes('AGI is not achieved')&&homepage.includes('ASI is not achieved'),'Research boundaries missing');
 for(const caption of ['ad-astra-runway-orbital-motion.vtt','ad-astra-horizon-motion.vtt']){const captionPath=path.join(root,'public/assets',caption);assert.ok(fs.existsSync(captionPath),`Missing caption track: ${caption}`);assert.ok(fs.readFileSync(captionPath,'utf8').startsWith('WEBVTT'),`Invalid caption track: ${caption}`);}
 const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');
 const sitemapRoutes=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1]);
@@ -94,8 +99,8 @@ assert.equal(manifest.indexingPolicy,'noindex-until-page-evidence-approved');
 assert.equal(manifest.marketProfileArchitecture,'one-connected-model-with-sector-profiles');
 assert.equal(manifest.marketProfileCount,catalog.MARKET_PROFILES.length);
 assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
-assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','approach','experiences','horizon','company','signature']);
-assert.deepEqual(experience.visualArchitecture.palette,{navy:'#07111c',cyan:'#9bdfe3',violet:'#9a7cff',gold:'#e9c990'});
+assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','intelligence','products','future','global','beyond']);
+assert.deepEqual(experience.visualArchitecture.palette,{navy:'#060b12',cyan:'#a8dbe3',violet:'#9a7cff',gold:'#d5ba91'});
 assert.equal(experience.seo.indexingPolicy,'noindex-until-page-evidence-approved');
 assert.equal(experience.seo.homepageRobots,approvedSet.has('/')?'index,follow':'noindex,follow');
 assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);

@@ -15,6 +15,25 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --ignore-scripts
       - run: npm test
+  website-browser:
+    name: Cinematic website responsive and interaction QA
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.1'
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - name: Verify all public routes without external writes
+        run: |
+          node scripts/serve-audit.cjs > "$RUNNER_TEMP/ad-astra-audit-server.log" 2>&1 &
+          audit_server_pid=$!
+          trap 'kill "$audit_server_pid"' EXIT
+          curl --retry 10 --retry-connrefused --retry-delay 1 --fail --silent http://127.0.0.1:4175/ > /dev/null
+          node scripts/audit-browser.cjs
   workspace-preview:
     name: Isolated workspace types, contracts, build and browser QA
     runs-on: ubuntu-latest

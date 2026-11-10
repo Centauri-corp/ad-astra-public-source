@@ -6,11 +6,17 @@
     "node": "24.x"
   },
   "scripts": {
+    "experience:build": "node scripts/build-experience.cjs",
+    "shell:build": "node scripts/build-site-shell.cjs",
     "products:build": "node scripts/build-products.cjs",
     "status:build": "node scripts/build-operating-status.cjs",
-    "test": "node scripts/build-products.cjs --check && node scripts/build-operating-status.cjs --check && node scripts/check-release.cjs && node scripts/website-source-integrity.cjs && node --test test/*.test.cjs",
-    "check": "node scripts/build-products.cjs --check && node scripts/build-operating-status.cjs --check && node scripts/check-release.cjs && node scripts/website-source-integrity.cjs",
+    "test": "npm run check && node --test test/*.test.cjs",
+    "check": "node scripts/build-experience.cjs --check && node scripts/build-products.cjs --check && node scripts/build-operating-status.cjs --check && node scripts/build-site-shell.cjs --check && node scripts/check-release.cjs && node scripts/website-source-integrity.cjs",
     "sources:write": "node scripts/website-source-integrity.cjs --write",
     "sources:check": "node scripts/website-source-integrity.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "sharp": "0.35.5"
   }
 }

@@ -31,18 +31,19 @@
   "pageGroups": {
     "homepage": {
       "routes": ["/"],
-      "hero": "/assets/ad-astra-hero-cinematic-4mp.png",
-      "motion": "/assets/ad-astra-runway-orbital-motion.mp4",
-      "motionPoster": "/assets/ad-astra-hero-cinematic-4mp.png",
-      "neuralStudy": "/assets/ad-astra-voice-motion-v1.png",
-      "mobileNeuralStudy": "/assets/ad-astra-voice-motion-v1.png",
-      "productConstellation": "/assets/ad-astra-product-ecosystem-v1.png",
-      "status": "public visual study; motion and engine remain gated"
+      "hero": "/assets/story/intelligence-1672.webp",
+      "motion": "optional CSS ambient motion; no video or audio",
+      "motionPoster": "/assets/story/intelligence-1672.webp",
+      "neuralStudy": "/assets/story/intelligence-1672.webp",
+      "mobileNeuralStudy": "/assets/story/intelligence-960.webp",
+      "productConstellation": "/assets/story/products-1672.webp",
+      "storyManifest": "/assets/story/manifest.json",
+      "status": "six-chapter conceptual story candidate; visual and rights review pending; customer engine remains gated"
     },
     "intelligence": {
       "routes": ["/intelligence/"],
-      "hero": "/assets/astra-lumen-neural-profile.png",
-      "filmPoster": "/assets/ad-astra-runway-orbital-poster.jpg",
+      "hero": "/assets/story/intelligence-1672.webp",
+      "researchArtwork": ["/assets/story/agi-1672.webp", "/assets/story/beyond-1672.webp"],
       "status": "public connected-intelligence direction"
     },
     "products": {
@@ -56,7 +57,8 @@
         "/products/autonomous-workflows/"
       ],
       "architecture": "/assets/products/architecture.svg",
-      "status": "six product families in development; generated diagrams are pending visual and rights review"
+      "primaryArtwork": "/assets/story/products-1672.webp",
+      "status": "six product families in development; story images and supporting diagrams are pending visual and rights review"
     },
     "platformPreview": {
       "routes": ["/platform-preview/"],
@@ -65,7 +67,7 @@
       "status": "static public mockup; no customer data or live service"
     },
     "modelAndMarkets": {
-      "routes": ["/agent/", "/markets/", "/markets/*", "/company/", "/about/", "/services/", "/pricing/"],
+      "routes": ["/agent/", "/markets/", "/markets/*", "/company/", "/about/", "/pricing/"],
       "primaryArt": "/assets/astra-lumen-neural-concierge.png",
       "secondaryArt": [
         "/assets/adobe-curiosity.jpg",
@@ -74,6 +76,12 @@
         "/assets/runway-orbital-intelligence.jpg"
       ],
       "status": "public proposal and research direction"
+    },
+    "solutions": {
+      "routes": ["/services/"],
+      "primaryArtwork": "/assets/story/products-1672.webp",
+      "globalArtwork": "/assets/story/global-1672.webp",
+      "status": "research and product-direction descriptions; no regions approved for customer service"
     },
     "film": {
       "routes": ["/film/"],

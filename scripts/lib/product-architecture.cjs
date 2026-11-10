@@ -1,5 +1,9 @@
 'use strict';
 const assert=require('node:assert/strict'),crypto=require('node:crypto');
+const {applySharedShell,picture}=require('./site-shell.cjs');
+const story=require('../../config/story-collection.json');
+const storyFor={'core-intelligence':'intelligence','creative-studio':'products','specialist-intelligence':'agi','business-commerce':'global','developer-platform':'agi','autonomous-workflows':'intelligence'};
+const storyImage=(id,cls='')=>picture(id,story.assets.find(a=>a.id===id).alt,{cls});
 const ids=['core-intelligence','creative-studio','specialist-intelligence','business-commerce','developer-platform','autonomous-workflows'];
 const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const title=s=>s[0].toUpperCase()+s.slice(1);
@@ -46,6 +50,19 @@ function productFiles(catalog,v){
 <section id="product-directions" aria-labelledby="directions-title"><div class="product-section-heading"><div><p class="eyebrow">FIND YOUR DIRECTION</p><h2 id="directions-title">What would you like to do?</h2></div><p>Explore the people, outcomes and visual systems behind each family.</p></div><div class="mode-filter" data-mode-filter hidden role="group" aria-label="Filter product directions by mode"><button type="button" data-mode="all" aria-pressed="true">All directions</button>${v.modes.map(mode=>`<button type="button" data-mode="${mode}" aria-pressed="false">${title(mode)}</button>`).join('')}</div><p id="product-results" role="status" aria-live="polite">All six product directions.</p><div class="family-grid">${cards}</div></section><aside class="product-next"><div><p class="eyebrow">KEEP THE NEXT STEP CLEAR</p><h2>See the shape of the workspace.</h2><p>Explore the design preview and current availability before choosing what comes next.</p></div><a class="button" href="/platform-preview/">View workspace design</a></aside>`;
   files.set('public/products/index.html',shell('/products/','Products','Explore six AD ASTRA product families, their intended outcomes and the five ways of working that connect them.',overview,'<script defer src="/products/discovery.js"></script>'));
   for(const f of catalog.families){const e=v.experiences[f.id];const detail=`<nav class="product-breadcrumb" aria-label="Breadcrumb"><a href="/products/">All products</a><span aria-hidden="true">/</span><span>${esc(f.name)}</span></nav><section class="product-hero" aria-labelledby="family-title"><div><p class="eyebrow">AD ASTRA / IN DEVELOPMENT</p><h1 id="family-title">${esc(f.name)}</h1><p class="lead">${esc(f.summary)}</p><p>${esc(f.audience)}</p><div class="mode-links" aria-label="Related modes">${modes(f)}</div><p class="preview-note">This is a product design direction. The example below is illustrative; no model request is executed.</p></div><figure class="architecture-figure"><img src="/assets/products/${f.id}.svg" width="800" height="460" alt="${esc(f.motif)}"><figcaption>${esc(f.motif)}</figcaption></figure></section><section class="product-example" aria-labelledby="example-title"><div><p class="eyebrow">AN ILLUSTRATIVE STARTING POINT</p><h2 id="example-title">Begin with your intention.</h2><blockquote>${esc(e.prompt)}</blockquote><p>${esc(f.outcome)}</p></div><div><p class="eyebrow">INTENDED OUTCOMES</p><ul>${e.outputs.map(s=>`<li>${esc(s)}</li>`).join('')}</ul><p class="example-note">These are proposed outputs, not generated results or a capability demonstration.</p></div></section><ol class="experience-steps" aria-label="Proposed experience">${e.steps.map((step,i)=>`<li><span>0${i+1}</span><h2>${esc(step)}</h2></li>`).join('')}</ol><aside class="product-next"><div><h2>Your judgment stays central.</h2><p>Specialist directions require qualified review. Workflow and developer directions do not grant autonomous execution or API access.</p></div><a class="button" href="/status/">Check product availability</a></aside>`;files.set(`public/products/${f.id}/index.html`,shell(`/products/${f.id}/`,f.name,f.summary,detail));}
+  // Retain the deterministic architecture diagrams as supporting assets, not the
+  // primary artwork. Each visible family scene is mapped to the story inventory.
+  for(const [file,body]of files){
+    if(!file.endsWith('/index.html'))continue;
+    const route='/'+file.slice('public/'.length).replace(/index\.html$/,'');
+    let html=body.replace(/<img src="\/assets\/products\/architecture.svg"[^>]*>/,storyImage('products'));
+    for(const f of catalog.families){
+      const re=new RegExp('<img([^>]*?)src="/assets/products/'+f.id+'\\.svg"[^>]*>','g');
+      html=html.replace(re,(_,prefix)=>storyImage(storyFor[f.id],prefix.includes('family-art')?'family-art':''));
+    }
+    html=html.replace('One foundation · Five modes · Six directions','One foundation · Five modes · Six directions · Concept art');
+    files.set(file,applySharedShell(html,route));
+  }
   return files;
 }
 module.exports={productFiles,validate};

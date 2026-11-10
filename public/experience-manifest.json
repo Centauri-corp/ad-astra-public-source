@@ -4,11 +4,12 @@
   "releaseScope": "public-marketing-site-only",
   "publicLaunchEnabled": false,
   "visualArchitecture": {
-    "sceneOrder": ["arrival", "vision", "approach", "experiences", "horizon", "company", "signature"],
-    "palette": { "navy": "#07111c", "cyan": "#9bdfe3", "violet": "#9a7cff", "gold": "#e9c990" },
+    "sceneOrder": ["arrival", "vision", "intelligence", "products", "future", "global", "beyond"],
+    "palette": { "navy": "#060b12", "cyan": "#a8dbe3", "violet": "#9a7cff", "gold": "#d5ba91" },
+    "storyCollection": "/assets/story/manifest.json",
     "threeD": { "privatePreviewOnly": true, "fallback": "static-neural-sphere-with-alt-text", "reducedMotion": true },
     "neuralArt": {
-      "publicModelGeneratedAssets": false,
+      "publicModelGeneratedAssets": true,
       "publicStaticAssets": true,
       "textEmbeddedInImages": false,
       "publicPreview": "research-direction-only",
@@ -19,7 +20,7 @@
       { "id": "agi", "status": "research-direction", "developmentStage": "engineering-development", "productWorkstreams": ["specialist-intelligence", "developer-platform", "autonomous-workflows"], "liveTelemetry": false },
       { "id": "asi", "status": "hypothetical-horizon", "developmentStage": "engineering-research", "productWorkstreams": ["specialist-intelligence", "developer-platform", "autonomous-workflows"], "liveTelemetry": false }
     ],
-    "motionPreview": { "hero": true, "filmStudy": true, "publicPremierePlayback": false, "reducedMotionFallback": "poster-frame" },
+    "motionPreview": { "hero": true, "type": "optional-css-ambient-motion", "filmStudy": false, "audio": false, "publicPremierePlayback": false, "reducedMotionFallback": "static-equivalent" },
     "videoBlueprint": {
       "title": "The Architecture of Alignment",
       "targetDurationSeconds": 60,

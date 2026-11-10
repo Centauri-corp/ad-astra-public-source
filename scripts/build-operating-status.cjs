@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const {operatingStatus} = require('../lib/operating-status');
+const {applySharedShell} = require('./lib/site-shell.cjs');
 const escape = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 // Static output is a conservative fallback; it does not inherit build secrets
 // or call the readiness function. The browser performs a fresh GET at runtime.
@@ -10,7 +11,7 @@ const cards = operatingStatus(false).services.map(service => `    <article class
       <div class="availability-heading"><h2 id="${service.id}-title">${escape(service.name)}</h2><span class="availability-state" data-state="${service.state}">${escape(service.label)}</span></div>
       <p data-description>${escape(service.description)}</p>${service.href ? `\n      <a href="${escape(service.href)}">Explore ${escape(service.name)} <span aria-hidden="true">→</span></a>` : ''}
     </article>`).join('\n');
-const html = `<!doctype html>
+const html = applySharedShell(`<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -41,7 +42,7 @@ ${cards}
 <footer><span>AD ASTRA · Human-directed discovery</span><a href="/products/">Explore product directions</a><a href="/intelligence/">Connected intelligence</a></footer>
 </body>
 </html>
-`;
+`, '/status/');
 const file = path.join(__dirname, '../public/status/index.html');
 if (process.argv.includes('--check')) {
   assert.equal(fs.readFileSync(file, 'utf8'), html, 'Operating status page drifted; run npm run status:build');
