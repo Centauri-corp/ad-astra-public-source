@@ -9,7 +9,7 @@ test('visible Menu text supplies the summary accessible name without an overridi
  assert.match(summary,/^<summary>Menu /);assert.ok(!summary.includes('aria-label='));
 });
 test('every route has one canonical brand icon and complete static social identity',()=>{
- const files=walk(root).filter(f=>f.endsWith('/index.html'));assert.equal(files.length,38);
+ const files=walk(root).filter(f=>f.endsWith('/index.html'));assert.equal(files.length,39);
  for(const file of files){
   const html=fs.readFileSync(file,'utf8'),route='/'+path.relative(root,file).replaceAll('\\','/').replace(/index\.html$/,'');
   assert.equal((html.match(/rel="icon"/g)||[]).length,1,file);

@@ -32,7 +32,7 @@ test('filter preserves static fallback, handles invalid deep links and browser h
 });
 test('every public page exposes product discovery and availability, and modes match the API contract',()=>{
  function walk(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);}
- const htmlFiles=walk(path.join(root,'public')).filter(f=>f.endsWith('/index.html'));assert.equal(htmlFiles.length,38);
+ const htmlFiles=walk(path.join(root,'public')).filter(f=>f.endsWith('/index.html'));assert.equal(htmlFiles.length,39);
  for(const f of htmlFiles){const body=fs.readFileSync(f,'utf8');assert.ok(body.includes('href="/products/"'),f);assert.ok(body.includes('href="/status/"'),f);assert.ok(body.includes('href="/intelligence/"'),f);}
  assert.deepEqual(require('../lib/modes').MODE_IDS,require('../public/release-manifest.json').customerModes);assert.deepEqual(require('../lib/model-catalog').MODELS[0].modes,visual.modes);
 });

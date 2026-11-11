@@ -1,0 +1,48 @@
+{
+  "schema": "ad-astra-customer-experience/v1",
+  "brand": "AD ASTRA",
+  "scope": "customer-journey-design-preview",
+  "releaseAuthorization": false,
+  "capabilities": {"aiExecution": false, "accountCreation": false, "billing": false, "crmWrites": false, "outreach": false, "microphone": false, "tracking": false},
+  "stages": [
+    {"id": "discover", "name": "Discover", "route": "/", "state": "preview", "promise": "Understand Ad Astra and the work it is being designed to support."},
+    {"id": "choose", "name": "Find your direction", "route": "/start/", "state": "preview", "promise": "Connect your intention to a product direction and an illustrative outcome."},
+    {"id": "evaluate", "name": "Evaluate the fit", "route": "/products/", "state": "preview", "promise": "Review intended outcomes, limitations and current availability."},
+    {"id": "account", "name": "Create your workspace", "route": "/sign-in/", "state": "planned", "promise": "Future: verify your identity and join only the workspace you are authorized to access."},
+    {"id": "subscribe", "name": "Choose your access", "route": "/pricing/", "state": "planned", "promise": "Future: see approved pricing, limits, renewal and cancellation terms before payment."},
+    {"id": "first-value", "name": "Make something useful", "route": "/platform-preview/", "state": "planned", "promise": "Future: complete a supported task, review the result and save or export your work."},
+    {"id": "return", "name": "Keep building", "route": "/status/", "state": "planned", "promise": "Future: return to your work, manage your subscription and get dependable support."}
+  ],
+  "directions": [
+    {
+      "id": "research", "name": "Understand a subject", "family": "specialist-intelligence", "mode": "research", "art": "agi",
+      "intention": "Turn a broad question into a research brief I can check.",
+      "sample": {"title": "A clearer research starting point", "summary": "Define the decision before collecting more information. Compare a small number of relevant options, and keep uncertain claims separate from verified evidence.", "steps": ["Write the question, audience and decision deadline in one sentence.", "Identify primary sources and record their dates, assumptions and limitations.", "Compare the options against agreed criteria; ask a qualified reviewer to check consequential claims."], "review": "This sample has not retrieved or verified sources. Specialist work requires appropriate qualified review."}
+    },
+    {
+      "id": "create", "name": "Shape an idea", "family": "creative-studio", "mode": "create", "art": "products",
+      "intention": "Give a creative idea a direction I can refine.",
+      "sample": {"title": "From a thought to a creative brief", "summary": "Start with the feeling and the audience. Build one coherent creative direction around a single message, then test whether the idea is clear without an explanation.", "steps": ["Describe the audience, intended feeling and one message to remember.", "Choose a visual language, useful references and the formats the work must support.", "Review the concept for clarity, accessibility and usage rights before producing final assets."], "review": "This is a written creative example, not generated media. Final artwork requires visual and rights review."}
+    },
+    {
+      "id": "learn", "name": "Learn something new", "family": "core-intelligence", "mode": "learn", "art": "intelligence",
+      "intention": "Break a new subject into a practical learning path.",
+      "sample": {"title": "A small plan for understanding", "summary": "Connect the subject to something familiar. Learn one concept, explain it in your own words, then use a short exercise to find what still needs clarification.", "steps": ["Write what you already know and the question you want to answer.", "Study one foundational concept and explain it with an everyday example.", "Try an exercise, check the explanation against a trusted source and revise your understanding."], "review": "A sample learning structure, not a personalized lesson or a verified answer to a subject question."}
+    },
+    {
+      "id": "plan", "name": "Move work forward", "family": "business-commerce", "mode": "ask", "art": "global",
+      "intention": "Turn a team question into an accountable next step.",
+      "sample": {"title": "A decision brief your team can review", "summary": "Make the desired outcome explicit. Compare the options, name the trade-offs and give the next action an owner instead of allowing a draft to become an unreviewed decision.", "steps": ["State the outcome, available resources and constraints.", "Compare options using agreed criteria and record the assumptions to validate.", "Assign the next action, reviewer and check-in date before changing a business system."], "review": "No business records were read and no actions were taken. Financial, legal and operational decisions need appropriate review."}
+    },
+    {
+      "id": "build", "name": "Connect a system", "family": "developer-platform", "mode": "create", "art": "agi",
+      "intention": "Outline an integration with boundaries I can test.",
+      "sample": {"title": "An integration that starts with a contract", "summary": "Define the input and the expected result before selecting a tool. Keep authorization on the server and make retries safe before connecting a production provider.", "steps": ["Document the caller, input schema, permissions and intended response.", "Specify validation, tenant boundaries, idempotency and failure behavior.", "Test with synthetic identities and data, then review the exact candidate before a controlled release."], "review": "An illustrative engineering brief, not deployed code, an API credential or a tested integration."}
+    },
+    {
+      "id": "coordinate", "name": "Organize a workflow", "family": "autonomous-workflows", "mode": "explore", "art": "intelligence",
+      "intention": "Make a repeatable process easier to understand and supervise.",
+      "sample": {"title": "A workflow with deliberate checkpoints", "summary": "Separate preparation from execution. Give each step a clear owner and stop condition, and require explicit approval before consequential external actions.", "steps": ["Map the trigger, required inputs and the outcome to prepare.", "Name the owner, permitted actions and review checkpoint for each step.", "Test failure, retry and stop paths before authorizing any automation."], "review": "No workflow is running. The sample does not authorize autonomous actions, outreach or changes to external systems."}
+    }
+  ]
+}
