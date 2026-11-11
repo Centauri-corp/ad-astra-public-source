@@ -24,9 +24,9 @@ function createHandler({releaseReady=ready,environment=()=>process.env,request=(
    for await(const chunk of upstream.body){size+=chunk.byteLength;if(size>8192)throw new Error('unavailable');chunks.push(Buffer.from(chunk));}
    const status=JSON.parse(Buffer.concat(chunks).toString('utf8'));
    if(!status||typeof status!=='object'||Array.isArray(status)||status.environment!==target||
-      ['frameworkDeployed','checkoutEnabled','activationEnabled'].some(key=>typeof status[key]!=='boolean'))throw new Error('unavailable');
+      ['frameworkDeployed','checkoutEnabled','activationEnabled','productAvailable'].some(key=>typeof status[key]!=='boolean'))throw new Error('unavailable');
    return send(200,{market:'US-CA',environment:target,
-    available:target==='production'&&status.frameworkDeployed&&status.checkoutEnabled&&status.activationEnabled,
+    available:target==='production'&&status.frameworkDeployed&&status.checkoutEnabled&&status.activationEnabled&&status.productAvailable,
     frameworkDeployed:status.frameworkDeployed});
   }catch{return send(503,unavailable);}
  };

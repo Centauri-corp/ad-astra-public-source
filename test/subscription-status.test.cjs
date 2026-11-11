@@ -2,7 +2,7 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
 const {createHandler}=require('../api/subscription-status');
 const source=require('../public/release-manifest.json');
-const complete={environment:'production',checkoutEnabled:true,activationEnabled:true,frameworkDeployed:true};
+const complete={environment:'production',checkoutEnabled:true,activationEnabled:true,frameworkDeployed:true,productAvailable:true};
 async function responseFor({target='production',deployment='production',released=true,method='GET',upstream=complete,failure=false,response}={}){
  let body='',status,requests=[];const headers={};
  const handler=createHandler({environment:()=>({AD_ASTRA_SUBSCRIPTION_ENVIRONMENT:target,VERCEL_ENV:deployment}),releaseReady:()=>released,
@@ -24,7 +24,7 @@ test('preview cannot query production and production cannot query development',a
  assert.equal(r.body.available,false);assert.equal(r.requests.length,1);assert.match(r.requests[0].url,/astra-subscriptions-development\/status$/);
 });
 test('a matching production target and all provider conditions are required; extra metadata is stripped',async()=>{
- for(const field of ['frameworkDeployed','checkoutEnabled','activationEnabled'])assert.equal((await responseFor({upstream:{...complete,[field]:false}})).body.available,false);
+ for(const field of ['frameworkDeployed','checkoutEnabled','activationEnabled','productAvailable'])assert.equal((await responseFor({upstream:{...complete,[field]:false}})).body.available,false);
  const r=await responseFor({upstream:{...complete,blockers:['private-receipt'],secret:'private-fixture'}});
  assert.deepEqual(r.body,{market:'US-CA',environment:'production',available:true,frameworkDeployed:true});
  assert.equal(r.requests[0].options.redirect,'error');assert.equal(r.requests[0].options.cache,'no-store');
@@ -42,4 +42,11 @@ test('ambiguous, malformed, oversized or unavailable upstreams fail closed witho
 test('HEAD is bodyless and writes are rejected without a provider call',async()=>{
  const head=await responseFor({method:'HEAD',released:false});assert.equal(head.body,null);assert.equal(head.status,200);
  const write=await responseFor({method:'POST'});assert.equal(write.status,405);assert.equal(write.requests.length,0);assert.equal(write.headers.Allow,'GET, HEAD');
+});
+test('onboarding readiness cannot imply product access and ambiguous product availability fails closed',async()=>{
+ const onboarding=await responseFor({upstream:{...complete,productAvailable:false}});assert.equal(onboarding.status,200);assert.equal(onboarding.body.available,false);
+ for(const value of [undefined,null,'true',1]){
+  const r=await responseFor({upstream:{...complete,productAvailable:value}});assert.equal(r.status,503);assert.equal(r.body.available,false);
+ }
+ const paused=await responseFor({released:false});assert.equal(paused.body.available,false);assert.equal(paused.requests.length,0);
 });

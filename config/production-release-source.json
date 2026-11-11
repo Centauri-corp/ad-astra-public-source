@@ -6,7 +6,7 @@
   "projectId": "prj_FX8QO3TIqUNAfFR4enz0bALmjeg1",
   "teamId": "team_5xblMPo2zEBjbz4KPmeDVHPr",
   "sourceSelection": "owner-selected-pr36-in-chat",
-  "reconciledCanaryCommit": "3ddef0d2e787f0ce8f466dd96e73aed0e0475977",
+  "reconciledCanaryCommit": "c61a957d0d6d731d652a7ca71eb61d099f00d16c",
   "retiredReleaseBranches": ["work"],
   "automaticGitDeployments": false,
   "promotionMode": "stage-test-independent-review-manual-promotion",
