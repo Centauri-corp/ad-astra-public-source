@@ -7,7 +7,7 @@ const release=require('../public/release-manifest.json'),routing=require('../ver
 const originalRelease=structuredClone(release),originalRedirects=structuredClone(routing.redirects);
 const pair=crypto.generateKeyPairSync('rsa',{modulusLength:2048});
 const jwk={...pair.publicKey.export({format:'jwk'}),kid:'test-key',use:'sig',alg:'RS256'};
-let calls=[],redisResult=[1,11,3600],providerStatus=200;
+let calls=[],redisResult=[1,11,3600],providerStatus=200,providerPayload;
 function token(overrides={},head={}){
  const now=Math.floor(Date.now()/1000);
  const claims={iss:'https://clerk.adastra.global',aud:'ad-astra-workspace',azp:'https://adastra.global',sub:'user_testA',sid:'sess_testA',iat:now,nbf:now-1,exp:now+60,...overrides};
@@ -27,11 +27,12 @@ beforeEach(()=>{
  Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://redis.invalid',KV_REST_API_TOKEN:'synthetic-test-only',OPENAI_API_KEY:'synthetic-test-only',OPENAI_MODEL:'gpt-4.1-mini-2025-04-14',VERCEL_ENV:'production'});
  for(const flag of gates.FLAGS)process.env[flag]='true';
  calls=[];redisResult=[1,11,3600];providerStatus=200;
+ providerPayload={object:'chat.completion',model:'gpt-4.1-mini-2025-04-14',choices:[{index:0,finish_reason:'stop',message:{role:'assistant',content:'Synthetic fixture response'}}],usage:{prompt_tokens:100,completion_tokens:20,total_tokens:120}};
  global.fetch=async(url,options)=>{
   calls.push({url,options});
   if(url.includes('/.well-known/jwks.json'))return {ok:true,json:async()=>({keys:[jwk]})};
   if(url==='https://redis.invalid')return {ok:true,json:async()=>({result:redisResult})};
-  if(url==='https://api.openai.com/v1/chat/completions')return {ok:providerStatus===200,status:providerStatus,json:async()=>({choices:[{message:{content:'Synthetic fixture response'}}]})};
+  if(url==='https://api.openai.com/v1/chat/completions')return Response.json(providerPayload,{status:providerStatus});
   throw Error('Unexpected external destination');
  };
 });
@@ -108,6 +109,17 @@ test('quota keys use signed identity, ignore spoofed IP and survive module reloa
 test('provider 429 yields safe 503 without retry or refund',async()=>{
  providerStatus=429;const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'ai_unavailable');assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,1);assert.equal(calls.filter(c=>c.url==='https://redis.invalid').length,1);
  assert.ok(!JSON.stringify(r.body).includes('synthetic-test-only'));
+});
+test('provider model/format violations never publish an answer, replay or expose the provider body',async()=>{
+ const valid=structuredClone(providerPayload);
+ for(const mutate of [p=>p.model='unapproved-private-model',p=>p.choices[0].finish_reason='length',
+   p=>p.choices[0].message.tool_calls=[{function:{name:'unapproved-tool'}}],p=>p.usage.total_tokens=999]){
+  providerPayload=structuredClone(valid);mutate(providerPayload);calls=[];
+  const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'ai_unavailable');
+  assert.ok(!('answer' in r.body));assert.ok(!JSON.stringify(r.body).includes('unapproved'));
+  assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,1);
+  assert.equal(calls.filter(c=>c.url==='https://redis.invalid').length,1);
+ }
 });
 test('status exposes availability only and requires actual release configuration',()=>{
  process.env.AD_ASTRA_SECURITY_REVIEW_APPROVED='false';const r=response();status({method:'GET'},r);assert.deepEqual(Object.keys(r.body).sort(),['available','message']);assert.equal(r.body.available,false);

@@ -6,6 +6,7 @@ const { ready } = require('../lib/release-gates');
 const sharedBudget = require('../lib/shared-budget');
 const { MODES } = require('../lib/modes');
 const { engineEvents } = require('../lib/engine-events');
+const { CONTRACT, readCompletion } = require('../lib/model-validation');
 const MAX_BODY = 14000;
 function sameOrigin(req) {
   const host = String(req.headers?.host || '').toLowerCase();
@@ -74,14 +75,12 @@ module.exports = async function ask(req, res) {
     events.start(headers);events.requesting();
     const response = await fetch('https://api.openai.com/v1/chat/completions',{
       method:'POST',headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},
-      body:JSON.stringify({model:'gpt-4.1-mini-2025-04-14',temperature:0.25,max_tokens:700,store:false,messages}),
+      body:JSON.stringify({model:CONTRACT.providerModel,temperature:0.25,max_tokens:CONTRACT.maxOutputTokens,store:false,messages}),
       redirect:'error',cache:'no-store',signal:AbortSignal.any([AbortSignal.timeout(18000),disconnected.signal])
     });
     if (!response.ok) {console.warn('ad_astra_provider_status',{requestId,status:response.status});throw new Error('provider_unavailable');}
-    const data = await response.json();
-    const answer = data?.choices?.[0]?.message?.content;
-    if (typeof answer !== 'string' || !answer.trim()) throw new Error('empty_response');
-    return reply(200,{ok:true,mode,answer:answer.trim().slice(0,6000),disclosure:'AI-generated response. Verify important claims against primary sources.'},headers);
+    const answer = await readCompletion(response);
+    return reply(200,{ok:true,mode,answer,disclosure:'AI-generated response. Verify important claims against primary sources.'},headers);
   } catch { return reply(503,{error:'ai_unavailable',message:'Ad Astra could not complete this response. Please try again later.'},{...headers,'Retry-After':60}); }
   finally { req.removeListener?.('aborted',stop);res.removeListener?.('close',stop); }
 };

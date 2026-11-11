@@ -11,13 +11,13 @@
   "files": [
     {
       "path": "api/ask.js",
-      "bytes": 6929,
-      "sha256": "98dccea4adef85791740f40ae3169e0932ef3bae150ca448b85cd5cb67791d1b"
+      "bytes": 6857,
+      "sha256": "177473e21f2de1f6fc860623b60ff91a60b2353bba65f37732b9a3b2ea67a1e1"
     },
     {
       "path": "api/models.js",
-      "bytes": 916,
-      "sha256": "b6dd6f1d88b9b781d4f4758058439979c4f66ca9b1c8e60f7aebf089dc866b71"
+      "bytes": 1471,
+      "sha256": "aa156316b8fbd8a32726d7637a24398143e98100b40a2876c0bacd00f6b3c106"
     },
     {
       "path": "api/operating-status.js",
@@ -46,8 +46,13 @@
     },
     {
       "path": "lib/model-catalog.js",
-      "bytes": 4996,
-      "sha256": "58f3195ada06f8fa0c4e040f2e73e4b40f89f64c0ee4eccc3713c29181fd5ea9"
+      "bytes": 5091,
+      "sha256": "123602f966a09608fd0580b798d97fa6823899a28791790264582b5c85f9b299"
+    },
+    {
+      "path": "lib/model-validation.js",
+      "bytes": 5222,
+      "sha256": "e6fac3d0c543b867a7a8097daa0493e55112b3b44f50d3317167908a49e7a3fc"
     },
     {
       "path": "lib/modes.js",
@@ -71,8 +76,8 @@
     },
     {
       "path": "lib/release-gates.js",
-      "bytes": 1070,
-      "sha256": "20a26e76ef573c3ecc90b73760f3f7af910907253e2388f42a9c127a45d25fac"
+      "bytes": 1315,
+      "sha256": "261f75381b3bf4b2bd6824c29a4c8a639dafba3862c22793fc54f28c9dfc8476"
     },
     {
       "path": "lib/shared-budget.js",
@@ -755,5 +760,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "db91833c417dfc1740efcb719f358f01fd2ac0ee082a44220aa0f2d6dcb9c180"
+  "fingerprint": "5fc4107d7f405e3a1d16f896d7eb992482ec2998fc33015e32a76825206633e7"
 }
