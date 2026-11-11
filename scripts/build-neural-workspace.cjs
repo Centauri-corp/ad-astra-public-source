@@ -1,0 +1,16 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {neuralSection}=require('./lib/neural-experience.cjs'),{conversationSection}=require('./lib/neural-conversation.cjs');
+const {applySharedShell}=require('./lib/site-shell.cjs');
+const file=path.join(__dirname,'../public/platform/index.html'),original=fs.readFileSync(file,'utf8');
+assert.ok(original.includes('<main id="platform-content" class="market-shell" hidden>'),'Preserve the verified-account boundary');
+const start='<!-- AD ASTRA neural workspace -->',end='<!-- /AD ASTRA neural workspace -->';
+const block=start+'<div data-neural-workspace>'+neuralSection({workspace:true})+conversationSection()+'</div>'+end;
+let html=original.includes(start)?original.replace(/<!-- AD ASTRA neural workspace -->[\s\S]*?<!-- \/AD ASTRA neural workspace -->/,block):original.replace('  <section aria-labelledby="platform-tools">',block+'\n  <section aria-labelledby="platform-tools">');
+assert.ok(html.includes(block),'Workspace insertion failed');
+const resources='<link rel="stylesheet" href="/neural/experience.css"><script defer src="/neural/state.js"></script><script defer src="/neural/engine-client.js"></script><script defer src="/neural/voice.js"></script><script defer src="/neural/conversation.js"></script><script defer src="/neural/experience.js"></script>';
+if(!html.includes('src="/neural/conversation.js"'))html=html.replace('</head>',resources+'</head>');
+html=html.replace('href="/status/#ask-ad-astra"','href="#ask-ad-astra"').replaceAll('href="/status/?mode=','href="/platform/?mode=');
+html=applySharedShell(html,'/platform/');
+if(process.argv.includes('--check'))assert.equal(original,html,'Customer neural workspace drifted');else fs.writeFileSync(file,html);
+console.log('AD_ASTRA_NEURAL_WORKSPACE_PASS accountGuard=preserved engineRelease=closed');

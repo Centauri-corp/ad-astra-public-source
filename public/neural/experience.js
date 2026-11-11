@@ -6,6 +6,8 @@
  const check=section.querySelector('[data-neural-check]'),connection=section.querySelector('[data-neural-connection-status]');
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  let scene=null,loading=false,disposed=false,paused=true,request=null,expiry=null,refreshGeneration=0,loadGeneration=0;
+ let activity='idle';
+ const conversation=globalThis.AdAstraConversation?.mount(section.closest('[data-neural-workspace]')||section,{onActivity:value=>{activity=value;stage.dataset.activity=value;scene?.setActivity(value);}});
  controls.hidden=false;check.hidden=false;
  function syncControls(){
   for(const button of controls.querySelectorAll('button:not([data-neural-load])'))button.disabled=!scene;
@@ -22,7 +24,7 @@
   try{
    const module=await import('/neural/scene.js');if(disposed||generation!==loadGeneration)return;
    scene=module.createScene(stage,{reducedMotion:reduced.matches,onContextLost:()=>staticFallback('3D rendering stopped. Static artwork is available; you can retry.')});
-   paused=reduced.matches;scene.setPaused(paused);stage.querySelector('.neural-poster').hidden=true;
+   paused=reduced.matches;scene.setPaused(paused);scene.setActivity(activity);stage.querySelector('.neural-poster').hidden=true;
    stage.dataset.scene='interactive';load.textContent='Interactive 3D loaded';
    renderStatus.textContent='Interactive concept scene loaded. Pointer movement and the labelled controls change only this local artwork.';syncControls();
   }catch{if(!disposed&&generation===loadGeneration)staticFallback('Interactive 3D is unavailable on this device or connection. The static artwork remains available.');}
@@ -53,7 +55,7 @@
   }catch{if(!disposed&&generation===refreshGeneration)unknown('Availability could not be verified. No active AI session is represented.');}
   finally{clearTimeout(timeout);if(!disposed&&generation===refreshGeneration)check.disabled=false;}
  });
- window.addEventListener('pagehide',()=>{disposed=true;refreshGeneration++;loadGeneration++;request?.abort();clearTimeout(expiry);scene?.dispose();scene=null;});
- window.addEventListener('pageshow',event=>{if(!event.persisted)return;disposed=false;loading=false;check.disabled=false;staticFallback('Static artwork restored. Choose interactive 3D to load the scene again.');unknown('Connection not checked. No active AI session.');});
+ window.addEventListener('pagehide',()=>{disposed=true;refreshGeneration++;loadGeneration++;request?.abort();clearTimeout(expiry);conversation?.dispose();scene?.dispose();scene=null;});
+ window.addEventListener('pageshow',event=>{if(!event.persisted)return;disposed=false;loading=false;check.disabled=false;conversation?.restore();staticFallback('Static artwork restored. Choose interactive 3D to load the scene again.');unknown('Connection not checked. No active AI session.');});
  syncControls();
 })();

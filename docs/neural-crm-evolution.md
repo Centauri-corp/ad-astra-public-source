@@ -1,5 +1,7 @@
 # Ad Astra neural experience and CRM automation
 
+This document records the initial controlled-scene increment. The next source increment is documented in [Voice and engine-event integration](voice-engine-integration.md); its optional device-local voice and guarded request transport do not activate CRM or the public customer release.
+
 ## Implemented increment
 
 The Intelligence page now offers an explicit-load, self-hosted Three.js neural scene. It combines a physical glass-like core, reflective metallic spiral geometry, a node lattice, orbital forms and studio lighting. Pointer and labelled keyboard-operable controls adjust a bounded view; automatic motion can be paused. Reduced-motion users start with a still view and manual controls. The scene stops rendering when hidden or offscreen and releases GPU resources on teardown or context loss.

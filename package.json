@@ -9,11 +9,12 @@
     "experience:build": "node scripts/build-experience.cjs",
     "journey:build": "node scripts/build-customer-experience.cjs",
     "neural:build": "node scripts/build-neural-vendor.cjs",
+    "workspace:build": "node scripts/build-neural-workspace.cjs",
     "shell:build": "node scripts/build-site-shell.cjs",
     "products:build": "node scripts/build-products.cjs",
     "status:build": "node scripts/build-operating-status.cjs",
     "test": "npm run check && node --test test/*.test.cjs",
-    "check": "node scripts/build-neural-vendor.cjs --check && node scripts/build-experience.cjs --check && node scripts/build-customer-experience.cjs --check && node scripts/build-products.cjs --check && node scripts/build-operating-status.cjs --check && node scripts/build-site-shell.cjs --check && node scripts/check-release.cjs && node scripts/website-source-integrity.cjs",
+    "check": "node scripts/build-neural-vendor.cjs --check && node scripts/build-experience.cjs --check && node scripts/build-customer-experience.cjs --check && node scripts/build-neural-workspace.cjs --check && node scripts/build-products.cjs --check && node scripts/build-operating-status.cjs --check && node scripts/build-site-shell.cjs --check && node scripts/check-release.cjs && node scripts/website-source-integrity.cjs",
     "sources:write": "node scripts/website-source-integrity.cjs --write",
     "sources:check": "node scripts/website-source-integrity.cjs"
   },

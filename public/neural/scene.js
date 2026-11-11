@@ -56,5 +56,6 @@ export function createScene(host,{reducedMotion=false,onContextLost=()=>{}}={}){
  function dispose(){if(disposed)return;disposed=true;cancelAnimationFrame(frame);resizeObserver.disconnect();intersection.disconnect();document.removeEventListener('visibilitychange',visibility);canvas.removeEventListener('webglcontextlost',lost);host.removeEventListener('pointermove',pointer);for(const g of geometries)g.dispose();for(const m of materials)m.dispose();environment.dispose();renderer.dispose();canvas.remove();}
  canvas.addEventListener('webglcontextlost',lost);host.addEventListener('pointermove',pointer);document.addEventListener('visibilitychange',visibility);
  host.append(canvas);resizeObserver.observe(host);intersection.observe(host);resize();sync();
- return {setPaused(value){paused=!!value;sync();},setReducedMotion(value){reducedMotion=!!value;if(reducedMotion)paused=true;sync();},rotate,reset,dispose};
+ function setActivity(value){const colors={idle:0x3f8698,listening:0x6b59a0,requesting:0x437ba8,responding:0x4c9c91,speaking:0xaa8450,error:0x98675b};if(!Object.hasOwn(colors,value)||disposed)return;nodeMaterial.emissive.setHex(colors[value]);nodeMaterial.emissiveIntensity=value==='idle'?1.2:1.7;host.dataset.activity=value;draw();}
+ return {setPaused(value){paused=!!value;sync();},setReducedMotion(value){reducedMotion=!!value;if(reducedMotion)paused=true;sync();},setActivity,rotate,reset,dispose};
 }

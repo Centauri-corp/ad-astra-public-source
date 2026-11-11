@@ -11,8 +11,8 @@
   "files": [
     {
       "path": "api/ask.js",
-      "bytes": 6183,
-      "sha256": "df3e7758eb7450f9d646535d10d892477af183b9f9282f1575840d1777021af3"
+      "bytes": 6929,
+      "sha256": "98dccea4adef85791740f40ae3169e0932ef3bae150ca448b85cd5cb67791d1b"
     },
     {
       "path": "api/models.js",
@@ -38,6 +38,11 @@
       "path": "lib/auth.js",
       "bytes": 4742,
       "sha256": "86771b59484435890eec436f731f7646baf529d56cb77253a243d3f65d44e73a"
+    },
+    {
+      "path": "lib/engine-events.js",
+      "bytes": 1437,
+      "sha256": "a484c3735c80188a135f36b89743a8a10c73d6c34082630709fce2f3beaa1866"
     },
     {
       "path": "lib/model-catalog.js",
@@ -520,19 +525,29 @@
       "sha256": "345692e8db64afe8fd8068e2edc1d3d46987c5a024e38ee6d1371177c27e43b2"
     },
     {
+      "path": "public/neural/conversation.js",
+      "bytes": 5285,
+      "sha256": "20f079d7d5d382566c4ef7a77bc83f383ad52e2bc9fa58addebdbe3ad97ca2e4"
+    },
+    {
+      "path": "public/neural/engine-client.js",
+      "bytes": 4368,
+      "sha256": "b1ef85afefe1c35e0b9faa727031cb8c4b6e9de3e216df86fcd9d5af8ecdb25a"
+    },
+    {
       "path": "public/neural/experience.css",
-      "bytes": 3222,
-      "sha256": "f4a2f9c93dc09a2d6e8754f74161560bcc1359ca12b72c95c4846ae392e5bb99"
+      "bytes": 4535,
+      "sha256": "6b4640fb69643b8141a3c565815237867ad36f49ff6ccb33281f0fdffd375bb8"
     },
     {
       "path": "public/neural/experience.js",
-      "bytes": 5493,
-      "sha256": "5722acc98832015600d43d3002d72db2bae7afb7cccdb33ae7467f054db7be28"
+      "bytes": 5796,
+      "sha256": "2efdfdd704fbc049fa1e85f54e8efab6850aba5274428c01d5324511fb1e71d9"
     },
     {
       "path": "public/neural/scene.js",
-      "bytes": 7186,
-      "sha256": "dc9ecb9ecdac27900320f1c96052f7bb2d620ad0330f6f695ac2a2be992a5081"
+      "bytes": 7532,
+      "sha256": "6b2b1c396b59585d7b8346c1a38c0465973ace3668300dcd4002c66c9ddcf9d9"
     },
     {
       "path": "public/neural/state.js",
@@ -560,6 +575,11 @@
       "sha256": "104f56145899722094556490d787aae0617cc2fc3382f31df02d724ea1aee341"
     },
     {
+      "path": "public/neural/voice.js",
+      "bytes": 4296,
+      "sha256": "ddfe681843bd880bb32a99ca920823721c9bfc8f1949833bbc00d6c111cac532"
+    },
+    {
       "path": "public/platform-preview/app.js",
       "bytes": 1307,
       "sha256": "134f738608f2cd371113389510de93869c331d890d5223e933fa8e714522001c"
@@ -581,8 +601,8 @@
     },
     {
       "path": "public/platform/index.html",
-      "bytes": 8857,
-      "sha256": "03d9c145e72e57d0d61a0831b4cadaa6f101eba64a9e4aa302fe8e738e486dc6"
+      "bytes": 15047,
+      "sha256": "70d9798a7266132ef2bb9a32c51c41a95a5ab2bc559b7c76039b2c67e05f5fce"
     },
     {
       "path": "public/pricing/index.html",
@@ -735,5 +755,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "37c1e101f5448d3793499d542e700488b4802d8a0628e358756f4e1bf50d6eeb"
+  "fingerprint": "db91833c417dfc1740efcb719f358f01fd2ac0ee082a44220aa0f2d6dcb9c180"
 }
