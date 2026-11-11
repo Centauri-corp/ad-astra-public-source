@@ -2,12 +2,13 @@
 // Local-only browser -> public routes -> conservative availability API audit.
 // Not independent approval, authenticated customer QA, or provider evidence.
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process');
+const axe=require('axe-core');
 const root=path.join(__dirname,'..'),base='http://127.0.0.1:'+(process.env.AD_ASTRA_AUDIT_PORT||4175);
 const out=process.env.AD_ASTRA_AUDIT_OUTPUT||path.join(root,'LStra/evidence');
 const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);
 const htmlFiles=walk(path.join(root,'public')).filter(f=>f.endsWith('/index.html'));
 const routes=htmlFiles.map(f=>'/'+path.relative(path.join(root,'public'),f).replace(/index\.html$/,''));
-const report={schema:'ad-astra-browser-audit/v2',observedAt:new Date().toISOString(),baseCommit:cp.execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),sourceFingerprint:require('../config/website-source-integrity.json').fingerprint,scope:'working-candidate-loopback-not-provider-or-production-acceptance',pages:[],interactions:[],screenshots:[]};
+const report={schema:'ad-astra-browser-audit/v3',observedAt:new Date().toISOString(),baseCommit:cp.execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),sourceFingerprint:require('../config/website-source-integrity.json').fingerprint,scope:'working-candidate-loopback-not-provider-or-production-acceptance',accessibilityEngine:axe.version,accessibility:[],pages:[],interactions:[],screenshots:[]};
 fs.mkdirSync(out,{recursive:true});
 const result=name=>report.interactions.push({name,result:'PASS'});
 (async()=>{
@@ -26,6 +27,14 @@ const result=name=>report.interactions.push({name,result:'PASS'});
     // A fresh unauthenticated browser must not expose protected workspace content.
     const guardedContentHidden=route==='/platform/'?await page.locator('#platform-content').isHidden():route==='/knowledge/'?await page.locator('#main').isHidden():null;
     report.pages.push({route,width,status:response.status(),...state,guardedContentHidden,errors:[...errors],failedRequests:[...failedRequests]});
+    if(width===390){
+     await page.evaluate(axe.source);
+     const audit=await page.evaluate(async()=>{
+      const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}});
+      return {violations:r.violations.map(v=>({id:v.id,impact:v.impact,targets:v.nodes.map(n=>n.target)})),manualReviewRules:r.incomplete.map(v=>v.id)};
+     });
+     report.accessibility.push({route,width,...audit});
+    }
     if(['/','/intelligence/','/services/','/products/','/products/core-intelligence/','/status/'].includes(route)&&[390,1440].includes(width)){
      const name=route==='/'?'home':route.split('/').filter(Boolean).join('-');
      for(const full of route==='/'?[false,true]:[true]){const file=path.join(out,`candidate-${name}-${width}${full?'-full':''}.png`);await page.screenshot({path:file,fullPage:full});report.screenshots.push(path.basename(file));}
@@ -34,6 +43,9 @@ const result=name=>report.interactions.push({name,result:'PASS'});
   }
   for(const file of htmlFiles)for(const [,href]of fs.readFileSync(file,'utf8').matchAll(/(?:href|src)="(\/(?!\/)[^"?#]*)(?:[?#][^"]*)?"/g))assert.ok(fs.existsSync(path.join(root,'public',href)),'Broken first-party link: '+href+' in '+file);
   result('first-party route and asset links resolve to checked source');
+  assert.equal(report.accessibility.length,routes.length,'Every route requires a mobile accessibility scan');
+  assert.deepEqual(report.accessibility.filter(r=>r.violations.length),[],'Automated accessibility violations block candidate QA; incomplete/manual review is not conformance approval');
+  result('38-route automated accessibility regression scan; manual review remains separate');
   await page.setViewportSize({width:390,height:844});await page.goto(base+'/');
   assert.equal(await page.locator('#story .chapter-image img').evaluate(e=>getComputedStyle(e).objectPosition),'0% 50%');
   const menu=page.locator('.site-menu');await menu.locator('summary').click();assert.notEqual(await menu.getAttribute('open'),null);await page.keyboard.press('Escape');assert.equal(await menu.getAttribute('open'),null);assert.ok(await menu.locator('summary').evaluate(e=>e===document.activeElement));
@@ -53,5 +65,5 @@ const result=name=>report.interactions.push({name,result:'PASS'});
   await motionPage.goto(base+'/');const control=motionPage.locator('[data-motion-toggle]');assert.ok(await control.isVisible());await control.click();assert.equal(await motionPage.locator('body').getAttribute('data-motion'),'off');await control.click();assert.equal(await motionPage.locator('body').getAttribute('data-motion'),'on');await motionPage.emulateMedia({reducedMotion:'reduce'});await motionPage.waitForFunction(()=>document.body.dataset.motion==='off');assert.ok(await control.isHidden());assert.deepEqual(forbidden,[]);await motionContext.close();result('motion pause, reduced motion and zero provider or customer writes');
  }catch(error){report.error=error.stack;process.exitCode=1;}finally{await browser.close();}
  report.failures=report.pages.filter(p=>p.status!==200||p.overflow||(p.guardedContentHidden===null?p.visibleH1s!==1:!p.guardedContentHidden||p.visibleH1s>1)||p.errors.length||p.brokenImages.length||p.failedRequests.length||!p.products||!p.availability||p.sharedHeader!==1||p.sharedFooter!==1);
- report.pass=!report.error&&report.failures.length===0;fs.writeFileSync(path.join(out,'browser-audit.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({pass:report.pass,observations:report.pages.length,interactions:report.interactions,failures:report.failures,error:report.error},null,2));if(!report.pass)process.exitCode=1;
+ report.pass=!report.error&&report.failures.length===0&&report.accessibility.length===routes.length&&report.accessibility.every(r=>r.violations.length===0);fs.writeFileSync(path.join(out,'browser-audit.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({pass:report.pass,observations:report.pages.length,accessibilityScans:report.accessibility.length,automatedAccessibilityViolations:report.accessibility.reduce((n,r)=>n+r.violations.length,0),interactions:report.interactions,failures:report.failures,error:report.error},null,2));if(!report.pass)process.exitCode=1;
 })();
