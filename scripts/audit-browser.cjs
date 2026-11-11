@@ -11,7 +11,18 @@ const routes=htmlFiles.map(f=>'/'+path.relative(path.join(root,'public'),f).repl
 const report={schema:'ad-astra-browser-audit/v3',observedAt:new Date().toISOString(),baseCommit:cp.execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),sourceFingerprint:require('../config/website-source-integrity.json').fingerprint,scope:'working-candidate-loopback-not-provider-or-production-acceptance',accessibilityEngine:axe.version,accessibility:[],pages:[],interactions:[],screenshots:[]};
 fs.mkdirSync(out,{recursive:true});
 const result=name=>report.interactions.push({name,result:'PASS'});
+const checkpoint=stage=>{
+ report.stage=stage;
+ fs.writeFileSync(path.join(out,'browser-progress.json'),JSON.stringify({stage,at:new Date().toISOString(),activeNavigation:report.activeNavigation,pages:report.pages.length,scans:report.accessibility.length,interactions:report.interactions},null,2)+'\n');
+ console.log('AD_ASTRA_BROWSER_PROGRESS '+JSON.stringify({stage,route:report.activeNavigation?.route,width:report.activeNavigation?.width,pages:report.pages.length}));
+};
+const deadline=setTimeout(()=>{
+ report.error='Browser audit exceeded the eight-minute execution budget at '+report.stage;
+ report.pass=false;fs.writeFileSync(path.join(out,'browser-audit.json'),JSON.stringify(report,null,2)+'\n');
+ console.error(report.error);process.exit(1);
+},480000);deadline.unref();
 (async()=>{
+ checkpoint('launch');
  const browser=await chromium.launch({executablePath:fs.existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
  try{
   const context=await browser.newContext({reducedMotion:'reduce'});let page,errors=[],failedRequests=[];
@@ -24,6 +35,7 @@ const result=name=>report.interactions.push({name,result:'PASS'});
     page.on('response',r=>{if(r.status()>=400&&new URL(r.url()).origin===base)failedRequests.push({path:new URL(r.url()).pathname,status:r.status()});});
     errors=[];failedRequests=[];
     report.activeNavigation={route,width};
+    checkpoint('route-navigation');
     try{
     const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:20000});
     await page.evaluate(async()=>{for(const image of document.images)image.loading='eager';await Promise.all([...document.images].map(image=>image.decode().catch(()=>{})));});
@@ -43,10 +55,11 @@ const result=name=>report.interactions.push({name,result:'PASS'});
      const name=route==='/'?'home':route.split('/').filter(Boolean).join('-');
      for(const full of ['/','/start/'].includes(route)?[false,true]:[true]){const file=path.join(out,`candidate-${name}-${width}${full?'-full':''}.png`);await page.screenshot({path:file,fullPage:full});report.screenshots.push(path.basename(file));}
     }
-    }finally{await page.close();}
+    }finally{checkpoint('route-close');await page.close();}
    }
   }
   delete report.activeNavigation;
+  checkpoint('interactions');
   page=await context.newPage();
   // Deliberately delayed auth redirect: reproduce the old cross-route race,
   // then assert real isolated navigation rather than retrying a failed goto.
@@ -90,7 +103,7 @@ const result=name=>report.interactions.push({name,result:'PASS'});
   const motionContext=await browser.newContext({reducedMotion:'no-preference',viewport:{width:1440,height:1000}}),motionPage=await motionContext.newPage();let forbidden=[];
   motionPage.on('request',r=>{if(r.method()!=='GET'||/\/api\/(ask|session)|stripe|zoho|openai|google-analytics/.test(r.url()))forbidden.push(r.url());});
   await motionPage.goto(base+'/');const control=motionPage.locator('[data-motion-toggle]');assert.ok(await control.isVisible());await control.click();assert.equal(await motionPage.locator('body').getAttribute('data-motion'),'off');await control.click();assert.equal(await motionPage.locator('body').getAttribute('data-motion'),'on');await motionPage.emulateMedia({reducedMotion:'reduce'});await motionPage.waitForFunction(()=>document.body.dataset.motion==='off');assert.ok(await control.isHidden());assert.deepEqual(forbidden,[]);await motionContext.close();result('motion pause, reduced motion and zero provider or customer writes');
- }catch(error){report.error=error.stack;process.exitCode=1;}finally{await browser.close();}
+ }catch(error){report.error=error.stack;process.exitCode=1;}finally{checkpoint('browser-close');await browser.close();}
  report.failures=report.pages.filter(p=>p.status!==200||p.overflow||(p.guardedContentHidden===null?p.visibleH1s!==1:!p.guardedContentHidden||p.visibleH1s>1)||p.errors.length||p.brokenImages.length||p.failedRequests.length||!p.products||!p.availability||p.sharedHeader!==1||p.sharedFooter!==1);
- report.pass=!report.error&&report.failures.length===0&&report.accessibility.length===routes.length&&report.accessibility.every(r=>r.violations.length===0);fs.writeFileSync(path.join(out,'browser-audit.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({pass:report.pass,observations:report.pages.length,accessibilityScans:report.accessibility.length,automatedAccessibilityViolations:report.accessibility.reduce((n,r)=>n+r.violations.length,0),interactions:report.interactions,failures:report.failures,error:report.error},null,2));if(!report.pass)process.exitCode=1;
+ report.pass=!report.error&&report.failures.length===0&&report.accessibility.length===routes.length&&report.accessibility.every(r=>r.violations.length===0);fs.writeFileSync(path.join(out,'browser-audit.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({pass:report.pass,observations:report.pages.length,accessibilityScans:report.accessibility.length,automatedAccessibilityViolations:report.accessibility.reduce((n,r)=>n+r.violations.length,0),interactions:report.interactions,failures:report.failures,error:report.error},null,2));clearTimeout(deadline);if(!report.pass)process.exitCode=1;
 })();
