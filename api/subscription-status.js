@@ -14,7 +14,8 @@ module.exports=async function subscriptionStatus(req,res){
     });
     if(!upstream.ok)throw new Error('unavailable');
     const status=await upstream.json();
-    const available=environment==='production' && status.environment===environment && status.checkoutEnabled===true && status.activationEnabled===true;
+    const available=environment==='production' && status.environment===environment && status.frameworkDeployed===true
+      && status.checkoutEnabled===true && status.activationEnabled===true && status.productAvailable===true;
     res.statusCode=200;
     res.end(JSON.stringify({market:'US-CA',environment,available,frameworkDeployed:status.frameworkDeployed===true}));
   } catch {res.statusCode=503;res.end(JSON.stringify({market:'US-CA',environment,available:false}));}

@@ -23,6 +23,8 @@ test('public status strips provider configuration and requires complete producti
   blockers:['private-receipt'],stripe_key:'private-fixture'});
  assert.equal(result.body.available,false);
  assert.ok(!JSON.stringify(result.body).includes('private'));
- const ready=await responseFor('production',{environment:'production',checkoutEnabled:true,activationEnabled:true,frameworkDeployed:true});
+ const onboardingOnly=await responseFor('production',{environment:'production',checkoutEnabled:true,activationEnabled:true,frameworkDeployed:true});
+ assert.equal(onboardingOnly.body.available,false);
+ const ready=await responseFor('production',{environment:'production',checkoutEnabled:true,activationEnabled:true,frameworkDeployed:true,productAvailable:true});
  assert.equal(ready.body.available,true);
 });
