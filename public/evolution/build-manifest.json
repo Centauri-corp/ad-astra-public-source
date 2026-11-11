@@ -1,0 +1,409 @@
+{
+  "schema": "ad-astra-website-evolution/v1",
+  "previewBase": "/evolution",
+  "status": "review-candidate",
+  "publicRelease": false,
+  "customerExecutionEnabled": false,
+  "publicBaseCommit": "3ddef0d2e787f0ce8f466dd96e73aed0e0475977",
+  "foundationModel": {
+    "id": "astra-lumen",
+    "name": "Astra Polaris",
+    "role": "Connected foundation intelligence",
+    "modes": [
+      "ask",
+      "learn"
+    ],
+    "visual": "central radiant core",
+    "latency": "fast"
+  },
+  "marketContexts": 15,
+  "sectorProfiles": 24,
+  "pageCount": 88,
+  "artifactFingerprint": "a9b290678884cca67a26e727f51421cef5f5a1168f717d3301a4a0fe7cef2c96",
+  "artifacts": [
+    {
+      "path": "/evolution/_assets/concept-scene.js",
+      "sha256": "00b70470b22c31ed4d82530e6ea6af2337427df7a7e8dbe1c8d7bf5587280f51"
+    },
+    {
+      "path": "/evolution/_assets/concept.css",
+      "sha256": "e0eb9e68ff300d3c5d0da013f292e7ef62fe1d226cb23f5b6468c96ebbffad32"
+    },
+    {
+      "path": "/evolution/_assets/concept.js",
+      "sha256": "e213da248c5bc2458d529673a13869d910817686236938c597e75ba141c9a337"
+    },
+    {
+      "path": "/evolution/_assets/open-horizon-candidate.svg",
+      "sha256": "909b22c388b66be3409f4e37c3e3123a255c3758da7763743fe28ac69c2395f7"
+    },
+    {
+      "path": "/evolution/_assets/site-foundation.css",
+      "sha256": "9043a44977e0d46c168777476c976b0c48b6a56a8644a588073633edf73bd5af"
+    },
+    {
+      "path": "/evolution/_assets/site-navigation.js",
+      "sha256": "83379cb30121f11a2cc7626d3d839623321ce8a0c7857e284af02f9cbe189d9c"
+    },
+    {
+      "path": "/evolution/company/about/index.html",
+      "sha256": "1932be5e1e5695df2183e073765d13634d0412024eb84d4d58ac6e5844536790"
+    },
+    {
+      "path": "/evolution/company/contact/index.html",
+      "sha256": "d31dd5893f360a7fd01cd29960b48b786a2f5d1b8d038691fada702ef7a420e7"
+    },
+    {
+      "path": "/evolution/company/index.html",
+      "sha256": "af4cdbab60df43566db3b7c5b5ba289dbdb4c13a6deb2e22f1e70da6ac0adabe"
+    },
+    {
+      "path": "/evolution/global/africa/index.html",
+      "sha256": "7afd2fff2265d6673bf37c041b6acf5708610e84cd7f6265516faa44f656b1f5"
+    },
+    {
+      "path": "/evolution/global/antarctica/index.html",
+      "sha256": "05c75eee9b83038570772feb4c969d6796ef4992082f74a32193a3f588f95d5d"
+    },
+    {
+      "path": "/evolution/global/asia/index.html",
+      "sha256": "a7fa54b244c1b2b0beccbd6f81e18836f7fd487c197ab2df051cecb4acc949bf"
+    },
+    {
+      "path": "/evolution/global/europe/index.html",
+      "sha256": "cc846e8851a06855363c10ca0b12bbd57896a91ea8dda7e95734b028bf503410"
+    },
+    {
+      "path": "/evolution/global/index.html",
+      "sha256": "012b06a2010055c4902aaa4f091a3fabe2c5bb5b9932d984be64b231a25bc3cb"
+    },
+    {
+      "path": "/evolution/global/north-america/index.html",
+      "sha256": "93be045db55498a60c362c5aed2e8f106a1597a8a9fbe5e3932ff583538bbe33"
+    },
+    {
+      "path": "/evolution/global/oceania/index.html",
+      "sha256": "119a0320a02262a793fc4a5c81815d01c8dcd4a933cafb6cde63c0eec1162c54"
+    },
+    {
+      "path": "/evolution/global/south-america/index.html",
+      "sha256": "b9ffa42352bea6be3796531c337a5788e4dd498dce83bc89204a767a76c726ab"
+    },
+    {
+      "path": "/evolution/index.html",
+      "sha256": "cc974a0ae3e160983b3a82493ba0f7b9f2aed8ee9d1981b55bcc9705a6dffffb"
+    },
+    {
+      "path": "/evolution/legal/cookies/index.html",
+      "sha256": "ad82068f17842dcb8f44e341037ccd261471c765b79e4518c8b3deed776a5628"
+    },
+    {
+      "path": "/evolution/legal/index.html",
+      "sha256": "fd5867106119e772b1332a03f3cee24b69d3a9377f31cb58feff4323fc6c27b8"
+    },
+    {
+      "path": "/evolution/legal/privacy-notice/index.html",
+      "sha256": "b49aba634f2b0e27839eeaaa37f1aa67907cc5440f4d82b8f822dc6956fd0ef2"
+    },
+    {
+      "path": "/evolution/legal/terms/index.html",
+      "sha256": "4fd279cc6610722a1936dd2dd82cebcb433f33eb4a1991854e5b879379f2386b"
+    },
+    {
+      "path": "/evolution/markets/agriculture-food/index.html",
+      "sha256": "93b9893e52b4d94e3340da21897fd572d1ae650b974d133c9e722b70d2655eb1"
+    },
+    {
+      "path": "/evolution/markets/business-professional-services/index.html",
+      "sha256": "872483f8d34cc14dcf6dfdadc4af63bdf9ce840884589c6c97a33847f58a6897"
+    },
+    {
+      "path": "/evolution/markets/consumer-personal-ai/index.html",
+      "sha256": "011308260076d1cf9b2c315bf55595d0e7bb87c21ce16b2d19f1b1093d2f0b27"
+    },
+    {
+      "path": "/evolution/markets/creative-industries-media/index.html",
+      "sha256": "9f66687769e718ff814d148dd2417904bd40a324f1ca2f7fe3b61e8bc6db60ac"
+    },
+    {
+      "path": "/evolution/markets/digital-commerce/index.html",
+      "sha256": "971478ef92cd1d83bc9cb59cf8dcb27d5379b259c346435ca25cdb62cf0a9181"
+    },
+    {
+      "path": "/evolution/markets/education-learning/index.html",
+      "sha256": "aaedb33a26560db6dc071401e3e73cd129c9911373ca45b563cde5edeee6301b"
+    },
+    {
+      "path": "/evolution/markets/finance-economics/index.html",
+      "sha256": "329e9de1bb0f485efcf154e13e057debc260d3c4429518502bb74fba2fab5980"
+    },
+    {
+      "path": "/evolution/markets/government-public-services/index.html",
+      "sha256": "8adb0174bfcc21a6e36667a50ba24a7a0174678529e7ba617f986b0e14041d8a"
+    },
+    {
+      "path": "/evolution/markets/healthcare-wellness/index.html",
+      "sha256": "76ae44f020d7ac82ba576ec01326abf8d0942d2a7d74072d0393ba0cee8414fd"
+    },
+    {
+      "path": "/evolution/markets/index.html",
+      "sha256": "544c66e6d460fd3d94186b5b771ae1e30a29ab801ea4dad11b804a7f94366461"
+    },
+    {
+      "path": "/evolution/markets/legal-compliance/index.html",
+      "sha256": "093fe0ec31a6cdd0c9e24536cbea18a3f58b9ca7e37ec05cdb9ef67ccfb836c2"
+    },
+    {
+      "path": "/evolution/markets/logistics-supply-chain/index.html",
+      "sha256": "7b91c01cf86daf9691d423935611c3deab31620f534c11114ed2de97998ef064"
+    },
+    {
+      "path": "/evolution/markets/manufacturing-energy/index.html",
+      "sha256": "e2a6350a7c539414890531a23f05a65b8f932dedc9e3e3f867facc1fb839530f"
+    },
+    {
+      "path": "/evolution/markets/real-estate-construction/index.html",
+      "sha256": "840c9cd3f941280031257b18e9f721a3d6b7ebf8dd4fab4bb5ee69b9d933527c"
+    },
+    {
+      "path": "/evolution/markets/science-research/index.html",
+      "sha256": "7a8d7b1fc31b9de5005b49a3c137baeb9c117fdb02bf7c99fe6e0d3ecd34e965"
+    },
+    {
+      "path": "/evolution/markets/travel-hospitality/index.html",
+      "sha256": "e0781b4e4e5654ea41e0098abc80aff70fcb6a8de48e21ebf16d95a053dc140b"
+    },
+    {
+      "path": "/evolution/platform/ask/index.html",
+      "sha256": "06187eeb2d5ec0f0e6b4fc4d1a4816c0f2dc726fc77b0b29937ecaada7d5dfcc"
+    },
+    {
+      "path": "/evolution/platform/connect/index.html",
+      "sha256": "f6feeeeb24b39d3540beaa348d23cf863ceb79ea8250a6920329c0c48955b7ab"
+    },
+    {
+      "path": "/evolution/platform/create/index.html",
+      "sha256": "d5297316224a77a73b60e9eee4bb6973a7b8af0fa7d900668e51ead57e399a81"
+    },
+    {
+      "path": "/evolution/platform/customer-access/index.html",
+      "sha256": "4997849ac4e27f0c3b9256a4808ae7ae2666c834f0aaf3486098016755c64865"
+    },
+    {
+      "path": "/evolution/platform/decide/index.html",
+      "sha256": "27fca33e19ce3e84509fcc5386644ae8c94249444cc65ae6a838fe56302d306d"
+    },
+    {
+      "path": "/evolution/platform/index.html",
+      "sha256": "198a0999aef8c8f1d268e46d5ba42511ae9ee54baed886e70d7830fd8af53c42"
+    },
+    {
+      "path": "/evolution/platform/visual-studio/index.html",
+      "sha256": "ff9c8cf9aef91764db56a9c7ad6ee58642642e7f97bc4b4f5df7a4cf3d981268"
+    },
+    {
+      "path": "/evolution/platform/voice/index.html",
+      "sha256": "c2a1d40fc4f24226ba15af4a3e512a54a24bad1044d2a21fcfc7c57439297b74"
+    },
+    {
+      "path": "/evolution/pricing/index.html",
+      "sha256": "799526edb4e3f98275fe4c30ffbef078085f165fecdbea842099cd46a877aff0"
+    },
+    {
+      "path": "/evolution/products/autonomous-workflows/index.html",
+      "sha256": "c811e36702a6cf545ba4442d538f75331dd7200eab06026dfc9a5035d4479884"
+    },
+    {
+      "path": "/evolution/products/business-commerce/index.html",
+      "sha256": "da6b638b1121f4c9067267f52bd8aa5e34b6296c3299dfde3b5cde5128c41dfc"
+    },
+    {
+      "path": "/evolution/products/core-intelligence/index.html",
+      "sha256": "74b7683a1c724463bdb0e78137a3aa116906d04d035a4fce943945e3f2a4bff4"
+    },
+    {
+      "path": "/evolution/products/creative-studio/index.html",
+      "sha256": "a3ca7acb288d01625176a20b992a4cfcc9b2dbba1cb49b0378fbb8e054fdc6f4"
+    },
+    {
+      "path": "/evolution/products/developer-platform/index.html",
+      "sha256": "632f1e8cbfb8e5250f467ed9cdc296ca688c213b8d43cb6c9a416a7c48fb55ad"
+    },
+    {
+      "path": "/evolution/products/index.html",
+      "sha256": "26b335faf70dad4fa5d35cdb63aef7d74051d079277a6c314697081bca2ea297"
+    },
+    {
+      "path": "/evolution/products/specialist-intelligence/index.html",
+      "sha256": "89b216c17017773f12e8bc65f02121ac3fa93f5e1858852d98f6779e7562cad2"
+    },
+    {
+      "path": "/evolution/profiles/altair-engineering/index.html",
+      "sha256": "9ccca7c5c1ec6d2b6370869e7f126e35d66df16a6898ddc6d92798c48e95dd9b"
+    },
+    {
+      "path": "/evolution/profiles/altair-signal/index.html",
+      "sha256": "8e9b50901e7d7019b6f8c8a367287c79aebc039b303b7b8971466538b31c43b7"
+    },
+    {
+      "path": "/evolution/profiles/andromeda-global/index.html",
+      "sha256": "9d149a244fdab75b3034cce2f411d04a1432aabe5fca4f640589911b154d721a"
+    },
+    {
+      "path": "/evolution/profiles/andromeda-science/index.html",
+      "sha256": "7aac73cdb0003466ec64287cfdafc700bf5194084f3a6a5b460a32b6c6269208"
+    },
+    {
+      "path": "/evolution/profiles/aquarius-water/index.html",
+      "sha256": "09834f8be8c877a9e8fc359d8174f2357f7a074522bbe8d87cb21f38ddef7b25"
+    },
+    {
+      "path": "/evolution/profiles/arcturus-weather/index.html",
+      "sha256": "789a005e371fd5ebcc43897be11f71a7df211167d2927965658548f9fb5809ec"
+    },
+    {
+      "path": "/evolution/profiles/capella-hospitality/index.html",
+      "sha256": "7624b652e64f27d1159d2a3623e0cd098479a2deec3b0893e8418624764bb5c1"
+    },
+    {
+      "path": "/evolution/profiles/cygnus-industrial/index.html",
+      "sha256": "d4edfa0fb74e029647b18db1a2c0dfc56d610721044dcc1c683fc937caf6c77b"
+    },
+    {
+      "path": "/evolution/profiles/deneb-epc/index.html",
+      "sha256": "ae8016b225ad00e9a340e0d691067e4c2992f5ec5dbe2abaf2ace591c6e654f6"
+    },
+    {
+      "path": "/evolution/profiles/electra-electrical/index.html",
+      "sha256": "3d5d7ad6dc4a6f8bf768a64b22de5af08563e3f2d73c2be534063d4a45b22f2c"
+    },
+    {
+      "path": "/evolution/profiles/helios-energy/index.html",
+      "sha256": "dfc08f1599c0b2a1e80c962bd838b8322844b20697911ba4b2c466d2137df8ad"
+    },
+    {
+      "path": "/evolution/profiles/helios-grid/index.html",
+      "sha256": "a8ab846dd3c9c96e9200991d4e68fabf262da4b053097ffdb863faaa63874751"
+    },
+    {
+      "path": "/evolution/profiles/index.html",
+      "sha256": "59fbdf50975af8d95e4e43be498b153ab2128c2df223b7cdbf221cd4bca1cca3"
+    },
+    {
+      "path": "/evolution/profiles/lyra-education/index.html",
+      "sha256": "9a167afae522efb9efe0e127061bf3a6e713a857ad8ed542f980828e824e180c"
+    },
+    {
+      "path": "/evolution/profiles/orion-defense/index.html",
+      "sha256": "5ceea08f98deab919d61203f246c09b3c8f281e9c02a84a697a39076c5b12f57"
+    },
+    {
+      "path": "/evolution/profiles/orion-enterprise/index.html",
+      "sha256": "488e2da9ddfb8904e4bf32aa95adc5844601682c8f20ffa33cf1b98ff99a2821"
+    },
+    {
+      "path": "/evolution/profiles/procyon-programs/index.html",
+      "sha256": "0c066447de7bd5702e90bb048ce33c9ef895bec671054765c827cb63e18033cf"
+    },
+    {
+      "path": "/evolution/profiles/pulsar-access/index.html",
+      "sha256": "6ae5050050d4ae2f5c20b9aafcd03f36a48d23ca4c129530476d9146c751fa4c"
+    },
+    {
+      "path": "/evolution/profiles/rigel-mechanical/index.html",
+      "sha256": "fd0930a55f06c5a6dfefc85229fcc773f6fb8d150f59cf458da0c01a8e79a872"
+    },
+    {
+      "path": "/evolution/profiles/sentinel-civic/index.html",
+      "sha256": "ecbf4c4fa7768934a3d2721c78745141bdd85ac5cf19741b421728646262178f"
+    },
+    {
+      "path": "/evolution/profiles/sirius-public/index.html",
+      "sha256": "05d7e7f9b2ce72606042e838073f4c796390b492ec0dab3738cb2c6466890f8b"
+    },
+    {
+      "path": "/evolution/profiles/spica-medical/index.html",
+      "sha256": "f4c454b458cd0ededec888cd9cb499125416b5a77113e2a20c4a48d75c5e7b49"
+    },
+    {
+      "path": "/evolution/profiles/terra-nova-civil/index.html",
+      "sha256": "bb6d9958c510d3e413a050589f1163dc1be1550e017ea87e9e3826c064e27739"
+    },
+    {
+      "path": "/evolution/profiles/vega-systems/index.html",
+      "sha256": "f60e94091340fbf99cc6496fd07b72ca3c55c4e9150fc5fc069e904eca27785e"
+    },
+    {
+      "path": "/evolution/profiles/vela-logistics/index.html",
+      "sha256": "2bb0e170623269bae809ac002d54bc595d1e07109279d020c8d50b1e4cd321f4"
+    },
+    {
+      "path": "/evolution/resources/faq/index.html",
+      "sha256": "b633c88130dd524e5ddaf79b8c7e32b6f78c83df287a12bf100a2fa47c3763c6"
+    },
+    {
+      "path": "/evolution/resources/getting-started/index.html",
+      "sha256": "44d71cba5bf52280ed996f0a5e74dcc4d7906b450378045cd68e3dd79b87b26d"
+    },
+    {
+      "path": "/evolution/resources/guides/index.html",
+      "sha256": "cdfcb81998756939b044b4ac1829fe3599ea19ddfa2d129f873bcaedc779131c"
+    },
+    {
+      "path": "/evolution/resources/index.html",
+      "sha256": "c89ce0513c648e3e64a190428c3881a9dad81fe339e42b81e3dcec0661be11f8"
+    },
+    {
+      "path": "/evolution/services/creative-production/index.html",
+      "sha256": "06eb36e5c822b0759e642f0bfb8e4eeaf17c17286985974393ce6fd5cd9a06ff"
+    },
+    {
+      "path": "/evolution/services/customer-success/index.html",
+      "sha256": "a882044da163a940a5c7fe61aa81fbb68fc5c68144ca5177073972b2b93963ca"
+    },
+    {
+      "path": "/evolution/services/implementation/index.html",
+      "sha256": "fb32fd08179a717c1d69787b285db697b47408411815ddde6b7b7321a6f098eb"
+    },
+    {
+      "path": "/evolution/services/index.html",
+      "sha256": "64a5c05c219a35815d717ffe510e75ab1ea7ce39ce391bf5b6a0d059922c516a"
+    },
+    {
+      "path": "/evolution/site-map.json",
+      "sha256": "40533b1135afed2ec401ccb98febdd9aec6d045c4cdf030377c314085e50d9e5"
+    },
+    {
+      "path": "/evolution/sitemap.xml",
+      "sha256": "5aaa2805d137532218400f6c8a5e7689f87b344540dd3cd6a4f78929718263d4"
+    },
+    {
+      "path": "/evolution/sitemap/index.html",
+      "sha256": "6108470036932cfb70262f1a3fd201b089f1e6e106ed455a8c94b089e69e3b06"
+    },
+    {
+      "path": "/evolution/support/index.html",
+      "sha256": "215a218f04312cde4db285d166f1a53e80ad03c90394932ccd3cb8ef6931455e"
+    },
+    {
+      "path": "/evolution/trust/accessibility/index.html",
+      "sha256": "e5ed6714ba7b0ab5bbe86c05ccd9c91a0e7d55b64582e121679480e096bf1991"
+    },
+    {
+      "path": "/evolution/trust/ai-transparency/index.html",
+      "sha256": "03f4973d2482d4322c142b86e222cae71c695b9822cdcee8dfb9039eceb2ccef"
+    },
+    {
+      "path": "/evolution/trust/index.html",
+      "sha256": "5d812a32b363dba713ad3dc71961c2130029d53867206743bdb683ac49040b59"
+    },
+    {
+      "path": "/evolution/trust/privacy/index.html",
+      "sha256": "9066fef2eb421807b43fea814483e112ec95b9fc54b7852e55bfa9f4e4b424dc"
+    },
+    {
+      "path": "/evolution/trust/security/index.html",
+      "sha256": "73ee15ced1f385e6d36523eb5c367dfda8e7ba32ce5155a7b3da8b57c5ed9c5e"
+    }
+  ]
+}

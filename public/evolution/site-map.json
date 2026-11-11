@@ -1,0 +1,1286 @@
+{
+  "schema": "ad-astra-website-foundation/v1",
+  "status": "content-and-design-candidate",
+  "publicRelease": false,
+  "indexing": "noindex,nofollow",
+  "previewBase": "/evolution",
+  "canonicalOrigin": "https://adastra.global",
+  "navigation": [
+    {
+      "id": "workspace",
+      "label": "Workspace",
+      "description": "One journey from question to decision.",
+      "paths": [
+        "/platform/",
+        "/platform/ask/",
+        "/platform/connect/",
+        "/platform/create/",
+        "/platform/decide/",
+        "/platform/visual-studio/",
+        "/platform/voice/",
+        "/platform/customer-access/"
+      ],
+      "links": [
+        {
+          "path": "/platform/",
+          "previewPath": "/evolution/platform/",
+          "title": "The workspace"
+        },
+        {
+          "path": "/platform/ask/",
+          "previewPath": "/evolution/platform/ask/",
+          "title": "Ask"
+        },
+        {
+          "path": "/platform/connect/",
+          "previewPath": "/evolution/platform/connect/",
+          "title": "Connect"
+        },
+        {
+          "path": "/platform/create/",
+          "previewPath": "/evolution/platform/create/",
+          "title": "Create"
+        },
+        {
+          "path": "/platform/decide/",
+          "previewPath": "/evolution/platform/decide/",
+          "title": "Decide"
+        },
+        {
+          "path": "/platform/visual-studio/",
+          "previewPath": "/evolution/platform/visual-studio/",
+          "title": "Visual studio"
+        },
+        {
+          "path": "/platform/voice/",
+          "previewPath": "/evolution/platform/voice/",
+          "title": "Voice interaction"
+        },
+        {
+          "path": "/platform/customer-access/",
+          "previewPath": "/evolution/platform/customer-access/",
+          "title": "Customer access"
+        }
+      ]
+    },
+    {
+      "id": "capabilities",
+      "label": "Capabilities",
+      "description": "Connected capabilities inside one workspace.",
+      "paths": [
+        "/products/",
+        "/profiles/",
+        "/products/core-intelligence/",
+        "/products/creative-studio/",
+        "/products/specialist-intelligence/",
+        "/products/business-commerce/",
+        "/products/developer-platform/",
+        "/products/autonomous-workflows/",
+        "/services/"
+      ],
+      "links": [
+        {
+          "path": "/products/",
+          "previewPath": "/evolution/products/",
+          "title": "Connected capabilities"
+        },
+        {
+          "path": "/profiles/",
+          "previewPath": "/evolution/profiles/",
+          "title": "Astra Polaris sector profiles"
+        },
+        {
+          "path": "/products/core-intelligence/",
+          "previewPath": "/evolution/products/core-intelligence/",
+          "title": "Core Intelligence"
+        },
+        {
+          "path": "/products/creative-studio/",
+          "previewPath": "/evolution/products/creative-studio/",
+          "title": "Creative Studio"
+        },
+        {
+          "path": "/products/specialist-intelligence/",
+          "previewPath": "/evolution/products/specialist-intelligence/",
+          "title": "Specialist Intelligence"
+        },
+        {
+          "path": "/products/business-commerce/",
+          "previewPath": "/evolution/products/business-commerce/",
+          "title": "Business & Commerce"
+        },
+        {
+          "path": "/products/developer-platform/",
+          "previewPath": "/evolution/products/developer-platform/",
+          "title": "Developer Platform"
+        },
+        {
+          "path": "/products/autonomous-workflows/",
+          "previewPath": "/evolution/products/autonomous-workflows/",
+          "title": "Autonomous Workflows"
+        },
+        {
+          "path": "/services/",
+          "previewPath": "/evolution/services/",
+          "title": "Services"
+        }
+      ]
+    },
+    {
+      "id": "markets",
+      "label": "Markets",
+      "description": "Your field. A familiar way forward.",
+      "collections": [
+        "markets"
+      ],
+      "paths": [
+        "/markets/",
+        "/global/"
+      ],
+      "links": [
+        {
+          "path": "/markets/",
+          "previewPath": "/evolution/markets/",
+          "title": "Markets"
+        },
+        {
+          "path": "/global/",
+          "previewPath": "/evolution/global/",
+          "title": "Global perspective"
+        },
+        {
+          "path": "/markets/business-professional-services/",
+          "previewPath": "/evolution/markets/business-professional-services/",
+          "title": "Business & professional services"
+        },
+        {
+          "path": "/markets/manufacturing-energy/",
+          "previewPath": "/evolution/markets/manufacturing-energy/",
+          "title": "Manufacturing & energy"
+        },
+        {
+          "path": "/markets/science-research/",
+          "previewPath": "/evolution/markets/science-research/",
+          "title": "Science & research"
+        },
+        {
+          "path": "/markets/education-learning/",
+          "previewPath": "/evolution/markets/education-learning/",
+          "title": "Education & learning"
+        },
+        {
+          "path": "/markets/creative-industries-media/",
+          "previewPath": "/evolution/markets/creative-industries-media/",
+          "title": "Creative industries & media"
+        },
+        {
+          "path": "/markets/healthcare-wellness/",
+          "previewPath": "/evolution/markets/healthcare-wellness/",
+          "title": "Healthcare & wellness"
+        },
+        {
+          "path": "/markets/finance-economics/",
+          "previewPath": "/evolution/markets/finance-economics/",
+          "title": "Finance & economics"
+        },
+        {
+          "path": "/markets/legal-compliance/",
+          "previewPath": "/evolution/markets/legal-compliance/",
+          "title": "Legal & compliance"
+        },
+        {
+          "path": "/markets/government-public-services/",
+          "previewPath": "/evolution/markets/government-public-services/",
+          "title": "Government & public services"
+        },
+        {
+          "path": "/markets/agriculture-food/",
+          "previewPath": "/evolution/markets/agriculture-food/",
+          "title": "Agriculture & food"
+        },
+        {
+          "path": "/markets/logistics-supply-chain/",
+          "previewPath": "/evolution/markets/logistics-supply-chain/",
+          "title": "Logistics & supply chain"
+        },
+        {
+          "path": "/markets/real-estate-construction/",
+          "previewPath": "/evolution/markets/real-estate-construction/",
+          "title": "Real estate & construction"
+        },
+        {
+          "path": "/markets/digital-commerce/",
+          "previewPath": "/evolution/markets/digital-commerce/",
+          "title": "Digital commerce"
+        },
+        {
+          "path": "/markets/travel-hospitality/",
+          "previewPath": "/evolution/markets/travel-hospitality/",
+          "title": "Travel & hospitality"
+        },
+        {
+          "path": "/markets/consumer-personal-ai/",
+          "previewPath": "/evolution/markets/consumer-personal-ai/",
+          "title": "Everyday life"
+        }
+      ]
+    },
+    {
+      "id": "trust",
+      "label": "Trust",
+      "description": "Human direction, visible evidence, and clear boundaries.",
+      "paths": [
+        "/trust/",
+        "/trust/security/",
+        "/trust/privacy/",
+        "/trust/ai-transparency/",
+        "/trust/accessibility/"
+      ],
+      "links": [
+        {
+          "path": "/trust/",
+          "previewPath": "/evolution/trust/",
+          "title": "Trust center"
+        },
+        {
+          "path": "/trust/security/",
+          "previewPath": "/evolution/trust/security/",
+          "title": "Security"
+        },
+        {
+          "path": "/trust/privacy/",
+          "previewPath": "/evolution/trust/privacy/",
+          "title": "Privacy controls"
+        },
+        {
+          "path": "/trust/ai-transparency/",
+          "previewPath": "/evolution/trust/ai-transparency/",
+          "title": "AI transparency"
+        },
+        {
+          "path": "/trust/accessibility/",
+          "previewPath": "/evolution/trust/accessibility/",
+          "title": "Accessibility"
+        }
+      ]
+    },
+    {
+      "id": "resources",
+      "label": "Resources",
+      "description": "Build understanding before you begin.",
+      "paths": [
+        "/resources/",
+        "/resources/getting-started/",
+        "/resources/guides/",
+        "/resources/faq/",
+        "/support/"
+      ],
+      "links": [
+        {
+          "path": "/resources/",
+          "previewPath": "/evolution/resources/",
+          "title": "Resources"
+        },
+        {
+          "path": "/resources/getting-started/",
+          "previewPath": "/evolution/resources/getting-started/",
+          "title": "Getting started"
+        },
+        {
+          "path": "/resources/guides/",
+          "previewPath": "/evolution/resources/guides/",
+          "title": "Working guides"
+        },
+        {
+          "path": "/resources/faq/",
+          "previewPath": "/evolution/resources/faq/",
+          "title": "Frequently asked questions"
+        },
+        {
+          "path": "/support/",
+          "previewPath": "/evolution/support/",
+          "title": "Support"
+        }
+      ]
+    },
+    {
+      "id": "company",
+      "label": "Company",
+      "description": "Meet the direction behind AD ASTRA.",
+      "paths": [
+        "/company/",
+        "/company/about/",
+        "/company/contact/",
+        "/pricing/",
+        "/legal/",
+        "/sitemap/"
+      ],
+      "links": [
+        {
+          "path": "/company/",
+          "previewPath": "/evolution/company/",
+          "title": "Company"
+        },
+        {
+          "path": "/company/about/",
+          "previewPath": "/evolution/company/about/",
+          "title": "About AD ASTRA"
+        },
+        {
+          "path": "/company/contact/",
+          "previewPath": "/evolution/company/contact/",
+          "title": "Start a conversation"
+        },
+        {
+          "path": "/pricing/",
+          "previewPath": "/evolution/pricing/",
+          "title": "Plans"
+        },
+        {
+          "path": "/legal/",
+          "previewPath": "/evolution/legal/",
+          "title": "Legal information"
+        },
+        {
+          "path": "/sitemap/",
+          "previewPath": "/evolution/sitemap/",
+          "title": "Complete website map"
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "path": "/",
+      "parent": null,
+      "title": "Home",
+      "group": "Home",
+      "description": "One AD ASTRA workspace for questions, context, creation, and human decisions.",
+      "previewPath": "/evolution/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/platform/",
+      "parent": "/",
+      "title": "The workspace",
+      "group": "Workspace",
+      "description": "AD ASTRA brings questions, context, creative work, and human decisions into one workspace direction.",
+      "previewPath": "/evolution/platform/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/platform/visual-studio/",
+      "parent": "/platform/",
+      "title": "Visual studio",
+      "group": "Workspace",
+      "description": "Explore original visual direction, scene composition, and reviewable creative briefs within the AD ASTRA workspace concept.",
+      "previewPath": "/evolution/platform/visual-studio/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/platform/voice/",
+      "parent": "/platform/",
+      "title": "Voice interaction",
+      "group": "Workspace",
+      "description": "The voice direction combines explicit choice, a visible transcript, text fallback, and interruption controls.",
+      "previewPath": "/evolution/platform/voice/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/platform/customer-access/",
+      "parent": "/platform/",
+      "title": "Customer access",
+      "group": "Workspace",
+      "description": "Explore the customer portal direction, private access boundary, and organization workspace requirements.",
+      "previewPath": "/evolution/platform/customer-access/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/products/",
+      "parent": "/",
+      "title": "Connected capabilities",
+      "group": "Capabilities",
+      "description": "Six capability families organize the AD ASTRA product direction inside one workspace.",
+      "previewPath": "/evolution/products/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/services/",
+      "parent": "/",
+      "title": "Services",
+      "group": "Services",
+      "description": "Service directions connect workspace implementation, original creative production, and customer enablement.",
+      "previewPath": "/evolution/services/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/services/implementation/",
+      "parent": "/services/",
+      "title": "Workspace implementation",
+      "group": "Services",
+      "description": "Plan identity, context, integrations, acceptance, and handoff for a focused customer workflow.",
+      "previewPath": "/evolution/services/implementation/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/services/creative-production/",
+      "parent": "/services/",
+      "title": "Creative production",
+      "group": "Services",
+      "description": "A creative production direction spanning visual identity, commercial concepts, motion, sound, and responsive delivery.",
+      "previewPath": "/evolution/services/creative-production/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/services/customer-success/",
+      "parent": "/services/",
+      "title": "Customer enablement",
+      "group": "Services",
+      "description": "The customer enablement direction connects onboarding, training, adoption, and human escalation.",
+      "previewPath": "/evolution/services/customer-success/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/",
+      "parent": "/",
+      "title": "Markets",
+      "group": "Markets",
+      "description": "Explore 15 market contexts for the same human-directed AD ASTRA workspace journey.",
+      "previewPath": "/evolution/markets/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/global/",
+      "parent": "/",
+      "title": "Global perspective",
+      "group": "Global",
+      "description": "A regional qualification framework for a consistent experience across languages, communities, and markets.",
+      "previewPath": "/evolution/global/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/trust/",
+      "parent": "/",
+      "title": "Trust center",
+      "group": "Trust",
+      "description": "Understand the intended security, privacy, accessibility, and AI transparency principles of AD ASTRA.",
+      "previewPath": "/evolution/trust/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/trust/security/",
+      "parent": "/trust/",
+      "title": "Security",
+      "group": "Trust",
+      "description": "The security foundation checks identity, workspace membership, scope, and human approval at the server boundary.",
+      "previewPath": "/evolution/trust/security/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/trust/privacy/",
+      "parent": "/trust/",
+      "title": "Privacy controls",
+      "group": "Trust",
+      "description": "The privacy direction covers consent, tenant boundaries, retention, export, deletion, and regional handling.",
+      "previewPath": "/evolution/trust/privacy/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/trust/ai-transparency/",
+      "parent": "/trust/",
+      "title": "AI transparency",
+      "group": "Trust",
+      "description": "Clear distinctions between model-generated output, source evidence, conceptual artwork, and actions requiring human review.",
+      "previewPath": "/evolution/trust/ai-transparency/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/trust/accessibility/",
+      "parent": "/trust/",
+      "title": "Accessibility",
+      "group": "Trust",
+      "description": "The design foundation prioritizes readable text, keyboard control, reduced motion, and alternatives to voice and WebGL.",
+      "previewPath": "/evolution/trust/accessibility/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/resources/",
+      "parent": "/",
+      "title": "Resources",
+      "group": "Resources",
+      "description": "Guides, frequently asked questions, and practical first steps for exploring the AD ASTRA product direction.",
+      "previewPath": "/evolution/resources/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/resources/getting-started/",
+      "parent": "/resources/",
+      "title": "Getting started",
+      "group": "Resources",
+      "description": "Prepare a useful first brief and understand the difference between the public design preview and private workspace access.",
+      "previewPath": "/evolution/resources/getting-started/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/resources/guides/",
+      "parent": "/resources/",
+      "title": "Working guides",
+      "group": "Resources",
+      "description": "Practical patterns for focused questions, evidence review, creative briefs, and human decisions.",
+      "previewPath": "/evolution/resources/guides/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/resources/faq/",
+      "parent": "/resources/",
+      "title": "Frequently asked questions",
+      "group": "Resources",
+      "description": "Answers about access, product availability, capabilities, pricing, and the AD ASTRA design preview.",
+      "previewPath": "/evolution/resources/faq/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/company/",
+      "parent": "/",
+      "title": "Company",
+      "group": "Company",
+      "description": "AD ASTRA is developing a human-directed workspace for questions, connected evidence, visual thinking, and better next decisions.",
+      "previewPath": "/evolution/company/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/company/about/",
+      "parent": "/company/",
+      "title": "About AD ASTRA",
+      "group": "Company",
+      "description": "The AD ASTRA direction puts people at the center of questions, context, creativity, and decisions.",
+      "previewPath": "/evolution/company/about/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/company/contact/",
+      "parent": "/company/",
+      "title": "Start a conversation",
+      "group": "Company",
+      "description": "Prepare a clear inquiry about a workflow, creative production brief, regional requirement, or potential collaboration.",
+      "previewPath": "/evolution/company/contact/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/pricing/",
+      "parent": "/",
+      "title": "Plans",
+      "group": "Plans & support",
+      "description": "Explore how workspace plans will need to describe access, usage, billing, and support before purchase is available.",
+      "previewPath": "/evolution/pricing/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/support/",
+      "parent": "/",
+      "title": "Support",
+      "group": "Plans & support",
+      "description": "Find the available guidance and understand the support direction for the private preview and future customer platform.",
+      "previewPath": "/evolution/support/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/legal/",
+      "parent": "/",
+      "title": "Legal information",
+      "group": "Legal",
+      "description": "Review the notice topics that need approved terms, privacy information, and cookie disclosures before customer launch.",
+      "previewPath": "/evolution/legal/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/legal/terms/",
+      "parent": "/legal/",
+      "title": "Terms review draft",
+      "group": "Legal",
+      "description": "A review outline for customer terms; binding service terms and contracting details require approval.",
+      "previewPath": "/evolution/legal/terms/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/legal/privacy-notice/",
+      "parent": "/legal/",
+      "title": "Privacy notice review draft",
+      "group": "Legal",
+      "description": "A review outline for an accurate privacy notice, including processing, providers, retention, and rights.",
+      "previewPath": "/evolution/legal/privacy-notice/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/legal/cookies/",
+      "parent": "/legal/",
+      "title": "Cookie notice review draft",
+      "group": "Legal",
+      "description": "A review outline for session cookies, optional storage, and consent handling based on actual implementation.",
+      "previewPath": "/evolution/legal/cookies/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/",
+      "parent": "/",
+      "title": "Astra Polaris sector profiles",
+      "group": "Sector profiles",
+      "description": "Explore 24 sector profiles connected to one Astra Polaris foundation model and 15 customer market contexts.",
+      "previewPath": "/evolution/profiles/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/sirius-public/",
+      "parent": "/profiles/",
+      "title": "Astra Sirius",
+      "group": "Sector profiles",
+      "description": "Everyday questions, planning and learning",
+      "previewPath": "/evolution/profiles/sirius-public/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/orion-defense/",
+      "parent": "/profiles/",
+      "title": "Astra Orion",
+      "group": "Sector profiles",
+      "description": "Mission planning, analysis and governed knowledge work",
+      "previewPath": "/evolution/profiles/orion-defense/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/helios-energy/",
+      "parent": "/profiles/",
+      "title": "Astra Helios",
+      "group": "Sector profiles",
+      "description": "Energy systems, research and program planning",
+      "previewPath": "/evolution/profiles/helios-energy/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/spica-medical/",
+      "parent": "/profiles/",
+      "title": "Astra Spica",
+      "group": "Sector profiles",
+      "description": "Health literacy, research and clinical operations support",
+      "previewPath": "/evolution/profiles/spica-medical/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/lyra-education/",
+      "parent": "/profiles/",
+      "title": "Astra Lyra",
+      "group": "Sector profiles",
+      "description": "Teaching, learning, research and workforce development",
+      "previewPath": "/evolution/profiles/lyra-education/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/capella-hospitality/",
+      "parent": "/profiles/",
+      "title": "Astra Capella",
+      "group": "Sector profiles",
+      "description": "Menu planning, service operations and guest experience",
+      "previewPath": "/evolution/profiles/capella-hospitality/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/andromeda-science/",
+      "parent": "/profiles/",
+      "title": "Astra Andromeda",
+      "group": "Sector profiles",
+      "description": "Evidence mapping, hypotheses and cross-domain discovery",
+      "previewPath": "/evolution/profiles/andromeda-science/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/altair-engineering/",
+      "parent": "/profiles/",
+      "title": "Astra Altair",
+      "group": "Sector profiles",
+      "description": "Engineering documentation, review and decision support",
+      "previewPath": "/evolution/profiles/altair-engineering/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/rigel-mechanical/",
+      "parent": "/profiles/",
+      "title": "Astra Rigel",
+      "group": "Sector profiles",
+      "description": "Mechanical systems, design reviews and maintenance planning",
+      "previewPath": "/evolution/profiles/rigel-mechanical/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/electra-electrical/",
+      "parent": "/profiles/",
+      "title": "Astra Electra",
+      "group": "Sector profiles",
+      "description": "Electrical systems, controls and power analysis",
+      "previewPath": "/evolution/profiles/electra-electrical/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/terra-nova-civil/",
+      "parent": "/profiles/",
+      "title": "Astra Terra Nova",
+      "group": "Sector profiles",
+      "description": "Sites, structures, infrastructure and resilience planning",
+      "previewPath": "/evolution/profiles/terra-nova-civil/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/vega-systems/",
+      "parent": "/profiles/",
+      "title": "Astra Vega",
+      "group": "Sector profiles",
+      "description": "Architecture, requirements and technical delivery",
+      "previewPath": "/evolution/profiles/vega-systems/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/procyon-programs/",
+      "parent": "/profiles/",
+      "title": "Astra Procyon",
+      "group": "Sector profiles",
+      "description": "Scope, schedule, risk, decisions and stakeholder alignment",
+      "previewPath": "/evolution/profiles/procyon-programs/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/deneb-epc/",
+      "parent": "/profiles/",
+      "title": "Astra Deneb",
+      "group": "Sector profiles",
+      "description": "Estimating, procurement, delivery and commissioning",
+      "previewPath": "/evolution/profiles/deneb-epc/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/helios-grid/",
+      "parent": "/profiles/",
+      "title": "Astra Helios Grid",
+      "group": "Sector profiles",
+      "description": "Grid planning, asset programs and customer communications",
+      "previewPath": "/evolution/profiles/helios-grid/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/arcturus-weather/",
+      "parent": "/profiles/",
+      "title": "Astra Arcturus",
+      "group": "Sector profiles",
+      "description": "Forecast interpretation, resilience and climate planning",
+      "previewPath": "/evolution/profiles/arcturus-weather/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/aquarius-water/",
+      "parent": "/profiles/",
+      "title": "Astra Aquarius",
+      "group": "Sector profiles",
+      "description": "Water planning, environmental review and resource stewardship",
+      "previewPath": "/evolution/profiles/aquarius-water/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/cygnus-industrial/",
+      "parent": "/profiles/",
+      "title": "Astra Cygnus",
+      "group": "Sector profiles",
+      "description": "Process improvement, quality and operational risk",
+      "previewPath": "/evolution/profiles/cygnus-industrial/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/vela-logistics/",
+      "parent": "/profiles/",
+      "title": "Astra Vela",
+      "group": "Sector profiles",
+      "description": "Routing, supply chain scenarios and operational coordination",
+      "previewPath": "/evolution/profiles/vela-logistics/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/altair-signal/",
+      "parent": "/profiles/",
+      "title": "Astra Altair Signal",
+      "group": "Sector profiles",
+      "description": "Network planning, infrastructure and service operations",
+      "previewPath": "/evolution/profiles/altair-signal/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/orion-enterprise/",
+      "parent": "/profiles/",
+      "title": "Astra Orion Enterprise",
+      "group": "Sector profiles",
+      "description": "Strategy, operations, customer work and scenario analysis",
+      "previewPath": "/evolution/profiles/orion-enterprise/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/sentinel-civic/",
+      "parent": "/profiles/",
+      "title": "Astra Sentinel",
+      "group": "Sector profiles",
+      "description": "Citizen services, policy research and official information",
+      "previewPath": "/evolution/profiles/sentinel-civic/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/andromeda-global/",
+      "parent": "/profiles/",
+      "title": "Astra Andromeda Global",
+      "group": "Sector profiles",
+      "description": "Regional language, localization and cross-border workflows",
+      "previewPath": "/evolution/profiles/andromeda-global/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/profiles/pulsar-access/",
+      "parent": "/profiles/",
+      "title": "Astra Pulsar",
+      "group": "Sector profiles",
+      "description": "Voice, mobile, low-bandwidth and assisted experiences",
+      "previewPath": "/evolution/profiles/pulsar-access/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/platform/ask/",
+      "parent": "/platform/",
+      "title": "Ask",
+      "group": "Workspace",
+      "description": "The ask stage of the AD ASTRA question-to-decision journey.",
+      "previewPath": "/evolution/platform/ask/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/platform/connect/",
+      "parent": "/platform/",
+      "title": "Connect",
+      "group": "Workspace",
+      "description": "The connect stage of the AD ASTRA question-to-decision journey.",
+      "previewPath": "/evolution/platform/connect/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/platform/create/",
+      "parent": "/platform/",
+      "title": "Create",
+      "group": "Workspace",
+      "description": "The create stage of the AD ASTRA question-to-decision journey.",
+      "previewPath": "/evolution/platform/create/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/platform/decide/",
+      "parent": "/platform/",
+      "title": "Decide",
+      "group": "Workspace",
+      "description": "The decide stage of the AD ASTRA question-to-decision journey.",
+      "previewPath": "/evolution/platform/decide/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/products/core-intelligence/",
+      "parent": "/products/",
+      "title": "Core Intelligence",
+      "group": "Capabilities",
+      "description": "Clarify questions, shape writing, explore learning goals, and plan a useful next step.",
+      "previewPath": "/evolution/products/core-intelligence/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/products/creative-studio/",
+      "parent": "/products/",
+      "title": "Creative Studio",
+      "group": "Capabilities",
+      "description": "Develop visual, writing, audio, and media briefs with human review throughout the creative process.",
+      "previewPath": "/evolution/products/creative-studio/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/products/specialist-intelligence/",
+      "parent": "/products/",
+      "title": "Specialist Intelligence",
+      "group": "Capabilities",
+      "description": "Organize domain questions and source material for review by a qualified person.",
+      "previewPath": "/evolution/products/specialist-intelligence/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/products/business-commerce/",
+      "parent": "/products/",
+      "title": "Business & Commerce",
+      "group": "Capabilities",
+      "description": "Shape operational briefs, customer communication, scenario comparisons, and human-directed workflows.",
+      "previewPath": "/evolution/products/business-commerce/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/products/developer-platform/",
+      "parent": "/products/",
+      "title": "Developer Platform",
+      "group": "Capabilities",
+      "description": "A developer direction for governed capability access, integrations, usage visibility, and verifiable results.",
+      "previewPath": "/evolution/products/developer-platform/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/products/autonomous-workflows/",
+      "parent": "/products/",
+      "title": "Autonomous Workflows",
+      "group": "Capabilities",
+      "description": "A controlled workflow direction for queued tasks, review checkpoints, audit trails, and recovery.",
+      "previewPath": "/evolution/products/autonomous-workflows/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/business-professional-services/",
+      "parent": "/markets/",
+      "title": "Business & professional services",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for business & professional services.",
+      "previewPath": "/evolution/markets/business-professional-services/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/manufacturing-energy/",
+      "parent": "/markets/",
+      "title": "Manufacturing & energy",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for manufacturing & energy.",
+      "previewPath": "/evolution/markets/manufacturing-energy/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/science-research/",
+      "parent": "/markets/",
+      "title": "Science & research",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for science & research.",
+      "previewPath": "/evolution/markets/science-research/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/education-learning/",
+      "parent": "/markets/",
+      "title": "Education & learning",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for education & learning.",
+      "previewPath": "/evolution/markets/education-learning/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/creative-industries-media/",
+      "parent": "/markets/",
+      "title": "Creative industries & media",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for creative industries & media.",
+      "previewPath": "/evolution/markets/creative-industries-media/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/healthcare-wellness/",
+      "parent": "/markets/",
+      "title": "Healthcare & wellness",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for healthcare & wellness.",
+      "previewPath": "/evolution/markets/healthcare-wellness/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/finance-economics/",
+      "parent": "/markets/",
+      "title": "Finance & economics",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for finance & economics.",
+      "previewPath": "/evolution/markets/finance-economics/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/legal-compliance/",
+      "parent": "/markets/",
+      "title": "Legal & compliance",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for legal & compliance.",
+      "previewPath": "/evolution/markets/legal-compliance/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/government-public-services/",
+      "parent": "/markets/",
+      "title": "Government & public services",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for government & public services.",
+      "previewPath": "/evolution/markets/government-public-services/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/agriculture-food/",
+      "parent": "/markets/",
+      "title": "Agriculture & food",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for agriculture & food.",
+      "previewPath": "/evolution/markets/agriculture-food/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/logistics-supply-chain/",
+      "parent": "/markets/",
+      "title": "Logistics & supply chain",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for logistics & supply chain.",
+      "previewPath": "/evolution/markets/logistics-supply-chain/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/real-estate-construction/",
+      "parent": "/markets/",
+      "title": "Real estate & construction",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for real estate & construction.",
+      "previewPath": "/evolution/markets/real-estate-construction/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/digital-commerce/",
+      "parent": "/markets/",
+      "title": "Digital commerce",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for digital commerce.",
+      "previewPath": "/evolution/markets/digital-commerce/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/travel-hospitality/",
+      "parent": "/markets/",
+      "title": "Travel & hospitality",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for travel & hospitality.",
+      "previewPath": "/evolution/markets/travel-hospitality/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/markets/consumer-personal-ai/",
+      "parent": "/markets/",
+      "title": "Everyday life",
+      "group": "Markets",
+      "description": "Explore the AD ASTRA workspace direction for everyday life.",
+      "previewPath": "/evolution/markets/consumer-personal-ai/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/global/africa/",
+      "parent": "/global/",
+      "title": "Africa",
+      "group": "Global",
+      "description": "Regional qualification and localization direction for Africa.",
+      "previewPath": "/evolution/global/africa/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/global/asia/",
+      "parent": "/global/",
+      "title": "Asia",
+      "group": "Global",
+      "description": "Regional qualification and localization direction for Asia.",
+      "previewPath": "/evolution/global/asia/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/global/europe/",
+      "parent": "/global/",
+      "title": "Europe",
+      "group": "Global",
+      "description": "Regional qualification and localization direction for Europe.",
+      "previewPath": "/evolution/global/europe/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/global/north-america/",
+      "parent": "/global/",
+      "title": "North America",
+      "group": "Global",
+      "description": "Regional qualification and localization direction for North America.",
+      "previewPath": "/evolution/global/north-america/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/global/south-america/",
+      "parent": "/global/",
+      "title": "South America",
+      "group": "Global",
+      "description": "Regional qualification and localization direction for South America.",
+      "previewPath": "/evolution/global/south-america/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/global/oceania/",
+      "parent": "/global/",
+      "title": "Oceania",
+      "group": "Global",
+      "description": "Regional qualification and localization direction for Oceania.",
+      "previewPath": "/evolution/global/oceania/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/global/antarctica/",
+      "parent": "/global/",
+      "title": "Antarctica",
+      "group": "Global",
+      "description": "Antarctica as a research context in the AD ASTRA global foundation.",
+      "previewPath": "/evolution/global/antarctica/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    },
+    {
+      "path": "/sitemap/",
+      "parent": "/",
+      "title": "Complete website map",
+      "group": "Site map",
+      "description": "Explore the complete AD ASTRA website foundation and the boundary between public information and private customer access.",
+      "previewPath": "/evolution/sitemap/",
+      "access": "public-safe-content",
+      "status": "content-and-design-candidate"
+    }
+  ],
+  "customerRoutes": [
+    {
+      "path": "/platform/",
+      "name": "Customer platform entry (release held)",
+      "access": "clerk-implementation-release-held",
+      "state": "release-held-redirect",
+      "available": false
+    },
+    {
+      "path": "/workspace/conversation",
+      "name": "Conversation",
+      "access": "authenticated-tenant-and-entitlement",
+      "state": "requires-customer-session-implementation",
+      "available": false
+    },
+    {
+      "path": "/workspace/activity",
+      "name": "Activity and evidence history",
+      "access": "authenticated-tenant",
+      "state": "planned",
+      "available": false
+    },
+    {
+      "path": "/workspace/usage",
+      "name": "Usage and billing",
+      "access": "authenticated-tenant-and-role",
+      "state": "planned",
+      "available": false
+    },
+    {
+      "path": "/workspace/organization",
+      "name": "Organization administration",
+      "access": "authenticated-admin",
+      "state": "planned",
+      "available": false
+    },
+    {
+      "path": "/workspace/privacy",
+      "name": "Privacy controls",
+      "access": "authenticated-tenant",
+      "state": "planned",
+      "available": false
+    },
+    {
+      "path": "/workspace/support",
+      "name": "Support and escalation",
+      "access": "authenticated-tenant",
+      "state": "planned",
+      "available": false
+    }
+  ],
+  "customerIdentity": "clerk-implementation-release-held-no-sso-bridge"
+}

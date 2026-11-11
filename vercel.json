@@ -28,6 +28,13 @@
   ],
   "headers": [
     {
+      "source": "/evolution(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, follow" },
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {

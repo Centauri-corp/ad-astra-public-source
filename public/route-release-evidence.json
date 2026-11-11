@@ -31,6 +31,41 @@
   },
   "routes": [
     {
+      "path": "/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
       "path": "/about/",
       "decision": "held",
       "gates": {
@@ -136,6 +171,2998 @@
       "reason": "No independent route approval and human release authorization are bound to this source commit."
     },
     {
+      "path": "/evolution/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/company/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/company/about/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/company/contact/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/global/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/global/africa/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/global/antarctica/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/global/asia/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/global/europe/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/global/north-america/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/global/oceania/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/global/south-america/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/legal/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/legal/cookies/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/legal/privacy-notice/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/legal/terms/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/agriculture-food/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/business-professional-services/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/consumer-personal-ai/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/creative-industries-media/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/digital-commerce/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/education-learning/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/finance-economics/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/government-public-services/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/healthcare-wellness/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/legal-compliance/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/logistics-supply-chain/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/manufacturing-energy/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/real-estate-construction/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/science-research/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/markets/travel-hospitality/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/platform/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/platform/ask/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/platform/connect/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/platform/create/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/platform/customer-access/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/platform/decide/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/platform/visual-studio/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/platform/voice/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/pricing/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/products/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/products/autonomous-workflows/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/products/business-commerce/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/products/core-intelligence/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/products/creative-studio/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/products/developer-platform/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/products/specialist-intelligence/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/altair-engineering/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/altair-signal/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/andromeda-global/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/andromeda-science/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/aquarius-water/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/arcturus-weather/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/capella-hospitality/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/cygnus-industrial/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/deneb-epc/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/electra-electrical/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/helios-energy/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/helios-grid/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/lyra-education/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/orion-defense/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/orion-enterprise/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/procyon-programs/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/pulsar-access/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/rigel-mechanical/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/sentinel-civic/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/sirius-public/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/spica-medical/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/terra-nova-civil/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/vega-systems/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/profiles/vela-logistics/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/resources/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/resources/faq/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/resources/getting-started/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/resources/guides/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/services/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/services/creative-production/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/services/customer-success/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/services/implementation/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/sitemap/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/support/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/trust/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/trust/accessibility/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/trust/ai-transparency/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/trust/privacy/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
+      "path": "/evolution/trust/security/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      }
+    },
+    {
       "path": "/film/",
       "decision": "held",
       "gates": {
@@ -171,7 +3198,7 @@
       "reason": "No independent route approval and human release authorization are bound to this source commit."
     },
     {
-      "path": "/",
+      "path": "/knowledge/",
       "decision": "held",
       "gates": {
         "contentAndClaims": {
@@ -206,7 +3233,7 @@
       "reason": "No independent route approval and human release authorization are bound to this source commit."
     },
     {
-      "path": "/knowledge/",
+      "path": "/markets/",
       "decision": "held",
       "gates": {
         "contentAndClaims": {
@@ -591,41 +3618,6 @@
       "reason": "No independent route approval and human release authorization are bound to this source commit."
     },
     {
-      "path": "/markets/",
-      "decision": "held",
-      "gates": {
-        "contentAndClaims": {
-          "status": "pending",
-          "evidenceRef": null
-        },
-        "brandAndRights": {
-          "status": "pending",
-          "evidenceRef": null
-        },
-        "seoTechnicalQa": {
-          "status": "pending",
-          "evidenceRef": null
-        },
-        "accessibilityResponsiveQa": {
-          "status": "pending",
-          "evidenceRef": null
-        },
-        "privacyAndAnalyticsQa": {
-          "status": "pending",
-          "evidenceRef": null
-        },
-        "independentReview": {
-          "status": "pending",
-          "evidenceRef": null
-        },
-        "humanReleaseAuthorization": {
-          "status": "pending",
-          "evidenceRef": null
-        }
-      },
-      "reason": "No independent route approval and human release authorization are bound to this source commit."
-    },
-    {
       "path": "/markets/legal-compliance/",
       "decision": "held",
       "gates": {
@@ -906,7 +3898,7 @@
       "reason": "No independent route approval and human release authorization are bound to this source commit."
     },
     {
-      "path": "/platform/",
+      "path": "/platform-preview/",
       "decision": "held",
       "gates": {
         "contentAndClaims": {
@@ -941,7 +3933,7 @@
       "reason": "No independent route approval and human release authorization are bound to this source commit."
     },
     {
-      "path": "/platform-preview/",
+      "path": "/platform/",
       "decision": "held",
       "gates": {
         "contentAndClaims": {
