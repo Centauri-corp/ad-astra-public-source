@@ -2,6 +2,7 @@
 const {test,beforeEach,after}=require('node:test'), assert=require('node:assert/strict'), crypto=require('node:crypto'), vm=require('node:vm'),fs=require('node:fs'),path=require('node:path');
 const ask=require('../api/ask'),status=require('../api/status'),auth=require('../lib/auth'),quota=require('../lib/quota'),gates=require('../lib/release-gates');
 const models=require('../api/models'),catalog=require('../lib/model-catalog');
+const sharedBudget=require('../lib/shared-budget'),originalBudgetClient=sharedBudget.createClient;
 const originalEnv={...process.env},originalFetch=global.fetch;
 const pair=crypto.generateKeyPairSync('rsa',{modulusLength:2048});
 const jwk={...pair.publicKey.export({format:'jwk'}),kid:'test-key',use:'sig',alg:'RS256'};
@@ -24,6 +25,7 @@ beforeEach(()=>{
  for(const flag of gates.FLAGS)process.env[flag]='true';
  process.env.AD_ASTRA_SUBSCRIPTION_ENVIRONMENT='production';
  calls=[];redisResult=[1,11,3600];providerStatus=200;subscriptionAccess=true;
+ sharedBudget.createClient=()=>({productionAccepted:true});
  global.fetch=async(url,options)=>{
   calls.push({url,options});
   if(url.includes('/.well-known/jwks.json'))return {ok:true,json:async()=>({keys:[jwk]})};
@@ -33,7 +35,7 @@ beforeEach(()=>{
   throw Error('Unexpected external destination');
  };
 });
-after(()=>{global.fetch=originalFetch;for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];Object.assign(process.env,originalEnv);});
+after(()=>{sharedBudget.createClient=originalBudgetClient;global.fetch=originalFetch;for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];Object.assign(process.env,originalEnv);});
 test('valid signed session reserves quota before one bounded provider request',async()=>{
  const r=await request();assert.equal(r.statusCode,200);assert.equal(r.headers['cache-control'],'no-store');
  const quotaIndex=calls.findIndex(c=>c.url==='https://redis.invalid'),modelIndex=calls.findIndex(c=>c.url.includes('/chat/completions'));assert.ok(quotaIndex<modelIndex);
@@ -45,6 +47,12 @@ test('missing entitlement, failed billing verification and wrong environments st
   subscriptionAccess=value;calls=[];const result=await request();assert.equal(result.statusCode,code);
   assert.ok(!calls.some(call=>call.url==='https://redis.invalid'||call.url.includes('/chat/completions')));
  }
+});
+test('unaccepted customer budget bridge blocks quota and provider spend even with accepted entitlement and release flags',async()=>{
+ sharedBudget.createClient=originalBudgetClient;
+ const result=await request();assert.equal(result.statusCode,503);assert.equal(result.body.error,'customer_budget_unavailable');
+ assert.ok(!calls.some(call=>call.url==='https://redis.invalid'||call.url.includes('/chat/completions')));
+ const health=response();status({method:'GET'},health);assert.equal(health.body.available,false);
 });
 test('every absent or false release flag prevents all quota and model calls',async()=>{
  for(const flag of gates.FLAGS){process.env[flag]='false';calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));process.env[flag]='true';}

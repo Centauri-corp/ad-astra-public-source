@@ -58,7 +58,7 @@ module.exports = async function ask(req, res) {
   if(access.status!==200)return reply(access.status===401?401:503,{error:'subscription_unavailable',message:'Your subscription could not be verified.'});
   if(access.body.allowed!==true)return reply(403,{error:'subscription_required',message:'A current subscription and approved product access are required. Check your billing account.'});
   const budgetClient = sharedBudget.createClient();
-  void budgetClient;
+  if(budgetClient.productionAccepted!==true)return reply(503,{error:'customer_budget_unavailable',message:'The live engine is paused while customer usage controls are verified.'},{'Retry-After':300});
   let quota;
   try { quota = await reserve(auth.claims); } catch { return reply(503,{error:'quota_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60}); }
   const headers = {'X-RateLimit-Limit':LIMIT,'X-RateLimit-Remaining':quota.remaining,'X-Ad-Astra-Quota-Mode':'durable'};
