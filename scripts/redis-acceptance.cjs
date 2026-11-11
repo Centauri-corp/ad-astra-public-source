@@ -3,6 +3,15 @@ const assert=require('node:assert/strict'),crypto=require('node:crypto');
 const {command,SCRIPT}=require('../lib/quota');
 async function run(){
  if(!process.env.VERCEL){console.log('Redis integration acceptance: deferred to Vercel build with connected secrets');return;}
+ // A private, non-live preview must not need production Redis credentials just
+ // to render the marketing candidate. This is NOT Redis acceptance evidence.
+ // Production, unknown targets, and any executable/publicly launched candidate
+ // retain the real integration test below, including its failure behavior.
+ const release=require('../public/release-manifest.json');
+ if(process.env.VERCEL_ENV==='preview'&&release.engineAvailable===false&&release.publicLaunchEnabled===false){
+  console.log('AD_ASTRA_REDIS_ACCEPTANCE_DEFERRED target=preview engine=paused productionAccepted=false');
+  return;
+ }
  const root='ad-astra:acceptance:'+crypto.randomUUID();
  const keys=[];
  const make=(label)=>{const k=root+':'+label;keys.push(k);return k;};
