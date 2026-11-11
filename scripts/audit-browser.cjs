@@ -14,13 +14,17 @@ const result=name=>report.interactions.push({name,result:'PASS'});
 (async()=>{
  const browser=await chromium.launch({executablePath:fs.existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
  try{
-  const context=await browser.newContext({reducedMotion:'reduce'}),page=await context.newPage();let errors=[],failedRequests=[];
-  page.on('pageerror',e=>errors.push(e.message));
-  page.on('response',r=>{if(r.status()>=400&&new URL(r.url()).origin===base)failedRequests.push({path:new URL(r.url()).pathname,status:r.status()});});
+  const context=await browser.newContext({reducedMotion:'reduce'});let page,errors=[],failedRequests=[];
+  // Protected routes can redirect asynchronously after Clerk loads. A document
+  // from the previous route must never interrupt the next route's navigation.
   for(const width of [320,390,768,1440]){
-   await page.setViewportSize({width,height:900});
    for(const route of routes){
+    page=await context.newPage();await page.setViewportSize({width,height:900});
+    page.on('pageerror',e=>errors.push(e.message));
+    page.on('response',r=>{if(r.status()>=400&&new URL(r.url()).origin===base)failedRequests.push({path:new URL(r.url()).pathname,status:r.status()});});
     errors=[];failedRequests=[];
+    report.activeNavigation={route,width};
+    try{
     const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:20000});
     await page.evaluate(async()=>{for(const image of document.images)image.loading='eager';await Promise.all([...document.images].map(image=>image.decode().catch(()=>{})));});
     const state=await page.evaluate(()=>({resolvedPath:location.pathname,overflow:document.documentElement.scrollWidth>innerWidth+1,visibleH1s:[...document.querySelectorAll('h1')].filter(e=>e.checkVisibility()).length,brokenImages:[...document.images].filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.getAttribute('src')),products:!!document.querySelector('a[href="/products/"]'),availability:!!document.querySelector('a[href="/status/"]'),sharedHeader:document.querySelectorAll('.site-header').length,sharedFooter:document.querySelectorAll('.site-footer').length}));
@@ -39,8 +43,21 @@ const result=name=>report.interactions.push({name,result:'PASS'});
      const name=route==='/'?'home':route.split('/').filter(Boolean).join('-');
      for(const full of ['/','/start/'].includes(route)?[false,true]:[true]){const file=path.join(out,`candidate-${name}-${width}${full?'-full':''}.png`);await page.screenshot({path:file,fullPage:full});report.screenshots.push(path.basename(file));}
     }
+    }finally{await page.close();}
    }
   }
+  delete report.activeNavigation;
+  page=await context.newPage();
+  // Deliberately delayed auth redirect: reproduce the old cross-route race,
+  // then assert real isolated navigation rather than retrying a failed goto.
+  const authPage=await context.newPage();
+  await authPage.route('**/knowledge/',r=>r.fulfill({contentType:'text/html',body:fs.readFileSync(path.join(root,'public/knowledge/index.html'),'utf8').replace(/<script defer data-clerk-publishable-key[^>]*><\/script>/,'<script>window.Clerk={load:()=>new Promise(r=>setTimeout(r,80)),session:null};</script>')}));
+  await authPage.goto(base+'/knowledge/',{waitUntil:'domcontentloaded'});
+  await authPage.close();
+  await page.route('**/markets/agriculture-food/',async r=>{await new Promise(resolve=>setTimeout(resolve,250));await r.continue();});
+  await page.goto(base+'/markets/agriculture-food/',{waitUntil:'domcontentloaded'});
+  assert.equal(new URL(page.url()).pathname,'/markets/agriculture-food/');await page.unroute('**/markets/agriculture-food/');
+  result('delayed protected-route redirect cannot abort the next isolated route');
   for(const file of htmlFiles)for(const [,href]of fs.readFileSync(file,'utf8').matchAll(/(?:href|src)="(\/(?!\/)[^"?#]*)(?:[?#][^"]*)?"/g))assert.ok(fs.existsSync(path.join(root,'public',href)),'Broken first-party link: '+href+' in '+file);
   result('first-party route and asset links resolve to checked source');
   assert.equal(report.accessibility.length,routes.length,'Every route requires a mobile accessibility scan');

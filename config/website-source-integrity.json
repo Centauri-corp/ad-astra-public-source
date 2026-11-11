@@ -11,8 +11,8 @@
   "files": [
     {
       "path": "api/ask.js",
-      "bytes": 6857,
-      "sha256": "177473e21f2de1f6fc860623b60ff91a60b2353bba65f37732b9a3b2ea67a1e1"
+      "bytes": 7611,
+      "sha256": "0bfbfbe16bb7495952060b88d1d47ee9b6e70f13fdfde9184e2e5fbaa135f5e8"
     },
     {
       "path": "api/models.js",
@@ -76,13 +76,13 @@
     },
     {
       "path": "lib/release-gates.js",
-      "bytes": 1315,
-      "sha256": "261f75381b3bf4b2bd6824c29a4c8a639dafba3862c22793fc54f28c9dfc8476"
+      "bytes": 1429,
+      "sha256": "4abb05d604362b2be7ecdef58d22d398bc0895c0d7cab63a3cade5a1d64a3bd0"
     },
     {
       "path": "lib/shared-budget.js",
-      "bytes": 421,
-      "sha256": "002340da93ade4f2ca927a6d07e988779cc0c412a1ce7e0394d39673aeff2263"
+      "bytes": 3293,
+      "sha256": "386459239a24faaf42316fbdcb54481ad2c432e2d051dcfc86ad168a1e701ac1"
     },
     {
       "path": "public/about/index.html",
@@ -396,8 +396,8 @@
     },
     {
       "path": "public/knowledge/app.js",
-      "bytes": 4279,
-      "sha256": "8c216428a9956899669484e50927db9494cbfd28b037fb1ba53620548a4c5d2b"
+      "bytes": 4525,
+      "sha256": "495b274ce56b7128766162b81160793239b69b8f1f7f91125a2469777308c717"
     },
     {
       "path": "public/knowledge/experience-links.js",
@@ -531,13 +531,13 @@
     },
     {
       "path": "public/neural/conversation.js",
-      "bytes": 5285,
-      "sha256": "20f079d7d5d382566c4ef7a77bc83f383ad52e2bc9fa58addebdbe3ad97ca2e4"
+      "bytes": 5515,
+      "sha256": "e989f8b27dc64abd7a1fa113462a533961cc1cbed516280ac3e3fb0112c003f2"
     },
     {
       "path": "public/neural/engine-client.js",
-      "bytes": 4368,
-      "sha256": "b1ef85afefe1c35e0b9faa727031cb8c4b6e9de3e216df86fcd9d5af8ecdb25a"
+      "bytes": 4447,
+      "sha256": "daa9b833886e6486ffbf6e36f15a147cfa1a41f6f1372dcdf937d6c131b03d0e"
     },
     {
       "path": "public/neural/experience.css",
@@ -760,5 +760,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "5fc4107d7f405e3a1d16f896d7eb992482ec2998fc33015e32a76825206633e7"
+  "fingerprint": "ef0e69d50c1aecf745419b156b3297232dfa736f9c159cbbe041a58a191b5051"
 }

@@ -3,11 +3,12 @@ const {test,beforeEach,after}=require('node:test'), assert=require('node:assert/
 const ask=require('../api/ask'),status=require('../api/status'),auth=require('../lib/auth'),quota=require('../lib/quota'),gates=require('../lib/release-gates');
 const models=require('../api/models'),catalog=require('../lib/model-catalog');
 const originalEnv={...process.env},originalFetch=global.fetch;
+const customerBudget=require('./fixtures/customer-budget.cjs');
 const release=require('../public/release-manifest.json'),routing=require('../vercel.json');
 const originalRelease=structuredClone(release),originalRedirects=structuredClone(routing.redirects);
 const pair=crypto.generateKeyPairSync('rsa',{modulusLength:2048});
 const jwk={...pair.publicKey.export({format:'jwk'}),kid:'test-key',use:'sig',alg:'RS256'};
-let calls=[],redisResult=[1,11,3600],providerStatus=200,providerPayload;
+let calls=[],redisResult=[1,11,3600],providerStatus=200,providerPayload,budgetReply;
 function token(overrides={},head={}){
  const now=Math.floor(Date.now()/1000);
  const claims={iss:'https://clerk.adastra.global',aud:'ad-astra-workspace',azp:'https://adastra.global',sub:'user_testA',sid:'sess_testA',iat:now,nbf:now-1,exp:now+60,...overrides};
@@ -26,12 +27,14 @@ beforeEach(()=>{
  for(const key of Object.keys(process.env))if(!(key in originalEnv))delete process.env[key];
  Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://redis.invalid',KV_REST_API_TOKEN:'synthetic-test-only',OPENAI_API_KEY:'synthetic-test-only',OPENAI_MODEL:'gpt-4.1-mini-2025-04-14',VERCEL_ENV:'production'});
  for(const flag of gates.FLAGS)process.env[flag]='true';
+ Object.assign(process.env,customerBudget.env);budgetReply=null;
  calls=[];redisResult=[1,11,3600];providerStatus=200;
  providerPayload={object:'chat.completion',model:'gpt-4.1-mini-2025-04-14',choices:[{index:0,finish_reason:'stop',message:{role:'assistant',content:'Synthetic fixture response'}}],usage:{prompt_tokens:100,completion_tokens:20,total_tokens:120}};
  global.fetch=async(url,options)=>{
   calls.push({url,options});
   if(url.includes('/.well-known/jwks.json'))return {ok:true,json:async()=>({keys:[jwk]})};
   if(url==='https://redis.invalid')return {ok:true,json:async()=>({result:redisResult})};
+  if(url===customerBudget.url)return Response.json(budgetReply||customerBudget.allowance(options));
   if(url==='https://api.openai.com/v1/chat/completions')return Response.json(providerPayload,{status:providerStatus});
   throw Error('Unexpected external destination');
  };
@@ -48,7 +51,24 @@ test('all five contracted modes use a bounded provider request in the synthetic 
 test('valid signed session reserves quota before one bounded provider request',async()=>{
  const r=await request();assert.equal(r.statusCode,200);assert.equal(r.headers['cache-control'],'no-store');
  const quotaIndex=calls.findIndex(c=>c.url==='https://redis.invalid'),modelIndex=calls.findIndex(c=>c.url.includes('/chat/completions'));assert.ok(quotaIndex<modelIndex);
+ const admissionIndex=calls.findIndex(c=>c.url===customerBudget.url);assert.ok(admissionIndex>quotaIndex&&admissionIndex<modelIndex);
+ const admission=JSON.parse(calls[admissionIndex].options.body);assert.deepEqual(Object.keys(admission).sort(),['idempotencyKey','protocol','requestHash']);
  const payload=JSON.parse(calls[modelIndex].options.body);assert.equal(payload.max_tokens,700);assert.equal(payload.store,false);assert.equal(payload.model,'gpt-4.1-mini-2025-04-14');assert.ok(calls[modelIndex].options.signal);
+});
+test('paid denial, revoked access, replay and tenant capacity never reach the provider',async()=>{
+ for(const [reason,code] of [['paid_access_required',403],['request_replayed',409],['capacity_reached',429]]){
+  budgetReply={protocol:'ad-astra-customer-budget/v1',allowed:false,reason};calls=[];
+  const r=await request();assert.equal(r.statusCode,code);assert.equal(r.body.error,reason);
+  assert.ok(!calls.some(c=>c.url.includes('/chat/completions')));assert.ok(!JSON.stringify(r.body).includes('secret'));
+ }
+});
+test('an invalid or unavailable bridge cannot fall back to identity and Redis alone',async()=>{
+ for(const value of [{allowed:true},{protocol:'ad-astra-customer-budget/v1',allowed:false,reason:'unknown'},
+  {...customerBudget.allowance({body:JSON.stringify({requestHash:'a'.repeat(64)})}),expiresAt:0}]){
+  budgetReply=value;calls=[];const r=await request();assert.equal(r.statusCode,503);
+  assert.equal(r.body.error,'customer_access_unavailable');assert.ok(!calls.some(c=>c.url.includes('/chat/completions')));
+ }
+ delete process.env.AD_ASTRA_CUSTOMER_BUDGET_SECRET;assert.equal((await request()).statusCode,503);
 });
 test('every absent or false release flag prevents all quota and model calls',async()=>{
  for(const flag of gates.FLAGS){process.env[flag]='false';calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));process.env[flag]='true';}

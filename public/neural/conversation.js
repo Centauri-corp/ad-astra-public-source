@@ -36,7 +36,7 @@
    }catch(error){
     if(disposed||current!==generation)return;
     completedAnswer='';answer.textContent='';activity('error');
-    status.textContent=abort.signal.aborted?'Request stopped or timed out. No automatic retry was made.':error.message==='authentication_required'?'Your session could not be verified. Please sign in again.':error.message==='capacity_reached'?'Request capacity has been reached. Please try later.':error.message==='release_or_provider_unavailable'?'The engine is release-gated or temporarily unavailable. No answer was produced.':'The request could not be verified or completed. No automatic retry was made.';
+    status.textContent=abort.signal.aborted?'Request stopped or timed out. No automatic retry was made.':error.message==='authentication_required'?'Your session could not be verified. Please sign in again.':error.message==='access_denied'?'Access was denied. Check your account and subscription before sending another request.':error.message==='request_replayed'?'This request was already attempted. It was not sent to the model again.':error.message==='capacity_reached'?'Request capacity has been reached. Please try later.':error.message==='release_or_provider_unavailable'?'The engine is release-gated or temporarily unavailable. No answer was produced.':'The request could not be verified or completed. No automatic retry was made.';
    }finally{clearTimeout(timeout);if(!disposed&&current===generation){busy=false;controller=null;sync();}}
   });
   function visibility(){if(document.hidden&&!disposed)cancel('Paused because the page is hidden. Microphone, playback and the local request were stopped.');}

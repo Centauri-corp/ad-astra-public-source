@@ -55,13 +55,21 @@ module.exports = async function ask(req, res) {
   if (!auth.ok) return reply(auth.status,{error:auth.error,message:auth.status === 401 ? 'Please sign in again to continue.' : 'Secure sign-in is temporarily unavailable.'});
   if (!ready()) return reply(503,{error:'release_not_ready',message:'The live engine is paused while release checks are completed.'},{'Retry-After':300});
   const idempotencyKey = String(req.headers?.['idempotency-key'] || '');
-  if (!idempotencyKey || idempotencyKey.length > 200) return reply(400,{error:'idempotency_key_required'});
+  if (!/^[A-Za-z0-9_-]{8,128}$/.test(idempotencyKey)) return reply(400,{error:'idempotency_key_required'});
   const budgetClient = sharedBudget.createClient();
-  void budgetClient;
   let quota;
   try { quota = await reserve(auth.claims); } catch { return reply(503,{error:'quota_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60}); }
   const headers = {'X-RateLimit-Limit':LIMIT,'X-RateLimit-Remaining':quota.remaining,'X-Ad-Astra-Quota-Mode':'durable'};
   if (!quota.allowed) return reply(429,{error:quota.budgetReached ? 'daily_capacity_reached' : 'rate_limit_reached',message:'Request capacity has been reached. Please try again later.'},{...headers,'Retry-After':quota.retryAfter});
+  let admission;
+  try {
+    admission = await budgetClient.reserve({authorization:req.headers.authorization,idempotencyKey,
+      requestHash:crypto.createHash('sha256').update(JSON.stringify({mode,prompt})).digest('hex')});
+  } catch { return reply(503,{error:'customer_access_unavailable',message:'Paid access could not be verified. No AI request was sent.'},{...headers,'Retry-After':60}); }
+  if (!admission.allowed) {
+    const status = admission.reason === 'paid_access_required' ? 403 : admission.reason === 'request_replayed' ? 409 : 429;
+    return reply(status,{error:admission.reason,message:'This request was not authorized. Check your subscription or contact support.'},headers);
+  }
   const disconnected = new AbortController();
   const stop = () => { if(!res.writableEnded)disconnected.abort(); };
   req.once?.('aborted',stop);res.once?.('close',stop);
@@ -72,6 +80,7 @@ module.exports = async function ask(req, res) {
     ];
     if (messages.reduce((n,m)=>n+Buffer.byteLength(m.content)+32,0) > 16384) throw new Error('input_limit');
     if(req.aborted||res.destroyed)throw new Error('disconnected');
+    if(admission.expiresAt<=Date.now())throw new Error('admission_expired');
     events.start(headers);events.requesting();
     const response = await fetch('https://api.openai.com/v1/chat/completions',{
       method:'POST',headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},

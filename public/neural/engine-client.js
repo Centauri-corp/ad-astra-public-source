@@ -22,7 +22,7 @@
   };
  }
  async function readStream(response,{onEvent=()=>{},signal,now=Date.now}={}){
-  if(!response.ok)throw Error(response.status===401?'authentication_required':response.status===429?'capacity_reached':response.status===503?'release_or_provider_unavailable':'request_rejected');
+  if(!response.ok)throw Error(response.status===401?'authentication_required':response.status===403?'access_denied':response.status===409?'request_replayed':response.status===429?'capacity_reached':response.status===503?'release_or_provider_unavailable':'request_rejected');
   if(!response.headers.get('content-type')?.startsWith('text/event-stream'))throw Error('invalid_engine_transport');
   const state=reducer(response.headers.get('x-request-id'),now),reader=response.body?.getReader();if(!reader)throw Error('missing_engine_stream');
   const decoder=new TextDecoder('utf-8',{fatal:true});let buffer='',size=0;

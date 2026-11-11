@@ -76,6 +76,8 @@
       } catch (error) {
         status.textContent = ['rate_limit_reached','daily_capacity_reached'].includes(error.message)
           ? 'You have reached the hourly request limit. Please try again later.'
+          : error.message === 'paid_access_required' ? 'Paid access was not authorized. Check your account and subscription.'
+          : error.message === 'request_replayed' ? 'This request was already attempted. No model request was repeated.'
           : ['authentication_required','authentication_invalid'].includes(error.message)
             ? 'Please sign in again to continue.'
             : 'The live engine is unavailable right now. Please try again shortly.';

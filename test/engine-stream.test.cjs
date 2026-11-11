@@ -2,6 +2,7 @@
 const {test,beforeEach,after}=require('node:test'),assert=require('node:assert/strict'),crypto=require('node:crypto'),{EventEmitter}=require('node:events');
 const ask=require('../api/ask'),gates=require('../lib/release-gates'),release=require('../public/release-manifest.json'),routing=require('../vercel.json');
 const client=require('../public/neural/engine-client.js');
+const customerBudget=require('./fixtures/customer-budget.cjs');
 const originalEnv={...process.env},originalFetch=global.fetch,originalRelease=structuredClone(release),originalRedirects=structuredClone(routing.redirects);
 const pair=crypto.generateKeyPairSync('rsa',{modulusLength:2048}),jwk={...pair.publicKey.export({format:'jwk'}),kid:'stream-fixture',use:'sig',alg:'RS256'};
 let calls=[],providerStatus=200,redis=[1,11,3600],pendingProvider=false,providerSignal;
@@ -13,7 +14,8 @@ beforeEach(()=>{
  for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];
  Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://stream-redis.invalid',KV_REST_API_TOKEN:'synthetic-fixture',OPENAI_API_KEY:'synthetic-fixture',OPENAI_MODEL:'gpt-4.1-mini-2025-04-14'});
  for(const flag of gates.FLAGS)process.env[flag]='true';calls=[];providerStatus=200;redis=[1,11,3600];pendingProvider=false;providerSignal=undefined;
- global.fetch=async(url,init)=>{calls.push({url,init});if(url.includes('/.well-known/jwks.json'))return {ok:true,json:async()=>({keys:[jwk]})};if(url==='https://stream-redis.invalid')return {ok:true,json:async()=>({result:redis})};if(url==='https://api.openai.com/v1/chat/completions'){providerSignal=init.signal;if(pendingProvider)return new Promise((_resolve,reject)=>{init.signal.addEventListener('abort',()=>reject(Error('cancelled')),{once:true});});return Response.json({object:'chat.completion',model:'gpt-4.1-mini-2025-04-14',choices:[{index:0,finish_reason:'stop',message:{role:'assistant',content:'Synthetic streamed answer. <script>not executable</script>'}}],usage:{prompt_tokens:100,completion_tokens:20,total_tokens:120}},{status:providerStatus});}throw Error('Unexpected fixture destination');};
+ Object.assign(process.env,customerBudget.env);
+ global.fetch=async(url,init)=>{calls.push({url,init});if(url.includes('/.well-known/jwks.json'))return {ok:true,json:async()=>({keys:[jwk]})};if(url==='https://stream-redis.invalid')return {ok:true,json:async()=>({result:redis})};if(url===customerBudget.url)return Response.json(customerBudget.allowance(init));if(url==='https://api.openai.com/v1/chat/completions'){providerSignal=init.signal;if(pendingProvider)return new Promise((_resolve,reject)=>{init.signal.addEventListener('abort',()=>reject(Error('cancelled')),{once:true});});return Response.json({object:'chat.completion',model:'gpt-4.1-mini-2025-04-14',choices:[{index:0,finish_reason:'stop',message:{role:'assistant',content:'Synthetic streamed answer. <script>not executable</script>'}}],usage:{prompt_tokens:100,completion_tokens:20,total_tokens:120}},{status:providerStatus});}throw Error('Unexpected fixture destination');};
 });
 after(()=>{global.fetch=originalFetch;Object.assign(release,originalRelease);routing.redirects=originalRedirects;for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];Object.assign(process.env,originalEnv);});
 test('signed request reserves capacity before emitting four correlated lifecycle events',async()=>{
@@ -30,6 +32,11 @@ test('provider failure terminates with a safe event and never invents an answer 
 });
 test('client disconnect aborts the single in-flight provider request without replay',async()=>{
  pendingProvider=true;const f=fixture(),running=ask(f.req,f.res);for(let i=0;i<50&&!providerSignal;i++)await new Promise(resolve=>setImmediate(resolve));assert.ok(providerSignal);f.res.destroyed=true;f.res.emit('close');await running;assert.equal(providerSignal.aborted,true);assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,1);assert.equal(f.res.listenerCount('close'),0);
+});
+test('paid-access denial and duplicate request are explicit client stops, not streamed model activity',async()=>{
+ for(const [status,reason]of [[403,'access_denied'],[409,'request_replayed']]){
+  await assert.rejects(()=>client.readStream(new Response('{}',{status,headers:{'content-type':'application/json'}})),new RegExp(reason));
+ }
 });
 test('reducer rejects mismatched IDs, sequence gaps, stale times and unsolicited event data',()=>{
  const now=Date.now(),id=crypto.randomUUID(),first={schema:'ad-astra-engine-event/v1',requestId:id,sequence:1,type:'accepted',at:new Date(now).toISOString()};
