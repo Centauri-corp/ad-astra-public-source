@@ -7,6 +7,9 @@
   "functions": {
     "api/ask.js": {
       "maxDuration": 30
+    },
+    "api/subscriptions.js": {
+      "maxDuration": 30
     }
   },
   "redirects": [
@@ -18,11 +21,6 @@
     {
       "source": "/knowledge/:path*",
       "destination": "/agent/",
-      "permanent": false
-    },
-    {
-      "source": "/sign-in/:path*",
-      "destination": "/",
       "permanent": false
     }
   ],
@@ -71,7 +69,7 @@
       ]
     },
     {
-      "source": "/(knowledge|platform|sign-in|markets|pricing|services|company|about|film)(.*)",
+      "source": "/(knowledge|platform|sign-in|account|markets|pricing|services|company|about|film)(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",

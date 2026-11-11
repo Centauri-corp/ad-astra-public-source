@@ -4,6 +4,7 @@ const { authenticateRequest } = require('../lib/auth');
 const { reserve, LIMIT } = require('../lib/quota');
 const { ready } = require('../lib/release-gates');
 const sharedBudget = require('../lib/shared-budget');
+const subscriptions = require('../lib/subscriptions');
 const MODES = Object.freeze({ ask: 'clarify the question and give a useful next step', research: 'separate claims, evidence, uncertainty and a research path', create: 'develop a concept with options, constraints and a small experiment', learn: 'explain progressively with an example and a check for understanding', explore: 'compare possibilities, constraints and what would falsify each one' });
 const MAX_BODY = 14000;
 function sameOrigin(req) {
@@ -51,6 +52,11 @@ module.exports = async function ask(req, res) {
   if (!ready()) return reply(503,{error:'release_not_ready',message:'The live engine is paused while release checks are completed.'},{'Retry-After':300});
   const idempotencyKey = String(req.headers?.['idempotency-key'] || '');
   if (!idempotencyKey || idempotencyKey.length > 200) return reply(400,{error:'idempotency_key_required'});
+  let access;
+  try {access=await subscriptions.call('access',{},req.headers.authorization.slice(7));}
+  catch{return reply(503,{error:'subscription_unavailable',message:'We could not verify your current subscription. Please try again.'});}
+  if(access.status!==200)return reply(access.status===401?401:503,{error:'subscription_unavailable',message:'Your subscription could not be verified.'});
+  if(access.body.allowed!==true)return reply(403,{error:'subscription_required',message:'A current subscription and approved product access are required. Check your billing account.'});
   const budgetClient = sharedBudget.createClient();
   void budgetClient;
   let quota;

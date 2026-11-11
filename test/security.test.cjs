@@ -5,7 +5,7 @@ const models=require('../api/models'),catalog=require('../lib/model-catalog');
 const originalEnv={...process.env},originalFetch=global.fetch;
 const pair=crypto.generateKeyPairSync('rsa',{modulusLength:2048});
 const jwk={...pair.publicKey.export({format:'jwk'}),kid:'test-key',use:'sig',alg:'RS256'};
-let calls=[],redisResult=[1,11,3600],providerStatus=200;
+let calls=[],redisResult=[1,11,3600],providerStatus=200,subscriptionAccess=true;
 function token(overrides={},head={}){
  const now=Math.floor(Date.now()/1000);
  const claims={iss:'https://clerk.adastra.global',aud:'ad-astra-workspace',azp:'https://adastra.global',sub:'user_testA',sid:'sess_testA',iat:now,nbf:now-1,exp:now+60,...overrides};
@@ -22,10 +22,12 @@ beforeEach(()=>{
  for(const key of Object.keys(process.env))if(!(key in originalEnv))delete process.env[key];
  Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://redis.invalid',KV_REST_API_TOKEN:'synthetic-test-only',OPENAI_API_KEY:'synthetic-test-only',OPENAI_MODEL:'gpt-4.1-mini-2025-04-14',VERCEL_ENV:'production'});
  for(const flag of gates.FLAGS)process.env[flag]='true';
- calls=[];redisResult=[1,11,3600];providerStatus=200;
+ process.env.AD_ASTRA_SUBSCRIPTION_ENVIRONMENT='production';
+ calls=[];redisResult=[1,11,3600];providerStatus=200;subscriptionAccess=true;
  global.fetch=async(url,options)=>{
   calls.push({url,options});
   if(url.includes('/.well-known/jwks.json'))return {ok:true,json:async()=>({keys:[jwk]})};
+  if(url.endsWith('/astra-subscriptions-production/access'))return subscriptionAccess==='outage'?Response.json({error:'unavailable'},{status:503}):Response.json({environment:subscriptionAccess==='wrong-environment'?'development':'production',market:'US-CA',allowed:subscriptionAccess===true});
   if(url==='https://redis.invalid')return {ok:true,json:async()=>({result:redisResult})};
   if(url==='https://api.openai.com/v1/chat/completions')return {ok:providerStatus===200,status:providerStatus,json:async()=>({choices:[{message:{content:'Synthetic fixture response'}}]})};
   throw Error('Unexpected external destination');
@@ -35,7 +37,14 @@ after(()=>{global.fetch=originalFetch;for(const k of Object.keys(process.env))if
 test('valid signed session reserves quota before one bounded provider request',async()=>{
  const r=await request();assert.equal(r.statusCode,200);assert.equal(r.headers['cache-control'],'no-store');
  const quotaIndex=calls.findIndex(c=>c.url==='https://redis.invalid'),modelIndex=calls.findIndex(c=>c.url.includes('/chat/completions'));assert.ok(quotaIndex<modelIndex);
+ assert.ok(calls.findIndex(c=>c.url.endsWith('/access'))<quotaIndex,'Product admission must precede quota and provider spend');
  const payload=JSON.parse(calls[modelIndex].options.body);assert.equal(payload.max_tokens,700);assert.equal(payload.store,false);assert.equal(payload.model,'gpt-4.1-mini-2025-04-14');assert.ok(calls[modelIndex].options.signal);
+});
+test('missing entitlement, failed billing verification and wrong environments stop all model spend',async()=>{
+ for(const [value,code]of [[false,403],['outage',503],['wrong-environment',503]]){
+  subscriptionAccess=value;calls=[];const result=await request();assert.equal(result.statusCode,code);
+  assert.ok(!calls.some(call=>call.url==='https://redis.invalid'||call.url.includes('/chat/completions')));
+ }
 });
 test('every absent or false release flag prevents all quota and model calls',async()=>{
  for(const flag of gates.FLAGS){process.env[flag]='false';calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));process.env[flag]='true';}
@@ -106,13 +115,13 @@ test('public model catalog exposes stable names without provider details',()=>{
  for(const model of body.models){assert.ok(model.name.startsWith('Astra '));assert.ok(!('provider' in model));assert.ok(!('apiKey' in model));}
  for(const profile of body.profiles){assert.ok(profile.name.startsWith('Astra '));assert.equal(profile.foundationModel,'astra-lumen');assert.ok(!('provider' in profile));assert.ok(!('apiKey' in profile));}
 });
-test('public agent surface is present and portal routes redirect away',()=>{
+test('public agent surface preserves legacy navigation while sign-in is reachable',()=>{
  const agent=fs.readFileSync(path.join(__dirname,'../public/agent/index.html'),'utf8');
  assert.match(agent,/Astra\s*<br><em>Polaris\.<\/em>/);
  assert.match(agent,/Start with curiosity/);
  const vercel=JSON.parse(fs.readFileSync(path.join(__dirname,'../vercel.json'),'utf8'));
  assert.deepEqual(vercel.redirects.map(r=>[r.source,r.destination]),[
-  ['/platform/:path*','/'],['/knowledge/:path*','/agent/'],['/sign-in/:path*','/']
+  ['/platform/:path*','/'],['/knowledge/:path*','/agent/']
  ]);
 });
 test('return paths reject external URLs and preserve approved mode navigation',()=>{
@@ -120,6 +129,7 @@ test('return paths reject external URLs and preserve approved mode navigation',(
  const safe=context.window.adAstraReturnPath;
  for(const value of ['https://evil.example','//evil.example','/\\evil.example','javascript:alert(1)','/sign-in/','/%2f%2fevil.example'])assert.equal(safe(value),'/platform/');
  assert.equal(safe('/knowledge/?mode=learn#ask-ad-astra'),'/knowledge/?mode=learn#ask-ad-astra');
+ assert.equal(safe('/account/billing/?return=https://evil.example'),'/account/billing/');
 });
 test('session handshake verifies identity without model or quota access',async()=>{
  const session=require('../api/session');
