@@ -27,6 +27,9 @@ jobs:
         with:
           node-version: '24.22.1'
       - run: npm ci --ignore-scripts
+      - name: Use official HTTPS Ubuntu mirrors
+        timeout-minutes: 1
+        run: sudo --preserve-env=CI,RUNNER_ENVIRONMENT -- "$(command -v node)" scripts/prepare-ci-ubuntu-mirrors.cjs --apply
       - name: Install Chromium system dependencies
         timeout-minutes: 3
         run: npx playwright install-deps chromium
@@ -74,6 +77,10 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npm run test:runtime
+      - name: Use official HTTPS Ubuntu mirrors
+        working-directory: .
+        timeout-minutes: 1
+        run: sudo --preserve-env=CI,RUNNER_ENVIRONMENT -- "$(command -v node)" scripts/prepare-ci-ubuntu-mirrors.cjs --apply
       - name: Install Chromium system dependencies
         timeout-minutes: 3
         run: npx playwright install-deps chromium

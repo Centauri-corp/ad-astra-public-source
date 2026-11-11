@@ -27,4 +27,6 @@ Team identity accepts `VERCEL_ORG_ID` (CLI), `VERCEL_TEAM_ID`, or the non-secret
 
 Hosted Chromium installation now uses the pinned Ubuntu 24.04 runner and separate, three-minute system-dependency/browser steps. Browser download connection time is bounded. No browser assertion, route, test, scan or acceptance requirement is skipped. A dependency failure is explicit failed CI, not a pass or a silent fallback to local results.
 
+The bounded run exposed the actual infrastructure error: `Temporary failure resolving 'azure.archive.ubuntu.com'` before browser QA. Hosted-runner setup now replaces Ubuntu's Azure mirror indirection with the official HTTPS archive/security endpoints. It preserves suites, components, signing keys, TLS and package verification. The repair is restricted to disposable GitHub-hosted Linux runners; it never changes the developer's machine or any production host. A subsequent hosted result, not this source edit, establishes that installation and QA succeeded.
+
 The marketing visual publication and the customer revenue launch remain separate decisions. A noindex website with paused customer capabilities is not a paid-customer launch. No source-only fix accepts media rights, regional availability, indexing ownership, tenant QA, charges or CRM writes.
