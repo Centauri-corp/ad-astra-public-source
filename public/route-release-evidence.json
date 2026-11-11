@@ -1,0 +1,1084 @@
+{
+  "schema": "ad-astra-route-release-evidence/v1",
+  "generatedAt": "2026-11-11T00:00:00Z",
+  "releaseScope": "public-marketing-site-only",
+  "customerProductLaunchEnabled": false,
+  "approvedRoutes": [],
+  "requiredRouteGates": [
+    "contentAndClaims",
+    "brandAndRights",
+    "seoTechnicalQa",
+    "accessibilityResponsiveQa",
+    "privacyAndAnalyticsQa",
+    "independentReview",
+    "humanReleaseAuthorization"
+  ],
+  "availabilityClaims": {
+    "globalAvailability": false,
+    "approvedRegions": []
+  },
+  "searchProperties": {
+    "googleSearchConsole": {
+      "property": "sc-domain:adastra.global",
+      "status": "not-verified",
+      "evidenceRef": null
+    },
+    "bingWebmaster": {
+      "property": "https://adastra.global/",
+      "status": "not-verified",
+      "evidenceRef": null
+    }
+  },
+  "routes": [
+    {
+      "path": "/about/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/agent/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/company/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/film/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/knowledge/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/agriculture-food/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/business-professional-services/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/california/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/consumer-personal-ai/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/creative-industries-media/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/digital-commerce/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/education-learning/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/finance-economics/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/government-public-services/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/healthcare-wellness/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/legal-compliance/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/logistics-supply-chain/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/manufacturing-energy/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/positioning/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/positioning/microgrids/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/real-estate-construction/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/science-research/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/markets/travel-hospitality/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/platform/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/platform-preview/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/pricing/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/services/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    },
+    {
+      "path": "/sign-in/",
+      "decision": "held",
+      "gates": {
+        "contentAndClaims": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "brandAndRights": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "seoTechnicalQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "accessibilityResponsiveQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "privacyAndAnalyticsQa": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "independentReview": {
+          "status": "pending",
+          "evidenceRef": null
+        },
+        "humanReleaseAuthorization": {
+          "status": "pending",
+          "evidenceRef": null
+        }
+      },
+      "reason": "No independent route approval and human release authorization are bound to this source commit."
+    }
+  ]
+}

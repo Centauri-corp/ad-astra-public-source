@@ -3,34 +3,81 @@
   "canonical": "https://adastra.global/",
   "publicLaunchEnabled": false,
   "visualArchitecture": {
-    "sceneOrder": ["arrival", "vision", "approach", "experiences", "horizon", "company", "signature"],
-    "palette": { "navy": "#07111c", "cyan": "#8ee8f4", "violet": "#9a7cff", "gold": "#f2c879" },
-    "threeD": { "privatePreviewOnly": true, "fallback": "static-neural-sphere-with-alt-text", "reducedMotion": true },
+    "sceneOrder": [
+      "arrival",
+      "vision",
+      "approach",
+      "experiences",
+      "horizon",
+      "company",
+      "signature"
+    ],
+    "palette": {
+      "navy": "#07111c",
+      "cyan": "#9bdfe3",
+      "violet": "#9a7cff",
+      "gold": "#e9c990"
+    },
+    "threeD": {
+      "privatePreviewOnly": true,
+      "fallback": "static-neural-sphere-with-alt-text",
+      "reducedMotion": true
+    },
     "neuralArt": {
       "publicModelGeneratedAssets": false,
       "publicStaticAssets": true,
       "textEmbeddedInImages": false,
       "publicPreview": "research-direction-only",
-      "hybridPipeline": ["proxy-form", "camera-motion", "neural-layer-concept", "human-review"]
+      "hybridPipeline": [
+        "proxy-form",
+        "camera-motion",
+        "neural-layer-concept",
+        "human-review"
+      ]
     },
     "intelligenceLayers": [
-      { "id": "narrow-ai", "status": "guided-preview", "liveTelemetry": false },
-      { "id": "agi", "status": "research-direction", "liveTelemetry": false },
-      { "id": "asi", "status": "hypothetical-horizon", "liveTelemetry": false }
+      {
+        "id": "narrow-ai",
+        "status": "guided-preview",
+        "liveTelemetry": false
+      },
+      {
+        "id": "agi",
+        "status": "research-direction",
+        "liveTelemetry": false
+      },
+      {
+        "id": "asi",
+        "status": "hypothetical-horizon",
+        "liveTelemetry": false
+      }
     ],
-    "motionPreview": { "hero": true, "filmStudy": true, "publicPremierePlayback": false, "reducedMotionFallback": "poster-frame" },
+    "motionPreview": {
+      "hero": true,
+      "filmStudy": true,
+      "publicPremierePlayback": false,
+      "reducedMotionFallback": "poster-frame"
+    },
     "videoBlueprint": {
       "title": "The Architecture of Alignment",
       "targetDurationSeconds": 60,
       "publicPlayback": "premiere-gated",
-      "scenes": ["hook", "narrow-core", "agi-research", "asi-horizon-return"],
+      "scenes": [
+        "hook",
+        "narrow-core",
+        "agi-research",
+        "asi-horizon-return"
+      ],
       "claimBoundary": "conceptual-research-framing"
     }
   },
   "seo": {
-    "indexableRoutes": ["/"],
+    "indexableRoutes": [],
     "nonHomeRoutes": "noindex,follow",
-    "sitemap": "homepage-only"
+    "sitemap": "approved-routes-only",
+    "indexingPolicy": "noindex-until-page-evidence-approved",
+    "homepageRobots": "noindex,follow",
+    "routeEvidenceFile": "route-release-evidence.json"
   },
   "growthAutomation": {
     "mode": "private-scheduled-read-only-audit",

@@ -1,18 +1,28 @@
 {
-  "release": "ad-astra-production-repair-2026-10-23",
+  "release": "ad-astra-california-canary-2026-11-11",
   "canonical": "https://adastra.global/",
-  "filmPublicPlayback": false,
-  "publicReferenceCatalog": false,
-  "assetOriginDependency": false,
+  "releaseScope": "public-marketing-site-only",
+  "routeEvidenceFile": "route-release-evidence.json",
   "publicLaunchEnabled": false,
+  "indexingPolicy": "noindex-until-page-evidence-approved",
+  "indexableRoutes": [],
   "engineAvailable": false,
   "customerPortal": "authenticated-preview",
   "customerAiModel": "astra-lumen",
-  "connectedPublicModelCount": 1,
   "publicModelName": "Astra Polaris",
+  "customerModes": [
+    "ask",
+    "research",
+    "create",
+    "learn",
+    "explore"
+  ],
+  "filmPublicPlayback": false,
+  "publicReferenceCatalog": false,
+  "assetOriginDependency": false,
+  "connectedPublicModelCount": 1,
   "marketProfileArchitecture": "one-connected-model-with-sector-profiles",
   "marketProfileCount": 24,
-  "customerModes": ["ask", "research", "create", "learn", "explore"],
   "customerAccess": "clerk-authenticated",
   "liveEngineAccess": "requires-all-verified-release-gates",
   "customerBudgetBridge": {
@@ -43,13 +53,15 @@
     "title": "The Architecture of Alignment",
     "targetDurationSeconds": 60,
     "publicPlayback": "premiere-gated",
-    "scenes": ["hook", "narrow-core", "agi-research", "asi-horizon-return"],
+    "scenes": [
+      "hook",
+      "narrow-core",
+      "agi-research",
+      "asi-horizon-return"
+    ],
     "claimBoundary": "conceptual-research-framing"
   },
   "dailyModelBudgetUSD": 10,
   "rollbackBaseline": "dpl_GUQqWJ3jTy9f73XqfQFvmbqhnHUy",
-  "source": "isolated AD ASTRA source; see release evidence",
-  "indexableRoutes": [
-    "/"
-  ]
+  "source": "isolated AD ASTRA source; see route release evidence"
 }

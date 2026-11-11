@@ -27,7 +27,10 @@ const homepage=fs.readFileSync(path.join(root,'public/index.html'),'utf8');
 assert.ok(homepage.includes('ad-astra-runway-orbital-motion.vtt')&&homepage.includes('ad-astra-horizon-motion.vtt'),'Public motion previews missing caption tracks');
 assert.equal((homepage.match(/class="video-transcript"/g)||[]).length,2,'Public motion previews missing text transcripts');
 for(const caption of ['ad-astra-runway-orbital-motion.vtt','ad-astra-horizon-motion.vtt']){const captionPath=path.join(root,'public/assets',caption);assert.ok(fs.existsSync(captionPath),`Missing caption track: ${caption}`);assert.ok(fs.readFileSync(captionPath,'utf8').startsWith('WEBVTT'),`Invalid caption track: ${caption}`);}
-const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,1);assert.ok(sitemap.includes('<loc>https://adastra.global/</loc>'));
+const evidence=JSON.parse(fs.readFileSync(path.join(root,'public/route-release-evidence.json'),'utf8'));
+const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');
+const sitemapRoutes=[...sitemap.matchAll(/<loc>\s*([^<]+)\s*<\/loc>/gi)].map(match=>match[1].trim());
+assert.deepEqual(sitemapRoutes,evidence.approvedRoutes.map(route=>new URL(route,'https://adastra.global').href));
 assert.equal(JSON.parse(fs.readFileSync(path.join(root,'vercel.json'))).git.deploymentEnabled,false);
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'public/release-manifest.json')));
 const experience=JSON.parse(fs.readFileSync(path.join(root,'public/experience-manifest.json')));
@@ -40,7 +43,7 @@ assert.equal(manifest.marketProfileArchitecture,'one-connected-model-with-sector
 assert.equal(manifest.marketProfileCount,catalog.MARKET_PROFILES.length);
 assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
 assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','approach','experiences','horizon','company','signature']);
-assert.deepEqual(experience.seo.indexableRoutes,['/']);
+assert.deepEqual(experience.seo.indexableRoutes,evidence.approvedRoutes);
 assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);
 assert.equal(experience.growthAutomation.externalCrmWrites,false);
 assert.equal(experience.growthAutomation.outboundSends,false);
@@ -75,4 +78,4 @@ assert.ok(microgrids.includes('20FT / TACTICAL MICRO-POD')&&microgrids.includes(
 assert.ok(microgrids.includes('Neither footprint bypasses municipal permission'));
 assert.ok(microgrids.includes('selenium interlayer')&&microgrids.includes('pressure-vessel safety case'));
 assert.ok(pricing.includes('For individuals')&&pricing.includes('For organizations')&&pricing.includes('No payment is requested'));
-console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-only privacy=passed');
+console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld approvedRoutes='+evidence.approvedRoutes.length+' privacy=passed');
