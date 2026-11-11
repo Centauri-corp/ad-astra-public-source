@@ -1,0 +1,21 @@
+{
+  "schema": "ad-astra-production-release-source/v1",
+  "repository": "Centauri-corp/ad-astra-public-source",
+  "pullRequest": 36,
+  "branch": "codex/cinematic-website-rebuild-20261110",
+  "projectId": "prj_FX8QO3TIqUNAfFR4enz0bALmjeg1",
+  "teamId": "team_5xblMPo2zEBjbz4KPmeDVHPr",
+  "sourceSelection": "owner-selected-pr36-in-chat",
+  "reconciledCanaryCommit": "3ddef0d2e787f0ce8f466dd96e73aed0e0475977",
+  "retiredReleaseBranches": ["work"],
+  "automaticGitDeployments": false,
+  "promotionMode": "stage-test-independent-review-manual-promotion",
+  "independentExactCommitReviewRequired": true,
+  "releaseAuthorized": false,
+  "internalCompanion": {
+    "repository": "Centauri-corp/ad-astra-internal-source",
+    "pullRequest": 45,
+    "commit": "62c28c6687b66d16d94b737479385cac79d633c6"
+  },
+  "pricingPreparation": {"currency":"USD","plusMonthly":12,"proMonthly":29,"team":"inquiry-only","enterprise":"inquiry-only","liveChargingAuthorized":false}
+}

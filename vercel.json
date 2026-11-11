@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "npm test && node scripts/redis-acceptance.cjs",
+  "buildCommand": "node scripts/check-production-source.cjs && npm test && node scripts/redis-acceptance.cjs",
   "installCommand": "npm ci --include=dev --ignore-scripts --no-audit --no-fund",
   "outputDirectory": "public",
   "functions": {

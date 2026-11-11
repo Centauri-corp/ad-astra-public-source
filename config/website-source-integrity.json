@@ -35,6 +35,11 @@
       "sha256": "3718cc1f1a69946341301fc35308ec668c9bd7a788d9bcf9d192b010e2bc38bb"
     },
     {
+      "path": "api/subscription-status.js",
+      "bytes": 2363,
+      "sha256": "ea4d1c192de999e3815904f04f4d12bacce2a8e08e3ab9351837c90472bdcb04"
+    },
+    {
       "path": "lib/auth.js",
       "bytes": 4742,
       "sha256": "86771b59484435890eec436f731f7646baf529d56cb77253a243d3f65d44e73a"
@@ -341,8 +346,8 @@
     },
     {
       "path": "public/design-system.css",
-      "bytes": 15972,
-      "sha256": "ef9fef09c12976baecda0eb4d409c6c774445559c6b586a0c9f6e33921c64c71"
+      "bytes": 29562,
+      "sha256": "8978756d04deb4a9d1fa5777610efebbe0853b4a66b6622c76cb6f0fd77db363"
     },
     {
       "path": "public/design-system.js",
@@ -381,8 +386,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 19708,
-      "sha256": "6ee272a4ce7d3d012f4f4716f2c76ad4b72dd0585f8739c2ae119db1d27c6aad"
+      "bytes": 19664,
+      "sha256": "8e61f0046a7f7341d0b812e4c7f71202c6fab62979d35ebc554f666830fa255f"
     },
     {
       "path": "public/intelligence/index.html",
@@ -438,6 +443,16 @@
       "path": "public/markets/business-professional-services/index.html",
       "bytes": 5282,
       "sha256": "8e49f58adfcee6742852fa43fabad029da775bc305f864b0ebd9f9faf1d19e50"
+    },
+    {
+      "path": "public/markets/california/app.js",
+      "bytes": 876,
+      "sha256": "5cb4c7d9e619d2d90db43bda752d733fcf309aac130887dbf7bbd708ef638da2"
+    },
+    {
+      "path": "public/markets/california/index.html",
+      "bytes": 5739,
+      "sha256": "99d30d5cba508540a539c628eb0a598071de341566220a02e524edd46b9d3b20"
     },
     {
       "path": "public/markets/consumer-personal-ai/index.html",
@@ -671,8 +686,8 @@
     },
     {
       "path": "public/route-release-evidence.json",
-      "bytes": 10690,
-      "sha256": "772a23bd17c1b30b193e846b8ce25c54a3fb286d4c77b9ee07b222752456c6b3"
+      "bytes": 10931,
+      "sha256": "71ed0e22521ce990d23e7a47d9d2d17f855a95bd22f004db96c9d8b660b556bc"
     },
     {
       "path": "public/services/index.html",
@@ -760,5 +775,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "ef0e69d50c1aecf745419b156b3297232dfa736f9c159cbbe041a58a191b5051"
+  "fingerprint": "43b073e0d8d4fb24f5f5fb69a4a057609384dbf1cab6b0369ceac077fee5ad21"
 }

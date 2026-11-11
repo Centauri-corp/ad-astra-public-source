@@ -32,3 +32,149 @@ body:not(.experience-site){background:var(--space)}body:not(.experience-site) .s
 /* Keep the observer in frame: the human is the point of the vision chapter. */
 @media(max-width:760px){#story .chapter-image img{object-position:left center}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.motion-ready .motion-control{display:none}}
+
+/* Cinematic composition: original artwork becomes the scene, not a framed card. */
+.experience-site{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.experience-site:has(.cinema-hero)>.site-header{position:absolute;inset:0 0 auto;width:100%;height:96px;border:0;background:linear-gradient(180deg,rgba(6,11,18,.88),rgba(6,11,18,0));backdrop-filter:none}
+.site-header .site-availability{border:0;border-radius:0;padding:0;background:transparent}
+.experience-site .cinema-hero{height:100svh;min-height:780px;max-height:1200px;align-items:center}
+.experience-site .cinema-hero .hero-art{inset:0}
+.experience-site .cinema-hero .hero-art img{object-position:68% center;opacity:1;mask-image:linear-gradient(180deg,#000 78%,transparent 100%)}
+.experience-site .cinema-hero:after{background:linear-gradient(90deg,rgba(6,11,18,.8),rgba(6,11,18,.2) 46%,transparent 72%),linear-gradient(0deg,var(--space),transparent 25%)}
+.experience-site .hero-content{padding-top:130px;padding-bottom:130px;max-width:790px;position:relative;z-index:1}
+.experience-site .hero-content h1{font-size:clamp(66px,7.2vw,116px);line-height:1.02;letter-spacing:-.065em;font-weight:420}
+.experience-site .hero-content h1 span{color:var(--text)}
+.experience-site .hero-content .body-copy{max-width:355px;font-size:15px;line-height:1.8;color:#d2dbe3;margin-top:30px}
+.experience-site .hero-actions{gap:36px;margin-top:28px}
+.experience-site .cta{background:transparent;color:var(--text);border:0;border-bottom:1px solid var(--ice);border-radius:0;padding:8px 0;font-size:13px}
+.experience-site .cta:hover{background:transparent;color:var(--ice)}
+.experience-site .quiet-cta{border-bottom-color:transparent}
+.experience-site .quiet-cta:hover{border-bottom-color:var(--ice)}
+.experience-site .hero-baseline{bottom:28px;z-index:2;color:#c2ccd6}
+.experience-site .motion-control{border:0;background:none;padding:12px 0;color:#d3dce4}
+.experience-site .story-nav{border:0;background:transparent;padding-block:30px;gap:clamp(24px,5vw,90px)}
+.experience-site .chapter{padding-block:clamp(90px,10vw,170px)}
+.experience-site .chapter-intro h2{letter-spacing:-.055em;font-weight:400}
+.experience-site .chapter-intro h2 span{color:#cad5de}
+.experience-site .intent-section,.experience-site .intent-modes,.experience-site .intent-modes a+a,.experience-site .journey-invitation,.experience-site .journey-rail{border:0;background:transparent}
+.experience-site .intent-modes{gap:30px}
+.experience-site .intent-modes a{padding:18px 0 28px}
+.experience-site .intent-modes a+a{padding-left:0}
+.experience-site .intent-modes h3{font-size:clamp(25px,2.5vw,38px);letter-spacing:-.04em}
+.experience-site .journey-invitation{background:radial-gradient(ellipse at 75% 45%,rgba(100,145,183,.09),transparent 64%)}
+.experience-site .journey-rail{gap:60px;padding-top:42px}
+
+/* Vision: a continuous, full-width photographic scene with an editorial caption. */
+.experience-site #story{position:relative;isolation:isolate;min-height:920px;display:flex;align-items:center;overflow:clip}
+.experience-site #story>.chapter-intro{position:relative;z-index:2;display:block;width:min(510px,43%);margin:0 0 0 auto}
+.experience-site #story .chapter-intro h2{font-size:clamp(38px,4.3vw,68px)}
+.experience-site #story .chapter-intro .body-copy{margin-top:30px;color:#d2dbe3;font-size:15px}
+.experience-site #story>.chapter-image{position:absolute;inset:0;z-index:-1;overflow:visible}
+.experience-site #story .chapter-image picture,.experience-site #story .chapter-image img{width:100%;height:100%;display:block}
+.experience-site #story .chapter-image img{aspect-ratio:auto;object-fit:cover;object-position:38% center;mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent)}
+.experience-site #story .chapter-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 12%,rgba(6,11,18,.18) 40%,rgba(6,11,18,.92) 78%);pointer-events:none}
+.experience-site #story .image-caption{position:absolute;left:var(--gutter);right:var(--gutter);bottom:34px;z-index:2;color:#c2ccd6}
+
+.experience-site .collection{background:transparent}
+.experience-site .collection-image{position:relative;margin-inline:calc(-1 * var(--gutter))!important}
+.experience-site .collection-image img{aspect-ratio:2;mask-image:linear-gradient(180deg,transparent,#000 13%,#000 78%,transparent)}
+.experience-site .collection-image .image-caption{margin-inline:var(--gutter);margin-top:0!important}
+.experience-site .collection-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:38px 60px;margin-top:58px}
+.experience-site .collection-list a{border:0;align-items:start;padding-block:12px 20px;grid-template-columns:22px 1fr 14px}
+.experience-site .collection-list h3{font-size:24px}
+.experience-site .collection-list p{line-height:1.8}
+
+/* Research is a pair of dissolving cinematic scenes, never two text boxes. */
+.experience-site .research-grid{display:block;margin-inline:calc(-1 * var(--gutter))}
+.experience-site .research-card{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-height:740px;height:86svh;max-height:1100px;background:transparent;border:0;border-radius:0;overflow:clip}
+.experience-site .research-card+.research-card{margin-top:-25px}
+.experience-site .research-card>picture{position:absolute;inset:0;z-index:-2;display:block}
+.experience-site .research-card img{width:100%;height:100%;aspect-ratio:auto;object-fit:cover;object-position:center;mask-image:linear-gradient(180deg,transparent,#000 17%,#000 78%,transparent)}
+.experience-site .research-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(6,11,18,.88),rgba(6,11,18,.42) 42%,transparent 80%),linear-gradient(0deg,rgba(6,11,18,.8),transparent 65%);pointer-events:none}
+.experience-site .research-card-content{position:relative;padding:70px var(--gutter) 90px;max-width:760px;background:transparent;border:0;text-shadow:0 2px 22px #0008}
+.experience-site .research-card-content h3{font-size:clamp(35px,4.1vw,64px);line-height:1.07;letter-spacing:-.05em;margin-bottom:24px}
+.experience-site .research-card-content p{max-width:460px;color:#d2dbe3;font-size:14px;line-height:1.9}
+.experience-site .research-card-content small{border:0;padding:0;margin-top:22px;color:#e4c99f;max-width:470px}
+
+.experience-site .global-chapter{position:relative;isolation:isolate;min-height:920px;display:flex;align-items:center;overflow:clip}
+.experience-site .global-chapter>div{position:relative;z-index:2;width:min(510px,43%)}
+.experience-site .global-chapter>figure{position:absolute;inset:0;z-index:-1}
+.experience-site .global-chapter figure picture,.experience-site .global-chapter figure img{width:100%;height:100%;display:block}
+.experience-site .global-chapter figure img{aspect-ratio:auto;object-fit:cover;object-position:70% center;mask-image:linear-gradient(180deg,transparent,#000 17%,#000 80%,transparent)}
+.experience-site .global-chapter figure:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,11,18,.96),rgba(6,11,18,.48) 40%,transparent 78%);pointer-events:none}
+.experience-site .global-chapter .body-copy{font-size:15px;color:#d2dbe3}
+.experience-site .global-chapter .image-caption{position:absolute;bottom:28px;left:var(--gutter);right:var(--gutter);z-index:2;color:#c2ccd6}
+.experience-site .closing-scene{min-height:800px;align-items:center}
+.experience-site .closing-scene picture{mask-image:linear-gradient(180deg,transparent,#000 20%,#000 85%,transparent)}
+.experience-site .closing-scene h2{font-size:clamp(62px,7.8vw,120px);line-height:1.02;letter-spacing:-.065em}
+.site-footer{border-top:0;background:transparent}
+
+/* Product explanations remain readable and interactive, without dashboard cards. */
+.product-shell{--ink:var(--space);--ink-soft:var(--space);--muted:var(--subtle);--cyan:var(--ice);--gold:var(--champagne)}
+.product-shell .architecture-figure,.product-shell .product-next,.product-shell .product-example{background:transparent;border:0;border-radius:0}
+.product-shell .architecture-figure img{mask-image:radial-gradient(ellipse at center,#000 48%,transparent 78%)}
+.product-shell .architecture-figure figcaption{border:0;padding:14px 0;background:transparent}
+.product-shell .family-grid{display:block}
+.product-shell .family-card{position:relative;isolation:isolate;display:grid;grid-template-columns:1fr 1fr;min-height:560px;margin-block:60px;border:0;border-radius:0;background:transparent;overflow:clip}
+.product-shell .family-art{position:absolute;left:28%;right:0;top:0;bottom:0;z-index:-1;width:72%;border:0;mask-image:linear-gradient(90deg,transparent,#000 28%,#000 70%,transparent)}
+.product-shell .family-art picture,.product-shell .family-art img{display:block;width:100%;height:100%}
+.product-shell .family-art img{aspect-ratio:auto;object-fit:cover;mask-image:linear-gradient(180deg,transparent,#000 15%,#000 85%,transparent)}
+.product-shell .family-copy{position:relative;z-index:1;padding:64px 0;max-width:450px;justify-content:center;background:transparent}
+.product-shell .family-card h2{font-size:clamp(32px,4vw,54px);letter-spacing:-.05em}
+.product-shell .family-summary{font-size:17px;color:var(--text);text-shadow:0 2px 12px var(--space)}
+.product-shell .mode-links a{border:0;border-radius:0;padding:9px 12px 9px 0}
+.product-shell .mode-filter button{border:0;border-bottom:1px solid transparent;border-radius:0;background:transparent}
+.product-shell .mode-filter button[aria-pressed=true]{color:var(--ice);background:transparent;border-bottom-color:var(--ice)}
+.product-shell .product-next,.product-shell .product-example{padding:36px 0}
+
+@media(max-width:1000px){
+ .experience-site .collection-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}
+ .experience-site #story>.chapter-intro{width:48%}
+ .experience-site .global-chapter>div{width:48%}
+}
+@media(max-width:760px){
+ .experience-site:has(.cinema-hero)>.site-header{height:76px}
+ .experience-site .cinema-hero{height:100svh;min-height:850px;max-height:1050px;align-items:flex-start}
+ .experience-site .cinema-hero .hero-art{inset:160px -100px -20px}
+ .experience-site .cinema-hero .hero-art img{object-position:69% center;opacity:.9}
+ .experience-site .cinema-hero:after{background:linear-gradient(180deg,var(--space) 2%,rgba(6,11,18,.9) 18%,rgba(6,11,18,.1) 53%,transparent 76%,var(--space))}
+ .experience-site .hero-content{padding:130px var(--gutter) 340px;max-width:100%}
+ .experience-site .hero-content h1{font-size:clamp(52px,12vw,86px);line-height:1.04;letter-spacing:-.065em}
+ .experience-site .hero-content .body-copy{font-size:13px;max-width:300px;margin-top:20px}
+ .experience-site .hero-actions{margin-top:18px;gap:24px}
+ .experience-site .hero-baseline{bottom:24px;gap:14px;font-size:7px}
+ .experience-site .hero-baseline>span{max-width:130px}
+ .experience-site .story-nav{padding-block:22px}
+ .experience-site .intent-modes{gap:10px}
+ .experience-site .intent-modes a{border:0!important;padding-block:18px!important}
+ .experience-site .journey-rail{gap:26px}
+ .experience-site #story{min-height:920px;align-items:flex-end;padding-bottom:100px}
+ .experience-site #story>.chapter-intro{width:100%;max-width:520px}
+ .experience-site #story .chapter-intro h2{max-width:340px;font-size:clamp(36px,8vw,54px)}
+ .experience-site #story .chapter-intro .body-copy{max-width:340px;font-size:13px;line-height:1.85}
+ .experience-site #story .chapter-image img{object-position:18% top}
+ .experience-site #story .chapter-image:after{background:linear-gradient(0deg,var(--space) 4%,rgba(6,11,18,.85) 36%,transparent 76%)}
+ .experience-site .collection-image img{aspect-ratio:1.25}
+ .experience-site .collection-list{grid-template-columns:1fr;gap:22px;margin-top:38px}
+ .experience-site .collection-list a{padding-block:12px}
+ .experience-site .research-card{height:auto;min-height:850px;align-items:flex-end}
+ .experience-site .research-card img{object-position:57% top}
+ .experience-site .research-card:after{background:linear-gradient(0deg,var(--space) 3%,rgba(6,11,18,.92) 30%,rgba(6,11,18,.12) 74%,transparent)}
+ .experience-site .research-card-content{padding:400px var(--gutter) 80px;width:100%}
+ .experience-site .research-card-content h3{font-size:clamp(32px,8.2vw,48px)}
+ .experience-site .research-card-content p{font-size:13px}
+ .experience-site .research-card-content .eyebrow{font-size:9px}
+ .experience-site .global-chapter{min-height:990px;align-items:flex-end;padding-bottom:110px}
+ .experience-site .global-chapter>div{width:100%}
+ .experience-site .global-chapter figure img{object-position:66% top}
+ .experience-site .global-chapter figure:after{background:linear-gradient(0deg,var(--space) 4%,rgba(6,11,18,.9) 38%,transparent 80%)}
+ .experience-site .global-chapter .body-copy{font-size:13px;max-width:350px}
+ .experience-site .closing-scene{min-height:780px}
+ .experience-site .closing-scene h2{font-size:clamp(54px,13vw,90px)}
+ .product-shell .family-card{display:flex;min-height:800px;margin-block:25px;justify-content:flex-end}
+ .product-shell .family-art{left:calc(-1 * var(--gutter));right:calc(-1 * var(--gutter));width:calc(100% + 2 * var(--gutter));top:0;bottom:230px;mask-image:linear-gradient(180deg,transparent,#000 14%,#000 45%,transparent)}
+ .product-shell .family-copy{padding:360px 0 40px;max-width:100%;flex:0 1 auto}
+ .product-shell .family-art img{object-position:65% top}
+ .product-shell .family-card h2{font-size:36px}
+}
+@media(prefers-reduced-motion:reduce){.experience-site picture,.experience-site picture img{animation:none!important;transform:none!important}}
