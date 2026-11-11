@@ -41,8 +41,8 @@
     },
     {
       "path": "api/subscriptions.js",
-      "bytes": 2741,
-      "sha256": "a03dcf69c63fbfd01db86521838d32ce676fb0a3c01cdfeff8ac21e34a584d02"
+      "bytes": 2830,
+      "sha256": "34ccd360313fe835d158c5f3c88b85d7a28c6614d92443b833251ec6d6df3b59"
     },
     {
       "path": "lib/auth.js",
@@ -96,8 +96,8 @@
     },
     {
       "path": "lib/subscriptions.js",
-      "bytes": 5067,
-      "sha256": "043cb3a53d2bdb9e4ca929b62200c939d36cabb486d5f6d2b0701de5ae519709"
+      "bytes": 5795,
+      "sha256": "14b98c944eda6a2f8aff2a65e0ee3baf60e8e7609d39fe0439a7d29218affef6"
     },
     {
       "path": "public/about/index.html",
@@ -361,8 +361,8 @@
     },
     {
       "path": "public/auth-navigation.js",
-      "bytes": 1094,
-      "sha256": "ee64cec7a7f319a3e2b6adda1bce40962cab721cfe34dec58180551425c375d2"
+      "bytes": 1177,
+      "sha256": "564f46b8ff05a29a2af1993de3f4cd6ed62e80ab59fd980b77c4a822dff23426"
     },
     {
       "path": "public/company/index.html",
@@ -800,5 +800,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "cc3b4f3a263a6a35a7973f6870e5288f7cd3be5570b3b10e6568386023538d10"
+  "fingerprint": "e099715b9b3e1011bf9242b0696baca91a8d18322f8e0d5758f7639bf686c39a"
 }

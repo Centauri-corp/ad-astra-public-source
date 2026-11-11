@@ -162,6 +162,9 @@ test('return paths reject external URLs and preserve approved mode navigation',(
  const safe=context.window.adAstraReturnPath;
  for(const value of ['https://evil.example','//evil.example','/\\evil.example','javascript:alert(1)','/sign-in/','/%2f%2fevil.example'])assert.equal(safe(value),'/platform/');
   assert.equal(safe('/knowledge/?mode=learn#ask-ad-astra'),'/knowledge/?mode=learn#ask-ad-astra');
+ assert.equal(safe('/account/billing/'),'/account/billing/');
+ assert.equal(safe('/account/billing/?return=https://evil.example&mode=learn#ask-ad-astra'),'/account/billing/');
+ for(const value of ['/account/','/account/billing/extra/','/account/billing/%2f%2fevil.example','/account/billing/\\evil.example'])assert.equal(safe(value),'/platform/');
 });
 test('session handshake verifies identity without model or quota access',async()=>{
  const session=require('../api/session');

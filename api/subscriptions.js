@@ -23,5 +23,5 @@ module.exports=async function handler(req,res){
   if(body.action==='enroll'&&(typeof key!=='string'||!/^[A-Za-z0-9:_-]{8,128}$/.test(key)))return reply(400,{error:'idempotency_key_required'});
   const result=await subscriptions.call(body.action,input,req.headers.authorization.slice(7),body.action==='enroll'?key:undefined);
   return reply(result.status,result.body);
- }catch{return reply(503,{error:'subscription_unavailable'});}
+ }catch(error){return reply(503,{error:error.message==='subscription_release_not_ready'?'subscription_release_not_ready':'subscription_unavailable'});}
 };

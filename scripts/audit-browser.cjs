@@ -122,6 +122,36 @@ const deadline=setTimeout(()=>{
   const motionContext=await browser.newContext({reducedMotion:'no-preference',viewport:{width:1440,height:1000}}),motionPage=await motionContext.newPage();let forbidden=[];
   motionPage.on('request',r=>{if(r.method()!=='GET'||/\/api\/(ask|session)|stripe|zoho|openai|google-analytics/.test(r.url()))forbidden.push(r.url());});
   await motionPage.goto(base+'/');const control=motionPage.locator('[data-motion-toggle]');assert.ok(await control.isVisible());await control.click();assert.equal(await motionPage.locator('body').getAttribute('data-motion'),'off');await control.click();assert.equal(await motionPage.locator('body').getAttribute('data-motion'),'on');await motionPage.emulateMedia({reducedMotion:'reduce'});await motionPage.waitForFunction(()=>document.body.dataset.motion==='off');assert.ok(await control.isHidden());assert.deepEqual(forbidden,[]);await motionContext.close();result('motion pause, reduced motion and zero provider or customer writes');
+  const billingContext=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'}),billingPage=await billingContext.newPage(),billingRequests=[];
+  await billingContext.route('**/*',route=>{
+   const request=route.request(),url=new URL(request.url());
+   if(url.origin!==base)return route.abort();
+   if(url.pathname.startsWith('/api/')){
+    if(url.pathname!=='/api/subscriptions')return route.abort();
+    billingRequests.push(request.postDataJSON());
+    return route.fulfill({contentType:'application/json',body:JSON.stringify({environment:'development',market:'US-CA',linked:true,linkingEnabled:false,checkoutEnabled:false,accessCurrent:false,workspaces:[],subscriptions:[]})});
+   }
+   return route.continue();
+  });
+  await billingPage.addInitScript(()=>{
+   window.Clerk={load:async()=>{},session:null,mountSignIn(_element,options){window.syntheticBillingReturn=options.fallbackRedirectUrl;}};
+  });
+  await billingPage.goto(base+'/account/billing/');
+  await billingPage.getByRole('link',{name:'Sign in to continue'}).click();
+  await billingPage.waitForURL('**/sign-in/**');
+  await billingPage.waitForFunction(()=>window.syntheticBillingReturn==='/account/billing/');
+  assert.equal(await billingPage.evaluate(()=>window.syntheticBillingReturn),'/account/billing/');
+  assert.equal(billingRequests.length,0);
+  await billingPage.addInitScript(()=>{
+   window.Clerk={load:async()=>{},session:{getToken:async()=> 'synthetic-browser-token'}};
+  });
+  await billingPage.goto(base+'/sign-in/?return=%2Faccount%2Fbilling%2F');
+  await billingPage.waitForURL('**/account/billing/');
+  await billingPage.waitForFunction(()=>document.getElementById('billing-message').textContent==='Your billing status is up to date.');
+  assert.deepEqual(billingRequests,[{action:'account',input:{}}]);
+  assert.ok(await billingPage.locator('#billing-start').isHidden());
+  await billingContext.close();
+  result('synthetic billing sign-in returns to the account page and paused sales show no checkout form');
  }catch(error){report.error=error.stack;process.exitCode=1;}finally{checkpoint('browser-close');await browser.close();}
  report.failures=report.pages.filter(p=>p.status!==200||p.overflow||(p.guardedContentHidden===null?p.visibleH1s!==1:!p.guardedContentHidden||p.visibleH1s>1)||p.errors.length||p.brokenImages.length||p.failedRequests.length||!p.products||!p.availability||p.sharedHeader!==1||p.sharedFooter!==1);
  report.pass=!report.error&&report.failures.length===0&&report.accessibility.length===routes.length&&report.accessibility.every(r=>r.violations.length===0);fs.writeFileSync(path.join(out,'browser-audit.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({pass:report.pass,observations:report.pages.length,accessibilityScans:report.accessibility.length,automatedAccessibilityViolations:report.accessibility.reduce((n,r)=>n+r.violations.length,0),interactions:report.interactions,failures:report.failures,error:report.error},null,2));clearTimeout(deadline);if(!report.pass)process.exitCode=1;
