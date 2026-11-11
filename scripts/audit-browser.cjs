@@ -26,6 +26,17 @@ const deadline=setTimeout(()=>{
  const browser=await chromium.launch({executablePath:fs.existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
  try{
   const context=await browser.newContext({reducedMotion:'reduce'});let page,errors=[],failedRequests=[];
+  // This source audit verifies the offline/fail-closed public surface, not the
+  // live identity provider. Loading the real SDK here introduces provider-driven
+  // redirects/frames into axe's document scan. Real sign-in belongs to protected
+  // customer QA; a separate fixture below tests the actual anonymous redirect.
+  report.identityProviderScope='SDK-unavailable fail-closed routes plus synthetic anonymous redirect; live identity NOT accepted';
+  report.blockedExternalOrigins=[];
+  await context.route('**/*',route=>{
+   const origin=new URL(route.request().url()).origin;
+   if(origin!==base){if(!report.blockedExternalOrigins.includes(origin))report.blockedExternalOrigins.push(origin);return route.abort();}
+   return route.continue();
+  });
   // Protected routes can redirect asynchronously after Clerk loads. A document
   // from the previous route must never interrupt the next route's navigation.
   for(const width of [320,390,768,1440]){
@@ -44,6 +55,7 @@ const deadline=setTimeout(()=>{
     const guardedContentHidden=route==='/platform/'?await page.locator('#platform-content').isHidden():route==='/knowledge/'?await page.locator('#main').isHidden():null;
     report.pages.push({route,width,status:response.status(),...state,guardedContentHidden,errors:[...errors],failedRequests:[...failedRequests]});
     if(width===390){
+     checkpoint('route-accessibility');
      await page.evaluate(axe.source);
      const audit=await page.evaluate(async()=>{
       const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}});
@@ -52,6 +64,7 @@ const deadline=setTimeout(()=>{
      report.accessibility.push({route,width,...audit});
     }
     if(['/','/start/','/intelligence/','/services/','/products/','/products/core-intelligence/','/status/'].includes(route)&&[390,1440].includes(width)){
+     checkpoint('route-screenshot');
      const name=route==='/'?'home':route.split('/').filter(Boolean).join('-');
      for(const full of ['/','/start/'].includes(route)?[false,true]:[true]){const file=path.join(out,`candidate-${name}-${width}${full?'-full':''}.png`);await page.screenshot({path:file,fullPage:full});report.screenshots.push(path.basename(file));}
     }
@@ -65,6 +78,10 @@ const deadline=setTimeout(()=>{
   // then assert real isolated navigation rather than retrying a failed goto.
   const authPage=await context.newPage();
   await authPage.route('**/knowledge/',r=>r.fulfill({contentType:'text/html',body:fs.readFileSync(path.join(root,'public/knowledge/index.html'),'utf8').replace(/<script defer data-clerk-publishable-key[^>]*><\/script>/,'<script>window.Clerk={load:()=>new Promise(r=>setTimeout(r,80)),session:null};</script>')}));
+  await authPage.goto(base+'/knowledge/',{waitUntil:'domcontentloaded'});
+  await authPage.waitForURL(url=>url.pathname==='/platform/');
+  assert.ok(await authPage.locator('#platform-content').isHidden());
+  result('synthetic anonymous session follows the actual knowledge redirect without exposing protected content');
   await authPage.goto(base+'/knowledge/',{waitUntil:'domcontentloaded'});
   await authPage.close();
   await page.route('**/markets/agriculture-food/',async r=>{await new Promise(resolve=>setTimeout(resolve,250));await r.continue();});
