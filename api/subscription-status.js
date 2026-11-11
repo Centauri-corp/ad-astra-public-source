@@ -6,7 +6,8 @@ module.exports=async function subscriptionStatus(req,res){
   res.setHeader('Cache-Control','no-store');
   res.setHeader('X-Robots-Tag','noindex, nofollow');
   if(req.method!=='GET'){res.statusCode=405;res.end(JSON.stringify({available:false}));return;}
-  const environment=process.env.VERCEL_ENV==='production'?'production':'development';
+  const environment=process.env.AD_ASTRA_SUBSCRIPTION_ENVIRONMENT;
+  if(!['production','development'].includes(environment)){res.statusCode=503;res.end(JSON.stringify({market:'US-CA',available:false}));return;}
   try {
     const upstream=await fetch(`https://wewznejqpnsmiwkbozgw.supabase.co/functions/v1/astra-subscriptions-${environment}/status`,{
       headers:{Accept:'application/json'},redirect:'error',signal:AbortSignal.timeout(4000)

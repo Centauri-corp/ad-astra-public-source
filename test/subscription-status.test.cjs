@@ -4,15 +4,15 @@ const assert=require('node:assert/strict');
 const handler=require('../api/subscription-status');
 
 async function responseFor(environment,upstream){
- const oldFetch=global.fetch,oldEnvironment=process.env.VERCEL_ENV;
+ const oldFetch=global.fetch,oldEnvironment=process.env.AD_ASTRA_SUBSCRIPTION_ENVIRONMENT;
  let body='',status=200;
  global.fetch=async()=>Response.json(upstream);
- process.env.VERCEL_ENV=environment;
+ process.env.AD_ASTRA_SUBSCRIPTION_ENVIRONMENT=environment==='production'?'production':'development';
  try{
   const response={setHeader(){},set statusCode(value){status=value;},end(value){body=value;}};
   await handler({method:'GET'},response);
   return {status,body:JSON.parse(body)};
- }finally{global.fetch=oldFetch;if(oldEnvironment===undefined)delete process.env.VERCEL_ENV;else process.env.VERCEL_ENV=oldEnvironment;}
+ }finally{global.fetch=oldFetch;if(oldEnvironment===undefined)delete process.env.AD_ASTRA_SUBSCRIPTION_ENVIRONMENT;else process.env.AD_ASTRA_SUBSCRIPTION_ENVIRONMENT=oldEnvironment;}
 }
 test('sandbox availability cannot be advertised as live subscription availability',async()=>{
  const result=await responseFor('preview',{environment:'development',checkoutEnabled:true,activationEnabled:true,frameworkDeployed:true});
