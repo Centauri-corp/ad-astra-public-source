@@ -18,3 +18,13 @@ The separate interactive-workspace branch's `apps/customer-workspace` tree match
 Selection of PR #36 is source-governance authorization, not an independent approval, charging authorization, or acceptance of missing provider evidence. Plus US$12/month and Pro US$29/month are approved for preparation only; Team/Enterprise remain inquiry-only. The existing hourly release watch reports material changes and does not autonomously deploy, charge, message, or index.
 
 `git.deploymentEnabled=false` remains in both observed branches. The Vercel project was requested to disable automatic custom-domain assignment and ignore Git builds from `work`; these controls do not revoke other accounts' manual CLI/API deployment powers. This candidate's production-source guard additionally rejects wrong/unknown branches, unpinned commits and wrong team/project. There is no claim of an account-wide manual-deployment lock. Do not pause the entire Vercel project: that would interrupt the currently serving website.
+
+## Release-path compatibility
+
+An exact SHA supplied as Vercel's Git ref is accepted only when it equals the platform's actual `VERCEL_GIT_COMMIT_SHA`. The selected branch is also accepted; the `work` branch and unknown refs remain rejected. This syntactic source check does not verify a GitHub review: the release operator must separately verify PR36's exact head, CI and independent approval before running any secret-bearing production build.
+
+Team identity accepts `VERCEL_ORG_ID` (CLI), `VERCEL_TEAM_ID`, or the non-secret scoped `AD_ASTRA_RELEASE_TEAM_ID`; project identity accepts `VERCEL_PROJECT_ID` or `AD_ASTRA_RELEASE_PROJECT_ID`. Every supplied identifier must match the verified project/team. Missing or conflicting identity fails closed. Never infer that a missing CLI variable means the Vercel account is wrong, or treat an operator-configured identifier as independent provider proof. The authenticated release operator verifies the actual team/project before deployment. Production Redis acceptance is unchanged.
+
+Hosted Chromium installation now uses the pinned Ubuntu 24.04 runner and separate, three-minute system-dependency/browser steps. Browser download connection time is bounded. No browser assertion, route, test, scan or acceptance requirement is skipped. A dependency failure is explicit failed CI, not a pass or a silent fallback to local results.
+
+The marketing visual publication and the customer revenue launch remain separate decisions. A noindex website with paused customer capabilities is not a paid-customer launch. No source-only fix accepts media rights, regional availability, indexing ownership, tenant QA, charges or CRM writes.
