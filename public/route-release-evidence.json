@@ -64,7 +64,8 @@
     { "path": "/sign-in/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/start/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/status/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
-    {"path": "/intelligence/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"]}
+    {"path": "/intelligence/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"]},
+    {"path": "/account/billing/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"]}
   ],
   "searchProperties": {
     "googleSearchConsole": { "status": "not-verified", "evidenceRef": null },

@@ -40,6 +40,11 @@
       "sha256": "468a9419003151a54ec39ebeeb156001ea8061f1e4a3c24d74959ee6b77337a0"
     },
     {
+      "path": "api/subscriptions.js",
+      "bytes": 2741,
+      "sha256": "a03dcf69c63fbfd01db86521838d32ce676fb0a3c01cdfeff8ac21e34a584d02"
+    },
+    {
       "path": "lib/auth.js",
       "bytes": 4742,
       "sha256": "86771b59484435890eec436f731f7646baf529d56cb77253a243d3f65d44e73a"
@@ -90,9 +95,29 @@
       "sha256": "386459239a24faaf42316fbdcb54481ad2c432e2d051dcfc86ad168a1e701ac1"
     },
     {
+      "path": "lib/subscriptions.js",
+      "bytes": 5067,
+      "sha256": "043cb3a53d2bdb9e4ca929b62200c939d36cabb486d5f6d2b0701de5ae519709"
+    },
+    {
       "path": "public/about/index.html",
       "bytes": 3841,
       "sha256": "9e8f72e5884991eaa2175f89178df4339057636590967aba59ee1cc4b9710789"
+    },
+    {
+      "path": "public/account/billing/app.js",
+      "bytes": 7767,
+      "sha256": "7def5d7ba4b824d791d5837cb5d30456b474f27c36a8ccd80510257b71dafe47"
+    },
+    {
+      "path": "public/account/billing/index.html",
+      "bytes": 7984,
+      "sha256": "342b49f1da33dae190425a9ea7966d3c544703160b1bac1cffec4f126ca5383f"
+    },
+    {
+      "path": "public/account/billing/style.css",
+      "bytes": 1708,
+      "sha256": "857e9e0a28ac58d8d5de1bf88bb748cbf22115ebae96e10487c2b5704df2de05"
     },
     {
       "path": "public/agent/index.html",
@@ -686,8 +711,8 @@
     },
     {
       "path": "public/route-release-evidence.json",
-      "bytes": 10931,
-      "sha256": "71ed0e22521ce990d23e7a47d9d2d17f855a95bd22f004db96c9d8b660b556bc"
+      "bytes": 11167,
+      "sha256": "8c2af1e5f5fcfe3ca9e528f4794436af394a54d47400f3b931c1d3274456abc4"
     },
     {
       "path": "public/services/index.html",
@@ -775,5 +800,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "9497942eb3112a62347a82f99bcb563ab5ff21418e55abb3b8a493e9be2e7c36"
+  "fingerprint": "cc3b4f3a263a6a35a7973f6870e5288f7cd3be5570b3b10e6568386023538d10"
 }

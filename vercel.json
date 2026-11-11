@@ -7,6 +7,9 @@
   "functions": {
     "api/ask.js": {
       "maxDuration": 30
+    },
+    "api/subscriptions.js": {
+      "maxDuration": 30
     }
   },
   "redirects": [],
@@ -55,7 +58,7 @@
       ]
     },
     {
-      "source": "/(intelligence|knowledge|platform|sign-in|markets|pricing|products|status|services|company|about|film|start)(.*)",
+      "source": "/(intelligence|knowledge|platform|sign-in|account|markets|pricing|products|status|services|company|about|film|start)(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
