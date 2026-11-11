@@ -376,8 +376,8 @@
     },
     {
       "path": "public/intelligence/index.html",
-      "bytes": 12587,
-      "sha256": "a0479e824c0f78cbdc27bee4e0e81d1cd982f4218858a1912acd0e2e1cf86155"
+      "bytes": 16154,
+      "sha256": "c0a67dc15edace31e600352280c78889ec3518fed8c1cd6a4d0c32dd151cd898"
     },
     {
       "path": "public/intelligence/style.css",
@@ -518,6 +518,46 @@
       "path": "public/markets/travel-hospitality/index.html",
       "bytes": 5026,
       "sha256": "345692e8db64afe8fd8068e2edc1d3d46987c5a024e38ee6d1371177c27e43b2"
+    },
+    {
+      "path": "public/neural/experience.css",
+      "bytes": 3222,
+      "sha256": "f4a2f9c93dc09a2d6e8754f74161560bcc1359ca12b72c95c4846ae392e5bb99"
+    },
+    {
+      "path": "public/neural/experience.js",
+      "bytes": 5493,
+      "sha256": "5722acc98832015600d43d3002d72db2bae7afb7cccdb33ae7467f054db7be28"
+    },
+    {
+      "path": "public/neural/scene.js",
+      "bytes": 7186,
+      "sha256": "dc9ecb9ecdac27900320f1c96052f7bb2d620ad0330f6f695ac2a2be992a5081"
+    },
+    {
+      "path": "public/neural/state.js",
+      "bytes": 1604,
+      "sha256": "42d3947bd03df25f37631699801057aa1d5f23ee72e910737c91cef984560dfc"
+    },
+    {
+      "path": "public/neural/vendor/LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "path": "public/neural/vendor/manifest.json",
+      "bytes": 669,
+      "sha256": "38fe5c250faea6eb55c82f065269b650030c7e9d6dd38dfca4c2466ddaf2200b"
+    },
+    {
+      "path": "public/neural/vendor/three.core.js",
+      "bytes": 1474799,
+      "sha256": "613e370f76638fdef83926642bf256dc9615684922de1ce1f63a8583e5d78578"
+    },
+    {
+      "path": "public/neural/vendor/three.module.js",
+      "bytes": 658900,
+      "sha256": "104f56145899722094556490d787aae0617cc2fc3382f31df02d724ea1aee341"
     },
     {
       "path": "public/platform-preview/app.js",
@@ -695,5 +735,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "9a4ccc484b7a86617cc2f5e92fe1d5a4d168d002df6432507155576a768f6fa6"
+  "fingerprint": "37c1e101f5448d3793499d542e700488b4802d8a0628e358756f4e1bf50d6eeb"
 }

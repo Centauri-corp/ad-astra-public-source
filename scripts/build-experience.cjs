@@ -2,6 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {head,footer,picture,esc,applySharedShell}=require('./lib/site-shell.cjs');
 const {journeyTeaser}=require('./lib/customer-experience.cjs');
+const {decorateNeuralExperience}=require('./lib/neural-experience.cjs');
 const collection=require('../config/story-collection.json'),catalog=require('../config/public-product-families.json');
 const art=id=>collection.assets.find(a=>a.id===id);
 const image=(id,options)=>picture(id,art(id).alt,options);
@@ -25,5 +26,5 @@ const files=new Map([
  ['public/intelligence/index.html',head('/intelligence/','Connected intelligence','Explore Astra Polaris, five ways of working and the clear boundaries between AI, AGI engineering research and an ASI research horizon.')+intelligenceContent+footer()+'</body></html>\n'],
  ['public/services/index.html',head('/services/','Solutions','Explore Ad Astra solution directions for individuals, creators, organizations, specialists and builders. Products and services remain in development.')+servicesContent+footer()+'</body></html>\n']
 ]);
-for(const [file,body]of files){const route=file==='public/index.html'?'/':'/'+file.slice(7).replace(/index\.html$/,'');const content=route==='/'?body.replace('href="/products/">Explore the possibilities','href="/start/">Find your starting point'):body;const html=applySharedShell(content,route);const target=path.join(__dirname,'..',file);if(process.argv.includes('--check'))assert.equal(fs.readFileSync(target,'utf8'),html,'Experience page drifted: '+file);else fs.writeFileSync(target,html);}
+for(const [file,body]of files){const route=file==='public/index.html'?'/':'/'+file.slice(7).replace(/index\.html$/,'');let content=route==='/'?body.replace('href="/products/">Explore the possibilities','href="/start/">Find your starting point'):body;if(route==='/intelligence/')content=decorateNeuralExperience(content);const html=applySharedShell(content,route);const target=path.join(__dirname,'..',file);if(process.argv.includes('--check'))assert.equal(fs.readFileSync(target,'utf8'),html,'Experience page drifted: '+file);else fs.writeFileSync(target,html);}
 console.log('AD_ASTRA_EXPERIENCE_PASS pages='+files.size+' storyAssets=6 releaseAuthorization=false');
