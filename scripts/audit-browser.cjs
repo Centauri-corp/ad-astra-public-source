@@ -143,13 +143,21 @@ const deadline=setTimeout(()=>{
   assert.equal(await billingPage.evaluate(()=>window.syntheticBillingReturn),'/account/billing/');
   assert.equal(billingRequests.length,0);
   await billingPage.addInitScript(()=>{
-   window.Clerk={load:async()=>{},session:{getToken:async()=> 'synthetic-browser-token'}};
+   window.Clerk={load:async()=>{},session:{id:'sess_browser_fixture',getToken:async()=> 'synthetic-browser-token'},addListener(callback){window.syntheticBillingSessionChanged=callback;}};
   });
   await billingPage.goto(base+'/sign-in/?return=%2Faccount%2Fbilling%2F');
   await billingPage.waitForURL('**/account/billing/');
   await billingPage.waitForFunction(()=>document.getElementById('billing-message').textContent==='Your billing status is up to date.');
   assert.deepEqual(billingRequests,[{action:'account',input:{}}]);
   assert.ok(await billingPage.locator('#billing-start').isHidden());
+  await billingPage.evaluate(()=>{
+   window.Clerk.session={id:'sess_browser_other',getToken:async()=> 'other-synthetic-token'};
+   window.syntheticBillingSessionChanged({session:window.Clerk.session});
+  });
+  assert.ok(await billingPage.locator('#billing-account').isHidden());
+  await billingPage.locator('#billing-message').filter({hasText:'Your sign-in changed'}).waitFor();
+  assert.deepEqual(billingRequests,[{action:'account',input:{}}]);
+  result('synthetic session switch clears billing details without another customer request');
   await billingContext.close();
   result('synthetic billing sign-in returns to the account page and paused sales show no checkout form');
  }catch(error){report.error=error.stack;process.exitCode=1;}finally{checkpoint('browser-close');await browser.close();}

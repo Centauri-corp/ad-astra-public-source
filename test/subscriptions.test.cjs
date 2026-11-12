@@ -32,7 +32,7 @@ const account={environment:'production',market:'US-CA',linked:true,linkingEnable
 
 test('closed source blocks new enrollment, checkout and activation before any provider request',async()=>{
  for(const action of ['enroll','checkout','activate']){
-  const f=fixture();const input=action==='enroll'?{tenantId:tenant,plan:'pro',market:'US-CA',consent:true,consentVersion:'2026-11'}:{workflowId:workflow};
+  const f=fixture();const input=action==='enroll'?{tenantId:tenant,plan:'pro',market:'US-CA',consent:true,consentVersion:'2026-11',channel:'direct'}:{workflowId:workflow};
   const r=await f.request({action,input},{headers:{'idempotency-key':'synthetic-enroll-1'}});
   assert.equal(r.statusCode,503);assert.equal(r.body.error,'subscription_release_not_ready');assert.equal(f.requests.length,0);
  }
@@ -54,7 +54,7 @@ test('subscription environment isolation rejects production requests from previe
 });
 test('authenticated released enrollment retains the idempotency key and pinned provider destination',async()=>{
  const f=fixture({released:true,reply:{workflowId:workflow,state:'requested'}});
- const r=await f.request({action:'enroll',input:{tenantId:tenant,plan:'pro',market:'US-CA',consent:true,consentVersion:'2026-11'}},{headers:{'idempotency-key':'synthetic-enroll-1'}});
+ const r=await f.request({action:'enroll',input:{tenantId:tenant,plan:'pro',market:'US-CA',consent:true,consentVersion:'2026-11',channel:'direct'}},{headers:{'idempotency-key':'synthetic-enroll-1'}});
  assert.equal(r.statusCode,200);assert.equal(f.requests.length,1);const {url,options}=f.requests[0];
  assert.equal(url,base+'production/enroll');assert.equal(options.headers['Idempotency-Key'],'synthetic-enroll-1');
  assert.equal(options.redirect,'error');assert.equal(options.cache,'no-store');assert.equal(options.headers.Authorization,'Bearer synthetic-token');
@@ -74,8 +74,8 @@ test('origin, authentication, content type, input shape, body size and enrollmen
  for(const [body,options,expected]of cases){const f=fixture({released:true});assert.equal((await f.request(body,options)).statusCode,expected);assert.equal(f.requests.length,0);}
  const f=fixture({authenticated:false});assert.equal((await f.request()).statusCode,401);assert.equal(f.requests.length,0);
 });
-test('checkout display requires release, consent version, policy URLs and a matching provider environment',async()=>{
- for(const change of [{consentVersion:null},{consentVersion:'invalid version'},{termsUrl:'https://evil.example/terms/'},{privacyUrl:'https://adastra.global/'},{checkoutEnabled:false}]){
+test('checkout display requires release, a linked identity, consent version, policy URLs and a matching provider environment',async()=>{
+ for(const change of [{consentVersion:null},{consentVersion:'invalid version'},{termsUrl:'https://evil.example/terms/'},{privacyUrl:'https://adastra.global/'},{checkoutEnabled:false},{linked:false}]){
   const f=fixture({released:true,reply:{...account,...change}});assert.equal((await f.request()).body.checkoutEnabled,false);
  }
  const f=fixture({released:true,reply:account});assert.equal((await f.request()).body.checkoutEnabled,true);
@@ -96,4 +96,23 @@ test('payment redirects accept only the action-specific HTTPS Stripe host',async
  for(const url of ['https://evil.example/','http://billing.stripe.com/','https://billing.stripe.com.evil.example/','https://user:password@billing.stripe.com/','https://checkout.stripe.com/']){
   const f=fixture({reply:{url}});const r=await f.request({action:'portal',input:{workflowId:workflow}});assert.equal(r.statusCode,503);
  }
+});
+test('coerced actions and malformed required billing fields never reach the provider',async()=>{
+ const enrollment={tenantId:tenant,plan:'pro',market:'US-CA',consent:true,consentVersion:'2026-11',channel:'direct'};
+ const bodies=[{action:['enroll'],input:enrollment},{action:['account']},{action:'constructor'},
+  {action:'link',input:{email:'invalid',password:'synthetic-private-value'}},
+  {action:'link',input:{email:'qa@example.test',password:'fixture',mfaCode:123456}},
+  {action:'unlink',input:{confirm:'true'}},{action:'state',input:{}},
+  {action:'checkout',input:{workflowId:[workflow]}},
+  {action:'enroll',input:{...enrollment,consent:false}},{action:'enroll',input:{...enrollment,channel:'unapproved'}}];
+ for(const body of bodies){const f=fixture({released:true,reply:{workflowId:workflow,state:'requested'}});const result=await f.request(body,{headers:{'idempotency-key':'synthetic-enroll-1'}});assert.equal(result.statusCode,400,JSON.stringify(body));assert.equal(f.requests.length,0);assert.ok(!JSON.stringify(result.body).includes('synthetic-private-value'));}
+ const f=fixture({reply:{workflowId:workflow,state:'requested'}});assert.equal((await f.request({action:['enroll'],input:enrollment},{headers:{'idempotency-key':'synthetic-enroll-1'}})).statusCode,400);
+ await assert.rejects(f.adapter.call(['enroll'],enrollment,'fixture-token'),/invalid_subscription_request/);assert.equal(f.requests.length,0);
+});
+test('unlinked identity and paused release cannot advertise current product access',async()=>{
+ const unlinked=fixture({released:true,reply:{...account,linked:false}});const body=(await unlinked.request()).body;
+ assert.equal(body.checkoutEnabled,false);assert.equal(body.accessCurrent,false);assert.deepEqual(body.workspaces,[]);assert.deepEqual(body.subscriptions,[]);
+ const paused=fixture({reply:account});assert.equal((await paused.request()).body.accessCurrent,false);
+ const access=fixture({reply:{environment:'production',market:'US-CA',allowed:true}});assert.equal((await access.request({action:'access'})).body.allowed,false);
+ const state=fixture({reply:{workflowId:workflow,state:'active',accessCurrent:true}});assert.equal((await state.request({action:'state',input:{workflowId:workflow}})).body.accessCurrent,false);
 });

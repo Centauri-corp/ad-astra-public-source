@@ -16,9 +16,9 @@ module.exports=async function handler(req,res){
   else{const parts=[];let size=0;for await(const chunk of req){size+=Buffer.byteLength(chunk);if(size>14000)return reply(413,{error:'body_too_large'});parts.push(Buffer.from(chunk));}raw=Buffer.concat(parts).toString('utf8');}
   if(Buffer.byteLength(raw)>14000)return reply(413,{error:'body_too_large'});
   let body;try{body=JSON.parse(raw);}catch{return reply(400,{error:'invalid_json'});}
-  if(!body||typeof body!=='object'||Array.isArray(body)||Object.keys(body).some(key=>!['action','input'].includes(key))||!Object.hasOwn(subscriptions.FIELDS,body.action))return reply(400,{error:'invalid_subscription_request'});
+  if(!body||typeof body!=='object'||Array.isArray(body)||Object.keys(body).some(key=>!['action','input'].includes(key)))return reply(400,{error:'invalid_subscription_request'});
   const input=body.input??{};
-  if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).some(key=>!subscriptions.FIELDS[body.action].includes(key)))return reply(400,{error:'invalid_subscription_request'});
+  if(!subscriptions.validInput(body.action,input))return reply(400,{error:'invalid_subscription_request'});
   const key=req.headers?.['idempotency-key'];
   if(body.action==='enroll'&&(typeof key!=='string'||!/^[A-Za-z0-9:_-]{8,128}$/.test(key)))return reply(400,{error:'idempotency_key_required'});
   const result=await subscriptions.call(body.action,input,req.headers.authorization.slice(7),body.action==='enroll'?key:undefined);
