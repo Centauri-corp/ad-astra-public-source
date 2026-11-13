@@ -76,10 +76,12 @@ assert.ok(homepage.includes('class="brand-wordmark" aria-hidden="true">AD ASTRA<
 assert.ok(fs.existsSync(path.join(root,'public/assets/brand/ad-astra-mark.svg')),'Missing first-party AD ASTRA orbital mark');
 const visualManifest=JSON.parse(fs.readFileSync(path.join(root,'public/assets/visual-manifest.json')));
 assert.ok(visualManifest.assets.some(asset=>asset.id==='ad-astra-orbital-mark'&&asset.path==='/assets/brand/ad-astra-mark.svg'),'Visual manifest must identify the deployed AD ASTRA orbital mark');
-// The cinematic rebuild uses optional CSS motion, not autoplay video/audio.
-// Caption assets remain checked for the archived motion studies, but the new
-// homepage must not quietly reintroduce media, microphone or prompt execution.
-assert.ok(!/<video|<audio|<iframe|<form\b/.test(homepage),'Homepage must stay a readable, non-executing story');
+// The owner's website revision permits a local, user-controlled motion study.
+// Customer execution, autoplay audio and third-party embeds remain excluded.
+assert.ok(!/<audio|<iframe|<form\b/.test(homepage),'Homepage must not activate audio, embeds or customer forms');
+assert.equal((homepage.match(/<video\b/g)||[]).length,1,'Homepage needs its reviewed local motion study');
+assert.ok(homepage.includes('src="/assets/brand/ad-astra-neural-study.mp4"'));
+assert.ok(!/<video[^>]*\bautoplay\b/.test(homepage),'Film playback must require user intent');
 assert.ok(homepage.includes('data-motion-toggle')&&homepage.includes('/design-system.js'),'Ambient motion needs an explicit pause control');
 for(const id of ['intelligence','vision','products','agi','global','beyond'])assert.ok(homepage.includes('/assets/story/'+id+'-1672.webp'),'Missing story chapter art: '+id);
 assert.ok(homepage.includes('AGI is not achieved')&&homepage.includes('ASI is not achieved'),'Research boundaries missing');
@@ -103,7 +105,8 @@ assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','i
 assert.deepEqual(experience.visualArchitecture.palette,{navy:'#060b12',cyan:'#a8dbe3',violet:'#9a7cff',gold:'#d5ba91'});
 assert.equal(experience.seo.indexingPolicy,'noindex-until-page-evidence-approved');
 assert.equal(experience.seo.homepageRobots,approvedSet.has('/')?'index,follow':'noindex,follow');
-assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);
+assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,false);
+assert.equal(experience.visualArchitecture.threeD.customerExecution,false);
 assert.equal(experience.growthAutomation.externalCrmWrites,false);
 assert.equal(experience.growthAutomation.outboundSends,false);
 assert.equal(experience.growthAutomation.mode,'private-scheduled-read-only-audit');

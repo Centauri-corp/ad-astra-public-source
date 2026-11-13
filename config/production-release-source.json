@@ -15,7 +15,7 @@
   "internalCompanion": {
     "repository": "Centauri-corp/ad-astra-internal-source",
     "pullRequest": 45,
-    "commit": "62c28c6687b66d16d94b737479385cac79d633c6"
+    "commit": "71eafb69c20ccd28499b50f6e6cbd3469a2ceeb0"
   },
   "pricingPreparation": {"currency":"USD","plusMonthly":12,"proMonthly":29,"team":"inquiry-only","enterprise":"inquiry-only","liveChargingAuthorized":false}
 }

@@ -250,6 +250,21 @@
       "sha256": "041f448e91faa5ee2097c5fb301b53aedec92f4199fadd403903440f876b383c"
     },
     {
+      "path": "public/assets/brand/ad-astra-neural-study.jpg",
+      "bytes": 34900,
+      "sha256": "64c6cf7ee4c7816889c49b6e1336214cfaba9cef3ca77968db643525f45e26af"
+    },
+    {
+      "path": "public/assets/brand/ad-astra-neural-study.mp4",
+      "bytes": 1538447,
+      "sha256": "c0492b2a735fdd31c32752cee9bbdc62b5fc40feab66f043045ae1be164233af"
+    },
+    {
+      "path": "public/assets/brand/ad-astra-neural-study.vtt",
+      "bytes": 241,
+      "sha256": "c703b92adcc525b4971bccd9356b0c401ba31026279c28e0b409c79723b01a91"
+    },
+    {
       "path": "public/assets/brand/product-tokens.css",
       "bytes": 395,
       "sha256": "f461b14b9fc187bf132018337331264d8b78035f7fd266353155b64bb952ed0c"
@@ -381,8 +396,8 @@
     },
     {
       "path": "public/company/index.html",
-      "bytes": 4093,
-      "sha256": "db4d6372ec11cd8e3fa410f608d9db12e104b7ba4f5f340b6c2541a3248e9748"
+      "bytes": 10337,
+      "sha256": "563aaea6e47524c4e5e8e06260eb76b9e876b77a6c80befb2faa6e9657c85bef"
     },
     {
       "path": "public/design-system.css",
@@ -401,8 +416,8 @@
     },
     {
       "path": "public/experience-manifest.json",
-      "bytes": 2629,
-      "sha256": "e588d8b8b16992702f6b331b10380e01dfca0ab4cc1a743bddd896a944f5f7b4"
+      "bytes": 2661,
+      "sha256": "ad004d9e4899de149de5224052fa124bf863eec06cde5bf80a81932228f63be8"
     },
     {
       "path": "public/film-delivery.css",
@@ -425,9 +440,19 @@
       "sha256": "28af5a3054be9f5d9927f23f5e00e309fd59cbb915eef6066586f8fca5c53513"
     },
     {
+      "path": "public/homepage-experience.css",
+      "bytes": 2160,
+      "sha256": "7644981ceebe0f416f0e3b969aafa35161b6a539e66235cacba12f4794928b9a"
+    },
+    {
+      "path": "public/homepage-experience.js",
+      "bytes": 2868,
+      "sha256": "8a16fbb0224a9eb56c8b0de67289b831c20d53a04969788b9a350049c9ea6b4b"
+    },
+    {
       "path": "public/index.html",
-      "bytes": 20328,
-      "sha256": "605664d177677caa52aa277c0fcd1463a037c02d3b8c32ff6f6c2e7221a433fa"
+      "bytes": 25401,
+      "sha256": "0f2b66a148b99a3df981feabf7f043a2e03c27a805ccf209b81ae05316631fa7"
     },
     {
       "path": "public/intelligence/index.html",
@@ -583,6 +608,11 @@
       "path": "public/markets/travel-hospitality/index.html",
       "bytes": 5026,
       "sha256": "345692e8db64afe8fd8068e2edc1d3d46987c5a024e38ee6d1371177c27e43b2"
+    },
+    {
+      "path": "public/neural/company-scene.js",
+      "bytes": 3103,
+      "sha256": "300e63ea6a9304f31e12e0bf9ecd96bfd34bac05d425d6ba56dd4d61e47eb3cd"
     },
     {
       "path": "public/neural/conversation.js",
@@ -815,5 +845,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "f80a14400aeefd849f37d432e18750970ea410b8735a761b83b4c300e4c30e4f"
+  "fingerprint": "46e4e02732110497f2f95ea249be21e2d81b61000bd97459c21a36d6598c6431"
 }

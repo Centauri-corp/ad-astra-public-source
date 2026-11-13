@@ -1,6 +1,6 @@
 # AD ASTRA: one release source
 
-The owner selected public PR #36 (`codex/cinematic-website-rebuild-20261110`) as the release source. The California canary through `c61a957d0d6d731d652a7ca71eb61d099f00d16c` is reconciled into that history, not deployed over it. Existing branch history is retained; no force push or history rewrite is required. The protected internal companion remains PR #45 at `62c28c6687b66d16d94b737479385cac79d633c6`; it is not copied into the public repository.
+The owner selected public PR #36 (`codex/cinematic-website-rebuild-20261110`) as the release source. The California canary through `c61a957d0d6d731d652a7ca71eb61d099f00d16c` is reconciled into that history, not deployed over it. Existing branch history is retained; no force push or history rewrite is required. The protected internal companion remains PR #45 at `71eafb69c20ccd28499b50f6e6cbd3469a2ceeb0`; it is not copied into the public repository. This pin is source identity, not a claim of provider acceptance or permission to activate it.
 
 The canary's unique California page and subscription-status proxy are retained. Existing PR #36 implementations supersede overlapping older manifests, prompt identity, routing, build checks and home page. The proxy now requires matching production environment, current source/runtime release readiness and complete bounded provider status before reporting availability. A preview or paused source makes no provider request and cannot claim paid enrollment. Provider flags do not grant a customer entitlement or authorize a charge.
 
