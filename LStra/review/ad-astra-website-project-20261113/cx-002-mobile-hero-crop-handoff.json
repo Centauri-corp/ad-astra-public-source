@@ -12,7 +12,7 @@
   "backlogItem": {
     "id": "CX-002",
     "priority": 0,
-    "state": "HANDOFF_PREPARED_PARTIAL_INTEGRATION",
+    "state": "HANDOFF_PREPARED_NATIVE_MASTER_METADATA_CORRECTION",
     "ownerVisualReview": "PENDING",
     "rightsReview": "PENDING",
     "verifiedLive": false
@@ -159,17 +159,18 @@
   ],
   "releaseEvidence": {
     "prState": "OPEN",
-    "prMergeable": true,
+    "prMergeable": false,
     "prPreviewComments": 0,
     "commitStatusChecks": 0,
     "branchFilteredVercelDeployments": 0,
     "websiteAudit": "NOT_RUN_NO_AUTHORIZED_LOCAL_WORKSPACE",
-    "candidateBrowserRoutes": "NOT_TESTED_NO_PREVIEW",
+    "candidateBrowserRoutes": "PARTIAL_TECHNICAL_TEST_HOME_DESKTOP_1363x936",
     "productionPromotion": "NOT_AUTHORIZED",
-    "checkedCandidateHead": "e81453805ae5a86202da8c25baf492f5ef8fc28d",
+    "checkedCandidateHead": "bf0c483cdb69b49b26ef21d078e081614b985d9f",
     "candidateWorkflowRuns": 0,
     "candidateCommitStatuses": 0,
-    "candidatePreviewDeployments": 0
+    "candidatePreviewDeployments": 1,
+    "exactPreviewDeployment": "dpl_56cYebwPKxkNRMT6oAQC2SEegF4h"
   },
   "cmsPolicyConflict": {
     "projectId": "6a4vgjc9",
@@ -236,6 +237,118 @@
       "action": "Implement the already specified derived 800x600 crop and register its exact bytes/hash, or revise the release language to describe only a contain/source-sizing mitigation and keep the art-specific mobile crop acceptance open.",
       "preferredCreativePath": "Derive the 800x600 WebP from the existing 1600x900 selected bytes without generation or restyling, preserve the full neural silhouette/core/horizon, update manifest + asset selection + generated homepage, then capture exact 320/390/768 screenshots.",
       "publicationBoundary": "No production promotion or OWNER_ACCEPTED status until the exact candidate receives real visual and rights review."
+    }
+  },
+  "currentCandidateReconciliation": {
+    "observedAt": "2026-11-13T20:22:41Z",
+    "candidateHead": "bf0c483cdb69b49b26ef21d078e081614b985d9f",
+    "exactPreview": {
+      "deploymentId": "dpl_56cYebwPKxkNRMT6oAQC2SEegF4h",
+      "url": "https://ad-astra-public-6h23abgem-zoheb-khan-825ab34d.vercel.app/",
+      "state": "READY",
+      "productionPromotion": false
+    },
+    "nativeMasterEvidence": {
+      "classification": "Original procedural CGI",
+      "landscapePng": {
+        "path": "public/assets/neural-master/neural-master-landscape-3840x2160.png",
+        "width": 3840,
+        "height": 2160,
+        "bytes": 5545237,
+        "sha256": "7154081165187348da70616ae400ca463a3858fd7fbdcd883a1beaa84827d3b7",
+        "operation": "direct WebGL canvas PNG; no resampling"
+      },
+      "delivery3840": {
+        "path": "/assets/neural-master/delivery/neural-core-3840.avif",
+        "width": 3840,
+        "height": 2160,
+        "bytes": 143364,
+        "sha256": "2393c4fded782a3e5643b91605cf8fe4156686ce1b3fee80b45c067031cf45b3",
+        "gitBlobSha": "3402e0506106888bf920d436b44326d9de683593"
+      },
+      "delivery1600": {
+        "path": "/assets/neural-master/delivery/neural-core-1600.avif",
+        "width": 1600,
+        "height": 900,
+        "bytes": 44087,
+        "sha256": "8720fe9e4d9bac9037845d96c352d4c243363529a8eb9a87d5d6ace321abb871",
+        "gitBlobSha": "fb4043f39294c0a4b9bbab486f9bd4e0624fb2aa"
+      },
+      "portraitReference": {
+        "path": "public/assets/neural-master/neural-master-portrait-2160x3840.webp",
+        "width": 2160,
+        "height": 3840,
+        "bytes": 663606,
+        "sha256": "d57762baa9e7b5703872d945c4afcd31817e982b64a40c56071f6ea4a67fb1d2",
+        "gitBlobSha": "fb4ef46e35e602dc7412b8162010e3415f0d7333",
+        "selectedForHomepage": false
+      },
+      "provenance": {
+        "manifest": "public/assets/neural-master/manifest.json",
+        "deliveryManifest": "public/assets/neural-master/delivery/manifest.json",
+        "seed": 401913,
+        "rasterInputs": [],
+        "upscaled": false,
+        "externalRequests": []
+      }
+    },
+    "actualVisualReview": {
+      "browser": "Chrome cloud browser",
+      "exactHeadPreview": true,
+      "viewport": {
+        "width": 1363,
+        "height": 936,
+        "dpr": 1
+      },
+      "route": "/",
+      "observed": {
+        "selectedAsset": "/assets/neural-master/delivery/neural-core-1600.avif",
+        "objectFit": "contain",
+        "objectPosition": "66% 50%",
+        "horizontalOverflow": false,
+        "heroCopyLegible": true,
+        "neuralSilhouetteVisible": true,
+        "coreAndPlanetaryHorizonVisible": true,
+        "pauseControlBefore": "Pause ambient motion",
+        "pauseControlAfter": "Play ambient motion",
+        "motionStateAfter": "off"
+      },
+      "limitations": [
+        "Technical screenshot/interaction QA only; not owner visual acceptance.",
+        "Required 320/390/768/1024/1440 route bundle is NOT_TESTED in this run.",
+        "Cloud browser responsive DevTools were organization-blocked; local Playwright Chromium launch failed because sandbox socket creation was not permitted.",
+        "Physical Safari and VoiceOver are NOT_TESTED."
+      ]
+    },
+    "assessment": [
+      "The previous 1672px-source/1600px-proxy limitation is superseded for the selected neural hero: the current candidate contains a direct-rendered 3840x2160 procedural CGI master with recorded no-upscale provenance.",
+      "The old specific desktop crop/legibility concern was not reproduced at 1363x936: the exact preview uses contain, preserves the full neural silhouette and keeps copy readable without horizontal overflow.",
+      "CX-002 mobile closure remains pending because the required mobile/tablet viewport evidence was not available; no mobile pass is claimed.",
+      "The consolidated visual review remains pending and cannot be self-signed.",
+      "No commit status or PR-triggered workflow run was attached to the exact head at observation time."
+    ],
+    "preciseCorrection": {
+      "id": "CX-002-NATIVE-MASTER-INTEGRATION-METADATA",
+      "summary": "Reconcile the neural-master provenance/review records with their actual candidate integration without changing approval state.",
+      "sourceDiff": [
+        "In public/assets/neural-master/manifest.json, change approval.integration from not-integrated to candidate-integrated and bind the exact candidate head/deployment; keep humanApproved=false and approval.status unapproved/pending.",
+        "In public/assets/neural-master/visual-review.json, change integration from not-integrated to candidate-integrated and record the selected delivery paths plus exact deployment evidence; keep ownerAcceptance=pending.",
+        "In projects/website-customer-experience/evolution-backlog.json, move CX-002 only to candidate technical review, not completed, until 320/390/768/1024/1440 screenshot/interaction evidence exists.",
+        "Do not regenerate the CGI, switch to the portrait reference, change rights status, publish, or mark OWNER_ACCEPTED."
+      ],
+      "closingTests": [
+        "Run npm run website:audit and the affected source tests in the authorized workspace.",
+        "Capture exact-head / at 320/390/768/1024/1440 with the selected AVIF currentSrc, no overflow, full silhouette/core/horizon, motion toggle, reduced motion and Save-Data evidence.",
+        "Obtain independent owner visual review against the consolidated fingerprint."
+      ]
+    },
+    "statusDistinction": {
+      "draft": true,
+      "designApproved": false,
+      "tested": "DESKTOP_TECHNICAL_ONLY_1363x936",
+      "handoffPrepared": true,
+      "verifiedLive": false,
+      "ownerAccepted": false
     }
   }
 }
