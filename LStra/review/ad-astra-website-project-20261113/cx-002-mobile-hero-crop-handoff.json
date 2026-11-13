@@ -1,6 +1,6 @@
 {
   "schema": "ad-astra-website-creative-handoff/v1",
-  "recordedAt": "2026-11-13T18:25:28Z",
+  "recordedAt": "2026-11-13T18:27:29Z",
   "project": {
     "repository": "Centauri-corp/ad-astra-public-source",
     "repositoryId": 1431594115,
@@ -178,5 +178,16 @@
     "action": "CMS_EXPORT_HOLD",
     "privateBodiesFetched": false,
     "accessSettingsChanged": false
+  },
+  "liveComparison": {
+    "url": "https://adastra.global/",
+    "browser": "Chrome cloud browser",
+    "observedTitle": "Ad Astra — Beyond the expected",
+    "observedHeroHeading": "Beyond the expected.",
+    "candidateHeroHeading": "See beyond. Think further.",
+    "result": "CURRENT_LIVE_DIFFERS_FROM_PR38_CANDIDATE",
+    "screenshotObserved": true,
+    "responsiveViewports": "NOT_TESTED_IN_THIS_RUN",
+    "note": "The live surface is the older public-preview composition; the PR38 candidate is not live and no exact preview deployment was available."
   }
 }
