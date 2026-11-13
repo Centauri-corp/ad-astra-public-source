@@ -22,7 +22,7 @@ test('the project generates current graphics contracts, brand tokens and explici
 test('retired primary image migration is idempotent and preserves protected forms and scripts',()=>{
  const original='<main hidden id="platform-content"><form action="/api/session"><input name="token"></form><script src="/auth.js"></script><img src="/assets/astra-lumen-neural-concierge.png" alt="Old head"></main>';
  const updated=reconcileVisualAssets(original,'/agent/');
- assert.ok(updated.includes('src="/assets/experience/neural-core-1600.webp"'));
+ assert.ok(updated.includes('src="'+primaryAsset('/agent/',context).src+'"'));
  assert.ok(updated.includes('<main hidden id="platform-content"><form action="/api/session"><input name="token"></form><script src="/auth.js"></script>'));
  assert.equal(reconcileVisualAssets(updated,'/agent/'),updated);
  assert.equal(reconcileVisualAssets(original,'/platform/'),original,'Text-first guarded routes have no implicit asset substitution');

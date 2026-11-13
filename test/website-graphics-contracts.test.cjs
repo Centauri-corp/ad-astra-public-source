@@ -25,6 +25,7 @@ function fixture(t){
 }
 function update(root,file,change){const value=read(root,file);change(value);write(root,file,value);}
 const selectionPath='projects/website-customer-experience/asset-selections.json';
+const signatureManifest=h.primaryAsset('/').manifest;
 function rendered(route,context=h.loadProject()){
  const original=fs.readFileSync(path.join(source,'public',route.slice(1),'index.html'),'utf8');
  return h.reconcileVisualAssets(original,route,context);
@@ -68,15 +69,15 @@ test('CX-002: unknown kind and a WebP labelled vector fail closed',async t=>{
  update(root,selectionPath,s=>s.assets[0].kind='vector');await assert.rejects(h.assetQuality(root),/not SVG/);
 });
 test('CX-002: even correctly hashed one-pixel rasters cannot bypass minimum delivery dimensions',async t=>{
- const root=fixture(t),pixel=await sharp({create:{width:1,height:1,channels:3,background:'#05070a'}}).webp().toBuffer();
- const manifest=read(root,'public/assets/experience/manifest.json');
+ const root=fixture(t),pixel=await sharp({create:{width:1,height:1,channels:3,background:'#05070a'}}).avif().toBuffer();
+ const manifest=read(root,signatureManifest);
  for(const entry of manifest.exports){write(root,'public'+entry.path,pixel);Object.assign(entry,{width:1,height:1,bytes:pixel.length,sha256:hash(pixel)});}
- write(root,'public/assets/experience/manifest.json',manifest);
+ write(root,signatureManifest,manifest);
  await assert.rejects(h.assetQuality(root),/below minimum width/);
  update(root,selectionPath,s=>s.assets[0].kind='vector');await assert.rejects(h.assetQuality(root),/not SVG/);
 });
 test('CX-002: stale bytes, decoded metadata and vector origin versions fail provenance checks',async t=>{
- const root=fixture(t),manifest='public/assets/experience/manifest.json',saved=read(root,manifest);
+ const root=fixture(t),manifest=signatureManifest,saved=read(root,manifest);
  update(root,manifest,m=>m.exports[1].bytes=1);await assert.rejects(h.assetQuality(root),/byte count/);
  write(root,manifest,saved);update(root,manifest,m=>m.exports[1].width=1);await assert.rejects(h.assetQuality(root),/decoded width/);
  write(root,manifest,saved);update(root,selectionPath,s=>s.assets.find(a=>a.id==='orbital-mark').origin.version='0'.repeat(64));
@@ -90,7 +91,7 @@ test('CX-006: a selected held origin fails, but unrelated held datasets do not b
 test('CX-006: unknown provenance fields and a manifest pointing to a held source are not ignored',async t=>{
  const root=fixture(t),saved=read(root,selectionPath);
  update(root,selectionPath,s=>s.assets[0].sourceResourceId='sanity-dataset-production');await assert.rejects(h.assetQuality(root),/selected asset fields/);
- write(root,selectionPath,saved);update(root,'public/assets/experience/manifest.json',m=>m.source.resourceId='sanity-dataset-production');
+ write(root,selectionPath,saved);update(root,signatureManifest,m=>m.source.resourceId='sanity-dataset-production');
  await assert.rejects(h.assetQuality(root),/on hold/);
 });
 test('CX-004: the actual report and production visual guard reject stale bytes before interpreting review data',async t=>{

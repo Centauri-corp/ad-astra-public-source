@@ -244,6 +244,19 @@
       "textOnly": true
     },
     {
+      "id": "customer-trust",
+      "paths": [
+        "/privacy/",
+        "/terms/",
+        "/security/",
+        "/support/"
+      ],
+      "journey": "trust",
+      "primaryAsset": null,
+      "families": "all",
+      "textOnly": true
+    },
+    {
       "id": "film",
       "paths": [
         "/film/"

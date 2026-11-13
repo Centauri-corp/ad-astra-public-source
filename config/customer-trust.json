@@ -1,0 +1,66 @@
+{
+  "schema": "ad-astra-customer-trust/v1",
+  "scope": "source-backed-trust-preview",
+  "routeLedger": "public/route-release-evidence.json",
+  "business": {
+    "status": "billing-merchant-verified",
+    "publicTradingName": "AD ASTRA",
+    "billingMerchantLegalName": "Ea solar llc",
+    "website": "https://www.adastra.global",
+    "mailingAddress": "5170 Golden Foothill Parkway, El Dorado Hills, CA 95762, US",
+    "mailingAddressAuthority": "owner-approved-office-address",
+    "providerRecord": {
+      "provider": "Stripe",
+      "accountId": "acct_1UUszKDxqADfYHCv",
+      "record": "/settings/business-details",
+      "method": "Authenticated TinyFish business-profile read-back",
+      "automationRun": "25271e63-2d7c-4ea0-9a8e-d9fe99a80720",
+      "observedOn": "2026-11-13",
+      "evidenceRef": "/workspace/LStra/review/ad-astra-launch-deliverables-20261113/business-contact-evidence.json",
+      "scope": "Billing merchant, public trading name, website, business address and configured public phone only; does not establish the service operator relationship or monitored support."
+    },
+    "operatorLegalName": null,
+    "operatorRelationship": null,
+    "operatorEvidenceRef": null
+  },
+  "support": {
+    "status": "operational-routing-unverified",
+    "publicPhone": "+1 (415) 972-9905",
+    "phoneEvidenceRef": "/workspace/LStra/review/ad-astra-launch-deliverables-20261113/business-contact-evidence.json",
+    "email": null,
+    "emailStatus": "unverified",
+    "emailVerificationEvidenceRef": null,
+    "routingEvidenceRef": null,
+    "availabilityNotice": null,
+    "serviceEvidenceRef": null
+  },
+  "policy": {
+    "status": "holding-for-verified-policy",
+    "version": null,
+    "effectiveDate": null,
+    "retentionNotice": null,
+    "rightsNotice": null,
+    "providerProcessingNotice": null,
+    "commercialNotice": null,
+    "evidenceRef": null
+  },
+  "sources": [
+    { "id": "identity", "refs": ["lib/auth.js", "api/session.js", "docs/customer-contract-release.md"] },
+    { "id": "access", "refs": ["api/ask.js", "lib/shared-budget.js", "lib/model-gateway.js", "docs/customer-contract-release.md"] },
+    { "id": "conversation", "refs": ["public/neural/conversation.js", "public/neural/engine-client.js", "api/ask.js"] },
+    { "id": "voice", "refs": ["public/neural/voice.js", "docs/voice-engine-integration.md"] },
+    { "id": "billing", "refs": ["lib/subscriptions.js", "public/account/billing/app.js"] },
+    { "id": "accounting", "refs": ["api/ask.js", "docs/customer-contract-release.md", "owner-session:verified-private-accounting-hashes-and-ids-without-prompt-content"] },
+    { "id": "availability", "refs": ["public/release-manifest.json", "public/route-release-evidence.json", "lib/release-gates.js"] },
+    { "id": "business", "refs": ["/workspace/LStra/review/ad-astra-launch-deliverables-20261113/business-contact-evidence.json", "owner-session:approved-office-address-20261113"] }
+  ],
+  "practices": {
+    "identity": "Account sign-in uses Clerk. Account and sign-in information is processed to verify access; sign-in alone does not establish a paid subscription.",
+    "access": "Before a model request can proceed, the service checks the signed-in account, workspace membership and subscription access. Customer access remains subject to availability and service limits.",
+    "conversation": "In the current conversation interface, typing does not send your question to the AI service. Text is transmitted when you choose Send. Questions and answers are held for the current interaction; this interface does not save a conversation history for you to return to.",
+    "voice": "Voice is optional. Dictation and answer playback use supported on-device speech features only, after you choose them. You can review dictated text before choosing Send. This interface sends no audio to Ad Astra. If on-device speech is unavailable, use text instead.",
+    "billing": "Existing customers can start from account billing to review their account and, where available, open Stripe-hosted billing management. Account access and billing management depend on a verified sign-in and the availability of the connected service.",
+    "accounting": "Separate private usage and cost records contain request identifiers and hashes rather than the text of your question. These records support access checks and usage reconciliation. They are distinct from conversation history.",
+    "availability": "The website and workspace designs are previews. Customer AI access and new paid subscriptions are not opened by these pages. Product availability and service regions must be confirmed before purchase."
+  }
+}

@@ -229,9 +229,12 @@ async function assetQuality(root=projectRoot){
    assert.equal(expectedHash,item.sha256,'Provenance hash mismatch: '+src);
    if(evidence.bytes!==undefined)assert.equal(evidence.bytes,bytes.length,'Provenance byte count mismatch');
    if(asset.kind==='raster'){
-    const image=sharp(bytes,{limitInputPixels:64000000}),meta=await image.metadata();Object.assign(item,{width:meta.width,height:meta.height,format:meta.format});
-    assert.ok(c.standard.delivery.rasterFormats.includes(meta.format),'Unsupported raster delivery: '+src);
-    assert.equal(path.extname(src),'.'+meta.format,'Declared/decoded raster format mismatch');
+    const image=sharp(bytes,{limitInputPixels:64000000}),meta=await image.metadata();
+    // libvips identifies AVIF by its HEIF container and AV1 compression.
+    const format=meta.format==='heif'&&meta.compression==='av1'?'avif':meta.format;
+    Object.assign(item,{width:meta.width,height:meta.height,format});
+    assert.ok(c.standard.delivery.rasterFormats.includes(format),'Unsupported raster delivery: '+src);
+    assert.equal(path.extname(src),'.'+format,'Declared/decoded raster format mismatch');
     assert.equal(evidence.width,meta.width,'Provenance decoded width mismatch');
     if(evidence.height!==undefined)assert.equal(evidence.height,meta.height,'Provenance decoded height mismatch');
     const min=use==='desktop'?c.standard.delivery.desktopHeroMinimumWidth:c.standard.delivery.mobileMinimumWidth;

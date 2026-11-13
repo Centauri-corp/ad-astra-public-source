@@ -12,16 +12,16 @@
   "assets": [
     {
       "id": "neural-core",
-      "src": "/assets/experience/neural-core-1600.webp",
-      "mobile": "/assets/experience/neural-core-800.webp",
-      "manifest": "public/assets/experience/manifest.json",
+      "src": "/assets/neural-master/delivery/neural-core-3840.avif",
+      "mobile": "/assets/neural-master/delivery/neural-core-1600.avif",
+      "manifest": "public/assets/neural-master/delivery/manifest.json",
       "kind": "raster",
       "role": "Signature neural spiral; homepage and workspace identity",
-      "alt": "An optical-glass neural spiral rising above Earth's horizon. Original Ad Astra concept art.",
+      "alt": "An original CGI glass neural sculpture with a champagne spiral above a planetary horizon.",
       "origin": {
-        "kind": "local-generated",
-        "resourceId": "experience-art-manifest",
-        "version": "be8d98f3cc8fd0556ace3b2a50d8fb0a073f0a053dc0c43f05b3f2d5850002a5"
+        "kind": "first-party-code",
+        "resourceId": "native-neural-cgi",
+        "version": "7154081165187348da70616ae400ca463a3858fd7fbdcd883a1beaa84827d3b7"
       }
     },
     {

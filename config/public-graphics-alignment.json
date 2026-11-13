@@ -35,11 +35,11 @@
       "routes": [
         "/"
       ],
-      "hero": "/assets/experience/neural-core-1600.webp",
+      "hero": "/assets/neural-master/delivery/neural-core-3840.avif",
       "motion": "optional CSS ambient motion; no video or audio",
-      "motionPoster": "/assets/experience/neural-core-1600.webp",
-      "neuralStudy": "/assets/experience/neural-core-1600.webp",
-      "mobileNeuralStudy": "/assets/experience/neural-core-800.webp",
+      "motionPoster": "/assets/neural-master/delivery/neural-core-3840.avif",
+      "neuralStudy": "/assets/neural-master/delivery/neural-core-3840.avif",
+      "mobileNeuralStudy": "/assets/neural-master/delivery/neural-core-1600.avif",
       "productConstellation": "/assets/story/products-1672.webp",
       "storyManifest": "/assets/story/manifest.json",
       "status": "cinematic customer experience candidate; consolidated owner visual review pending"
@@ -73,8 +73,8 @@
       "routes": [
         "/platform-preview/"
       ],
-      "hero": "/assets/experience/neural-core-1600.webp",
-      "neuralCard": "/assets/experience/neural-core-1600.webp",
+      "hero": "/assets/neural-master/delivery/neural-core-3840.avif",
+      "neuralCard": "/assets/neural-master/delivery/neural-core-3840.avif",
       "status": "interactive local sample workspace; no live model session or customer data"
     },
     "modelAndMarkets": {
@@ -94,7 +94,7 @@
         "/assets/runway-orbital-intelligence.jpg"
       ],
       "status": "Route-specific visible roles; company/market pages are explicitly text-only. Social images are separate from visible primary artwork.",
-      "socialArt": "/assets/experience/neural-core-1600.webp"
+      "socialArt": "/assets/neural-master/delivery/neural-core-3840.avif"
     },
     "solutions": {
       "routes": [

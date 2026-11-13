@@ -1,0 +1,35 @@
+{
+  "name": "ad-astra-public-hardened",
+  "private": true,
+  "version": "2.3.0",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "experience:build": "node scripts/build-experience.cjs",
+    "journey:build": "node scripts/build-customer-experience.cjs",
+    "neural:build": "node scripts/build-neural-vendor.cjs",
+    "workspace:build": "node scripts/build-neural-workspace.cjs",
+    "shell:build": "node scripts/build-site-shell.cjs",
+    "website:build": "node scripts/build-website-project.cjs && npm run experience:build && npm run journey:build && npm run products:build && npm run status:build && npm run workspace:build && npm run trust:build && npm run shell:build && npm run sources:write",
+    "website:audit": "node scripts/audit-website-project.cjs",
+    "website:promotion-check": "node scripts/audit-website-project.cjs --require-visual-approval",
+    "products:build": "node scripts/build-products.cjs",
+    "status:build": "node scripts/build-operating-status.cjs",
+    "trust:build": "node scripts/build-customer-trust.cjs",
+    "trust:check": "node scripts/build-customer-trust.cjs --check",
+    "trust:readiness": "node scripts/build-customer-trust.cjs --require-paid-sales",
+    "trust:test": "node --test test/customer-trust*.test.cjs",
+    "test": "npm run check && node --test test/*.test.cjs",
+    "check": "node scripts/build-website-project.cjs --check && node scripts/build-neural-vendor.cjs --check && node scripts/build-experience.cjs --check && node scripts/build-customer-experience.cjs --check && node scripts/build-neural-workspace.cjs --check && node scripts/build-products.cjs --check && node scripts/build-operating-status.cjs --check && node scripts/build-customer-trust.cjs --check && node scripts/build-site-shell.cjs --check && node scripts/check-release.cjs && node scripts/website-source-integrity.cjs && node scripts/validate-models.cjs && node scripts/audit-website-project.cjs",
+    "models:validate": "node scripts/validate-models.cjs",
+    "sources:write": "node scripts/website-source-integrity.cjs --write",
+    "sources:check": "node scripts/website-source-integrity.cjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.14.0",
+    "playwright": "1.62.1",
+    "sharp": "0.35.5",
+    "three": "0.187.0"
+  }
+}
