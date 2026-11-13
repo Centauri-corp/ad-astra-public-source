@@ -25,54 +25,54 @@ beforeEach(()=>{
  // In-memory accepted-source fixture only; never edits public manifests.
  release.publicLaunchEnabled=true;release.engineAvailable=true;routing.redirects=[];
  for(const key of Object.keys(process.env))if(!(key in originalEnv))delete process.env[key];
- Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://redis.invalid',KV_REST_API_TOKEN:'synthetic-test-only',OPENAI_API_KEY:'synthetic-test-only',OPENAI_MODEL:'gpt-4.1-mini-2025-04-14',VERCEL_ENV:'production'});
+ Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://redis.invalid',KV_REST_API_TOKEN:'synthetic-test-only',AD_ASTRA_MODEL_GATEWAY_URL:'https://gateway.invalid/v1/respond',AD_ASTRA_MODEL_GATEWAY_TOKEN:'synthetic-gateway-token',AD_ASTRA_MODEL_GATEWAY_CONTRACT:'ad-astra-model-gateway/v1',VERCEL_ENV:'production'});
  for(const flag of gates.FLAGS)process.env[flag]='true';
  Object.assign(process.env,customerBudget.env);budgetReply=null;
  calls=[];redisResult=[1,11,3600];providerStatus=200;
- providerPayload={object:'chat.completion',model:'gpt-4.1-mini-2025-04-14',choices:[{index:0,finish_reason:'stop',message:{role:'assistant',content:'Synthetic fixture response'}}],usage:{prompt_tokens:100,completion_tokens:20,total_tokens:120}};
+ providerPayload={object:'chat.completion',model:'astra-lumen',choices:[{index:0,finish_reason:'stop',message:{role:'assistant',content:'Synthetic fixture response'}}],usage:{prompt_tokens:100,completion_tokens:20,total_tokens:120}};
  global.fetch=async(url,options)=>{
   calls.push({url,options});
   if(url.includes('/.well-known/jwks.json'))return {ok:true,json:async()=>({keys:[jwk]})};
   if(url==='https://redis.invalid')return {ok:true,json:async()=>({result:redisResult})};
   if(url===customerBudget.url)return Response.json(budgetReply||customerBudget.allowance(options));
-  if(url==='https://api.openai.com/v1/chat/completions')return Response.json(providerPayload,{status:providerStatus});
+  if(url==='https://gateway.invalid/v1/respond')return Response.json(providerPayload,{status:providerStatus});
   throw Error('Unexpected external destination');
  };
 });
 after(()=>{global.fetch=originalFetch;Object.assign(release,originalRelease);routing.redirects=originalRedirects;for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];Object.assign(process.env,originalEnv);});
 test('runtime switches cannot bypass a marketing-only source or closed customer routes',async()=>{
- for(const key of ['publicLaunchEnabled','engineAvailable']){release[key]=false;calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));release[key]=true;}
+ for(const key of ['publicLaunchEnabled','engineAvailable']){release[key]=false;calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/v1/respond')));release[key]=true;}
   assert.deepEqual(routing.redirects, []);
 });
 test('all five contracted modes and governed agent profiles use a bounded provider request in the synthetic fixture',async()=>{
  const ids=require('../lib/modes').MODE_IDS;assert.deepEqual(ids,release.customerModes);assert.deepEqual(catalog.MODELS[0].modes,ids);
- for(const mode of ids){calls=[];const r=await request({body:{question:'Compare two clear alternatives.',mode}});assert.equal(r.statusCode,200);assert.equal(r.body.mode,mode);assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,1);}
+ for(const mode of ids){calls=[];const r=await request({body:{question:'Compare two clear alternatives.',mode}});assert.equal(r.statusCode,200);assert.equal(r.body.mode,mode);assert.equal(calls.filter(c=>c.url.includes('/v1/respond')).length,1);}
  const r=await request({body:{question:'Compare two clear alternatives.',mode:'research',agentId:'researcher'}});assert.equal(r.statusCode,200);assert.equal(r.body.agentId,'researcher');
 });
 test('valid signed session reserves quota before one bounded provider request',async()=>{
  const r=await request();assert.equal(r.statusCode,200);assert.equal(r.headers['cache-control'],'no-store');
- const quotaIndex=calls.findIndex(c=>c.url==='https://redis.invalid'),modelIndex=calls.findIndex(c=>c.url.includes('/chat/completions'));assert.ok(quotaIndex<modelIndex);
+ const quotaIndex=calls.findIndex(c=>c.url==='https://redis.invalid'),modelIndex=calls.findIndex(c=>c.url.includes('/v1/respond'));assert.ok(quotaIndex<modelIndex);
  const admissionIndex=calls.findIndex(c=>c.url===customerBudget.url);assert.ok(admissionIndex>quotaIndex&&admissionIndex<modelIndex);
  const admission=JSON.parse(calls[admissionIndex].options.body);assert.deepEqual(Object.keys(admission).sort(),['idempotencyKey','protocol','requestHash']);
- const payload=JSON.parse(calls[modelIndex].options.body);assert.equal(payload.max_tokens,700);assert.equal(payload.store,false);assert.equal(payload.model,'gpt-4.1-mini-2025-04-14');assert.ok(calls[modelIndex].options.signal);
+ const payload=JSON.parse(calls[modelIndex].options.body);assert.equal(payload.agentId,'guide');assert.equal(payload.mode,'ask');assert.ok(Array.isArray(payload.messages));assert.ok(!('model' in payload));assert.ok(calls[modelIndex].options.signal);
 });
 test('paid denial, revoked access, replay and tenant capacity never reach the provider',async()=>{
  for(const [reason,code] of [['paid_access_required',403],['request_replayed',409],['capacity_reached',429]]){
   budgetReply={protocol:'ad-astra-customer-budget/v1',allowed:false,reason};calls=[];
   const r=await request();assert.equal(r.statusCode,code);assert.equal(r.body.error,reason);
-  assert.ok(!calls.some(c=>c.url.includes('/chat/completions')));assert.ok(!JSON.stringify(r.body).includes('secret'));
+  assert.ok(!calls.some(c=>c.url.includes('/v1/respond')));assert.ok(!JSON.stringify(r.body).includes('secret'));
  }
 });
 test('an invalid or unavailable bridge cannot fall back to identity and Redis alone',async()=>{
  for(const value of [{allowed:true},{protocol:'ad-astra-customer-budget/v1',allowed:false,reason:'unknown'},
   {...customerBudget.allowance({body:JSON.stringify({requestHash:'a'.repeat(64)})}),expiresAt:0}]){
   budgetReply=value;calls=[];const r=await request();assert.equal(r.statusCode,503);
-  assert.equal(r.body.error,'customer_access_unavailable');assert.ok(!calls.some(c=>c.url.includes('/chat/completions')));
+  assert.equal(r.body.error,'customer_access_unavailable');assert.ok(!calls.some(c=>c.url.includes('/v1/respond')));
  }
  delete process.env.AD_ASTRA_CUSTOMER_BUDGET_SECRET;assert.equal((await request()).statusCode,503);
 });
 test('every absent or false release flag prevents all quota and model calls',async()=>{
- for(const flag of gates.FLAGS){process.env[flag]='false';calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));process.env[flag]='true';}
+ for(const flag of gates.FLAGS){process.env[flag]='false';calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/v1/respond')));process.env[flag]='true';}
  delete process.env.AD_ASTRA_SECURITY_REVIEW_APPROVED;assert.equal((await request()).statusCode,503);
 });
 test('auth mode cannot become public, absent auth configuration denies',async()=>{
@@ -83,7 +83,7 @@ test('missing and forged bearer tokens never reach quota or model',async()=>{
  assert.equal((await request({headers:{authorization:''}})).statusCode,401);
  const parts=token().split('.');parts[2]=Buffer.alloc(256).toString('base64url');
  assert.equal((await request({headers:{authorization:'Bearer '+parts.join('.')}})).statusCode,401);
- assert.ok(!calls.some(c=>c.url.includes('/chat/completions')||c.url==='https://redis.invalid'));
+ assert.ok(!calls.some(c=>c.url.includes('/v1/respond')||c.url==='https://redis.invalid'));
 });
 test('JWT issuer audience azp subject session state and numeric date checks',async()=>{
  const now=Math.floor(Date.now()/1000);
@@ -91,7 +91,7 @@ test('JWT issuer audience azp subject session state and numeric date checks',asy
   assert.equal((await request({headers:{authorization:'Bearer '+token(claims)}})).statusCode,401,JSON.stringify(claims));
  }
  for(const h of [{alg:'none'},{alg:'HS256'},{jku:'https://evil.example'},{kid:'unknown'},{crit:['b64']}])assert.equal((await request({headers:{authorization:'Bearer '+token({},h)}})).statusCode,401);
- assert.ok(!calls.some(c=>c.url.includes('/chat/completions')));
+ assert.ok(!calls.some(c=>c.url.includes('/v1/respond')));
 });
 test('origin and method rejection cannot be bypassed with Host or proxy headers',async()=>{
  assert.equal((await request({method:'GET'})).statusCode,405);
@@ -111,15 +111,15 @@ test('body limits apply to parsed objects, strings, Unicode, and unknown fields'
 test('quota outage and corrupt replies fail closed without memory fallback',async()=>{
  for(const result of [null,'1',[-1,0,60],[1,20,0],[1,'11',3600]]){redisResult=result;assert.equal((await request()).statusCode,503);}
  delete process.env.KV_REST_API_TOKEN;delete process.env.UPSTASH_REDIS_REST_TOKEN;assert.equal((await request()).statusCode,503);
- assert.ok(!calls.some(c=>c.url.includes('/chat/completions')));
+ assert.ok(!calls.some(c=>c.url.includes('/v1/respond')));
 });
 test('user quota and global budget exhaustion stop model calls with Retry-After',async()=>{
  for(const [result,error] of [[[0,0,120],'rate_limit_reached'],[[2,0,3600],'daily_capacity_reached']]){redisResult=result;const r=await request();assert.equal(r.statusCode,429);assert.equal(r.body.error,error);assert.ok(Number(r.headers['retry-after'])>0);}
- assert.ok(!calls.some(c=>c.url.includes('/chat/completions')));
+ assert.ok(!calls.some(c=>c.url.includes('/v1/respond')));
 });
 test('budget is required and never exceeds the owner-approved ceiling',async()=>{
  for(const value of ['', 'NaN','10000001','-1','1.5']){process.env.AD_ASTRA_DAILY_BUDGET_MICRO_USD=value;assert.equal((await request()).statusCode,503);}
- assert.ok(!calls.some(c=>c.url.includes('/chat/completions')));
+ assert.ok(!calls.some(c=>c.url.includes('/v1/respond')));
 });
 test('quota keys use signed identity, ignore spoofed IP and survive module reload',async()=>{
  await request({headers:{'x-forwarded-for':'1.2.3.4'}});const first=JSON.parse(calls.find(c=>c.url==='https://redis.invalid').options.body);
@@ -128,7 +128,7 @@ test('quota keys use signed identity, ignore spoofed IP and survive module reloa
  delete require.cache[require.resolve('../lib/quota')];calls=[];await require('../lib/quota').reserve({iss:'https://clerk.adastra.global',sub:'user_testA'});assert.equal(JSON.parse(calls[0].options.body)[3],first[3]);
 });
 test('provider 429 yields safe 503 without retry or refund',async()=>{
- providerStatus=429;const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'ai_unavailable');assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,1);assert.equal(calls.filter(c=>c.url==='https://redis.invalid').length,1);
+ providerStatus=429;const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'ai_unavailable');assert.equal(calls.filter(c=>c.url.includes('/v1/respond')).length,1);assert.equal(calls.filter(c=>c.url==='https://redis.invalid').length,1);
  assert.ok(!JSON.stringify(r.body).includes('synthetic-test-only'));
 });
 test('provider model/format violations never publish an answer, replay or expose the provider body',async()=>{
@@ -138,7 +138,7 @@ test('provider model/format violations never publish an answer, replay or expose
   providerPayload=structuredClone(valid);mutate(providerPayload);calls=[];
   const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'ai_unavailable');
   assert.ok(!('answer' in r.body));assert.ok(!JSON.stringify(r.body).includes('unapproved'));
-  assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,1);
+  assert.equal(calls.filter(c=>c.url.includes('/v1/respond')).length,1);
   assert.equal(calls.filter(c=>c.url==='https://redis.invalid').length,1);
  }
 });
@@ -173,5 +173,5 @@ test('session handshake verifies identity without model or quota access',async()
   const res=response();await session({method:'POST',headers:{host:'adastra.global',origin:'https://adastra.global','x-ad-astra-request':'public-v1',authorization}},res);
   assert.equal(res.statusCode,code);assert.equal(res.body.authenticated,code===200);assert.deepEqual(Object.keys(res.body),['authenticated']);
  }
- assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));
+ assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/v1/respond')));
 });

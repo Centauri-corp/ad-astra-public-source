@@ -5,7 +5,7 @@ const { publicCustomerAgents } = require('../lib/customer-agent-catalog');
 const { CONTRACT, validateCatalog, validateRelease, validateCompletion, readCompletion } = require('../lib/model-validation');
 const release = require('../public/release-manifest.json');
 function completion() {
-  return { object: 'chat.completion', model: CONTRACT.providerModel,
+  return { object: 'chat.completion', model: CONTRACT.runtimeModel,
     choices: [{ index: 0, finish_reason: 'stop', message: { role: 'assistant', content: '  Synthetic contract fixture.  ', refusal: null } }],
     usage: { prompt_tokens: 100, completion_tokens: 20, total_tokens: 120 } };
 }
@@ -56,7 +56,7 @@ test('only a completed answer from the exact pinned provider snapshot is admitte
   assert.equal(await readCompletion(Response.json(value)), 'Synthetic contract fixture.');
 });
 test('model substitution, truncation, tools, refusals, role changes and ambiguous choices fail closed', () => {
-  for (const mutate of [d=>d.model='gpt-4.1-mini', d=>delete d.model, d=>d.object='other',
+  for (const mutate of [d=>d.model='unrecognized-runtime', d=>delete d.model, d=>d.object='other',
     d=>d.choices.push(d.choices[0]), d=>d.choices=[], d=>d.choices[0].index=1,
     d=>d.choices[0].finish_reason='length', d=>d.choices[0].finish_reason='content_filter',
     d=>d.choices[0].message.role='tool', d=>d.choices[0].message.refusal='synthetic refusal',
@@ -95,7 +95,7 @@ test('public catalog declares profile/model distinction and no AGI/ASI availabil
   require('../api/models')({method:'GET'},res);
   assert.equal(res.body.capabilityClass,'bounded-narrow-ai-integration');
   assert.equal(res.body.agiAvailable,false);assert.equal(res.body.asiAvailable,false);
-  assert.equal(JSON.stringify(res.body).includes(CONTRACT.providerModel),false);
+  assert.equal(JSON.stringify(res.body).includes('gateway.invalid'),false);
   assert.equal(res.body.agents.length, 6);
   for (const agent of res.body.agents) { assert.ok(!Object.hasOwn(agent, 'modelRole')); assert.equal(agent.availability, 'development-preview'); assert.ok(!/provider|connector|openai|google|ollama|llama/i.test(JSON.stringify(agent))); }
   assert.match(res.body.disclosure,/does not establish customer availability/);

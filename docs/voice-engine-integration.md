@@ -2,9 +2,9 @@
 
 ## Credential decision and scope
 
-The owner authorized reuse of the existing Ad Astra credentials. Configuration metadata confirms an existing sensitive `OPENAI_API_KEY` entry for the established Vercel project's Production and Preview environments. No secret was decrypted, copied to this workspace, recreated or written to source. Metadata presence is not proof that the credential works or that a customer release is accepted.
+The owner authorized reuse of the existing Ad Astra runtime configuration. The public source now requires a protected `AD_ASTRA_MODEL_GATEWAY_URL`, `AD_ASTRA_MODEL_GATEWAY_TOKEN`, and `AD_ASTRA_MODEL_GATEWAY_CONTRACT` for the private model gateway. No secret is decrypted, copied to this workspace, recreated or written to source. Metadata presence is not proof that the gateway works or that a customer release is accepted.
 
-This increment retains the existing provider, model, sign-in, budget and source-release boundaries. It adds request-lifecycle events, a guarded customer conversation interface, optional device-local dictation/playback and visual activity integration. It does not enable the public launch, billing, CRM, outreach, indexing, paid speech services or a new model.
+This increment retains the existing gateway, model-role, sign-in, budget and source-release boundaries. It adds request-lifecycle events, a guarded customer conversation interface, optional device-local dictation/playback and visual activity integration. It does not enable the public launch, billing, CRM, outreach, indexing, paid speech services or a new model.
 
 ## Implemented flow
 

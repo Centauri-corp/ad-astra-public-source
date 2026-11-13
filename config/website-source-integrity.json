@@ -11,8 +11,8 @@
   "files": [
     {
       "path": "api/ask.js",
-      "bytes": 7932,
-      "sha256": "c0792a6dfdfeca2770c34306092fdcce70beb971f13c5ce2199d825564c25995"
+      "bytes": 7700,
+      "sha256": "5c1367d7f92336763e188f88a70d7621280e98cfd9bc1b522bc35a19e7b79106"
     },
     {
       "path": "api/models.js",
@@ -65,9 +65,14 @@
       "sha256": "123602f966a09608fd0580b798d97fa6823899a28791790264582b5c85f9b299"
     },
     {
+      "path": "lib/model-gateway.js",
+      "bytes": 1296,
+      "sha256": "00a8ba421d4e4fc85be6b9ee45fa920f068737f2d96c183fd78a3c94b74721eb"
+    },
+    {
       "path": "lib/model-validation.js",
-      "bytes": 6503,
-      "sha256": "6a837e8b6b3987ac3f2368ad005843320c2208e60b55038a69a348a454920e81"
+      "bytes": 6489,
+      "sha256": "8d1777c129d1f5328686c289c6cf8e2ddde2689396caf4223abd1a2ac8923801"
     },
     {
       "path": "lib/modes.js",
@@ -86,13 +91,13 @@
     },
     {
       "path": "lib/quota.js",
-      "bytes": 3564,
-      "sha256": "5d0c0acfec04400cf114753837f132024c1986c050794a6ee695d8bf8fd8c526"
+      "bytes": 3565,
+      "sha256": "cdfc84408bbf3af719e297c679ee7510b95738a60b58d99d441fb0ea7c84b9fb"
     },
     {
       "path": "lib/release-gates.js",
-      "bytes": 1429,
-      "sha256": "4abb05d604362b2be7ecdef58d22d398bc0895c0d7cab63a3cade5a1d64a3bd0"
+      "bytes": 1561,
+      "sha256": "91610f0bf632bf5b9b900d693e654fc0efcecf83829d1cc254263a9840c3857f"
     },
     {
       "path": "lib/shared-budget.js",
@@ -805,5 +810,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "0060d017c2ead71b84ea007f6147c99c41a5b4572fbea5e54033c1aa6f30f317"
+  "fingerprint": "e774da8853ab1a3115dbc098e6d89654adae3f2aa0fcff9970613bd03a0729dc"
 }

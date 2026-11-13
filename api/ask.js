@@ -8,6 +8,7 @@ const { MODES } = require('../lib/modes');
 const { engineEvents } = require('../lib/engine-events');
 const { CONTRACT, readCompletion } = require('../lib/model-validation');
 const { resolveCustomerAgent } = require('../lib/customer-agent-catalog');
+const { requestCompletion } = require('../lib/model-gateway');
 const MAX_BODY = 14000;
 function sameOrigin(req) {
   const host = String(req.headers?.host || '').toLowerCase();
@@ -85,12 +86,8 @@ module.exports = async function ask(req, res) {
     if(req.aborted||res.destroyed)throw new Error('disconnected');
     if(admission.expiresAt<=Date.now())throw new Error('admission_expired');
     events.start(headers);events.requesting();
-    const response = await fetch('https://api.openai.com/v1/chat/completions',{
-      method:'POST',headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},
-      body:JSON.stringify({model:CONTRACT.providerModel,temperature:0.25,max_tokens:CONTRACT.maxOutputTokens,store:false,messages}),
-      redirect:'error',cache:'no-store',signal:AbortSignal.any([AbortSignal.timeout(18000),disconnected.signal])
-    });
-    if (!response.ok) {console.warn('ad_astra_provider_status',{requestId,status:response.status});throw new Error('provider_unavailable');}
+    const response = await requestCompletion({agentId, mode, messages, signal:AbortSignal.any([AbortSignal.timeout(18000),disconnected.signal])});
+    if (!response.ok) {console.warn('ad_astra_model_gateway_status',{requestId,status:response.status});throw new Error('model_gateway_unavailable');}
     const answer = await readCompletion(response);
     return reply(200,{ok:true,agentId,mode,answer,disclosure:'AI-generated response. Verify important claims against primary sources.'},headers);
   } catch { return reply(503,{error:'ai_unavailable',message:'Ad Astra could not complete this response. Please try again later.'},{...headers,'Retry-After':60}); }
