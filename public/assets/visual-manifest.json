@@ -143,7 +143,10 @@
       "id": "ad-astra-orbital-mark",
       "path": "/assets/brand/ad-astra-mark.svg",
       "role": "first-party orbital brand symbol paired with the semantic wordmark",
-      "alt": ""
+      "alt": "",
+      "kind": "vector",
+      "bytes": 604,
+      "sha256": "041f448e91faa5ee2097c5fb301b53aedec92f4199fadd403903440f876b383c"
     },
     {
       "id": "astra-lumen-neural-profile-canvas",
@@ -163,6 +166,11 @@
       "role": "Signature neural spiral; homepage and workspace identity",
       "kind": "image",
       "provenanceManifest": "/assets/experience/manifest.json",
+      "origin": {
+        "kind": "local-generated",
+        "resourceId": "experience-art-manifest",
+        "version": "be8d98f3cc8fd0556ace3b2a50d8fb0a073f0a053dc0c43f05b3f2d5850002a5"
+      },
       "reviewStatus": "candidate",
       "alt": "An optical-glass neural spiral rising above Earth's horizon. Original Ad Astra concept art."
     }

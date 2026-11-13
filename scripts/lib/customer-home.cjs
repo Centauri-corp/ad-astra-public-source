@@ -1,14 +1,15 @@
 'use strict';
-const {esc,picture}=require('./site-shell.cjs');
+const {esc}=require('./site-shell.cjs');
+const {loadProject,primaryAsset,primaryPicture,assetPicture}=require('./website-project.cjs');
 const catalog=require('../../config/public-product-families.json');
-const story=require('../../config/story-collection.json');
-const image=(id,cls='')=>picture(id,story.assets.find(a=>a.id===id).alt,{cls});
+const sceneIds={vision:'human-perspective',products:'product-constellation',agi:'agi-research',global:'global-perspective',beyond:'beyond-horizon'};
 const arrow='<span aria-hidden="true">↗</span>';
 
-function customerHome(){
+function customerHome(context=loadProject()){
+ const image=(id,cls='')=>assetPicture(sceneIds[id],{cls,sizes:'(max-width: 760px) 100vw, 70vw'},context);
  return `<main id="main">
 <section class="ad-arrival" aria-labelledby="arrival-title">
- <picture class="ad-neural-art"><source type="image/webp" srcset="/assets/experience/neural-core-800.webp 800w, /assets/experience/neural-core-1600.webp 1600w" sizes="100vw"><img src="/assets/experience/neural-core-1600.webp" width="1600" height="900" alt="An optical-glass neural spiral rising above Earth's horizon. Original conceptual artwork." fetchpriority="high" decoding="async"></picture>
+ ${primaryPicture('/',{cls:'ad-neural-art',hero:true},context)}
  <div class="ad-arrival-copy"><p class="ad-kicker"><span></span> HUMAN CURIOSITY. NEW POSSIBILITIES.</p><h1 id="arrival-title">See beyond.<br>Think further.</h1><p class="ad-lead">A place for your questions to become discoveries.<br>And your ideas to find their next direction.</p><div class="ad-actions"><a class="ad-button" href="/platform-preview/">Explore the workspace ${arrow}</a><a class="ad-text-link" href="#possibilities">Discover Ad Astra <span aria-hidden="true">↓</span></a></div><p class="ad-preview-note">Experience preview · Customer services in development</p></div>
  <div class="ad-arrival-foot"><a href="#possibilities"><span class="ad-scroll-line" aria-hidden="true"></span> SCROLL TO DISCOVER</a><a href="/intelligence/#neural-experience">Explore the 3D study ${arrow}</a><button type="button" data-motion-toggle aria-pressed="false">Pause ambient motion</button></div>
 </section>
@@ -25,7 +26,7 @@ function customerHome(){
 </section>
 <section class="ad-workspace-story" aria-labelledby="workspace-title">
  <div class="ad-workspace-copy"><p class="ad-kicker">02 / YOUR SPACE TO THINK</p><h2 id="workspace-title">Less between you<br>and the idea.</h2><p>A calm workspace. A connected visual canvas. Space to move between a question, its context and what comes next.</p><a class="ad-button" href="/platform-preview/">Step inside the preview ${arrow}</a><span class="ad-fineprint">Interactive design preview with curated sample responses.</span></div>
- <a class="ad-workspace-window" href="/platform-preview/"><div class="ad-window-toolbar"><span class="ad-window-brand">A / AD ASTRA</span><span>WORKSPACE PREVIEW ${arrow}</span></div><div class="ad-window-scene"><img src="/assets/experience/neural-core-800.webp" width="800" height="450" loading="lazy" alt="Glass neural sculpture within the proposed workspace"><div class="ad-window-greeting"><span>A LITTLE CURIOSITY GOES A LONG WAY.</span><p>What will you<br>explore today?</p></div><div class="ad-window-composer"><span>Start with a question…</span><span aria-hidden="true">↑</span></div></div><div class="ad-window-status"><span>Research</span><span>Create</span><span>Plan</span><span>LOCAL DESIGN STUDY</span></div></a>
+ <a class="ad-workspace-window" href="/platform-preview/"><div class="ad-window-toolbar"><span class="ad-window-brand">A / AD ASTRA</span><span>WORKSPACE PREVIEW ${arrow}</span></div><div class="ad-window-scene">${assetPicture(primaryAsset('/',context).id,{sizes:'(max-width: 760px) 100vw, 50vw'},context)}<div class="ad-window-greeting"><span>A LITTLE CURIOSITY GOES A LONG WAY.</span><p>What will you<br>explore today?</p></div><div class="ad-window-composer"><span>Start with a question…</span><span aria-hidden="true">↑</span></div></div><div class="ad-window-status"><span>Research</span><span>Create</span><span>Plan</span><span>LOCAL DESIGN STUDY</span></div></a>
 </section>
 <section class="ad-products ad-section" id="products" aria-labelledby="product-title"><div class="ad-section-heading"><p class="ad-kicker">03 / THE PRODUCT CONSTELLATION</p><h2 id="product-title">Built around<br><span>what matters to you.</span></h2><p>Six connected product directions. From everyday curiosity<br>to the work of creators, teams and builders.</p></div><div class="ad-product-editorial"><figure>${image('products')}<figcaption>Original product-family concept art</figcaption></figure><div class="ad-product-list">${catalog.families.map((f,i)=>`<a href="/products/${f.id}/"><span class="ad-product-number">0${i+1}</span><div><h3>${esc(f.name)}</h3><p>${esc(f.summary)}</p></div>${arrow}</a>`).join('')}</div></div><div class="ad-product-baseline"><p>Explore the intended outcomes and human review needs.<br>Product families are in development.</p><a class="ad-text-link" href="/products/">See the product architecture ${arrow}</a></div></section>
 <section class="ad-vision" id="story" aria-labelledby="vision-title">${image('vision')}<div class="ad-vision-copy"><p class="ad-kicker">04 / THE HUMAN PERSPECTIVE</p><h2 id="vision-title">The most important<br>part is still you.</h2><p>Technology should make room for human imagination.<br>For better questions. For more considered decisions.<br>For possibilities worth pursuing.</p><a class="ad-text-link" href="/company/">The Ad Astra perspective ${arrow}</a></div><span class="ad-scene-caption">Imagined vision scene · Concept art</span></section>

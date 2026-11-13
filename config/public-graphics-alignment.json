@@ -86,14 +86,15 @@
         "/about/",
         "/pricing/"
       ],
-      "primaryArt": "/assets/experience/neural-core-1600.webp",
+      "primaryArt": null,
       "secondaryArt": [
         "/assets/adobe-curiosity.jpg",
         "/assets/adobe-horizon.jpg",
         "/assets/runway-curiosity-notes.jpg",
         "/assets/runway-orbital-intelligence.jpg"
       ],
-      "status": "selected neural/company/global story imagery by project route group; availability remains governed"
+      "status": "Route-specific visible roles; company/market pages are explicitly text-only. Social images are separate from visible primary artwork.",
+      "socialArt": "/assets/experience/neural-core-1600.webp"
     },
     "solutions": {
       "routes": [

@@ -6,7 +6,7 @@
  function tell(text){message.textContent=text;}
  function clearAccount(){
   account=null;
-  for(const id of ['billing-connect','billing-disconnect','billing-start','billing-subscriptions-section'])node(id).hidden=true;
+  for(const id of ['billing-provision','billing-connect','billing-disconnect','billing-start','billing-subscriptions-section'])node(id).hidden=true;
   node('billing-subscriptions').replaceChildren();node('billing-workspace').replaceChildren();
   node('billing-terms').removeAttribute('href');node('billing-privacy').removeAttribute('href');
   node('billing-password').value='';node('billing-mfa').value='';
@@ -41,6 +41,7 @@
   node('billing-access').textContent=account.accessCurrent?'Your paid product access is current.':account.linked?'Your billing account is connected. Current paid product access has not been verified.':'No billing account is connected to this sign-in.';
   node('billing-enrollment').textContent=account.checkoutEnabled?'California enrollment is available. Review the recurring price and terms at checkout.':'New paid California enrollment is awaiting release checks. Existing billing management remains separate from new sales.';
   node('billing-connect').hidden=account.linked||!account.linkingEnabled;
+  node('billing-provision').hidden=account.linked||!account.newCustomerProvisioningEnabled;
   node('billing-disconnect').hidden=!account.linked;
   node('billing-start').hidden=!account.linked||!account.checkoutEnabled||!account.workspaces.length;
   if(account.termsUrl)node('billing-terms').href=account.termsUrl;if(account.privacyUrl)node('billing-privacy').href=account.privacyUrl;
@@ -49,7 +50,7 @@
   if(!account.subscriptions.length){const empty=document.createElement('p');empty.textContent='No subscriptions were found for your current workspace memberships.';list.append(empty);}
   for(const subscription of account.subscriptions){
    const row=document.createElement('article');row.className='subscription-row';
-   const heading=document.createElement('h3');heading.textContent=(subscription.plan==='pro'?'Pro':'Starter')+' · '+(account.workspaces.find(workspace=>workspace.tenantId===subscription.tenantId)?.name||'Workspace');
+   const heading=document.createElement('h3');heading.textContent=(subscription.plan==='pro'?'Pro':'Plus')+' · '+(account.workspaces.find(workspace=>workspace.tenantId===subscription.tenantId)?.name||'Workspace');
    const status=document.createElement('p');status.textContent=stateNames[subscription.state]||'Status unavailable';row.append(heading,status);
    if(subscription.paidThrough){const date=document.createElement('p');date.textContent='Payment period ends '+new Intl.DateTimeFormat(undefined,{dateStyle:'medium'}).format(new Date(subscription.paidThrough))+'.';row.append(date);}
    if(subscription.canManageBilling)row.append(button('Manage cancellation',async()=>{const result=await request('portal',{workflowId:subscription.workflowId});navigate(result.url,'billing.stripe.com');}));
@@ -58,9 +59,10 @@
    list.append(row);
   }
   const select=node('billing-workspace');select.replaceChildren();for(const workspace of account.workspaces){const option=document.createElement('option');option.value=workspace.tenantId;option.textContent=workspace.name;select.append(option);}if(account.workspaces.some(workspace=>workspace.tenantId===selectedWorkspace))select.value=selectedWorkspace;
-  tell(account.linked?'Your billing status is up to date.':account.linkingEnabled?'Connect your existing billing account to continue.':'Account connections are awaiting release checks. New billing account setup is not available yet.');
+  tell(account.linked?'Your billing status is up to date.':account.newCustomerProvisioningEnabled?'Set up your workspace with this verified sign-in, or connect an existing billing account.':account.linkingEnabled?'Connect your existing billing account to continue.':'Workspace setup and account connections are awaiting release checks.');
  }
  node('billing-refresh').addEventListener('click',()=>operate(refresh));
+ node('billing-provision-button').addEventListener('click',()=>operate(async()=>{await request('provision');enrollmentAttempt=null;node('billing-consent').checked=false;await refresh();}));
  node('billing-connect-form').addEventListener('submit',event=>{event.preventDefault();const input={email:node('billing-email').value.trim(),password:node('billing-password').value};if(node('billing-mfa').value)input.mfaCode=node('billing-mfa').value;operate(async()=>{await request('link',input);enrollmentAttempt=null;node('billing-consent').checked=false;await refresh();});});
  node('billing-enroll-form').addEventListener('submit',event=>{event.preventDefault();if(busy||!account?.checkoutEnabled||!account.consentVersion||!node('billing-consent').checked)return;
   const input={tenantId:node('billing-workspace').value,plan:node('billing-plan').value,market:'US-CA',consent:true,consentVersion:account.consentVersion,channel:'direct'};

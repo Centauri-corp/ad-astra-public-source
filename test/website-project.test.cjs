@@ -32,13 +32,13 @@ test('selected responsive art decodes at genuine delivery dimensions and matches
  assert.equal(assets.length,context.selection.assets.length);
  for(const asset of assets)for(const v of asset.variants){assert.ok(v.bytes>0);assert.match(v.sha256,/^[a-f0-9]{64}$/);if(v.width)assert.ok(v.width>=(v.use==='desktop'?1600:800));}
 });
-test('one complete visual bundle requires the actual reviewer, exact source, every route and every selected asset',()=>{
+test('review metadata alone cannot establish actual acceptance without current decision and viewport artifacts',async()=>{
  const routes=['/','/platform-preview/'],assets=[{id:'neural-core'}],fingerprint='a'.repeat(64);
  const approved={decision:'approved',scopeFingerprint:fingerprint,reviewerId:'zoheb-khan',reviewedAt:'2026-11-13T18:00:00Z',evidenceRef:'review://synthetic-fixture',scores:Object.fromEntries(context.standard.visualAcceptance.criteria.map(k=>[k,4])),routeCoverage:[...routes],assetRights:[{assetId:'neural-core',decision:'approved',evidenceRef:'review://synthetic-rights-fixture'}]};
  const evaluate=review=>visualAcceptance({review,standard:context.standard,fingerprint,routes,assets});
- assert.equal(evaluate(approved).ready,true);
+ assert.equal((await evaluate(approved)).ready,false,'A reviewer string and review:// reference are not evidence');
  for(const mutate of [r=>r.decision='pending',r=>r.scopeFingerprint='b'.repeat(64),r=>r.reviewerId=null,r=>r.evidenceRef=null,r=>r.routeCoverage.pop(),r=>r.assetRights=[],r=>r.scores.mobileComposition=3,r=>r.scores.storyAlignment=99]){
-  const altered=structuredClone(approved);mutate(altered);assert.equal(evaluate(altered).ready,false);
+  const altered=structuredClone(approved);mutate(altered);assert.equal((await evaluate(altered)).ready,false);
  }
- assert.equal(evaluate(context.review).ready,false,'Real pending review cannot inherit a synthetic fixture approval');
+ assert.equal((await evaluate(context.review)).ready,false,'Real pending review cannot inherit a synthetic fixture approval');
 });

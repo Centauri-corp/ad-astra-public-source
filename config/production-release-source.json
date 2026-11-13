@@ -7,15 +7,24 @@
   "teamId": "team_5xblMPo2zEBjbz4KPmeDVHPr",
   "sourceSelection": "owner-selected-pr36-in-chat",
   "reconciledCanaryCommit": "c61a957d0d6d731d652a7ca71eb61d099f00d16c",
-  "retiredReleaseBranches": ["work"],
+  "retiredReleaseBranches": [
+    "work"
+  ],
   "automaticGitDeployments": false,
   "promotionMode": "stage-test-independent-review-manual-promotion",
   "independentExactCommitReviewRequired": true,
   "releaseAuthorized": false,
   "internalCompanion": {
     "repository": "Centauri-corp/ad-astra-internal-source",
-    "pullRequest": 45,
-    "commit": "62c28c6687b66d16d94b737479385cac79d633c6"
+    "pullRequest": 54,
+    "commit": "c59cbe1469d72cec8bad81fc7e4d7e1d95242ba7"
   },
-  "pricingPreparation": {"currency":"USD","plusMonthly":12,"proMonthly":29,"team":"inquiry-only","enterprise":"inquiry-only","liveChargingAuthorized":false}
+  "pricingPreparation": {
+    "currency": "USD",
+    "plusMonthly": 12,
+    "proMonthly": 29,
+    "team": "inquiry-only",
+    "enterprise": "inquiry-only",
+    "liveChargingAuthorized": false
+  }
 }

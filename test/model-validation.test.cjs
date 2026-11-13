@@ -52,7 +52,7 @@ test('release metadata cannot advertise additional models or achieved AGI/ASI', 
     const value = structuredClone(release); mutate(value); assert.throws(() => validateRelease(value));
   }
 });
-test('only a completed answer from the exact pinned provider snapshot is admitted', async () => {
+test('only a completed answer with the normalized product alias and bounded usage is admitted', async () => {
   assert.equal(validateCompletion(completion()), 'Synthetic contract fixture.');
   const value = completion(); value.choices[0].message.tool_calls = null; value.choices[0].message.function_call = null;
   assert.equal(await readCompletion(Response.json(value)), 'Synthetic contract fixture.');

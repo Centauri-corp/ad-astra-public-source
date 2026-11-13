@@ -6,7 +6,7 @@ This implements catalog, release-claim and provider-response admission checks. I
 
 The public catalog describes **one foundation integration**, Astra Polaris (stable product ID `astra-lumen`), with five interaction modes and 24 sector profiles. Profiles are configurations/product directions over that integration, not 24 separately trained models. The website continues to present Ad Astra as a customer-facing intelligence platform. Unachieved AGI and ASI are not advertised as available products.
 
-`lib/model-validation.js` centralizes the existing pinned provider snapshot and response limits. Neither provider identity nor credentials are returned by the public catalog. `publicModels()` and `publicMarketProfiles()` project only allowlisted properties and return detached mode lists.
+`lib/model-validation.js` validates the normalized product alias and bounded response shape; the private gateway owns provider-snapshot and generation-receipt verification. Neither provider identity nor credentials are returned by the public catalog. `publicModels()` and `publicMarketProfiles()` project only allowlisted properties and return detached mode lists.
 
 ## Enforced checks
 
@@ -14,7 +14,7 @@ The public catalog describes **one foundation integration**, Astra Polaris (stab
 - Public projections contain no extra fields, provider configuration or executable markup.
 - Release metadata agrees with the catalog and cannot change AGI/ASI to achieved/available or fabricate live intelligence telemetry.
 - The gated engine still verifies origin, authentication, release switches and durable budget/quota before its single provider request.
-- Provider output must be bounded JSON, valid UTF-8, the exact pinned snapshot, one assistant completion with `finish_reason=stop`, no function/tool invocation or refusal payload, bounded nonempty answer text, and coherent bounded token usage.
+- Provider output must be bounded JSON, valid UTF-8, the normalized product alias, one assistant completion with `finish_reason=stop`, no function/tool invocation or refusal payload, bounded nonempty answer text, and coherent bounded token usage.
 - Malformed, truncated, substituted, tool-bearing, oversized or ambiguous responses fail closed. No partial answer, automatic retry, quota refund, raw provider error or hidden reasoning is published.
 - Invalid catalog metadata returns a generic non-cacheable 503. The public API explicitly distinguishes profiles from models and disclaims customer availability, certification and AGI/ASI availability.
 

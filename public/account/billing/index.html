@@ -20,19 +20,20 @@
  <a id="billing-sign-in" class="button" href="/sign-in/?return=%2Faccount%2Fbilling%2F" hidden>Sign in to continue</a>
  <div id="billing-account" hidden>
   <section class="billing-card" aria-labelledby="billing-status-title"><h2 id="billing-status-title">Your access</h2><p id="billing-access"></p><p id="billing-enrollment"></p><button id="billing-refresh" type="button" class="button alt">Refresh status</button></section>
+  <section id="billing-provision" class="billing-card" aria-labelledby="billing-provision-title" hidden><h2 id="billing-provision-title">Create your workspace</h2><p>Use your verified Ad Astra sign-in to set up your own workspace. This does not purchase a subscription.</p><button id="billing-provision-button" type="button" class="button">Set up my workspace</button></section>
   <section id="billing-connect" class="billing-card" aria-labelledby="billing-connect-title" hidden>
    <h2 id="billing-connect-title">Connect an existing billing account</h2>
    <p>Verify your existing billing account to connect it to this sign-in. This does not purchase a subscription or change product access.</p>
    <form id="billing-connect-form"><label for="billing-email">Billing email</label><input id="billing-email" name="email" type="email" autocomplete="username" maxlength="254" required>
     <label for="billing-password">Billing password</label><input id="billing-password" name="password" type="password" autocomplete="current-password" maxlength="1024" required>
     <label for="billing-mfa">Authenticator code <span>(if enabled)</span></label><input id="billing-mfa" name="mfaCode" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6">
-    <p class="fine-print">Your billing password is used only for this verification and is not saved by this page. Use an existing account; new billing account setup is not available here.</p>
+    <p class="fine-print">This is for an existing billing account. Your password is used only for verification and is not saved by this page. New customers can use workspace setup when it is available.</p>
     <button type="submit" class="button">Verify and connect</button>
    </form>
   </section>
   <section id="billing-subscriptions-section" class="billing-card" aria-labelledby="billing-subscriptions-title" hidden><h2 id="billing-subscriptions-title">Your subscriptions</h2><div id="billing-subscriptions"></div></section>
   <section id="billing-start" class="billing-card" aria-labelledby="billing-start-title" hidden><h2 id="billing-start-title">Start a California subscription</h2>
-   <form id="billing-enroll-form"><label for="billing-workspace">Workspace</label><select id="billing-workspace" required></select><label for="billing-plan">Plan</label><select id="billing-plan"><option value="starter">Starter</option><option value="pro">Pro</option></select>
+   <form id="billing-enroll-form"><label for="billing-workspace">Workspace</label><select id="billing-workspace" required></select><label for="billing-plan">Plan</label><select id="billing-plan"><option value="starter">Plus</option><option value="pro">Pro</option></select>
     <label class="check"><input id="billing-consent" type="checkbox" required><span>I agree to the <a id="billing-terms">terms</a> and <a id="billing-privacy">privacy notice</a>, including the recurring subscription and cancellation terms shown at checkout.</span></label>
     <button type="submit" class="button">Continue to secure checkout</button><p class="fine-print">Review the recurring price and payment terms in secure checkout before confirming payment.</p>
    </form>
