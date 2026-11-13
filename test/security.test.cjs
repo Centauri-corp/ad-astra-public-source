@@ -25,7 +25,7 @@ beforeEach(()=>{
  // In-memory accepted-source fixture only; never edits public manifests.
  release.publicLaunchEnabled=true;release.engineAvailable=true;routing.redirects=[];
  for(const key of Object.keys(process.env))if(!(key in originalEnv))delete process.env[key];
- Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://redis.invalid',KV_REST_API_TOKEN:'synthetic-test-only',AD_ASTRA_MODEL_GATEWAY_URL:'https://gateway.invalid/v1/respond',AD_ASTRA_MODEL_GATEWAY_TOKEN:'synthetic-gateway-token',AD_ASTRA_MODEL_GATEWAY_CONTRACT:'ad-astra-model-gateway/v1',VERCEL_ENV:'production'});
+ Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://redis.invalid',KV_REST_API_TOKEN:'synthetic-test-only',AD_ASTRA_MODEL_GATEWAY_URL:'https://gateway.invalid/v1/respond',AD_ASTRA_MODEL_GATEWAY_TOKEN:'synthetic-gateway-token',AD_ASTRA_MODEL_GATEWAY_CONTRACT:'ad-astra-model-gateway/v1',AD_ASTRA_MODEL_GATEWAY_MODE:'production',VERCEL_ENV:'production'});
  for(const flag of gates.FLAGS)process.env[flag]='true';
  Object.assign(process.env,customerBudget.env);budgetReply=null;
  calls=[];redisResult=[1,11,3600];providerStatus=200;

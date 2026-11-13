@@ -66,8 +66,8 @@
     },
     {
       "path": "lib/model-gateway.js",
-      "bytes": 1296,
-      "sha256": "00a8ba421d4e4fc85be6b9ee45fa920f068737f2d96c183fd78a3c94b74721eb"
+      "bytes": 1494,
+      "sha256": "e6ec4f06a67dcd398dd85bca9c29316f600ee2d1412bf871db38956244159f93"
     },
     {
       "path": "lib/model-validation.js",
@@ -96,8 +96,8 @@
     },
     {
       "path": "lib/release-gates.js",
-      "bytes": 1561,
-      "sha256": "91610f0bf632bf5b9b900d693e654fc0efcecf83829d1cc254263a9840c3857f"
+      "bytes": 1627,
+      "sha256": "109b220961927d52b8d4b485b11d87fc208a20053728beda0811a016385028fd"
     },
     {
       "path": "lib/shared-budget.js",
@@ -810,5 +810,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "e774da8853ab1a3115dbc098e6d89654adae3f2aa0fcff9970613bd03a0729dc"
+  "fingerprint": "0d29767e33af213cc7f3716939a495ef89a0d325d8f53940cb24d97f2cbf2af8"
 }
