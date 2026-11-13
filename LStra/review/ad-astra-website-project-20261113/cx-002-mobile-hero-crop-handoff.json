@@ -1,0 +1,182 @@
+{
+  "schema": "ad-astra-website-creative-handoff/v1",
+  "recordedAt": "2026-11-13T00:00:00Z",
+  "project": {
+    "repository": "Centauri-corp/ad-astra-public-source",
+    "repositoryId": 1431594115,
+    "pullRequest": 38,
+    "branch": "codex/customer-experience-rebuild-20261113",
+    "reviewedSourceHead": "b2802c591bdee037a624d03573c037b9961cbc0a",
+    "developmentOwner": "Automation_eabb75a22f748191bc848d57c563aa4e"
+  },
+  "backlogItem": {
+    "id": "CX-002",
+    "priority": 0,
+    "state": "HANDOFF_PREPARED",
+    "ownerVisualReview": "PENDING",
+    "rightsReview": "PENDING",
+    "verifiedLive": false
+  },
+  "defect": {
+    "id": "CX-002-MOBILE-HERO-CROP",
+    "route": "/",
+    "summary": "The selected mobile hero is only a same-composition 800x450 downscale of the 1600x900 desktop export; the mobile layout then crops it through an oversized 4:3-ish container with object-position:80% center.",
+    "evidence": [
+      {
+        "path": "/assets/experience/neural-core-1600.webp",
+        "width": 1600,
+        "height": 900,
+        "bytes": 161238,
+        "sha256": "5d7de50c2232a88e430c46e21fb869b1c4e91af1fda5cc13e6cabb7962e5cbde"
+      },
+      {
+        "path": "/assets/experience/neural-core-800.webp",
+        "width": 800,
+        "height": 450,
+        "bytes": 52250,
+        "sha256": "26bc3cf490171b5d1ead461d928b00e17d7af4e2428c720260f56a0287e01e20"
+      }
+    ],
+    "actualPixelReview": {
+      "browser": "Chrome cloud browser",
+      "exactHeadAssetUrls": true,
+      "desktopExportObserved": true,
+      "mobileExportObserved": true,
+      "finding": "Both exports show the same 16:9 composition; no dedicated mobile crop is present.",
+      "limitations": [
+        "Candidate route preview was not available from PR comments, commit statuses or branch-filtered Vercel deployments.",
+        "Responsive route behavior is NOT_TESTED.",
+        "This is technical/creative evidence, not owner visual acceptance."
+      ]
+    }
+  },
+  "creativeCorrection": {
+    "title": "Derive a dedicated 4:3 mobile hero crop from the exact selected neural-core bytes",
+    "sourceIdentity": {
+      "manifest": "public/assets/experience/manifest.json",
+      "originalMaster": "exec-bda306c1-2281-440f-b329-69d5576c6994.png",
+      "originalWidth": 1672,
+      "originalHeight": 941,
+      "originalSha256": "be8d98f3cc8fd0556ace3b2a50d8fb0a073f0a053dc0c43f05b3f2d5850002a5"
+    },
+    "instructions": [
+      "Do not generate or restyle the neural form.",
+      "Create an 800x600 WebP crop from the existing 1600x900 derivative (crop the rightmost 1200x900 region, then downscale to 800x600).",
+      "Keep the complete optical-glass neural outline and luminous core visible, retain the Earth horizon, and preserve a restrained dark margin rather than clipping the sculpture.",
+      "Record the exact output byte count and SHA-256 in public/assets/experience/manifest.json.",
+      "Point the mobile selection and homepage mobile srcset to the new 800x600 path, and center the mobile object position so CSS does not perform a second unintended crop.",
+      "Re-run the homepage at 320, 390 and 768 widths; verify copy separation, full neural silhouette, horizon continuity, no horizontal overflow, and Pause/reduced-motion behavior.",
+      "Keep the current 1600x900 desktop export classified as a review proxy. Do not call it native 4K.",
+      "For the required 3200px desktop master, either bind an accepted source that is at least 3200px wide or document the exact enhancement method, source hash and resulting hash. Enhancement is not native resolution."
+    ],
+    "acceptanceChecks": [
+      "Mobile asset is exactly 800x600 and derived from the selected source identity.",
+      "No new generative asset, credits or provider project are used.",
+      "The neural sculpture, cyan core and Earth horizon remain visually legible at 320 and 390 widths.",
+      "Asset manifest, asset selection, generated homepage and source template agree on path, dimensions and hash.",
+      "Technical QA remains separate from consolidated owner visual review."
+    ]
+  },
+  "selectedRasterSetEvidence": [
+    {
+      "id": "story-intelligence",
+      "source": [
+        1672,
+        941
+      ],
+      "sourceSha256": "36ad9b496c21a01214f92726948dde5d43e00f1fd1cdebdd198cc707def7aa6a",
+      "desktop": [
+        1672,
+        941
+      ],
+      "desktopSha256": "13107426eef7014bfe6708340888aba25a7eabe7f32e0efbfe942219e762ba6e"
+    },
+    {
+      "id": "human-perspective",
+      "source": [
+        1672,
+        941
+      ],
+      "sourceSha256": "d83b2c3a0ed26936785a45bcbb4940e617e93d2ecf8dd56b8ce64d033afd7222",
+      "desktop": [
+        1672,
+        941
+      ],
+      "desktopSha256": "6e8071b392096b0ad5f9f237f3ce6f97d8645b4a2cebe1133fe43be716094512"
+    },
+    {
+      "id": "product-constellation",
+      "source": [
+        1672,
+        941
+      ],
+      "sourceSha256": "d02ba332e2dfc8995af66c1a6836815a9be5fa23c7f6d71e1c5ef923f979c7ac",
+      "desktop": [
+        1672,
+        941
+      ],
+      "desktopSha256": "8251c134bcbd161922541e6b16faa9384115663e85c4ead32833c66f6d7f72eb"
+    },
+    {
+      "id": "agi-research",
+      "source": [
+        1672,
+        941
+      ],
+      "sourceSha256": "b3d8e04b48fb974ad218f35e15988753e82aa2020b16de6d0b6b083d58fb6c87",
+      "desktop": [
+        1672,
+        941
+      ],
+      "desktopSha256": "353b988ffc78be51728ee32bdf5add3c07d2727d4c265ef591ac0082f469b4ee"
+    },
+    {
+      "id": "global-perspective",
+      "source": [
+        1672,
+        941
+      ],
+      "sourceSha256": "a5a0946a25c9cb8035bec4254bbf5873b5e37001bf5782e3eb6ec2e2b335acc7",
+      "desktop": [
+        1672,
+        941
+      ],
+      "desktopSha256": "f5548ccb8314ed71992075e1ab8651c3417254cd28943efd2e54b6b4b9a62639"
+    },
+    {
+      "id": "beyond-horizon",
+      "source": [
+        1672,
+        941
+      ],
+      "sourceSha256": "7c1ab9ae68cdc8998a22c213da8e98f7b3a96a40e83ed7aea991d70b44e6b427",
+      "desktop": [
+        1672,
+        941
+      ],
+      "desktopSha256": "dab893845a01573def7e3fbaea0d96ac480156d75a52a3a1b1c7361440bfb33c"
+    }
+  ],
+  "releaseEvidence": {
+    "prState": "OPEN",
+    "prMergeable": true,
+    "prPreviewComments": 0,
+    "commitStatusChecks": 0,
+    "branchFilteredVercelDeployments": 0,
+    "websiteAudit": "NOT_RUN_NO_AUTHORIZED_LOCAL_WORKSPACE",
+    "candidateBrowserRoutes": "NOT_TESTED_NO_PREVIEW",
+    "productionPromotion": "NOT_AUTHORIZED"
+  },
+  "cmsPolicyConflict": {
+    "projectId": "6a4vgjc9",
+    "datasets": [
+      "production",
+      "ad-astra-cognitive"
+    ],
+    "reportedAcl": "public",
+    "intendedUse": "private",
+    "action": "CMS_EXPORT_HOLD",
+    "privateBodiesFetched": false,
+    "accessSettingsChanged": false
+  }
+}
