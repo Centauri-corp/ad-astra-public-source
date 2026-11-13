@@ -411,13 +411,13 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 19664,
-      "sha256": "8e61f0046a7f7341d0b812e4c7f71202c6fab62979d35ebc554f666830fa255f"
+      "bytes": 20025,
+      "sha256": "e5d491c49487c2174411eee2c990f7a3b397bd377bc2088855004fbbf1c2685f"
     },
     {
       "path": "public/intelligence/index.html",
-      "bytes": 16154,
-      "sha256": "c0a67dc15edace31e600352280c78889ec3518fed8c1cd6a4d0c32dd151cd898"
+      "bytes": 16515,
+      "sha256": "26a97e5ca52da2e92de474622c7ad4916a69d8e0148d26835337df4c69c78697"
     },
     {
       "path": "public/intelligence/style.css",
@@ -716,8 +716,8 @@
     },
     {
       "path": "public/services/index.html",
-      "bytes": 8750,
-      "sha256": "7ef6d906fb470c1ed47761937ea6cc806af64a93c70178700498c161ef484c53"
+      "bytes": 9111,
+      "sha256": "98cdfd434b47797c6f728b68315458cdc1b9b65c7d99543b69c8d8e374ca5414"
     },
     {
       "path": "public/sign-in/app.js",
@@ -746,8 +746,8 @@
     },
     {
       "path": "public/start/index.html",
-      "bytes": 25828,
-      "sha256": "bf06f6ba951f22c17a350efd4739f15135aa40b5942c55b0da18a86ec5531796"
+      "bytes": 26189,
+      "sha256": "1bcbc66f620863229c1a53baf55d9be4440c44f68e5b833fca037d584103d0de"
     },
     {
       "path": "public/start/samples/build.txt",
@@ -800,5 +800,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "9085d341cd629ff0a99e1daba9863bd83221fa86fac1863528e33192a1555f73"
+  "fingerprint": "08549a715a77e225866266acaffca6445dc1726a6300c0dda43bd9be8ef0fcbc"
 }
