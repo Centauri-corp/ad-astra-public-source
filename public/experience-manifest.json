@@ -21,7 +21,8 @@
     },
     "storyCollection": "/assets/story/manifest.json",
     "threeD": {
-      "privatePreviewOnly": true,
+      "privatePreviewOnly": false,
+      "customerExecution": false,
       "fallback": "static-neural-sphere-with-alt-text",
       "reducedMotion": true
     },
@@ -68,8 +69,8 @@
     ],
     "motionPreview": {
       "hero": true,
-      "type": "optional-css-ambient-motion",
-      "filmStudy": false,
+      "type": "optional-css-ambient-motion-and-opt-in-silent-film",
+      "filmStudy": true,
       "audio": false,
       "publicPremierePlayback": false,
       "reducedMotionFallback": "static-equivalent"

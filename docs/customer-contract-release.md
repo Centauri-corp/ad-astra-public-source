@@ -1,6 +1,9 @@
 # Website/customer contract correction release
 
-This candidate implements the seven-step architecture correction plan through the selected PR #36 release source. It is not a record of public activation. The companion source and exact commit are pinned in `config/production-release-source.json`.
+This candidate implements the seven-step architecture correction plan through
+controlled PR #38 over the selected PR #36 base. It is not a record of public
+activation. The companion source and exact commit are pinned in
+`config/production-release-source.json`.
 
 1. **Interface ownership:** gateway v2 identifies its real private receiver. Public Clerk QA has its own workflow and protocol; internal Supabase QA cannot stand in for it. Hosted subscription receiver v12 source is preserved in the private companion.
 2. **Onboarding:** an explicit empty-body `provision` action creates a verified subject-owned workspace through the private receiver. Existing-account password/MFA linking remains a separate migration path. The UI only offers setup when source and provider release conditions permit it; setup itself does not purchase a subscription.
