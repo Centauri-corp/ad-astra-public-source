@@ -147,7 +147,7 @@ test('status exposes availability only and requires actual release configuration
 });
 test('public model catalog exposes stable names without provider details',()=>{
  const r=response();models({method:'GET'},r);assert.equal(r.statusCode,200);assert.equal(r.headers['cache-control'],'public, max-age=300, stale-while-revalidate=3600');
- const body=r.body;assert.equal(body.family,'Ad Astra');assert.equal(body.architecture,'one-connected-model-with-sector-profiles');assert.equal(body.models.length,1);assert.deepEqual(body.models.map(m=>m.id),catalog.MODELS.map(m=>m.id));assert.equal(body.profiles.length,catalog.MARKET_PROFILES.length);
+ const body=r.body;assert.equal(body.family,'Ad Astra');assert.equal(body.architecture,'one-connected-model-with-sector-profiles');assert.equal(body.models.length,1);assert.deepEqual(body.models.map(m=>m.id),catalog.MODELS.map(m=>m.id));assert.equal(body.profiles.length,catalog.MARKET_PROFILES.length);assert.equal(body.offers.length,4);assert.equal(body.publicOfferCount,4);assert.equal(body.withheldOfferCount,0);
  for(const model of body.models){assert.ok(model.name.startsWith('Astra '));assert.ok(!('provider' in model));assert.ok(!('apiKey' in model));}
  for(const profile of body.profiles){assert.ok(profile.name.startsWith('Astra '));assert.equal(profile.foundationModel,'astra-lumen');assert.ok(!('provider' in profile));assert.ok(!('apiKey' in profile));}
 });

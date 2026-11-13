@@ -16,8 +16,8 @@
     },
     {
       "path": "api/models.js",
-      "bytes": 1771,
-      "sha256": "543cb92ad708982bcfe4893698aab03427a1adcf163492a802aa3d4eeb75e587"
+      "bytes": 2056,
+      "sha256": "1012fd939724c99a696c2336586e39cd379a9a6f293f36808c2a2a8858f9c420"
     },
     {
       "path": "api/operating-status.js",
@@ -51,8 +51,8 @@
     },
     {
       "path": "lib/customer-agent-catalog.js",
-      "bytes": 3040,
-      "sha256": "cd810b56015e5094af7348019daabfaf65fe8f21485eb929c812bf8c459b3135"
+      "bytes": 3502,
+      "sha256": "41d7f1f871b40e42772ab95ed4c817cdd40bca5c312b69aa43fe052dac0e91cf"
     },
     {
       "path": "lib/engine-events.js",
@@ -71,13 +71,18 @@
     },
     {
       "path": "lib/model-validation.js",
-      "bytes": 6489,
-      "sha256": "8d1777c129d1f5328686c289c6cf8e2ddde2689396caf4223abd1a2ac8923801"
+      "bytes": 7651,
+      "sha256": "65e390e4ff7f4147c73e0f1ba3353828dade9a52287199faca152e8b95b44eab"
     },
     {
       "path": "lib/modes.js",
       "bytes": 586,
       "sha256": "2775782c723070a975aac4706d9cae743dcab278cd10e2f8a3f87e691f97428b"
+    },
+    {
+      "path": "lib/offer-catalog.js",
+      "bytes": 1640,
+      "sha256": "ce919d660c870000f8169d2cf1cb5407b8356f88ebf2beb03de123d85be03c8c"
     },
     {
       "path": "lib/operating-status.js",
@@ -436,8 +441,8 @@
     },
     {
       "path": "public/knowledge/app.js",
-      "bytes": 4852,
-      "sha256": "337bc76a7b8fce8ef2d5e7668c45f8679f0ea9b0669ba841c9cc1401088d9e14"
+      "bytes": 5099,
+      "sha256": "67a848247836ff1dcad9245f9423a4c9386dbc167bebf31f07e55fc112b7453a"
     },
     {
       "path": "public/knowledge/experience-links.js",
@@ -711,8 +716,8 @@
     },
     {
       "path": "public/release-manifest.json",
-      "bytes": 2365,
-      "sha256": "7234002417ab9cd2ab3f5cf3a4eb8c2aba255e48595b75f3ad0ef8028d9c76c3"
+      "bytes": 2487,
+      "sha256": "32c41b8d4f464396e96dc1d48a41b131f6bcbbe3b3ca6ed62ab443a6a3fac00a"
     },
     {
       "path": "public/robots.txt",
@@ -810,5 +815,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "0d29767e33af213cc7f3716939a495ef89a0d325d8f53940cb24d97f2cbf2af8"
+  "fingerprint": "f80a14400aeefd849f37d432e18750970ea410b8735a761b83b4c300e4c30e4f"
 }

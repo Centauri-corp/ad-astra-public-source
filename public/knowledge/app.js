@@ -9,7 +9,7 @@
     learn: 'Learn — build understanding',
     explore: 'Explore — test possibilities'
   };
-  const agentDefaults = {guide:'ask', researcher:'research', creator:'create', analyst:'explore', navigator:'ask', access:'learn'};
+  const agentDefaults = {guide:'ask', researcher:'research', creator:'create', analyst:'explore', navigator:'ask', access:'learn', visual:'create'};
   function clerkDomain() {
     try { return atob(publishableKey.split('_')[2]).slice(0, -1); } catch { return 'clerk.adastra.global'; }
   }
@@ -36,6 +36,9 @@
     if (!form) return;
     const question = $('live-ai-question');
     const agent = $('live-ai-agent');
+    if (agent && !agent.querySelector('option[value="visual"]')) {
+      const option = document.createElement('option'); option.value = 'visual'; option.textContent = 'Astra Visual — visual briefs'; agent.append(option);
+    }
     const mode = $('live-ai-mode');
     const submit = $('live-ai-submit');
     const status = $('live-ai-status');

@@ -2,7 +2,8 @@
 const { test } = require('node:test'), assert = require('node:assert/strict');
 const { publicModels, publicMarketProfiles, MODELS } = require('../lib/model-catalog');
 const { publicCustomerAgents } = require('../lib/customer-agent-catalog');
-const { CONTRACT, validateCatalog, validateRelease, validateCompletion, readCompletion } = require('../lib/model-validation');
+const { publicOffers } = require('../lib/offer-catalog');
+const { CONTRACT, validateCatalog, validateOffers, validateRelease, validateCompletion, readCompletion } = require('../lib/model-validation');
 const release = require('../public/release-manifest.json');
 function completion() {
   return { object: 'chat.completion', model: CONTRACT.runtimeModel,
@@ -10,9 +11,10 @@ function completion() {
     usage: { prompt_tokens: 100, completion_tokens: 20, total_tokens: 120 } };
 }
 test('one foundation integration, five modes and 24 profiles have distinct, validated identities', () => {
-  assert.deepEqual(validateCatalog(publicModels(), publicMarketProfiles(), publicCustomerAgents()), { connectedModelCount: 1, modeCount: 5, sectorProfileCount: 24, customerAgentCount: 6 });
+  assert.deepEqual(validateCatalog(publicModels(), publicMarketProfiles(), publicCustomerAgents()), { connectedModelCount: 1, modeCount: 5, sectorProfileCount: 24, customerAgentCount: 7 });
   assert.equal(validateRelease(release), true);
   assert.equal(release.engineAvailable, false); assert.equal(release.publicLaunchEnabled, false);
+  assert.equal(validateOffers(publicOffers(), publicCustomerAgents()), 4);
   for (const profile of publicMarketProfiles()) assert.equal(profile.foundationModel, CONTRACT.productId);
 });
 test('public catalog returns detached allowlisted values rather than internal objects', () => {
@@ -82,6 +84,7 @@ test('catalog endpoint fails closed on drift without publishing the rejected met
   const context = {module:{exports:{}},require(name){
     if (name === '../lib/model-catalog') return {publicModels:()=>models,publicMarketProfiles};
     if (name === '../lib/customer-agent-catalog') return {publicCustomerAgents};
+    if (name === '../lib/offer-catalog') return {publicOffers};
     return require('../lib/model-validation');
   }};
   vm.runInNewContext(fs.readFileSync(require.resolve('../api/models'),'utf8'),context);
@@ -96,7 +99,7 @@ test('public catalog declares profile/model distinction and no AGI/ASI availabil
   assert.equal(res.body.capabilityClass,'bounded-narrow-ai-integration');
   assert.equal(res.body.agiAvailable,false);assert.equal(res.body.asiAvailable,false);
   assert.equal(JSON.stringify(res.body).includes('gateway.invalid'),false);
-  assert.equal(res.body.agents.length, 6);
+  assert.equal(res.body.agents.length, 7);
   for (const agent of res.body.agents) { assert.ok(!Object.hasOwn(agent, 'modelRole')); assert.equal(agent.availability, 'development-preview'); assert.ok(!/provider|connector|openai|google|ollama|llama/i.test(JSON.stringify(agent))); }
   assert.match(res.body.disclosure,/does not establish customer availability/);
 });
