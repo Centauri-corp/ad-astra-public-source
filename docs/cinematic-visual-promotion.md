@@ -1,5 +1,7 @@
 # Ad Astra cinematic visual promotion
 
+Current website authority: `projects/website-customer-experience/`. The asset order and provider observations below are historical creative evidence. The selected homepage/workspace art and palette are now generated from that dedicated project's registry. On November 13, fresh Sanity metadata reported `aclMode: public` for both Ad Astra datasets despite their private-use descriptions. Do not rely on the older private-access statement below; keep CMS content out of website exports until the access-policy conflict is reconciled. See the project's resource register for the current metadata scope.
+
 This document keeps the homepage visual system in one promotion order.
 
 ## Experience direction

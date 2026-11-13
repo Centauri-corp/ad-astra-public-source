@@ -101,7 +101,8 @@ assert.equal(manifest.marketProfileArchitecture,'one-connected-model-with-sector
 assert.equal(manifest.marketProfileCount,catalog.MARKET_PROFILES.length);
 assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
 assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','intelligence','products','future','global','beyond']);
-assert.deepEqual(experience.visualArchitecture.palette,{navy:'#060b12',cyan:'#a8dbe3',violet:'#9a7cff',gold:'#d5ba91'});
+const visualTokens=require('../projects/website-customer-experience/visual-standard.json').tokens;
+assert.deepEqual(experience.visualArchitecture.palette,{navy:visualTokens.background,cyan:visualTokens.cyan,violet:visualTokens.violet,gold:visualTokens.champagne});
 assert.equal(experience.seo.indexingPolicy,'noindex-until-page-evidence-approved');
 assert.equal(experience.seo.homepageRobots,approvedSet.has('/')?'index,follow':'noindex,follow');
 assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);

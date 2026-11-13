@@ -1,0 +1,12 @@
+{
+  "schema":"ad-astra-website-visual-review/v1",
+  "decision":"pending",
+  "scopeFingerprint":null,
+  "reviewerId":null,
+  "reviewedAt":null,
+  "evidenceRef":null,
+  "scores":{},
+  "routeCoverage":[],
+  "assetRights":[],
+  "note":"One consolidated owner review of the complete visual bundle. No visual approval has been inferred from broad implementation authorization or passing CI."
+}

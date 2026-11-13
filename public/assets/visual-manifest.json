@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "purpose": "Public visual inventory for the AD ASTRA homepage and Astra Polaris experience",
+  "purpose": "Ad Astra visual resource archive and active project selection; archived candidates are not current homepage instructions",
   "productArchitectureManifest": "/assets/products/manifest.json",
   "publicSafe": true,
   "storyCollectionManifest": "/assets/story/manifest.json",
@@ -16,7 +16,8 @@
       "visualDirection": "high-resolution cinematic AI-realistic blended artwork",
       "provenance": "Adobe Firefly generation, 2026-11-10",
       "reviewStatus": "candidate",
-      "alt": "A human profile held within a luminous cyan and violet neural constellation"
+      "alt": "A human profile held within a luminous cyan and violet neural constellation",
+      "lifecycle": "archived-primary-candidate"
     },
     {
       "id": "ad-astra-hero-cinematic-v1",
@@ -27,7 +28,8 @@
       "visualDirection": "cinematic AI-realistic blended artwork",
       "provenance": "Ad Astra visual generation, 2026-11-10",
       "reviewStatus": "candidate",
-      "alt": "A human profile held within a luminous cyan and violet neural constellation"
+      "alt": "A human profile held within a luminous cyan and violet neural constellation",
+      "lifecycle": "archived-primary-candidate"
     },
     {
       "id": "ad-astra-product-ecosystem-v1",
@@ -71,25 +73,29 @@
       "id": "astra-polaris-platform-mockup",
       "path": "/assets/astra-polaris-platform-mockup.png",
       "role": "public customer platform mockup",
-      "alt": "Futuristic Ad Astra customer platform concept with a glowing neural brain, global network arcs and modular workspace panels"
+      "alt": "Futuristic Ad Astra customer platform concept with a glowing neural brain, global network arcs and modular workspace panels",
+      "lifecycle": "archived-primary-candidate"
     },
     {
       "id": "astra-lumen-neural-concierge",
       "path": "/assets/astra-lumen-neural-concierge.png",
       "role": "public neural concierge artwork",
-      "alt": "Cinematic side profile of a luminous neural figure with cyan rim light, violet pathways, and a warm gold brain core"
+      "alt": "Cinematic side profile of a luminous neural figure with cyan rim light, violet pathways, and a warm gold brain core",
+      "lifecycle": "archived-primary-candidate"
     },
     {
       "id": "astra-lumen-neural-brain",
       "path": "/assets/astra-lumen-neural-brain.png",
       "role": "hero neural artwork",
-      "alt": "Luminous blue and violet neural brain with connected signal nodes"
+      "alt": "Luminous blue and violet neural brain with connected signal nodes",
+      "lifecycle": "archived-primary-candidate"
     },
     {
       "id": "astra-lumen-neural-profile",
       "path": "/assets/astra-lumen-neural-profile.png",
       "role": "neural profile artwork",
-      "alt": "Side profile of a luminous neural figure with a glowing connected brain"
+      "alt": "Side profile of a luminous neural figure with a glowing connected brain",
+      "lifecycle": "archived-primary-candidate"
     },
     {
       "id": "astra-lumen-neural-horizon",
@@ -150,9 +156,23 @@
       "path": "/assets/astra-lumen-neural-profile-canvas-mobile.png",
       "role": "mobile neural canvas artwork",
       "alt": "Mobile composition of a cyan neural profile with a violet connected brain"
+    },
+    {
+      "id": "ad-astra-neural-spiral",
+      "path": "/assets/experience/neural-core-1600.webp",
+      "role": "Signature neural spiral; homepage and workspace identity",
+      "kind": "image",
+      "provenanceManifest": "/assets/experience/manifest.json",
+      "reviewStatus": "candidate",
+      "alt": "An optical-glass neural spiral rising above Earth's horizon. Original Ad Astra concept art."
     }
   ],
   "withheld": [
     "Internal neural-sphere screenshots remain private-only and are not published."
-  ]
+  ],
+  "activeSelection": {
+    "authority": "projects/website-customer-experience/asset-selections.json",
+    "signatureAsset": "/assets/experience/neural-core-1600.webp",
+    "review": "pending-consolidated-visual-review"
+  }
 }

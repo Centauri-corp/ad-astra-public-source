@@ -1,6 +1,7 @@
 'use strict';
 // Static brand identity only. Does not change robots, indexing, claims or release gates.
 const collection=require('../../config/story-collection.json');
+const {loadProject,primaryAsset}=require('./website-project.cjs');
 const origin='https://adastra.global';
 const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const decode=value=>String(value).replace(/&(?:amp|lt|gt|quot|apos|#39|#\d+|#x[\da-f]+);/gi,entity=>{
@@ -11,7 +12,7 @@ const decode=value=>String(value).replace(/&(?:amp|lt|gt|quot|apos|#39|#\d+|#x[\
 });
 function metadataForRoute(route){
  if(typeof route!=='string'||!/^\/(?:[a-z0-9-]+\/)*$/.test(route))throw new Error('A canonical static route is required.');
- if(route==='/'||route==='/platform-preview/')return {canonical:origin+route,image:origin+'/assets/experience/neural-core-1600.webp',alt:'An optical-glass neural spiral rising above Earth’s horizon. Original Ad Astra concept art.'};
+ if(['/','/platform-preview/','/agent/'].includes(route)){const selected=primaryAsset(route,loadProject());return {canonical:origin+route,image:origin+selected.src,alt:selected.alt};}
  let id='intelligence';
  if(['/company/','/about/'].includes(route))id='vision';
  else if(route.startsWith('/markets/')||route==='/products/business-commerce/')id='global';

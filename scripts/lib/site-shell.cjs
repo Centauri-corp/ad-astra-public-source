@@ -1,5 +1,6 @@
 'use strict';
 const {applyBrandMetadata}=require('./brand-metadata.cjs');
+const {reconcileVisualAssets}=require('./website-project.cjs');
 // Shared first-party navigation. No tracking, forms or provider calls.
 const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const arrow='<svg class="site-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>';
@@ -25,6 +26,8 @@ function applySharedShell(html,route) {
   if(!html.includes('href="/design-system.css"'))html=html.replace('</head>','<link rel="stylesheet" href="/design-system.css"></head>');
   if(!html.includes('src="/design-system.js"'))html=html.replace('</head>','<script defer src="/design-system.js"></script></head>');
   if(!html.includes('href="/customer-experience.css"'))html=html.replace('</head>','<link rel="stylesheet" href="/customer-experience.css"></head>');
+  if(!html.includes('href="/assets/brand/experience-tokens.css"'))html=html.replace('<link rel="stylesheet" href="/customer-experience.css">','<link rel="stylesheet" href="/assets/brand/experience-tokens.css"><link rel="stylesheet" href="/customer-experience.css">');
+  html=reconcileVisualAssets(html,route);
   return iconize(applyBrandMetadata(html,route));
 }
 module.exports = {esc,header,footer,head,picture,applySharedShell,iconize};
