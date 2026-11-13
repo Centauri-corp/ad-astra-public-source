@@ -43,6 +43,7 @@ jobs:
           AD_ASTRA_AUDIT_OUTPUT: ${{ runner.temp }}/ad-astra-browser-evidence
           AD_ASTRA_PREVIEW_EVIDENCE: ${{ runner.temp }}/ad-astra-browser-evidence/portal
         run: |
+          npm run trust:browser:test
           node scripts/serve-audit.cjs > "$RUNNER_TEMP/ad-astra-audit-server.log" 2>&1 &
           audit_server_pid=$!
           trap 'kill "$audit_server_pid"' EXIT
