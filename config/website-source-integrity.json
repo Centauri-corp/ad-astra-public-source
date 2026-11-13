@@ -411,8 +411,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 20025,
-      "sha256": "e5d491c49487c2174411eee2c990f7a3b397bd377bc2088855004fbbf1c2685f"
+      "bytes": 20328,
+      "sha256": "605664d177677caa52aa277c0fcd1463a037c02d3b8c32ff6f6c2e7221a433fa"
     },
     {
       "path": "public/intelligence/index.html",
@@ -800,5 +800,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "08549a715a77e225866266acaffca6445dc1726a6300c0dda43bd9be8ef0fcbc"
+  "fingerprint": "c13119aaca94e80563ecba29fce620b101b45781f57709ae00248f18b0a7b859"
 }
