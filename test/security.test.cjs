@@ -44,9 +44,10 @@ test('runtime switches cannot bypass a marketing-only source or closed customer 
  for(const key of ['publicLaunchEnabled','engineAvailable']){release[key]=false;calls=[];const r=await request();assert.equal(r.statusCode,503);assert.equal(r.body.error,'release_not_ready');assert.ok(!calls.some(c=>c.url==='https://redis.invalid'||c.url.includes('/chat/completions')));release[key]=true;}
   assert.deepEqual(routing.redirects, []);
 });
-test('all five contracted modes use a bounded provider request in the synthetic fixture',async()=>{
+test('all five contracted modes and governed agent profiles use a bounded provider request in the synthetic fixture',async()=>{
  const ids=require('../lib/modes').MODE_IDS;assert.deepEqual(ids,release.customerModes);assert.deepEqual(catalog.MODELS[0].modes,ids);
  for(const mode of ids){calls=[];const r=await request({body:{question:'Compare two clear alternatives.',mode}});assert.equal(r.statusCode,200);assert.equal(r.body.mode,mode);assert.equal(calls.filter(c=>c.url.includes('/chat/completions')).length,1);}
+ const r=await request({body:{question:'Compare two clear alternatives.',mode:'research',agentId:'researcher'}});assert.equal(r.statusCode,200);assert.equal(r.body.agentId,'researcher');
 });
 test('valid signed session reserves quota before one bounded provider request',async()=>{
  const r=await request();assert.equal(r.statusCode,200);assert.equal(r.headers['cache-control'],'no-store');
@@ -104,7 +105,7 @@ test('body limits apply to parsed objects, strings, Unicode, and unknown fields'
  assert.equal((await request({body:{question:'x'.repeat(15000)}})).statusCode,413);
  assert.equal((await request({body:JSON.stringify({question:'x'.repeat(15000)})})).statusCode,413);
  assert.equal((await request({headers:{'content-length':'15000'}})).statusCode,413);
- for(const body of [{question:'tiny'},{question:'x'.repeat(4001)},{question:'A valid question',mode:'__proto__'},{question:'A valid question',references:[{title:'private'}]},{question:'A valid question',model:'unbounded-model'}])assert.equal((await request({body})).statusCode,422);
+ for(const body of [{question:'tiny'},{question:'x'.repeat(4001)},{question:'A valid question',mode:'__proto__'},{question:'A valid question',agentId:'unknown'},{question:'A valid question',references:[{title:'private'}]},{question:'A valid question',model:'unbounded-model'}])assert.equal((await request({body})).statusCode,422);
  assert.equal(calls.length,0);
 });
 test('quota outage and corrupt replies fail closed without memory fallback',async()=>{

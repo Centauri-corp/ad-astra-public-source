@@ -1,6 +1,7 @@
 'use strict';
 const { test } = require('node:test'), assert = require('node:assert/strict');
 const { publicModels, publicMarketProfiles, MODELS } = require('../lib/model-catalog');
+const { publicCustomerAgents } = require('../lib/customer-agent-catalog');
 const { CONTRACT, validateCatalog, validateRelease, validateCompletion, readCompletion } = require('../lib/model-validation');
 const release = require('../public/release-manifest.json');
 function completion() {
@@ -9,7 +10,7 @@ function completion() {
     usage: { prompt_tokens: 100, completion_tokens: 20, total_tokens: 120 } };
 }
 test('one foundation integration, five modes and 24 profiles have distinct, validated identities', () => {
-  assert.deepEqual(validateCatalog(publicModels(), publicMarketProfiles()), { connectedModelCount: 1, modeCount: 5, sectorProfileCount: 24 });
+  assert.deepEqual(validateCatalog(publicModels(), publicMarketProfiles(), publicCustomerAgents()), { connectedModelCount: 1, modeCount: 5, sectorProfileCount: 24, customerAgentCount: 6 });
   assert.equal(validateRelease(release), true);
   assert.equal(release.engineAvailable, false); assert.equal(release.publicLaunchEnabled, false);
   for (const profile of publicMarketProfiles()) assert.equal(profile.foundationModel, CONTRACT.productId);
@@ -42,7 +43,7 @@ test('extra models, modes, profile drift, duplicate identities and metadata leak
   }
 });
 test('release metadata cannot advertise additional models or achieved AGI/ASI', () => {
-  for (const mutate of [r=>r.connectedPublicModelCount=4, r=>r.marketProfileCount=436,
+  for (const mutate of [r=>r.connectedPublicModelCount=4, r=>r.marketProfileCount=436, r=>r.customerAgentCount=1,
     r=>r.customerModes.reverse(), r=>r.customerAiModel='new-model',
     r=>r.intelligenceLayers.agi='available', r=>r.intelligenceLayers.asi='production',
     r=>r.intelligenceLayers.liveTelemetry=true]) {
@@ -79,7 +80,9 @@ test('catalog endpoint fails closed on drift without publishing the rejected met
   const vm = require('node:vm'), fs = require('node:fs');
   const models = publicModels(); models[0].provider = 'sensitive-provider-metadata';
   const context = {module:{exports:{}},require(name){
-    return name === '../lib/model-catalog' ? {publicModels:()=>models,publicMarketProfiles} : require('../lib/model-validation');
+    if (name === '../lib/model-catalog') return {publicModels:()=>models,publicMarketProfiles};
+    if (name === '../lib/customer-agent-catalog') return {publicCustomerAgents};
+    return require('../lib/model-validation');
   }};
   vm.runInNewContext(fs.readFileSync(require.resolve('../api/models'),'utf8'),context);
   const res={headers:{},setHeader(k,v){this.headers[k]=v},end(value){this.body=JSON.parse(value)}};
@@ -93,6 +96,8 @@ test('public catalog declares profile/model distinction and no AGI/ASI availabil
   assert.equal(res.body.capabilityClass,'bounded-narrow-ai-integration');
   assert.equal(res.body.agiAvailable,false);assert.equal(res.body.asiAvailable,false);
   assert.equal(JSON.stringify(res.body).includes(CONTRACT.providerModel),false);
+  assert.equal(res.body.agents.length, 6);
+  for (const agent of res.body.agents) { assert.ok(!Object.hasOwn(agent, 'modelRole')); assert.equal(agent.availability, 'development-preview'); assert.ok(!/provider|connector|openai|google|ollama|llama/i.test(JSON.stringify(agent))); }
   assert.match(res.body.disclosure,/does not establish customer availability/);
 });
 test('bounded reader rejects non-JSON, malformed JSON, oversized headers and streamed bodies', async () => {

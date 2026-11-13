@@ -1,5 +1,6 @@
 'use strict';
 const { publicModels, publicMarketProfiles } = require('../lib/model-catalog');
+const { publicCustomerAgents } = require('../lib/customer-agent-catalog');
 const { validateCatalog } = require('../lib/model-validation');
 
 module.exports = function models(req, res) {
@@ -14,7 +15,8 @@ module.exports = function models(req, res) {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   const models = publicModels();
   const profiles = publicMarketProfiles();
-  try { validateCatalog(models, profiles); } catch {
+  const agents = publicCustomerAgents();
+  try { validateCatalog(models, profiles, agents); } catch {
     res.statusCode = 503;
     res.setHeader('Cache-Control', 'no-store');
     return res.end(JSON.stringify({ error: 'model_catalog_unavailable' }));
@@ -25,11 +27,15 @@ module.exports = function models(req, res) {
     architecture: 'one-connected-model-with-sector-profiles',
     connectedModel: models[0]?.id || null,
     connectedModelCount: models.length,
+    customerAgentArchitecture: 'provider-neutral-capability-profiles',
+    customerAgentCount: agents.length,
+    customerAgentAvailability: 'development-preview',
     capabilityClass: 'bounded-narrow-ai-integration',
     agiAvailable: false,
     asiAvailable: false,
     disclosure: 'Sector profiles share one foundation integration. Listing a profile does not establish customer availability, professional certification, or AGI/ASI capability.',
     models,
-    profiles
+    profiles,
+    agents
   }));
 };

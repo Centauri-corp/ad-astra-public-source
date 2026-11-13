@@ -9,6 +9,7 @@
     learn: 'Learn — build understanding',
     explore: 'Explore — test possibilities'
   };
+  const agentDefaults = {guide:'ask', researcher:'research', creator:'create', analyst:'explore', navigator:'ask', access:'learn'};
   function clerkDomain() {
     try { return atob(publishableKey.split('_')[2]).slice(0, -1); } catch { return 'clerk.adastra.global'; }
   }
@@ -34,6 +35,7 @@
     const form = $('live-ai-form');
     if (!form) return;
     const question = $('live-ai-question');
+    const agent = $('live-ai-agent');
     const mode = $('live-ai-mode');
     const submit = $('live-ai-submit');
     const status = $('live-ai-status');
@@ -46,6 +48,7 @@
     }));
     const requestedMode = new URLSearchParams(location.search).get('mode');
     if (modeLabels[requestedMode]) mode.value = requestedMode;
+    agent?.addEventListener('change', () => { if (agentDefaults[agent.value]) mode.value = agentDefaults[agent.value]; });
     form.addEventListener('submit', async event => {
       event.preventDefault();
       if (submit.dataset.available !== 'true') { status.textContent = 'The live engine is paused while release checks are completed.'; return; }
@@ -65,7 +68,7 @@
         const response = await fetch('/api/ask', {
           method: 'POST', credentials: 'same-origin', signal: AbortSignal.timeout(25000),
           headers: {'Content-Type': 'application/json', 'X-Ad-Astra-Request': 'public-v1', 'Authorization': `Bearer ${token}`, 'Idempotency-Key': pendingRequest.key},
-          body: JSON.stringify({question: value, mode: mode.value, references: []})
+          body: JSON.stringify({question: value, agentId: agent?.value || 'guide', mode: mode.value, references: []})
         });
         const data = await response.json();
         if (!response.ok || !data.ok) throw new Error(data?.error || 'unavailable');

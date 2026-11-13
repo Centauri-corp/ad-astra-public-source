@@ -7,6 +7,7 @@ const sharedBudget = require('../lib/shared-budget');
 const { MODES } = require('../lib/modes');
 const { engineEvents } = require('../lib/engine-events');
 const { CONTRACT, readCompletion } = require('../lib/model-validation');
+const { resolveCustomerAgent } = require('../lib/customer-agent-catalog');
 const MAX_BODY = 14000;
 function sameOrigin(req) {
   const host = String(req.headers?.host || '').toLowerCase();
@@ -48,8 +49,10 @@ module.exports = async function ask(req, res) {
   if (!body || typeof body !== 'object' || Array.isArray(body)) return reply(400,{error:'invalid_body'});
   const prompt = typeof body.question === 'string' ? body.question.trim() : '';
   const mode = body.mode === undefined ? 'ask' : body.mode;
+  const agentId = body.agentId === undefined ? 'guide' : body.agentId;
+  const agent = typeof agentId === 'string' ? resolveCustomerAgent(agentId) : null;
   if (typeof mode !== 'string' || !Object.hasOwn(MODES,mode) || prompt.length < 5 || prompt.length > 4000 ||
-      Object.keys(body).some(k=>!['question','mode','references'].includes(k)) ||
+      !agent || Object.keys(body).some(k=>!['question','mode','agentId','references'].includes(k)) ||
       (body.references !== undefined && (!Array.isArray(body.references) || body.references.length))) return reply(422,{error:'invalid_question'});
   const auth = await authenticateRequest(req);
   if (!auth.ok) return reply(auth.status,{error:auth.error,message:auth.status === 401 ? 'Please sign in again to continue.' : 'Secure sign-in is temporarily unavailable.'});
@@ -64,7 +67,7 @@ module.exports = async function ask(req, res) {
   let admission;
   try {
     admission = await budgetClient.reserve({authorization:req.headers.authorization,idempotencyKey,
-      requestHash:crypto.createHash('sha256').update(JSON.stringify({mode,prompt})).digest('hex')});
+      requestHash:crypto.createHash('sha256').update(JSON.stringify({agentId,mode,prompt})).digest('hex')});
   } catch { return reply(503,{error:'customer_access_unavailable',message:'Paid access could not be verified. No AI request was sent.'},{...headers,'Retry-After':60}); }
   if (!admission.allowed) {
     const status = admission.reason === 'paid_access_required' ? 403 : admission.reason === 'request_replayed' ? 409 : 429;
@@ -75,7 +78,7 @@ module.exports = async function ask(req, res) {
   req.once?.('aborted',stop);res.once?.('close',stop);
   try {
     const messages = [
-      {role:'system',content:`You are Astra Polaris, Ad Astra's sole connected customer-facing model (product model ID: astra-lumen), and a careful human-directed thinking assistant. Your task is to ${MODES[mode]}. Answer directly in under 500 words. Separate evidence, assumptions and uncertainty. You cannot browse, retrieve private data, remember conversations or take external actions. Never invent citations or claim source verification. For medical, legal or financial decisions provide general information and recommend qualified advice. Decline unsafe instructions.`},
+      {role:'system',content:`You are Astra Polaris, Ad Astra's sole connected customer-facing model (product model ID: astra-lumen), operating through the Ad Astra agent profile ${agent.name}. The profile focus is to ${agent.directive}. Your task is to ${MODES[mode]}. Answer directly in under 500 words. Separate evidence, assumptions and uncertainty. You cannot browse, retrieve private data, remember conversations or take external actions. Never invent citations or claim source verification. For medical, legal or financial decisions provide general information and recommend qualified advice. Decline unsafe instructions.`},
       {role:'user',content:prompt}
     ];
     if (messages.reduce((n,m)=>n+Buffer.byteLength(m.content)+32,0) > 16384) throw new Error('input_limit');
@@ -89,7 +92,7 @@ module.exports = async function ask(req, res) {
     });
     if (!response.ok) {console.warn('ad_astra_provider_status',{requestId,status:response.status});throw new Error('provider_unavailable');}
     const answer = await readCompletion(response);
-    return reply(200,{ok:true,mode,answer,disclosure:'AI-generated response. Verify important claims against primary sources.'},headers);
+    return reply(200,{ok:true,agentId,mode,answer,disclosure:'AI-generated response. Verify important claims against primary sources.'},headers);
   } catch { return reply(503,{error:'ai_unavailable',message:'Ad Astra could not complete this response. Please try again later.'},{...headers,'Retry-After':60}); }
   finally { req.removeListener?.('aborted',stop);res.removeListener?.('close',stop); }
 };
