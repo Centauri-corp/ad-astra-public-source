@@ -1,6 +1,6 @@
 {
   "schema": "ad-astra-website-creative-handoff/v1",
-  "recordedAt": "2026-11-13T18:27:29Z",
+  "recordedAt": "2026-11-13T19:17:48Z",
   "project": {
     "repository": "Centauri-corp/ad-astra-public-source",
     "repositoryId": 1431594115,
@@ -12,7 +12,7 @@
   "backlogItem": {
     "id": "CX-002",
     "priority": 0,
-    "state": "HANDOFF_PREPARED",
+    "state": "HANDOFF_PREPARED_PARTIAL_INTEGRATION",
     "ownerVisualReview": "PENDING",
     "rightsReview": "PENDING",
     "verifiedLive": false
@@ -165,7 +165,11 @@
     "branchFilteredVercelDeployments": 0,
     "websiteAudit": "NOT_RUN_NO_AUTHORIZED_LOCAL_WORKSPACE",
     "candidateBrowserRoutes": "NOT_TESTED_NO_PREVIEW",
-    "productionPromotion": "NOT_AUTHORIZED"
+    "productionPromotion": "NOT_AUTHORIZED",
+    "checkedCandidateHead": "e81453805ae5a86202da8c25baf492f5ef8fc28d",
+    "candidateWorkflowRuns": 0,
+    "candidateCommitStatuses": 0,
+    "candidatePreviewDeployments": 0
   },
   "cmsPolicyConflict": {
     "projectId": "6a4vgjc9",
@@ -189,5 +193,49 @@
     "screenshotObserved": true,
     "responsiveViewports": "NOT_TESTED_IN_THIS_RUN",
     "note": "The live surface is the older public-preview composition; the PR38 candidate is not live and no exact preview deployment was available."
+  },
+  "postIntegrationCheck": {
+    "observedAt": "2026-11-13T19:17:48Z",
+    "candidateHead": "e81453805ae5a86202da8c25baf492f5ef8fc28d",
+    "prClaim": "The mobile hero crop/source sizing is corrected.",
+    "result": "PARTIAL_TECHNICAL_MITIGATION_NOT_CREATIVE_CROP",
+    "exactEvidence": {
+      "mobileBinary": {
+        "path": "/assets/experience/neural-core-800.webp",
+        "gitBlobSha": "7974d6d720ecbf5f1b74cb8bad3e304a7bfa028c",
+        "width": 800,
+        "height": 450,
+        "bytes": 52250,
+        "recordedSha256": "26bc3cf490171b5d1ead461d928b00e17d7af4e2428c720260f56a0287e01e20"
+      },
+      "desktopBinary": {
+        "path": "/assets/experience/neural-core-1600.webp",
+        "gitBlobSha": "2b82dc8f239d3401a6237d9c59433d36e5b2763e",
+        "width": 1600,
+        "height": 900,
+        "bytes": 161238,
+        "recordedSha256": "5d7de50c2232a88e430c46e21fb869b1c4e91af1fda5cc13e6cabb7962e5cbde"
+      },
+      "experienceManifestBlobSha": "2316f30b37b4d6e0dc060efcc1867ff97dcd9ec6",
+      "assetSelectionBlobSha": "b26c4d114b76ad592a26dd8f44b250608065ebd9",
+      "implementation": {
+        "primaryFit": "contain",
+        "primarySizes": "(max-width: 760px) calc(100vw + 345px), 100vw",
+        "generatedImgInlineStyle": "object-fit:contain",
+        "mobileCssStillUses": "object-position:80% center and the existing mask"
+      }
+    },
+    "assessment": [
+      "The contain/sizes change is a legitimate technical mitigation: it prevents the prior cover crop and can select the 1600px export for high-DPR mobile display.",
+      "No art-specific mobile crop was produced. The selected mobile asset remains the same 16:9 800x450 composition and original bytes.",
+      "The 3200px desktop master target remains unmet; the largest selected export is 1600x900 from a 1672x941 source.",
+      "visual-review.json remains pending with no scope fingerprint, scores, route coverage, rights decisions or viewport artifacts.",
+      "No exact-head PR comment, commit status, workflow run or branch-filtered Vercel preview was available; candidate route visual QA remains NOT_TESTED."
+    ],
+    "requiredCorrection": {
+      "action": "Implement the already specified derived 800x600 crop and register its exact bytes/hash, or revise the release language to describe only a contain/source-sizing mitigation and keep the art-specific mobile crop acceptance open.",
+      "preferredCreativePath": "Derive the 800x600 WebP from the existing 1600x900 selected bytes without generation or restyling, preserve the full neural silhouette/core/horizon, update manifest + asset selection + generated homepage, then capture exact 320/390/768 screenshots.",
+      "publicationBoundary": "No production promotion or OWNER_ACCEPTED status until the exact candidate receives real visual and rights review."
+    }
   }
 }
