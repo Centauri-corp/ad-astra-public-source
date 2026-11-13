@@ -1,0 +1,28 @@
+{
+  "schema": "ad-astra-experience-art/v1",
+  "createdAt": "2026-11-13",
+  "generator": "OpenAI image generation",
+  "source": {
+    "file": "exec-bda306c1-2281-440f-b329-69d5576c6994.png",
+    "width": 1672,
+    "height": 941,
+    "sha256": "be8d98f3cc8fd0556ace3b2a50d8fb0a073f0a053dc0c43f05b3f2d5850002a5"
+  },
+  "description": "Original optical-glass neural spiral over a planetary horizon; conceptual artwork, not a deployed intelligence system.",
+  "exports": [
+    {
+      "path": "/assets/experience/neural-core-800.webp",
+      "width": 800,
+      "bytes": 52250,
+      "sha256": "26bc3cf490171b5d1ead461d928b00e17d7af4e2428c720260f56a0287e01e20"
+    },
+    {
+      "path": "/assets/experience/neural-core-1600.webp",
+      "width": 1600,
+      "bytes": 161238,
+      "sha256": "5d7de50c2232a88e430c46e21fb869b1c4e91af1fda5cc13e6cabb7962e5cbde"
+    }
+  ],
+  "humanVisualApproval": null,
+  "releaseAuthorization": false
+}

@@ -81,7 +81,8 @@ assert.ok(visualManifest.assets.some(asset=>asset.id==='ad-astra-orbital-mark'&&
 // homepage must not quietly reintroduce media, microphone or prompt execution.
 assert.ok(!/<video|<audio|<iframe|<form\b/.test(homepage),'Homepage must stay a readable, non-executing story');
 assert.ok(homepage.includes('data-motion-toggle')&&homepage.includes('/design-system.js'),'Ambient motion needs an explicit pause control');
-for(const id of ['intelligence','vision','products','agi','global','beyond'])assert.ok(homepage.includes('/assets/story/'+id+'-1672.webp'),'Missing story chapter art: '+id);
+for(const id of ['vision','products','agi','global','beyond'])assert.ok(homepage.includes('/assets/story/'+id+'-1672.webp'),'Missing story chapter art: '+id);
+assert.ok(homepage.includes('/assets/experience/neural-core-1600.webp'),'Missing customer-experience neural artwork');
 assert.ok(homepage.includes('AGI is not achieved')&&homepage.includes('ASI is not achieved'),'Research boundaries missing');
 for(const caption of ['ad-astra-runway-orbital-motion.vtt','ad-astra-horizon-motion.vtt']){const captionPath=path.join(root,'public/assets',caption);assert.ok(fs.existsSync(captionPath),`Missing caption track: ${caption}`);assert.ok(fs.readFileSync(captionPath,'utf8').startsWith('WEBVTT'),`Invalid caption track: ${caption}`);}
 const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');
@@ -116,10 +117,10 @@ const markets=fs.readFileSync(path.join(root,'public/markets/index.html'),'utf8'
 const agent=fs.readFileSync(path.join(root,'public/agent/index.html'),'utf8');
 assert.ok(agent.includes('Astra Polaris')&&agent.includes('Astra Sirius')&&agent.includes('Astra Orion')&&agent.includes('Astra Helios')&&agent.includes('Astra Spica')&&agent.includes('Astra Lyra')&&agent.includes('Astra Rigel')&&agent.includes('Astra Electra')&&agent.includes('Astra Arcturus'),'Public star profile catalog missing');
 const preview=fs.readFileSync(path.join(root,'public/platform-preview/index.html'),'utf8');
-assert.ok(preview.includes('CUSTOMER PLATFORM MOCKUP')&&preview.includes('Astra Polaris')&&preview.includes('PREVIEW BOUNDARY'),'Customer platform preview missing boundary');
+assert.ok(preview.includes('Customer workspace preview')&&preview.includes('Astra Polaris')&&preview.includes('PREVIEW BOUNDARY')&&preview.includes('Responses are fixed samples, not live AI output.'),'Customer platform preview missing sample boundary');
 assert.ok(preview.includes('no customer prompts')&&preview.includes('backend writes'),'Customer platform preview exposes an unsafe surface');
-assert.ok(preview.includes('/assets/astra-polaris-platform-mockup.png')&&preview.includes('global network'),'Customer platform mockup visual missing');
-for(const label of ['QUESTION STUDIO','RESEARCH ATLAS','CREATIVE ORBIT','LEARNING LENS','HORIZON SCANNER','PROJECT ORBIT','KNOWLEDGE ROOMS','SIGNAL MONITOR','PROFILE CONSTELLATIONS','GLOBAL NETWORK','ACCESS LAYER','GOVERNANCE DECK'])assert.ok(preview.includes(label),`Customer product missing: ${label}`);
+assert.ok(preview.includes('/assets/experience/neural-core-1600.webp')&&preview.includes('Visual concept of Astra Polaris'),'Customer workspace neural visual missing');
+for(const mode of ['research','create','plan'])assert.ok(preview.includes('data-mode="'+mode+'"'),'Workspace preview mode missing: '+mode);
 const positioning=fs.readFileSync(path.join(root,'public/markets/positioning/index.html'),'utf8');
 const microgrids=fs.readFileSync(path.join(root,'public/markets/positioning/microgrids/index.html'),'utf8');
 const pricing=fs.readFileSync(path.join(root,'public/pricing/index.html'),'utf8');

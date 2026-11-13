@@ -11,6 +11,7 @@ const decode=value=>String(value).replace(/&(?:amp|lt|gt|quot|apos|#39|#\d+|#x[\
 });
 function metadataForRoute(route){
  if(typeof route!=='string'||!/^\/(?:[a-z0-9-]+\/)*$/.test(route))throw new Error('A canonical static route is required.');
+ if(route==='/'||route==='/platform-preview/')return {canonical:origin+route,image:origin+'/assets/experience/neural-core-1600.webp',alt:'An optical-glass neural spiral rising above Earth’s horizon. Original Ad Astra concept art.'};
  let id='intelligence';
  if(['/company/','/about/'].includes(route))id='vision';
  else if(route.startsWith('/markets/')||route==='/products/business-commerce/')id='global';

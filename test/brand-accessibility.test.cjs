@@ -30,6 +30,8 @@ test('metadata regeneration escapes untrusted text and preserves source security
  for(const bad of ['https://evil.invalid/','/../','/?mode=ask','/<script>/'])assert.throws(()=>metadataForRoute(bad));
 });
 test('static preview and authentication wrappers use valid named roles',()=>{
- assert.match(fs.readFileSync(path.join(root,'platform-preview/index.html'),'utf8'),/class="network-map" role="img" aria-label="Conceptual global connection map, not service coverage"/);
+ const preview=fs.readFileSync(path.join(root,'platform-preview/index.html'),'utf8');
+ assert.match(preview,/<figure class="wp-scene-art" aria-label="Glass neural spiral above an Earth horizon. Visual concept of Astra Polaris.">/);
+ assert.match(preview,/<img id="neural-image"[^>]+alt=""/);
  assert.match(fs.readFileSync(path.join(root,'sign-in/index.html'),'utf8'),/id="sign-in" role="region" aria-label="Ad Astra sign-in"/);
 });

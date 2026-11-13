@@ -116,8 +116,8 @@
     },
     {
       "path": "public/about/index.html",
-      "bytes": 3841,
-      "sha256": "9e8f72e5884991eaa2175f89178df4339057636590967aba59ee1cc4b9710789"
+      "bytes": 3967,
+      "sha256": "feff2623a438883415c35a98d5e7ae51aee624e8704075c7f5b9b9459ac2c431"
     },
     {
       "path": "public/account/billing/app.js",
@@ -126,8 +126,8 @@
     },
     {
       "path": "public/account/billing/index.html",
-      "bytes": 7984,
-      "sha256": "342b49f1da33dae190425a9ea7966d3c544703160b1bac1cffec4f126ca5383f"
+      "bytes": 8110,
+      "sha256": "41d86086c7b779a6995150c1340b42bd6a7f39d22c9f4594d2dfd4b6d59e69c7"
     },
     {
       "path": "public/account/billing/style.css",
@@ -136,8 +136,8 @@
     },
     {
       "path": "public/agent/index.html",
-      "bytes": 8564,
-      "sha256": "5b54d55deced051be11fd8493ee5223af9363a27fa3ed2c72a86168f69df349f"
+      "bytes": 8690,
+      "sha256": "8d367df92a3487799f7eda5b9758548f4b9b6144b802350da6cf5b4ea472528d"
     },
     {
       "path": "public/app.js",
@@ -253,6 +253,21 @@
       "path": "public/assets/brand/product-tokens.css",
       "bytes": 395,
       "sha256": "f461b14b9fc187bf132018337331264d8b78035f7fd266353155b64bb952ed0c"
+    },
+    {
+      "path": "public/assets/experience/manifest.json",
+      "bytes": 930,
+      "sha256": "b9dde81038b7ccb3a0e9416f7c8fef7a28464e656cf4dd53741de07c143d6462"
+    },
+    {
+      "path": "public/assets/experience/neural-core-1600.webp",
+      "bytes": 161238,
+      "sha256": "5d7de50c2232a88e430c46e21fb869b1c4e91af1fda5cc13e6cabb7962e5cbde"
+    },
+    {
+      "path": "public/assets/experience/neural-core-800.webp",
+      "bytes": 52250,
+      "sha256": "26bc3cf490171b5d1ead461d928b00e17d7af4e2428c720260f56a0287e01e20"
     },
     {
       "path": "public/assets/products/architecture.svg",
@@ -381,8 +396,18 @@
     },
     {
       "path": "public/company/index.html",
-      "bytes": 4093,
-      "sha256": "db4d6372ec11cd8e3fa410f608d9db12e104b7ba4f5f340b6c2541a3248e9748"
+      "bytes": 4219,
+      "sha256": "17bef5d5a0489d8a2aa3b86c53c4ca22e98db525aeb716ce1897acf0d94602fd"
+    },
+    {
+      "path": "public/customer-experience.css",
+      "bytes": 16530,
+      "sha256": "31404be09d2836b69fc034312df6c8eb28cda05491580ae1e74755298d657806"
+    },
+    {
+      "path": "public/customer-experience.js",
+      "bytes": 1027,
+      "sha256": "12ae6e3b6439791d0884716bf68461f485d4bc403d41edffadc0f57d8f903904"
     },
     {
       "path": "public/design-system.css",
@@ -421,18 +446,18 @@
     },
     {
       "path": "public/film/index.html",
-      "bytes": 9876,
-      "sha256": "28af5a3054be9f5d9927f23f5e00e309fd59cbb915eef6066586f8fca5c53513"
+      "bytes": 10002,
+      "sha256": "8cbaf4ce46cabc05d55484fe49bc3550ccea14b3915f5e3f92a6bbba036e7d00"
     },
     {
       "path": "public/index.html",
-      "bytes": 20328,
-      "sha256": "605664d177677caa52aa277c0fcd1463a037c02d3b8c32ff6f6c2e7221a433fa"
+      "bytes": 20276,
+      "sha256": "ce8e4ce24a9f3c2675fab5cdc926476e81764555039e8b415af2f95779b67367"
     },
     {
       "path": "public/intelligence/index.html",
-      "bytes": 16515,
-      "sha256": "26a97e5ca52da2e92de474622c7ad4916a69d8e0148d26835337df4c69c78697"
+      "bytes": 16641,
+      "sha256": "443fa4e058bea7c309acb38df97fb650652c6d9f2d9ef1d80962b0990cb5132f"
     },
     {
       "path": "public/intelligence/style.css",
@@ -451,8 +476,8 @@
     },
     {
       "path": "public/knowledge/index.html",
-      "bytes": 10073,
-      "sha256": "26b3849fba635af3f02ddef77e7a6359327aa82fd53129d465f0082f66319879"
+      "bytes": 10199,
+      "sha256": "5a01fe0a72f284e1756544d7413df472da6ac198c8e68a97088c80b6dcc089b0"
     },
     {
       "path": "public/knowledge/style.css",
@@ -471,8 +496,8 @@
     },
     {
       "path": "public/markets/agriculture-food/index.html",
-      "bytes": 5082,
-      "sha256": "0c5febb3e3a4aeea6c27ab874657bf5e8665426e7f7ef99386ea1aa44bf41bcd"
+      "bytes": 5208,
+      "sha256": "a46f5cdc886e353feac8bb761362aaa068d53f4e99fe60ec20407af043f9d2c3"
     },
     {
       "path": "public/markets/app.js",
@@ -481,8 +506,8 @@
     },
     {
       "path": "public/markets/business-professional-services/index.html",
-      "bytes": 5282,
-      "sha256": "8e49f58adfcee6742852fa43fabad029da775bc305f864b0ebd9f9faf1d19e50"
+      "bytes": 5408,
+      "sha256": "bdd1ac035b9a75d096e3d8c2682e91416a75c01a59e30e63fa169ece34459261"
     },
     {
       "path": "public/markets/california/app.js",
@@ -491,73 +516,73 @@
     },
     {
       "path": "public/markets/california/index.html",
-      "bytes": 5739,
-      "sha256": "99d30d5cba508540a539c628eb0a598071de341566220a02e524edd46b9d3b20"
+      "bytes": 5865,
+      "sha256": "548b928304d817de94cd090be40103c65a10abd367a4d4522add690c7fc64d62"
     },
     {
       "path": "public/markets/consumer-personal-ai/index.html",
-      "bytes": 5235,
-      "sha256": "667208e04005462c40bf82ca5d6d643db5c1cf88000821e7a9022ff76c33907a"
+      "bytes": 5361,
+      "sha256": "28623ad7cf76492ba5722b31222fd6334c00dc8b4cd59f6f81d669954b90e1f4"
     },
     {
       "path": "public/markets/creative-industries-media/index.html",
-      "bytes": 5197,
-      "sha256": "c0a74a3092753e7ce7d3ffd44e69986124f5784ad7b5f7544e02be23c5f3aed2"
+      "bytes": 5323,
+      "sha256": "2061452b42c3941d21a215fa5a9e92f7b475e84cbd55821cbe6f3b217cd9c37a"
     },
     {
       "path": "public/markets/digital-commerce/index.html",
-      "bytes": 5150,
-      "sha256": "0a0baedf9c21e9cf380fc491fc5f230aee028c03fcaee9e773db37902f255455"
+      "bytes": 5276,
+      "sha256": "f81aa5e0cd78674334a2ffca177a4838643aa3122b7822897aac46b1828b085f"
     },
     {
       "path": "public/markets/education-learning/index.html",
-      "bytes": 5159,
-      "sha256": "251e35e13454bcaa5c0ef54719d32157183fd507ec6cb3e4892f402456c0875e"
+      "bytes": 5285,
+      "sha256": "cea706197ed5638f042e154f401f12a7f1d831c82cba74dc3a948a6266acf3b2"
     },
     {
       "path": "public/markets/finance-economics/index.html",
-      "bytes": 5128,
-      "sha256": "feee5f40d46272673af25b4ba4af0b85e6781856574ed81bd02dfbda53f81fd1"
+      "bytes": 5254,
+      "sha256": "8bb8dc367f8c5300b781da631a2fa2a9d4ccb364db9090a8532d2bba764ab0c5"
     },
     {
       "path": "public/markets/government-public-services/index.html",
-      "bytes": 5187,
-      "sha256": "6c72c32b81fbae09518b1a1c04790aebbe77e1ac40350046d2aebfc4fb7af4a5"
+      "bytes": 5313,
+      "sha256": "db676d0afb71665f860c520e4eff4f5cd45d1a1e01187af5ae61ce07f74d12e6"
     },
     {
       "path": "public/markets/healthcare-wellness/index.html",
-      "bytes": 5206,
-      "sha256": "1228409e2e4220b8a3ea328578a927756e87a362cb8501382d39bce47efab7f9"
+      "bytes": 5332,
+      "sha256": "b6e915465ea8a84bfcf4353857e789ea735fc5224a8384d395e9701db9bedf75"
     },
     {
       "path": "public/markets/index.html",
-      "bytes": 8818,
-      "sha256": "c29d178611e8be593128dc94a37ae45d8578aa8cbaf2af9eb40032ba53123223"
+      "bytes": 8944,
+      "sha256": "25191b10289dc9da4cc5bc64fa1b1cb5a8fc73222fdae7087e06a2f4e003e19d"
     },
     {
       "path": "public/markets/legal-compliance/index.html",
-      "bytes": 5133,
-      "sha256": "a803a35edff98ca849b5e5b5c34dd9f4a2d5fc3a0668c2ddeba1f14b13670c79"
+      "bytes": 5259,
+      "sha256": "97d99bcb9550f463e2a32819a3e0c472abd4170de94567916b03c28402a92683"
     },
     {
       "path": "public/markets/logistics-supply-chain/index.html",
-      "bytes": 5133,
-      "sha256": "4164a4e964ae6be32949a7312e9d2a034a0ed5f2fed5d6d6e94c897ec5cd0797"
+      "bytes": 5259,
+      "sha256": "cbe79e941b328dee8be964c330dd177d2f606113347be72306ac8c61718f38b3"
     },
     {
       "path": "public/markets/manufacturing-energy/index.html",
-      "bytes": 5216,
-      "sha256": "93e6ee724002f32972c590fd09f5cd0553eaff82004ed4c3df1bad3d2a54ebbd"
+      "bytes": 5342,
+      "sha256": "59202382209de4cf1ca0fbe76a161666d85dae7831afa20e61ae4c10cdcb0cac"
     },
     {
       "path": "public/markets/positioning/index.html",
-      "bytes": 8256,
-      "sha256": "05904ade1c7770bc1afdc487e121072cd248014c0c7de61da9a845e99d4b5af3"
+      "bytes": 8382,
+      "sha256": "4f3c493f6dac1593e840c4526f0f9fdd1f9bbcb48e503c4cf342d7aa894bc4d1"
     },
     {
       "path": "public/markets/positioning/microgrids/index.html",
-      "bytes": 13228,
-      "sha256": "bdcb384ed019ecb34b790e04fc1f5b2a31a2091179205ec8547439ef4cdfb103"
+      "bytes": 13354,
+      "sha256": "c4560c28553804e4d7e2d3b752c339f7a05e1d87842738866cc2696c4201a265"
     },
     {
       "path": "public/markets/positioning/style.css",
@@ -566,13 +591,13 @@
     },
     {
       "path": "public/markets/real-estate-construction/index.html",
-      "bytes": 5147,
-      "sha256": "0680795848ed86940ad02703b1c63c59b08d7b1798b76003529e23b9be0da526"
+      "bytes": 5273,
+      "sha256": "ec51b128d351311deea8a9a9769c0dd32f8656ea633d870084928b9a7565a56e"
     },
     {
       "path": "public/markets/science-research/index.html",
-      "bytes": 5215,
-      "sha256": "fcd054926963ba54225a17dcd7c7dd4990076feb0717de27e2c9bb924267afc4"
+      "bytes": 5341,
+      "sha256": "1a43da3f285fe15cebc58b865178428f50b7576576b50275f76392ba2373ba48"
     },
     {
       "path": "public/markets/style.css",
@@ -581,8 +606,8 @@
     },
     {
       "path": "public/markets/travel-hospitality/index.html",
-      "bytes": 5026,
-      "sha256": "345692e8db64afe8fd8068e2edc1d3d46987c5a024e38ee6d1371177c27e43b2"
+      "bytes": 5152,
+      "sha256": "429c0f7fa7b0d98f129bf0a8191a4c92787525e7f4b4e9d2243b85c501fc970f"
     },
     {
       "path": "public/neural/conversation.js",
@@ -641,18 +666,18 @@
     },
     {
       "path": "public/platform-preview/app.js",
-      "bytes": 1307,
-      "sha256": "134f738608f2cd371113389510de93869c331d890d5223e933fa8e714522001c"
+      "bytes": 20108,
+      "sha256": "44cb991df0355dfe84115de253a792a0746aeb1f4f8dfad59b1fce0c6f143aaf"
     },
     {
       "path": "public/platform-preview/index.html",
-      "bytes": 14588,
-      "sha256": "757038f332714ddd5e9ed91fe350e12026177057e79002e378a624a8760a4931"
+      "bytes": 15397,
+      "sha256": "e7199b6e395e8c29b50c72522a7cf9e9527d7436eb19f1d9a4107a8f061e2ed2"
     },
     {
       "path": "public/platform-preview/style.css",
-      "bytes": 13323,
-      "sha256": "7324df59747ec033c72e051425442d67e11bcede9118c59194a9130116b9e7e6"
+      "bytes": 20301,
+      "sha256": "886471afb236323368ce5ab37052543653e53e0bf8f9e688bd9193b5a5f6494d"
     },
     {
       "path": "public/platform/app.js",
@@ -661,38 +686,38 @@
     },
     {
       "path": "public/platform/index.html",
-      "bytes": 15047,
-      "sha256": "70d9798a7266132ef2bb9a32c51c41a95a5ab2bc559b7c76039b2c67e05f5fce"
+      "bytes": 15173,
+      "sha256": "21ffb591e4dae072ca05c7441287c248d2dac5dc70a3aa2298da724cf24f8c2f"
     },
     {
       "path": "public/pricing/index.html",
-      "bytes": 6148,
-      "sha256": "7c3cfba999e14003863b0926f72280697724ac9e7b6572f3512e89cbef01955f"
+      "bytes": 6274,
+      "sha256": "fadf85541ca96d788e253ddd1149508910100eff2ca7e7f7a897e947e8a512db"
     },
     {
       "path": "public/products/autonomous-workflows/index.html",
-      "bytes": 6101,
-      "sha256": "9fc338aa3633b640b50f2c6b5141a163052d1fd2685979e0c8660dab5f2c9d00"
+      "bytes": 6227,
+      "sha256": "b92c3b21cbeba1e808c58d015e893380e3aa42232223d58b66b8a7353be70b82"
     },
     {
       "path": "public/products/business-commerce/index.html",
-      "bytes": 6115,
-      "sha256": "06616dc64aae013822a01e6794053964abd7f7de7226bd3add99e02ef43b0258"
+      "bytes": 6241,
+      "sha256": "e8acf583fd887df04da85e0ab6653a3575441f939613e70557c3c27455a7940e"
     },
     {
       "path": "public/products/core-intelligence/index.html",
-      "bytes": 6111,
-      "sha256": "f65982dbbbf00cbe3ffd483e6ec1681873935a68fbdb10044541592a31d57cdf"
+      "bytes": 6237,
+      "sha256": "a65d267450c76c0ed39af7f2a6ac29ec5f7d4f63325c2ffb5c4f3ca86889adf8"
     },
     {
       "path": "public/products/creative-studio/index.html",
-      "bytes": 6093,
-      "sha256": "accb5ae22ce833bea48798d69df538a9db5b5a64ec4d9bdc3c50191db177b94c"
+      "bytes": 6219,
+      "sha256": "2eb346f0ab9237b6de8c32886d6955c96aa2f1aea6918c4960ea5e4a442140c1"
     },
     {
       "path": "public/products/developer-platform/index.html",
-      "bytes": 6086,
-      "sha256": "9f09b5b13aa5fd8cbad2cdb5dc38a7ddb34899a216331073a6d3c2e82eaaa0c2"
+      "bytes": 6212,
+      "sha256": "b06521308323acf9f2a10b94b0e147b12c625af6ef0cf6cbd22becfe6aaf829b"
     },
     {
       "path": "public/products/discovery.js",
@@ -701,13 +726,13 @@
     },
     {
       "path": "public/products/index.html",
-      "bytes": 13916,
-      "sha256": "120da59068a11f7644da4ffcb722c4889e09b1fc37c5c3fcd51b42baa0c6afc0"
+      "bytes": 14042,
+      "sha256": "3348a9eb6ef4954bc2150dd5e843ab711387909c3767bc4fa01c4289cf51eba2"
     },
     {
       "path": "public/products/specialist-intelligence/index.html",
-      "bytes": 6172,
-      "sha256": "7efb7907864a52cd966dc2f1e0a0a4385dd4e3446486905a3ce0be4d0c7f4540"
+      "bytes": 6298,
+      "sha256": "828abd6324806556def214e8d09dce97fb71af48e63f22c0b70f30a7e13580f8"
     },
     {
       "path": "public/products/style.css",
@@ -731,8 +756,8 @@
     },
     {
       "path": "public/services/index.html",
-      "bytes": 9111,
-      "sha256": "98cdfd434b47797c6f728b68315458cdc1b9b65c7d99543b69c8d8e374ca5414"
+      "bytes": 9237,
+      "sha256": "6000f14f63e87c742f0a6b6ea1142b2f717a903416ae872feb611932cfae49c0"
     },
     {
       "path": "public/sign-in/app.js",
@@ -741,8 +766,8 @@
     },
     {
       "path": "public/sign-in/index.html",
-      "bytes": 4698,
-      "sha256": "688ec4f59899402ca7c5d01c472f793baf59550ee8b7c39251a6c864e3b5991d"
+      "bytes": 4824,
+      "sha256": "89cf89ac30f767dd796891c7ca6fa5c9c8c7b86aa181c9fb8ca0282a30bcdb9d"
     },
     {
       "path": "public/sitemap.xml",
@@ -761,8 +786,8 @@
     },
     {
       "path": "public/start/index.html",
-      "bytes": 26189,
-      "sha256": "1bcbc66f620863229c1a53baf55d9be4440c44f68e5b833fca037d584103d0de"
+      "bytes": 26275,
+      "sha256": "c710b3893fdc172ee3ae4b3ddafa139f5808655f58c3c9c717505c868ce8a02b"
     },
     {
       "path": "public/start/samples/build.txt",
@@ -796,8 +821,8 @@
     },
     {
       "path": "public/status/index.html",
-      "bytes": 8007,
-      "sha256": "230b3acd25ba10efc69ae1e7aa5132863cb61135fd8df9cee0e8b67dd5c8c634"
+      "bytes": 8133,
+      "sha256": "ab98772d6d58de09549d99440e41db32da308f013b7dc2144fd0900b58d6cf88"
     },
     {
       "path": "public/status/status.js",
@@ -815,5 +840,5 @@
       "sha256": "74602665247bd2986b4ffce16f4c8c2f38b8d5010724616d5a1f3b94201c5aa8"
     }
   ],
-  "fingerprint": "f80a14400aeefd849f37d432e18750970ea410b8735a761b83b4c300e4c30e4f"
+  "fingerprint": "238f16bcd657291e737688492a33e59965e565ddaded7d0ed680ea5572969d44"
 }

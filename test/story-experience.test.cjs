@@ -25,9 +25,20 @@ test('story pages are non-executing, complete without script and explicit about 
   assert.equal((html.match(/<h1\b/g)||[]).length,1);assert.ok(!/<input|<textarea|<video|<audio|<iframe|<form\b/.test(html));assert.ok(!html.includes('/app.js'));assert.ok(html.includes('noindex,follow'));assert.ok(html.includes('/status/'));assert.ok(html.includes('Concept art')||html.includes('Conceptual artwork'));
  }
  const home=fs.readFileSync(path.join(root,'public/index.html'),'utf8');
- for(const asset of collection.assets)assert.ok(home.includes('/assets/story/'+asset.id+'-1672.webp'));
+ for(const asset of collection.assets.filter(a=>a.id!=='intelligence'))assert.ok(home.includes('/assets/story/'+asset.id+'-1672.webp'));
+ assert.ok(home.includes('/assets/experience/neural-core-1600.webp'));
  assert.ok(home.includes('No regions are currently approved'));assert.ok(home.includes('AGI is not achieved'));assert.ok(home.includes('ASI is not achieved'));
  assert.ok(picture('vision','<script>alert(1)</script>').includes('&lt;script&gt;'));
  const js=fs.readFileSync(path.join(root,'public/design-system.js'),'utf8');assert.ok(!/fetch\(|getUserMedia|localStorage|SpeechRecognition|XMLHttpRequest/.test(js));
  const css=fs.readFileSync(path.join(root,'public/design-system.css'),'utf8');assert.ok(css.includes('prefers-reduced-motion:reduce'));assert.ok(css.includes('[hidden]'));
+});
+test('new neural artwork has source-bound responsive exports within the delivery budget',()=>{
+ const art=require('../public/assets/experience/manifest.json');
+ assert.equal(art.releaseAuthorization,false);assert.equal(art.humanVisualApproval,null);
+ for(const item of art.exports){
+  const bytes=fs.readFileSync(path.join(root,'public',item.path));
+  assert.ok(item.width<=art.source.width);assert.ok(bytes.length<250000);
+  assert.equal(bytes.length,item.bytes);
+  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),item.sha256);
+ }
 });

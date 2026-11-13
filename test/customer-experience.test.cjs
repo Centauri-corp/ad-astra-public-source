@@ -115,7 +115,8 @@ test('default selection receives a shareable URL and every direction survives hi
 test('homepage, navigation and route evidence link to a pending, non-indexable journey', () => {
   const home = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
   assert.ok(home.includes('href="/start/">Find your starting point'));
-  assert.ok(home.includes('id="journey-invitation-title"'));
+  assert.ok(home.includes('href="/platform-preview/">Explore the workspace'));
+  for(const mode of ['research','create','plan'])assert.ok(home.includes('href="/platform-preview/?mode='+mode+'"'));
   const evidence = require('../public/route-release-evidence.json');
   const start = evidence.routes.find(r => r.path === '/start/');
   assert.equal(start.decision, 'pending');
