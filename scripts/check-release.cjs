@@ -76,9 +76,8 @@ assert.ok(homepage.includes('class="brand-wordmark" aria-hidden="true">AD ASTRA<
 assert.ok(fs.existsSync(path.join(root,'public/assets/brand/ad-astra-mark.svg')),'Missing first-party AD ASTRA orbital mark');
 const visualManifest=JSON.parse(fs.readFileSync(path.join(root,'public/assets/visual-manifest.json')));
 assert.ok(visualManifest.assets.some(asset=>asset.id==='ad-astra-orbital-mark'&&asset.path==='/assets/brand/ad-astra-mark.svg'),'Visual manifest must identify the deployed AD ASTRA orbital mark');
-// The public cinematic hero is muted, decorative, and explicitly opt-in. The
-// static master is complete without motion; customer execution, autoplay audio
-// and third-party embeds remain excluded.
+// The local neural sculpture may animate with an explicit pause and reduced
+// motion fallback. The separate decorative video remains opt-in and silent.
 assert.ok(!/<audio|<iframe|<form\b/.test(homepage),'Homepage must not activate audio, embeds or customer forms');
 assert.equal((homepage.match(/<video\b/g)||[]).length,2,'Homepage needs a cinematic hero film and an opt-in local motion study');
 const heroFilm=(homepage.match(/<video[^>]*class="ad-arrival-film"[^>]*>/)||[])[0]||'';

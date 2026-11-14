@@ -135,13 +135,15 @@ test('cinematic arrival and workspace layers are decorative, controllable and do
   assert.match(home, /Cinematic design preview · Customer access remains unavailable/);
   assert.match(home, /class="ad-arrival-system" aria-label="Ad Astra visual platform sequence"/);
   assert.match(home, /class="ad-architecture-sequence" aria-labelledby="architecture-sequence-title"/);
-  assert.match(home, /Design architecture only\. No account, model, billing, CRM, voice or external action is activated\./);
+  assert.match(home, /Explore the experience\. Products are in development\./);
+  assert.match(home, /data-neural-hero/);
+  assert.match(home, /src="\/neural\/cinematic-home\.js"/);
   assert.doesNotMatch(home, /ad-arrival-film" autoplay/);
   assert.match(preview, /class="wp-scene-atmosphere" aria-hidden="true"/);
   assert.match(preview, /Visual layer · not model reasoning\./);
   assert.match(homeCss, /motion-ready:not\(\[data-motion=off\]\)\s+\.ad-arrival-orbit/);
   assert.match(homeCss, /\.ad-architecture-sequence\{/);
-  assert.match(systemJs, /let paused = true/);
+  assert.match(home, /data-motion-toggle/);
   assert.match(workspaceCss, /data-visual-motion=off\]\s+\.wp-scene-art img,\.wp-app\[data-visual-motion=off\]\s+\.wp-scene-orbit/);
   assert.match(workspaceCss, /@media\(prefers-reduced-motion:reduce\)/);
 });

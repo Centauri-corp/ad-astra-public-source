@@ -110,3 +110,70 @@ html:not(.ad-interactive) .ad-explore-panels [hidden]{display:block!important;ma
 .ad-arrival-system{position:absolute;right:clamp(24px,5vw,80px);bottom:104px;z-index:1;display:flex;align-items:center;gap:13px;color:#bdcbd4;font-size:8px;letter-spacing:.13em;writing-mode:vertical-rl;transform:rotate(180deg)}.ad-arrival-system i{display:block;width:1px;height:52px;background:linear-gradient(transparent,#c7e7f1aa,transparent)}
 .ad-architecture-sequence{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);min-height:760px;background:#05090e;border-top:1px solid #ffffff1a;overflow:hidden}.ad-architecture-sequence figure{position:relative;margin:0;min-height:100%;isolation:isolate}.ad-architecture-sequence figure:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 42%,#05090ef2 100%),linear-gradient(0deg,#05090eb5,transparent 35%);pointer-events:none}.ad-architecture-sequence picture,.ad-architecture-sequence img{display:block;width:100%;height:100%}.ad-architecture-sequence img{object-fit:cover;object-position:center}.ad-architecture-sequence figcaption{position:absolute;left:clamp(24px,5vw,78px);bottom:28px;z-index:1;color:#c1d2dc;font-size:9px;letter-spacing:.1em;text-transform:uppercase}.ad-architecture-copy{padding:clamp(74px,9vw,146px) clamp(28px,7vw,116px) clamp(64px,8vw,120px) 0;align-self:center;max-width:690px}.ad-architecture-copy h2{font-size:clamp(42px,4.2vw,72px);line-height:1.02;letter-spacing:-.06em}.ad-architecture-copy h2 span{color:#a6cddd;font-style:italic;font-weight:300}.ad-architecture-copy>p:not(.ad-kicker):not(.ad-architecture-note){max-width:42ch;margin-top:26px;color:#b2bec9;font-size:14px;line-height:1.9}.ad-architecture-rail{margin:43px 0 0;padding:0;list-style:none;border-top:1px solid #ffffff28}.ad-architecture-rail li{border-bottom:1px solid #ffffff28}.ad-architecture-rail a{display:grid;grid-template-columns:28px minmax(0,1fr) 18px;column-gap:16px;row-gap:6px;align-items:start;padding:21px 0;text-decoration:none;transition:padding .3s ease,color .3s ease}.ad-architecture-rail a:hover{padding-left:10px;color:#c6e8f5}.ad-architecture-rail span{grid-row:span 2;color:#c8a977;font-size:9px;letter-spacing:.13em;padding-top:4px}.ad-architecture-rail strong{font-size:18px;font-weight:400;letter-spacing:-.025em}.ad-architecture-rail em{grid-column:2;font-style:normal;color:#9eacb9;font-size:11px;line-height:1.6}.ad-architecture-rail .site-arrow{grid-column:3;grid-row:1 / span 2;margin-top:4px}.ad-architecture-note{margin:19px 0 0!important;color:#81919f!important;font-size:10px!important;line-height:1.7!important}
 @media(max-width:760px){.ad-arrival-system{display:none}.ad-architecture-sequence{grid-template-columns:1fr;min-height:0}.ad-architecture-sequence figure{min-height:370px}.ad-architecture-sequence figure:after{background:linear-gradient(0deg,#05090ef5 0%,transparent 55%)}.ad-architecture-sequence img{object-position:center}.ad-architecture-sequence figcaption{left:24px;bottom:18px;font-size:8px}.ad-architecture-copy{padding:52px 24px 74px;max-width:none}.ad-architecture-copy h2{font-size:43px}.ad-architecture-copy>p:not(.ad-kicker):not(.ad-architecture-note){font-size:13px}.ad-architecture-rail{margin-top:31px}.ad-architecture-rail a{padding-block:19px}.ad-architecture-rail strong{font-size:17px}.ad-architecture-rail em{font-size:10px}}
+
+/* Cinematic neural arrival: one real-time sculpture, with its selected still as
+   the progressive fallback. All optical detail remains first-party artwork. */
+body.customer-home{--cx-background:#030709;--cx-surface:#080e13;-webkit-font-smoothing:antialiased}
+.customer-home .ad-arrival{min-height:800px;height:min(100svh,1120px);background:radial-gradient(ellipse at 78% 68%,#0c202b7a,transparent 49%),radial-gradient(ellipse at 82% 112%,#34526738,transparent 42%),#030709}
+.customer-home .ad-arrival:before{content:"";position:absolute;inset:67% -20% -25%;z-index:-3;pointer-events:none;border-radius:50%;border-top:1px solid #96bcc42b;background:radial-gradient(ellipse at 50% 0%,#99d7e516,transparent 28%);transform:rotate(-9deg)}
+.customer-home .ad-arrival:after{background:linear-gradient(90deg,#030709dd,transparent 57%),linear-gradient(0deg,#030709,transparent 20%);pointer-events:none}
+.customer-home .ad-arrival-film{display:none}
+.ad-neural-live{position:absolute;inset:0;z-index:-2;pointer-events:none;opacity:0;transition:opacity 1.1s ease}
+.ad-neural-live canvas{display:block;width:100%;height:100%}
+.is-live .ad-neural-live{opacity:1}
+.customer-home .ad-arrival.is-live .ad-neural-art{opacity:0!important}
+.customer-home .ad-arrival.is-live .ad-neural-art img{animation:none}
+.customer-home .ad-arrival-atmosphere{z-index:-3;opacity:.28}
+.customer-home .ad-arrival-copy{width:57%;max-width:920px;padding:135px 0 160px clamp(28px,7vw,116px)}
+.customer-home .ad-arrival h1{font-size:clamp(70px,7.4vw,118px);line-height:1.03;letter-spacing:-.075em}
+.customer-home .ad-arrival h1 span{display:inline-block;font-size:.57em;line-height:1.24;letter-spacing:-.055em;font-style:normal;color:#b9d3dd;font-weight:300;max-width:100%}
+.customer-home .ad-arrival .ad-lead{font-size:clamp(14px,1.15vw,17px);line-height:1.85;color:#aebbc5;max-width:38ch;margin-top:30px}
+.customer-home .ad-arrival .ad-kicker{color:#bfcdd2;letter-spacing:.18em;font-size:9px}
+.customer-home .ad-arrival .ad-preview-note{max-width:42ch;font-size:10px;color:#a5b3bc}
+.ad-neural-caption{position:absolute;left:73%;bottom:164px;transform:translateX(-50%);width:280px;max-width:90%;text-align:center;z-index:2;pointer-events:none}
+.ad-neural-caption>span:nth-child(2){font-size:10px;font-weight:400;letter-spacing:.24em;color:#d5c6ad}
+.ad-neural-caption p{font-size:10px;letter-spacing:.015em;line-height:1.7;color:#a8b9c1;margin-top:9px}
+.ad-neural-indicator{display:inline-block;width:4px;height:4px;border-radius:50%;background:#c8b58f;margin:0 9px 2px 0;box-shadow:0 0 12px #d3b77a65}
+.ad-live-hint{display:block;margin-top:7px;font-size:9px;line-height:1.6;color:#a3b0b9}
+.ad-scene-controls{position:absolute;left:73%;bottom:94px;transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:3px;padding:4px;border:1px solid #b4c9d62b;border-radius:40px;background:#07101580;backdrop-filter:blur(18px);max-width:calc(100% - 40px)}
+.ad-scene-controls[hidden]{display:none}
+.ad-scene-controls button{position:relative;min-width:84px;min-height:42px;border:0;border-radius:30px;background:transparent;color:#adbbc4;font-size:11px;cursor:pointer;transition:background .25s,color .25s}
+.ad-scene-controls button[aria-pressed=true]{background:#b3c8d51a;color:#edf2f1}
+.ad-scene-controls button:hover{color:#fff;background:#b3c8d514}
+.ad-scene-controls button:focus-visible,.customer-home .ad-button:focus-visible,.customer-home .ad-text-link:focus-visible{outline:2px solid #d5ba91;outline-offset:5px}
+.customer-home .ad-arrival-system{opacity:.6;right:3.5vw}
+.customer-home .ad-section-heading h2{font-weight:300;line-height:1.08;letter-spacing:-.055em}
+.customer-home .ad-section-heading h2 span{color:#a3b7c4}
+.customer-home .ad-architecture-sequence{background:#030709;border-color:#acc8d518}
+.customer-home .ad-architecture-sequence figure:after{background:linear-gradient(90deg,transparent 30%,#030709 100%),linear-gradient(0deg,#03070999,transparent 45%)}
+.customer-home .ad-architecture-copy h2 span{font-style:normal;color:#adc8d6}
+.customer-home .ad-motion-study{background:radial-gradient(ellipse at 65% 45%,#14232f55,transparent 60%),#030709;border-color:#b9d1dc18;gap:7vw}
+.customer-home .ad-motion-study video{border:0;box-shadow:none;border-radius:0;mask-image:linear-gradient(0deg,transparent,#000 12%,#000 88%,transparent)}
+.customer-home .ad-products,.customer-home .ad-horizons{background:#030709}
+.customer-home .ad-product-editorial img{mask-image:linear-gradient(0deg,transparent,#000 15%,#000 85%,transparent)}
+.customer-home .ad-horizon-grid img{mask-image:linear-gradient(0deg,transparent,#000 17%)}
+@media(min-width:761px) and (max-width:1100px){.customer-home .ad-arrival-copy{width:60%;padding-left:5vw}.customer-home .ad-arrival h1{font-size:8vw}.ad-neural-caption{left:76%;width:240px}.ad-scene-controls{left:76%}.ad-scene-controls button{min-width:70px}.ad-live-hint{font-size:8px}}
+@media(max-width:760px){
+ .customer-home .ad-arrival{min-height:1040px;height:auto;align-items:flex-start;background:radial-gradient(ellipse at 50% 65%,#142a3955,transparent 48%),#030709}
+ .customer-home .ad-arrival-copy{width:100%;max-width:none;padding:125px 24px 600px}
+ .customer-home .ad-arrival h1{font-size:clamp(58px,15vw,88px);letter-spacing:-.07em;line-height:1.05}
+ .customer-home .ad-arrival h1 span{font-size:.59em;line-height:1.25;letter-spacing:-.055em}
+ .customer-home .ad-arrival .ad-kicker{font-size:8px;letter-spacing:.12em;margin-bottom:23px;gap:8px}
+ .customer-home .ad-arrival .ad-lead{font-size:13px;line-height:1.8;margin-top:23px}
+ .customer-home .ad-arrival .ad-actions{gap:18px;margin-top:25px}
+ .customer-home .ad-arrival .ad-preview-note{font-size:9px;max-width:34ch;margin-top:17px}
+ .ad-neural-live{inset:420px -25px 120px}
+ .customer-home .ad-neural-art{inset:420px -95px 125px}
+ .customer-home .ad-neural-art img{object-fit:cover;object-position:76% center;mask-image:linear-gradient(0deg,transparent,#000 15%,#000 75%,transparent)}
+ .customer-home .ad-arrival:before{inset:65% -60% -5%;transform:rotate(-8deg)}
+ .customer-home .ad-arrival:after{background:linear-gradient(0deg,#030709,transparent 24%,transparent 63%,#030709 80%)}
+ .customer-home .ad-arrival-atmosphere{inset:400px -30vw 100px;opacity:.2}
+ .ad-neural-caption{left:50%;bottom:153px;width:290px}
+ .ad-neural-caption>span:nth-child(2){font-size:9px}.ad-neural-caption p{font-size:9px}.ad-live-hint{font-size:8px}
+ .ad-scene-controls{left:50%;bottom:88px}.ad-scene-controls button{min-width:85px;min-height:44px;font-size:11px}
+ .customer-home .ad-arrival-foot{left:24px;right:24px;bottom:19px;gap:15px}
+ .customer-home .ad-architecture-sequence figure:after{background:linear-gradient(0deg,#030709,transparent 65%)}
+ .customer-home .ad-architecture-copy{padding-top:32px}
+ .customer-home .ad-motion-study{gap:38px}
+}
+@media(prefers-reduced-motion:reduce){.ad-neural-live,.ad-scene-controls button{transition:none}.ad-live-hint{display:none}}
