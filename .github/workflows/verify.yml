@@ -50,6 +50,7 @@ jobs:
           curl --retry 10 --retry-connrefused --retry-delay 1 --fail --silent http://127.0.0.1:4175/ > /dev/null
           node scripts/audit-browser.cjs
           node scripts/audit-cinematic-home.cjs
+          node scripts/audit-design-concepts.cjs
           node scripts/accept-platform-preview.cjs
           AD_ASTRA_PROJECT_REPORT="$RUNNER_TEMP/ad-astra-browser-evidence/project-coverage.json" npm run website:audit
       - name: Retain browser failure and route evidence

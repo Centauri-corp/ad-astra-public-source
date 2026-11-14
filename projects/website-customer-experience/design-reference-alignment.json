@@ -1,0 +1,390 @@
+{
+  "schema": "ad-astra-design-reference-alignment/v1",
+  "observedAt": "2026-11-14T19:10:00Z",
+  "brand": "AD ASTRA",
+  "auditedBase": "ac818172aa9204691a24103d983429004f39a7c5",
+  "scope": "Design concepts and their implementation role; no provider affiliation or licensed use of reference artwork is claimed.",
+  "references": [
+    {
+      "id": "dji",
+      "url": "https://www.dji.com/",
+      "category": "design-benchmark",
+      "evidence": "Rendered first view and one scroll step observed",
+      "concept": "Large product stages, concise promise, consistent Learn/Buy action hierarchy and sticky navigation",
+      "application": "Use catalog-backed product stages and clear discovery-to-workspace actions; do not show Buy until purchasing exists",
+      "decision": "implemented-pattern",
+      "sourceFiles": [
+        "scripts/lib/product-showcase.cjs",
+        "public/neural/product-showcase.js"
+      ]
+    },
+    {
+      "id": "apple",
+      "url": "https://www.apple.com/",
+      "category": "design-benchmark",
+      "evidence": "Public page content inspected",
+      "concept": "Restrained typography, product hierarchy, clear primary/secondary actions",
+      "application": "Keep the page calm around the neural art; test contrast and mobile crops",
+      "decision": "partly-implemented",
+      "sourceFiles": [
+        "public/customer-experience.css"
+      ]
+    },
+    {
+      "id": "mckp",
+      "url": "https://mckp.live/?ref=a1.gallery",
+      "category": "interactive-mockup",
+      "evidence": "Rendered introduction/scroll observed; cursor/timeline capabilities described by site, not exercised",
+      "concept": "Treat a real product screen as the subject of a lit stage; optional cursor/scroll camera and progressive quality",
+      "application": "Use original workspace preview, modest perspective and actual sample content; external templates require separate licensed export",
+      "decision": "partly-implemented",
+      "sourceFiles": [
+        "scripts/lib/customer-home.cjs",
+        "public/customer-experience.css"
+      ]
+    },
+    {
+      "id": "lusion",
+      "url": "https://lusion.co/",
+      "category": "creative-studio",
+      "evidence": "Loader observed; main scene remained unverified",
+      "concept": "One spatial scene, cinematic pacing and transitions aligned with brand narrative",
+      "application": "Native sticky scroll sequence directs the existing neural camera; avoid mandatory full-screen loaders",
+      "decision": "implemented-concept-not-copied-scene",
+      "sourceFiles": [
+        "public/neural/cinematic-home.js",
+        "public/neural/scroll-narrative.css"
+      ]
+    },
+    {
+      "id": "active-theory",
+      "url": "https://activetheory.net/",
+      "category": "creative-studio",
+      "evidence": "Text extraction insufficient; rendered experience not verified",
+      "concept": "Custom real-time environments can integrate identity, motion and interaction",
+      "application": "Use as an art-direction benchmark, not proof that current artwork matches studio quality",
+      "decision": "reference-only",
+      "sourceFiles": []
+    },
+    {
+      "id": "thebrain",
+      "url": "https://thebrain.com/",
+      "category": "product-concept",
+      "evidence": "Rendered relationship graphic and page narrative observed; graph interaction not tested",
+      "concept": "Show information through its relationships, then expose selected context",
+      "application": "Curated interactive knowledge map with node selection, neighboring edges and explanatory detail",
+      "decision": "implemented-pattern",
+      "sourceFiles": [
+        "scripts/lib/knowledge-map.cjs",
+        "public/platform-preview/knowledge-map.js"
+      ]
+    },
+    {
+      "id": "content-guru",
+      "url": "https://www.contentguru.com/en-us/products/brain-ai/",
+      "category": "service-architecture",
+      "evidence": "Public product text inspected; no service execution verified",
+      "concept": "Explain orchestration, knowledge assistance, transcription and next actions as separate capabilities",
+      "application": "Keep actual workflow status separate from decorative neural motion; current React Flow workspace remains a read-only sample",
+      "decision": "architecture-reference",
+      "sourceFiles": [
+        "apps/customer-workspace/components/workflow-graph.tsx"
+      ]
+    },
+    {
+      "id": "awwwards",
+      "url": "https://www.awwwards.com/websites/3d/",
+      "category": "inspiration-gallery",
+      "evidence": "Gallery taxonomy inspected",
+      "concept": "Find examples for spatial design, typography, transitions and storytelling",
+      "application": "Curate specific examples and test them; an award does not establish accessibility, loading speed or Ad Astra acceptance",
+      "decision": "reference-only",
+      "sourceFiles": []
+    },
+    {
+      "id": "a1",
+      "url": "https://www.a1.gallery/websites/3d-design",
+      "category": "inspiration-gallery",
+      "evidence": "Gallery guidance inspected",
+      "concept": "Focused shortlist of 3D sites and progressive first paint",
+      "application": "Maintain a stable readable poster while richer artwork loads",
+      "decision": "implemented-pattern",
+      "sourceFiles": [
+        "public/neural/cinematic-home.js"
+      ]
+    },
+    {
+      "id": "mesh",
+      "url": "https://mesh3d.gallery/",
+      "category": "inspiration-gallery",
+      "evidence": "Gallery text inspected; discovered from supplied Reddit reference",
+      "concept": "Compare real-time Three.js/WebGL examples by makers and use case",
+      "application": "Use as a research library; do not import gallery artwork or code as owned assets",
+      "decision": "reference-only",
+      "sourceFiles": []
+    },
+    {
+      "id": "fabric",
+      "url": "https://fabric.so/zh/comparison/best-3d-design-tool-for-web",
+      "category": "tool-comparison",
+      "evidence": "Article inspected",
+      "concept": "Separate authoring, rendering and lightweight animation tools",
+      "application": "Choose one renderer and one scene authority; authoring tools are optional production aids",
+      "decision": "decision-guidance",
+      "sourceFiles": []
+    },
+    {
+      "id": "mdx",
+      "url": "https://mdx.so/blog/best-3d-websites-2026-examples",
+      "category": "implementation-article",
+      "evidence": "Article inspected against official rendering docs",
+      "concept": "Purposeful 3D, mobile budgets and stack choices",
+      "application": "Adopt performance discipline; reject the article's implication that WebGL2 provides compute shaders",
+      "decision": "partly-adopted-with-correction",
+      "sourceFiles": [
+        "public/neural/cinematic-scene.js"
+      ]
+    },
+    {
+      "id": "school-of-motion",
+      "url": "https://schoolofmotion.com/blog/10-websites-with-great-animation-in-2026",
+      "category": "motion-reference",
+      "evidence": "Article inspected",
+      "concept": "Typography, pacing, section choreography and useful microinteractions",
+      "application": "Make scroll change perspective and narrative, rather than merely rotating an ornament",
+      "decision": "implemented-pattern",
+      "sourceFiles": [
+        "public/neural/scroll-narrative.css"
+      ]
+    },
+    {
+      "id": "youtube-spline",
+      "url": "https://www.youtube.com/watch?v=JGlmbElrGbo",
+      "category": "video-reference",
+      "evidence": "Timed out; video/transcript not reviewed",
+      "concept": "Unknown beyond the supplied description",
+      "application": "No implementation claim derived from unavailable video",
+      "decision": "unverified",
+      "sourceFiles": []
+    },
+    {
+      "id": "youtube-claude",
+      "url": "https://www.youtube.com/watch?v=AGHqBAVyrQs",
+      "category": "video-reference",
+      "evidence": "Title visible; no demonstration or transcript available",
+      "concept": "Title suggests AI-assisted 3D development",
+      "application": "Treat as a development workflow lead; no verified design specification extracted",
+      "decision": "unverified",
+      "sourceFiles": []
+    },
+    {
+      "id": "youtube-scroll",
+      "url": "https://www.youtube.com/watch?v=IR1tzLU-r_4&t=667",
+      "category": "video-reference",
+      "evidence": "Timed out; video/transcript not reviewed",
+      "concept": "Unknown beyond supplied description",
+      "application": "No claim to have reviewed its demonstrated scroll rig",
+      "decision": "unverified",
+      "sourceFiles": []
+    },
+    {
+      "id": "reddit-mesh",
+      "url": "https://www.reddit.com/r/webdev/comments/1scdv42/i_built_a_curated_gallery_for_the_best_3d/",
+      "category": "discovery-reference",
+      "evidence": "Public post inspected",
+      "concept": "Points to mesh3d.gallery and describes its directory stack",
+      "application": "Gallery infrastructure is not the Ad Astra runtime architecture",
+      "decision": "reference-only",
+      "sourceFiles": []
+    },
+    {
+      "id": "facebook-brain",
+      "url": "https://www.facebook.com/reel/768474506284450/?fs=e&mibextid=wwXIfr&fs=e",
+      "category": "video-reference",
+      "evidence": "Public title/description only; playback not inspected",
+      "concept": "The Brain Paradox is a biology/science inspiration lead",
+      "application": "No footage copied, anatomy validation or content licence inferred",
+      "decision": "unverified-visual",
+      "sourceFiles": []
+    },
+    {
+      "id": "three",
+      "url": "https://threejs.org/manual/en/fundamentals.html",
+      "category": "renderer",
+      "evidence": "Official documentation and installed source inspected",
+      "concept": "Scenes, materials, lighting, geometry and camera control",
+      "application": "Keep the current self-hosted renderer as the public site's one 3D foundation",
+      "decision": "already-in-use",
+      "sourceFiles": [
+        "public/neural/cinematic-scene.js"
+      ]
+    },
+    {
+      "id": "r3f",
+      "url": "https://docs.pmnd.rs/react-three-fiber/getting-started/introduction",
+      "category": "react-renderer",
+      "evidence": "Official documentation inspected",
+      "concept": "React composition of Three.js scenes; React-major compatibility matters",
+      "application": "Use if/when the scene moves into the React workspace; avoid a rewrite or second renderer on the current static site; v10 is alpha",
+      "decision": "conditional-adoption",
+      "sourceFiles": [
+        "apps/customer-workspace/package.json"
+      ]
+    },
+    {
+      "id": "gsap",
+      "url": "https://gsap.com/docs/v3/Plugins/ScrollTrigger/",
+      "category": "motion-orchestration",
+      "evidence": "Official documentation and standard licence inspected",
+      "concept": "Pinning, scrubbing, camera timelines and responsive animation lifecycles",
+      "application": "Current sequence uses native sticky/progress for this bounded interaction; consider GSAP for a larger authored timeline. Site use is permitted; a competing visual animation builder needs licence review",
+      "decision": "concept-applied-library-not-installed",
+      "sourceFiles": [
+        "public/neural/scroll-narrative.css",
+        "public/neural/cinematic-home.js"
+      ]
+    },
+    {
+      "id": "spline",
+      "url": "https://spline.design/",
+      "category": "3d-authoring",
+      "evidence": "Official site capabilities inspected",
+      "concept": "Designer-editable materials, interaction states and export workflows",
+      "application": "Suitable for an approved editable scene; no .splinecode file was found in the scoped creative/public asset inventory",
+      "decision": "authoring-option",
+      "sourceFiles": []
+    },
+    {
+      "id": "rive",
+      "url": "https://rive.app/",
+      "category": "ui-motion",
+      "evidence": "Official site capabilities inspected",
+      "concept": "State machines, rigging, vector UI and data-bound interactions",
+      "application": "Use for compact voice/button/UI states after an approved .riv asset exists; do not add it merely to duplicate a Three.js brain",
+      "decision": "authoring-option",
+      "sourceFiles": []
+    },
+    {
+      "id": "lottie",
+      "url": "https://lottiefiles.com/",
+      "category": "lightweight-motion",
+      "evidence": "Official site capabilities inspected",
+      "concept": "Small vector transitions, illustrations and interface motion",
+      "application": "Use for lightweight UI feedback; not a replacement for physically rendered 3D materials",
+      "decision": "selective-option",
+      "sourceFiles": []
+    },
+    {
+      "id": "react-flow",
+      "url": "https://www.reactflow.dev/",
+      "category": "knowledge-workflow-ui",
+      "evidence": "Official site and current component source inspected",
+      "concept": "Selectable nodes, zoom/pan and workflow relationships; MIT core",
+      "application": "Already installed at 12.12.1 in the isolated React workspace. Marketing uses a small semantic SVG example; no duplicate dependency required",
+      "decision": "already-in-use-and-public-example-added",
+      "sourceFiles": [
+        "apps/customer-workspace/components/workflow-graph.tsx",
+        "public/platform-preview/knowledge-map.js"
+      ]
+    },
+    {
+      "id": "blender",
+      "url": "https://www.blender.org/features/modeling/",
+      "category": "asset-production",
+      "evidence": "Official modelling documentation inspected",
+      "concept": "Sculpting, topology, UVs and authored production geometry",
+      "application": "Use for an art-directed neural GLB and high-quality film master; renderer code alone cannot establish final studio-quality artwork",
+      "decision": "production-pipeline-option",
+      "sourceFiles": []
+    },
+    {
+      "id": "framer",
+      "url": "https://www.framer.com/",
+      "category": "site-authoring",
+      "evidence": "Official public site inspected",
+      "concept": "Fast visual page composition, breakpoints and motion prototypes",
+      "application": "Use for isolated prototypes if useful; do not introduce another published source/CMS alongside the existing Git release chain",
+      "decision": "prototype-only",
+      "sourceFiles": []
+    },
+    {
+      "id": "tripo",
+      "url": "https://www.tripo3d.ai/",
+      "category": "asset-generation",
+      "evidence": "Official public site inspected",
+      "concept": "Image/text-to-mesh and topology/rigging options",
+      "application": "Use only as a starting mesh, followed by review, retopology, materials and web optimization. Claimed production readiness is provider marketing",
+      "decision": "conditional-asset-tool",
+      "sourceFiles": []
+    },
+    {
+      "id": "kimi",
+      "url": "https://www.kimi.com/",
+      "category": "agent-authoring",
+      "evidence": "Public surface inspected; no generated project tested",
+      "concept": "Agent-assisted design/coding and a 3D Make entry point",
+      "application": "Potential prototyping assistant; does not replace the website renderer, UX design or QA",
+      "decision": "prototype-only",
+      "sourceFiles": []
+    },
+    {
+      "id": "lovable",
+      "url": "https://lovable.dev/",
+      "category": "app-authoring",
+      "evidence": "Public fetch timed out",
+      "concept": "Not independently assessed in this audit",
+      "application": "Do not claim its output or integration has been evaluated",
+      "decision": "unverified",
+      "sourceFiles": []
+    },
+    {
+      "id": "adobe",
+      "url": "https://www.adobe.com/products/firefly.html",
+      "category": "creative-production",
+      "evidence": "Official public capabilities inspected; 30 connected asset metadata results sampled, not all assets viewed",
+      "concept": "Generate and refine images, expand crops, create storyboards and grade media consistently",
+      "application": "Use one Ad Astra art direction for approved stills, responsive crops and film finishing; export governed web assets rather than embed the authoring app",
+      "decision": "production-pipeline-option",
+      "sourceFiles": [
+        "projects/website-customer-experience/asset-selections.json"
+      ]
+    },
+    {
+      "id": "runway",
+      "url": "https://runway.com/product",
+      "category": "motion-production",
+      "evidence": "Official public capabilities inspected; 30 recent media metadata entries sampled, no final film acceptance established",
+      "concept": "Image/video generation, relighting, shot editing, performance and chained creative workflows",
+      "application": "Create or refine short coherent hero shots and cinematic transitions; browser neural interactivity remains Three.js, not generated video",
+      "decision": "production-pipeline-option",
+      "sourceFiles": [
+        "projects/website-customer-experience/resources.json"
+      ]
+    },
+    {
+      "id": "invideo",
+      "url": "https://invideo.io/",
+      "category": "film-editor",
+      "evidence": "Official public capabilities inspected and two matching Ad Astra project metadata entries identified; finished edits not reviewed",
+      "concept": "Shot-by-shot storyboarding, multitrack assembly, grading, audio mixing and collaborative editing",
+      "application": "Assemble approved shots into one final hero/brand film with consistent pacing, captioning and web-specific exports",
+      "decision": "production-pipeline-option",
+      "sourceFiles": [
+        "projects/website-customer-experience/resources.json"
+      ]
+    },
+    {
+      "id": "sanity",
+      "url": "https://www.sanity.io/",
+      "category": "content-operations",
+      "evidence": "Official public capabilities and Ad Astra project/dataset metadata inspected; no private document bodies read or publishing changes made",
+      "concept": "Structured content, image hotspots/alt text, revisions, content releases and preview workflows",
+      "application": "Model page scenes, product stories, asset selections and localized copy as governed content; integrate through the canonical build rather than create competing layout or availability authorities",
+      "decision": "content-integration-recommendation",
+      "sourceFiles": [
+        "projects/website-customer-experience/project.json",
+        "projects/website-customer-experience/asset-selections.json"
+      ]
+    }
+  ]
+}

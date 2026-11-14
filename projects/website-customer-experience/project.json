@@ -9,7 +9,7 @@
     "projectPath": "projects/website-customer-experience",
     "releasePolicy": "config/production-release-source.json",
     "candidateBranch": "codex/customer-experience-rebuild-20261113",
-    "candidatePullRequest": 38,
+    "candidatePullRequest": 39,
     "routeLedger": "public/route-release-evidence.json",
     "productFamilies": "config/public-product-families.json",
     "models": "lib/model-catalog.js",
@@ -20,6 +20,7 @@
     "assetSelections": "projects/website-customer-experience/asset-selections.json",
     "modelExperience": "projects/website-customer-experience/model-experience.json",
     "resources": "projects/website-customer-experience/resources.json",
+    "designReferences": "projects/website-customer-experience/design-reference-alignment.json",
     "visualReview": "projects/website-customer-experience/visual-review.json"
   },
   "integrationOrder": [

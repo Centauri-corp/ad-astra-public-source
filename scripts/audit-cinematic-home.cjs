@@ -24,6 +24,12 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
    assert.ok(dimensions.width >= 300 && dimensions.height >= 300, 'The hero must render a full-size 3D scene, not a hidden or one-pixel canvas.');
    const first = await canvas.screenshot(); await delay(350);
    assert.equal(first.equals(await canvas.screenshot()), false, 'The actual rendered neural sculpture must move.');
+   if(width===1440){
+    await page.evaluate(()=>{const sequence=document.querySelector('[data-arrival-sequence]'),hero=document.querySelector('.ad-arrival');scrollTo({top:(sequence.offsetHeight-hero.offsetHeight)*.65,behavior:'instant'});});
+    await page.waitForFunction(()=>Number(document.querySelector('[data-arrival-sequence]').style.getPropertyValue('--ad-story-progress'))>.5);
+    assert.equal(await page.locator('.ad-arrival').evaluate(element=>getComputedStyle(element).position),'sticky');
+    assert.ok(await page.locator('.ad-arrival-phase').evaluate(element=>Number(getComputedStyle(element).opacity)>.2));
+   }
    await page.locator('[data-motion-toggle]').click();
    assert.equal(await page.locator('body').getAttribute('data-motion'), 'off');
    const stopped = await canvas.screenshot(); await delay(200);
@@ -33,7 +39,7 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
    await page.screenshot({path: path.join(output, 'cinematic-home-' + width + '.png')});
    await page.screenshot({path: path.join(output, 'cinematic-home-' + width + '-full.png'), fullPage: true});
-   evidence.widths.push({width, liveCanvas: true, renderedMotion: true, pausePixelsStable: true, noHorizontalOverflow: true, errors, forbiddenRequests: forbidden});
+   evidence.widths.push({width, liveCanvas: true, renderedMotion: true, scrollDirectedStory:width===1440, pausePixelsStable: true, noHorizontalOverflow: true, errors, forbiddenRequests: forbidden});
    assert.deepEqual(errors, []); assert.deepEqual(forbidden, []);
    await context.close();
   }
@@ -45,7 +51,7 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
    assert.equal(await page.locator('.ad-neural-art img').isVisible(), true);
    await context.close();
   }
-  evidence.assertions.push('Moving rendered pixels at desktop/mobile', 'Pause freezes rendered pixels', 'Intent controls change visual mode', 'Reduced motion retains static artwork without WebGL', 'No remote provider traffic or writes', 'No horizontal overflow at 320/390/768/1440');
+  evidence.assertions.push('Moving rendered pixels at desktop/mobile', 'Desktop scroll directs sticky scene and narrative', 'Pause freezes rendered pixels', 'Intent controls change visual mode', 'Reduced motion retains static artwork without WebGL', 'No remote provider traffic or writes', 'No horizontal overflow at 320/390/768/1440');
   evidence.pass = true;
  } finally {
   await browser.close(); fs.writeFileSync(path.join(output, 'cinematic-review.json'), JSON.stringify(evidence, null, 2) + '\n');

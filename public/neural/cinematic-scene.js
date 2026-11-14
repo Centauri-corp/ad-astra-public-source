@@ -102,19 +102,19 @@ export function createCinematicScene(host) {
   time = seconds; pointerX += ((input.x || 0) - pointerX) * .045; pointerY += ((input.y || 0) - pointerY) * .045; scroll = input.scroll || 0;
   const mobile = host.clientWidth < 760;
   sculpture.position.set(mobile ? 0 : 1.45, mobile ? .48 : .15, 0);
-  sculpture.rotation.set(.13 + pointerY * .1 + Math.sin(time * .13) * .025, -.35 + time * .06 + pointerX * .14, -.08 + Math.sin(time * .11) * .035);
+  sculpture.rotation.set(.13 + pointerY * .1 + Math.sin(time * .13) * .025 + scroll*.12, -.35 + time * .06 + pointerX * .14 + scroll*.6, -.08 + Math.sin(time * .11) * .035);
   sculpture.scale.setScalar(mobile ? .83 : 1 + Math.min(scroll, 1) * .04);
   const points = pulseGeometry.attributes.position;
   for (let i = 0; i < pathways.length; i++) { const p = pathways[i].getPoint((time * .12 + i / pathways.length) % 1); points.setXYZ(i, p.x, p.y, p.z); }
   points.needsUpdate = true;
-  camera.position.set(pointerX * .1, .12 + pointerY * .06 + scroll * .15, mobile ? 8.8 : 8.4);
+  camera.position.set(pointerX * .1, .12 + pointerY * .06 + scroll * .15, mobile ? 8.8 : 8.4-scroll*1.1);
   camera.lookAt(0, mobile ? -.1 : .1, 0); renderer.render(scene, camera);
  }
- function resize() { if (disposed) return; const w = Math.max(1, host.clientWidth), h = Math.max(1, host.clientHeight); camera.aspect = w / h; camera.updateProjectionMatrix(); renderer.setSize(w, h, false); renderAt(time); }
+ function resize() { if (disposed) return; const w = Math.max(1, host.clientWidth), h = Math.max(1, host.clientHeight); camera.aspect = w / h; camera.updateProjectionMatrix(); renderer.setSize(w, h, false); renderAt(time,{x:pointerX,y:pointerY,scroll}); }
  const resizeObserver = new ResizeObserver(resize); resizeObserver.observe(host); resize();
  return {
   renderAt,
-  setMode(mode) { if (!Object.hasOwn(palette, mode) || disposed) return; currentMode = mode; fiberMaterial.color.setHex(palette[mode]); pulseMaterial.color.setHex(palette[mode]); renderAt(time); },
+  setMode(mode) { if (!Object.hasOwn(palette, mode) || disposed) return; currentMode = mode; fiberMaterial.color.setHex(palette[mode]); pulseMaterial.color.setHex(palette[mode]); renderAt(time,{x:pointerX,y:pointerY,scroll}); },
   get mode() { return currentMode; },
   dispose() { if (disposed) return; disposed = true; resizeObserver.disconnect(); const materials = new Set(); scene.traverse(item => { item.geometry?.dispose(); if (item.material) materials.add(item.material); }); for (const material of materials) material.dispose(); environment.dispose(); renderer.dispose(); renderer.domElement.remove(); }
  };

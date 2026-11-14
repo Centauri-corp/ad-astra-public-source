@@ -1,0 +1,19 @@
+.ad-product-stage{position:sticky;top:105px;min-width:0;align-self:start;isolation:isolate}
+.ad-product-controls{position:relative;z-index:2;display:flex;gap:7px;justify-content:center;padding:12px 0;border-bottom:1px solid #bad4df24}
+.ad-product-controls[hidden],.ad-product-view[hidden]{display:none}
+.ad-product-controls button{background:transparent;border:0;border-bottom:1px solid transparent;color:#a3b8c5;padding:8px 12px;min-width:44px;min-height:44px;cursor:pointer;font:inherit;font-size:11px;letter-spacing:.1em}
+.ad-product-controls button[aria-pressed=true]{color:#e3cfac;border-bottom-color:#d5ba91}
+.ad-product-controls button:focus-visible{outline:2px solid #d5ba91;outline-offset:4px}
+.ad-control-name{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.customer-home .ad-product-view{margin:0;position:relative;min-height:640px;display:flex;align-items:flex-end}
+.customer-home .ad-product-view:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#030709f5,transparent 68%);pointer-events:none}
+.customer-home .ad-product-view picture{position:absolute;inset:0;z-index:-1}
+.customer-home .ad-product-view img{width:100%;height:100%;object-fit:cover;mask-image:linear-gradient(0deg,transparent,#000 38%,#000 82%,transparent)}
+.customer-home .ad-product-view figcaption{position:relative;z-index:1;padding:32px 24px 24px;width:100%;max-width:42ch;font-size:15px;color:#d0dce3;line-height:1.75}
+.ad-product-view figcaption>p:not(.ad-kicker){font-size:15px}
+.ad-product-view figcaption>a{display:inline-flex;gap:20px;align-items:center;min-height:44px;margin-top:12px;font-size:12px;color:#e8f1f2;text-decoration:none;border-bottom:1px solid #c0d6df55}
+.ad-product-view figcaption>span{display:block;margin-top:14px;font-size:9px;letter-spacing:.06em;color:#a8b7c1}
+.ad-product-view:not([hidden]){animation:ad-product-enter .45s ease-out}
+@keyframes ad-product-enter{from{opacity:.45;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.ad-product-stage{position:relative;top:0}.customer-home .ad-product-view{min-height:490px}.ad-product-controls{gap:5px}.ad-product-controls button{padding-inline:10px}.customer-home .ad-product-view figcaption{max-width:none;padding:32px 20px 24px}}
+@media(prefers-reduced-motion:reduce){.ad-product-view:not([hidden]){animation:none}}

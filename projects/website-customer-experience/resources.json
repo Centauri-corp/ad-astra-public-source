@@ -2,9 +2,9 @@
   "schema": "ad-astra-website-resources/v1",
   "projectId": "website-customer-experience",
   "brand": "AD ASTRA",
-  "updatedAt": "2026-11-13T17:58:13Z",
+  "updatedAt": "2026-11-14T19:10:00Z",
   "sourceSnapshot": {
-    "commit": "5a1adadffeac6479991c54cbc21e4027fafdd01e",
+    "commit": "ac818172aa9204691a24103d983429004f39a7c5",
     "repository": "https://github.com/Centauri-corp/ad-astra-public-source",
     "branch": "codex/customer-experience-rebuild-20261113"
   },
@@ -1219,6 +1219,18 @@
       "selectionStatus": "candidate-for-owner-visual-review",
       "rightsStatus": "first-party-procedural-scene-no-raster-inputs",
       "nextAction": "Review the exact candidate composition and artwork; no human acceptance is implied."
+    },
+    {
+      "id": "design-reference-concept-audit",
+      "kind": "design-reference-authority",
+      "provider": "Public design and technology references",
+      "authorityPath": "projects/website-customer-experience/design-reference-alignment.json",
+      "scope": "Thirty-four reference-by-reference decisions covering rendered benchmarks, documentation, creative applications, tools, galleries and unavailable video demonstrations; mapped to actual source files.",
+      "status": "reference-concepts-audited-with-explicit-evidence-limits",
+      "observedAt": "2026-11-14T19:10:00Z",
+      "selectionStatus": "concept-patterns-selected-for-original-implementation",
+      "rightsStatus": "reference-artwork-not-copied-no-provider-affiliation-claimed",
+      "nextAction": "Verify the implemented narrative, product-stage and knowledge-map interactions; complete owner review of original Ad Astra visuals separately."
     }
   ]
 }
