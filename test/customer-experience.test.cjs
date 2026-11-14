@@ -131,7 +131,7 @@ test('cinematic arrival and workspace layers are decorative, controllable and do
   const homeCss = fs.readFileSync(path.join(root, 'public/customer-experience.css'), 'utf8');
   const workspaceCss = fs.readFileSync(path.join(root, 'public/platform-preview/style.css'), 'utf8');
   assert.match(home, /class="ad-arrival-atmosphere" aria-hidden="true"/);
-  assert.match(home, /Cinematic experience preview · Customer services in development/);
+  assert.match(home, /Cinematic experience preview · Customer access opens after launch checks/);
   assert.match(preview, /class="wp-scene-atmosphere" aria-hidden="true"/);
   assert.match(preview, /Visual layer · not model reasoning\./);
   assert.match(homeCss, /motion-ready:not\(\[data-motion=off\]\)\s+\.ad-arrival-orbit/);
