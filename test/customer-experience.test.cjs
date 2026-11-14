@@ -115,11 +115,26 @@ test('default selection receives a shareable URL and every direction survives hi
 test('homepage, navigation and route evidence link to a pending, non-indexable journey', () => {
   const home = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
   assert.ok(home.includes('href="/start/">Find your starting point'));
-  assert.ok(home.includes('id="journey-invitation-title"'));
+  assert.ok(home.includes('href="/platform-preview/">Explore the workspace'));
+  for(const mode of ['research','create','plan'])assert.ok(home.includes('href="/platform-preview/?mode='+mode+'"'));
   const evidence = require('../public/route-release-evidence.json');
   const start = evidence.routes.find(r => r.path === '/start/');
   assert.equal(start.decision, 'pending');
   assert.deepEqual(start.missingGates, evidence.requiredRouteGates);
   assert.ok(!evidence.approvedRoutes.includes('/start/'));
   assert.equal(require('../public/release-manifest.json').publicLaunchEnabled, false);
+});
+
+test('cinematic arrival and workspace layers are decorative, controllable and do not claim model reasoning', () => {
+  const home = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
+  const preview = fs.readFileSync(path.join(root, 'public/platform-preview/index.html'), 'utf8');
+  const homeCss = fs.readFileSync(path.join(root, 'public/customer-experience.css'), 'utf8');
+  const workspaceCss = fs.readFileSync(path.join(root, 'public/platform-preview/style.css'), 'utf8');
+  assert.match(home, /class="ad-arrival-atmosphere" aria-hidden="true"/);
+  assert.match(home, /Cinematic experience preview · Customer services in development/);
+  assert.match(preview, /class="wp-scene-atmosphere" aria-hidden="true"/);
+  assert.match(preview, /Visual layer · not model reasoning\./);
+  assert.match(homeCss, /motion-ready:not\(\[data-motion=off\]\)\s+\.ad-arrival-orbit/);
+  assert.match(workspaceCss, /data-visual-motion=off\]\s+\.wp-scene-art img,\.wp-app\[data-visual-motion=off\]\s+\.wp-scene-orbit/);
+  assert.match(workspaceCss, /@media\(prefers-reduced-motion:reduce\)/);
 });

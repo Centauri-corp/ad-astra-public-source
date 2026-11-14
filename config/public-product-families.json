@@ -1,10 +1,10 @@
 {
   "schema": "ad-astra-public-product-families/v1",
   "source": {
-    "repository": "zohebkhanfiji-ux/ad-astra-internal-source",
-    "commit": "318fc520685df55422404ec078e16f50ae392b43",
-    "architecture": "config/pgas-division.json",
-    "visualDirection": "config/product-graphics-design.json"
+    "repository": "Centauri-corp/ad-astra-public-source",
+    "architecture": "config/product-architecture-release-control.json",
+    "visualDirection": "projects/website-customer-experience/visual-standard.json",
+    "releaseSelection": "PR #38 over PR #36 base"
   },
   "scope": "public-family-descriptions-only",
   "availability": "in-development",

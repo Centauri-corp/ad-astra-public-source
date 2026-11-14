@@ -1,0 +1,181 @@
+{
+  "schema": "ad-astra-website-model-experience/v1",
+  "production": {
+    "runtimeModelActivation": false,
+    "customerAccess": false,
+    "billing": false,
+    "crmWrites": false,
+    "outreach": false,
+    "publicIndexing": false,
+    "agiAvailable": false,
+    "asiAvailable": false
+  },
+  "integrations": [
+    {
+      "modelId": "astra-lumen",
+      "roleIds": ["default-chat", "fast-chat", "advanced-research", "vision-multimodal"],
+      "customerRoutes": ["/intelligence/", "/platform/", "/platform-preview/"]
+    }
+  ],
+  "offers": [
+    {
+      "offerId": "core-intelligence",
+      "roleId": "default-chat",
+      "familyIds": ["core-intelligence", "business-commerce", "creative-studio"],
+      "customerRoutes": ["/agent/", "/platform-preview/", "/pricing/"]
+    },
+    {
+      "offerId": "research-studio",
+      "roleId": "advanced-research",
+      "familyIds": ["specialist-intelligence", "developer-platform", "business-commerce"],
+      "customerRoutes": ["/agent/", "/platform-preview/", "/pricing/"]
+    },
+    {
+      "offerId": "workflow-navigator",
+      "roleId": "fast-chat",
+      "familyIds": ["autonomous-workflows", "business-commerce", "core-intelligence"],
+      "customerRoutes": ["/agent/", "/platform-preview/", "/pricing/"]
+    },
+    {
+      "offerId": "visual-intelligence",
+      "roleId": "vision-multimodal",
+      "familyIds": ["creative-studio", "specialist-intelligence"],
+      "customerRoutes": ["/agent/", "/platform-preview/", "/pricing/"]
+    }
+  ],
+  "agents": [
+    {
+      "agentId": "guide", "modelId": "astra-lumen", "offerId": "core-intelligence", "roleId": "default-chat",
+      "familyIds": ["core-intelligence", "business-commerce"],
+      "customerRoutes": ["/agent/", "/platform-preview/"]
+    },
+    {
+      "agentId": "researcher", "modelId": "astra-lumen", "offerId": "research-studio", "roleId": "advanced-research",
+      "familyIds": ["specialist-intelligence", "developer-platform"],
+      "customerRoutes": ["/agent/", "/platform-preview/"]
+    },
+    {
+      "agentId": "creator", "modelId": "astra-lumen", "offerId": "core-intelligence", "roleId": "default-chat",
+      "familyIds": ["creative-studio"],
+      "customerRoutes": ["/agent/", "/platform-preview/"]
+    },
+    {
+      "agentId": "analyst", "modelId": "astra-lumen", "offerId": "research-studio", "roleId": "advanced-research",
+      "familyIds": ["specialist-intelligence", "business-commerce"],
+      "customerRoutes": ["/agent/", "/platform-preview/"]
+    },
+    {
+      "agentId": "navigator", "modelId": "astra-lumen", "offerId": "workflow-navigator", "roleId": "fast-chat",
+      "familyIds": ["autonomous-workflows", "business-commerce"],
+      "customerRoutes": ["/agent/", "/platform-preview/"]
+    },
+    {
+      "agentId": "access", "modelId": "astra-lumen", "offerId": "workflow-navigator", "roleId": "fast-chat",
+      "familyIds": ["core-intelligence", "autonomous-workflows"],
+      "customerRoutes": ["/agent/", "/platform-preview/"]
+    },
+    {
+      "agentId": "visual", "modelId": "astra-lumen", "offerId": "visual-intelligence", "roleId": "vision-multimodal",
+      "familyIds": ["creative-studio", "specialist-intelligence"],
+      "customerRoutes": ["/agent/", "/platform-preview/"]
+    }
+  ],
+  "profiles": [
+    {
+      "profileId": "sirius-public", "modelId": "astra-lumen", "agentIds": ["guide", "access"],
+      "familyIds": ["core-intelligence"], "customerRoutes": ["/markets/consumer-personal-ai/"]
+    },
+    {
+      "profileId": "orion-defense", "modelId": "astra-lumen", "agentIds": ["researcher", "navigator"],
+      "familyIds": ["specialist-intelligence", "autonomous-workflows"], "customerRoutes": ["/markets/government-public-services/"]
+    },
+    {
+      "profileId": "helios-energy", "modelId": "astra-lumen", "agentIds": ["researcher", "analyst", "navigator"],
+      "familyIds": ["specialist-intelligence", "business-commerce"], "customerRoutes": ["/markets/manufacturing-energy/"]
+    },
+    {
+      "profileId": "spica-medical", "modelId": "astra-lumen", "agentIds": ["researcher", "analyst"],
+      "familyIds": ["specialist-intelligence"], "customerRoutes": ["/markets/healthcare-wellness/"]
+    },
+    {
+      "profileId": "lyra-education", "modelId": "astra-lumen", "agentIds": ["guide", "researcher", "access"],
+      "familyIds": ["core-intelligence", "specialist-intelligence"], "customerRoutes": ["/markets/education-learning/"]
+    },
+    {
+      "profileId": "capella-hospitality", "modelId": "astra-lumen", "agentIds": ["creator", "navigator"],
+      "familyIds": ["creative-studio", "business-commerce"], "customerRoutes": ["/markets/travel-hospitality/"]
+    },
+    {
+      "profileId": "andromeda-science", "modelId": "astra-lumen", "agentIds": ["researcher", "analyst"],
+      "familyIds": ["specialist-intelligence"], "customerRoutes": ["/markets/science-research/"]
+    },
+    {
+      "profileId": "altair-engineering", "modelId": "astra-lumen", "agentIds": ["researcher", "analyst"],
+      "familyIds": ["specialist-intelligence", "developer-platform"], "customerRoutes": ["/markets/science-research/"]
+    },
+    {
+      "profileId": "rigel-mechanical", "modelId": "astra-lumen", "agentIds": ["researcher", "analyst"],
+      "familyIds": ["specialist-intelligence"], "customerRoutes": ["/markets/manufacturing-energy/"]
+    },
+    {
+      "profileId": "electra-electrical", "modelId": "astra-lumen", "agentIds": ["researcher", "analyst"],
+      "familyIds": ["specialist-intelligence"], "customerRoutes": ["/markets/manufacturing-energy/"]
+    },
+    {
+      "profileId": "terra-nova-civil", "modelId": "astra-lumen", "agentIds": ["researcher", "analyst"],
+      "familyIds": ["specialist-intelligence"], "customerRoutes": ["/markets/real-estate-construction/"]
+    },
+    {
+      "profileId": "vega-systems", "modelId": "astra-lumen", "agentIds": ["researcher"],
+      "familyIds": ["developer-platform"], "customerRoutes": ["/products/developer-platform/"]
+    },
+    {
+      "profileId": "procyon-programs", "modelId": "astra-lumen", "agentIds": ["navigator", "analyst"],
+      "familyIds": ["autonomous-workflows", "business-commerce"], "customerRoutes": ["/markets/business-professional-services/"]
+    },
+    {
+      "profileId": "deneb-epc", "modelId": "astra-lumen", "agentIds": ["navigator", "researcher"],
+      "familyIds": ["business-commerce", "specialist-intelligence"], "customerRoutes": ["/markets/real-estate-construction/"]
+    },
+    {
+      "profileId": "helios-grid", "modelId": "astra-lumen", "agentIds": ["researcher", "navigator"],
+      "familyIds": ["specialist-intelligence", "business-commerce"], "customerRoutes": ["/markets/manufacturing-energy/", "/markets/positioning/microgrids/"]
+    },
+    {
+      "profileId": "arcturus-weather", "modelId": "astra-lumen", "agentIds": ["researcher", "analyst"],
+      "familyIds": ["specialist-intelligence"], "customerRoutes": ["/markets/science-research/"]
+    },
+    {
+      "profileId": "aquarius-water", "modelId": "astra-lumen", "agentIds": ["researcher", "analyst"],
+      "familyIds": ["specialist-intelligence"], "customerRoutes": ["/markets/science-research/"]
+    },
+    {
+      "profileId": "cygnus-industrial", "modelId": "astra-lumen", "agentIds": ["navigator", "analyst"],
+      "familyIds": ["business-commerce", "specialist-intelligence"], "customerRoutes": ["/markets/manufacturing-energy/"]
+    },
+    {
+      "profileId": "vela-logistics", "modelId": "astra-lumen", "agentIds": ["navigator", "analyst"],
+      "familyIds": ["business-commerce", "autonomous-workflows"], "customerRoutes": ["/markets/logistics-supply-chain/"]
+    },
+    {
+      "profileId": "altair-signal", "modelId": "astra-lumen", "agentIds": ["researcher", "navigator"],
+      "familyIds": ["developer-platform", "business-commerce"], "customerRoutes": ["/products/developer-platform/"]
+    },
+    {
+      "profileId": "orion-enterprise", "modelId": "astra-lumen", "agentIds": ["guide", "analyst", "navigator"],
+      "familyIds": ["business-commerce"], "customerRoutes": ["/markets/business-professional-services/", "/markets/finance-economics/"]
+    },
+    {
+      "profileId": "sentinel-civic", "modelId": "astra-lumen", "agentIds": ["guide", "researcher"],
+      "familyIds": ["core-intelligence", "specialist-intelligence"], "customerRoutes": ["/markets/government-public-services/"]
+    },
+    {
+      "profileId": "andromeda-global", "modelId": "astra-lumen", "agentIds": ["guide", "navigator"],
+      "familyIds": ["core-intelligence", "business-commerce"], "customerRoutes": ["/markets/"]
+    },
+    {
+      "profileId": "pulsar-access", "modelId": "astra-lumen", "agentIds": ["access"],
+      "familyIds": ["core-intelligence"], "customerRoutes": ["/products/core-intelligence/"]
+    }
+  ]
+}

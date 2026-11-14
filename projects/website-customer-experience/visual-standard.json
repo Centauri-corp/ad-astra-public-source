@@ -1,0 +1,93 @@
+{
+  "schema": "ad-astra-website-visual-standard/v1",
+  "direction": "Original cinematic realism, optical glass and restrained titanium, a neural spiral and planetary horizons; calm product storytelling with human purpose.",
+  "references": {
+    "interactionQuality": [
+      "https://www.dji.com/",
+      "https://www.apple.com/"
+    ],
+    "use": "Quality references only; do not copy their logos, artwork, compositions or product claims."
+  },
+  "tokens": {
+    "background": "#05070a",
+    "surface": "#0b1016",
+    "text": "#f4f5f5",
+    "muted": "#aeb8c3",
+    "cyan": "#b6deed",
+    "champagne": "#d5ba91",
+    "cobalt": "#214b78",
+    "cobaltText": "#aec9ed",
+    "violet": "#9a7cff"
+  },
+  "graphicsRules": [
+    "Every asset has a specific story or product role, source record, truthful caption where needed and responsive treatment.",
+    "No generic humanoid heads, robot faces, stock chatbot illustrations or unrelated decorative card grids as primary product identity.",
+    "Show the actual interface or a clearly labelled concept. Imagined artwork cannot establish a working product, model, customer outcome or regional coverage.",
+    "Artwork should blend into the page composition. Preserve deliberate negative space, readable typography, consistent light and materials, and a clear next action.",
+    "Product diagrams explain interfaces; they do not substitute for finished product artwork or customer experience evidence.",
+    "No embedded marketing text, invented certification marks, customer logos, fake citations or fabricated telemetry in generated art."
+  ],
+  "delivery": {
+    "desktopHeroMinimumWidth": 1600,
+    "desktopMasterTargetWidth": 3200,
+    "mobileMinimumWidth": 800,
+    "heroExportMaxBytes": 300000,
+    "secondaryExportMaxBytes": 650000,
+    "rasterFormats": [
+      "webp",
+      "avif"
+    ],
+    "upscaling": "Disclose enhancement and original dimensions; never describe an enlarged export as native high-resolution capture.",
+    "pixelCoverage": "Measure the rendered contain/cover box, native export dimensions and DPR. Report density shortfalls; do not upscale and claim native detail."
+  },
+  "motion": {
+    "defaultAudio": false,
+    "pauseRequired": true,
+    "reducedMotion": "Static equivalent; no essential information depends on motion.",
+    "voice": "Microphone permission only after an explicit customer action; show actual engine/voice availability.",
+    "film": "Selected master, measured duration, rights, poster, captions where applicable, mobile budget and a reviewed final cut before publication."
+  },
+  "accessibility": {
+    "target": "WCAG 2.2 AA with manual review",
+    "responsiveWidths": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "manualChecks": [
+      "keyboard and focus",
+      "screen-reader journey",
+      "zoom and reflow",
+      "contrast over every image crop",
+      "touch interaction",
+      "no-JavaScript and reduced-motion alternatives"
+    ]
+  },
+  "performanceTargets": {
+    "mobileP75LcpMs": 2500,
+    "mobileP75InpMs": 200,
+    "mobileP75Cls": 0.1,
+    "evidence": "Field performance remains unmeasured until real traffic and approved instrumentation exist; local browser checks do not establish these targets."
+  },
+  "visualAcceptance": {
+    "minimumEachScore": 4,
+    "scaleMax": 5,
+    "criteria": [
+      "storyAlignment",
+      "cinematicCraft",
+      "productClarity",
+      "brandConsistency",
+      "desktopComposition",
+      "mobileComposition",
+      "typographyAndContrast",
+      "motionAndFallbacks"
+    ],
+    "rule": "Every criterion must pass. Record human review of the exact website fingerprint, all route screenshots and selected asset rights. A test pass or generated image is not visual approval.",
+    "reviewWidths": [
+      390,
+      1440
+    ],
+    "evidence": "Existing owner decision artifact and hashed route-by-viewport screenshots; local files validate evidence identity and content, not the human actor. Independent exact-commit review remains separate."
+  }
+}

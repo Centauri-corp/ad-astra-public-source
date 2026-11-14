@@ -12,26 +12,26 @@ const events=res=>res.body.trim().split('\n\n').filter(Boolean).map(frame=>JSON.
 beforeEach(()=>{
  Object.assign(release,originalRelease,{publicLaunchEnabled:true,engineAvailable:true});routing.redirects=[];
  for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];
- Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://stream-redis.invalid',KV_REST_API_TOKEN:'synthetic-fixture',AD_ASTRA_MODEL_GATEWAY_URL:'https://gateway.invalid/v1/respond',AD_ASTRA_MODEL_GATEWAY_TOKEN:'synthetic-gateway-token',AD_ASTRA_MODEL_GATEWAY_CONTRACT:'ad-astra-model-gateway/v1',AD_ASTRA_MODEL_GATEWAY_MODE:'production'});
+ Object.assign(process.env,originalEnv,{AD_ASTRA_ACCESS_MODE:'authenticated',AD_ASTRA_AUTH_ISSUER:'https://clerk.adastra.global',AD_ASTRA_AUTH_JWKS_URL:'https://clerk.adastra.global/.well-known/jwks.json',AD_ASTRA_AUTH_AUDIENCE:'ad-astra-workspace',AD_ASTRA_DAILY_BUDGET_MICRO_USD:'10000000',KV_REST_API_URL:'https://stream-redis.invalid',KV_REST_API_TOKEN:'synthetic-fixture',AD_ASTRA_MODEL_GATEWAY_URL:customerBudget.gatewayUrl,AD_ASTRA_MODEL_GATEWAY_TOKEN:'synthetic-gateway-secret-32-characters',AD_ASTRA_MODEL_GATEWAY_CONTRACT:'ad-astra-model-gateway/v2',AD_ASTRA_MODEL_GATEWAY_MODE:'production',VERCEL_ENV:'production'});
  for(const flag of gates.FLAGS)process.env[flag]='true';calls=[];providerStatus=200;redis=[1,11,3600];pendingProvider=false;providerSignal=undefined;
  Object.assign(process.env,customerBudget.env);
- global.fetch=async(url,init)=>{calls.push({url,init});if(url.includes('/.well-known/jwks.json'))return {ok:true,json:async()=>({keys:[jwk]})};if(url==='https://stream-redis.invalid')return {ok:true,json:async()=>({result:redis})};if(url===customerBudget.url)return Response.json(customerBudget.allowance(init));if(url==='https://gateway.invalid/v1/respond'){providerSignal=init.signal;if(pendingProvider)return new Promise((_resolve,reject)=>{init.signal.addEventListener('abort',()=>reject(Error('cancelled')),{once:true});});return Response.json({object:'chat.completion',model:'astra-lumen',choices:[{index:0,finish_reason:'stop',message:{role:'assistant',content:'Synthetic streamed answer. <script>not executable</script>'}}],usage:{prompt_tokens:100,completion_tokens:20,total_tokens:120}},{status:providerStatus});}throw Error('Unexpected fixture destination');};
+ global.fetch=async(url,init)=>{calls.push({url,init});if(url.includes('/.well-known/jwks.json'))return {ok:true,json:async()=>({keys:[jwk]})};if(url==='https://stream-redis.invalid')return {ok:true,json:async()=>({result:JSON.parse(init.body)[2]===1?[1,59,3600]:redis})};if(url===customerBudget.url)return Response.json(customerBudget.allowance(init));if(url===customerBudget.gatewayUrl){providerSignal=init.signal;if(pendingProvider)return new Promise((_resolve,reject)=>{init.signal.addEventListener('abort',()=>reject(Error('cancelled')),{once:true});});return Response.json({object:'chat.completion',model:'astra-lumen',choices:[{index:0,finish_reason:'stop',message:{role:'assistant',content:'Synthetic streamed answer. <script>not executable</script>'}}],usage:{prompt_tokens:100,completion_tokens:20,total_tokens:120}},{status:providerStatus});}throw Error('Unexpected fixture destination');};
 });
 after(()=>{global.fetch=originalFetch;Object.assign(release,originalRelease);routing.redirects=originalRedirects;for(const k of Object.keys(process.env))if(!(k in originalEnv))delete process.env[k];Object.assign(process.env,originalEnv);});
 test('signed request reserves capacity before emitting four correlated lifecycle events',async()=>{
  const {req,res}=fixture();await ask(req,res);assert.equal(res.statusCode,200);assert.match(res.headers['content-type'],/^text\/event-stream/);assert.equal(res.headers['cache-control'],'no-store, no-transform');
  const rows=events(res);assert.deepEqual(rows.map(e=>e.type),['accepted','requesting','answer','completed']);assert.deepEqual(rows.map(e=>e.sequence),[1,2,3,4]);assert.ok(rows.every(e=>e.requestId===res.headers['x-request-id']));
  const seen=[];const answer=await client.readStream(new Response(res.body,{headers:res.headers}),{onEvent:e=>seen.push(e.type)});assert.equal(answer,'Synthetic streamed answer. <script>not executable</script>');assert.equal(seen.length,4);
- assert.ok(calls.findIndex(c=>c.url==='https://stream-redis.invalid')<calls.findIndex(c=>c.url.includes('/v1/respond')));assert.equal(calls.filter(c=>c.url.includes('/v1/respond')).length,1);assert.ok(!res.body.includes('synthetic-fixture'));assert.ok(!res.body.includes(req.body.question));
+ assert.ok(calls.findIndex(c=>c.url==='https://stream-redis.invalid')<calls.findIndex(c=>c.url===customerBudget.gatewayUrl));assert.equal(calls.filter(c=>c.url===customerBudget.gatewayUrl).length,1);assert.ok(!res.body.includes('synthetic-fixture'));assert.ok(!res.body.includes(req.body.question));
 });
 test('authentication, release, origin and capacity failures remain JSON and emit no activity stream',async()=>{
- for(const kind of ['auth','release','origin','capacity']){calls=[];release.engineAvailable=true;redis=[1,11,3600];const f=fixture(kind==='auth'?{authorization:''}:kind==='origin'?{origin:'https://untrusted.invalid'}:{});if(kind==='release')release.engineAvailable=false;if(kind==='capacity')redis=[2,0,3600];await ask(f.req,f.res);assert.ok([401,403,429,503].includes(f.res.statusCode));assert.match(f.res.headers['content-type'],/^application\/json/);assert.ok(!f.res.body.includes('event: accepted'));assert.equal(calls.filter(c=>c.url.includes('/v1/respond')).length,0);}
+ for(const kind of ['auth','release','origin','capacity']){calls=[];release.engineAvailable=true;redis=[1,11,3600];const f=fixture(kind==='auth'?{authorization:''}:kind==='origin'?{origin:'https://untrusted.invalid'}:{});if(kind==='release')release.engineAvailable=false;if(kind==='capacity')redis=[2,0,3600];await ask(f.req,f.res);assert.ok([401,403,429,503].includes(f.res.statusCode));assert.match(f.res.headers['content-type'],/^application\/json/);assert.ok(!f.res.body.includes('event: accepted'));assert.equal(calls.filter(c=>c.url===customerBudget.gatewayUrl).length,0);}
 });
 test('provider failure terminates with a safe event and never invents an answer or retries',async()=>{
- providerStatus=429;const f=fixture();await ask(f.req,f.res);assert.deepEqual(events(f.res).map(e=>e.type),['accepted','requesting','failed']);await assert.rejects(()=>client.readStream(new Response(f.res.body,{headers:f.res.headers})),/ai_unavailable/);assert.equal(calls.filter(c=>c.url.includes('/v1/respond')).length,1);
+ providerStatus=429;const f=fixture();await ask(f.req,f.res);assert.deepEqual(events(f.res).map(e=>e.type),['accepted','requesting','failed']);await assert.rejects(()=>client.readStream(new Response(f.res.body,{headers:f.res.headers})),/ai_unavailable/);assert.equal(calls.filter(c=>c.url===customerBudget.gatewayUrl).length,1);
 });
 test('client disconnect aborts the single in-flight provider request without replay',async()=>{
- pendingProvider=true;const f=fixture(),running=ask(f.req,f.res);for(let i=0;i<50&&!providerSignal;i++)await new Promise(resolve=>setImmediate(resolve));assert.ok(providerSignal);f.res.destroyed=true;f.res.emit('close');await running;assert.equal(providerSignal.aborted,true);assert.equal(calls.filter(c=>c.url.includes('/v1/respond')).length,1);assert.equal(f.res.listenerCount('close'),0);
+ pendingProvider=true;const f=fixture(),running=ask(f.req,f.res);for(let i=0;i<50&&!providerSignal;i++)await new Promise(resolve=>setImmediate(resolve));assert.ok(providerSignal);f.res.destroyed=true;f.res.emit('close');await running;assert.equal(providerSignal.aborted,true);assert.equal(calls.filter(c=>c.url===customerBudget.gatewayUrl).length,1);assert.equal(f.res.listenerCount('close'),0);
 });
 test('paid-access denial and duplicate request are explicit client stops, not streamed model activity',async()=>{
  for(const [status,reason]of [[403,'access_denied'],[409,'request_replayed']]){
@@ -51,4 +51,58 @@ test('stream parser handles split UTF-8 frames and rejects premature EOF, invali
 });
 test('a late session token after cancellation cannot dispatch a request',async()=>{
  const abort=new AbortController();let grant,count=0;const pending=client.ask({question:'A synthetic test question.',getToken:()=>new Promise(resolve=>grant=resolve),fetcher:async()=>{count++;},signal:abort.signal});abort.abort();grant('synthetic-session-token');await assert.rejects(()=>pending,/request_cancelled/);assert.equal(count,0);
+});
+
+
+test('all seven selected agents reach the real server gateway and JSON response without changing their IDs',async()=>{
+ const agents=require('../lib/customer-agent-catalog').publicCustomerAgents();
+ assert.equal(agents.length,7);
+ for(const agent of agents){
+  calls=[];const f=fixture({accept:'application/json'});
+  f.req.body={question:'A synthetic text-only profile test.',agentId:agent.id,mode:agent.defaultMode};
+  await ask(f.req,f.res);assert.equal(f.res.statusCode,200);
+  const body=JSON.parse(f.res.body);
+  assert.equal(body.agentId,agent.id);assert.equal(body.mode,agent.defaultMode);
+  const request=calls.find(call=>call.url.includes('astra-model-gateway')||call.url.includes('/v1/respond'));
+  assert.equal(JSON.parse(request.init.body).agentId,agent.id);
+  const streamed=fixture();streamed.req.body={...f.req.body};await ask(streamed.req,streamed.res);
+  assert.equal(await client.readStream(new Response(streamed.res.body,{headers:streamed.res.headers}),{agentId:agent.id,mode:agent.defaultMode}),'Synthetic streamed answer. <script>not executable</script>');
+ }
+});
+test('client preserves every catalog agent and validates response agent, mode and request correlation',async()=>{
+ for(const agent of require('../lib/customer-agent-catalog').publicCustomerAgents()){
+  const id=crypto.randomUUID(),at=new Date().toISOString();let sent;
+  const rows=['accepted','requesting','answer','completed'].map((type,i)=>({schema:'ad-astra-engine-event/v1',requestId:id,sequence:i+1,type,at,...(type==='answer'?{answer:'A synthetic text answer.',mode:agent.defaultMode,agentId:agent.id}:{})}));
+  const serialized=()=>rows.map(row=>'event: '+row.type+'\ndata: '+JSON.stringify(row)+'\n\n').join('');
+  const fetcher=async(_url,init)=>{sent=JSON.parse(init.body);return new Response(serialized(),{headers:{'content-type':'text/event-stream','x-request-id':id}});};
+  const answer=await client.ask({question:'A synthetic selected profile question.',agentId:agent.id,mode:agent.defaultMode,getToken:async()=>'synthetic-token',fetcher});
+  assert.equal(sent.agentId,agent.id);assert.equal(sent.mode,agent.defaultMode);assert.equal(answer,'A synthetic text answer.');
+  for(const change of [row=>delete row.agentId,row=>row.agentId=agent.id==='guide'?'visual':'guide',row=>row.mode=agent.defaultMode==='ask'?'create':'ask',row=>row.requestId=crypto.randomUUID()]){
+   const original=structuredClone(rows[2]);change(rows[2]);
+   await assert.rejects(()=>client.ask({question:'A synthetic selected profile question.',agentId:agent.id,mode:agent.defaultMode,getToken:async()=>'synthetic-token',fetcher}));
+   rows[2]=original;
+  }
+ }
+});
+test('catalog-derived deep links reject duplicates, unknown roles and prototype names',()=>{
+ const agents=require('../lib/customer-agent-catalog').publicCustomerAgents();
+ for(const agent of agents)assert.deepEqual(client.selection('?agentId='+agent.id,agents),{agentId:agent.id,mode:agent.defaultMode,invalid:false});
+ assert.deepEqual(client.selection('?agentId=visual&mode=research',agents),{agentId:'visual',mode:'research',invalid:false});
+ for(const search of ['?agentId=__proto__','?agentId=provider/model','?agentId=visual&agentId=guide','?agentId=','?agentId=%3Cscript%3E']){
+  const result=client.selection(search,agents);assert.equal(result.agentId,'guide');assert.equal(result.invalid,true);
+ }
+ for(const search of ['?mode=__proto__','?mode=ask&mode=create'])assert.equal(client.selection(search,agents).invalid,true);
+});
+test('invalid client selections and idempotency keys fail before acquiring a bearer',async()=>{
+ for(const change of [{agentId:'../visual'},{agentId:['visual']},{idempotencyKey:'short'},{idempotencyKey:'bad key'}]){
+  let calls=0;
+  await assert.rejects(()=>client.ask({question:'A synthetic valid question.',getToken:async()=>{calls++;return 'synthetic-token';},...change}));
+  assert.equal(calls,0);
+ }
+});
+test('generated agent selector uses the actual catalog and honestly scopes visual/research profiles to text',()=>{
+ const html=require('../scripts/lib/neural-conversation.cjs').conversationSection();
+ for(const agent of require('../lib/customer-agent-catalog').publicCustomerAgents())assert.ok(html.includes('value="'+agent.id+'" data-default-mode="'+agent.defaultMode+'"'));
+ assert.match(html,/cannot analyze uploaded images, retrieve documents, browse the web or verify citations/);
+ assert.equal((html.match(/name="agentId"/g)||[]).length,1);
 });

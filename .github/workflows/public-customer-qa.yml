@@ -1,0 +1,57 @@
+name: Public Clerk customer protocol QA
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ad-astra-public-customer-qa
+  cancel-in-progress: false
+jobs:
+  public-customer:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    environment: public-customer-qa
+    env:
+      AD_ASTRA_PUBLIC_QA_SHA: ${{ github.sha }}
+      AD_ASTRA_PUBLIC_QA_URL: ${{ vars.AD_ASTRA_PUBLIC_QA_URL }}
+      AD_ASTRA_PUBLIC_QA_ENVIRONMENT: ${{ vars.AD_ASTRA_PUBLIC_QA_ENVIRONMENT }}
+      AD_ASTRA_PUBLIC_QA_SYNTHETIC_IDENTITY: ${{ vars.AD_ASTRA_PUBLIC_QA_SYNTHETIC_IDENTITY }}
+      AD_ASTRA_PUBLIC_QA_SUBJECT_SHA256: ${{ vars.AD_ASTRA_PUBLIC_QA_SUBJECT_SHA256 }}
+      AD_ASTRA_PUBLIC_QA_SOURCE_PROOF_SHA256: ${{ vars.AD_ASTRA_PUBLIC_QA_SOURCE_PROOF_SHA256 }}
+      AD_ASTRA_PUBLIC_QA_LIFECYCLE_SHA256: ${{ vars.AD_ASTRA_PUBLIC_QA_LIFECYCLE_SHA256 }}
+      AD_ASTRA_PUBLIC_QA_CURRENT_TOKEN: ${{ secrets.AD_ASTRA_PUBLIC_QA_CURRENT_TOKEN }}
+      AD_ASTRA_PUBLIC_QA_REVOKED_TOKEN: ${{ secrets.AD_ASTRA_PUBLIC_QA_REVOKED_TOKEN }}
+      AD_ASTRA_PUBLIC_QA_EXPIRED_TOKEN: ${{ secrets.AD_ASTRA_PUBLIC_QA_EXPIRED_TOKEN }}
+      AD_ASTRA_PUBLIC_QA_PROTECTION_BYPASS: ${{ secrets.AD_ASTRA_PUBLIC_QA_PROTECTION_BYPASS }}
+    steps:
+      - name: Set private evidence paths
+        run: |
+          node -e "const fs=require('node:fs'),p=require('node:path');const rows={AD_ASTRA_PUBLIC_QA_OUTPUT:p.join(process.env.RUNNER_TEMP,'public-customer-qa'),AD_ASTRA_PUBLIC_QA_SOURCE_PROOF_FILE:p.join(process.env.RUNNER_TEMP,'public-source-proof.json'),AD_ASTRA_PUBLIC_QA_LIFECYCLE_FILE:p.join(process.env.RUNNER_TEMP,'public-lifecycle.json')};fs.appendFileSync(process.env.GITHUB_ENV,Object.entries(rows).map(([k,v])=>k+'='+v).join('\n')+'\n');"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.1'
+      - name: Materialize protected reviewed metadata receipts
+        env:
+          SOURCE_PROOF_JSON: ${{ secrets.AD_ASTRA_PUBLIC_QA_SOURCE_PROOF_JSON }}
+          LIFECYCLE_JSON: ${{ secrets.AD_ASTRA_PUBLIC_QA_LIFECYCLE_JSON }}
+        run: |
+          node -e "const fs=require('node:fs'); for(const [value,file] of [[process.env.SOURCE_PROOF_JSON,process.env.AD_ASTRA_PUBLIC_QA_SOURCE_PROOF_FILE],[process.env.LIFECYCLE_JSON,process.env.AD_ASTRA_PUBLIC_QA_LIFECYCLE_FILE]]) if(value) fs.writeFileSync(file,value,{mode:0o600,flag:'wx'});"
+      - name: Test the public bearer protocol against the exact candidate
+        run: node scripts/public-customer-qa.cjs
+      - name: Retain sanitized public-only evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: public-clerk-qa-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/public-customer-qa/public-customer-qa.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Remove temporary provider metadata receipts
+        if: always()
+        run: |
+          node -e "const fs=require('node:fs'); for(const file of [process.env.AD_ASTRA_PUBLIC_QA_SOURCE_PROOF_FILE,process.env.AD_ASTRA_PUBLIC_QA_LIFECYCLE_FILE]) fs.rmSync(file,{force:true});"
+# No deployment/merge/write permissions or activation secrets. Protect the
+# environment with the actual independent reviewer and restrict its branches.

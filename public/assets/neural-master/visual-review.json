@@ -1,0 +1,144 @@
+{
+  "schema": "ad-astra.neural-master.visual-review.v1",
+  "inspectedAt": "2026-11-13T20:01:55.144Z",
+  "inspector": "Assistant visual inspection",
+  "status": "candidate-ready-for-main-review",
+  "humanApproved": false,
+  "ownerAcceptance": "pending",
+  "integration": "not-integrated",
+  "classification": "Original procedural CGI",
+  "selected": [
+    {
+      "preset": "landscape",
+      "png": {
+        "path": "public/assets/neural-master/neural-master-landscape-3840x2160.png",
+        "bytes": 5545237,
+        "sha256": "7154081165187348da70616ae400ca463a3858fd7fbdcd883a1beaa84827d3b7",
+        "width": 3840,
+        "height": 2160,
+        "operation": "direct WebGL canvas PNG; no resampling"
+      },
+      "webp": {
+        "path": "public/assets/neural-master/neural-master-landscape-3840x2160.webp",
+        "bytes": 543032,
+        "sha256": "0c6a7fc9fb5401805ff0ac0b9be2a458a5a2316c188027e0c4e8253107533193",
+        "width": 3840,
+        "height": 2160,
+        "operation": "same-size WebP encoding from native PNG"
+      },
+      "detail": {
+        "path": "public/assets/neural-master/neural-master-landscape-3840x2160-detail-1to1.png",
+        "bytes": 602908,
+        "sha256": "a9b35140c99bb229c0593f8923a073b9debfd2197601196014d17bd3fc39f01f",
+        "width": 512,
+        "height": 512,
+        "operation": "extract only; no resampling"
+      }
+    },
+    {
+      "preset": "panoramic",
+      "png": {
+        "path": "public/assets/neural-master/neural-master-panoramic-3840x1600.png",
+        "bytes": 3721054,
+        "sha256": "bc9ca7482eb899fb0e122e75748115e1c152e9f2ccca68c343ad125f16f00510",
+        "width": 3840,
+        "height": 1600,
+        "operation": "direct WebGL canvas PNG; no resampling"
+      },
+      "webp": {
+        "path": "public/assets/neural-master/neural-master-panoramic-3840x1600.webp",
+        "bytes": 383216,
+        "sha256": "fc375371e034ac3b6c0f4e3b075cc8e4753c63566ac17a27a5963fcb136f69d9",
+        "width": 3840,
+        "height": 1600,
+        "operation": "same-size WebP encoding from native PNG"
+      },
+      "detail": {
+        "path": "public/assets/neural-master/neural-master-panoramic-3840x1600-detail-1to1.png",
+        "bytes": 629651,
+        "sha256": "33166b5f285a21176bbb16a6aacdc5c503c70659b6d7ac3636df1de1bdddb8f6",
+        "width": 512,
+        "height": 512,
+        "operation": "extract only; no resampling"
+      }
+    },
+    {
+      "preset": "portrait",
+      "png": {
+        "path": "public/assets/neural-master/neural-master-portrait-2160x3840.png",
+        "bytes": 6851057,
+        "sha256": "44ebcfeed113f025b8cc12565d81600c7adec8c3e27e1eb85e19f2093398f366",
+        "width": 2160,
+        "height": 3840,
+        "operation": "direct WebGL canvas PNG; no resampling"
+      },
+      "webp": {
+        "path": "public/assets/neural-master/neural-master-portrait-2160x3840.webp",
+        "bytes": 663606,
+        "sha256": "d57762baa9e7b5703872d945c4afcd31817e982b64a40c56071f6ea4a67fb1d2",
+        "width": 2160,
+        "height": 3840,
+        "operation": "same-size WebP encoding from native PNG"
+      },
+      "detail": {
+        "path": "public/assets/neural-master/neural-master-portrait-2160x3840-detail-1to1.png",
+        "bytes": 644311,
+        "sha256": "d6fc580ce02502ec0ce3c5a6963df95a34b8a270840d1339cb3b28f716f4063d",
+        "width": 512,
+        "height": 512,
+        "operation": "extract only; no resampling"
+      }
+    },
+    {
+      "preset": "retina",
+      "png": {
+        "path": "public/assets/neural-master/neural-master-retina-2880x1620.png",
+        "bytes": 3413453,
+        "sha256": "1f40e18326ab85806eb8683002f1d3bc1f80f7faead4665748c47c58c4623c25",
+        "width": 2880,
+        "height": 1620,
+        "operation": "direct WebGL canvas PNG; no resampling"
+      },
+      "webp": {
+        "path": "public/assets/neural-master/neural-master-retina-2880x1620.webp",
+        "bytes": 350386,
+        "sha256": "2607a6784cd905e9d89baea7b24d28948ee62eee1315e4f4832cb1c3326896b4",
+        "width": 2880,
+        "height": 1620,
+        "operation": "same-size WebP encoding from native PNG"
+      },
+      "detail": {
+        "path": "public/assets/neural-master/neural-master-retina-2880x1620-detail-1to1.png",
+        "bytes": 627250,
+        "sha256": "c07043c37fc246629874999ec498169f2efb3342a92becbaf773557c320515ad",
+        "width": 512,
+        "height": 512,
+        "operation": "extract only; no resampling"
+      }
+    }
+  ],
+  "inspection": [
+    "Inspected full native landscape PNG, panoramic WebP, portrait WebP, and exact-pixel detail crop.",
+    "Selected composition has a folded optical-glass neural silhouette, icy cyan branching core, champagne spiral, and a restrained planetary horizon.",
+    "Landscape and panoramic outputs preserve quiet left copy space. Portrait leaves room above the centered sculpture for mobile copy.",
+    "Early studies rejected for regular folds, exposed spiral tips, and dominant horizon. Removed rejected study outputs so only final candidate files remain."
+  ],
+  "pixelProof": "3840x2160 PNG decodes to 8,294,400 pixels; canvas/drawing buffer/composer agree. Same-size WebP encoding; detail crops are extraction only. All other outputs have independent native render buffers, including actual browser DPR 2 for portrait and retina.",
+  "qualityLimits": [
+    "Screen-space transmission with physical glass materials and PMREM studio illumination; not path-traced global illumination, multi-bounce refraction, dispersion, or spectral caustics.",
+    "Fold repetition is visibly procedural on close inspection; this is an abstract neural sculpture, not an anatomical scan.",
+    "Specular and core bloom intentionally soften a small part of the image. 4K core detail crop has about 1.03% fully white pixels.",
+    "Native pixel dimensions prove geometric rendering resolution, not inference-generated or recovered raster detail. No existing raster was sampled."
+  ],
+  "validation": {
+    "command": "node --test test/neural-master-render.test.cjs",
+    "passed": 4,
+    "failed": 0
+  },
+  "ownership": [
+    "scripts/render-neural-master.cjs",
+    "scripts/lib/neural-master-scene.mjs",
+    "test/neural-master-render.test.cjs",
+    "public/assets/neural-master/*"
+  ]
+}

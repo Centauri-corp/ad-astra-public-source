@@ -31,11 +31,23 @@ const account={environment:'production',market:'US-CA',linked:true,linkingEnable
  workspaces:[{tenantId:tenant,name:'Synthetic workspace'}],subscriptions:[{tenantId:tenant,workflowId:workflow,plan:'pro',state:'active',canManageBilling:true}]};
 
 test('closed source blocks new enrollment, checkout and activation before any provider request',async()=>{
- for(const action of ['enroll','checkout','activate']){
-  const f=fixture();const input=action==='enroll'?{tenantId:tenant,plan:'pro',market:'US-CA',consent:true,consentVersion:'2026-11',channel:'direct'}:{workflowId:workflow};
+ for(const action of ['provision','enroll','checkout','activate']){
+  const f=fixture();const input=action==='provision'?{}:action==='enroll'?{tenantId:tenant,plan:'pro',market:'US-CA',consent:true,consentVersion:'2026-11',channel:'direct'}:{workflowId:workflow};
   const r=await f.request({action,input},{headers:{'idempotency-key':'synthetic-enroll-1'}});
   assert.equal(r.statusCode,503);assert.equal(r.body.error,'subscription_release_not_ready');assert.equal(f.requests.length,0);
  }
+});
+test('new workspace provisioning uses only verified subject context and is gated separately from legacy linking',async()=>{
+ const f=fixture({released:true,reply:{linked:true,provisioned:true}});const result=await f.request({action:'provision',input:{}});
+ assert.equal(result.statusCode,200);assert.deepEqual(result.body,{linked:true,provisioned:true});
+ assert.match(f.requests[0].url,/\/provision$/);assert.deepEqual(JSON.parse(f.requests[0].options.body),{});
+ for(const input of [{email:'qa@example.test'},{tenantId:tenant},{subject:'user_spoofed'}]){
+  const invalid=fixture({released:true});assert.equal((await invalid.request({action:'provision',input})).statusCode,400);assert.equal(invalid.requests.length,0);
+ }
+ const enabled=fixture({released:true,reply:{...account,linked:false,newCustomerProvisioningEnabled:true}});
+ assert.equal((await enabled.request()).body.newCustomerProvisioningEnabled,true);
+ const closed=fixture({reply:{...account,linked:false,newCustomerProvisioningEnabled:true}});
+ assert.equal((await closed.request()).body.newCustomerProvisioningEnabled,false);
 });
 test('paused sales retain authenticated billing management and cannot advertise checkout',async()=>{
  const f=fixture({reply:account});const r=await f.request();

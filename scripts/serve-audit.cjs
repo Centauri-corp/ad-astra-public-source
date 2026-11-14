@@ -2,7 +2,7 @@
 // Loopback-only acceptance server. No provider credentials or production writes.
 const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
 const root=path.join(__dirname,'../public');
-const types={'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.mp4':'video/mp4','.vtt':'text/vtt','.txt':'text/plain','.xml':'application/xml'};
+const types={'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.json':'application/json','.svg':'image/svg+xml','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.mp4':'video/mp4','.vtt':'text/vtt','.txt':'text/plain','.xml':'application/xml'};
 const apis={status:require('../api/status'),'operating-status':require('../api/operating-status'),'subscription-status':require('../api/subscription-status'),models:require('../api/models'),session:require('../api/session'),ask:require('../api/ask')};
 const server=http.createServer(async(req,res)=>{
  try{

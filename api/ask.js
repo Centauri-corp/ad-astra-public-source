@@ -1,7 +1,7 @@
 'use strict';
 const crypto = require('node:crypto');
 const { authenticateRequest } = require('../lib/auth');
-const { reserve, LIMIT } = require('../lib/quota');
+const { reserve, throttle, LIMIT } = require('../lib/quota');
 const { ready } = require('../lib/release-gates');
 const sharedBudget = require('../lib/shared-budget');
 const { MODES } = require('../lib/modes');
@@ -61,19 +61,26 @@ module.exports = async function ask(req, res) {
   const idempotencyKey = String(req.headers?.['idempotency-key'] || '');
   if (!/^[A-Za-z0-9_-]{8,128}$/.test(idempotencyKey)) return reply(400,{error:'idempotency_key_required'});
   const budgetClient = sharedBudget.createClient();
+  try {
+    const abuse=await throttle(auth.claims);
+    if(!abuse.allowed)return reply(429,{error:'rate_limit_reached',message:'Please try again later.'},{'Retry-After':abuse.retryAfter});
+  }catch{return reply(503,{error:'quota_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60});}
   let quota;
-  try { quota = await reserve(auth.claims); } catch { return reply(503,{error:'quota_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60}); }
-  const headers = {'X-RateLimit-Limit':LIMIT,'X-RateLimit-Remaining':quota.remaining,'X-Ad-Astra-Quota-Mode':'durable'};
-  if (!quota.allowed) return reply(429,{error:quota.budgetReached ? 'daily_capacity_reached' : 'rate_limit_reached',message:'Request capacity has been reached. Please try again later.'},{...headers,'Retry-After':quota.retryAfter});
+  let headers = {'X-RateLimit-Limit':LIMIT,'X-Ad-Astra-Quota-Mode':'durable'};
   let admission;
   try {
     admission = await budgetClient.reserve({authorization:req.headers.authorization,idempotencyKey,
-      requestHash:crypto.createHash('sha256').update(JSON.stringify({agentId,mode,prompt})).digest('hex')});
+      requestHash:crypto.createHash('sha256').update(JSON.stringify({agentId,mode,prompt})).digest('hex'),requestId,agentId,mode});
   } catch { return reply(503,{error:'customer_access_unavailable',message:'Paid access could not be verified. No AI request was sent.'},{...headers,'Retry-After':60}); }
   if (!admission.allowed) {
     const status = admission.reason === 'paid_access_required' ? 403 : admission.reason === 'request_replayed' ? 409 : 429;
     return reply(status,{error:admission.reason,message:'This request was not authorized. Check your subscription or contact support.'},headers);
   }
+  // Unpaid and replayed requests consume abuse capacity, never model-spend capacity.
+  // An admitted request that cannot execute keeps its conservative durable hold.
+  try { quota = await reserve(auth.claims); } catch { return reply(503,{error:'quota_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60}); }
+  headers={...headers,'X-RateLimit-Remaining':quota.remaining};
+  if (!quota.allowed) return reply(429,{error:quota.budgetReached ? 'daily_capacity_reached' : 'rate_limit_reached',message:'Request capacity has been reached. Please try again later.'},{...headers,'Retry-After':quota.retryAfter});
   const disconnected = new AbortController();
   const stop = () => { if(!res.writableEnded)disconnected.abort(); };
   req.once?.('aborted',stop);res.once?.('close',stop);
@@ -86,7 +93,8 @@ module.exports = async function ask(req, res) {
     if(req.aborted||res.destroyed)throw new Error('disconnected');
     if(admission.expiresAt<=Date.now())throw new Error('admission_expired');
     events.start(headers);events.requesting();
-    const response = await requestCompletion({agentId, mode, messages, signal:AbortSignal.any([AbortSignal.timeout(18000),disconnected.signal])});
+    const response = await requestCompletion({agentId,mode,question:prompt,authorization:req.headers.authorization,
+      admission,idempotencyKey,signal:AbortSignal.any([AbortSignal.timeout(18000),disconnected.signal])});
     if (!response.ok) {console.warn('ad_astra_model_gateway_status',{requestId,status:response.status});throw new Error('model_gateway_unavailable');}
     const answer = await readCompletion(response);
     return reply(200,{ok:true,agentId,mode,answer,disclosure:'AI-generated response. Verify important claims against primary sources.'},headers);

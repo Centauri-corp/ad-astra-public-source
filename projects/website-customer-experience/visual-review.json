@@ -1,0 +1,14 @@
+{
+  "schema": "ad-astra-website-visual-review/v1",
+  "decision": "pending",
+  "scopeFingerprint": null,
+  "reviewerId": null,
+  "reviewedAt": null,
+  "evidenceRef": null,
+  "scores": {},
+  "routeCoverage": [],
+  "assetRights": [],
+  "note": "One consolidated owner review of the complete visual bundle. No visual approval has been inferred from broad implementation authorization or passing CI. scopeFingerprint binds the visual bundle and policy separately from full release source. Evidence refs resolve only inside AD_ASTRA_VISUAL_REVIEW_ROOT. A reviewerId string does not authenticate a human.",
+  "evidenceSha256": null,
+  "viewportArtifacts": []
+}

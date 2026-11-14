@@ -1,0 +1,342 @@
+{
+  "schema": "ad-astra-website-project/v1",
+  "id": "ad-astra-website-customer-experience",
+  "name": "AD ASTRA — Website & Customer Experience",
+  "company": "Ad Astra",
+  "purpose": "Own the complete public product experience, from the foundation and truthful capability definitions through artwork, customer journeys, engineering, quality review and controlled release.",
+  "sourceOfTruth": {
+    "repository": "Centauri-corp/ad-astra-public-source",
+    "projectPath": "projects/website-customer-experience",
+    "releasePolicy": "config/production-release-source.json",
+    "candidateBranch": "codex/customer-experience-rebuild-20261113",
+    "candidatePullRequest": 38,
+    "routeLedger": "public/route-release-evidence.json",
+    "productFamilies": "config/public-product-families.json",
+    "models": "lib/model-catalog.js",
+    "agents": "lib/customer-agent-catalog.js",
+    "offers": "lib/offer-catalog.js",
+    "customerJourney": "config/customer-experience-framework.json",
+    "visualStandard": "projects/website-customer-experience/visual-standard.json",
+    "assetSelections": "projects/website-customer-experience/asset-selections.json",
+    "modelExperience": "projects/website-customer-experience/model-experience.json",
+    "resources": "projects/website-customer-experience/resources.json",
+    "visualReview": "projects/website-customer-experience/visual-review.json"
+  },
+  "integrationOrder": [
+    {
+      "id": "foundation",
+      "owner": "product-and-platform",
+      "contract": "Company identity, product taxonomy, authorized data boundaries and release policy."
+    },
+    {
+      "id": "models",
+      "owner": "intelligence-engineering",
+      "contract": "Every model, agent, offer and sector profile maps to its existing server-owned contract and truthful availability."
+    },
+    {
+      "id": "journeys",
+      "owner": "customer-experience",
+      "contract": "Discovery, product fit, preview, account, subscription, first value, return and support."
+    },
+    {
+      "id": "creative",
+      "owner": "brand-and-creative",
+      "contract": "One visual standard and selected asset registry, with rights, crops, motion and human visual acceptance."
+    },
+    {
+      "id": "frontend",
+      "owner": "website-engineering",
+      "contract": "All public routes, shared navigation, responsive layout, accessible controls and progressive enhancement."
+    },
+    {
+      "id": "backend",
+      "owner": "platform-engineering",
+      "contract": "Authentication, tenant membership, entitlement, bounded AI execution, billing, CRM and support interfaces."
+    },
+    {
+      "id": "verification",
+      "owner": "quality-and-independent-review",
+      "contract": "Source checks, page coverage, browser QA, graphics review and real authenticated acceptance are reported separately."
+    },
+    {
+      "id": "release-and-evolution",
+      "owner": "release-owner",
+      "contract": "One chronological candidate, exact-source review, staged deployment, rollback and continuing measured improvements."
+    }
+  ],
+  "accountability": {
+    "sponsor": {
+      "name": "Zoheb Khan",
+      "role": "Owner / CEO"
+    },
+    "graphicsAcceptance": {
+      "reviewerId": "zoheb-khan",
+      "role": "Owner review of the exact visual bundle"
+    },
+    "independentCodeReview": {
+      "github": "tahira-khatun",
+      "role": "Requested independent reviewer; a request is not approval"
+    },
+    "deliveryRoles": [
+      "product-and-platform",
+      "intelligence-engineering",
+      "customer-experience",
+      "brand-and-creative",
+      "website-engineering",
+      "platform-engineering",
+      "quality-and-independent-review",
+      "release-owner"
+    ],
+    "staffingStatus": "Roles define responsibilities; this file does not claim appointed staff or accepted reviews."
+  },
+  "pageGroups": [
+    {
+      "id": "arrival",
+      "paths": [
+        "/"
+      ],
+      "journey": "discover",
+      "primaryAsset": "neural-core",
+      "families": "all",
+      "textOnly": false,
+      "artContainerClass": "ad-neural-art",
+      "primaryFit": "contain",
+      "primarySizes": "(max-width: 760px) calc(100vw + 345px), 100vw"
+    },
+    {
+      "id": "discovery",
+      "paths": [
+        "/start/"
+      ],
+      "journey": "choose",
+      "primaryAsset": "story-intelligence",
+      "families": "all",
+      "textOnly": false,
+      "artContainerClass": "journey-arrival"
+    },
+    {
+      "id": "product-directory",
+      "paths": [
+        "/products/"
+      ],
+      "journey": "evaluate",
+      "primaryAsset": "product-constellation",
+      "families": "all",
+      "textOnly": false,
+      "artContainerClass": "product-hero"
+    },
+    {
+      "id": "product-detail",
+      "prefix": "/products/",
+      "journey": "evaluate",
+      "primaryAsset": "product-constellation",
+      "families": "from-route",
+      "textOnly": false,
+      "artContainerClass": "product-hero"
+    },
+    {
+      "id": "intelligence",
+      "paths": [
+        "/intelligence/"
+      ],
+      "journey": "evaluate",
+      "primaryAsset": "story-intelligence",
+      "families": "all",
+      "textOnly": false,
+      "artContainerClass": "cinema-hero"
+    },
+    {
+      "id": "agent-catalog",
+      "paths": [
+        "/agent/"
+      ],
+      "journey": "evaluate",
+      "primaryAsset": "neural-core",
+      "families": "all",
+      "textOnly": false,
+      "artContainerClass": "agent-neural-art"
+    },
+    {
+      "id": "solutions",
+      "paths": [
+        "/services/"
+      ],
+      "journey": "evaluate",
+      "primaryAsset": "product-constellation",
+      "families": "all",
+      "textOnly": false,
+      "artContainerClass": "collection-image"
+    },
+    {
+      "id": "markets",
+      "prefix": "/markets/",
+      "journey": "evaluate",
+      "primaryAsset": null,
+      "families": "all",
+      "socialAsset": "global-perspective",
+      "textOnly": true
+    },
+    {
+      "id": "workspace-preview",
+      "paths": [
+        "/platform-preview/"
+      ],
+      "journey": "preview",
+      "primaryAsset": "neural-core",
+      "families": "all",
+      "textOnly": false,
+      "artContainerClass": "wp-scene-art",
+      "primaryFit": "contain",
+      "primarySizes": "100vw"
+    },
+    {
+      "id": "identity",
+      "paths": [
+        "/sign-in/"
+      ],
+      "journey": "account",
+      "primaryAsset": null,
+      "families": "all",
+      "textOnly": true
+    },
+    {
+      "id": "customer-platform",
+      "paths": [
+        "/platform/",
+        "/knowledge/"
+      ],
+      "journey": "first-value",
+      "primaryAsset": null,
+      "families": "all",
+      "textOnly": true
+    },
+    {
+      "id": "subscription",
+      "paths": [
+        "/pricing/",
+        "/account/billing/"
+      ],
+      "journey": "subscribe",
+      "primaryAsset": null,
+      "families": "all",
+      "textOnly": true
+    },
+    {
+      "id": "company",
+      "paths": [
+        "/company/",
+        "/about/"
+      ],
+      "journey": "trust",
+      "primaryAsset": null,
+      "families": "all",
+      "socialAsset": "human-perspective",
+      "textOnly": true
+    },
+    {
+      "id": "availability",
+      "paths": [
+        "/status/"
+      ],
+      "journey": "support",
+      "primaryAsset": null,
+      "families": "all",
+      "textOnly": true
+    },
+    {
+      "id": "customer-trust",
+      "paths": [
+        "/privacy/",
+        "/terms/",
+        "/security/",
+        "/support/"
+      ],
+      "journey": "trust",
+      "primaryAsset": null,
+      "families": "all",
+      "textOnly": true
+    },
+    {
+      "id": "film",
+      "paths": [
+        "/film/"
+      ],
+      "journey": "discover",
+      "primaryAsset": null,
+      "families": "all",
+      "textOnly": true
+    }
+  ],
+  "backendContracts": [
+    {
+      "id": "identity-and-membership",
+      "source": "api/session.js",
+      "acceptance": "Authenticated sign-in, recovery, expiry, logout and two-tenant authorization QA."
+    },
+    {
+      "id": "intelligence-delivery",
+      "source": "api/ask.js",
+      "acceptance": "Entitlement, bounded budget, permitted model/agent, response validation, cancellation and usage reconciliation."
+    },
+    {
+      "id": "subscription-lifecycle",
+      "source": "api/subscriptions.js",
+      "acceptance": "Sandbox payment, signed events, entitlement, cancellation and revocation before live billing."
+    },
+    {
+      "id": "crm-and-growth",
+      "source": "api/operating-status.js",
+      "acceptance": "Independent provider evidence for the isolated Ad Astra tenant, consent, suppression and delivery; status metadata alone is insufficient."
+    }
+  ],
+  "completeExperienceRequirements": [
+    {
+      "id": "product-discovery",
+      "routes": [
+        "/",
+        "/products/",
+        "/services/",
+        "/intelligence/"
+      ]
+    },
+    {
+      "id": "customer-workspace",
+      "routes": [
+        "/sign-in/",
+        "/platform/",
+        "/account/billing/"
+      ]
+    },
+    {
+      "id": "commercial-and-availability",
+      "routes": [
+        "/pricing/",
+        "/status/"
+      ]
+    },
+    {
+      "id": "privacy-and-terms",
+      "routes": [
+        "/privacy/",
+        "/terms/"
+      ]
+    },
+    {
+      "id": "trust-and-support",
+      "routes": [
+        "/security/",
+        "/support/"
+      ]
+    }
+  ],
+  "evolution": {
+    "backlog": "projects/website-customer-experience/evolution-backlog.json",
+    "graphicsAutomationId": "6acdc4e0ebc8819186f79af8433af7f6",
+    "developmentAutomationId": "Automation_eabb75a22f748191bc848d57c563aa4e",
+    "cadence": "existing-hourly-owners",
+    "oneInFlightCandidate": true,
+    "sourceEditsAndPreviewAllowed": true,
+    "automaticProductionPromotion": false,
+    "notify": "Material design progress, regressions or owner actions; no unchanged-status repetition."
+  }
+}

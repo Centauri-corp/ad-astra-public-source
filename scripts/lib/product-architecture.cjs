@@ -1,9 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),crypto=require('node:crypto');
-const {applySharedShell,picture}=require('./site-shell.cjs');
-const story=require('../../config/story-collection.json');
-const storyFor={'core-intelligence':'intelligence','creative-studio':'products','specialist-intelligence':'agi','business-commerce':'global','developer-platform':'agi','autonomous-workflows':'intelligence'};
-const storyImage=(id,cls='')=>picture(id,story.assets.find(a=>a.id===id).alt,{cls});
+const {applySharedShell}=require('./site-shell.cjs');
+const {loadProject,assetPicture,primaryPicture,reconcileVisualAssets}=require('./website-project.cjs');
 const ids=['core-intelligence','creative-studio','specialist-intelligence','business-commerce','developer-platform','autonomous-workflows'];
 const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const title=s=>s[0].toUpperCase()+s.slice(1);
@@ -31,7 +29,7 @@ function architectureSvg(v){
   const points=[[150,90],[400,55],[650,90],[650,360],[400,405],[150,360]],names=['CORE','CREATIVE','SPECIALIST','BUSINESS','DEVELOPER','WORKFLOWS'];
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460"><rect width="800" height="460" rx="24" fill="${v.tokens.surface}"/><g fill="none" stroke="${v.tokens.cyan}" opacity=".35"><ellipse cx="400" cy="230" rx="285" ry="160"/><ellipse cx="400" cy="230" rx="200" ry="110"/>${points.map(([x,y])=>`<path d="M400 230L${x} ${y}"/>`).join('')}</g><circle cx="400" cy="230" r="65" fill="${v.tokens.background}" stroke="${v.tokens.champagne}"/><g fill="${v.tokens.text}" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle"><text x="400" y="221">ASTRA POLARIS</text><text x="400" y="244" fill="${v.tokens.muted}" font-size="10">HUMAN DIRECTION</text>${points.map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="6" fill="${i%2?v.tokens.champagne:v.tokens.cyan}"/><text x="${x}" y="${y<230?y+25:y-18}">${names[i]}</text>`).join('')}</g></svg>\n`;
 }
-function productFiles(catalog,v){
+function productFiles(catalog,v,context=loadProject()){
   validate(catalog,v);const files=new Map(),assets=[];
   function asset(id,svg,alt,family=null){
     const file=`public/assets/products/${id}.svg`;files.set(file,svg);
@@ -43,7 +41,7 @@ function productFiles(catalog,v){
   files.set('public/assets/brand/product-tokens.css',`:root{${Object.entries(v.tokens).map(([k,c])=>`--product-${k}:${c}`).join(';')};--ink:var(--product-background);--ink-soft:var(--product-surface);--mist:var(--product-text);--muted:var(--product-muted);--cyan:var(--product-cyan);--gold:var(--product-champagne)}\n`);
   const shell=(route,name,description,content,script='')=>`<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(name)} | AD ASTRA</title><meta name="description" content="${esc(description)}"><meta name="robots" content="noindex,follow"><link rel="canonical" href="https://adastra.global${route}"><link rel="stylesheet" href="/markets/style.css"><link rel="stylesheet" href="/assets/brand/product-tokens.css"><link rel="stylesheet" href="/products/style.css">${script}</head><body><a class="skip-products" href="#main">Skip to products</a><header><a class="brand product-brand" href="/" aria-label="AD ASTRA home"><img src="/assets/brand/ad-astra-mark.svg" width="40" height="40" alt="">AD ASTRA</a><nav aria-label="Primary"><a href="/products/"${route==='/products/'?' aria-current="page"':''}>Products</a><a href="/markets/">Solutions</a><a href="/pricing/">Plans</a><a href="/status/">Availability</a></nav></header><main class="product-shell" id="main">${content}</main><footer><span>AD ASTRA · Human-directed discovery</span><a href="/agent/">Explore Astra Polaris</a><a href="/status/">Product availability</a><a href="/">Back to AD ASTRA</a><a href="/intelligence/">Connected intelligence</a></footer></body></html>\n`;
-  const modes=f=>f.modes.map(mode=>`<a href="/#tab-${mode}">${title(mode)}</a>`).join('');
+  const modes=f=>f.modes.map(mode=>`<a href="/intelligence/#tab-${mode}">${title(mode)}</a>`).join('');
   const cards=catalog.families.map((f,i)=>`<article class="family-card accent-${f.accent}" id="${f.id}" data-family="${f.id}" data-modes="${f.modes.join(' ')}" aria-labelledby="${f.id}-title"><img class="family-art" src="/assets/products/${f.id}.svg" width="800" height="460" alt="${esc(f.motif)}" loading="lazy"><div class="family-copy"><p class="eyebrow">0${i+1} / IN DEVELOPMENT</p><h2 id="${f.id}-title">${esc(f.name)}</h2><p class="family-summary">${esc(f.summary)}</p><p class="family-audience">${esc(f.audience)}</p><div class="mode-links" aria-label="${esc(f.name)} modes">${modes(f)}</div><a class="family-detail" href="/products/${f.id}/">Explore ${esc(f.name)} <span aria-hidden="true">→</span></a></div></article>`).join('\n');
   const overview=`<section class="product-hero" aria-labelledby="products-title"><div><p class="eyebrow">AD ASTRA / PRODUCT ARCHITECTURE</p><h1 id="products-title">One core.<br><em>Many directions.</em></h1><p class="lead">Six product families, built around the work you want to do.</p><p>Start with a question. Choose a way of working. Find the product direction that fits.</p><div class="product-actions"><a class="button" href="#product-directions">Explore the families</a><a class="text-action" href="/platform-preview/">View the workspace design →</a></div><p class="preview-note">Product directions in development. Customer access and purchasing are not yet available.</p></div><figure class="architecture-figure"><img src="/assets/products/architecture.svg" width="800" height="460" alt="Astra Polaris connects six product directions around human intention."><figcaption>One foundation · Five modes · Six directions</figcaption></figure></section>
 <section class="architecture-path" aria-label="From intention to direction"><div><span>01 / YOU</span><h2>Set the intention.</h2><p>Your goal gives the work its direction.</p></div><div><span>02 / MODE</span><h2>Choose how to think.</h2><p>Ask, Research, Create, Learn or Explore.</p></div><div><span>03 / FAMILY</span><h2>Find your workspace.</h2><p>Follow a product direction built around your task.</p></div></section>
@@ -55,13 +53,13 @@ function productFiles(catalog,v){
   for(const [file,body]of files){
     if(!file.endsWith('/index.html'))continue;
     const route='/'+file.slice('public/'.length).replace(/index\.html$/,'');
-    let html=body.replace(/<img src="\/assets\/products\/architecture.svg"[^>]*>/,storyImage('products'));
+    let html=body.replace(/<img src="\/assets\/products\/architecture.svg"[^>]*>/,primaryPicture(route,{hero:true},context));
     for(const f of catalog.families){
       const re=new RegExp('<img([^>]*?)src="/assets/products/'+f.id+'\\.svg"[^>]*>','g');
-      html=html.replace(re,(_,prefix)=>storyImage(storyFor[f.id],prefix.includes('family-art')?'family-art':''));
+      html=html.replace(re,(_,prefix)=>prefix.includes('family-art')?assetPicture(context.selection.familyAssets[f.id],{cls:'family-art',sizes:'(max-width: 760px) 100vw, 50vw'},context):primaryPicture(route,{hero:true},context));
     }
     html=html.replace('One foundation · Five modes · Six directions','One foundation · Five modes · Six directions · Concept art');
-    files.set(file,applySharedShell(html,route));
+    files.set(file,reconcileVisualAssets(applySharedShell(html,route),route,context));
   }
   return files;
 }

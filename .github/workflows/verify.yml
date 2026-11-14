@@ -41,12 +41,16 @@ jobs:
       - name: Verify all public routes without external writes
         env:
           AD_ASTRA_AUDIT_OUTPUT: ${{ runner.temp }}/ad-astra-browser-evidence
+          AD_ASTRA_PREVIEW_EVIDENCE: ${{ runner.temp }}/ad-astra-browser-evidence/portal
         run: |
+          npm run trust:browser:test
           node scripts/serve-audit.cjs > "$RUNNER_TEMP/ad-astra-audit-server.log" 2>&1 &
           audit_server_pid=$!
           trap 'kill "$audit_server_pid"' EXIT
           curl --retry 10 --retry-connrefused --retry-delay 1 --fail --silent http://127.0.0.1:4175/ > /dev/null
           node scripts/audit-browser.cjs
+          node scripts/accept-platform-preview.cjs
+          AD_ASTRA_PROJECT_REPORT="$RUNNER_TEMP/ad-astra-browser-evidence/project-coverage.json" npm run website:audit
       - name: Retain browser failure and route evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
