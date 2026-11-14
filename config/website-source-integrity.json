@@ -826,28 +826,28 @@
     },
     {
       "path": "public/products/autonomous-workflows/index.html",
-      "bytes": 6465,
-      "sha256": "57e44bae805d91030a83ae855735f97c9bdbd48f26d389bd8c3d3e16acf1b81d"
+      "bytes": 6496,
+      "sha256": "8109483d92b49a4a2009466204c25e62e79e6364c7353e2841531d5173bb8986"
     },
     {
       "path": "public/products/business-commerce/index.html",
-      "bytes": 6473,
-      "sha256": "744a3a13113925b7db1065a8fc501b7fd81ccaff001943de5ca28ad8d4cf5e79"
+      "bytes": 6504,
+      "sha256": "33c52ce20b101c55269768b61e1f1c944b4b986fac2081a6551c9d4ede2c1f00"
     },
     {
       "path": "public/products/core-intelligence/index.html",
-      "bytes": 6475,
-      "sha256": "99e4bbe93e69598cf8dd37663ac1023488f329569958b4d83ab1cf93db40727c"
+      "bytes": 6506,
+      "sha256": "575a10034d4baf025a38050817306778738e1bf443e00256fc6450fa9bcb7164"
     },
     {
       "path": "public/products/creative-studio/index.html",
-      "bytes": 6431,
-      "sha256": "0e4077e705bedbf86a30f1b045408b0e7b36305e133ef74892ebecc3c1d8505e"
+      "bytes": 6462,
+      "sha256": "f410c6f77820acbc8083bd2af81b5e00ce56230ad4963472a0a2bedcf1b5d8be"
     },
     {
       "path": "public/products/developer-platform/index.html",
-      "bytes": 6423,
-      "sha256": "135bdb4565348dd4d29286ee7e301bc9a69cd99eb8f98f8174e627a34f4673d8"
+      "bytes": 6454,
+      "sha256": "837fa38a388917e55bc5c53c3f6c6fdaa5f25f8209cfc5aeb8d7f54eb320f55f"
     },
     {
       "path": "public/products/discovery.js",
@@ -856,18 +856,18 @@
     },
     {
       "path": "public/products/index.html",
-      "bytes": 14350,
-      "sha256": "f5521a563c9b5294d0e90a4e0f5d17d3eb661c99b68de3b84b4c3ed516b6d488"
+      "bytes": 14394,
+      "sha256": "8901fd72af1933e31a47a801617aae5ce423697bbc3cf5fe44eaa0fd827e2eed"
     },
     {
       "path": "public/products/specialist-intelligence/index.html",
-      "bytes": 6522,
-      "sha256": "badea1ed24095adec4ce031ac19357501d8912ed5eee5c52942d1719e3417c6f"
+      "bytes": 6553,
+      "sha256": "66425872d00981441768104d0569ecc5cfeb454f14390fdb9534d0cc850c9c3f"
     },
     {
       "path": "public/products/style.css",
-      "bytes": 6283,
-      "sha256": "1c6f737268d28e27ac7677e19849d39aeae18cefcbab3ec68dee56ae29e255b5"
+      "bytes": 6799,
+      "sha256": "2717293caf57412d241bf28e991c30d3f5bcec387b6b431951d6074bda3b14d7"
     },
     {
       "path": "public/release-manifest.json",
@@ -990,5 +990,5 @@
       "sha256": "8d10f2d14a587acf322043ac5030a285a205e77c6f32c591ec3017fe53bac6f0"
     }
   ],
-  "fingerprint": "1336a55aa81319fa2e066599daffd4a6e5a07754771994f0350242d4495fcd6f"
+  "fingerprint": "0adc4f78ff8ef153a075375578e86f9d9f2df42a693ff241718b45ca29a1433b"
 }
