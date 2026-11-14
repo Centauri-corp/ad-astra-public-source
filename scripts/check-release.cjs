@@ -76,8 +76,17 @@ assert.ok(homepage.includes('class="brand-wordmark" aria-hidden="true">AD ASTRA<
 assert.ok(fs.existsSync(path.join(root,'public/assets/brand/ad-astra-mark.svg')),'Missing first-party AD ASTRA orbital mark');
 const visualManifest=JSON.parse(fs.readFileSync(path.join(root,'public/assets/visual-manifest.json')));
 assert.ok(visualManifest.assets.some(asset=>asset.id==='ad-astra-orbital-mark'&&asset.path==='/assets/brand/ad-astra-mark.svg'),'Visual manifest must identify the deployed AD ASTRA orbital mark');
-assert.ok(homepage.includes('ad-astra-runway-orbital-motion.vtt')&&homepage.includes('ad-astra-horizon-motion.vtt'),'Public motion previews missing caption tracks');
-assert.equal((homepage.match(/class="video-transcript"/g)||[]).length,2,'Public motion previews missing text transcripts');
+// The owner's website revision permits a local, user-controlled motion study.
+// Customer execution, autoplay audio and third-party embeds remain excluded.
+assert.ok(!/<audio|<iframe|<form\b/.test(homepage),'Homepage must not activate audio, embeds or customer forms');
+assert.equal((homepage.match(/<video\b/g)||[]).length,1,'Homepage needs its reviewed local motion study');
+assert.ok(homepage.includes('src="/assets/brand/ad-astra-neural-study.mp4"'));
+assert.ok(!/<video[^>]*\bautoplay\b/.test(homepage),'Film playback must require user intent');
+assert.ok(homepage.includes('data-motion-toggle')&&homepage.includes('/design-system.js'),'Ambient motion needs an explicit pause control');
+for(const id of ['vision','products','agi','global','beyond'])assert.ok(homepage.includes('/assets/story/'+id+'-1672.webp'),'Missing story chapter art: '+id);
+const signatureArt=require('../projects/website-customer-experience/asset-selections.json').assets.find(asset=>asset.id==='neural-core');
+assert.ok(signatureArt&&homepage.includes('src="'+signatureArt.src+'"'),'Missing selected customer-experience neural artwork');
+assert.ok(homepage.includes('AGI is not achieved')&&homepage.includes('ASI is not achieved'),'Research boundaries missing');
 for(const caption of ['ad-astra-runway-orbital-motion.vtt','ad-astra-horizon-motion.vtt']){const captionPath=path.join(root,'public/assets',caption);assert.ok(fs.existsSync(captionPath),`Missing caption track: ${caption}`);assert.ok(fs.readFileSync(captionPath,'utf8').startsWith('WEBVTT'),`Invalid caption track: ${caption}`);}
 const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');
 const sitemapRoutes=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1]);
@@ -94,11 +103,13 @@ assert.equal(manifest.indexingPolicy,'noindex-until-page-evidence-approved');
 assert.equal(manifest.marketProfileArchitecture,'one-connected-model-with-sector-profiles');
 assert.equal(manifest.marketProfileCount,catalog.MARKET_PROFILES.length);
 assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
-assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','approach','experiences','horizon','company','signature']);
-assert.deepEqual(experience.visualArchitecture.palette,{navy:'#07111c',cyan:'#9bdfe3',violet:'#9a7cff',gold:'#e9c990'});
+assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','intelligence','products','future','global','beyond']);
+const visualTokens=require('../projects/website-customer-experience/visual-standard.json').tokens;
+assert.deepEqual(experience.visualArchitecture.palette,{navy:visualTokens.background,cyan:visualTokens.cyan,violet:visualTokens.violet,gold:visualTokens.champagne});
 assert.equal(experience.seo.indexingPolicy,'noindex-until-page-evidence-approved');
 assert.equal(experience.seo.homepageRobots,approvedSet.has('/')?'index,follow':'noindex,follow');
-assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);
+assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,false);
+assert.equal(experience.visualArchitecture.threeD.customerExecution,false);
 assert.equal(experience.growthAutomation.externalCrmWrites,false);
 assert.equal(experience.growthAutomation.outboundSends,false);
 assert.equal(experience.growthAutomation.mode,'private-scheduled-read-only-audit');
@@ -111,10 +122,10 @@ const markets=fs.readFileSync(path.join(root,'public/markets/index.html'),'utf8'
 const agent=fs.readFileSync(path.join(root,'public/agent/index.html'),'utf8');
 assert.ok(agent.includes('Astra Polaris')&&agent.includes('Astra Sirius')&&agent.includes('Astra Orion')&&agent.includes('Astra Helios')&&agent.includes('Astra Spica')&&agent.includes('Astra Lyra')&&agent.includes('Astra Rigel')&&agent.includes('Astra Electra')&&agent.includes('Astra Arcturus'),'Public star profile catalog missing');
 const preview=fs.readFileSync(path.join(root,'public/platform-preview/index.html'),'utf8');
-assert.ok(preview.includes('CUSTOMER PLATFORM MOCKUP')&&preview.includes('Astra Polaris')&&preview.includes('PREVIEW BOUNDARY'),'Customer platform preview missing boundary');
+assert.ok(preview.includes('Customer workspace preview')&&preview.includes('Astra Polaris')&&preview.includes('PREVIEW BOUNDARY')&&preview.includes('Responses are fixed samples, not live AI output.'),'Customer platform preview missing sample boundary');
 assert.ok(preview.includes('no customer prompts')&&preview.includes('backend writes'),'Customer platform preview exposes an unsafe surface');
-assert.ok(preview.includes('/assets/astra-polaris-platform-mockup.png')&&preview.includes('global network'),'Customer platform mockup visual missing');
-for(const label of ['QUESTION STUDIO','RESEARCH ATLAS','CREATIVE ORBIT','LEARNING LENS','HORIZON SCANNER','PROJECT ORBIT','KNOWLEDGE ROOMS','SIGNAL MONITOR','PROFILE CONSTELLATIONS','GLOBAL NETWORK','ACCESS LAYER','GOVERNANCE DECK'])assert.ok(preview.includes(label),`Customer product missing: ${label}`);
+assert.ok(preview.includes('src="'+signatureArt.src+'"')&&preview.includes('Visual concept of Astra Polaris'),'Customer workspace neural visual missing');
+for(const mode of ['research','create','plan'])assert.ok(preview.includes('data-mode="'+mode+'"'),'Workspace preview mode missing: '+mode);
 const positioning=fs.readFileSync(path.join(root,'public/markets/positioning/index.html'),'utf8');
 const microgrids=fs.readFileSync(path.join(root,'public/markets/positioning/microgrids/index.html'),'utf8');
 const pricing=fs.readFileSync(path.join(root,'public/pricing/index.html'),'utf8');

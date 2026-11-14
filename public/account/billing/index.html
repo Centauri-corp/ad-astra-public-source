@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your billing account | Ad Astra</title>
+<meta name="description" content="Manage your Ad Astra billing account, subscription status and cancellation.">
+<meta name="robots" content="noindex,follow"><link rel="canonical" href="https://adastra.global/account/billing/">
+<link rel="stylesheet" href="/markets/style.css"><link rel="stylesheet" href="/account/billing/style.css">
+<script defer src="https://cdn.jsdelivr.net/npm/@clerk/ui@1.41.2/dist/ui.browser.js" integrity="sha384-FYXAFwPN7TccH+1GBGhfSmj4kqvVseEdP5OAvO5JnZp3fArgoYkLmW0MLwnxJFUB" crossorigin="anonymous"></script>
+<script defer data-clerk-publishable-key="pk_live_Y2xlcmsuYWRhc3RyYS5nbG9iYWwk" src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@6.40.1/dist/clerk.browser.js" integrity="sha384-JcUoKGgU3fVbZOepxOhFBTSImBs/0xQTLYLqy0CLEkd2sMiA4wn5VDTC6IJYRSaj" crossorigin="anonymous"></script>
+<script defer src="/auth-navigation.js"></script><script defer src="/account/billing/app.js"></script>
+<link rel="stylesheet" href="/design-system.css"><script defer src="/design-system.js"></script>
+<link rel="icon" href="/assets/brand/ad-astra-mark.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/brand/experience-tokens.css"><link rel="stylesheet" href="/customer-experience.css">
+<!-- AD ASTRA brand metadata --><meta property="og:title" content="Your billing account | Ad Astra"><meta property="og:description" content="Manage your Ad Astra billing account, subscription status and cancellation."><meta property="og:type" content="website"><meta property="og:url" content="https://adastra.global/account/billing/"><meta property="og:image" content="https://adastra.global/assets/story/intelligence-1672.webp"><meta property="og:image:alt" content="A luminous neural sphere wrapped in titanium and optical-glass orbital ribbons."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Your billing account | Ad Astra"><meta name="twitter:description" content="Manage your Ad Astra billing account, subscription status and cancellation."><meta name="twitter:image" content="https://adastra.global/assets/story/intelligence-1672.webp"><meta name="twitter:image:alt" content="A luminous neural sphere wrapped in titanium and optical-glass orbital ribbons."><!-- /AD ASTRA brand metadata --></head>
+<body>
+<header class="site-header"><a class="site-brand" href="/" aria-label="AD ASTRA home"><img src="/assets/brand/ad-astra-mark.svg" width="36" height="36" alt=""><span class="brand-wordmark" aria-hidden="true">AD ASTRA</span></a><nav class="site-desktop-nav" aria-label="Primary"><a href="/products/">Products</a><a href="/platform-preview/">Workspace</a><a href="/services/">Solutions</a><a href="/intelligence/">Intelligence</a></nav><a class="site-availability" href="/platform-preview/">Explore workspace <svg class="site-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><details class="site-menu"><summary>Menu <span aria-hidden="true">＋</span></summary><nav aria-label="Mobile navigation"><a href="/products/">Products</a><a href="/platform-preview/">Workspace</a><a href="/services/">Solutions</a><a href="/intelligence/">Intelligence</a><a href="/start/">Find your starting point</a><a href="/company/">Company</a><a href="/pricing/">Plans & availability</a><a href="/platform/">Customer access</a><a href="/status/">Service status</a></nav></details></header>
+<main class="market-shell billing-shell">
+ <div class="market-hero"><p class="eyebrow">AD ASTRA / YOUR ACCOUNT</p><h1>Clarity for<br><em>your subscription.</em></h1><p class="lead">Review your billing status and manage your subscription in one place.</p></div>
+ <p id="billing-message" class="message" role="status" aria-live="polite">Loading your account…</p>
+ <a id="billing-sign-in" class="button" href="/sign-in/?return=%2Faccount%2Fbilling%2F" hidden>Sign in to continue</a>
+ <div id="billing-account" hidden>
+  <section class="billing-card" aria-labelledby="billing-status-title"><h2 id="billing-status-title">Your access</h2><p id="billing-access"></p><p id="billing-enrollment"></p><button id="billing-refresh" type="button" class="button alt">Refresh status</button></section>
+  <section id="billing-provision" class="billing-card" aria-labelledby="billing-provision-title" hidden><h2 id="billing-provision-title">Create your workspace</h2><p>Use your verified Ad Astra sign-in to set up your own workspace. This does not purchase a subscription.</p><button id="billing-provision-button" type="button" class="button">Set up my workspace</button></section>
+  <section id="billing-connect" class="billing-card" aria-labelledby="billing-connect-title" hidden>
+   <h2 id="billing-connect-title">Connect an existing billing account</h2>
+   <p>Verify your existing billing account to connect it to this sign-in. This does not purchase a subscription or change product access.</p>
+   <form id="billing-connect-form"><label for="billing-email">Billing email</label><input id="billing-email" name="email" type="email" autocomplete="username" maxlength="254" required>
+    <label for="billing-password">Billing password</label><input id="billing-password" name="password" type="password" autocomplete="current-password" maxlength="1024" required>
+    <label for="billing-mfa">Authenticator code <span>(if enabled)</span></label><input id="billing-mfa" name="mfaCode" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6">
+    <p class="fine-print">This is for an existing billing account. Your password is used only for verification and is not saved by this page. New customers can use workspace setup when it is available.</p>
+    <button type="submit" class="button">Verify and connect</button>
+   </form>
+  </section>
+  <section id="billing-subscriptions-section" class="billing-card" aria-labelledby="billing-subscriptions-title" hidden><h2 id="billing-subscriptions-title">Your subscriptions</h2><div id="billing-subscriptions"></div></section>
+  <section id="billing-start" class="billing-card" aria-labelledby="billing-start-title" hidden><h2 id="billing-start-title">Start a California subscription</h2>
+   <form id="billing-enroll-form"><label for="billing-workspace">Workspace</label><select id="billing-workspace" required></select><label for="billing-plan">Plan</label><select id="billing-plan"><option value="starter">Plus</option><option value="pro">Pro</option></select>
+    <label class="check"><input id="billing-consent" type="checkbox" required><span>I agree to the <a id="billing-terms">terms</a> and <a id="billing-privacy">privacy notice</a>, including the recurring subscription and cancellation terms shown at checkout.</span></label>
+    <button type="submit" class="button">Continue to secure checkout</button><p class="fine-print">Review the recurring price and payment terms in secure checkout before confirming payment.</p>
+   </form>
+  </section>
+  <section id="billing-disconnect" class="billing-card" aria-labelledby="billing-disconnect-title" hidden><h2 id="billing-disconnect-title">Account connection</h2><p>Disconnecting removes access to billing through this sign-in. It does not cancel a subscription. Manage cancellation above first.</p><label class="check"><input id="billing-disconnect-confirm" type="checkbox"><span>I understand this does not cancel billing.</span></label><button id="billing-disconnect-button" type="button" class="button alt" disabled>Disconnect billing account</button></section>
+  <button id="billing-sign-out" type="button" class="button alt">Sign out</button>
+ </div>
+</main>
+<footer class="site-footer"><div class="site-footer-top"><a class="site-brand" href="/" aria-label="AD ASTRA home"><img src="/assets/brand/ad-astra-mark.svg" width="36" height="36" alt=""><span>AD ASTRA</span></a><p>Human curiosity.<br>Extraordinary possibilities.</p><nav aria-label="Footer"><a href="/products/">Products</a><a href="/services/">Solutions</a><a href="/intelligence/">Intelligence</a><a href="/company/">Company</a><a href="/pricing/">Plans</a><a href="/status/">Availability</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/security/">Security</a><a href="/support/">Support</a></nav></div><div class="site-footer-bottom"><span>© AD ASTRA · Beyond the expected.</span><span>Design preview. Products in development.</span><a href="/#story">Explore our story ↑</a></div></footer>
+</body>
+</html>

@@ -32,6 +32,7 @@
     { "path": "/film/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/knowledge/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/markets/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/markets/california/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/markets/agriculture-food/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/markets/business-professional-services/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/markets/consumer-personal-ai/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
@@ -61,8 +62,14 @@
     { "path": "/products/autonomous-workflows/", "decision": "pending", "missingGates": ["contentAndClaims","brandAndRights","seoTechnicalQa","accessibilityResponsiveQa","privacyAndAnalyticsQa","independentReview","humanReleaseAuthorization"] },
     { "path": "/services/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/sign-in/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
+    { "path": "/start/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
     { "path": "/status/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"] },
-    {"path": "/intelligence/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"]}
+    {"path": "/intelligence/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"]},
+    {"path": "/account/billing/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"]},
+    {"path": "/privacy/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"]},
+    {"path": "/terms/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"]},
+    {"path": "/security/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"]},
+    {"path": "/support/", "decision": "pending", "missingGates": ["contentAndClaims", "brandAndRights", "seoTechnicalQa", "accessibilityResponsiveQa", "privacyAndAnalyticsQa", "independentReview", "humanReleaseAuthorization"]}
   ],
   "searchProperties": {
     "googleSearchConsole": { "status": "not-verified", "evidenceRef": null },

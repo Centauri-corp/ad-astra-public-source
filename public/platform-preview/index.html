@@ -3,106 +3,88 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Customer platform preview | Ad Astra</title>
-  <meta name="description" content="A public visual preview of the Ad Astra customer platform, powered by Astra Polaris profile directions.">
+  <title>Customer workspace preview | Ad Astra</title>
+  <meta name="description" content="Explore the Ad Astra customer workspace. Move from a question to an illustrative research brief, creative outline or practical plan in this local interactive preview.">
   <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#05070a">
   <link rel="canonical" href="https://adastra.global/platform-preview/">
   <link rel="icon" href="/assets/brand/ad-astra-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/design-system.css">
+  <link rel="stylesheet" href="/assets/brand/experience-tokens.css"><link rel="stylesheet" href="/customer-experience.css">
   <link rel="stylesheet" href="/platform-preview/style.css">
-</head>
-<body>
-  <header class="preview-header">
-    <a class="brand" href="/">AD ASTRA<span>BEYOND THE EXPECTED</span></a>
-    <div class="header-meta"><span class="preview-badge">PUBLIC PREVIEW</span><a href="/agent/">Astra Polaris ↗</a></div>
-  </header>
+  <script defer src="/design-system.js"></script>
+  <script defer src="/platform-preview/app.js"></script>
 
-  <main class="preview-shell">
-    <section class="preview-intro" aria-labelledby="preview-title">
-      <div>
-        <p class="eyebrow">AD ASTRA / CUSTOMER PLATFORM MOCKUP</p>
-        <h1 id="preview-title">A workspace for<br><em>the next clear move.</em></h1>
-        <p class="lead">Astra Polaris brings questions, evidence and practical direction into one calm working surface.</p>
-      </div>
-      <div class="intro-note"><span class="status-dot"></span><span>Visual concept · no live customer data</span></div>
-    </section>
-    <figure class="mockup-hero-image"><img src="/assets/astra-polaris-platform-mockup.png" alt="Futuristic Ad Astra customer platform concept with a glowing neural brain, global network arcs and modular workspace panels" width="1672" height="941" fetchpriority="high"><figcaption>ASTRA POLARIS / CUSTOMER PLATFORM VISUAL DIRECTION</figcaption></figure>
-    <section class="product-suite" id="product-suite" aria-labelledby="suite-title">
-      <div class="suite-heading"><div><p class="eyebrow">AD ASTRA / PRODUCT SUITE</p><h2 id="suite-title">Every surface, one connected direction.</h2></div><p>Preview catalog · governed product concepts</p></div>
-      <div class="product-grid">
-        <article class="product-tile"><span class="product-number">01</span><span class="eyebrow">QUESTION STUDIO</span><h3>Ask</h3><p>Turn a broad thought into a focused inquiry with a clear starting brief.</p></article>
-        <article class="product-tile"><span class="product-number">02</span><span class="eyebrow">RESEARCH ATLAS</span><h3>Research</h3><p>Compare evidence, uncertainty and competing explanations across sources.</p></article>
-        <article class="product-tile"><span class="product-number">03</span><span class="eyebrow">CREATIVE ORBIT</span><h3>Create</h3><p>Shape concepts, drafts and alternatives while keeping intent visible.</p></article>
-        <article class="product-tile"><span class="product-number">04</span><span class="eyebrow">LEARNING LENS</span><h3>Learn</h3><p>Build understanding through examples, explanations and recall prompts.</p></article>
-        <article class="product-tile"><span class="product-number">05</span><span class="eyebrow">HORIZON SCANNER</span><h3>Explore</h3><p>Test possibilities, scenarios and next questions across disciplines.</p></article>
-        <article class="product-tile"><span class="product-number">06</span><span class="eyebrow">PROJECT ORBIT</span><h3>Plan</h3><p>Map scope, milestones, risks, owners and decisions for complex work.</p></article>
-        <article class="product-tile"><span class="product-number">07</span><span class="eyebrow">KNOWLEDGE ROOMS</span><h3>Collaborate</h3><p>Keep briefs, evidence, notes and review trails together in one workspace.</p></article>
-        <article class="product-tile"><span class="product-number">08</span><span class="eyebrow">SIGNAL MONITOR</span><h3>Watch</h3><p>Track changing inputs, assumptions and signals that could shift the path.</p></article>
-        <article class="product-tile"><span class="product-number">09</span><span class="eyebrow">PROFILE CONSTELLATIONS</span><h3>Specialize</h3><p>Apply star-based sector language for engineering, energy, civic and global work.</p></article>
-        <article class="product-tile"><span class="product-number">10</span><span class="eyebrow">GLOBAL NETWORK</span><h3>Localize</h3><p>Frame language, policy, access and regional context across seven regions.</p></article>
-        <article class="product-tile"><span class="product-number">11</span><span class="eyebrow">ACCESS LAYER</span><h3>Include</h3><p>Support voice, mobile, low-bandwidth, multilingual and reduced-motion use.</p></article>
-        <article class="product-tile"><span class="product-number">12</span><span class="eyebrow">GOVERNANCE DECK</span><h3>Review</h3><p>Keep permissions, uncertainty, human approval and audit boundaries visible.</p></article>
-      </div>
-      <div class="feature-rail"><span>Evidence-aware</span><span>Human-directed</span><span>Profile-based</span><span>Multilingual-ready</span><span>Voice-ready</span><span>Reduced-motion aware</span><span>Read-only preview</span></div>
-    </section>
-    <section class="platform-frame" aria-label="Customer platform visual mockup">
-      <aside class="platform-sidebar">
-        <div class="sidebar-mark"><span class="mark-orbit"></span><span>POLARIS</span></div>
-        <nav aria-label="Preview navigation">
-          <a class="nav-item active" href="#workspace"><span>⌂</span>Workspace</a>
-          <a class="nav-item" href="#profiles"><span>✦</span>Profiles</a>
-          <a class="nav-item" href="#network"><span>◎</span>Global network</a>
-          <a class="nav-item" href="#signals"><span>⌁</span>Signals</a>
-        </nav>
-        <div class="sidebar-footer"><span class="mini-orbit"></span><p>Human direction<br><strong>stays central.</strong></p></div>
-      </aside>
+<!-- AD ASTRA brand metadata --><meta property="og:title" content="Customer workspace preview | Ad Astra"><meta property="og:description" content="Explore the Ad Astra customer workspace. Move from a question to an illustrative research brief, creative outline or practical plan in this local interactive preview."><meta property="og:type" content="website"><meta property="og:url" content="https://adastra.global/platform-preview/"><meta property="og:image" content="https://adastra.global/assets/neural-master/delivery/neural-core-3840.avif"><meta property="og:image:alt" content="An original CGI glass neural sculpture with a champagne spiral above a planetary horizon."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Customer workspace preview | Ad Astra"><meta name="twitter:description" content="Explore the Ad Astra customer workspace. Move from a question to an illustrative research brief, creative outline or practical plan in this local interactive preview."><meta name="twitter:image" content="https://adastra.global/assets/neural-master/delivery/neural-core-3840.avif"><meta name="twitter:image:alt" content="An original CGI glass neural sculpture with a champagne spiral above a planetary horizon."><!-- /AD ASTRA brand metadata --></head>
+<body class="workspace-preview">
+  <a class="site-skip" href="#main">Skip to workspace</a>
+  <header class="site-header"><a class="site-brand" href="/" aria-label="AD ASTRA home"><img src="/assets/brand/ad-astra-mark.svg" width="36" height="36" alt=""><span class="brand-wordmark" aria-hidden="true">AD ASTRA</span></a><nav class="site-desktop-nav" aria-label="Primary"><a href="/products/">Products</a><a href="/platform-preview/" aria-current="page">Workspace</a><a href="/services/">Solutions</a><a href="/intelligence/">Intelligence</a></nav><a class="site-availability" href="/platform-preview/">Explore workspace <svg class="site-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><details class="site-menu"><summary>Menu <span aria-hidden="true">＋</span></summary><nav aria-label="Mobile navigation"><a href="/products/">Products</a><a href="/platform-preview/" aria-current="page">Workspace</a><a href="/services/">Solutions</a><a href="/intelligence/">Intelligence</a><a href="/start/">Find your starting point</a><a href="/company/">Company</a><a href="/pricing/">Plans & availability</a><a href="/platform/">Customer access</a><a href="/status/">Service status</a></nav></details></header>
 
-      <div class="platform-main" id="workspace">
-        <div class="platform-topbar"><div><span class="tiny-label">CUSTOMER WORKSPACE</span><strong id="workspace-profile">Astra Sirius / General public</strong></div><span class="topbar-state"><span class="status-dot"></span>Preview mode</span></div>
-        <div class="workspace-grid">
-          <section class="workspace-card question-card" aria-labelledby="question-title">
-            <div class="card-kicker"><span class="eyebrow">01 / START HERE</span><span class="signal-chip">DESIGN PREVIEW</span></div>
-            <h2 id="question-title">What would you like to understand?</h2>
-            <p class="muted">A focused prompt gives Astra Polaris a stronger starting point.</p>
-            <div class="prompt-box"><span>Ask a question worth exploring…</span><span class="prompt-cursor"></span></div>
-            <div class="prompt-footer"><span>Evidence-aware · human-directed</span><button type="button" class="send-button" disabled aria-label="Sending is unavailable in this design preview">↗</button></div>
-          </section>
-
-          <section class="workspace-card neural-card" aria-labelledby="neural-title">
-            <div class="card-kicker"><span class="eyebrow">02 / NEURAL FIELD</span><span class="signal-chip violet">LOCAL VISUAL</span></div>
-            <div class="neural-art"><img src="/assets/astra-lumen-neural-concierge.png" alt="Luminous neural profile with cyan pathways, violet signals and warm gold activity" width="1254" height="1254"><span class="neural-ring ring-one"></span><span class="neural-ring ring-two"></span></div>
-            <div class="neural-caption"><div><h2 id="neural-title">Astra Polaris</h2><p>One connected foundation · profile overlays</p></div><span class="pulse-label"><i></i>Thinking field</span></div>
-          </section>
-
-          <section class="workspace-card profile-card" id="profiles" aria-labelledby="profile-title">
-            <div class="card-kicker"><span class="eyebrow">03 / MARKET PROFILE</span><span class="signal-chip gold">LOCAL SELECTOR</span></div>
-            <h2 id="profile-title">Choose your working constellation.</h2>
-            <div class="profile-switcher" role="tablist" aria-label="Market profile preview">
-              <button class="profile-tab active" role="tab" aria-selected="true" id="profile-tab-sirius" aria-controls="profile-panel" tabindex="0" data-profile="sirius" data-label="Astra Sirius / General public" data-copy="Everyday questions, planning and learning.">Sirius</button>
-              <button class="profile-tab" role="tab" aria-selected="false" id="profile-tab-helios" aria-controls="profile-panel" tabindex="-1" data-profile="helios" data-label="Astra Helios / DOE and energy" data-copy="Energy systems, research and program planning.">Helios</button>
-              <button class="profile-tab" role="tab" aria-selected="false" id="profile-tab-rigel" aria-controls="profile-panel" tabindex="-1" data-profile="rigel" data-label="Astra Rigel / Mechanical engineering" data-copy="Mechanical systems, review and maintenance planning.">Rigel</button>
-              <button class="profile-tab" role="tab" aria-selected="false" id="profile-tab-arcturus" aria-controls="profile-panel" tabindex="-1" data-profile="arcturus" data-label="Astra Arcturus / Weather and climate" data-copy="Forecast interpretation, resilience and climate planning.">Arcturus</button>
-            </div>
-            <div class="profile-readout" id="profile-panel" role="tabpanel" aria-labelledby="profile-tab-sirius" tabindex="0"><span class="profile-star" id="profile-star">✦</span><div><strong id="profile-label">Astra Sirius / General public</strong><p id="profile-copy">Everyday questions, planning and learning.</p></div></div>
-          </section>
-
-          <section class="workspace-card network-card" id="network" aria-labelledby="network-title">
-            <div class="card-kicker"><span class="eyebrow">04 / GLOBAL NETWORK</span><span class="signal-chip">READ-ONLY MAP</span></div>
-            <div class="network-heading"><h2 id="network-title">A connected world, locally framed.</h2><span class="network-count">Concept map</span></div>
-            <div class="network-map" aria-label="Abstract global network map"><span class="map-line line-a"></span><span class="map-line line-b"></span><span class="map-line line-c"></span><i class="map-node node-a"></i><i class="map-node node-b"></i><i class="map-node node-c"></i><i class="map-node node-d"></i><i class="map-node node-e"></i></div>
-            <div class="region-row"><span><i></i>North America</span><span><i></i>Europe + UK</span><span><i></i>Asia Pacific</span><span><i></i>Africa + Middle East</span></div>
-          </section>
-
-          <section class="workspace-card signals-card" id="signals" aria-labelledby="signals-title">
-            <div class="card-kicker"><span class="eyebrow">05 / NEXT SIGNALS</span><span class="signal-chip violet">PREVIEW DATA</span></div>
-            <h2 id="signals-title">Keep the next step visible.</h2>
-            <ul class="signal-list"><li><span class="signal-icon cyan">01</span><span><strong>Clarify the decision</strong><small>Turn the broad question into a useful brief.</small></span><b>↗</b></li><li><span class="signal-icon gold">02</span><span><strong>Compare the evidence</strong><small>See what supports, limits or changes the path.</small></span><b>↗</b></li><li><span class="signal-icon violet">03</span><span><strong>Choose the next move</strong><small>Keep ownership with the person setting direction.</small></span><b>↗</b></li></ul>
-          </section>
+  <main id="main" class="wp-app" data-view="welcome" data-visual-motion="off">
+    <aside class="wp-sidebar" aria-label="Workspace controls">
+      <a class="wp-identity" href="#workspace"><span class="wp-orbit" aria-hidden="true"></span><span>POLARIS<small>Your space to think.</small></span></a>
+      <button type="button" class="wp-new" id="reset-preview" disabled><span aria-hidden="true">＋</span> New exploration <span class="wp-new-arrow" aria-hidden="true">↗</span></button>
+      <div class="wp-mode-group">
+        <p class="wp-overline" id="mode-label">A way forward</p>
+        <div class="wp-modes" role="tablist" aria-labelledby="mode-label" aria-orientation="vertical">
+          <button type="button" class="wp-mode" id="mode-research" role="tab" aria-selected="true" aria-controls="mode-panel" tabindex="0" data-mode="research"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6M10 7v6M7 10h6"/></svg><span>Research<small>Find a clearer perspective</small></span><span class="wp-selected-mark" aria-hidden="true"></span></button>
+          <button type="button" class="wp-mode" id="mode-create" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="create"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/></svg><span>Create<small>Give an idea its shape</small></span><span class="wp-selected-mark" aria-hidden="true"></span></button>
+          <button type="button" class="wp-mode" id="mode-plan" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 5h8a4 4 0 0 1 0 8H9a4 4 0 0 0 0 8h8"/></svg><span>Plan<small>Make the next move clear</small></span><span class="wp-selected-mark" aria-hidden="true"></span></button>
         </div>
-        <p class="boundary-note"><span>PREVIEW BOUNDARY</span> This is a public visual mockup. It uses no customer prompts, account data, live telemetry, CRM connections or backend writes.</p>
       </div>
+      <div class="wp-sidebar-note"><span class="wp-overline">Made for your curiosity</span><p>A question.<br>A new perspective.<br>A next step.</p></div>
+      <div class="wp-sidebar-bottom">
+        <button type="button" class="wp-text-button" data-open-references disabled><svg class="site-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg> Reference notes</button>
+        <a class="wp-text-button" href="/status/"><span aria-hidden="true">◦</span> Access &amp; availability</a>
+        <p>Human direction stays central.</p>
+      </div>
+    </aside>
+
+    <section class="wp-desk" id="workspace" aria-label="Customer workspace preview">
+      <div class="wp-topbar"><span class="wp-breadcrumb">Workspace <span aria-hidden="true">/</span> <span id="exploration-label">New exploration</span></span><span class="wp-preview-label"><i aria-hidden="true"></i> Interactive preview <span class="wp-notice-separator" aria-hidden="true">/</span> sample content</span></div>
+      <div id="mode-panel" class="wp-surface" role="tabpanel" aria-labelledby="mode-research" tabindex="0">
+        <div class="wp-scene" id="neural-scene">
+          <figure class="wp-scene-art" aria-label="Glass neural spiral above an Earth horizon. Visual concept of Astra Polaris."><picture data-primary-art="neural-core"><source type="image/avif" srcset="/assets/neural-master/delivery/neural-core-1600.avif 1600w, /assets/neural-master/delivery/neural-core-3840.avif 3840w" sizes="100vw"><img id="neural-image" src="/assets/neural-master/delivery/neural-core-3840.avif" width="3840" height="2160" alt="" style="object-fit:contain" fetchpriority="high" decoding="async"></picture></figure>
+          <div class="wp-scene-atmosphere" aria-hidden="true"><span class="wp-scene-halo"></span><span class="wp-scene-orbit wp-scene-orbit-one"></span><span class="wp-scene-orbit wp-scene-orbit-two"></span><span class="wp-scene-star wp-scene-star-one"></span><span class="wp-scene-star wp-scene-star-two"></span></div>
+          <div class="wp-scene-copy"><p class="wp-overline">Astra Polaris / Your thinking space</p><h1 id="workspace-title">Bring the question.<br><span>See a direction.</span></h1><p id="mode-description">Follow your curiosity. Bring the next move into focus.</p></div>
+          <div class="wp-scene-baseline"><span>One connected foundation.<br><span>Visual layer · not model reasoning.</span></span><button type="button" class="wp-motion" id="preview-motion" aria-pressed="true" hidden><span class="wp-motion-icon" aria-hidden="true">Ⅱ</span><span id="motion-label">Pause visual motion</span></button></div>
+        </div>
+
+        <div class="wp-conversation">
+          <form class="wp-composer" id="preview-composer" aria-label="Explore a sample" autocomplete="off">
+            <label for="preview-prompt" id="prompt-label">What would you like to understand?</label>
+            <textarea id="preview-prompt" name="local-preview-text" rows="2" maxlength="1500" placeholder="Start with a question, or choose one below…" aria-describedby="composer-note" spellcheck="false" disabled></textarea>
+            <div class="wp-composer-actions"><div class="wp-composer-context"><span class="wp-context-dot" aria-hidden="true"></span><span id="composer-mode">Research</span><span class="wp-context-divider" aria-hidden="true">/</span><span>Sample preview</span></div><div class="wp-submit-controls"><button type="button" class="wp-voice" id="preview-voice" aria-label="Voice availability" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 10v1a6.5 6.5 0 0 0 13 0v-1M12 17.5V21M9 21h6"/></svg></button><button type="submit" class="wp-submit" id="view-sample" disabled><span id="submit-label">View sample brief</span><svg class="site-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button></div></div>
+          </form>
+          <p class="wp-composer-note" id="composer-note">Prewritten examples. Your text stays in this tab; no AI request is sent.</p>
+          <div class="wp-suggestions" aria-labelledby="suggestion-label"><span class="wp-overline" id="suggestion-label">Or start here</span><div id="preview-presets" class="wp-presets"><button type="button" data-preset="0" aria-pressed="false" disabled><span>Explore a resilient city</span><svg class="site-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button><button type="button" data-preset="1" aria-pressed="false" disabled><span>Compare energy pathways</span><svg class="site-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button><button type="button" data-preset="2" aria-pressed="false" disabled><span>Understand a new subject</span><svg class="site-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></button></div></div>
+          <noscript><p class="wp-noscript">Enable JavaScript to switch modes and explore the local examples. This visual preview does not connect to a live AI service.</p></noscript>
+
+          <article class="wp-result" id="sample-result" aria-labelledby="sample-title" hidden>
+            <div class="wp-result-kicker"><span class="wp-orbit wp-orbit-small" aria-hidden="true"></span><span>ASTRA POLARIS <span aria-hidden="true">/</span> <span id="sample-kind">SAMPLE RESEARCH BRIEF</span></span></div>
+            <p class="wp-sample-boundary" id="sample-boundary">Prewritten sample · Illustrative, not a generated answer.</p>
+            <h2 id="sample-title" tabindex="-1"></h2>
+            <p class="wp-result-lead" id="sample-intro"></p>
+            <ol class="wp-result-sections" id="sample-sections"></ol>
+            <div class="wp-result-end"><button type="button" class="wp-text-button" data-open-references><svg class="site-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg> View sample reference notes</button><span>For your review. Always.</span></div>
+          </article>
+          <p class="wp-announcement" id="preview-announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+          <button type="button" class="wp-mobile-references wp-text-button" data-open-references disabled><svg class="site-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg> Reference notes &amp; preview details</button>
+        </div>
+      </div>
+      <div class="wp-workspace-baseline"><span>Room for a different kind of thinking.</span><span>Customer workspace / Visual preview</span></div>
     </section>
   </main>
-  <footer><span>Human curiosity. Connected knowledge. Independent judgment.</span><a href="/">Back to Ad Astra ↗</a><nav class="release-links" aria-label="Products and availability"><a href="/products/">Product families</a><a href="/status/">Current availability</a></nav><a href="/intelligence/">Connected intelligence</a></footer>
-  <script defer src="/platform-preview/app.js"></script>
+
+  <dialog class="wp-reference-dialog" id="reference-dialog" aria-labelledby="reference-title" aria-describedby="reference-intro">
+    <div class="wp-dialog-top"><span class="wp-overline">Reference notes / Sample only</span><button type="button" class="wp-close" id="close-references" aria-label="Close reference notes" autofocus>✕</button></div>
+    <h2 id="reference-title">See what sits<br>behind the sample.</h2>
+    <p id="reference-intro">These examples show how a brief could be structured. No sources were searched, retrieved or verified.</p>
+    <p class="wp-reference-context" id="reference-context">Research / Explore a resilient city</p>
+    <ol class="wp-reference-list" id="reference-list"><li><span>01 / Starting question</span><h3>A city facing hotter summers</h3><p>An invented scenario used to demonstrate a research brief. It describes no real customer, city or project.</p></li><li><span>02 / Evidence to seek</span><h3>Local conditions and lived experience</h3><p>A real brief would need local heat maps, building data and community input. None has been collected for this sample.</p></li><li><span>03 / Open questions</span><h3>Tradeoffs before recommendations</h3><p>Costs, maintenance, accessibility and local priorities would need review before choosing a response.</p></li></ol>
+    <details class="wp-preview-details"><summary>About this preview <span aria-hidden="true">＋</span></summary><div><p class="wp-overline">PREVIEW BOUNDARY</p><p>This customer workspace visual preview sends no customer prompts and performs no backend writes. Text and selections stay in memory in this tab, and reset on refresh. Responses are fixed samples, not live AI output.</p><p>The neural scene is concept art, not an indicator of processing or service availability. Voice activation will be available after customer access verification.</p><a href="/status/">Review current availability <svg class="site-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></div></details>
+  </dialog>
+
+  <footer class="site-footer"><div class="site-footer-top"><a class="site-brand" href="/" aria-label="AD ASTRA home"><img src="/assets/brand/ad-astra-mark.svg" width="36" height="36" alt=""><span>AD ASTRA</span></a><p>Human curiosity.<br>Extraordinary possibilities.</p><nav aria-label="Footer"><a href="/products/">Products</a><a href="/services/">Solutions</a><a href="/intelligence/">Intelligence</a><a href="/company/">Company</a><a href="/pricing/">Plans</a><a href="/status/">Availability</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/security/">Security</a><a href="/support/">Support</a></nav></div><div class="site-footer-bottom"><span>© AD ASTRA · Beyond the expected.</span><span>Design preview. Products in development.</span><a href="/#story">Explore our story ↑</a></div></footer>
 </body>
 </html>

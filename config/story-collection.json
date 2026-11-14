@@ -1,0 +1,25 @@
+{
+  "schema": "ad-astra-story-collection/v1",
+  "collection": "Beyond the expected — cinematic story collection",
+  "status": "candidate-for-human-visual-and-rights-review",
+  "brand": "AD ASTRA",
+  "style": "Physically grounded cinematic concept art; midnight navy, titanium, optical glass, ice cyan, restrained champagne and violet.",
+  "releaseAuthorization": false,
+  "generation": {"tool": "OpenAI image generation", "date": "2026-11-10", "originalArtwork": true, "referenceBrandAssetsCopied": false},
+  "rules": [
+    "Artwork is conceptual, not a photograph of an operating AD ASTRA facility or product.",
+    "AGI is an engineering research direction, not an achieved or available capability.",
+    "ASI is a speculative research horizon, not an achieved or available capability.",
+    "Earth and orbital connections express ambition, not verified regional service coverage.",
+    "No embedded text, invented customer logos, certifications, telemetry or fabricated product results.",
+    "All story content remains readable without images, JavaScript or motion."
+  ],
+  "assets": [
+    {"id":"intelligence","chapter":"AI / human-directed intelligence","headline":"Intelligence. With a human direction.","meaning":"A sculptural neural core makes connected intelligence tangible without another robotic face.","alt":"A luminous neural sphere wrapped in titanium and optical-glass orbital ribbons.","master":"exec-c81e30a7-74a9-4e27-ab83-4a6b81a45005.png","routes":["/","/intelligence/","/products/core-intelligence/","/products/autonomous-workflows/"],"boundary":"Concept art; customer AI execution remains release-gated."},
+    {"id":"vision","chapter":"Vision / humanity and Earth","headline":"A bigger world begins with a better question.","meaning":"Human perspective comes before technology, with Earth as the shared horizon.","alt":"A lone observer looks across Earth's blue atmosphere from a warm titanium observation space.","master":"exec-cbac8114-7509-43d2-b8e7-5330a6b70175.png","routes":["/","/company/"],"boundary":"Imagined vision scene; not an AD ASTRA facility or space operation."},
+    {"id":"products","chapter":"Products / ideas into useful work","headline":"One foundation. Six directions.","meaning":"Six distinct material forms express six product families, connected by one thread.","alt":"Six precision-sculpted glass and titanium forms connected by a fine cyan thread on dark stone.","master":"exec-dc55c636-9b7c-4b5a-9b9e-833eae81f0bd.png","routes":["/","/products/","/products/creative-studio/","/services/"],"boundary":"Sculptural product-family concepts, not shipped software or hardware."},
+    {"id":"agi","chapter":"Future / AGI engineering research","headline":"Build carefully. Ask bigger questions.","meaning":"A human researcher examines a bounded optical lattice, emphasizing evaluation and oversight.","alt":"A researcher studies connected glass nodes and cyan pathways above a precision research table.","master":"exec-2adf80ae-b2a4-47e7-9341-ab7e502fe379.png","routes":["/","/intelligence/","/products/specialist-intelligence/","/products/developer-platform/"],"boundary":"Conceptual research scene; AGI is not achieved or available to customers."},
+    {"id":"global","chapter":"Global positioning / connection with responsibility","headline":"Global ambition. Local responsibility.","meaning":"Earth and restrained orbital arcs express connected markets without claiming active coverage.","alt":"A blue Earth globe above a titanium plinth, encircled by delicate optical arcs.","master":"exec-0963f01a-f7bc-46f0-bd42-7aa68fc5846a.png","routes":["/","/services/","/products/business-commerce/"],"boundary":"Global market research imagery; no countries or regions are represented as approved for service."},
+    {"id":"beyond","chapter":"Space and beyond / ASI research horizon","headline":"The horizon is an invitation. Not a promise.","meaning":"A distant light beyond Earth reflects open-ended curiosity rather than an invented superintelligence.","alt":"Earth's curved horizon beneath a distant violet light and sweeping titanium orbital arcs in deep space.","master":"exec-9dc44c6f-64ed-4fd4-bc37-c88d02226494.png","routes":["/","/intelligence/"],"boundary":"Speculative concept art; ASI is not achieved, deployed or available."}
+  ]
+}

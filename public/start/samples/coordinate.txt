@@ -1,0 +1,17 @@
+AD ASTRA / ILLUSTRATIVE SAMPLE
+Written example, not a generated answer or live service.
+
+A workflow with deliberate checkpoints
+
+Make a repeatable process easier to understand and supervise.
+
+Separate preparation from execution. Give each step a clear owner and stop condition, and require explicit approval before consequential external actions.
+
+1. Map the trigger, required inputs and the outcome to prepare.
+2. Name the owner, permitted actions and review checkpoint for each step.
+3. Test failure, retry and stop paths before authorizing any automation.
+
+No workflow is running. The sample does not authorize autonomous actions, outreach or changes to external systems.
+
+Products remain in development. No account, payment or AI request was created.
+https://adastra.global/status/

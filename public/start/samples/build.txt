@@ -1,0 +1,17 @@
+AD ASTRA / ILLUSTRATIVE SAMPLE
+Written example, not a generated answer or live service.
+
+An integration that starts with a contract
+
+Outline an integration with boundaries I can test.
+
+Define the input and the expected result before selecting a tool. Keep authorization on the server and make retries safe before connecting a production provider.
+
+1. Document the caller, input schema, permissions and intended response.
+2. Specify validation, tenant boundaries, idempotency and failure behavior.
+3. Test with synthetic identities and data, then review the exact candidate before a controlled release.
+
+An illustrative engineering brief, not deployed code, an API credential or a tested integration.
+
+Products remain in development. No account, payment or AI request was created.
+https://adastra.global/status/

@@ -1,10 +1,14 @@
 'use strict';
 const crypto = require('node:crypto');
 const { authenticateRequest } = require('../lib/auth');
-const { reserve, LIMIT } = require('../lib/quota');
+const { reserve, throttle, LIMIT } = require('../lib/quota');
 const { ready } = require('../lib/release-gates');
 const sharedBudget = require('../lib/shared-budget');
 const { MODES } = require('../lib/modes');
+const { engineEvents } = require('../lib/engine-events');
+const { CONTRACT, readCompletion } = require('../lib/model-validation');
+const { resolveCustomerAgent } = require('../lib/customer-agent-catalog');
+const { requestCompletion } = require('../lib/model-gateway');
 const MAX_BODY = 14000;
 function sameOrigin(req) {
   const host = String(req.headers?.host || '').toLowerCase();
@@ -28,7 +32,10 @@ async function parseBody(req) {
 }
 module.exports = async function ask(req, res) {
   const requestId = crypto.randomUUID(), startedAt = Date.now();
+  const events = engineEvents(req,res,requestId);
   const reply = (status, payload, headers = {}) => {
+    if(res.destroyed||res.writableEnded)return;
+    if(events.started){console.info('ad_astra_request',{requestId,status,outcome:payload.error||'success',durationMs:Date.now()-startedAt});return events.finish(status,payload);}
     res.statusCode = status;
     const values = { 'Content-Type':'application/json; charset=utf-8', 'Cache-Control':'no-store', 'X-Content-Type-Options':'nosniff', 'X-Robots-Tag':'noindex, nofollow, noarchive, nosnippet', 'X-Request-Id':requestId, 'Server-Timing':`app;dur=${Date.now()-startedAt}`, ...headers };
     for (const [k,v] of Object.entries(values)) res.setHeader(k,String(v));
@@ -43,35 +50,54 @@ module.exports = async function ask(req, res) {
   if (!body || typeof body !== 'object' || Array.isArray(body)) return reply(400,{error:'invalid_body'});
   const prompt = typeof body.question === 'string' ? body.question.trim() : '';
   const mode = body.mode === undefined ? 'ask' : body.mode;
+  const agentId = body.agentId === undefined ? 'guide' : body.agentId;
+  const agent = typeof agentId === 'string' ? resolveCustomerAgent(agentId) : null;
   if (typeof mode !== 'string' || !Object.hasOwn(MODES,mode) || prompt.length < 5 || prompt.length > 4000 ||
-      Object.keys(body).some(k=>!['question','mode','references'].includes(k)) ||
+      !agent || Object.keys(body).some(k=>!['question','mode','agentId','references'].includes(k)) ||
       (body.references !== undefined && (!Array.isArray(body.references) || body.references.length))) return reply(422,{error:'invalid_question'});
   const auth = await authenticateRequest(req);
   if (!auth.ok) return reply(auth.status,{error:auth.error,message:auth.status === 401 ? 'Please sign in again to continue.' : 'Secure sign-in is temporarily unavailable.'});
   if (!ready()) return reply(503,{error:'release_not_ready',message:'The live engine is paused while release checks are completed.'},{'Retry-After':300});
   const idempotencyKey = String(req.headers?.['idempotency-key'] || '');
-  if (!idempotencyKey || idempotencyKey.length > 200) return reply(400,{error:'idempotency_key_required'});
+  if (!/^[A-Za-z0-9_-]{8,128}$/.test(idempotencyKey)) return reply(400,{error:'idempotency_key_required'});
   const budgetClient = sharedBudget.createClient();
-  void budgetClient;
+  try {
+    const abuse=await throttle(auth.claims);
+    if(!abuse.allowed)return reply(429,{error:'rate_limit_reached',message:'Please try again later.'},{'Retry-After':abuse.retryAfter});
+  }catch{return reply(503,{error:'quota_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60});}
   let quota;
+  let headers = {'X-RateLimit-Limit':LIMIT,'X-Ad-Astra-Quota-Mode':'durable'};
+  let admission;
+  try {
+    admission = await budgetClient.reserve({authorization:req.headers.authorization,idempotencyKey,
+      requestHash:crypto.createHash('sha256').update(JSON.stringify({agentId,mode,prompt})).digest('hex'),requestId,agentId,mode});
+  } catch { return reply(503,{error:'customer_access_unavailable',message:'Paid access could not be verified. No AI request was sent.'},{...headers,'Retry-After':60}); }
+  if (!admission.allowed) {
+    const status = admission.reason === 'paid_access_required' ? 403 : admission.reason === 'request_replayed' ? 409 : 429;
+    return reply(status,{error:admission.reason,message:'This request was not authorized. Check your subscription or contact support.'},headers);
+  }
+  // Unpaid and replayed requests consume abuse capacity, never model-spend capacity.
+  // An admitted request that cannot execute keeps its conservative durable hold.
   try { quota = await reserve(auth.claims); } catch { return reply(503,{error:'quota_unavailable',message:'The live engine is temporarily unavailable.'},{'Retry-After':60}); }
-  const headers = {'X-RateLimit-Limit':LIMIT,'X-RateLimit-Remaining':quota.remaining,'X-Ad-Astra-Quota-Mode':'durable'};
+  headers={...headers,'X-RateLimit-Remaining':quota.remaining};
   if (!quota.allowed) return reply(429,{error:quota.budgetReached ? 'daily_capacity_reached' : 'rate_limit_reached',message:'Request capacity has been reached. Please try again later.'},{...headers,'Retry-After':quota.retryAfter});
+  const disconnected = new AbortController();
+  const stop = () => { if(!res.writableEnded)disconnected.abort(); };
+  req.once?.('aborted',stop);res.once?.('close',stop);
   try {
     const messages = [
-      {role:'system',content:`You are Astra Polaris, Ad Astra's sole connected customer-facing model (product model ID: astra-lumen), and a careful human-directed thinking assistant. Your task is to ${MODES[mode]}. Answer directly in under 500 words. Separate evidence, assumptions and uncertainty. You cannot browse, retrieve private data, remember conversations or take external actions. Never invent citations or claim source verification. For medical, legal or financial decisions provide general information and recommend qualified advice. Decline unsafe instructions.`},
+      {role:'system',content:`You are Astra Polaris, Ad Astra's sole connected customer-facing model (product model ID: astra-lumen), operating through the Ad Astra agent profile ${agent.name}. The profile focus is to ${agent.directive}. Your task is to ${MODES[mode]}. Answer directly in under 500 words. Separate evidence, assumptions and uncertainty. You cannot browse, retrieve private data, remember conversations or take external actions. Never invent citations or claim source verification. For medical, legal or financial decisions provide general information and recommend qualified advice. Decline unsafe instructions.`},
       {role:'user',content:prompt}
     ];
     if (messages.reduce((n,m)=>n+Buffer.byteLength(m.content)+32,0) > 16384) throw new Error('input_limit');
-    const response = await fetch('https://api.openai.com/v1/chat/completions',{
-      method:'POST',headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},
-      body:JSON.stringify({model:'gpt-4.1-mini-2025-04-14',temperature:0.25,max_tokens:700,store:false,messages}),
-      redirect:'error',cache:'no-store',signal:AbortSignal.timeout(18000)
-    });
-    if (!response.ok) {console.warn('ad_astra_provider_status',{requestId,status:response.status});throw new Error('provider_unavailable');}
-    const data = await response.json();
-    const answer = data?.choices?.[0]?.message?.content;
-    if (typeof answer !== 'string' || !answer.trim()) throw new Error('empty_response');
-    return reply(200,{ok:true,mode,answer:answer.trim().slice(0,6000),disclosure:'AI-generated response. Verify important claims against primary sources.'},headers);
+    if(req.aborted||res.destroyed)throw new Error('disconnected');
+    if(admission.expiresAt<=Date.now())throw new Error('admission_expired');
+    events.start(headers);events.requesting();
+    const response = await requestCompletion({agentId,mode,question:prompt,authorization:req.headers.authorization,
+      admission,idempotencyKey,signal:AbortSignal.any([AbortSignal.timeout(18000),disconnected.signal])});
+    if (!response.ok) {console.warn('ad_astra_model_gateway_status',{requestId,status:response.status});throw new Error('model_gateway_unavailable');}
+    const answer = await readCompletion(response);
+    return reply(200,{ok:true,agentId,mode,answer,disclosure:'AI-generated response. Verify important claims against primary sources.'},headers);
   } catch { return reply(503,{error:'ai_unavailable',message:'Ad Astra could not complete this response. Please try again later.'},{...headers,'Retry-After':60}); }
+  finally { req.removeListener?.('aborted',stop);res.removeListener?.('close',stop); }
 };

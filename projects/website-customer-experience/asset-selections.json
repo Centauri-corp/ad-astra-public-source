@@ -1,0 +1,140 @@
+{
+  "schema": "ad-astra-website-asset-selections/v1",
+  "selectionStatus": "candidate-for-owner-visual-review",
+  "familyAssets": {
+    "core-intelligence": "story-intelligence",
+    "creative-studio": "product-constellation",
+    "specialist-intelligence": "agi-research",
+    "business-commerce": "global-perspective",
+    "developer-platform": "agi-research",
+    "autonomous-workflows": "story-intelligence"
+  },
+  "assets": [
+    {
+      "id": "neural-core",
+      "src": "/assets/neural-master/delivery/neural-core-3840.avif",
+      "mobile": "/assets/neural-master/delivery/neural-core-1600.avif",
+      "manifest": "public/assets/neural-master/delivery/manifest.json",
+      "kind": "raster",
+      "role": "Signature neural spiral; homepage and workspace identity",
+      "alt": "An original CGI glass neural sculpture with a champagne spiral above a planetary horizon.",
+      "origin": {
+        "kind": "first-party-code",
+        "resourceId": "native-neural-cgi",
+        "version": "7154081165187348da70616ae400ca463a3858fd7fbdcd883a1beaa84827d3b7"
+      }
+    },
+    {
+      "id": "story-intelligence",
+      "src": "/assets/story/intelligence-1672.webp",
+      "mobile": "/assets/story/intelligence-960.webp",
+      "manifest": "public/assets/story/manifest.json",
+      "kind": "raster",
+      "role": "Supporting connected-intelligence study",
+      "alt": "A luminous neural sphere wrapped in optical glass and titanium ribbons.",
+      "origin": {
+        "kind": "local-generated",
+        "resourceId": "story-manifest",
+        "version": "36ad9b496c21a01214f92726948dde5d43e00f1fd1cdebdd198cc707def7aa6a"
+      }
+    },
+    {
+      "id": "human-perspective",
+      "src": "/assets/story/vision-1672.webp",
+      "mobile": "/assets/story/vision-960.webp",
+      "manifest": "public/assets/story/manifest.json",
+      "kind": "raster",
+      "role": "Company vision and human perspective",
+      "alt": "An observer looks across Earth's atmosphere from an imagined observation space.",
+      "origin": {
+        "kind": "local-generated",
+        "resourceId": "story-manifest",
+        "version": "d83b2c3a0ed26936785a45bcbb4940e617e93d2ecf8dd56b8ce64d033afd7222"
+      }
+    },
+    {
+      "id": "product-constellation",
+      "src": "/assets/story/products-1672.webp",
+      "mobile": "/assets/story/products-960.webp",
+      "manifest": "public/assets/story/manifest.json",
+      "kind": "raster",
+      "role": "Six connected product directions; conceptual sculpture",
+      "alt": "Six sculpted glass and titanium forms connected by a fine cyan thread.",
+      "origin": {
+        "kind": "local-generated",
+        "resourceId": "story-manifest",
+        "version": "d02ba332e2dfc8995af66c1a6836815a9be5fa23c7f6d71e1c5ef923f979c7ac"
+      }
+    },
+    {
+      "id": "agi-research",
+      "src": "/assets/story/agi-1672.webp",
+      "mobile": "/assets/story/agi-960.webp",
+      "manifest": "public/assets/story/manifest.json",
+      "kind": "raster",
+      "role": "Evaluated research direction; no achieved AGI claim",
+      "alt": "A researcher studies a bounded optical lattice in a conceptual research scene.",
+      "origin": {
+        "kind": "local-generated",
+        "resourceId": "story-manifest",
+        "version": "b3d8e04b48fb974ad218f35e15988753e82aa2020b16de6d0b6b083d58fb6c87"
+      }
+    },
+    {
+      "id": "global-perspective",
+      "src": "/assets/story/global-1672.webp",
+      "mobile": "/assets/story/global-960.webp",
+      "manifest": "public/assets/story/manifest.json",
+      "kind": "raster",
+      "role": "Global ambition; no claim of active service coverage",
+      "alt": "Earth above a titanium plinth with delicate optical orbital arcs.",
+      "origin": {
+        "kind": "local-generated",
+        "resourceId": "story-manifest",
+        "version": "a5a0946a25c9cb8035bec4254bbf5873b5e37001bf5782e3eb6ec2e2b335acc7"
+      }
+    },
+    {
+      "id": "beyond-horizon",
+      "src": "/assets/story/beyond-1672.webp",
+      "mobile": "/assets/story/beyond-960.webp",
+      "manifest": "public/assets/story/manifest.json",
+      "kind": "raster",
+      "role": "Long-term curiosity and speculative ASI research horizon",
+      "alt": "Earth's horizon beneath a distant light and orbital arcs in deep space.",
+      "origin": {
+        "kind": "local-generated",
+        "resourceId": "story-manifest",
+        "version": "7c1ab9ae68cdc8998a22c213da8e98f7b3a96a40e83ed7aea991d70b44e6b427"
+      }
+    },
+    {
+      "id": "orbital-mark",
+      "src": "/assets/brand/ad-astra-mark.svg",
+      "mobile": null,
+      "manifest": "public/assets/visual-manifest.json",
+      "kind": "vector",
+      "role": "Canonical Ad Astra orbital brand mark",
+      "alt": "Ad Astra",
+      "origin": {
+        "kind": "first-party-code",
+        "resourceId": "brand-mark",
+        "version": "041f448e91faa5ee2097c5fb301b53aedec92f4199fadd403903440f876b383c"
+      }
+    }
+  ],
+  "legacyPrimaryAssets": [
+    "/assets/astra-polaris-platform-mockup.png",
+    "/assets/astra-lumen-neural-concierge.png",
+    "/assets/astra-lumen-neural-brain.png",
+    "/assets/astra-lumen-neural-profile.png",
+    "/assets/ad-astra-hero-cinematic-4mp.png",
+    "/assets/ad-astra-hero-cinematic-v1.png"
+  ],
+  "film": {
+    "selectedMaster": null,
+    "status": "not-selected-for-publication",
+    "sourceRegister": "projects/website-customer-experience/resources.json",
+    "reason": "Existing motion studies and recovered exports require selection, final edit, rights and delivery review."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema": "ad-astra-product-architecture-release-control/v1",
+  "company": "AD ASTRA",
+  "releaseScope": "public-marketing-and-staged-customer-architecture",
+  "singlePublicCandidate": {
+    "repository": "Centauri-corp/ad-astra-public-source",
+    "pullRequest": 38,
+    "branch": "codex/customer-experience-rebuild-20261113",
+    "basePullRequest": 36,
+    "baseBranch": "codex/cinematic-website-rebuild-20261110",
+    "parallelCandidatesAllowed": false
+  },
+  "productFamilies": [
+    "core-intelligence",
+    "creative-studio",
+    "specialist-intelligence",
+    "business-commerce",
+    "developer-platform",
+    "autonomous-workflows"
+  ],
+  "capabilityBoundary": {
+    "customerAiExecution": false,
+    "billing": false,
+    "crmWrites": false,
+    "outboundMessaging": false,
+    "globalAvailability": false,
+    "agi": "engineering-research",
+    "asi": "hypothetical-research"
+  },
+  "controlledOrder": [
+    {"order": 1, "id": "source-reconciliation", "requires": ["PR #38 contains its PR #36 base"], "state": "blocked"},
+    {"order": 2, "id": "architecture-and-route-integrity", "requires": ["six-family catalog", "source inventory", "route evidence"], "state": "pending"},
+    {"order": 3, "id": "candidate-ci-and-preview", "requires": ["exact SHA", "CI pass", "preview read-back"], "state": "pending"},
+    {"order": 4, "id": "protected-customer-qa", "requires": ["public customer-QA environment", "synthetic tenant and lifecycle acceptance"], "state": "blocked"},
+    {"order": 5, "id": "independent-exact-review", "requires": ["immutable public SHA", "paired private SHA"], "state": "pending"},
+    {"order": 6, "id": "controlled-production-stage", "requires": ["final human authorization", "rollback evidence"], "state": "pending"},
+    {"order": 7, "id": "scoped-public-enablement", "requires": ["approved routes", "search property verification", "accepted customer scope"], "state": "pending"}
+  ],
+  "promotionRule": "No later order may be marked complete until every earlier order has immutable evidence on the same public candidate SHA.",
+  "recordedAt": "2026-11-13"
+}

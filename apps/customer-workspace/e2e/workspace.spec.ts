@@ -417,6 +417,9 @@ test("the browser diagram cannot drag, delete or connect graph nodes", async ({
   await page.goto("/");
   const node = page.locator(".react-flow__node").first();
   await expect(page.locator(".react-flow__node")).toHaveCount(7);
+  // React Flow measures nodes while hidden. Capture the immutable baseline
+  // only after that initialization, not during its normal visibility change.
+  await expect(node).toBeVisible();
   const before = await node.getAttribute("style");
   await node.dragTo(page.locator(".workflow-top"));
   expect(await node.getAttribute("style")).toBe(before);

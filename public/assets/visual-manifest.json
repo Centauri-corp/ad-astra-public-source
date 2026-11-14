@@ -1,8 +1,10 @@
 {
   "version": 1,
-  "purpose": "Public visual inventory for the AD ASTRA homepage and Astra Polaris experience",
+  "purpose": "Ad Astra visual resource archive and active project selection; archived candidates are not current homepage instructions",
   "productArchitectureManifest": "/assets/products/manifest.json",
   "publicSafe": true,
+  "storyCollectionManifest": "/assets/story/manifest.json",
+  "currentStoryDirection": "Human vision, AI, products, AGI engineering research, global positioning, space and ASI research horizon. All conceptual; human visual and rights review pending.",
   "promotionPolicy": "Candidate assets require human visual review and release-gate approval before public promotion.",
   "assets": [
     {
@@ -14,7 +16,8 @@
       "visualDirection": "high-resolution cinematic AI-realistic blended artwork",
       "provenance": "Adobe Firefly generation, 2026-11-10",
       "reviewStatus": "candidate",
-      "alt": "A human profile held within a luminous cyan and violet neural constellation"
+      "alt": "A human profile held within a luminous cyan and violet neural constellation",
+      "lifecycle": "archived-primary-candidate"
     },
     {
       "id": "ad-astra-hero-cinematic-v1",
@@ -25,7 +28,8 @@
       "visualDirection": "cinematic AI-realistic blended artwork",
       "provenance": "Ad Astra visual generation, 2026-11-10",
       "reviewStatus": "candidate",
-      "alt": "A human profile held within a luminous cyan and violet neural constellation"
+      "alt": "A human profile held within a luminous cyan and violet neural constellation",
+      "lifecycle": "archived-primary-candidate"
     },
     {
       "id": "ad-astra-product-ecosystem-v1",
@@ -69,25 +73,29 @@
       "id": "astra-polaris-platform-mockup",
       "path": "/assets/astra-polaris-platform-mockup.png",
       "role": "public customer platform mockup",
-      "alt": "Futuristic Ad Astra customer platform concept with a glowing neural brain, global network arcs and modular workspace panels"
+      "alt": "Futuristic Ad Astra customer platform concept with a glowing neural brain, global network arcs and modular workspace panels",
+      "lifecycle": "archived-primary-candidate"
     },
     {
       "id": "astra-lumen-neural-concierge",
       "path": "/assets/astra-lumen-neural-concierge.png",
       "role": "public neural concierge artwork",
-      "alt": "Cinematic side profile of a luminous neural figure with cyan rim light, violet pathways, and a warm gold brain core"
+      "alt": "Cinematic side profile of a luminous neural figure with cyan rim light, violet pathways, and a warm gold brain core",
+      "lifecycle": "archived-primary-candidate"
     },
     {
       "id": "astra-lumen-neural-brain",
       "path": "/assets/astra-lumen-neural-brain.png",
       "role": "hero neural artwork",
-      "alt": "Luminous blue and violet neural brain with connected signal nodes"
+      "alt": "Luminous blue and violet neural brain with connected signal nodes",
+      "lifecycle": "archived-primary-candidate"
     },
     {
       "id": "astra-lumen-neural-profile",
       "path": "/assets/astra-lumen-neural-profile.png",
       "role": "neural profile artwork",
-      "alt": "Side profile of a luminous neural figure with a glowing connected brain"
+      "alt": "Side profile of a luminous neural figure with a glowing connected brain",
+      "lifecycle": "archived-primary-candidate"
     },
     {
       "id": "astra-lumen-neural-horizon",
@@ -135,7 +143,10 @@
       "id": "ad-astra-orbital-mark",
       "path": "/assets/brand/ad-astra-mark.svg",
       "role": "first-party orbital brand symbol paired with the semantic wordmark",
-      "alt": ""
+      "alt": "",
+      "kind": "vector",
+      "bytes": 604,
+      "sha256": "041f448e91faa5ee2097c5fb301b53aedec92f4199fadd403903440f876b383c"
     },
     {
       "id": "astra-lumen-neural-profile-canvas",
@@ -148,9 +159,28 @@
       "path": "/assets/astra-lumen-neural-profile-canvas-mobile.png",
       "role": "mobile neural canvas artwork",
       "alt": "Mobile composition of a cyan neural profile with a violet connected brain"
+    },
+    {
+      "id": "ad-astra-neural-spiral",
+      "path": "/assets/neural-master/delivery/neural-core-3840.avif",
+      "role": "Signature neural spiral; homepage and workspace identity",
+      "kind": "image",
+      "provenanceManifest": "/assets/neural-master/delivery/manifest.json",
+      "origin": {
+        "kind": "first-party-code",
+        "resourceId": "native-neural-cgi",
+        "version": "7154081165187348da70616ae400ca463a3858fd7fbdcd883a1beaa84827d3b7"
+      },
+      "reviewStatus": "candidate",
+      "alt": "An original CGI glass neural sculpture with a champagne spiral above a planetary horizon."
     }
   ],
   "withheld": [
     "Internal neural-sphere screenshots remain private-only and are not published."
-  ]
+  ],
+  "activeSelection": {
+    "authority": "projects/website-customer-experience/asset-selections.json",
+    "signatureAsset": "/assets/neural-master/delivery/neural-core-3840.avif",
+    "review": "pending-consolidated-visual-review"
+  }
 }

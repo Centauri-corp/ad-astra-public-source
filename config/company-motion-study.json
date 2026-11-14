@@ -1,0 +1,23 @@
+{
+  "schema": "ad-astra-company-motion-study/v1",
+  "scope": "marketing visual concept; not a recording of model execution",
+  "geometry": "public/neural/company-scene.js",
+  "renderer": "scripts/render-company-motion.cjs",
+  "construction": "Self-authored procedural folded hemispheres, neural lattice, three rings and six orbiting product lights; existing vendored Three.js renderer. No stock footage, model service, voice or soundtrack.",
+  "video": {
+    "path": "public/assets/brand/ad-astra-neural-study.mp4",
+    "sha256": "c0492b2a735fdd31c32752cee9bbdc62b5fc40feab66f043045ae1be164233af",
+    "bytes": 1538447,
+    "seconds": 12,
+    "width": 960,
+    "height": 540,
+    "codec": "h264",
+    "audio": false
+  },
+  "poster": {"path":"public/assets/brand/ad-astra-neural-study.jpg","sha256":"64c6cf7ee4c7816889c49b6e1336214cfaba9cef3ca77968db643525f45e26af"},
+  "captions": {"path":"public/assets/brand/ad-astra-neural-study.vtt","sha256":"c703b92adcc525b4971bccd9356b0c401ba31026279c28e0b409c79723b01a91"},
+  "humanVisualApproval": null,
+  "rightsAcceptance": null,
+  "releaseAuthorization": false,
+  "companyPremiere": "The planned sixty-second company film is a separate unfinished deliverable; this twelve-second study does not complete it."
+}

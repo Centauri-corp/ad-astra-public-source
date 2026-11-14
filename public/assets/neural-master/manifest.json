@@ -1,0 +1,1473 @@
+{
+  "schema": "ad-astra.neural-master.provenance.v1",
+  "generatedAt": "2026-11-13T20:00:31.558Z",
+  "classification": "Original procedural CGI",
+  "description": "New seeded 3D glass neural sculpture rendered from geometry at the recorded native pixel dimensions. No source raster, image editing, raster upscaling, AI inference, or brain telemetry.",
+  "approval": {
+    "status": "not-requested",
+    "humanApproved": false,
+    "integration": "not-integrated"
+  },
+  "reproduction": "node scripts/render-neural-master.cjs --all",
+  "runtime": {
+    "node": "v24.19.0",
+    "chromium": "151.0.7922.34",
+    "playwright": "1.62.1",
+    "three": "0.187.0",
+    "sharp": {
+      "aom": "3.15.1",
+      "archive": "3.8.9",
+      "cairo": "1.18.6",
+      "cgif": "0.5.4",
+      "exif": "0.6.26",
+      "expat": "2.8.5",
+      "ffi": "3.8.0",
+      "fontconfig": "2.18.3",
+      "freetype": "2.14.3",
+      "fribidi": "1.0.17",
+      "glib": "2.90.0",
+      "harfbuzz": "14.5.0",
+      "heif": "1.23.5",
+      "highway": "1.4.0",
+      "imagequant": "2.4.1",
+      "lcms": "2.19.1",
+      "mozjpeg": "0826579",
+      "pango": "1.58.2",
+      "pixman": "0.46.4",
+      "png": "1.6.58",
+      "proxy-libintl": "0.5",
+      "rsvg": "2.63.2",
+      "tiff": "4.7.2",
+      "uhdr": "2.0.2",
+      "vips": "8.18.7",
+      "webp": "1.6.0",
+      "xml2": "2.15.4",
+      "zlib-ng": "2.3.3",
+      "sharp": "0.35.5"
+    },
+    "launchArgs": [
+      "--no-sandbox",
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
+      "--disable-dev-shm-usage",
+      "--disable-background-networking",
+      "--disable-component-update",
+      "--no-first-run",
+      "--js-flags=--max-old-space-size=2048"
+    ]
+  },
+  "bounds": {
+    "maxPixels": 8294400,
+    "maxDimension": 3840,
+    "timeoutMs": 180000,
+    "processTimeoutMs": 600000,
+    "maxOutputBytes": 67108864,
+    "maxRequests": 128,
+    "maxModuleBytes": 4194304
+  },
+  "sources": [
+    {
+      "path": "node_modules/three/build/three.core.js",
+      "bytes": 1474799,
+      "sha256": "613e370f76638fdef83926642bf256dc9615684922de1ce1f63a8583e5d78578"
+    },
+    {
+      "path": "node_modules/three/build/three.module.js",
+      "bytes": 658900,
+      "sha256": "104f56145899722094556490d787aae0617cc2fc3382f31df02d724ea1aee341"
+    },
+    {
+      "path": "node_modules/three/examples/jsm/environments/RoomEnvironment.js",
+      "bytes": 4960,
+      "sha256": "55f466192cc84298755a424c5e040345006b2ee1455589b3b54126c2ea4123f4"
+    },
+    {
+      "path": "node_modules/three/examples/jsm/postprocessing/EffectComposer.js",
+      "bytes": 8501,
+      "sha256": "4e079a5886152d7e529a59aef644e968ab4d32c6a33ce016b36bf29b2eac26f7"
+    },
+    {
+      "path": "node_modules/three/examples/jsm/postprocessing/MaskPass.js",
+      "bytes": 4694,
+      "sha256": "7cd08eee9d5d6f5578beaddbdcbe9c384f6873810af27f22ab7db3ceeb127aa3"
+    },
+    {
+      "path": "node_modules/three/examples/jsm/postprocessing/OutputPass.js",
+      "bytes": 4184,
+      "sha256": "02e4a261af34de71338185e9e87f0cbe5cba9115608d984363e1269dec1d2272"
+    },
+    {
+      "path": "node_modules/three/examples/jsm/postprocessing/Pass.js",
+      "bytes": 4218,
+      "sha256": "444b409c235ead986893c472e720da1b779a56985c7d10b279c7944b52bd61c5"
+    },
+    {
+      "path": "node_modules/three/examples/jsm/postprocessing/RenderPass.js",
+      "bytes": 4280,
+      "sha256": "817f6c3cdcd0fd41515d112359ea0532568eefb5aabd3b33903957ebca1b8a6a"
+    },
+    {
+      "path": "node_modules/three/examples/jsm/postprocessing/ShaderPass.js",
+      "bytes": 3228,
+      "sha256": "e2500a5913b26bbf5148ceaae644c6edcff06a18b01494ee37bf856353d2ab9d"
+    },
+    {
+      "path": "node_modules/three/examples/jsm/postprocessing/UnrealBloomPass.js",
+      "bytes": 15397,
+      "sha256": "ba8f2fcadfa6588384c9473498f974d81d120f02f0e63a0e59c265202a006b5a"
+    },
+    {
+      "path": "node_modules/three/examples/jsm/shaders/CopyShader.js",
+      "bytes": 729,
+      "sha256": "a33057d5ac91c43304c186ac0e8816e62bb2ed471d3a00ff3018dfd5c0389718"
+    },
+    {
+      "path": "node_modules/three/examples/jsm/shaders/LuminosityHighPassShader.js",
+      "bytes": 1291,
+      "sha256": "5044f780b6e6cf863947f64c36fe1587132f7fbe395ada863cd1e5f0388dcf1e"
+    },
+    {
+      "path": "node_modules/three/examples/jsm/shaders/OutputShader.js",
+      "bytes": 1876,
+      "sha256": "353479f77a8d7e2629d49ccac9fc2f5dbfdda5442e0adf867b00377a2fcb0cb2"
+    },
+    {
+      "path": "node_modules/three/examples/jsm/utils/BufferGeometryUtils.js",
+      "bytes": 39153,
+      "sha256": "7bda2a8ba836b2bcf67cb938d4b9e1bb5d1b1bc616817103ed858c0b58296ce7"
+    },
+    {
+      "path": "package.json",
+      "bytes": 2265,
+      "sha256": "41639bd1e48e1107faf3297e71f1770fbe052fe6f96b8ba4a2dd5cbdde04b1df"
+    },
+    {
+      "path": "scripts/lib/neural-master-scene.mjs",
+      "bytes": 25060,
+      "sha256": "ac81858fcb2844275a311fdd2351f476ea01e1a421a37193742a462aea985d8b"
+    },
+    {
+      "path": "scripts/render-neural-master.cjs",
+      "bytes": 15334,
+      "sha256": "0526fd287be22fd24220bd48330fc3057fb771eb0c990f671c2400c1d2018eb1"
+    }
+  ],
+  "network": {
+    "policy": "Loopback server only; external page requests aborted; no external asset dependencies",
+    "requests": [
+      "/",
+      "/scene.mjs",
+      "/vendor/build/three.core.js",
+      "/vendor/build/three.module.js",
+      "/vendor/examples/jsm/environments/RoomEnvironment.js",
+      "/vendor/examples/jsm/postprocessing/EffectComposer.js",
+      "/vendor/examples/jsm/postprocessing/MaskPass.js",
+      "/vendor/examples/jsm/postprocessing/OutputPass.js",
+      "/vendor/examples/jsm/postprocessing/Pass.js",
+      "/vendor/examples/jsm/postprocessing/RenderPass.js",
+      "/vendor/examples/jsm/postprocessing/ShaderPass.js",
+      "/vendor/examples/jsm/postprocessing/UnrealBloomPass.js",
+      "/vendor/examples/jsm/shaders/CopyShader.js",
+      "/vendor/examples/jsm/shaders/LuminosityHighPassShader.js",
+      "/vendor/examples/jsm/shaders/OutputShader.js",
+      "/vendor/examples/jsm/utils/BufferGeometryUtils.js"
+    ],
+    "externalRequests": [],
+    "rejectedLocalRequests": []
+  },
+  "consoleMessages": [],
+  "artifacts": [
+    {
+      "preset": "landscape",
+      "dimensions": {
+        "width": 3840,
+        "height": 2160
+      },
+      "proof": {
+        "recipe": {
+          "id": "ad-astra-neural-master-cgi-v1",
+          "classification": "Original procedural CGI / physically based WebGL rendering",
+          "disclosure": "Abstract neural sculpture. Not AI inference, human brain telemetry, or an anatomical/medical model.",
+          "seed": 401913,
+          "rasterInputs": [],
+          "palette": {
+            "background": "#020710",
+            "glass": "#daeff5",
+            "filament": "#8ce4ff",
+            "champagne": "#cbb894"
+          },
+          "geometry": {
+            "cortexSegments": [
+              160,
+              112
+            ],
+            "glassGyri": 60,
+            "primaryAxons": 144,
+            "fineAxons": 240,
+            "spiralTurns": 1.5,
+            "spiralSegments": 480
+          },
+          "materials": {
+            "cortex": {
+              "transmission": 1,
+              "roughness": 0.018,
+              "ior": 1.46,
+              "thickness": 0.12,
+              "metalness": 0
+            },
+            "gyri": {
+              "transmission": 1,
+              "roughness": 0.025,
+              "ior": 1.46,
+              "thickness": 0.16,
+              "metalness": 0
+            },
+            "spiral": {
+              "transmission": 0.92,
+              "roughness": 0.065,
+              "ior": 1.48,
+              "thickness": 0.24,
+              "metalness": 0
+            },
+            "goldEdges": {
+              "metalness": 0.88,
+              "roughness": 0.24
+            }
+          },
+          "lighting": {
+            "environment": "Local RoomEnvironment with slate room (#33414d), no furniture, narrow strip panels at 65% emission; PMREM sigma 0.015",
+            "environmentIntensity": 0.48,
+            "lights": [
+              {
+                "type": "DirectionalLight",
+                "color": "#d9f4ff",
+                "intensity": 3.2,
+                "position": [
+                  1,
+                  6,
+                  6
+                ]
+              },
+              {
+                "type": "DirectionalLight",
+                "color": "#7ccde9",
+                "intensity": 2.6,
+                "position": [
+                  4,
+                  2,
+                  -5
+                ]
+              },
+              {
+                "type": "DirectionalLight",
+                "color": "#efdbc0",
+                "intensity": 1.15,
+                "position": [
+                  -4,
+                  3,
+                  2
+                ]
+              },
+              {
+                "type": "PointLight",
+                "color": "#a0eaff",
+                "intensity": 1.7,
+                "distance": 5,
+                "decay": 2,
+                "position": [
+                  0.12,
+                  -0.04,
+                  0.35
+                ],
+                "localToSculpture": true
+              }
+            ]
+          },
+          "camera": {
+            "landscape": {
+              "position": [
+                0,
+                0.65,
+                13.5
+              ],
+              "target": [
+                0,
+                0.25,
+                0
+              ],
+              "fov": 36,
+              "near": 0.1,
+              "far": 160
+            },
+            "portrait": {
+              "position": [
+                3.1,
+                0.9,
+                19.8
+              ],
+              "target": [
+                3.1,
+                0.35,
+                0
+              ],
+              "fov": 38,
+              "near": 0.1,
+              "far": 160
+            }
+          },
+          "composition": {
+            "sculpturePosition": [
+              3.1,
+              0.65,
+              0
+            ],
+            "sculptureRotation": [
+              0.08,
+              -0.32,
+              -0.075
+            ],
+            "sculptureScale": 1.28,
+            "planetCenter": [
+              60,
+              -213,
+              -40
+            ],
+            "planetRadius": 200,
+            "quietLeftFraction": 0.4
+          },
+          "rendering": {
+            "toneMapping": "ACESFilmicToneMapping",
+            "exposure": 0.91,
+            "transmissionResolutionScale": 1,
+            "samples": 4,
+            "bloom": {
+              "strength": 0.24,
+              "radius": 0.45,
+              "threshold": 1.1
+            },
+            "animationFrames": 0
+          },
+          "limits": {
+            "maxPixels": 8294400,
+            "maxDimension": 3840,
+            "maxTriangles": 750000,
+            "maxDrawCalls": 100,
+            "maxTextures": 64,
+            "renderTimeoutMs": 180000,
+            "maxBrowserHeapMB": 2048
+          },
+          "limitations": [
+            "Rasterized physical materials, environment lighting and screen-space transmission; not path-traced global illumination or spectral caustics.",
+            "Bloom uses a downsampled mip pyramid; geometry, physical refraction source and final color buffer are rendered at the declared native dimensions.",
+            "Procedural folds and axons are artistic abstractions, not anatomical reconstruction.",
+            "GPU/driver versions can change floating point results; source/recipe/seed repeatability does not promise cross-driver byte-identical pixels."
+          ]
+        },
+        "threeRevision": "187",
+        "capabilities": {
+          "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+          "vendor": "Google Inc. (Google)",
+          "maxTextureSize": 8192,
+          "maxRenderbufferSize": 8192
+        },
+        "stats": {
+          "frame": 69,
+          "calls": 38,
+          "triangles": 694994,
+          "points": 54,
+          "lines": 0,
+          "memory": {
+            "geometries": 17,
+            "textures": 15
+          },
+          "programs": 19,
+          "sceneTriangles": 499874,
+          "meshCount": 15
+        },
+        "dimensions": {
+          "cssWidth": 3840,
+          "cssHeight": 2160,
+          "requestedDPR": 1,
+          "browserDPR": 1,
+          "canvasWidth": 3840,
+          "canvasHeight": 2160,
+          "drawingBufferWidth": 3840,
+          "drawingBufferHeight": 2160,
+          "composerWidth": 3840,
+          "composerHeight": 2160,
+          "transmissionScale": 1
+        },
+        "camera": {
+          "position": [
+            0,
+            0.65,
+            13.5
+          ],
+          "target": [
+            0,
+            0.25,
+            0
+          ],
+          "fov": 36,
+          "near": 0.1,
+          "far": 160,
+          "aspect": 1.7777777777777777,
+          "projectionMatrix": [
+            1.7311969896610804,
+            0,
+            0,
+            0,
+            0,
+            3.077683537175254,
+            0,
+            0,
+            0,
+            0,
+            -1.0012507817385865,
+            -1,
+            0,
+            0,
+            -0.20012507817385866,
+            0
+          ],
+          "matrixWorld": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0.9995613313382166,
+            -0.029616632039650856,
+            0,
+            0,
+            0.029616632039650856,
+            0.9995613313382166,
+            0,
+            0,
+            0.65,
+            13.5,
+            1
+          ]
+        },
+        "corePixel": {
+          "x": 2684,
+          "y": 982
+        },
+        "renderMs": 887,
+        "glError": 0
+      },
+      "pixelProof": {
+        "decodedWidth": 3840,
+        "decodedHeight": 2160,
+        "nativePixels": 8294400,
+        "rawRGBSha256": "5c47d1e71238205ea37f051e6f4af73d12e94e47fa54ccd97e093507fd11bc77",
+        "crop": {
+          "left": 2428,
+          "top": 726,
+          "width": 512,
+          "height": 512
+        },
+        "cropPixelDifferenceFraction": 0.42910003662109375,
+        "cropWhiteClipFraction": 0.0103302001953125,
+        "upperLeftDarkPixelFraction": 1,
+        "method": "Decode captured WebGL canvas PNG directly. No resize. 512x512 crops preserve one source pixel per output pixel."
+      },
+      "files": [
+        {
+          "path": "public/assets/neural-master/neural-master-landscape-3840x2160.png",
+          "bytes": 5545237,
+          "sha256": "7154081165187348da70616ae400ca463a3858fd7fbdcd883a1beaa84827d3b7",
+          "width": 3840,
+          "height": 2160,
+          "operation": "direct WebGL canvas PNG; no resampling"
+        },
+        {
+          "path": "public/assets/neural-master/neural-master-landscape-3840x2160.webp",
+          "bytes": 543032,
+          "sha256": "0c6a7fc9fb5401805ff0ac0b9be2a458a5a2316c188027e0c4e8253107533193",
+          "width": 3840,
+          "height": 2160,
+          "operation": "same-size WebP encoding from native PNG"
+        },
+        {
+          "path": "public/assets/neural-master/neural-master-landscape-3840x2160-detail-1to1.png",
+          "bytes": 602908,
+          "sha256": "a9b35140c99bb229c0593f8923a073b9debfd2197601196014d17bd3fc39f01f",
+          "width": 512,
+          "height": 512,
+          "operation": "extract only; no resampling"
+        }
+      ]
+    },
+    {
+      "preset": "panoramic",
+      "dimensions": {
+        "width": 3840,
+        "height": 1600
+      },
+      "proof": {
+        "recipe": {
+          "id": "ad-astra-neural-master-cgi-v1",
+          "classification": "Original procedural CGI / physically based WebGL rendering",
+          "disclosure": "Abstract neural sculpture. Not AI inference, human brain telemetry, or an anatomical/medical model.",
+          "seed": 401913,
+          "rasterInputs": [],
+          "palette": {
+            "background": "#020710",
+            "glass": "#daeff5",
+            "filament": "#8ce4ff",
+            "champagne": "#cbb894"
+          },
+          "geometry": {
+            "cortexSegments": [
+              160,
+              112
+            ],
+            "glassGyri": 60,
+            "primaryAxons": 144,
+            "fineAxons": 240,
+            "spiralTurns": 1.5,
+            "spiralSegments": 480
+          },
+          "materials": {
+            "cortex": {
+              "transmission": 1,
+              "roughness": 0.018,
+              "ior": 1.46,
+              "thickness": 0.12,
+              "metalness": 0
+            },
+            "gyri": {
+              "transmission": 1,
+              "roughness": 0.025,
+              "ior": 1.46,
+              "thickness": 0.16,
+              "metalness": 0
+            },
+            "spiral": {
+              "transmission": 0.92,
+              "roughness": 0.065,
+              "ior": 1.48,
+              "thickness": 0.24,
+              "metalness": 0
+            },
+            "goldEdges": {
+              "metalness": 0.88,
+              "roughness": 0.24
+            }
+          },
+          "lighting": {
+            "environment": "Local RoomEnvironment with slate room (#33414d), no furniture, narrow strip panels at 65% emission; PMREM sigma 0.015",
+            "environmentIntensity": 0.48,
+            "lights": [
+              {
+                "type": "DirectionalLight",
+                "color": "#d9f4ff",
+                "intensity": 3.2,
+                "position": [
+                  1,
+                  6,
+                  6
+                ]
+              },
+              {
+                "type": "DirectionalLight",
+                "color": "#7ccde9",
+                "intensity": 2.6,
+                "position": [
+                  4,
+                  2,
+                  -5
+                ]
+              },
+              {
+                "type": "DirectionalLight",
+                "color": "#efdbc0",
+                "intensity": 1.15,
+                "position": [
+                  -4,
+                  3,
+                  2
+                ]
+              },
+              {
+                "type": "PointLight",
+                "color": "#a0eaff",
+                "intensity": 1.7,
+                "distance": 5,
+                "decay": 2,
+                "position": [
+                  0.12,
+                  -0.04,
+                  0.35
+                ],
+                "localToSculpture": true
+              }
+            ]
+          },
+          "camera": {
+            "landscape": {
+              "position": [
+                0,
+                0.65,
+                13.5
+              ],
+              "target": [
+                0,
+                0.25,
+                0
+              ],
+              "fov": 36,
+              "near": 0.1,
+              "far": 160
+            },
+            "portrait": {
+              "position": [
+                3.1,
+                0.9,
+                19.8
+              ],
+              "target": [
+                3.1,
+                0.35,
+                0
+              ],
+              "fov": 38,
+              "near": 0.1,
+              "far": 160
+            }
+          },
+          "composition": {
+            "sculpturePosition": [
+              3.1,
+              0.65,
+              0
+            ],
+            "sculptureRotation": [
+              0.08,
+              -0.32,
+              -0.075
+            ],
+            "sculptureScale": 1.28,
+            "planetCenter": [
+              60,
+              -213,
+              -40
+            ],
+            "planetRadius": 200,
+            "quietLeftFraction": 0.4
+          },
+          "rendering": {
+            "toneMapping": "ACESFilmicToneMapping",
+            "exposure": 0.91,
+            "transmissionResolutionScale": 1,
+            "samples": 4,
+            "bloom": {
+              "strength": 0.24,
+              "radius": 0.45,
+              "threshold": 1.1
+            },
+            "animationFrames": 0
+          },
+          "limits": {
+            "maxPixels": 8294400,
+            "maxDimension": 3840,
+            "maxTriangles": 750000,
+            "maxDrawCalls": 100,
+            "maxTextures": 64,
+            "renderTimeoutMs": 180000,
+            "maxBrowserHeapMB": 2048
+          },
+          "limitations": [
+            "Rasterized physical materials, environment lighting and screen-space transmission; not path-traced global illumination or spectral caustics.",
+            "Bloom uses a downsampled mip pyramid; geometry, physical refraction source and final color buffer are rendered at the declared native dimensions.",
+            "Procedural folds and axons are artistic abstractions, not anatomical reconstruction.",
+            "GPU/driver versions can change floating point results; source/recipe/seed repeatability does not promise cross-driver byte-identical pixels."
+          ]
+        },
+        "threeRevision": "187",
+        "capabilities": {
+          "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+          "vendor": "Google Inc. (Google)",
+          "maxTextureSize": 8192,
+          "maxRenderbufferSize": 8192
+        },
+        "stats": {
+          "frame": 69,
+          "calls": 38,
+          "triangles": 694994,
+          "points": 54,
+          "lines": 0,
+          "memory": {
+            "geometries": 17,
+            "textures": 15
+          },
+          "programs": 19,
+          "sceneTriangles": 499874,
+          "meshCount": 15
+        },
+        "dimensions": {
+          "cssWidth": 3840,
+          "cssHeight": 1600,
+          "requestedDPR": 1,
+          "browserDPR": 1,
+          "canvasWidth": 3840,
+          "canvasHeight": 1600,
+          "drawingBufferWidth": 3840,
+          "drawingBufferHeight": 1600,
+          "composerWidth": 3840,
+          "composerHeight": 1600,
+          "transmissionScale": 1
+        },
+        "camera": {
+          "position": [
+            0,
+            0.65,
+            13.5
+          ],
+          "target": [
+            0,
+            0.25,
+            0
+          ],
+          "fov": 36,
+          "near": 0.1,
+          "far": 160,
+          "aspect": 2.4,
+          "projectionMatrix": [
+            1.2823681404896892,
+            0,
+            0,
+            0,
+            0,
+            3.077683537175254,
+            0,
+            0,
+            0,
+            0,
+            -1.0012507817385865,
+            -1,
+            0,
+            0,
+            -0.20012507817385866,
+            0
+          ],
+          "matrixWorld": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0.9995613313382166,
+            -0.029616632039650856,
+            0,
+            0,
+            0.029616632039650856,
+            0.9995613313382166,
+            0,
+            0,
+            0.65,
+            13.5,
+            1
+          ]
+        },
+        "corePixel": {
+          "x": 2486,
+          "y": 727
+        },
+        "renderMs": 597,
+        "glError": 0
+      },
+      "pixelProof": {
+        "decodedWidth": 3840,
+        "decodedHeight": 1600,
+        "nativePixels": 6144000,
+        "rawRGBSha256": "3e49f3bf6b7ac84c6ad25bdb7affc808c2a6c50a83e76844199a39874a9621bc",
+        "crop": {
+          "left": 2230,
+          "top": 471,
+          "width": 512,
+          "height": 512
+        },
+        "cropPixelDifferenceFraction": 0.4380378723144531,
+        "cropWhiteClipFraction": 0.006763458251953125,
+        "upperLeftDarkPixelFraction": 1,
+        "method": "Decode captured WebGL canvas PNG directly. No resize. 512x512 crops preserve one source pixel per output pixel."
+      },
+      "files": [
+        {
+          "path": "public/assets/neural-master/neural-master-panoramic-3840x1600.png",
+          "bytes": 3721054,
+          "sha256": "bc9ca7482eb899fb0e122e75748115e1c152e9f2ccca68c343ad125f16f00510",
+          "width": 3840,
+          "height": 1600,
+          "operation": "direct WebGL canvas PNG; no resampling"
+        },
+        {
+          "path": "public/assets/neural-master/neural-master-panoramic-3840x1600.webp",
+          "bytes": 383216,
+          "sha256": "fc375371e034ac3b6c0f4e3b075cc8e4753c63566ac17a27a5963fcb136f69d9",
+          "width": 3840,
+          "height": 1600,
+          "operation": "same-size WebP encoding from native PNG"
+        },
+        {
+          "path": "public/assets/neural-master/neural-master-panoramic-3840x1600-detail-1to1.png",
+          "bytes": 629651,
+          "sha256": "33166b5f285a21176bbb16a6aacdc5c503c70659b6d7ac3636df1de1bdddb8f6",
+          "width": 512,
+          "height": 512,
+          "operation": "extract only; no resampling"
+        }
+      ]
+    },
+    {
+      "preset": "portrait",
+      "dimensions": {
+        "width": 2160,
+        "height": 3840
+      },
+      "proof": {
+        "recipe": {
+          "id": "ad-astra-neural-master-cgi-v1",
+          "classification": "Original procedural CGI / physically based WebGL rendering",
+          "disclosure": "Abstract neural sculpture. Not AI inference, human brain telemetry, or an anatomical/medical model.",
+          "seed": 401913,
+          "rasterInputs": [],
+          "palette": {
+            "background": "#020710",
+            "glass": "#daeff5",
+            "filament": "#8ce4ff",
+            "champagne": "#cbb894"
+          },
+          "geometry": {
+            "cortexSegments": [
+              160,
+              112
+            ],
+            "glassGyri": 60,
+            "primaryAxons": 144,
+            "fineAxons": 240,
+            "spiralTurns": 1.5,
+            "spiralSegments": 480
+          },
+          "materials": {
+            "cortex": {
+              "transmission": 1,
+              "roughness": 0.018,
+              "ior": 1.46,
+              "thickness": 0.12,
+              "metalness": 0
+            },
+            "gyri": {
+              "transmission": 1,
+              "roughness": 0.025,
+              "ior": 1.46,
+              "thickness": 0.16,
+              "metalness": 0
+            },
+            "spiral": {
+              "transmission": 0.92,
+              "roughness": 0.065,
+              "ior": 1.48,
+              "thickness": 0.24,
+              "metalness": 0
+            },
+            "goldEdges": {
+              "metalness": 0.88,
+              "roughness": 0.24
+            }
+          },
+          "lighting": {
+            "environment": "Local RoomEnvironment with slate room (#33414d), no furniture, narrow strip panels at 65% emission; PMREM sigma 0.015",
+            "environmentIntensity": 0.48,
+            "lights": [
+              {
+                "type": "DirectionalLight",
+                "color": "#d9f4ff",
+                "intensity": 3.2,
+                "position": [
+                  1,
+                  6,
+                  6
+                ]
+              },
+              {
+                "type": "DirectionalLight",
+                "color": "#7ccde9",
+                "intensity": 2.6,
+                "position": [
+                  4,
+                  2,
+                  -5
+                ]
+              },
+              {
+                "type": "DirectionalLight",
+                "color": "#efdbc0",
+                "intensity": 1.15,
+                "position": [
+                  -4,
+                  3,
+                  2
+                ]
+              },
+              {
+                "type": "PointLight",
+                "color": "#a0eaff",
+                "intensity": 1.7,
+                "distance": 5,
+                "decay": 2,
+                "position": [
+                  0.12,
+                  -0.04,
+                  0.35
+                ],
+                "localToSculpture": true
+              }
+            ]
+          },
+          "camera": {
+            "landscape": {
+              "position": [
+                0,
+                0.65,
+                13.5
+              ],
+              "target": [
+                0,
+                0.25,
+                0
+              ],
+              "fov": 36,
+              "near": 0.1,
+              "far": 160
+            },
+            "portrait": {
+              "position": [
+                3.1,
+                0.9,
+                19.8
+              ],
+              "target": [
+                3.1,
+                0.35,
+                0
+              ],
+              "fov": 38,
+              "near": 0.1,
+              "far": 160
+            }
+          },
+          "composition": {
+            "sculpturePosition": [
+              3.1,
+              0.65,
+              0
+            ],
+            "sculptureRotation": [
+              0.08,
+              -0.32,
+              -0.075
+            ],
+            "sculptureScale": 1.28,
+            "planetCenter": [
+              60,
+              -213,
+              -40
+            ],
+            "planetRadius": 200,
+            "quietLeftFraction": 0.4
+          },
+          "rendering": {
+            "toneMapping": "ACESFilmicToneMapping",
+            "exposure": 0.91,
+            "transmissionResolutionScale": 1,
+            "samples": 4,
+            "bloom": {
+              "strength": 0.24,
+              "radius": 0.45,
+              "threshold": 1.1
+            },
+            "animationFrames": 0
+          },
+          "limits": {
+            "maxPixels": 8294400,
+            "maxDimension": 3840,
+            "maxTriangles": 750000,
+            "maxDrawCalls": 100,
+            "maxTextures": 64,
+            "renderTimeoutMs": 180000,
+            "maxBrowserHeapMB": 2048
+          },
+          "limitations": [
+            "Rasterized physical materials, environment lighting and screen-space transmission; not path-traced global illumination or spectral caustics.",
+            "Bloom uses a downsampled mip pyramid; geometry, physical refraction source and final color buffer are rendered at the declared native dimensions.",
+            "Procedural folds and axons are artistic abstractions, not anatomical reconstruction.",
+            "GPU/driver versions can change floating point results; source/recipe/seed repeatability does not promise cross-driver byte-identical pixels."
+          ]
+        },
+        "threeRevision": "187",
+        "capabilities": {
+          "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+          "vendor": "Google Inc. (Google)",
+          "maxTextureSize": 8192,
+          "maxRenderbufferSize": 8192
+        },
+        "stats": {
+          "frame": 69,
+          "calls": 38,
+          "triangles": 694994,
+          "points": 54,
+          "lines": 0,
+          "memory": {
+            "geometries": 17,
+            "textures": 15
+          },
+          "programs": 19,
+          "sceneTriangles": 499874,
+          "meshCount": 15
+        },
+        "dimensions": {
+          "cssWidth": 1080,
+          "cssHeight": 1920,
+          "requestedDPR": 2,
+          "browserDPR": 2,
+          "canvasWidth": 2160,
+          "canvasHeight": 3840,
+          "drawingBufferWidth": 2160,
+          "drawingBufferHeight": 3840,
+          "composerWidth": 2160,
+          "composerHeight": 3840,
+          "transmissionScale": 1
+        },
+        "camera": {
+          "position": [
+            3.1,
+            0.9,
+            19.8
+          ],
+          "target": [
+            3.1,
+            0.35,
+            0
+          ],
+          "fov": 38,
+          "near": 0.1,
+          "far": 160,
+          "aspect": 0.5625,
+          "projectionMatrix": [
+            5.163041560312573,
+            0,
+            0,
+            0,
+            0,
+            2.9042108776758226,
+            0,
+            0,
+            0,
+            0,
+            -1.0012507817385865,
+            -1,
+            0,
+            0,
+            -0.20012507817385866,
+            0
+          ],
+          "matrixWorld": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0.9996144206527183,
+            -0.027767067240353285,
+            0,
+            0,
+            0.027767067240353285,
+            0.9996144206527183,
+            0,
+            3.1,
+            0.9,
+            19.8,
+            1
+          ]
+        },
+        "corePixel": {
+          "x": 1080,
+          "y": 1836
+        },
+        "renderMs": 581,
+        "glError": 0
+      },
+      "pixelProof": {
+        "decodedWidth": 2160,
+        "decodedHeight": 3840,
+        "nativePixels": 8294400,
+        "rawRGBSha256": "44a27f5f0ddab807129e0c802dbfce4fbf6eda434f9524f5d8ca4ac79bce23e2",
+        "crop": {
+          "left": 824,
+          "top": 1580,
+          "width": 512,
+          "height": 512
+        },
+        "cropPixelDifferenceFraction": 0.48722076416015625,
+        "cropWhiteClipFraction": 0.001499176025390625,
+        "upperLeftDarkPixelFraction": 0.863696035180855,
+        "method": "Decode captured WebGL canvas PNG directly. No resize. 512x512 crops preserve one source pixel per output pixel."
+      },
+      "files": [
+        {
+          "path": "public/assets/neural-master/neural-master-portrait-2160x3840.png",
+          "bytes": 6851057,
+          "sha256": "44ebcfeed113f025b8cc12565d81600c7adec8c3e27e1eb85e19f2093398f366",
+          "width": 2160,
+          "height": 3840,
+          "operation": "direct WebGL canvas PNG; no resampling"
+        },
+        {
+          "path": "public/assets/neural-master/neural-master-portrait-2160x3840.webp",
+          "bytes": 663606,
+          "sha256": "d57762baa9e7b5703872d945c4afcd31817e982b64a40c56071f6ea4a67fb1d2",
+          "width": 2160,
+          "height": 3840,
+          "operation": "same-size WebP encoding from native PNG"
+        },
+        {
+          "path": "public/assets/neural-master/neural-master-portrait-2160x3840-detail-1to1.png",
+          "bytes": 644311,
+          "sha256": "d6fc580ce02502ec0ce3c5a6963df95a34b8a270840d1339cb3b28f716f4063d",
+          "width": 512,
+          "height": 512,
+          "operation": "extract only; no resampling"
+        }
+      ]
+    },
+    {
+      "preset": "retina",
+      "dimensions": {
+        "width": 2880,
+        "height": 1620
+      },
+      "proof": {
+        "recipe": {
+          "id": "ad-astra-neural-master-cgi-v1",
+          "classification": "Original procedural CGI / physically based WebGL rendering",
+          "disclosure": "Abstract neural sculpture. Not AI inference, human brain telemetry, or an anatomical/medical model.",
+          "seed": 401913,
+          "rasterInputs": [],
+          "palette": {
+            "background": "#020710",
+            "glass": "#daeff5",
+            "filament": "#8ce4ff",
+            "champagne": "#cbb894"
+          },
+          "geometry": {
+            "cortexSegments": [
+              160,
+              112
+            ],
+            "glassGyri": 60,
+            "primaryAxons": 144,
+            "fineAxons": 240,
+            "spiralTurns": 1.5,
+            "spiralSegments": 480
+          },
+          "materials": {
+            "cortex": {
+              "transmission": 1,
+              "roughness": 0.018,
+              "ior": 1.46,
+              "thickness": 0.12,
+              "metalness": 0
+            },
+            "gyri": {
+              "transmission": 1,
+              "roughness": 0.025,
+              "ior": 1.46,
+              "thickness": 0.16,
+              "metalness": 0
+            },
+            "spiral": {
+              "transmission": 0.92,
+              "roughness": 0.065,
+              "ior": 1.48,
+              "thickness": 0.24,
+              "metalness": 0
+            },
+            "goldEdges": {
+              "metalness": 0.88,
+              "roughness": 0.24
+            }
+          },
+          "lighting": {
+            "environment": "Local RoomEnvironment with slate room (#33414d), no furniture, narrow strip panels at 65% emission; PMREM sigma 0.015",
+            "environmentIntensity": 0.48,
+            "lights": [
+              {
+                "type": "DirectionalLight",
+                "color": "#d9f4ff",
+                "intensity": 3.2,
+                "position": [
+                  1,
+                  6,
+                  6
+                ]
+              },
+              {
+                "type": "DirectionalLight",
+                "color": "#7ccde9",
+                "intensity": 2.6,
+                "position": [
+                  4,
+                  2,
+                  -5
+                ]
+              },
+              {
+                "type": "DirectionalLight",
+                "color": "#efdbc0",
+                "intensity": 1.15,
+                "position": [
+                  -4,
+                  3,
+                  2
+                ]
+              },
+              {
+                "type": "PointLight",
+                "color": "#a0eaff",
+                "intensity": 1.7,
+                "distance": 5,
+                "decay": 2,
+                "position": [
+                  0.12,
+                  -0.04,
+                  0.35
+                ],
+                "localToSculpture": true
+              }
+            ]
+          },
+          "camera": {
+            "landscape": {
+              "position": [
+                0,
+                0.65,
+                13.5
+              ],
+              "target": [
+                0,
+                0.25,
+                0
+              ],
+              "fov": 36,
+              "near": 0.1,
+              "far": 160
+            },
+            "portrait": {
+              "position": [
+                3.1,
+                0.9,
+                19.8
+              ],
+              "target": [
+                3.1,
+                0.35,
+                0
+              ],
+              "fov": 38,
+              "near": 0.1,
+              "far": 160
+            }
+          },
+          "composition": {
+            "sculpturePosition": [
+              3.1,
+              0.65,
+              0
+            ],
+            "sculptureRotation": [
+              0.08,
+              -0.32,
+              -0.075
+            ],
+            "sculptureScale": 1.28,
+            "planetCenter": [
+              60,
+              -213,
+              -40
+            ],
+            "planetRadius": 200,
+            "quietLeftFraction": 0.4
+          },
+          "rendering": {
+            "toneMapping": "ACESFilmicToneMapping",
+            "exposure": 0.91,
+            "transmissionResolutionScale": 1,
+            "samples": 4,
+            "bloom": {
+              "strength": 0.24,
+              "radius": 0.45,
+              "threshold": 1.1
+            },
+            "animationFrames": 0
+          },
+          "limits": {
+            "maxPixels": 8294400,
+            "maxDimension": 3840,
+            "maxTriangles": 750000,
+            "maxDrawCalls": 100,
+            "maxTextures": 64,
+            "renderTimeoutMs": 180000,
+            "maxBrowserHeapMB": 2048
+          },
+          "limitations": [
+            "Rasterized physical materials, environment lighting and screen-space transmission; not path-traced global illumination or spectral caustics.",
+            "Bloom uses a downsampled mip pyramid; geometry, physical refraction source and final color buffer are rendered at the declared native dimensions.",
+            "Procedural folds and axons are artistic abstractions, not anatomical reconstruction.",
+            "GPU/driver versions can change floating point results; source/recipe/seed repeatability does not promise cross-driver byte-identical pixels."
+          ]
+        },
+        "threeRevision": "187",
+        "capabilities": {
+          "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+          "vendor": "Google Inc. (Google)",
+          "maxTextureSize": 8192,
+          "maxRenderbufferSize": 8192
+        },
+        "stats": {
+          "frame": 69,
+          "calls": 38,
+          "triangles": 694994,
+          "points": 54,
+          "lines": 0,
+          "memory": {
+            "geometries": 17,
+            "textures": 15
+          },
+          "programs": 19,
+          "sceneTriangles": 499874,
+          "meshCount": 15
+        },
+        "dimensions": {
+          "cssWidth": 1440,
+          "cssHeight": 810,
+          "requestedDPR": 2,
+          "browserDPR": 2,
+          "canvasWidth": 2880,
+          "canvasHeight": 1620,
+          "drawingBufferWidth": 2880,
+          "drawingBufferHeight": 1620,
+          "composerWidth": 2880,
+          "composerHeight": 1620,
+          "transmissionScale": 1
+        },
+        "camera": {
+          "position": [
+            0,
+            0.65,
+            13.5
+          ],
+          "target": [
+            0,
+            0.25,
+            0
+          ],
+          "fov": 36,
+          "near": 0.1,
+          "far": 160,
+          "aspect": 1.7777777777777777,
+          "projectionMatrix": [
+            1.7311969896610804,
+            0,
+            0,
+            0,
+            0,
+            3.077683537175254,
+            0,
+            0,
+            0,
+            0,
+            -1.0012507817385865,
+            -1,
+            0,
+            0,
+            -0.20012507817385866,
+            0
+          ],
+          "matrixWorld": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0.9995613313382166,
+            -0.029616632039650856,
+            0,
+            0,
+            0.029616632039650856,
+            0.9995613313382166,
+            0,
+            0,
+            0.65,
+            13.5,
+            1
+          ]
+        },
+        "corePixel": {
+          "x": 2013,
+          "y": 736
+        },
+        "renderMs": 676,
+        "glError": 0
+      },
+      "pixelProof": {
+        "decodedWidth": 2880,
+        "decodedHeight": 1620,
+        "nativePixels": 4665600,
+        "rawRGBSha256": "6eb97e0ee82070dfde80620b6d95492f4912aefbd2826f7643fb837199431890",
+        "crop": {
+          "left": 1757,
+          "top": 480,
+          "width": 512,
+          "height": 512
+        },
+        "cropPixelDifferenceFraction": 0.4400367736816406,
+        "cropWhiteClipFraction": 0.00730133056640625,
+        "upperLeftDarkPixelFraction": 1,
+        "method": "Decode captured WebGL canvas PNG directly. No resize. 512x512 crops preserve one source pixel per output pixel."
+      },
+      "files": [
+        {
+          "path": "public/assets/neural-master/neural-master-retina-2880x1620.png",
+          "bytes": 3413453,
+          "sha256": "1f40e18326ab85806eb8683002f1d3bc1f80f7faead4665748c47c58c4623c25",
+          "width": 2880,
+          "height": 1620,
+          "operation": "direct WebGL canvas PNG; no resampling"
+        },
+        {
+          "path": "public/assets/neural-master/neural-master-retina-2880x1620.webp",
+          "bytes": 350386,
+          "sha256": "2607a6784cd905e9d89baea7b24d28948ee62eee1315e4f4832cb1c3326896b4",
+          "width": 2880,
+          "height": 1620,
+          "operation": "same-size WebP encoding from native PNG"
+        },
+        {
+          "path": "public/assets/neural-master/neural-master-retina-2880x1620-detail-1to1.png",
+          "bytes": 627250,
+          "sha256": "c07043c37fc246629874999ec498169f2efb3342a92becbaf773557c320515ad",
+          "width": 512,
+          "height": 512,
+          "operation": "extract only; no resampling"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "schema": "ad-astra-cinematic-story-assets/v1",
+  "brand": "AD ASTRA",
+  "conceptArt": true,
+  "releaseAuthorization": false,
+  "assets": [
+    {
+      "id": "intelligence",
+      "chapter": "AI / human-directed intelligence",
+      "alt": "A luminous neural sphere wrapped in titanium and optical-glass orbital ribbons.",
+      "intendedRoutes": [
+        "/",
+        "/intelligence/",
+        "/products/core-intelligence/",
+        "/products/autonomous-workflows/"
+      ],
+      "claimBoundary": "Concept art; customer AI execution remains release-gated.",
+      "source": {
+        "tool": "OpenAI image generation",
+        "date": "2026-11-10",
+        "master": "exec-c81e30a7-74a9-4e27-ab83-4a6b81a45005.png",
+        "width": 1672,
+        "height": 941,
+        "sha256": "36ad9b496c21a01214f92726948dde5d43e00f1fd1cdebdd198cc707def7aa6a"
+      },
+      "exports": [
+        {
+          "path": "/assets/story/intelligence-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 87472,
+          "sha256": "29565d3e95b56f86fa4531b9e9357a977a0d2eb39af267c743e654156b102ecc"
+        },
+        {
+          "path": "/assets/story/intelligence-1672.webp",
+          "width": 1672,
+          "height": 941,
+          "bytes": 222210,
+          "sha256": "13107426eef7014bfe6708340888aba25a7eabe7f32e0efbfe942219e762ba6e"
+        }
+      ],
+      "reviewStatus": "candidate",
+      "humanVisualApproval": null,
+      "rightsApproval": null,
+      "releaseAuthorization": false
+    },
+    {
+      "id": "vision",
+      "chapter": "Vision / humanity and Earth",
+      "alt": "A lone observer looks across Earth's blue atmosphere from a warm titanium observation space.",
+      "intendedRoutes": [
+        "/",
+        "/company/"
+      ],
+      "claimBoundary": "Imagined vision scene; not an AD ASTRA facility or space operation.",
+      "source": {
+        "tool": "OpenAI image generation",
+        "date": "2026-11-10",
+        "master": "exec-cbac8114-7509-43d2-b8e7-5330a6b70175.png",
+        "width": 1672,
+        "height": 941,
+        "sha256": "d83b2c3a0ed26936785a45bcbb4940e617e93d2ecf8dd56b8ce64d033afd7222"
+      },
+      "exports": [
+        {
+          "path": "/assets/story/vision-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 100548,
+          "sha256": "e29dcf3e6e2194745f63b360e945ed54735c1ceb9e35fd2d5292ca9eae9a77dd"
+        },
+        {
+          "path": "/assets/story/vision-1672.webp",
+          "width": 1672,
+          "height": 941,
+          "bytes": 246772,
+          "sha256": "6e8071b392096b0ad5f9f237f3ce6f97d8645b4a2cebe1133fe43be716094512"
+        }
+      ],
+      "reviewStatus": "candidate",
+      "humanVisualApproval": null,
+      "rightsApproval": null,
+      "releaseAuthorization": false
+    },
+    {
+      "id": "products",
+      "chapter": "Products / ideas into useful work",
+      "alt": "Six precision-sculpted glass and titanium forms connected by a fine cyan thread on dark stone.",
+      "intendedRoutes": [
+        "/",
+        "/products/",
+        "/products/creative-studio/",
+        "/services/"
+      ],
+      "claimBoundary": "Sculptural product-family concepts, not shipped software or hardware.",
+      "source": {
+        "tool": "OpenAI image generation",
+        "date": "2026-11-10",
+        "master": "exec-dc55c636-9b7c-4b5a-9b9e-833eae81f0bd.png",
+        "width": 1672,
+        "height": 941,
+        "sha256": "d02ba332e2dfc8995af66c1a6836815a9be5fa23c7f6d71e1c5ef923f979c7ac"
+      },
+      "exports": [
+        {
+          "path": "/assets/story/products-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 76148,
+          "sha256": "740c913e77192c0d2e861ac539811f7b66fa9fc5781dd5f51a4e4113e71a2f09"
+        },
+        {
+          "path": "/assets/story/products-1672.webp",
+          "width": 1672,
+          "height": 941,
+          "bytes": 164154,
+          "sha256": "8251c134bcbd161922541e6b16faa9384115663e85c4ead32833c66f6d7f72eb"
+        }
+      ],
+      "reviewStatus": "candidate",
+      "humanVisualApproval": null,
+      "rightsApproval": null,
+      "releaseAuthorization": false
+    },
+    {
+      "id": "agi",
+      "chapter": "Future / AGI engineering research",
+      "alt": "A researcher studies connected glass nodes and cyan pathways above a precision research table.",
+      "intendedRoutes": [
+        "/",
+        "/intelligence/",
+        "/products/specialist-intelligence/",
+        "/products/developer-platform/"
+      ],
+      "claimBoundary": "Conceptual research scene; AGI is not achieved or available to customers.",
+      "source": {
+        "tool": "OpenAI image generation",
+        "date": "2026-11-10",
+        "master": "exec-2adf80ae-b2a4-47e7-9341-ab7e502fe379.png",
+        "width": 1672,
+        "height": 941,
+        "sha256": "b3d8e04b48fb974ad218f35e15988753e82aa2020b16de6d0b6b083d58fb6c87"
+      },
+      "exports": [
+        {
+          "path": "/assets/story/agi-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 69254,
+          "sha256": "bf066cce6f46f9f7c31b20e18cad120514da76fe5b46ae2fe996939bb3d2d030"
+        },
+        {
+          "path": "/assets/story/agi-1672.webp",
+          "width": 1672,
+          "height": 941,
+          "bytes": 148876,
+          "sha256": "353b988ffc78be51728ee32bdf5add3c07d2727d4c265ef591ac0082f469b4ee"
+        }
+      ],
+      "reviewStatus": "candidate",
+      "humanVisualApproval": null,
+      "rightsApproval": null,
+      "releaseAuthorization": false
+    },
+    {
+      "id": "global",
+      "chapter": "Global positioning / connection with responsibility",
+      "alt": "A blue Earth globe above a titanium plinth, encircled by delicate optical arcs.",
+      "intendedRoutes": [
+        "/",
+        "/services/",
+        "/products/business-commerce/"
+      ],
+      "claimBoundary": "Global market research imagery; no countries or regions are represented as approved for service.",
+      "source": {
+        "tool": "OpenAI image generation",
+        "date": "2026-11-10",
+        "master": "exec-0963f01a-f7bc-46f0-bd42-7aa68fc5846a.png",
+        "width": 1672,
+        "height": 941,
+        "sha256": "a5a0946a25c9cb8035bec4254bbf5873b5e37001bf5782e3eb6ec2e2b335acc7"
+      },
+      "exports": [
+        {
+          "path": "/assets/story/global-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 59906,
+          "sha256": "c277697ecd6929d21403f21453afaa8af6e3027b785968f207e6ac475e567fec"
+        },
+        {
+          "path": "/assets/story/global-1672.webp",
+          "width": 1672,
+          "height": 941,
+          "bytes": 141168,
+          "sha256": "f5548ccb8314ed71992075e1ab8651c3417254cd28943efd2e54b6b4b9a62639"
+        }
+      ],
+      "reviewStatus": "candidate",
+      "humanVisualApproval": null,
+      "rightsApproval": null,
+      "releaseAuthorization": false
+    },
+    {
+      "id": "beyond",
+      "chapter": "Space and beyond / ASI research horizon",
+      "alt": "Earth's curved horizon beneath a distant violet light and sweeping titanium orbital arcs in deep space.",
+      "intendedRoutes": [
+        "/",
+        "/intelligence/"
+      ],
+      "claimBoundary": "Speculative concept art; ASI is not achieved, deployed or available.",
+      "source": {
+        "tool": "OpenAI image generation",
+        "date": "2026-11-10",
+        "master": "exec-9dc44c6f-64ed-4fd4-bc37-c88d02226494.png",
+        "width": 1672,
+        "height": 941,
+        "sha256": "7c1ab9ae68cdc8998a22c213da8e98f7b3a96a40e83ed7aea991d70b44e6b427"
+      },
+      "exports": [
+        {
+          "path": "/assets/story/beyond-960.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 44318,
+          "sha256": "cf08fc0cab5daf607713a2346b1d5b1945ad6f3fedc41f2b1ddf771d083ff84f"
+        },
+        {
+          "path": "/assets/story/beyond-1672.webp",
+          "width": 1672,
+          "height": 941,
+          "bytes": 106940,
+          "sha256": "dab893845a01573def7e3fbaea0d96ac480156d75a52a3a1b1c7361440bfb33c"
+        }
+      ],
+      "reviewStatus": "candidate",
+      "humanVisualApproval": null,
+      "rightsApproval": null,
+      "releaseAuthorization": false
+    }
+  ]
+}

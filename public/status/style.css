@@ -2,6 +2,7 @@
 .availability-update p,.availability-note{font-size:14px;color:var(--muted)}
 .availability-update button{cursor:pointer;min-height:44px}.availability-update button:disabled{opacity:.6;cursor:wait}
 .availability-update button[hidden]{display:none}
+.field-note{margin:-8px 0 18px;color:var(--muted);font-size:12px;line-height:1.5}
 .availability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 .availability-card{padding:26px;border:1px solid var(--line);border-radius:18px;background:var(--ink-soft);min-width:0}
 .availability-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}

@@ -9,6 +9,7 @@
     learn: 'Learn — build understanding',
     explore: 'Explore — test possibilities'
   };
+  const agentDefaults = {guide:'ask', researcher:'research', creator:'create', analyst:'explore', navigator:'ask', access:'learn', visual:'create'};
   function clerkDomain() {
     try { return atob(publishableKey.split('_')[2]).slice(0, -1); } catch { return 'clerk.adastra.global'; }
   }
@@ -34,6 +35,10 @@
     const form = $('live-ai-form');
     if (!form) return;
     const question = $('live-ai-question');
+    const agent = $('live-ai-agent');
+    if (agent && !agent.querySelector('option[value="visual"]')) {
+      const option = document.createElement('option'); option.value = 'visual'; option.textContent = 'Astra Visual — visual briefs'; agent.append(option);
+    }
     const mode = $('live-ai-mode');
     const submit = $('live-ai-submit');
     const status = $('live-ai-status');
@@ -46,6 +51,7 @@
     }));
     const requestedMode = new URLSearchParams(location.search).get('mode');
     if (modeLabels[requestedMode]) mode.value = requestedMode;
+    agent?.addEventListener('change', () => { if (agentDefaults[agent.value]) mode.value = agentDefaults[agent.value]; });
     form.addEventListener('submit', async event => {
       event.preventDefault();
       if (submit.dataset.available !== 'true') { status.textContent = 'The live engine is paused while release checks are completed.'; return; }
@@ -65,7 +71,7 @@
         const response = await fetch('/api/ask', {
           method: 'POST', credentials: 'same-origin', signal: AbortSignal.timeout(25000),
           headers: {'Content-Type': 'application/json', 'X-Ad-Astra-Request': 'public-v1', 'Authorization': `Bearer ${token}`, 'Idempotency-Key': pendingRequest.key},
-          body: JSON.stringify({question: value, mode: mode.value, references: []})
+          body: JSON.stringify({question: value, agentId: agent?.value || 'guide', mode: mode.value, references: []})
         });
         const data = await response.json();
         if (!response.ok || !data.ok) throw new Error(data?.error || 'unavailable');
@@ -76,6 +82,8 @@
       } catch (error) {
         status.textContent = ['rate_limit_reached','daily_capacity_reached'].includes(error.message)
           ? 'You have reached the hourly request limit. Please try again later.'
+          : error.message === 'paid_access_required' ? 'Paid access was not authorized. Check your account and subscription.'
+          : error.message === 'request_replayed' ? 'This request was already attempted. No model request was repeated.'
           : ['authentication_required','authentication_invalid'].includes(error.message)
             ? 'Please sign in again to continue.'
             : 'The live engine is unavailable right now. Please try again shortly.';

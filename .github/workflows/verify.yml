@@ -4,7 +4,7 @@ permissions:
   contents: read
 jobs:
   security-and-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -15,9 +15,55 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --ignore-scripts
       - run: npm test
+  website-browser:
+    name: Cinematic website responsive and interaction QA
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.22.1'
+      - run: npm ci --ignore-scripts
+      - name: Use official HTTPS Ubuntu mirrors
+        timeout-minutes: 1
+        run: sudo --preserve-env=CI,RUNNER_ENVIRONMENT -- "$(command -v node)" scripts/prepare-ci-ubuntu-mirrors.cjs --apply
+      - name: Install Chromium system dependencies
+        timeout-minutes: 3
+        run: npx playwright install-deps chromium
+      - name: Install locked Chromium browser
+        timeout-minutes: 3
+        env:
+          PLAYWRIGHT_DOWNLOAD_CONNECTION_TIMEOUT: '60000'
+        run: npx playwright install chromium
+      - name: Verify all public routes without external writes
+        env:
+          AD_ASTRA_AUDIT_OUTPUT: ${{ runner.temp }}/ad-astra-browser-evidence
+          AD_ASTRA_PREVIEW_EVIDENCE: ${{ runner.temp }}/ad-astra-browser-evidence/portal
+        run: |
+          npm run trust:browser:test
+          node scripts/serve-audit.cjs > "$RUNNER_TEMP/ad-astra-audit-server.log" 2>&1 &
+          audit_server_pid=$!
+          trap 'kill "$audit_server_pid"' EXIT
+          curl --retry 10 --retry-connrefused --retry-delay 1 --fail --silent http://127.0.0.1:4175/ > /dev/null
+          node scripts/audit-browser.cjs
+          node scripts/accept-platform-preview.cjs
+          AD_ASTRA_PROJECT_REPORT="$RUNNER_TEMP/ad-astra-browser-evidence/project-coverage.json" npm run website:audit
+      - name: Retain browser failure and route evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: public-browser-evidence-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/ad-astra-browser-evidence
+            ${{ runner.temp }}/ad-astra-audit-server.log
+          retention-days: 7
   workspace-preview:
     name: Isolated workspace types, contracts, build and browser QA
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     env:
       NEXT_TELEMETRY_DISABLED: '1'
     defaults:
@@ -35,7 +81,18 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npm run test:runtime
-      - run: npx playwright install --with-deps chromium
+      - name: Use official HTTPS Ubuntu mirrors
+        working-directory: .
+        timeout-minutes: 1
+        run: sudo --preserve-env=CI,RUNNER_ENVIRONMENT -- "$(command -v node)" scripts/prepare-ci-ubuntu-mirrors.cjs --apply
+      - name: Install Chromium system dependencies
+        timeout-minutes: 3
+        run: npx playwright install-deps chromium
+      - name: Install locked Chromium browser
+        timeout-minutes: 3
+        env:
+          PLAYWRIGHT_DOWNLOAD_CONNECTION_TIMEOUT: '60000'
+        run: npx playwright install chromium
       - run: npm run test:browser
 # Production remains manual: stage on the exact team/project, run real Redis
 # acceptance during the Vercel build, verify the deployment, then promote.

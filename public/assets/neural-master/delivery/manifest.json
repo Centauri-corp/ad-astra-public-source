@@ -1,0 +1,44 @@
+{
+  "schema": "ad-astra-native-cgi-delivery/v1",
+  "generator": "scripts/build-neural-master-delivery.cjs",
+  "classification": "Original procedural CGI",
+  "source": {
+    "file": "public/assets/neural-master/neural-master-landscape-3840x2160.png",
+    "width": 3840,
+    "height": 2160,
+    "sha256": "7154081165187348da70616ae400ca463a3858fd7fbdcd883a1beaa84827d3b7",
+    "resourceId": "native-neural-cgi",
+    "provenance": "public/assets/neural-master/manifest.json"
+  },
+  "encoding": {
+    "format": "avif",
+    "quality": 55,
+    "effort": 6,
+    "upscaled": false
+  },
+  "exports": [
+    {
+      "path": "/assets/neural-master/delivery/neural-core-800.avif",
+      "width": 800,
+      "height": 450,
+      "bytes": 15510,
+      "sha256": "b6c8948b7ff1a09227413ae8d40e5c2ae01f370713bd5e8e93df4ed6e73ecdc0"
+    },
+    {
+      "path": "/assets/neural-master/delivery/neural-core-1600.avif",
+      "width": 1600,
+      "height": 900,
+      "bytes": 44087,
+      "sha256": "8720fe9e4d9bac9037845d96c352d4c243363529a8eb9a87d5d6ace321abb871"
+    },
+    {
+      "path": "/assets/neural-master/delivery/neural-core-3840.avif",
+      "width": 3840,
+      "height": 2160,
+      "bytes": 143364,
+      "sha256": "2393c4fded782a3e5643b91605cf8fe4156686ce1b3fee80b45c067031cf45b3"
+    }
+  ],
+  "humanVisualApproval": null,
+  "releaseAuthorization": false
+}
