@@ -33,6 +33,8 @@ body:not(.experience-site){background:var(--space)}body:not(.experience-site) .s
 /* On small screens, navigation is a full visual layer rather than a dropdown. */
 @media(max-width:760px){
  body .site-menu{position:static;z-index:60}
+ /* Closed details content must not retain an off-canvas layout box when JavaScript is unavailable. */
+ body .site-menu:not([open])>:not(summary){display:none}
  body .site-menu summary{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;min-width:62px;min-height:44px;padding:0;gap:7px;color:var(--text);font-size:9px;letter-spacing:.08em}
  body .site-menu-label{display:block}
  body .site-menu-icon{display:grid;gap:5px;width:20px}
