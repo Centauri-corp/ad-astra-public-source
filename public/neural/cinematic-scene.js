@@ -49,7 +49,7 @@ export function createCinematicScene(host) {
  const bodyGeometry = new THREE.SphereGeometry(1, 72, 48), position = bodyGeometry.attributes.position, uv = bodyGeometry.attributes.uv;
  for (let i = 0; i < position.count; i++) { const p = cortex(uv.getX(i) * TAU, (1 - uv.getY(i)) * Math.PI); position.setXYZ(i, p.x, p.y, p.z); }
  bodyGeometry.computeVertexNormals();
- const glass = new THREE.MeshPhysicalMaterial({color: 0x78a7bb, metalness: .02, roughness: .035, transmission: .94, thickness: .28, ior: 1.46, clearcoat: 1, clearcoatRoughness: .03, transparent: true, opacity: .7, envMapIntensity: .9});
+ const glass = new THREE.MeshPhysicalMaterial({color: 0x416b7e, metalness: .02, roughness: .12, transmission: .94, thickness: .12, ior: 1.46, clearcoat: 1, clearcoatRoughness: .08, transparent: true, opacity: .14, depthWrite:false, envMapIntensity: .5});
  sculpture.add(new THREE.Mesh(bodyGeometry, glass));
  const folds = [];
  for (let i = 0; i < 132; i++) {
@@ -60,13 +60,13 @@ export function createCinematicScene(host) {
    const u = baseU + (.20 * Math.cos(a) + .045 * Math.sin(a * 2 + i)) / Math.max(.45, Math.sin(baseV));
    points.push(cortex(u, v, 1.025));
   }
-  folds.push(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points, true), 44, .024 + .007 * (1 + Math.sin(i)), 7, true));
+  folds.push(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points, true), 44, .007 + .003 * (1 + Math.sin(i)), 6, true));
  }
- const foldsMaterial = new THREE.MeshPhysicalMaterial({color: 0xb6d5df, metalness: .06, roughness: .045, transmission: .88, thickness: .11, ior: 1.46, clearcoat: 1, envMapIntensity: 1.1});
+ const foldsMaterial = new THREE.MeshPhysicalMaterial({color: 0x8dc9dd, metalness: .25, roughness: .18, transmission: .5, thickness: .035, ior: 1.46, clearcoat: 1, transparent:true, opacity:.65, emissive:0x234c60, emissiveIntensity:.16, envMapIntensity: .65});
  sculpture.add(new THREE.Mesh(merged(folds), foldsMaterial));
  const pathways = [], filaments = [];
- for (let i = 0; i < 82; i++) {
-  const end = cortex(i * 2.39996323, Math.acos(1 - 2 * (i + .5) / 82), .91);
+ for (let i = 0; i < 160; i++) {
+  const end = cortex(i * 2.39996323, Math.acos(1 - 2 * (i + .5) / 160), .91);
   const curve = new THREE.CatmullRomCurve3([new THREE.Vector3(.04, -.13, 0), new THREE.Vector3(end.x * .3 + .13 * Math.sin(i), end.y * .45, end.z * .25), end]);
   pathways.push(curve);
   const points = curve.getPoints(24);
@@ -76,7 +76,11 @@ export function createCinematicScene(host) {
  const fiberMaterial = new THREE.LineBasicMaterial({color: 0x9de5f3, transparent: true, opacity: .25});
  sculpture.add(new THREE.LineSegments(network, fiberMaterial));
  const pulseGeometry = new THREE.BufferGeometry(); pulseGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pathways.length * 3), 3));
- const pulseMaterial = new THREE.PointsMaterial({color: 0xbef5ff, size: .035, transparent: true, opacity: .85, blending: THREE.AdditiveBlending, depthWrite: false});
+ const glowCanvas=document.createElement('canvas');glowCanvas.width=glowCanvas.height=64;
+ const glow=glowCanvas.getContext('2d'),gradient=glow.createRadialGradient(32,32,0,32,32,32);
+ gradient.addColorStop(0,'#ffffff');gradient.addColorStop(.12,'#ddf7ff');gradient.addColorStop(.3,'#73d4fa99');gradient.addColorStop(1,'#73d4fa00');glow.fillStyle=gradient;glow.fillRect(0,0,64,64);
+ const glowTexture=new THREE.CanvasTexture(glowCanvas);
+ const pulseMaterial = new THREE.PointsMaterial({color: 0xbef5ff, map:glowTexture, size: .065, transparent: true, opacity: .85, blending: THREE.AdditiveBlending, depthWrite: false});
  sculpture.add(new THREE.Points(pulseGeometry, pulseMaterial));
  const spiralPoints = [];
  for (let i = 0; i <= 240; i++) {
@@ -84,7 +88,7 @@ export function createCinematicScene(host) {
   spiralPoints.push(new THREE.Vector3(Math.cos(a) * radius, (t - .5) * 3.1, Math.sin(a) * radius * .83));
  }
  const gold = new THREE.MeshPhysicalMaterial({color: 0xcdb895, metalness: .95, roughness: .23, envMapIntensity: 1.9});
- const spiral = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(spiralPoints), 240, .023, 8), gold); sculpture.add(spiral);
+ const spiral = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(spiralPoints), 240, .013, 8), gold); sculpture.add(spiral);
  const orbit = new THREE.Mesh(new THREE.TorusGeometry(2.12, .0045, 5, 180), new THREE.MeshBasicMaterial({color: 0x9abacb, transparent: true, opacity: .26}));
  orbit.rotation.set(1.24, .28, -.22); sculpture.add(orbit);
  const stars = [];
@@ -95,11 +99,15 @@ export function createCinematicScene(host) {
  const key = new THREE.DirectionalLight(0xe0f6ff, 4); key.position.set(2, 4, 5); scene.add(key);
  const rim = new THREE.DirectionalLight(0x7cbad7, 3); rim.position.set(-4, .5, -3); scene.add(rim);
  const warm = new THREE.DirectionalLight(0xe9c99b, 2.4); warm.position.set(4, 1, 1); scene.add(warm);
- let disposed = false, time = 0, pointerX = 0, pointerY = 0, scroll = 0, currentMode = 'research';
+ let disposed = false, time = 0, pointerX = 0, pointerY = 0, scroll = 0, currentMode = 'research', currentActivity = 'idle';
  const palette = {research: 0xa3e8f4, create: 0xe2c19a, plan: 0xb4c3f2};
  function renderAt(seconds, input = {}) {
   if (disposed) return;
   time = seconds; pointerX += ((input.x || 0) - pointerX) * .045; pointerY += ((input.y || 0) - pointerY) * .045; scroll = input.scroll || 0;
+  if (['idle','listening','requesting','responding','speaking','error'].includes(input.activity)) currentActivity = input.activity;
+  const level = {idle:.72,listening:.86,requesting:.95,responding:.88,speaking:1,error:.4}[currentActivity];
+  pulseMaterial.opacity = Math.min(1,level + Math.sin(time * (currentActivity === 'speaking' ? 5 : 2)) * .06);
+  fiberMaterial.opacity = currentActivity === 'requesting' || currentActivity === 'speaking' ? .38 : .25;
   const mobile = host.clientWidth < 760;
   sculpture.position.set(mobile ? 0 : 1.45, mobile ? .48 : .15, 0);
   sculpture.rotation.set(.13 + pointerY * .1 + Math.sin(time * .13) * .025 + scroll*.12, -.35 + time * .06 + pointerX * .14 + scroll*.6, -.08 + Math.sin(time * .11) * .035);
@@ -116,6 +124,6 @@ export function createCinematicScene(host) {
   renderAt,
   setMode(mode) { if (!Object.hasOwn(palette, mode) || disposed) return; currentMode = mode; fiberMaterial.color.setHex(palette[mode]); pulseMaterial.color.setHex(palette[mode]); renderAt(time,{x:pointerX,y:pointerY,scroll}); },
   get mode() { return currentMode; },
-  dispose() { if (disposed) return; disposed = true; resizeObserver.disconnect(); const materials = new Set(); scene.traverse(item => { item.geometry?.dispose(); if (item.material) materials.add(item.material); }); for (const material of materials) material.dispose(); environment.dispose(); renderer.dispose(); renderer.domElement.remove(); }
+  dispose() { if (disposed) return; disposed = true; resizeObserver.disconnect(); const materials = new Set(); scene.traverse(item => { item.geometry?.dispose(); if (item.material) materials.add(item.material); }); for (const material of materials) material.dispose();glowTexture.dispose(); environment.dispose(); renderer.dispose(); renderer.domElement.remove(); }
  };
 }

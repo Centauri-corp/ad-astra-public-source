@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  function boot() {
-    document.querySelectorAll('[data-knowledge-map]').forEach(root => {
+  function boot(scope=document) {
+    scope.querySelectorAll('[data-knowledge-map]').forEach(root => {
       if (root.dataset.mapReady) return;
       const buttons = Array.from(root.querySelectorAll('[data-map-node]'));
       const edges = Array.from(root.querySelectorAll('[data-map-edge]'));
@@ -56,6 +56,7 @@
     });
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
+  globalThis.AdAstraKnowledgeMap=Object.freeze({mount:boot});
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => boot(), { once: true });
   else boot();
 })();

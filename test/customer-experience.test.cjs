@@ -72,7 +72,7 @@ test('journey selection has no provider, storage, tracking or microphone side ef
 });
 
 test('default selection receives a shareable URL and every direction survives history safely', () => {
-  const controls = {hidden:true}, announcement = {textContent:''}, listeners = {}, pushed = [];
+  const controls = {hidden:true,closest:()=>null}, announcement = {textContent:''}, listeners = {}, pushed = [];
   const buttons = framework.directions.map((d, i) => ({
     dataset:{directionChoice:d.id}, textContent:`0${i + 1}${d.name}↗`, attrs:{},
     setAttribute(key, value) { this.attrs[key] = value; },
@@ -81,7 +81,7 @@ test('default selection receives a shareable URL and every direction survives hi
   const panels = framework.directions.map(d => ({dataset:{directionPanel:d.id}, hidden:false}));
   const location = {search:''};
   const context = {
-    URLSearchParams, location,
+    URLSearchParams, location, AbortController,
     history:{pushState(_state, _title, url) { pushed.push(url); location.search = new URL(url, 'https://adastra.global').search; }},
     document:{
       querySelector(selector) { return selector === '[data-direction-controls]' ? controls : selector === '[data-direction-announcement]' ? announcement : null; },
@@ -132,10 +132,10 @@ test('cinematic arrival and workspace layers are decorative, controllable and do
   const workspaceCss = fs.readFileSync(path.join(root, 'public/platform-preview/style.css'), 'utf8');
   const systemJs = fs.readFileSync(path.join(root, 'public/design-system.js'), 'utf8');
   assert.match(home, /class="ad-arrival-atmosphere" aria-hidden="true"/);
-  assert.match(home, /Cinematic design preview · Customer access remains unavailable/);
+  assert.match(home, /Workspace preview · Customer access unavailable/);
   assert.match(home, /class="ad-arrival-system" aria-label="Ad Astra visual platform sequence"/);
   assert.match(home, /class="ad-architecture-sequence" aria-labelledby="architecture-sequence-title"/);
-  assert.match(home, /Explore the experience\. Products are in development\./);
+  assert.match(home, /Your question\. Connected context\. A next step you can review\./);
   assert.match(home, /data-neural-hero/);
   assert.match(home, /src="\/neural\/cinematic-home\.js"/);
   assert.doesNotMatch(home, /ad-arrival-film" autoplay/);

@@ -65,12 +65,12 @@ function browserHarness(responses) {
     const description = {textContent:service.description};
     return {dataset:{service:service.id}, querySelector(selector){return selector === '[data-state]' ? badge : description;}};
   });
-  const summary = {textContent:''};
+  const summary = {textContent:'',closest:()=>null};
   const refresh = {hidden:true, disabled:false, addEventListener(event, callback){this.click = callback;}};
   const calls = [];
   const context = {
-    document:{getElementById(id){return id === 'availability-update' ? summary : refresh;},querySelectorAll(){return cards;}},
-    AbortSignal, Intl, Date,
+    document:{querySelector(selector){return selector === '#availability-update' ? summary : refresh;},querySelectorAll(){return cards;}},
+    window:{addEventListener(){}},AbortController,AbortSignal,setTimeout,clearTimeout,Intl,Date,
     fetch:async (url, options) => {
       calls.push({url, options});
       const next = responses.shift(); if (next instanceof Error) throw next;

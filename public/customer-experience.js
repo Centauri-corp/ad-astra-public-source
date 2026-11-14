@@ -1,7 +1,9 @@
 'use strict';
 // Local interaction only. No account, network, microphone or persistent storage access.
-(() => {
- const tabs=[...document.querySelectorAll('[data-explore-tab]')];
+function mountHomeInteractions(scope=document) {
+ const section=scope.querySelector('[data-explore]');if(!section||section.dataset.companionReady)return;
+ section.dataset.companionReady='true';
+ const tabs=[...section.querySelectorAll('[data-explore-tab]')];
  function select(tab,focus=false){
   tabs.forEach(item=>{
    const selected=item===tab;
@@ -25,4 +27,6 @@
  });
  // All examples remain readable if scripting is unavailable.
  document.documentElement.classList.add('ad-interactive');
-})();
+}
+globalThis.AdAstraHomeInteractions=Object.freeze({mount:mountHomeInteractions});
+mountHomeInteractions();

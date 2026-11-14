@@ -13,21 +13,21 @@ const SERVICE_AREAS = Object.freeze([
     id: 'individuals-creators',
     label: 'Individuals & creators',
     title: 'Understand. Imagine. Make.',
-    description: 'Frame an everyday question, shape a creative brief or plan a learning journey. Proposed outcomes stay editable and open to human review.',
+    description: 'Build understanding, develop an idea or shape a learning plan. Keep explanations and creative work open to your judgment and review.',
     familyIds: Object.freeze(['core-intelligence', 'creative-studio'])
   }),
   Object.freeze({
     id: 'teams-organizations',
     label: 'Teams & organizations',
     title: 'Bring work into focus.',
-    description: 'Explore evidence, compare approaches and plan accountable handoffs. Integrations, team access and commercial terms are not yet committed.',
+    description: 'Compare evidence, clarify decisions and plan accountable handoffs. Team access, integrations and commercial terms remain unconfirmed.',
     familyIds: Object.freeze(['business-commerce', 'autonomous-workflows'])
   }),
   Object.freeze({
     id: 'specialists-builders',
     label: 'Specialists & builders',
-    title: 'Connect with care.',
-    description: 'Research complex subjects or outline bounded interfaces. Qualified oversight, authorization and verification remain essential.',
+    title: 'Make complexity clear.',
+    description: 'Connect sources to a research brief or map interfaces for an application. Keep uncertainty, qualified oversight, authorization and verification visible.',
     familyIds: Object.freeze(['specialist-intelligence', 'developer-platform'])
   })
 ]);

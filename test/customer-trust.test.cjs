@@ -50,7 +50,7 @@ test('customer HTML is static, semantic, local and honest about preview status',
     assert.ok(html.includes('href="https://adastra.global' + route + '"'));
     assert.ok(html.includes('Policy preview'));
     assert.ok(!/<form\b|<input\b|<textarea\b|<iframe\b|<audio\b|<video\b|\son[a-z]+\s*=/i.test(html));
-    assert.deepEqual([...html.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map(match => match[1]), ['/design-system.js']);
+    assert.deepEqual([...html.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map(match => match[1]), ['/design-system.js','/companion/app.js']);
     const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
     assert.equal(new Set(ids).size, ids.length);
     for (const match of html.matchAll(/(?:href="#|aria-labelledby=")([^" ]+)"/g)) assert.ok(ids.includes(match[1]), 'Missing target ' + match[1]);

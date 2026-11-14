@@ -2,14 +2,53 @@
 
 // A local visual prototype. No provider, network, storage or microphone APIs.
 (() => {
-  const app = document.querySelector('.wp-app');
+ if (globalThis.AdAstraWorkspacePreview) { globalThis.AdAstraWorkspacePreview.mount(); return; }
+ const mounted = new WeakMap();
+ // Native documents put the dialog after main; soft visits only replace main.
+ function referenceDialog(app) {
+  let dialog = app.querySelector('#reference-dialog') || document.querySelector('body > #reference-dialog');
+  if (!dialog) {
+    const element = (tag, attributes = {}, text = '') => {
+      const node = document.createElement(tag);
+      for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, value);
+      node.textContent = text;
+      return node;
+    };
+    dialog = element('dialog', {id: 'reference-dialog', class: 'wp-reference-dialog', 'aria-labelledby': 'reference-title', 'aria-describedby': 'reference-intro'});
+    const top = element('div', {class: 'wp-dialog-top'});
+    top.append(element('span', {class: 'wp-overline'}, 'Reference notes / Sample only'), element('button', {type: 'button', class: 'wp-close', id: 'close-references', 'aria-label': 'Close reference notes', autofocus: ''}, '✕'));
+    const title = element('h2', {id: 'reference-title'}, 'See what sits');
+    title.append(element('br'), document.createTextNode('behind the sample.'));
+    const details = element('details', {class: 'wp-preview-details'});
+    const summary = element('summary', {}, 'About this preview ');
+    summary.append(element('span', {'aria-hidden': 'true'}, '＋'));
+    const boundary = element('div');
+    boundary.append(
+      element('p', {class: 'wp-overline'}, 'PREVIEW BOUNDARY'),
+      element('p', {}, 'This customer workspace visual preview sends no customer prompts and performs no backend writes. Text and selections stay in memory in this tab, and reset on refresh. Responses are fixed samples, not live AI output.'),
+      element('p', {}, 'The neural scene is concept art, not an indicator of processing or service availability. Voice activation will be available after customer access verification.'),
+      element('a', {href: '/status/'}, 'Review current availability ↗')
+    );
+    details.append(summary, boundary);
+    dialog.append(top, title,
+      element('p', {id: 'reference-intro'}, 'These examples show how a brief could be structured. No sources were searched, retrieved or verified.'),
+      element('p', {id: 'reference-context', class: 'wp-reference-context'}),
+      element('ol', {id: 'reference-list', class: 'wp-reference-list'}), details);
+  }
+  app.append(dialog);
+  return dialog;
+ }
+ function mount(scope = document) {
+  const app = scope.matches?.('.wp-app') ? scope : scope.querySelector('.wp-app');
   if (!app) return;
-  const $ = id => document.getElementById(id);
+  if (mounted.has(app)) return mounted.get(app);
+  const dialog = referenceDialog(app);
+  const $ = id => app.querySelector('#' + id);
+  const events = new AbortController(), {signal} = events;
   const tabs = [...app.querySelectorAll('[role="tab"]')];
   const presets = [...app.querySelectorAll('[data-preset]')];
   const prompt = $('preview-prompt');
   const result = $('sample-result');
-  const dialog = $('reference-dialog');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const mobile = matchMedia('(max-width: 760px)');
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
@@ -121,13 +160,13 @@
   }
 
   tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => selectMode(tab.dataset.mode));
+    tab.addEventListener('click', () => selectMode(tab.dataset.mode), {signal});
     tab.addEventListener('keydown', event => {
       const positions = {ArrowRight: (index + 1) % tabs.length, ArrowDown: (index + 1) % tabs.length, ArrowLeft: (index + tabs.length - 1) % tabs.length, ArrowUp: (index + tabs.length - 1) % tabs.length, Home: 0, End: tabs.length - 1};
       if (!Object.hasOwn(positions, event.key)) return;
       event.preventDefault();
       selectMode(tabs[positions[event.key]].dataset.mode, true);
-    });
+    }, {signal});
   });
 
   presets.forEach((button, index) => button.addEventListener('click', () => {
@@ -138,7 +177,7 @@
     syncPresets();
     announce('Example selected. ' + modes[mode].submit + ' to explore the prewritten example.');
     prompt.focus({preventScroll: true});
-  }));
+  }, {signal}));
 
   prompt.addEventListener('input', () => {
     const match = modes[mode].samples.findIndex(item => item.question === prompt.value);
@@ -148,7 +187,7 @@
     // An edit invalidates the visible sample so it cannot appear to answer new text.
     clearSample();
     announce('');
-  });
+  }, {signal});
 
   function showSample(event) {
     event.preventDefault();
@@ -181,13 +220,13 @@
     $('sample-title').focus({preventScroll: true});
     $('sample-title').scrollIntoView({behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'start'});
   }
-  $('preview-composer').addEventListener('submit', showSample);
+  $('preview-composer').addEventListener('submit', showSample, {signal});
   prompt.addEventListener('keydown', event => {
     if (event.key === 'Enter' && (event.ctrlKey || event.metaKey) && !event.isComposing) {
       event.preventDefault();
       $('preview-composer').requestSubmit();
     }
-  });
+  }, {signal});
 
   function reset(focus = true) {
     if (dialog.open) dialog.close();
@@ -198,12 +237,12 @@
       $('workspace').scrollIntoView({behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'start'});
     }
   }
-  $('reset-preview').addEventListener('click', () => reset());
+  $('reset-preview').addEventListener('click', () => reset(), {signal});
   $('preview-voice').addEventListener('click', () => {
     const message = 'Voice activation will be available after customer access verification.';
     $('composer-note').textContent = message;
     announce(message);
-  });
+  }, {signal});
 
   function referenceRow(label, heading, text) {
     const li = document.createElement('li');
@@ -217,7 +256,7 @@
     return li;
   }
 
-  document.querySelectorAll('[data-open-references]').forEach(button => {
+  app.querySelectorAll('[data-open-references]').forEach(button => {
     button.addEventListener('click', () => {
       const example = shownSample || modes[mode].samples[selected];
       referenceTrigger = button;
@@ -230,17 +269,17 @@
       dialog.showModal();
       document.body.classList.add('wp-dialog-open');
       dialog.scrollTop = 0;
-    });
+    }, {signal});
   });
-  $('close-references').addEventListener('click', () => dialog.close());
+  $('close-references').addEventListener('click', () => dialog.close(), {signal});
   dialog.addEventListener('click', event => {
     const bounds = dialog.getBoundingClientRect();
     if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) dialog.close();
-  });
+  }, {signal});
   dialog.addEventListener('close', () => {
     document.body.classList.remove('wp-dialog-open');
     if (referenceTrigger?.isConnected) referenceTrigger.focus({preventScroll: true});
-  });
+  }, {signal});
 
   function syncMotion() {
     const off = paused || reducedMotion.matches || document.hidden;
@@ -254,25 +293,36 @@
       $('neural-scene').style.removeProperty('--scene-y');
     }
   }
-  $('preview-motion').addEventListener('click', () => { paused = !paused; syncMotion(); });
-  reducedMotion.addEventListener('change', syncMotion);
-  document.addEventListener('visibilitychange', syncMotion);
+  $('preview-motion').addEventListener('click', () => { paused = !paused; syncMotion(); }, {signal});
+  reducedMotion.addEventListener('change', syncMotion, {signal});
+  document.addEventListener('visibilitychange', syncMotion, {signal});
   $('neural-scene').addEventListener('pointermove', event => {
     if (app.dataset.visualMotion !== 'on' || !finePointer.matches || event.pointerType === 'touch') return;
     const bounds = event.currentTarget.getBoundingClientRect();
     event.currentTarget.style.setProperty('--scene-x', ((event.clientX - bounds.left) / bounds.width - .5) * 12 + 'px');
     event.currentTarget.style.setProperty('--scene-y', ((event.clientY - bounds.top) / bounds.height - .5) * 8 + 'px');
-  });
+  }, {signal});
   $('neural-scene').addEventListener('pointerleave', event => {
     event.currentTarget.style.removeProperty('--scene-x');
     event.currentTarget.style.removeProperty('--scene-y');
-  });
+  }, {signal});
   function syncOrientation() { app.querySelector('[role="tablist"]').setAttribute('aria-orientation', mobile.matches ? 'horizontal' : 'vertical'); }
-  mobile.addEventListener('change', syncOrientation);
+  mobile.addEventListener('change', syncOrientation, {signal});
 
   // Clearing on pagehide also prevents a browser back/forward snapshot retaining text.
-  window.addEventListener('pagehide', () => reset(false));
-  window.addEventListener('pageshow', event => { if (event.persisted) selectMode(new URLSearchParams(location.search).get('mode'), false, false); });
+  const controller = {dispose() {
+    if (signal.aborted) return;
+    events.abort();
+    referenceTrigger = null;
+    reset(false);
+    document.body.classList.remove('wp-dialog-open');
+    paused = true;
+    syncMotion();
+    mounted.delete(app);
+  }};
+  mounted.set(app, controller);
+  window.addEventListener('pagehide', controller.dispose, {signal});
+  window.addEventListener('ad-astra:before-route-change', controller.dispose, {signal});
   selectMode(new URLSearchParams(location.search).get('mode'), false, false);
   syncOrientation();
   syncMotion();
@@ -281,4 +331,10 @@
   app.querySelectorAll('[disabled]').forEach(control => {
     if (control.id !== 'preview-motion') control.disabled = false;
   });
+  return controller;
+ }
+ globalThis.AdAstraWorkspacePreview = Object.freeze({mount});
+ window.addEventListener('pageshow', event => { if (event.persisted) mount(); });
+ mount();
+ if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => mount(), {once: true});
 })();

@@ -251,3 +251,33 @@ html.site-transitioning .site-transition{animation:site-link-cue .45s ease-out b
  .product-shell .family-card h2{font-size:36px}
 }
 @media(prefers-reduced-motion:reduce){.experience-site picture,.experience-site picture img{animation:none!important;transform:none!important}}
+
+/* Marketing scenes share the page atmosphere; the workspace illustration is a link. */
+.customer-home .ad-workspace-story{background:radial-gradient(ellipse at 72% 50%,#17374638,transparent 70%)}
+.customer-home .ad-workspace-window{background:transparent;border:0;border-radius:0;box-shadow:none;transform:none}
+.customer-home .ad-workspace-window:hover{transform:none}
+.customer-home .ad-workspace-window:focus-visible{outline:2px solid var(--ice);outline-offset:-4px}
+.customer-home .ad-window-toolbar,.customer-home .ad-window-status{background:transparent;border:0}
+.customer-home .ad-window-composer{background:transparent;border:0;border-bottom:1px solid #b9d3df66;border-radius:0;backdrop-filter:none;padding-inline:0}
+.customer-home .ad-window-scene img{mask-image:radial-gradient(ellipse at 65% 45%,#000 32%,transparent 78%)}
+
+/* Keep horizon copy on a shaded scene, with no separate image or text panel. */
+.customer-home .ad-horizon-grid{gap:clamp(28px,4vw,64px)}
+.customer-home .ad-horizon-grid article{position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;min-height:640px;padding:240px 0 40px;background:transparent;border:0;border-radius:0;box-shadow:none}
+.customer-home .ad-horizon-grid article>picture{position:absolute;inset:0 -20px;z-index:-2;width:auto;pointer-events:none}
+.customer-home .ad-horizon-grid article>picture img{height:100%;aspect-ratio:auto;object-fit:cover;mask-image:radial-gradient(ellipse at 50% 40%,#000 28%,transparent 75%)}
+.customer-home .ad-horizon-grid article:after{content:"";position:absolute;inset:0 -20px;z-index:-1;background:linear-gradient(0deg,#030709 4%,#030709eb 30%,#03070970 56%,transparent 80%);pointer-events:none}
+.customer-home .ad-horizon-grid article>.ad-kicker{margin-top:0}
+.customer-home .ad-horizon-grid article>p:not(.ad-kicker){max-width:42ch;color:#c5d1da}
+.customer-home .ad-horizon-grid article>.ad-text-link{max-width:100%}
+
+/* The company product list uses open columns and quiet rules. */
+.experience-site .company-experience .architecture-rail{gap:24px 40px;background:transparent;border:0}
+.experience-site .company-experience .architecture-rail li{padding:24px 0;background:transparent;border-top:1px solid var(--hairline)}
+.experience-site .company-experience .architecture-rail small{display:block;color:var(--subtle);line-height:1.75}
+
+@media(max-width:760px){
+ .customer-home .ad-horizon-grid{grid-template-columns:1fr;gap:24px}
+ .customer-home .ad-horizon-grid article{min-height:580px;padding-top:220px}
+ .customer-home .ad-horizon-grid article>picture,.customer-home .ad-horizon-grid article:after{inset-inline:0}
+}

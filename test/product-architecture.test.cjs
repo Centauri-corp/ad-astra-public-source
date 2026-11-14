@@ -22,8 +22,8 @@ test('product text is escaped and cannot inject executable markup',()=>{
 test('filter preserves static fallback, handles invalid deep links and browser history',()=>{
  const cards=catalog.families.map(f=>({dataset:{modes:f.modes.join(' ')},hidden:false}));
  const buttons=['all',...visual.modes].map(mode=>({dataset:{mode},attrs:{},setAttribute(k,v){this.attrs[k]=v;},addEventListener(k,cb){this[k]=cb;}}));
- const result={textContent:''},filter={hidden:true,querySelectorAll:()=>buttons},listeners={},location={href:'https://adastra.global/products/?mode=__proto__'},history={pushState(_,__,url){location.href=String(url);}};
- const context={URL,location,history,document:{querySelector:()=>filter,querySelectorAll:()=>cards,getElementById:()=>result},window:{addEventListener(k,cb){listeners[k]=cb;}}};
+ const result={textContent:''},filter={hidden:true,closest:()=>null,querySelectorAll:()=>buttons},listeners={},location={href:'https://adastra.global/products/?mode=__proto__'},history={pushState(_,__,url){location.href=String(url);}};
+ const context={URL,location,history,AbortController,document:{querySelector:selector=>selector==='[data-mode-filter]'?filter:result,querySelectorAll:()=>cards},window:{addEventListener(k,cb){listeners[k]=cb;}}};
  vm.runInNewContext(fs.readFileSync(path.join(root,'public/products/discovery.js'),'utf8'),context);
  assert.equal(filter.hidden,false);assert.ok(cards.every(c=>!c.hidden));
  for(const mode of visual.modes){buttons.find(b=>b.dataset.mode===mode).click();assert.equal(cards.filter(c=>!c.hidden).length,catalog.families.filter(f=>f.modes.includes(mode)).length);assert.equal(new URL(location.href).searchParams.get('mode'),mode);assert.equal(buttons.filter(b=>b.attrs['aria-pressed']==='true').length,1);}

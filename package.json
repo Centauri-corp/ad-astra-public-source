@@ -13,6 +13,7 @@
     "shell:build": "node scripts/build-site-shell.cjs",
     "website:build": "node scripts/build-website-project.cjs && npm run experience:build && npm run journey:build && npm run products:build && npm run status:build && npm run workspace:build && npm run trust:build && npm run shell:build && npm run sources:write",
     "website:audit": "node scripts/audit-website-project.cjs",
+    "companion:browser:test": "node scripts/audit-companion.cjs",
     "website:promotion-check": "node scripts/audit-website-project.cjs --require-visual-approval",
     "products:build": "node scripts/build-products.cjs",
     "status:build": "node scripts/build-operating-status.cjs",

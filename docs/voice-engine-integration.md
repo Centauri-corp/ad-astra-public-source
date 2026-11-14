@@ -1,5 +1,12 @@
 # Ad Astra voice and engine-event increment
 
+This records the earlier workspace event/voice increment. The persistent public
+companion, cross-page context, shared identity verification and opt-in voice
+conversation are documented in [neural-companion.md](neural-companion.md).
+Current source and provider evidence belongs to the selected PR #39 / private
+PR #54 release chain; historical authentication statements below are not a new
+requirement to repeat sign-in or regenerate credentials.
+
 ## Credential decision and scope
 
 The owner authorized reuse of the existing Ad Astra runtime configuration. The public source now requires a protected `AD_ASTRA_MODEL_GATEWAY_URL`, `AD_ASTRA_MODEL_GATEWAY_TOKEN`, and `AD_ASTRA_MODEL_GATEWAY_CONTRACT` for the private model gateway. No secret is decrypted, copied to this workspace, recreated or written to source. Metadata presence is not proof that the gateway works or that a customer release is accepted.

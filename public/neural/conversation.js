@@ -11,7 +11,7 @@
   const catalog=new Map(agents.map(profile=>[profile.id,profile]));
   let busy=false,disposed=false,controller=null,generation=0,completedAnswer='';
   const labels={accepted:'Request accepted by the authenticated server.',requesting:'The server has requested a model response.',answer:'A response was received; validating completion.',completed:'Response complete. Review important claims.',failed:'The model request could not complete.'};
-  function activity(value){onActivity(value);section.querySelector('[data-request-activity]').textContent={idle:'No active request',listening:'On-device microphone active',requesting:'Model request in progress',responding:'Response received',speaking:'On-device voice playback',error:'Request stopped or unavailable'}[value]||'No active request';}
+  function activity(value){onActivity(value);root.dispatchEvent?.(new CustomEvent('ad-astra:engine-activity',{detail:{state:value,source:'workspace'}}));section.querySelector('[data-request-activity]').textContent={idle:'No active request',listening:'On-device microphone active',requesting:'Model request in progress',responding:'Response received',speaking:'On-device voice playback',error:'Request stopped or unavailable'}[value]||'No active request';}
   function sync(){submit.disabled=busy||disposed||input.value.trim().length<5||!catalog.has(agent.value);agent.disabled=busy;mode.disabled=busy;dictate.disabled=busy;read.disabled=busy||!completedAnswer;stop.disabled=false;}
   const createVoice=()=>root.AdAstraVoice.create({onState:activity,onTranscript:text=>{if(disposed||busy)return;input.value=text;sync();input.focus();},onNotice:text=>{notice.textContent=text;}});
   let voice=createVoice();

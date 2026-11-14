@@ -1,13 +1,29 @@
 'use strict';
 (() => {
- const section=document.getElementById('neural-experience');if(!section)return;
+ if(globalThis.AdAstraNeuralExperience){globalThis.AdAstraNeuralExperience.mount();return;}
+ const mounted=new WeakMap(),conversations=new WeakMap();
+ function mount(scope=document){
+ const section=scope.matches?.('#neural-experience')?scope:scope.querySelector('#neural-experience');if(!section)return;
+ if(mounted.has(section))return mounted.get(section);
  const stage=section.querySelector('[data-neural-stage]'),controls=section.querySelector('[data-neural-controls]');
  const load=section.querySelector('[data-neural-load]'),pause=section.querySelector('[data-neural-pause]'),renderStatus=section.querySelector('[data-neural-render-status]');
  const check=section.querySelector('[data-neural-check]'),connection=section.querySelector('[data-neural-connection-status]');
+ if(!stage||!controls||!load||!pause||!renderStatus||!check||!connection)return;
+ const events=new AbortController(),{signal}=events,timeouts=new Set();
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  let scene=null,loading=false,disposed=false,paused=true,request=null,expiry=null,refreshGeneration=0,loadGeneration=0;
  let activity='idle';
- const conversation=globalThis.AdAstraConversation?.mount(section.closest('[data-neural-workspace]')||section,{onActivity:value=>{activity=value;stage.dataset.activity=value;scene?.setActivity(value);}});
+ // Reuse the conversation's restore contract on the same DOM root. Its event
+ // handlers belong to that instance and must not be installed a second time.
+ const workspace=section.closest('[data-neural-workspace]')||section;
+ let conversation=conversations.get(workspace);
+ const onActivity=value=>{if(disposed)return;activity=value;stage.dataset.activity=value;scene?.setActivity(value);};
+ if(conversation){conversation.onActivity=onActivity;conversation.controller.restore();}
+ else if(globalThis.AdAstraConversation){
+  conversation={onActivity};
+  conversation.controller=globalThis.AdAstraConversation.mount(workspace,{onActivity:value=>conversation.onActivity?.(value)});
+  conversations.set(workspace,conversation);
+ }
  controls.hidden=false;check.hidden=false;
  function syncControls(){
   for(const button of controls.querySelectorAll('button:not([data-neural-load])'))button.disabled=!scene;
@@ -29,11 +45,11 @@
    renderStatus.textContent='Interactive concept scene loaded. Pointer movement and the labelled controls change only this local artwork.';syncControls();
   }catch{if(!disposed&&generation===loadGeneration)staticFallback('Interactive 3D is unavailable on this device or connection. The static artwork remains available.');}
   finally{if(generation===loadGeneration)loading=false;}
- });
- pause.addEventListener('click',()=>{if(!scene||reduced.matches)return;paused=!paused;scene.setPaused(paused);syncControls();});
- for(const[key,x,y]of[['left',0,-.18],['right',0,.18],['up',-.12,0],['down',.12,0]])section.querySelector('[data-neural-'+key+']').addEventListener('click',()=>scene?.rotate(x,y));
- section.querySelector('[data-neural-reset]').addEventListener('click',()=>scene?.reset());
- reduced.addEventListener('change',()=>{if(reduced.matches)paused=true;scene?.setReducedMotion(reduced.matches);scene?.setPaused(paused);syncControls();});
+ },{signal});
+ pause.addEventListener('click',()=>{if(!scene||reduced.matches)return;paused=!paused;scene.setPaused(paused);syncControls();},{signal});
+ for(const[key,x,y]of[['left',0,-.18],['right',0,.18],['up',-.12,0],['down',.12,0]])section.querySelector('[data-neural-'+key+']').addEventListener('click',()=>scene?.rotate(x,y),{signal});
+ section.querySelector('[data-neural-reset]').addEventListener('click',()=>scene?.reset(),{signal});
+ reduced.addEventListener('change',()=>{if(reduced.matches)paused=true;scene?.setReducedMotion(reduced.matches);scene?.setPaused(paused);syncControls();},{signal});
  function unknown(message){
   clearTimeout(expiry);for(const card of section.querySelectorAll('[data-neural-service]')){card.textContent='Not verified';card.dataset.state='unknown';}
   connection.textContent=message;
@@ -42,6 +58,7 @@
   if(disposed)return;const generation=++refreshGeneration;request?.abort();clearTimeout(expiry);request=new AbortController();
   const current=request;check.disabled=true;unknown('Checking public availability. No customer session is being opened.');
   const timeout=setTimeout(()=>current.abort(),8000);
+  timeouts.add(timeout);
   try{
    const response=await fetch('/api/operating-status',{method:'GET',cache:'no-store',credentials:'omit',redirect:'error',signal:current.signal});
    if(!response.ok||!response.headers.get('content-type')?.includes('application/json'))throw Error('Status unavailable');
@@ -53,9 +70,24 @@
    connection.textContent='Public availability checked. No active AI session or customer operation is represented.';
    expiry=setTimeout(()=>unknown('Status expired. Check again before relying on availability.'),Math.max(0,status.expiresAt-Date.now()));
   }catch{if(!disposed&&generation===refreshGeneration)unknown('Availability could not be verified. No active AI session is represented.');}
-  finally{clearTimeout(timeout);if(!disposed&&generation===refreshGeneration)check.disabled=false;}
- });
- window.addEventListener('pagehide',()=>{disposed=true;refreshGeneration++;loadGeneration++;request?.abort();clearTimeout(expiry);conversation?.dispose();scene?.dispose();scene=null;});
- window.addEventListener('pageshow',event=>{if(!event.persisted)return;disposed=false;loading=false;check.disabled=false;conversation?.restore();staticFallback('Static artwork restored. Choose interactive 3D to load the scene again.');unknown('Connection not checked. No active AI session.');});
+  finally{clearTimeout(timeout);timeouts.delete(timeout);if(!disposed&&generation===refreshGeneration)check.disabled=false;}
+ },{signal});
+ const controller={dispose(){
+  if(disposed)return;disposed=true;events.abort();refreshGeneration++;loadGeneration++;request?.abort();clearTimeout(expiry);
+  for(const timeout of timeouts)clearTimeout(timeout);timeouts.clear();
+  conversation?.controller.dispose();if(conversation)conversation.onActivity=null;
+  scene?.dispose();scene=null;mounted.delete(section);
+ }};
+ mounted.set(section,controller);
+ window.addEventListener('pagehide',controller.dispose,{signal});
+ window.addEventListener('ad-astra:before-route-change',controller.dispose,{signal});
+ stage.dataset.scene='static';stage.querySelector('.neural-poster').hidden=false;load.disabled=false;load.textContent='Load interactive 3D';check.disabled=false;
+ unknown('Connection not checked. No active AI session.');
  syncControls();
+ return controller;
+ }
+ globalThis.AdAstraNeuralExperience=Object.freeze({mount});
+ window.addEventListener('pageshow',event=>{if(event.persisted){mount();const status=document.querySelector('[data-neural-render-status]');if(status)status.textContent='Static artwork restored. Choose interactive 3D to load the scene again.';}});
+ mount();
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>mount(),{once:true});
 })();

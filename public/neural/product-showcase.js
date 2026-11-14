@@ -1,4 +1,6 @@
-for(const stage of document.querySelectorAll('[data-product-showcase]')){
+export function mountProductShowcases(scope=document){
+for(const stage of scope.querySelectorAll('[data-product-showcase]')){
+ if(stage.dataset.companionReady)continue;stage.dataset.companionReady='true';
  const buttons=[...stage.querySelectorAll('[data-product-pick]')];
  const views=[...stage.querySelectorAll('[data-product-view]')];
  const select=(id,focus=false)=>{
@@ -22,3 +24,5 @@ for(const stage of document.querySelectorAll('[data-product-showcase]')){
  });
  select(buttons[0].dataset.productPick);
 }
+}
+mountProductShowcases();

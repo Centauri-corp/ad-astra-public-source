@@ -12,9 +12,9 @@
     {
       "id": "core-intelligence",
       "name": "Core Intelligence",
-      "summary": "A clearer starting point for everyday questions, writing and learning.",
+      "summary": "Bring everyday questions, writing and learning into focus.",
       "audience": "People working through an idea, a decision or a new subject.",
-      "outcome": "A focused question, a structured explanation or an editable first draft.",
+      "outcome": "A clear explanation, a first draft or a learning plan you can review.",
       "modes": ["ask", "learn", "research"],
       "motif": "Connections that bring a question into focus",
       "accent": "cyan"
@@ -22,9 +22,9 @@
     {
       "id": "creative-studio",
       "name": "Creative Studio",
-      "summary": "Turn a creative brief into a direction you can shape and review.",
+      "summary": "Shape a story, visual concept or media brief around your audience.",
       "audience": "Creators and teams developing a story, visual concept or media brief.",
-      "outcome": "An editable concept and visual direction with room for human refinement.",
+      "outcome": "A creative brief and visual direction ready for your judgment and refinement.",
       "modes": ["create", "explore"],
       "motif": "Layers of craft around a human-directed idea",
       "accent": "champagne"
@@ -42,7 +42,7 @@
     {
       "id": "business-commerce",
       "name": "Business & Commerce",
-      "summary": "Give business questions a practical brief and a considered next step.",
+      "summary": "Turn business questions into clear options and practical next steps.",
       "audience": "Teams planning customer work, operations and commercial decisions.",
       "outcome": "A comparison, communication draft or handoff for your team to review.",
       "modes": ["ask", "research", "create"],
@@ -52,9 +52,9 @@
     {
       "id": "developer-platform",
       "name": "Developer Platform",
-      "summary": "Design testable connections between models, tools and applications.",
+      "summary": "Map models, tools and applications to an integration you can test.",
       "audience": "Developers evaluating integration and application architecture.",
-      "outcome": "An integration direction with explicit interfaces and verification needs.",
+      "outcome": "An integration plan with defined interfaces, limits and verification needs.",
       "modes": ["create", "research"],
       "motif": "Bounded interfaces with traceable connections",
       "accent": "cobalt"
@@ -62,7 +62,7 @@
     {
       "id": "autonomous-workflows",
       "name": "Autonomous Workflows",
-      "summary": "Plan coordinated work with visible human approval checkpoints.",
+      "summary": "Define repeatable workflows with clear owners and human approvals.",
       "audience": "Teams designing repeatable tasks, reviews and accountable handoffs.",
       "outcome": "A workflow plan with clear owners, limits and stop points.",
       "modes": ["ask", "create", "explore"],

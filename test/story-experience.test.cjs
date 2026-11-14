@@ -22,7 +22,7 @@ test('shared chrome migration is idempotent and preserves main body and security
 test('story pages are non-executing, complete without script and explicit about research and regions',()=>{
  for(const route of ['','intelligence/','services/']){
   const html=fs.readFileSync(path.join(root,'public',route,'index.html'),'utf8');
-  assert.equal((html.match(/<h1\b/g)||[]).length,1);assert.ok(!/<input|<textarea|<audio|<iframe|<form\b/.test(html));if(route)assert.ok(!/<video\b/.test(html));assert.ok(!html.includes('/app.js'));assert.ok(html.includes('noindex,follow'));assert.ok(html.includes('/status/'));assert.ok(html.includes('Concept art')||html.includes('Conceptual artwork'));
+  assert.equal((html.match(/<h1\b/g)||[]).length,1);assert.ok(!/<input|<textarea|<audio|<iframe|<form\b/.test(html));if(route)assert.ok(!/<video\b/.test(html));assert.ok(!html.includes('src="/app.js"'));assert.ok(html.includes('src="/companion/app.js"'));assert.ok(html.includes('noindex,follow'));assert.ok(html.includes('/status/'));assert.ok(html.includes('Concept art')||html.includes('Conceptual artwork'));
  }
  const home=fs.readFileSync(path.join(root,'public/index.html'),'utf8');
  for(const asset of collection.assets.filter(a=>a.id!=='intelligence'))assert.ok(home.includes('/assets/story/'+asset.id+'-1672.webp'));

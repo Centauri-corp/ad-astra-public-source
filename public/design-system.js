@@ -78,25 +78,22 @@
   });
   reduced.addEventListener('change', resetTransition);
   window.addEventListener('pageshow', () => { resetTransition(); closeDisclosures(); if (menu?.open) menu.open = false; syncMenu(); });
-  const control = document.querySelector('[data-motion-toggle]');
-  if (!control) return;
-  const heroFilm = document.querySelector('.ad-arrival-film');
-  const home = document.body.classList.contains('customer-home');
   const connection = navigator.connection;
-  // The live homepage scene observes data-motion. Other routes remain opt-in;
-  // the older homepage film never competes with the scene for playback.
-  let paused = !(home && !reduced.matches && !connection?.saveData);
+  // One decorative-motion choice follows the shared companion between routes.
+  // The older homepage film never competes with the scene for playback.
+  let paused = reduced.matches || connection?.saveData === true;
   function sync() {
-    const off = paused || reduced.matches || document.hidden || (home && connection?.saveData);
+    const off = paused || reduced.matches || document.hidden || connection?.saveData === true;
     document.body.dataset.motion = off ? 'off' : 'on';
-    if (home || off) heroFilm?.pause(); else heroFilm?.play().catch(() => {});
-    control.textContent = off ? 'Play cinematic motion' : 'Pause cinematic motion';
-    control.setAttribute('aria-pressed', String(!off));
+    document.querySelector('.ad-arrival-film')?.pause();
+    document.querySelectorAll('[data-motion-toggle]').forEach(control=>{control.textContent = off ? 'Play cinematic motion' : 'Pause cinematic motion';control.setAttribute('aria-pressed', String(!off));});
   }
   document.body.classList.add('motion-ready');
-  control.addEventListener('click', () => { paused = !paused; sync(); });
+  document.addEventListener('click', event => { if (event.target.closest('[data-motion-toggle]')) { paused = !paused; sync(); } });
+  window.addEventListener('ad-astra:motion-choice',event=>{if(typeof event.detail?.paused==='boolean'){paused=event.detail.paused;sync();}});
+  window.addEventListener('ad-astra:route-change',sync);
   reduced.addEventListener('change', sync);
-  if (home) connection?.addEventListener('change', sync);
+  connection?.addEventListener('change', sync);
   document.addEventListener('visibilitychange', sync);
   sync();
 })();
