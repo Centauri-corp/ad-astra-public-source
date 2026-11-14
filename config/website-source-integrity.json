@@ -521,8 +521,8 @@
     },
     {
       "path": "public/design-system.css",
-      "bytes": 34580,
-      "sha256": "972351100bc29b5206ae8b0a00d67fea603b1073403fd9c4f9ecbad5c1ab6794"
+      "bytes": 34531,
+      "sha256": "b94d4f2a8dddbdadfd2ecbd901d83247bf7f4b8afd7fd676cd25f9c799586ddf"
     },
     {
       "path": "public/design-system.js",
@@ -990,5 +990,5 @@
       "sha256": "8d10f2d14a587acf322043ac5030a285a205e77c6f32c591ec3017fe53bac6f0"
     }
   ],
-  "fingerprint": "9a668ff24d575eef35c2d61ac026718328e4e27372f42d23c5ecb9c61ef6d248"
+  "fingerprint": "dc2c3f9587da67c7862e66b9a0efacfa7cfeff22a11a26fc774f6b674c2ff491"
 }
