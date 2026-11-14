@@ -124,3 +124,17 @@ test('homepage, navigation and route evidence link to a pending, non-indexable j
   assert.ok(!evidence.approvedRoutes.includes('/start/'));
   assert.equal(require('../public/release-manifest.json').publicLaunchEnabled, false);
 });
+
+test('cinematic arrival and workspace layers are decorative, controllable and do not claim model reasoning', () => {
+  const home = fs.readFileSync(path.join(root, 'public/index.html'), 'utf8');
+  const preview = fs.readFileSync(path.join(root, 'public/platform-preview/index.html'), 'utf8');
+  const homeCss = fs.readFileSync(path.join(root, 'public/customer-experience.css'), 'utf8');
+  const workspaceCss = fs.readFileSync(path.join(root, 'public/platform-preview/style.css'), 'utf8');
+  assert.match(home, /class="ad-arrival-atmosphere" aria-hidden="true"/);
+  assert.match(home, /Cinematic experience preview · Customer services in development/);
+  assert.match(preview, /class="wp-scene-atmosphere" aria-hidden="true"/);
+  assert.match(preview, /Visual layer · not model reasoning\./);
+  assert.match(homeCss, /motion-ready:not\(\[data-motion=off\]\)\s+\.ad-arrival-orbit/);
+  assert.match(workspaceCss, /data-visual-motion=off\]\s+\.wp-scene-art img,\.wp-app\[data-visual-motion=off\]\s+\.wp-scene-orbit/);
+  assert.match(workspaceCss, /@media\(prefers-reduced-motion:reduce\)/);
+});

@@ -511,8 +511,8 @@
     },
     {
       "path": "public/customer-experience.css",
-      "bytes": 17396,
-      "sha256": "a367a326943d382828bd0a15bbfab55846e6203ba3662ae98feaab2e92b21aec"
+      "bytes": 19389,
+      "sha256": "bf486f39ab0b8f8a96ce55a0f8cebe0f25888bbf47e256d2a3c90055bd36864e"
     },
     {
       "path": "public/customer-experience.js",
@@ -571,8 +571,8 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 21617,
-      "sha256": "647d2aae666b314e18a4044ec5d1e7865900a1adeb6b904683b44297115a4477"
+      "bytes": 22019,
+      "sha256": "db11f09ffc175842c60eebe9774f94da39156bf7067cf0b3f499cbadeddeadbd"
     },
     {
       "path": "public/intelligence/index.html",
@@ -796,13 +796,13 @@
     },
     {
       "path": "public/platform-preview/index.html",
-      "bytes": 15859,
-      "sha256": "19760215d584ad955ba3bceae6800a7623f48f30aa859736878661a3c5d55d99"
+      "bytes": 16196,
+      "sha256": "f1fe162b1e533a91f15add4177358d16c20383b6261864997700b0fedfc7b4b6"
     },
     {
       "path": "public/platform-preview/style.css",
-      "bytes": 20383,
-      "sha256": "3e74df24d4dc8daf9bc1a227a928578099667ca905dc006181a50e9691108c37"
+      "bytes": 22217,
+      "sha256": "6022789a125f8afed6689a6bd192eaaf50b4b508b1b80ba3c6884ccf94d5c834"
     },
     {
       "path": "public/platform/app.js",
@@ -990,5 +990,5 @@
       "sha256": "8d10f2d14a587acf322043ac5030a285a205e77c6f32c591ec3017fe53bac6f0"
     }
   ],
-  "fingerprint": "8101a02170eb66970257d7dcd9d825b109d7bb5b2c17607a13801cc3a8885284"
+  "fingerprint": "1336a55aa81319fa2e066599daffd4a6e5a07754771994f0350242d4495fcd6f"
 }
