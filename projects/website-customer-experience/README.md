@@ -2,7 +2,7 @@
 
 This is the dedicated delivery project for Ad Astra's public website and customer experience. It remains inside the existing public source repository so product definitions, design, engineering and release have one reviewable history. It does not create a second production repository or a new model gateway.
 
-The entry point is [project.json](project.json). The controlled public release candidate is PR #38, which must reconcile the owner-selected PR #36 base before review. Existing private engine, provider, CRM, identity and billing authorities stay private.
+The entry point is [project.json](project.json). The controlled public release candidate is PR #39, descending from merged PR #38 and the owner-selected PR #36 base before review. Existing private engine, provider, CRM, identity and billing authorities stay private.
 
 ## One vertical delivery chain
 

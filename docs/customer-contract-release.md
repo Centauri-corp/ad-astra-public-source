@@ -1,7 +1,7 @@
 # Website/customer contract correction release
 
 This candidate implements the seven-step architecture correction plan through
-controlled PR #38 over the selected PR #36 base. It is not a record of public
+controlled PR #39, descending from merged PR #38 over the selected PR #36 base. It is not a record of public
 activation. The companion source and exact commit are pinned in
 `config/production-release-source.json`.
 

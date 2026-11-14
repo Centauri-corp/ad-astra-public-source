@@ -4,7 +4,7 @@
     "repository": "Centauri-corp/ad-astra-public-source",
     "architecture": "config/product-architecture-release-control.json",
     "visualDirection": "projects/website-customer-experience/visual-standard.json",
-    "releaseSelection": "PR #38 over PR #36 base"
+    "releaseSelection": "PR #39 over merged PR #38 and the PR #36 base"
   },
   "scope": "public-family-descriptions-only",
   "availability": "in-development",
