@@ -2,7 +2,7 @@
   "schema": "ad-astra-production-release-source/v1",
   "company": "AD ASTRA",
   "repository": "Centauri-corp/ad-astra-public-source",
-  "pullRequest": 38,
+  "pullRequest": 39,
   "branch": "codex/customer-experience-rebuild-20261113",
   "base": {
     "pullRequest": 36,
@@ -11,7 +11,7 @@
   "productArchitectureControl": "config/product-architecture-release-control.json",
   "projectId": "prj_FX8QO3TIqUNAfFR4enz0bALmjeg1",
   "teamId": "team_5xblMPo2zEBjbz4KPmeDVHPr",
-  "sourceSelection": "single-controlled-pr38-chain-over-owner-selected-pr36-base",
+  "sourceSelection": "single-controlled-pr39-chain-descending-from-merged-pr38-and-owner-selected-pr36-base",
   "retiredReleaseBranches": ["work"],
   "automaticGitDeployments": false,
   "promotionMode": "reconcile-stage-test-exact-review-manual-promotion",
@@ -20,7 +20,7 @@
   "internalCompanion": {
     "repository": "Centauri-corp/ad-astra-internal-source",
     "pullRequest": 54,
-    "commit": "c59cbe1469d72cec8bad81fc7e4d7e1d95242ba7"
+    "commit": "408c4729cf88e95b4c7dcdfe91d97d34dfcd1dd2"
   },
   "pricingPreparation": {
     "currency": "USD",

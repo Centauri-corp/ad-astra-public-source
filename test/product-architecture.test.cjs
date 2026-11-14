@@ -37,3 +37,15 @@ test('every public page exposes product discovery and availability, and modes ma
  for(const f of htmlFiles){const body=fs.readFileSync(f,'utf8');assert.ok(body.includes('href="/products/"'),f);assert.ok(body.includes('href="/status/"'),f);assert.ok(body.includes('href="/intelligence/"'),f);}
  assert.deepEqual(require('../lib/modes').MODE_IDS,require('../public/release-manifest.json').customerModes);assert.deepEqual(require('../lib/model-catalog').MODELS[0].modes,visual.modes);
 });
+
+test('public product architecture uses open editorial surfaces without reducing availability boundaries',()=>{
+ const overview=files.get('public/products/index.html'),detail=files.get('public/products/core-intelligence/index.html');
+ const css=fs.readFileSync(path.join(root,'public/products/style.css'),'utf8');
+ assert.ok(overview.includes('PRODUCT DIRECTION'));
+ assert.ok(overview.includes('Customer access and purchasing require current availability verification.'));
+ assert.ok(detail.includes('This public product overview describes the intended experience.'));
+ assert.match(css,/\.family-grid\{[^}]*gap:0[^}]*border-top:1px solid var\(--line\)/);
+ assert.match(css,/\.family-card\+\.family-card\{border-left:1px solid var\(--line\)/);
+ assert.match(css,/\.mode-filter button\{[^}]*border:0[^}]*border-radius:0/);
+ assert.match(css,/\.product-example\{[^}]*background:transparent[^}]*border-block:1px solid var\(--line\)/);
+});

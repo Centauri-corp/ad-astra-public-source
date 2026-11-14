@@ -1,19 +1,19 @@
 # AD ASTRA controlled release chain
 
-`PR #38` is the only public release candidate. It must contain the selected
-`PR #36` base before it can advance. Older branches, including `work`, remain
-historical evidence only and may not supply a new deployment or approval.
+`PR #39` is the only public release candidate. It descends from merged `PR #38`,
+which contains the selected `PR #36` base. Older branches, including `work`,
+remain historical evidence only and may not supply a new deployment or approval.
 
 The machine-readable source of truth is
 [`config/production-release-source.json`](../config/production-release-source.json).
 The product-family inventory and gate order are bound in
 [`config/product-architecture-release-control.json`](../config/product-architecture-release-control.json).
-The independent private input remains PR #54 at `c59cbe1…`; it is not copied
+The independent private input remains PR #54 at `408c472…`; it is not copied
 into the public source tree.
 
 ## Controlled order
 
-1. Reconcile the PR #38 source with PR #36. There must be one descendant
+1. Reconcile the PR #39 source with merged PR #38 and PR #36. There must be one descendant
    release chain, no parallel candidate, and one exact candidate SHA.
 2. Verify the six product families, public routes, source inventory, visual
    assets, noindex policy and capability boundaries against that SHA.

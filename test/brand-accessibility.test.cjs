@@ -4,9 +4,9 @@ const {header}=require('../scripts/lib/site-shell.cjs');
 const {applyBrandMetadata,metadataForRoute}=require('../scripts/lib/brand-metadata.cjs');
 const root=path.join(__dirname,'../public');
 const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(d,e.name)):[path.join(d,e.name)]);
-test('visible Menu text supplies the summary accessible name without an overriding label',()=>{
+test('visible Explore text supplies the summary accessible name without an overriding label',()=>{
  const summary=header('/').match(/<summary[^>]*>[\s\S]*?<\/summary>/)[0];
- assert.match(summary,/^<summary>Menu /);assert.ok(!summary.includes('aria-label='));
+ assert.match(summary,/^<summary aria-controls="site-navigation"><span class="site-menu-label">Explore<\/span>/);assert.ok(!summary.includes('aria-label='));
 });
 test('every route has one canonical brand icon and complete static social identity',()=>{
  const files=walk(root).filter(f=>f.endsWith('/index.html'));

@@ -6,7 +6,7 @@ const source=require('../config/production-release-source.json');
 function check(env=process.env){
  assert.equal(source.schema,'ad-astra-production-release-source/v1');
  assert.equal(source.repository,'Centauri-corp/ad-astra-public-source');
- assert.equal(source.pullRequest,38);assert.equal(source.base.pullRequest,36);assert.equal(source.automaticGitDeployments,false);
+ assert.equal(source.pullRequest,39);assert.equal(source.base.pullRequest,36);assert.equal(source.automaticGitDeployments,false);
  assert.equal(source.independentExactCommitReviewRequired,true);assert.equal(source.releaseAuthorized,false);
  if(env.VERCEL_ENV!=='production')return 'not-production';
  const projects=[env.VERCEL_PROJECT_ID,env.AD_ASTRA_RELEASE_PROJECT_ID].filter(value=>value!==undefined);
@@ -21,9 +21,9 @@ function check(env=process.env){
  assert.match(sha,/^[a-f0-9]{40}$/,'An exact production source commit is required');
  // Git deployments can use a branch or a SHA in ref. A SHA ref must equal
  // the platform's actual commit, never an arbitrary or mismatched hash.
- // External protected review must bind the exact reconciled PR #38 commit.
+ // External protected review must bind the exact reconciled PR #39 candidate.
  assert.ok(env.VERCEL_GIT_COMMIT_REF===source.branch||env.VERCEL_GIT_COMMIT_REF===sha,
-  'Production builds must use the controlled PR #38 branch or its exact pinned SHA; work and unknown branches are held');
+  'Production builds must use the controlled PR #39 branch or its exact pinned SHA; work and unknown branches are held');
  return 'source-selected-not-release-accepted';
 }
 if(require.main===module){try{console.log('AD_ASTRA_PRODUCTION_SOURCE_CHECK '+check());}catch(e){console.error('AD_ASTRA_PRODUCTION_SOURCE_HOLD '+e.message);process.exitCode=1;}}
