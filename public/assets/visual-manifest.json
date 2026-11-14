@@ -173,6 +173,22 @@
       },
       "reviewStatus": "candidate",
       "alt": "An original CGI glass neural sculpture with a champagne spiral above a planetary horizon."
+    },
+    {
+      "id": "ad-astra-company-motion-study",
+      "path": "/assets/brand/ad-astra-neural-study.mp4",
+      "kind": "video",
+      "role": "Twelve-second silent CGI concept study; separate from the unfinished final company film",
+      "bytes": 1538447,
+      "sha256": "c0492b2a735fdd31c32752cee9bbdc62b5fc40feab66f043045ae1be164233af",
+      "width": 960,
+      "height": 540,
+      "seconds": 12,
+      "audio": false,
+      "poster": "/assets/brand/ad-astra-neural-study.jpg",
+      "captions": "/assets/brand/ad-astra-neural-study.vtt",
+      "provenanceManifest": "config/company-motion-study.json",
+      "reviewStatus": "candidate"
     }
   ],
   "withheld": [

@@ -135,6 +135,7 @@ function projectFiles(root=projectRoot){
  experience.websiteProject='projects/website-customer-experience/project.json';
  experience.visualArchitecture.palette={navy:colors.background,cyan:colors.cyan,violet:colors.violet,gold:colors.champagne};
  experience.visualArchitecture.signatureAsset=neural.src;
+ Object.assign(experience.visualArchitecture.motionPreview,{type:'self-hosted-threejs-cinematic-hero-and-user-controlled-silent-study',scene:'public/neural/cinematic-scene.js',entryPoint:'public/neural/cinematic-home.js',stillFallback:neural.src,study:{provenance:'config/company-motion-study.json',role:'twelve-second-concept-study-not-final-company-film'}});
  const manifest=read(root,'public/assets/visual-manifest.json');
  manifest.activeSelection={authority:'projects/website-customer-experience/asset-selections.json',signatureAsset:neural.src,review:'pending-consolidated-visual-review'};
  manifest.purpose='Ad Astra visual resource archive and active project selection; archived candidates are not current homepage instructions';
@@ -143,6 +144,9 @@ function projectFiles(root=projectRoot){
  const mark=manifest.assets.find(a=>a.id==='ad-astra-orbital-mark');
  if(mark){const bytes=fs.readFileSync(localFile(root,'public'+mark.path));Object.assign(mark,{kind:'vector',bytes:bytes.length,sha256:digest(bytes)});}
  manifest.assets.push({id:'ad-astra-neural-spiral',path:neural.src,role:neural.role,kind:'image',provenanceManifest:'/'+neural.manifest.replace(/^public\//,''),origin:{...neural.origin},reviewStatus:'candidate',alt:neural.alt});
+ const study=read(root,'config/company-motion-study.json');
+ manifest.assets=manifest.assets.filter(asset=>asset.id!=='ad-astra-company-motion-study');
+ manifest.assets.push({id:'ad-astra-company-motion-study',path:'/'+study.video.path.replace(/^public\//,''),kind:'video',role:'Twelve-second silent CGI concept study; separate from the unfinished final company film',bytes:study.video.bytes,sha256:study.video.sha256,width:study.video.width,height:study.video.height,seconds:study.video.seconds,audio:study.video.audio,poster:'/'+study.poster.path.replace(/^public\//,''),captions:'/'+study.captions.path.replace(/^public\//,''),provenanceManifest:'config/company-motion-study.json',reviewStatus:'candidate'});
  const css='/* Generated from the dedicated website visual standard. */\n:root{'+Object.entries(colors).map(([name,value])=>'--cx-'+name+':'+value).join(';')+';--space:var(--cx-background);--surface:var(--cx-surface);--text:var(--cx-text);--subtle:var(--cx-muted);--ice:var(--cx-cyan);--champagne:var(--cx-champagne)}\n';
  return new Map([
   ['config/public-graphics-alignment.json',json(graphics)],['config/public-visual-architecture.json',json(architecture)],

@@ -36,7 +36,19 @@
         "/"
       ],
       "hero": "/assets/neural-master/delivery/neural-core-3840.avif",
-      "motion": "optional CSS ambient motion; no video or audio",
+      "motion": "Self-hosted Three.js cinematic hero with the selected native still fallback and a separate user-controlled twelve-second silent CGI study. The older orbital clip remains in markup with playback disabled. No audio or live model telemetry; the final company-film premiere remains gated.",
+      "motionScene": "public/neural/cinematic-scene.js",
+      "motionEntryPoint": "public/neural/cinematic-home.js",
+      "stillProvenance": "public/assets/neural-master/manifest.json",
+      "stillDeliveryManifest": "public/assets/neural-master/delivery/manifest.json",
+      "orbitalMotionStudy": "/assets/ad-astra-runway-orbital-motion.mp4",
+      "companyMotionStudy": {
+        "video": "/assets/brand/ad-astra-neural-study.mp4",
+        "poster": "/assets/brand/ad-astra-neural-study.jpg",
+        "captions": "/assets/brand/ad-astra-neural-study.vtt",
+        "provenance": "config/company-motion-study.json",
+        "role": "existing twelve-second visual study; not the final sixty-second film"
+      },
       "motionPoster": "/assets/neural-master/delivery/neural-core-3840.avif",
       "neuralStudy": "/assets/neural-master/delivery/neural-core-3840.avif",
       "mobileNeuralStudy": "/assets/neural-master/delivery/neural-core-1600.avif",

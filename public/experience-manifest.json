@@ -69,11 +69,18 @@
     ],
     "motionPreview": {
       "hero": true,
-      "type": "optional-css-ambient-motion-and-opt-in-silent-film",
+      "type": "self-hosted-threejs-cinematic-hero-and-user-controlled-silent-study",
       "filmStudy": true,
       "audio": false,
       "publicPremierePlayback": false,
-      "reducedMotionFallback": "static-equivalent"
+      "reducedMotionFallback": "static-equivalent",
+      "scene": "public/neural/cinematic-scene.js",
+      "entryPoint": "public/neural/cinematic-home.js",
+      "stillFallback": "/assets/neural-master/delivery/neural-core-3840.avif",
+      "study": {
+        "provenance": "config/company-motion-study.json",
+        "role": "twelve-second-concept-study-not-final-company-film"
+      }
     },
     "videoBlueprint": {
       "title": "The Architecture of Alignment",

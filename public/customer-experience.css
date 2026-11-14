@@ -121,6 +121,7 @@ body.customer-home{--cx-background:#030709;--cx-surface:#080e13;-webkit-font-smo
 .ad-neural-live{position:absolute;inset:0;z-index:-2;pointer-events:none;opacity:0;transition:opacity 1.1s ease}
 .ad-neural-live canvas{display:block;width:100%;height:100%}
 .is-live .ad-neural-live{opacity:1}
+.customer-home[data-motion=off] .ad-neural-live,.customer-home[data-motion=off] .ad-neural-art{transition:none}
 .customer-home .ad-arrival.is-live .ad-neural-art{opacity:0!important}
 .customer-home .ad-arrival.is-live .ad-neural-art img{animation:none}
 .customer-home .ad-arrival-atmosphere{z-index:-3;opacity:.28}

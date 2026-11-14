@@ -496,8 +496,8 @@
     },
     {
       "path": "public/assets/visual-manifest.json",
-      "bytes": 7741,
-      "sha256": "6732a58c940438115570987211b9e24d32b610dec41a555840267b82ae6746b7"
+      "bytes": 8394,
+      "sha256": "16f4b6190d3553b927cde43c2e8c320970011d129acd502ddb5991644f26aad8"
     },
     {
       "path": "public/auth-navigation.js",
@@ -511,8 +511,8 @@
     },
     {
       "path": "public/customer-experience.css",
-      "bytes": 30259,
-      "sha256": "1e673c6011e3ccf1b9933e4c8d3772f28fdb6c875dbb9bcfb6a17ac46521cb6c"
+      "bytes": 30371,
+      "sha256": "3ec8d739d2ea1792d2f3a0aac32fa077540312eb85b6632e01b7918d0391555a"
     },
     {
       "path": "public/customer-experience.js",
@@ -536,8 +536,8 @@
     },
     {
       "path": "public/experience-manifest.json",
-      "bytes": 3257,
-      "sha256": "4fb8cc8c723b4a7173301065f01de39b8bfe653c71eafcce1689bab4b9783570"
+      "bytes": 3612,
+      "sha256": "391d254e056a8cfff63007bd9a9e15b98306fe4f73242ea8df4c3d516b2627ee"
     },
     {
       "path": "public/film-delivery.css",
@@ -731,8 +731,8 @@
     },
     {
       "path": "public/neural/cinematic-home.js",
-      "bytes": 3869,
-      "sha256": "024d1180f080815f468e0dc881da77129ac5bd4cf46007e0658cdf3ef23eaa05"
+      "bytes": 4525,
+      "sha256": "6373218588dbe08bd31c29005917d19a73afaa35d290913ae12d1d8bdc9d4a3d"
     },
     {
       "path": "public/neural/cinematic-scene.js",
@@ -1025,5 +1025,5 @@
       "sha256": "8d10f2d14a587acf322043ac5030a285a205e77c6f32c591ec3017fe53bac6f0"
     }
   ],
-  "fingerprint": "aa7a8065a41055f9f790bf1e36caa900b106da0cc494f57e53e666e60ef7e7e5"
+  "fingerprint": "551c875be1c5b56ec815e184a0370696c14f590d7ed5df43439e778bacf310c8"
 }
