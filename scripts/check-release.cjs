@@ -76,17 +76,18 @@ assert.ok(homepage.includes('class="brand-wordmark" aria-hidden="true">AD ASTRA<
 assert.ok(fs.existsSync(path.join(root,'public/assets/brand/ad-astra-mark.svg')),'Missing first-party AD ASTRA orbital mark');
 const visualManifest=JSON.parse(fs.readFileSync(path.join(root,'public/assets/visual-manifest.json')));
 assert.ok(visualManifest.assets.some(asset=>asset.id==='ad-astra-orbital-mark'&&asset.path==='/assets/brand/ad-astra-mark.svg'),'Visual manifest must identify the deployed AD ASTRA orbital mark');
-// The public cinematic hero is muted, decorative motion with an explicit pause
-// control. Customer execution, autoplay audio and third-party embeds remain excluded.
+// The public cinematic hero is muted, decorative, and explicitly opt-in. The
+// static master is complete without motion; customer execution, autoplay audio
+// and third-party embeds remain excluded.
 assert.ok(!/<audio|<iframe|<form\b/.test(homepage),'Homepage must not activate audio, embeds or customer forms');
 assert.equal((homepage.match(/<video\b/g)||[]).length,2,'Homepage needs a cinematic hero film and an opt-in local motion study');
 const heroFilm=(homepage.match(/<video[^>]*class="ad-arrival-film"[^>]*>/)||[])[0]||'';
-assert.ok(heroFilm.includes('autoplay')&&heroFilm.includes('muted')&&heroFilm.includes('loop')&&heroFilm.includes('playsinline'),'Hero film must be muted, looping and inline');
+assert.ok(!heroFilm.includes('autoplay')&&heroFilm.includes('preload="none"')&&heroFilm.includes('muted')&&heroFilm.includes('loop')&&heroFilm.includes('playsinline'),'Hero film must be muted, static-first, looping and inline');
 assert.ok(heroFilm.includes('aria-hidden="true"')&&!heroFilm.includes('controls'),'Hero film must remain decorative rather than an unlabelled player');
 assert.ok(homepage.includes('src="/assets/ad-astra-runway-orbital-motion.mp4"'));
 const motionStudy=(homepage.match(/<video\s+controls[^>]*>/)||[])[0]||'';
 assert.ok(motionStudy.includes('controls')&&!motionStudy.includes('autoplay'),'Motion study playback must remain user-controlled');
-assert.ok(homepage.includes('data-motion-toggle')&&homepage.includes('/design-system.js'),'Ambient motion needs an explicit pause control');
+assert.ok(homepage.includes('data-motion-toggle')&&homepage.includes('/design-system.js'),'Ambient motion needs an explicit play/pause control');
 for(const id of ['vision','products','agi','global','beyond'])assert.ok(homepage.includes('/assets/story/'+id+'-1672.webp'),'Missing story chapter art: '+id);
 const signatureArt=require('../projects/website-customer-experience/asset-selections.json').assets.find(asset=>asset.id==='neural-core');
 assert.ok(signatureArt&&homepage.includes('src="'+signatureArt.src+'"'),'Missing selected customer-experience neural artwork');

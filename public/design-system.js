@@ -32,13 +32,15 @@
   if (!control) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const heroFilm = document.querySelector('.ad-arrival-film');
-  let paused = false;
+  // Motion is an explicit design choice. The static art is complete by itself,
+  // so an initial page view never starts the cinematic media layer.
+  let paused = true;
   function sync() {
     const off = paused || reduced.matches || document.hidden;
     document.body.dataset.motion = off ? 'off' : 'on';
     if (off) heroFilm?.pause(); else heroFilm?.play().catch(() => {});
     control.textContent = paused ? 'Play cinematic motion' : 'Pause cinematic motion';
-    control.setAttribute('aria-pressed', String(paused));
+    control.setAttribute('aria-pressed', String(!paused));
   }
   document.body.classList.add('motion-ready');
   control.addEventListener('click', () => { paused = !paused; sync(); });
