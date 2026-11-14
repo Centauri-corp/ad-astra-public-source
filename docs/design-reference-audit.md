@@ -334,6 +334,8 @@ Source: https://www.sanity.io/
 
 These changes passed 218 local source tests, 180 route/viewport observations, 45 automated accessibility scans and dedicated product/knowledge-map interaction checks. The corrected product captions also passed a fresh homepage accessibility scan. Rendered neural-motion and scroll-story evidence is recorded separately under `/workspace/LStra/review/ad-astra-design-concepts-20261114/implementation/`. Local checks do not establish owner acceptance or remote CI completion, and an unchanged older preview does not include this increment.
 
+Manual screenshot review caught overlapping hero headlines despite the initial passing motion checks. The follow-up corrects the handoff timing and requires the first headline to be fully hidden when the second becomes readable. This is why automated interaction checks alone do not establish final visual acceptance.
+
 ## Remaining craft work for a final premium release
 
 An art-directed final neural model, a selected and edited cinematic master, consistent final crops for every page group, manual device/accessibility review and explicit owner visual acceptance remain distinct craft/acceptance tasks. The current procedural sculpture and curated samples should not be presented as finished production AI or as evidence of achieved AGI/ASI. Customer/provider release acceptance remains outside a design inspiration audit.

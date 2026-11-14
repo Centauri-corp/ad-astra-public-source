@@ -28,7 +28,8 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
     await page.evaluate(()=>{const sequence=document.querySelector('[data-arrival-sequence]'),hero=document.querySelector('.ad-arrival');scrollTo({top:(sequence.offsetHeight-hero.offsetHeight)*.65,behavior:'instant'});});
     await page.waitForFunction(()=>Number(document.querySelector('[data-arrival-sequence]').style.getPropertyValue('--ad-story-progress'))>.5);
     assert.equal(await page.locator('.ad-arrival').evaluate(element=>getComputedStyle(element).position),'sticky');
-    assert.ok(await page.locator('.ad-arrival-phase').evaluate(element=>Number(getComputedStyle(element).opacity)>.2));
+    assert.ok(await page.locator('.ad-arrival-phase').evaluate(element=>Number(getComputedStyle(element).opacity)>.99));
+    assert.equal(await page.locator('#arrival-title').evaluate(element=>Number(getComputedStyle(element).opacity)),0,'The first headline must disappear before the next narrative becomes readable.');
    }
    await page.locator('[data-motion-toggle]').click();
    assert.equal(await page.locator('body').getAttribute('data-motion'), 'off');
@@ -51,7 +52,7 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
    assert.equal(await page.locator('.ad-neural-art img').isVisible(), true);
    await context.close();
   }
-  evidence.assertions.push('Moving rendered pixels at desktop/mobile', 'Desktop scroll directs sticky scene and narrative', 'Pause freezes rendered pixels', 'Intent controls change visual mode', 'Reduced motion retains static artwork without WebGL', 'No remote provider traffic or writes', 'No horizontal overflow at 320/390/768/1440');
+  evidence.assertions.push('Moving rendered pixels at desktop/mobile', 'Desktop scroll directs sticky scene and narrative without overlapping headlines', 'Pause freezes rendered pixels', 'Intent controls change visual mode', 'Reduced motion retains static artwork without WebGL', 'No remote provider traffic or writes', 'No horizontal overflow at 320/390/768/1440');
   evidence.pass = true;
  } finally {
   await browser.close(); fs.writeFileSync(path.join(output, 'cinematic-review.json'), JSON.stringify(evidence, null, 2) + '\n');

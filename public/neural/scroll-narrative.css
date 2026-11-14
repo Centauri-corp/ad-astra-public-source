@@ -8,8 +8,8 @@
 @media(min-width:900px) and (prefers-reduced-motion:no-preference){
  .ad-arrival-sequence.is-story-ready{height:165svh;min-height:1320px}
  .customer-home .ad-arrival-sequence.is-story-ready .ad-arrival{position:sticky;top:0}
- .is-story-ready .ad-arrival-copy>h1,.is-story-ready .ad-arrival-copy>.ad-kicker,.is-story-ready .ad-arrival-copy>.ad-lead{opacity:clamp(0,calc((.72 - var(--ad-story-progress))*2),1)}
- .is-story-ready .ad-arrival-phase{opacity:clamp(0,calc((var(--ad-story-progress) - .42)*2.5),1)}
+ .is-story-ready .ad-arrival-copy>h1,.is-story-ready .ad-arrival-copy>.ad-kicker,.is-story-ready .ad-arrival-copy>.ad-lead{opacity:clamp(0,calc((.32 - var(--ad-story-progress))*5),1)}
+ .is-story-ready .ad-arrival-phase{opacity:clamp(0,calc((var(--ad-story-progress) - .42)*5),1)}
  .customer-home.motion-ready>.site-header{position:fixed;background:#030709b0;backdrop-filter:blur(18px)}
 }
 @media(max-width:899px),(prefers-reduced-motion:reduce){.ad-arrival-phase,.ad-arrival-progress{display:none}}

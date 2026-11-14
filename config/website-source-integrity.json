@@ -781,8 +781,8 @@
     },
     {
       "path": "public/neural/scroll-narrative.css",
-      "bytes": 1489,
-      "sha256": "0b88500cb1bbbfca1b16a448bfa43b4f8d997e7fbf4f2c454fe511ce78719f88"
+      "bytes": 1487,
+      "sha256": "d7cec84cd24f97dadc340823954124de2e611d8804363ae3b3702b757eca25b6"
     },
     {
       "path": "public/neural/state.js",
@@ -1025,5 +1025,5 @@
       "sha256": "8d10f2d14a587acf322043ac5030a285a205e77c6f32c591ec3017fe53bac6f0"
     }
   ],
-  "fingerprint": "6e7f155c400036e0c9f1ffd96b7863f88d9f98a091e184edf0a49af128b2c789"
+  "fingerprint": "aa7a8065a41055f9f790bf1e36caa900b106da0cc494f57e53e666e60ef7e7e5"
 }
