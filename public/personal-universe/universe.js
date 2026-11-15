@@ -75,6 +75,16 @@ motion.addEventListener('click',()=>{
 });
 reduced.addEventListener('change',syncMotion);
 visualEnergy?.addEventListener('input',()=>{$('motion-energy-value').textContent=visualEnergy.value+'%';syncMotion();});
+const reveal=$('reveal-progress'),visual=$('daily-visual');
+function revealProgress(open,{scroll=false}={}){
+ if(!reveal||!visual)return;
+ visual.hidden=!open;
+ reveal.setAttribute('aria-expanded',String(open));
+ reveal.textContent=open?'Close progress view −':'Reveal my progress ↗';
+ if(open&&scroll)visual.scrollIntoView({behavior:calm()?'instant':'smooth',block:'nearest'});
+}
+reveal?.addEventListener('click',()=>revealProgress(visual.hidden,{scroll:true}));
+
 document.addEventListener('visibilitychange',()=>{if(document.hidden){stopRequest();voice?.stop();}syncMotion();});
 function syncAuth(){
  const next=identity?.scope()||null;
@@ -148,8 +158,8 @@ function handleVisualCommand(input){
   'cyan':()=>{colorChoice.value='cyan';updateTheme();},
   'champagne':()=>{colorChoice.value='champagne';updateTheme();},
   'cobalt':()=>{colorChoice.value='cobalt';updateTheme();},
-  'show progress':()=>{$('daily-visual').scrollIntoView({behavior:calm()?'instant':'smooth'});},
-  'show my progress':()=>{$('daily-visual').scrollIntoView({behavior:calm()?'instant':'smooth'});}
+  'show progress':()=>revealProgress(true,{scroll:true}),
+  'show my progress':()=>revealProgress(true,{scroll:true})
  };
  if(!Object.hasOwn(matches,normalized))return false;
  matches[normalized]();voiceState.textContent='Visual command applied locally: '+normalized+'.';return true;
