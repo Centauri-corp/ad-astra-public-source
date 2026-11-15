@@ -19,7 +19,7 @@ test('customer universe preserves six catalog directions and sanctioned agents',
  }
 });
 test('preview is non-indexed, 3D opt-in, voice opt-in and calls existing protected client',()=>{
- assert.match(html,/<meta name="robots" content="noindex,nofollow,noarchive">/);
+ assert.match(html,/<meta name="robots" content="noindex,follow">/);
  assert.match(html,/id="load-3d"/);
  assert.match(html,/id="verify-account"/);
  assert.match(html,/id="voice-dictate"[^>]+disabled/);
