@@ -1,0 +1,54 @@
+{
+  "schema": "ad-astra/unreal-cinematic-pipeline/v1",
+  "pipeline": "review-only",
+  "sourceSystems": [
+    "Unreal Engine",
+    "MetaHuman",
+    "Live Link",
+    "IK Retargeter",
+    "Control Rig",
+    "Sequencer",
+    "Niagara",
+    "Movie Render Queue"
+  ],
+  "inputContracts": {
+    "motionCapture": [
+      "skeleton-mapping",
+      "coordinate-system",
+      "frame-rate",
+      "take-id",
+      "rights-and-consent"
+    ],
+    "digitalHuman": [
+      "licensed-character-assets",
+      "validated-rig",
+      "facial-performance-permission"
+    ],
+    "cinematic": [
+      "shot-list",
+      "lighting",
+      "camera",
+      "material",
+      "scene-id"
+    ],
+    "intelligence": [
+      "validated-scene-preset",
+      "provenance",
+      "approved-render-command"
+    ]
+  },
+  "deliverables": [
+    "native-unreal-scene",
+    "mocap-retargeted-take",
+    "cinematic-shot",
+    "optimized-gltf-or-video",
+    "offline-render-receipt"
+  ],
+  "restrictions": [
+    "no-biometric-upload-without-consent",
+    "no-implied-live-ai-reasoning",
+    "no-direct-external-code-execution",
+    "no-unapproved-production-streaming"
+  ],
+  "productionEnabled": false
+}

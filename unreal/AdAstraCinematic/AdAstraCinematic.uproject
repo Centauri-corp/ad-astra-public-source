@@ -1,0 +1,23 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.6",
+  "Category": "Cinematic Intelligence",
+  "Description": "AD ASTRA Unreal cinematic rendering laboratory. Isolated from production customer environments.",
+  "Modules": [
+    {
+      "Name": "AdAstraCinematic",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "PythonScriptPlugin",
+      "Enabled": true
+    },
+    {
+      "Name": "SequencerScripting",
+      "Enabled": true
+    }
+  ]
+}
