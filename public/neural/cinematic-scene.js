@@ -91,6 +91,42 @@ export function createCinematicScene(host) {
  const spiral = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(spiralPoints), 240, .013, 8), gold); sculpture.add(spiral);
  const orbit = new THREE.Mesh(new THREE.TorusGeometry(2.12, .0045, 5, 180), new THREE.MeshBasicMaterial({color: 0x9abacb, transparent: true, opacity: .26}));
  orbit.rotation.set(1.24, .28, -.22); sculpture.add(orbit);
+ // Cinematic layers: translucent neural corona, animated orbital tracers and
+ // low-cost instanced satellites. All artwork is procedural and first-party.
+ const coronaGeometry = new THREE.SphereGeometry(1.94, 48, 24);
+ const coronaMaterial = new THREE.ShaderMaterial({
+   uniforms:{uTime:{value:0},uStrength:{value:.38},uColor:{value:new THREE.Color('#6bc9e7')}},
+   vertexShader:`varying vec3 vNormal; varying vec3 vViewPosition;
+     void main(){ vec4 mvPosition=modelViewMatrix*vec4(position,1.0);
+       vNormal=normalize(normalMatrix*normal);vViewPosition=-mvPosition.xyz;
+       gl_Position=projectionMatrix*mvPosition; }`,
+   fragmentShader:`uniform float uTime;uniform float uStrength;uniform vec3 uColor;
+     varying vec3 vNormal;varying vec3 vViewPosition;
+     void main(){float rim=pow(1.0-abs(dot(normalize(vNormal),normalize(vViewPosition))),3.0);
+       float shimmer=.87+.13*sin(uTime*.65+vNormal.y*12.0);
+       gl_FragColor=vec4(uColor,rim*shimmer*uStrength);}`,
+   transparent:true,depthWrite:false,side:THREE.BackSide,blending:THREE.AdditiveBlending
+ });
+ sculpture.add(new THREE.Mesh(coronaGeometry,coronaMaterial));
+ const satelliteCount=compact?48:96;
+ const satelliteGeometry=new THREE.IcosahedronGeometry(.025,0);
+ const satelliteMaterial=new THREE.MeshBasicMaterial({color:0xb6eaf2,transparent:true,opacity:.75});
+ const satellites=new THREE.InstancedMesh(satelliteGeometry,satelliteMaterial,satelliteCount);
+ const satelliteMatrix=new THREE.Matrix4();
+ const satellitePositions=[];
+ for(let i=0;i<satelliteCount;i++){
+   const theta=i*2.3999632297,z=1-2*(i+.5)/satelliteCount;
+   const radius=2.35+(i%9)*.11,r=Math.sqrt(Math.max(0,1-z*z));
+   const point=new THREE.Vector3(Math.cos(theta)*r*radius,Math.sin(theta)*r*radius,z*radius*.8);
+   satellitePositions.push(point);
+   satelliteMatrix.makeTranslation(point.x,point.y,point.z);
+   satellites.setMatrixAt(i,satelliteMatrix);
+ }
+ satellites.instanceMatrix.needsUpdate=true;
+ sculpture.add(satellites);
+ const sweepGeometry=new THREE.TorusGeometry(2.4,.006,5,160,Math.PI*1.55);
+ const sweepMaterial=new THREE.MeshBasicMaterial({color:0xd9b68c,transparent:true,opacity:.36,depthWrite:false});
+ const sweep=new THREE.Mesh(sweepGeometry,sweepMaterial);sweep.rotation.set(.35,.6,.25);sculpture.add(sweep);
  const stars = [];
  for (let i = 0; i < 240; i++) stars.push(Math.sin(i * 127.1) * 12, Math.cos(i * 311.7) * 7, -4 - (i % 12) * .7);
  const starGeometry = new THREE.BufferGeometry(); starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(stars, 3));
@@ -109,6 +145,13 @@ export function createCinematicScene(host) {
   pulseMaterial.opacity = Math.min(1,level + Math.sin(time * (currentActivity === 'speaking' ? 5 : 2)) * .06);
   fiberMaterial.opacity = currentActivity === 'requesting' || currentActivity === 'speaking' ? .38 : .25;
   const mobile = host.clientWidth < 760;
+  coronaMaterial.uniforms.uTime.value=time;
+  coronaMaterial.uniforms.uStrength.value=.32+(currentActivity==='speaking'?.25:currentActivity==='listening'?.18:currentActivity==='requesting'?.14:0);
+  sweep.rotation.z=.25+time*.07;
+  satellites.rotation.y=time*.018;
+  satellites.rotation.x=Math.sin(time*.12)*.09;
+  coronaMaterial.uniforms.uColor.value.setHex(currentActivity==='speaking'?0xe6ba7a:currentActivity==='listening'?0xa7a0ed:0x6bc9e7);
+
   sculpture.position.set(mobile ? 0 : 1.45, mobile ? .48 : .15, 0);
   sculpture.rotation.set(.13 + pointerY * .1 + Math.sin(time * .13) * .025 + scroll*.12, -.35 + time * .06 + pointerX * .14 + scroll*.6, -.08 + Math.sin(time * .11) * .035);
   sculpture.scale.setScalar(mobile ? .83 : 1 + Math.min(scroll, 1) * .04);
