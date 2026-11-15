@@ -21,7 +21,8 @@
     "modelExperience": "projects/website-customer-experience/model-experience.json",
     "resources": "projects/website-customer-experience/resources.json",
     "designReferences": "projects/website-customer-experience/design-reference-alignment.json",
-    "visualReview": "projects/website-customer-experience/visual-review.json"
+    "visualReview": "projects/website-customer-experience/visual-review.json",
+    "customerUniverse": "projects/website-customer-experience/neural-customer-verticals.json"
   },
   "integrationOrder": [
     {
@@ -189,6 +190,16 @@
       "artContainerClass": "wp-scene-art",
       "primaryFit": "contain",
       "primarySizes": "100vw"
+    },
+    {
+      "id": "personal-universe",
+      "paths": [
+        "/personal-universe/"
+      ],
+      "journey": "preview",
+      "primaryAsset": null,
+      "families": "all",
+      "textOnly": true
     },
     {
       "id": "identity",
