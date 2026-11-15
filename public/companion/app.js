@@ -3,6 +3,7 @@ import '../neural/engine-client.js';
 import '../neural/voice.js';
 import {publicNavigation} from './navigation.js';
 import {createCompanionIdentity} from './identity.js';
+import {routeContext,voiceNavigationIntent,sceneActivity} from './scene-intelligence.mjs';
 
 const session = AdAstraCompanionState.createSession();
 const reduced = matchMedia('(prefers-reduced-motion: reduce)'), connection = navigator.connection;
@@ -29,15 +30,31 @@ const $ = selector => root.querySelector(selector), toggle = $('.astra-companion
 const form = $('[data-companion-form]'), input = $('#astra-companion-question'), submit = form.querySelector('[type=submit]'), status = $('.astra-companion__status'), answer = $('.astra-companion__answer');
 const host = document.querySelector('[data-neural-hero]') || document.createElement('div');
 host.className = 'ad-neural-live'; host.dataset.neuralHero = ''; host.setAttribute('aria-hidden','true');
-let hero, sequence, routeEvents, observer, scene, loading = false, disposed = false, raf = 0, last = 0, time = 0, x = 0, y = 0, busy = false, activity = 'idle', answerText = '', request, generation = 0, authScope = null, previousBounds, travel, identity, voiceMode = false, voiceScope = null, dictated = false;
+let hero, sequence, routeEvents, observer, scene, loading = false, disposed = false, raf = 0, last = 0, time = 0, x = 0, y = 0, busy = false, activity = 'idle', answerText = '', request, generation = 0, authScope = null, previousBounds, travel, identity, voiceMode = false, voiceScope = null, dictated = false, routeNavigator = null;
 const scope = () => identity?.scope() || null;
-function setActivity(value) { activity = value; root.dataset.activity = value; }
+function setActivity(value) { activity = sceneActivity(value); root.dataset.activity = activity; host.dataset.activity = activity; }
 function voiceChoice() { const button=$('[data-companion-voice]');button.setAttribute('aria-pressed',String(voiceMode));button.textContent=voiceMode?'End voice conversation':'Start voice conversation'; }
 function endVoice() { voiceMode=false;voiceScope=null;dictated=false;voiceChoice(); }
 function speechStyle() { return session.snapshot().tone==='warm'?{rate:.94,pitch:1.02}:session.snapshot().tone==='concise'?{rate:1.1,pitch:1}:{rate:1,pitch:1}; }
 async function listen() { if(!voiceMode||scope()!==voiceScope||document.hidden){endVoice();return;}dictated=false;const started=await voice.dictate();if(!started)endVoice(); }
 const voice = AdAstraVoice.create({onState:setActivity,
- onTranscript:text => { if (!busy && scope()) { input.value=text.slice(0,2000);dictated=true;syncForm(); } },
+ onTranscript:text => {
+  if (busy || !scope()) return;
+  const intent=voiceNavigationIntent(text);
+  if (intent) {
+    dictated=false;
+    endVoice();
+    voice.stop();
+    if(intent.type==='navigation' && routeNavigator){
+      status.textContent=intent.spoken;
+      const destination=new URL(intent.path,location.origin);
+      // The normal navigation allowlist still decides whether to preserve the canvas.
+      void routeNavigator.navigate(destination);
+    }else status.textContent=intent.spoken;
+    return;
+  }
+  input.value=text.slice(0,2000);dictated=true;syncForm();
+},
  onNotice:text => { status.textContent=text; },
  onFailure:()=>endVoice(),
  onEnd:kind=>{if(!voiceMode||scope()!==voiceScope||document.hidden)return;if(kind==='dictation'){if(dictated&&input.value.trim().length>=5)sendQuestion(true);else{endVoice();status.textContent='Voice conversation stopped. Enter a question or start again when ready.';}}else if(kind==='playback'&&!busy)listen();}
@@ -79,9 +96,15 @@ function progress(){if(!sequence?.classList.contains('is-story-ready'))return 0;
 function active(){const target=hero||root,box=target.getBoundingClientRect();return scene&&!disposed&&!document.hidden&&!prefersStill()&&document.body.dataset.motion!=='off'&&box.bottom>0&&box.top<innerHeight;}
 function frame(now){if(!active())return;if(last)time+=Math.min((now-last)/1000,.05);last=now;const scroll=progress();sequence?.style.setProperty('--ad-story-progress',scroll.toFixed(4));scene.renderAt(time,{x,y,scroll,activity});raf=requestAnimationFrame(frame);}
 function sync(){cancelAnimationFrame(raf);raf=0;last=0;$('[data-companion-motion]').hidden=!scene||prefersStill();if(prefersStill()){still();return;}if(!scene&&host.dataset.neuralState==='static'){load();return;}layout();if(active())raf=requestAnimationFrame(frame);const off=document.body.dataset.motion==='off';if(off)travel?.finish();$('[data-companion-motion]').textContent=off?'Play':'Pause';$('[data-companion-motion]').setAttribute('aria-label',off?'Play companion motion':'Pause companion motion');}
-async function load(){if(scene||loading||disposed||prefersStill())return;loading=true;host.dataset.neuralState='loading';try{const {createCinematicScene}=await import('../neural/cinematic-scene.js');if(disposed||prefersStill())return;scene=createCinematicScene(host);host.dataset.neuralState='ready';root.classList.add('has-live-scene');hero?.classList.add('is-live');const controls=hero?.querySelector('.ad-scene-controls');if(controls)controls.hidden=false;const caption=hero?.querySelector('[data-neural-caption]');if(caption)caption.textContent='Interactive neural sculpture · Visual preview';sync();}catch{still('fallback');}finally{loading=false;}}
+async function load(){if(scene||loading||disposed||prefersStill())return;loading=true;host.dataset.neuralState='loading';try{const {createCinematicScene}=await import('../neural/cinematic-scene.js');if(disposed||prefersStill())return;scene=createCinematicScene(host);scene.setMode(routeContext(location.pathname).mode);host.dataset.neuralState='ready';root.classList.add('has-live-scene');hero?.classList.add('is-live');const controls=hero?.querySelector('.ad-scene-controls');if(controls)controls.hidden=false;const caption=hero?.querySelector('[data-neural-caption]');if(caption)caption.textContent='Interactive neural sculpture · Visual preview';sync();}catch{still('fallback');}finally{loading=false;}}
 function mountRoute(){
  root.dataset.routeState='loading';
+ const context=routeContext(location.pathname);
+ root.dataset.sceneDomain=context.domain;
+ host.dataset.sceneDomain=context.domain;
+ root.dataset.routeState='loading';
+ scene?.setMode(context.mode);
+
  routeEvents?.abort();routeEvents=new AbortController();observer?.disconnect();hero=document.querySelector('.ad-arrival');sequence=hero?.closest('[data-arrival-sequence]');root.dataset.home=String(Boolean(hero));
  if(hero){const placeholder=hero.querySelector('[data-neural-hero]');if(placeholder&&placeholder!==host)placeholder.replaceWith(host);else if(!hero.contains(host))hero.append(host);hero.classList.toggle('is-live',Boolean(scene));const controls=hero.querySelector('.ad-scene-controls');if(controls)controls.hidden=!scene;hero.addEventListener('pointermove',event=>{x=(event.clientX/innerWidth-.5)*2;y=(event.clientY/innerHeight-.5)*2;},{passive:true,signal:routeEvents.signal});hero.querySelectorAll('[data-neural-mode]').forEach(button=>button.addEventListener('click',()=>{hero.querySelectorAll('[data-neural-mode]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));scene?.setMode(button.dataset.neuralMode);},{signal:routeEvents.signal}));}
  else $('.astra-companion__dock').prepend(host);
@@ -115,7 +138,7 @@ $('[data-companion-motion]').addEventListener('click',()=>window.dispatchEvent(n
 host.addEventListener('webglcontextlost',event=>{event.preventDefault();still('fallback');},true);
 new MutationObserver(()=>{sync();syncAuth();if(document.body.dataset.authenticated==='true')identity.ensure();}).observe(document.body,{attributes:true,attributeFilter:['data-motion','data-authenticated']});
 reduced.addEventListener('change',sync);connection?.addEventListener('change',sync);window.addEventListener('resize',()=>{layout();sync();},{passive:true});document.addEventListener('visibilitychange',()=>{if(document.hidden)stop('Paused while this page is hidden.');sync();});
-publicNavigation({beforeChange(){previousBounds=host.getBoundingClientRect();routeEvents?.abort();observer?.disconnect();$('.astra-companion__dock').prepend(host);},afterChange:mountRoute});
+routeNavigator=publicNavigation({beforeChange(){previousBounds=host.getBoundingClientRect();routeEvents?.abort();observer?.disconnect();$('.astra-companion__dock').prepend(host);},afterChange:mountRoute});
 window.addEventListener('pagehide',()=>{disposed=true;stop();clearContext();still();observer?.disconnect();routeEvents?.abort();});
 window.addEventListener('pageshow',event=>{if(event.persisted){disposed=false;mountRoute();identity.ensure().then(syncAuth);}});
 window.addEventListener('ad-astra:engine-activity',event=>{if(['idle','listening','requesting','responding','speaking','error'].includes(event.detail?.state))setActivity(event.detail.state);});
