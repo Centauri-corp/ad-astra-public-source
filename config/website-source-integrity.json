@@ -15,6 +15,11 @@
       "sha256": "aee958c60a3d95fa2f9c8039636b20d6bc4c4f8130a0b13da6bd80823cb63349"
     },
     {
+      "path": "api/customer-integration.js",
+      "bytes": 1775,
+      "sha256": "f7ad550b72d6638300223aa6cb0a547a98a1ae194d00f63dee63d490eb530127"
+    },
+    {
       "path": "api/models.js",
       "bytes": 2056,
       "sha256": "1012fd939724c99a696c2336586e39cd379a9a6f293f36808c2a2a8858f9c420"
@@ -53,6 +58,11 @@
       "path": "lib/customer-agent-catalog.js",
       "bytes": 3520,
       "sha256": "e2e89ff63074b09d429cb10660b9eef13b9461e31227673b17c372977ee42b5d"
+    },
+    {
+      "path": "lib/customer-integration.js",
+      "bytes": 3906,
+      "sha256": "6a04516cdbe8507d29111a921ed4e56e96331743c35e901ed1ba71cbad75941d"
     },
     {
       "path": "lib/engine-events.js",
@@ -530,6 +540,11 @@
       "sha256": "5d775a2fb5f63356e684a6f2eb782942e02c7002bbbc9940d1c9aa0b63b1ccdb"
     },
     {
+      "path": "public/companion/verticals.js",
+      "bytes": 2078,
+      "sha256": "bf1f2362d20fa1b9d3de4f655e1c89dd4a87957f7da94882052537c43b2490dd"
+    },
+    {
       "path": "public/company/index.html",
       "bytes": 19439,
       "sha256": "c0e707e867cc5d336390da1373efa16af0178cb82018d65678610c6c8cf7923c"
@@ -840,6 +855,21 @@
       "sha256": "370d477c601eb97ca779e70eade0f2801bd6caf4647f0648ffbd749082d67fba"
     },
     {
+      "path": "public/personal-universe/index.html",
+      "bytes": 5218,
+      "sha256": "6ae21e01f1bdf67b6bff8f5fd2da5e18be5ca9fbeaedf18838f27d52d10950b3"
+    },
+    {
+      "path": "public/personal-universe/universe.css",
+      "bytes": 5389,
+      "sha256": "e79101d54276285b4af199a0dce41ae0bf29ed8741f3fff23777d17bcdcbb1d8"
+    },
+    {
+      "path": "public/personal-universe/universe.js",
+      "bytes": 7473,
+      "sha256": "55aad74682c1f5b66fabce52ca376cdda0ba305d2d7b462c60312e22a2550014"
+    },
+    {
       "path": "public/platform-preview/app.js",
       "bytes": 23488,
       "sha256": "a584b15d8ffcef3b0314d33ea664ce7ced154052e65389b0070c2183b9d9e71b"
@@ -941,8 +971,8 @@
     },
     {
       "path": "public/route-release-evidence.json",
-      "bytes": 12078,
-      "sha256": "9cf08fa4e5662c0fa3fa9de7d4d44fdecb976d8b9868358d725e56ee3bd6a5cf"
+      "bytes": 16464,
+      "sha256": "a0233c9ed2d10fdc7aaed0cdd1540ff927b64e9428a05b355d186172bfbfff50"
     },
     {
       "path": "public/security/index.html",
@@ -1050,5 +1080,5 @@
       "sha256": "8d10f2d14a587acf322043ac5030a285a205e77c6f32c591ec3017fe53bac6f0"
     }
   ],
-  "fingerprint": "5a8168d3fa62f7c5ac3eb6fe59428ba43b6960ad623a1d9ad8ea184c1e668ca8"
+  "fingerprint": "5021c0d1351102c44f9a2ab8c0a3b9e85942807c4243356cf8942d7a014d0329"
 }
