@@ -35,7 +35,7 @@ test('visual choices never become authorization or customer telemetry',()=>{
  assert.match(verticals,/NEVER a tenant\/role\/entitlement/);
  assert.match(verticals,/const byId=new Map/);
  assert.match(verticals,/requestHint/);
- assert.match(verticals,/runsAI:false/);
+ assert.match(require('node:fs').readFileSync(require('node:path').join(__dirname,'../lib/customer-integration.js'),'utf8'),/runsAI:false/);
  assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
  assert.match(html,/This image does not show an AI model thinking/);
 });
