@@ -31,3 +31,15 @@ test('visual voice commands are explicit, bounded and have no privileged side ef
  assert.match(runtime,/if\(handleVisualCommand\(value\)\)return/);
  assert.match(runtime,/identity\.token\(tokenScope\)/);
 });
+
+test('cinematic progress is hidden until explicit user selection or voice control',()=>{
+ const html=read('index.html'),runtime=read('universe.js'),style=read('universe.css');
+ assert.match(html,/id="daily-visual"[^>]*hidden/);
+ assert.match(html,/id="reveal-progress"[^>]*aria-expanded="false"/);
+ assert.match(runtime,/function revealProgress\(open/);
+ assert.match(runtime,/visual.hidden=!open/);
+ assert.match(runtime,/reveal\?\.addEventListener\('click'/);
+ assert.match(runtime,/'show progress':\(\)=>revealProgress\(true/);
+ assert.match(style,/#daily-visual\[hidden\]\{display:none!important\}/);
+ assert.match(html,/class="universe-enter"/);
+});
