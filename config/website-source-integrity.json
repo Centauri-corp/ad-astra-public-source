@@ -861,8 +861,8 @@
     },
     {
       "path": "public/personal-universe/index.html",
-      "bytes": 8723,
-      "sha256": "1e08c671ec5b6f896138aef432ecd93421f977576bf891e20df3019ed8cd3180"
+      "bytes": 9043,
+      "sha256": "ea9626b9342eb3a06be1f1aaec16d29b585b122817522ad27c22d2451d61ae90"
     },
     {
       "path": "public/personal-universe/neural-gpu-field.js",
@@ -871,13 +871,13 @@
     },
     {
       "path": "public/personal-universe/universe.css",
-      "bytes": 11883,
-      "sha256": "7738b7be3d15a1836916bc52197a887c2433ea5606346aa71a3b36dc33f4692f"
+      "bytes": 13283,
+      "sha256": "4079117342f89cf7896af908f7519ce23c6c9ed93676d26381a5c6c5c40e4289"
     },
     {
       "path": "public/personal-universe/universe.js",
-      "bytes": 13858,
-      "sha256": "5fd7ee98114e2c88bcce21f8b69e4f3a1b6f16897cc73b770bc27d82f29de7f0"
+      "bytes": 14249,
+      "sha256": "1816bffcfd13061bcaa6e310d04f7b10fa3657913983fc7be1692ac1c7fe061e"
     },
     {
       "path": "public/platform-preview/app.js",
@@ -1090,5 +1090,5 @@
       "sha256": "8d10f2d14a587acf322043ac5030a285a205e77c6f32c591ec3017fe53bac6f0"
     }
   ],
-  "fingerprint": "6b15b8cfc749ec0d5970624f8b5d6fa42a5895bad39bd607f500598345d223b4"
+  "fingerprint": "29fcc68298c3f626ffa54a202c87018024e6530828587da2acadc4ade8fd8317"
 }
