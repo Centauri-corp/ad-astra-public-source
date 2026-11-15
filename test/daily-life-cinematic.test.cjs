@@ -1,0 +1,34 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
+const root=path.join(__dirname,'../public/personal-universe');
+const read=f=>fs.readFileSync(path.join(root,f),'utf8');
+const catalog=require('../public/personal-universe/daily-life.js');
+test('daily life customer choices have no fabricated scores or server-side calls',()=>{
+ assert.equal(catalog.entries.length,6);
+ assert.equal(new Set(catalog.entries.map(x=>x.id)).size,6);
+ const session=catalog.createSession();
+ assert.equal(session.snapshot().completed,0);
+ session.setDone(0,true);assert.equal(session.snapshot().completed,1);
+ session.choose('finance');assert.equal(session.snapshot().need,'finance');
+ assert.equal(session.snapshot().completed,0);
+ session.choose('clarity');assert.equal(session.snapshot().completed,1);
+ session.clear();assert.equal(session.snapshot().completed,0);
+ assert.equal(session.snapshot().persisted,false);
+ assert.throws(()=>session.setDone(12,true),/invalid_step/);
+});
+test('customer world is continuous, non-boxed, no automatic model or microphone request',()=>{
+ const html=read('index.html'),css=read('universe.css'),js=read('universe.js');
+ assert.match(html,/id="daily-world"/);
+ assert.match(html,/id="daily-choices"/);
+ assert.match(html,/src="\/personal-universe\/daily-life.js"/);
+ assert.match(html,/name="robots" content="noindex,follow"/);
+ assert.match(css,/CINEMATIC UNIVERSE V3/);
+ assert.match(css,/\.experience-grid\{display:block/);
+ assert.match(css,/\.scene-shell\{position:absolute/);
+ assert.match(css,/prefers-reduced-motion:reduce/);
+ assert.match(js,/\$\('daily-ask'\)\.addEventListener/);
+ assert.match(js,/createCompanionIdentity/);
+ assert.match(js,/AdAstraEngineClient\.ask/);
+ assert.match(js,/voice\?\.dictate\(\)/);
+ assert.doesNotMatch(js,/localStorage|sessionStorage/);
+});
