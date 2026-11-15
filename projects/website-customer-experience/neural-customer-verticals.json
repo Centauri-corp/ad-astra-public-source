@@ -1,0 +1,65 @@
+{
+  "schema": "ad-astra-neural-customer-verticals/v1",
+  "availability": "development-preview",
+  "identityRequiredForAI": true,
+  "designStateScope": "tab-session-only",
+  "personalizationAuthority": "customer-selected-ui-preference-only",
+  "voice": "explicit-user-action-on-device-only",
+  "defaultFamily": "core-intelligence",
+  "families": [
+    {
+      "id": "core-intelligence",
+      "label": "Core Intelligence",
+      "mode": "research",
+      "agentId": "guide",
+      "interaction": "ask",
+      "accent": "#b6deed",
+      "description": "Understand, learn and ask"
+    },
+    {
+      "id": "creative-studio",
+      "label": "Creative Studio",
+      "mode": "create",
+      "agentId": "creator",
+      "interaction": "create",
+      "accent": "#d5ba91",
+      "description": "Shape ideas and visual briefs"
+    },
+    {
+      "id": "specialist-intelligence",
+      "label": "Specialist Intelligence",
+      "mode": "research",
+      "agentId": "researcher",
+      "interaction": "research",
+      "accent": "#b6deed",
+      "description": "Explore sources with oversight"
+    },
+    {
+      "id": "business-commerce",
+      "label": "Business & Commerce",
+      "mode": "plan",
+      "agentId": "analyst",
+      "interaction": "explore",
+      "accent": "#d5ba91",
+      "description": "Compare business decisions"
+    },
+    {
+      "id": "developer-platform",
+      "label": "Developer Platform",
+      "mode": "plan",
+      "agentId": "researcher",
+      "interaction": "research",
+      "accent": "#aec9ed",
+      "description": "Outline integrations and boundaries"
+    },
+    {
+      "id": "autonomous-workflows",
+      "label": "Autonomous Workflows",
+      "mode": "plan",
+      "agentId": "navigator",
+      "interaction": "ask",
+      "accent": "#aec9ed",
+      "description": "Plan supervised workflows"
+    }
+  ]
+}
