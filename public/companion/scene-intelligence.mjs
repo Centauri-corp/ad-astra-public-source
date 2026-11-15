@@ -6,7 +6,6 @@ export const ROUTES=Object.freeze({
  solutions:Object.freeze({path:'/services/',domain:'industry',mode:'plan',spoken:'solutions'}),
  intelligence:Object.freeze({path:'/intelligence/',domain:'knowledge',mode:'research',spoken:'intelligence'}),
  workspace:Object.freeze({path:'/platform-preview/',domain:'knowledge',mode:'create',spoken:'workspace preview'}),
- space:Object.freeze({path:'/explore/',domain:'cosmos',mode:'research',spoken:'exploration'}),
  company:Object.freeze({path:'/company/',domain:'origin',mode:'research',spoken:'company'}),
  start:Object.freeze({path:'/start/',domain:'time',mode:'plan',spoken:'getting started'}),
  status:Object.freeze({path:'/status/',domain:'data',mode:'research',spoken:'service status'})
@@ -14,7 +13,7 @@ export const ROUTES=Object.freeze({
 const alias=Object.freeze({
  home:'home',start:'start',products:'products',solutions:'solutions',
  services:'solutions',intelligence:'intelligence',workspace:'workspace',
- 'workspace preview':'workspace',explore:'space',exploration:'space',space:'space',
+ 'workspace preview':'workspace',explore:'workspace',exploration:'workspace',
  company:'company',status:'status','service status':'status'
 });
 export function routeContext(path='/'){
