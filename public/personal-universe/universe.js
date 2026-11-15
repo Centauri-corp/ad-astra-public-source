@@ -119,3 +119,66 @@ window.addEventListener('pagehide',()=>{
  disposed=true;stopRequest();pause();scene?.dispose();scene=null;voice?.dispose();identity?.dispose();
 },{once:true});
 updateTheme();syncAuth();
+
+
+// Daily Life Intelligence — a genuine human-first journey, not a fake AI answer.
+// This session only holds the choices and checked steps in browser memory.
+const dailyCatalog=globalThis.AdAstraDailyLife;
+if(dailyCatalog){
+ const daily=dailyCatalog.createSession();
+ const selection=$('daily-choices'),questionEl=$('daily-question'),steps=$('daily-steps'),progress=$('daily-status');
+ function renderDaily(){
+  const value=daily.current();
+  selection.replaceChildren();
+  for(const item of daily.list()){
+   const button=document.createElement('button');button.type='button';button.textContent=item.label;
+   button.setAttribute('aria-pressed',String(item.id===value.id));
+   button.addEventListener('click',()=>{
+    daily.choose(item.id);
+    // Changing the daily goal does not trigger a model request or infer a mood.
+    document.documentElement.style.setProperty('--accent',item.accent);
+    renderDaily();
+   });
+   selection.append(button);
+  }
+  questionEl.textContent=value.question;
+  steps.replaceChildren();
+  for(const [index,text] of value.steps.entries()){
+   const label=document.createElement('label'),checkbox=document.createElement('input'),caption=document.createElement('span');
+   checkbox.type='checkbox';checkbox.checked=daily.isDone(index);caption.textContent=text;
+   checkbox.addEventListener('change',()=>{daily.setDone(index,checkbox.checked);updateDailyProgress();});
+   label.append(checkbox,caption);steps.append(label);
+  }
+  updateDailyProgress();
+ }
+ function updateDailyProgress(){
+  const snap=daily.snapshot();
+  progress.textContent=snap.completed+' of '+snap.total+' chosen steps marked complete. Only you can confirm progress; it is not recorded after leaving this page.';
+ }
+ $('daily-ask').addEventListener('click',()=>{
+  const value=daily.current();
+  // The user must explicitly verify and submit through the existing protected AI path.
+  question.value=value.prompt;
+  question.dispatchEvent(new Event('input',{bubbles:true}));
+  $('universe-question').scrollIntoView({behavior:calm()?'instant':'smooth',block:'center'});
+  if(!currentScope)serviceState.textContent='Verify your account to submit this question. No AI request has been made.';
+ });
+ renderDaily();
+}
+// Environment parallax remains decorative and honors privacy, accessibility,
+// motion preferences, hidden pages, and mobile performance.
+let driftFrame=0,driftX=0,driftY=0;
+function applyDrift(){
+ driftFrame=0;
+ if(disposed||document.hidden||calm())return;
+ document.documentElement.style.setProperty('--parallax-x',(driftX*9).toFixed(1)+'px');
+ document.documentElement.style.setProperty('--parallax-y',(driftY*7).toFixed(1)+'px');
+}
+window.addEventListener('pointermove',event=>{
+ if(event.pointerType==='touch'||calm()||document.hidden)return;
+ driftX=(event.clientX/innerWidth-.5)*2;driftY=(event.clientY/innerHeight-.5)*2;
+ if(!driftFrame)driftFrame=requestAnimationFrame(applyDrift);
+},{passive:true});
+reduced.addEventListener('change',()=>{
+ if(calm()){cancelAnimationFrame(driftFrame);driftFrame=0;document.documentElement.style.setProperty('--parallax-x','0px');document.documentElement.style.setProperty('--parallax-y','0px');}
+});
