@@ -856,8 +856,8 @@
     },
     {
       "path": "public/personal-universe/index.html",
-      "bytes": 5218,
-      "sha256": "6ae21e01f1bdf67b6bff8f5fd2da5e18be5ca9fbeaedf18838f27d52d10950b3"
+      "bytes": 5278,
+      "sha256": "866ebc02b79488ae3c414c840f1ddd97ab3f434df05f5afe20af2b2da16f9e44"
     },
     {
       "path": "public/personal-universe/universe.css",
@@ -1080,5 +1080,5 @@
       "sha256": "8d10f2d14a587acf322043ac5030a285a205e77c6f32c591ec3017fe53bac6f0"
     }
   ],
-  "fingerprint": "5021c0d1351102c44f9a2ab8c0a3b9e85942807c4243356cf8942d7a014d0329"
+  "fingerprint": "402e7adc7c0d842c85f900cc33da6e8ed72ff5c1b38c7a1ece2400fc45b3a1f4"
 }
