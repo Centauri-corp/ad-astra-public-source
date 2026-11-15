@@ -35,3 +35,18 @@
 @media(max-width:760px){.astra-companion{right:14px;bottom:14px;width:142px}.astra-companion__dock{height:110px}.astra-companion__toggle{font-size:10px;padding-inline:12px}.astra-companion__panel{padding:24px}.astra-companion__motion{top:0}}
 @media(max-width:760px){.astra-companion[data-home=true]{left:24px;right:auto;top:auto;bottom:20px;width:156px}.astra-companion[data-home=true] .astra-companion__panel{top:auto;bottom:56px;max-height:calc(100svh - 100px)}}
 @media(prefers-reduced-motion:reduce){.astra-companion{view-transition-name:none}.astra-companion__panel{backdrop-filter:none}}
+
+/* Persistent neural-domain transitions: same canvas, different visual environments.
+   Decorative styling only; intelligence results and verified data are never inferred from hues. */
+.astra-companion { --astra-scene-glow: rgba(101,214,232,.38); }
+.astra-companion[data-scene-domain="industry"] { --astra-scene-glow: rgba(225,176,107,.42); }
+.astra-companion[data-scene-domain="knowledge"] { --astra-scene-glow: rgba(158,171,255,.4); }
+.astra-companion[data-scene-domain="data"] { --astra-scene-glow: rgba(96,222,182,.36); }
+.astra-companion[data-scene-domain="cosmos"] { --astra-scene-glow: rgba(118,165,255,.4); }
+.astra-companion[data-scene-domain="time"] { --astra-scene-glow: rgba(230,177,202,.35); }
+.astra-companion__dock { box-shadow: 0 0 46px var(--astra-scene-glow); transition: box-shadow .65s ease; }
+.astra-companion[data-activity="listening"] .astra-companion__dock { box-shadow: 0 0 60px rgba(168,138,255,.55); }
+.astra-companion[data-activity="speaking"] .astra-companion__dock { box-shadow: 0 0 60px rgba(230,190,114,.55); }
+@media (prefers-reduced-motion: reduce) {
+ .astra-companion__dock { transition: none; }
+}
