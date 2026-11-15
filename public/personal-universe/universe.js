@@ -11,7 +11,9 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const verticals=globalThis.AdAstraCustomerVerticals;
 if(!verticals)throw Error('vertical_catalog_unavailable');
 const session=verticals.createSession(verticals.resolveRoute(location.search).id);
-let scene=null,animation=0,started=0,elapsed=0,active=false,disposed=false;
+let scene=null,gpuField=null,animation=0,started=0,elapsed=0,active=false,disposed=false;
+const visualEnergy=$('motion-energy');
+function energy(){return calm()?0:Number(visualEnergy?.value??35)/100;}
 let voice=null,identity=null,currentScope=null,request=null,requestGeneration=0,lastVoiceAnswer='';
 const palettes={cyan:'research',champagne:'create',cobalt:'plan',vertical:null};
 function calm(){return reduced.matches||$('calm-motion').checked||navigator.connection?.saveData===true}
@@ -23,6 +25,7 @@ function updateTheme(){
  $('mapped-agent').textContent=profile.agentId.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()).replace(/^/,'Astra ');
  $('vertical-description').textContent='Selected: '+profile.label+'. This is a visual preference and agent request hint, not a provider authorization.';
  scene?.setMode(sceneMode());
+ gpuField?.setTint(accent);
  syncMotion();
 }
 for(const {id,label} of session.choices()){
@@ -38,13 +41,14 @@ function pause(){
 function loop(t){
  if(!scene||!active||disposed||document.hidden||calm())return;
  if(started)elapsed+=Math.min((t-started)/1000,.05);started=t;
- scene.renderAt(elapsed,{activity:request?'requesting':'idle'});
+ scene.renderAt(elapsed* Math.max(.12,energy()*1.2),{activity:request?'requesting':'idle'});
+ gpuField?.renderAt(elapsed,{motion:energy()});
  animation=requestAnimationFrame(loop);
 }
 function syncMotion(){
  pause();active=!!scene&&!calm()&&motion.getAttribute('aria-pressed')!=='true';
  document.body.classList.toggle('is-calm',calm());
- if(scene&&!disposed)scene.renderAt(elapsed,{activity:request?'requesting':'idle'});
+ if(scene&&!disposed){scene.renderAt(elapsed,{activity:request?'requesting':'idle'});gpuField?.renderAt(elapsed,{motion:energy()});}
  motion.disabled=!scene||calm();motion.textContent=calm()?'Motion disabled':active?'Pause motion':'Resume motion';
  if(active)animation=requestAnimationFrame(loop);
 }
@@ -55,6 +59,11 @@ $('load-3d').addEventListener('click',async()=>{
   const {createCinematicScene}=await import('../neural/cinematic-scene.js');
   if(disposed)return;
   scene=createCinematicScene(neural);scene.setMode(sceneMode());poster.hidden=true;
+  // Shader particles are an optional progressive enhancement. WebGL stays authoritative.
+  if(!calm())try{const {createGPUField}=await import('./neural-gpu-field.js');
+   if(!disposed&&scene)gpuField=await createGPUField(neural,{count:matchMedia('(max-width:760px)').matches?380:900});
+   if(gpuField)gpuField.setTint(getComputedStyle(document.documentElement).getPropertyValue('--accent').trim());
+  }catch{gpuField=null;}
   motion.setAttribute('aria-pressed','false');
   status.textContent='Interactive 3D loaded. Color and motion are visual preferences; no private model reasoning is shown.';
   btn.textContent='3D Ready';syncMotion();
@@ -65,6 +74,7 @@ motion.addEventListener('click',()=>{
  syncMotion();
 });
 reduced.addEventListener('change',syncMotion);
+visualEnergy?.addEventListener('input',()=>{$('motion-energy-value').textContent=visualEnergy.value+'%';syncMotion();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){stopRequest();voice?.stop();}syncMotion();});
 function syncAuth(){
  const next=identity?.scope()||null;
@@ -77,7 +87,12 @@ function stopRequest(){
 }
 voice=globalThis.AdAstraVoice?.create({
  onState:state=>{voiceState.textContent=state==='listening'?'Microphone active on this device.':state==='speaking'?'On-device voice playback.':'Microphone off.';},
- onTranscript:value=>{if(currentScope){question.value=value.slice(0,2000);syncAuth();}},
+ onTranscript:value=>{
+  // A bounded local vocabulary controls visuals without identity, model or billing access.
+  if(handleVisualCommand(value))return;
+  if(currentScope){question.value=value.slice(0,2000);syncAuth();}
+  else voiceState.textContent='Visual commands: pause motion, resume motion, cyan, champagne, cobalt, calm mode, or show progress.';
+ },
  onNotice:value=>{voiceState.textContent=value;},
  onFailure:()=>{voiceState.textContent='Voice unavailable. You can type instead.';}
 });
@@ -90,6 +105,7 @@ verify.addEventListener('click',async()=>{
 });
 question.addEventListener('input',()=>{ask.disabled=!currentScope||question.value.trim().length<5;});
 dictate.addEventListener('click',()=>{if(currentScope&&!request)void voice?.dictate();});
+$('visual-voice')?.addEventListener('click',()=>{if(!request)void voice?.dictate();});
 $('stop-activity').addEventListener('click',()=>{stopRequest();voiceState.textContent='Voice and request stopped.';});
 ask.addEventListener('click',async()=>{
  if(!currentScope||request)return;
@@ -116,10 +132,28 @@ ask.addEventListener('click',async()=>{
  }
 });
 window.addEventListener('pagehide',()=>{
- disposed=true;stopRequest();pause();scene?.dispose();scene=null;voice?.dispose();identity?.dispose();
+ disposed=true;stopRequest();pause();gpuField?.dispose();gpuField=null;scene?.dispose();scene=null;voice?.dispose();identity?.dispose();
 },{once:true});
 updateTheme();syncAuth();
 
+
+// Local visual voice commands do not require user authentication and never submit AI queries.
+function handleVisualCommand(input){
+ const normalized=String(input||'').toLowerCase().replace(/[.!?]/g,'').trim();
+ const matches={
+  'pause motion':()=>{motion.setAttribute('aria-pressed','true');syncMotion();},
+  'resume motion':()=>{motion.setAttribute('aria-pressed','false');syncMotion();},
+  'calm mode':()=>{$('calm-motion').checked=true;syncMotion();},
+  'focus mode':()=>{$('calm-motion').checked=false;visualEnergy.value='20';visualEnergy.dispatchEvent(new Event('input'));},
+  'cyan':()=>{colorChoice.value='cyan';updateTheme();},
+  'champagne':()=>{colorChoice.value='champagne';updateTheme();},
+  'cobalt':()=>{colorChoice.value='cobalt';updateTheme();},
+  'show progress':()=>{$('daily-visual').scrollIntoView({behavior:calm()?'instant':'smooth'});},
+  'show my progress':()=>{$('daily-visual').scrollIntoView({behavior:calm()?'instant':'smooth'});}
+ };
+ if(!Object.hasOwn(matches,normalized))return false;
+ matches[normalized]();voiceState.textContent='Visual command applied locally: '+normalized+'.';return true;
+}
 
 // Daily Life Intelligence — a genuine human-first journey, not a fake AI answer.
 // This session only holds the choices and checked steps in browser memory.
@@ -154,6 +188,15 @@ if(dailyCatalog){
  function updateDailyProgress(){
   const snap=daily.snapshot();
   progress.textContent=snap.completed+' of '+snap.total+' chosen steps marked complete. Only you can confirm progress; it is not recorded after leaving this page.';
+  const pct=snap.total?Math.round(100*snap.completed/snap.total):0;
+  const values=[0,1,2,3].map(i=>i<=snap.completed?122-(i*20):122-(snap.completed*20));
+  $('life-progress-path')?.setAttribute('d','M 28 '+values[0]+' L 235 '+values[1]+' L 445 '+values[2]+' L 672 '+values[3]);
+  if($('life-progress-points')){
+   const svgNS='http://www.w3.org/2000/svg';const group=$('life-progress-points');group.replaceChildren();
+   [28,235,445,672].forEach((x,i)=>{const c=document.createElementNS(svgNS,'circle');c.setAttribute('cx',String(x));c.setAttribute('cy',String(values[i]));c.setAttribute('r',i===snap.completed?'7':'4');group.append(c);});
+  }
+  $('life-progress-chart')?.setAttribute('aria-label',snap.completed+' of '+snap.total+' chosen steps marked complete');
+  $('life-progress-formula').textContent='Completed / total = '+snap.completed+' / '+snap.total+' = '+pct+'%';
  }
  $('daily-ask').addEventListener('click',()=>{
   const value=daily.current();
