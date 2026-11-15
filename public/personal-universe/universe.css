@@ -67,3 +67,18 @@ body:after{content:"";pointer-events:none;position:fixed;inset:0;z-index:-1;opac
 @media(max-width:1080px){.world-intro{max-width:78vw}.experience-panel{grid-template-columns:130px 1fr;min-height:0;gap:18px 32px}.experience-panel h2{grid-column:2;grid-row:1 / span 2}.experience-panel > label,.experience-panel > select,.experience-panel > .detail,.experience-panel > .meta-row,.assistant-panel > .account-button,.assistant-panel > textarea,.assistant-panel > .assistant-actions,.assistant-panel > #voice-state,.assistant-panel > .answer{grid-column:2}}
 @media(max-width:700px){.universe-header{min-height:85px;padding:22px 20px}.universe-header nav{gap:10px}.universe-header .back-link:nth-child(n+2){display:none}.scene-layout{min-height:820px;padding:130px 22px 128px;align-items:flex-end}.world-intro{max-width:100%;padding:20vh 0 5vh}.world-intro h1{font-size:clamp(50px,13vw,77px);margin:22px 0 28px}.world-intro>p:not(.eyebrow){font-size:13px}.neural-stage img{object-position:58% 18%;transform:translateY(-9%) scale(1.6)}.neural-stage:before{background:linear-gradient(0deg,#03060c 2%,#03060cbb 33%,transparent 85%)}.scene-footer{left:22px;right:22px;bottom:15px;display:block}.scene-footer p{display:none}.scene-actions button{font-size:10px}.experience-grid{padding:10px 22px 60px}.experience-panel{display:block;padding:85px 0}.experience-panel h2{font-size:clamp(40px,11vw,62px);margin:24px 0 44px}.experience-panel > label{margin:24px 0 12px}.assistant-panel .assistant-actions{gap:14px}.daily-world{min-height:620px;padding:95px 22px}.daily-world h2{font-size:58px}.trust{padding:30px 22px 80px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}body:before,.neural-stage img{transform:none!important}}
+
+/* Graphics evolution v4: blended math figures, progressive GPU atmosphere and scene choreography. */
+.gpu-neural-field{mix-blend-mode:screen;opacity:.78;filter:drop-shadow(0 0 9px var(--accent));}
+.intelligence-viz{max-width:850px;margin:54px 0 36px;position:relative;background:transparent;border:0;overflow:visible}
+.intelligence-viz:before{content:"";position:absolute;inset:-9% -6%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 44%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 68%)}
+#life-progress-chart{width:100%;height:auto;max-height:230px;overflow:visible}
+#life-progress-chart #life-progress-path{stroke-linecap:round;stroke-linejoin:round;transition:d 750ms cubic-bezier(.16,.8,.25,1)}
+#life-progress-chart circle{filter:drop-shadow(0 0 7px var(--accent));transition:cy 750ms cubic-bezier(.16,.8,.25,1)}
+.life-formula{display:block;font-size:clamp(13px,1.8vw,21px);font-weight:300;color:#d1e6ef;letter-spacing:.04em;margin:16px 0 12px}
+#motion-energy{width:100%;height:25px;accent-color:var(--accent);margin:10px 0 40px;cursor:pointer}
+#motion-energy-value{display:inline;color:var(--accent);font-size:11px;padding-left:8px}
+.daily-world,.experience-panel,.world-intro{transition:opacity 700ms ease,transform 900ms cubic-bezier(.2,.8,.2,1)}
+@media(prefers-reduced-motion:no-preference){.daily-world:before{animation:universe-ambient-wave 17s ease-in-out infinite alternate}
+@keyframes universe-ambient-wave{0%{opacity:.36;transform:scale(.96) translate3d(-1%,0,0)}100%{opacity:.84;transform:scale(1.04) translate3d(1%,0,0)}}}
+@media(prefers-reduced-motion:reduce){#life-progress-chart #life-progress-path,#life-progress-chart circle{transition:none!important}.gpu-neural-field{display:none!important}}
