@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="color-scheme" content="dark">
+<title>Personal Intelligence Universe — AD ASTRA Development Preview</title>
+<meta name="description" content="A protected development preview of the AD ASTRA Personal Intelligence Universe.">
+<link rel="icon" href="/assets/brand/ad-astra-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/personal-universe/universe.css">
+<script defer src="/companion/verticals.js"></script>
+<script defer src="/neural/engine-client.js"></script>
+<script defer src="/neural/voice.js"></script>
+<script type="module" src="/personal-universe/universe.js"></script>
+</head>
+<body>
+<a class="skip" href="#universe-main">Skip to workspace</a>
+<header class="universe-header">
+<a class="brand" href="/" aria-label="AD ASTRA home"><img src="/assets/brand/ad-astra-mark.svg" width="36" height="36" alt=""> AD ASTRA</a>
+<span class="preview-identity">PERSONAL INTELLIGENCE UNIVERSE <span class="preview-pill">DEVELOPMENT PREVIEW</span></span>
+<a class="back-link" href="/platform-preview/">Explore workspace <span aria-hidden="true">↗</span></a>
+</header>
+<main id="universe-main">
+<section class="scene-layout" aria-labelledby="world-title">
+<div class="scene-shell">
+<div id="universe-visual" class="neural-stage" aria-label="Decorative neural visualization">
+<img class="neural-poster" src="/assets/neural-master/delivery/neural-core-800.avif" width="800" height="450" alt="Decorative glass and light neural sculpture">
+</div>
+<div class="scene-footer">
+<p id="scene-status" role="status">Static neural artwork. This image does not show an AI model thinking.</p>
+<div class="scene-actions">
+<button id="load-3d" type="button">Enter 3D</button>
+<button id="motion-toggle" type="button" disabled aria-pressed="false">Pause motion</button>
+</div>
+</div>
+</div>
+<div class="world-intro">
+<p class="eyebrow">AD ASTRA / YOUR SPACE</p>
+<h1 id="world-title">An intelligence universe shaped around <em>your direction.</em></h1>
+<p>Choose a field, adjust your environment, and explore a shared neural world. Live intelligence is available only after your account and service permissions are verified.</p>
+<div class="world-state"><span class="state-dot" aria-hidden="true"></span><span id="service-state">AI connection not verified</span></div>
+</div>
+</section>
+<section class="experience-grid" aria-label="Personal universe controls">
+<div class="experience-panel">
+<p class="eyebrow">01 / YOUR VERTICAL</p>
+<h2>Choose your intelligence space.</h2>
+<label for="vertical-choice">Product and service direction</label>
+<select id="vertical-choice"></select>
+<p id="vertical-description" class="detail">Choose an area to see the mapped agent and visual atmosphere.</p>
+<div class="meta-row"><span>Assigned capability</span><strong id="mapped-agent">Astra Guide</strong></div>
+<div class="meta-row"><span>Availability</span><strong>Preview — release gated</strong></div>
+</div>
+<div class="experience-panel">
+<p class="eyebrow">02 / VISUAL SIMULATION</p>
+<h2>Make the atmosphere yours.</h2>
+<label for="color-choice">Neural color theme</label>
+<select id="color-choice">
+<option value="vertical">Match my vertical</option>
+<option value="cyan">Ice cyan</option>
+<option value="champagne">Champagne</option>
+<option value="cobalt">Cobalt</option>
+</select>
+<label class="toggle-label" for="calm-motion"><input id="calm-motion" type="checkbox"> Calm / reduced motion</label>
+<p class="detail">Preferences remain on this page. Motion and lighting are visual effects, never a representation of hidden reasoning.</p>
+</div>
+<div class="experience-panel assistant-panel">
+<p class="eyebrow">03 / ASTRA POLARIS</p>
+<h2>Your intelligence companion.</h2>
+<p class="detail">The existing protected model gateway handles permitted questions. This preview does not bypass authentication or turn on unavailable AI services.</p>
+<button type="button" id="verify-account" class="account-button">Verify my account</button>
+<label for="universe-question">Ask within your chosen vertical</label>
+<textarea id="universe-question" maxlength="2000" rows="3" placeholder="What would you like to explore?" disabled></textarea>
+<div class="assistant-actions">
+<button id="ask-intelligence" type="button" disabled>Ask Astra Polaris</button>
+<button id="voice-dictate" type="button" disabled>Use on-device voice</button>
+<button id="stop-activity" type="button">Stop</button>
+</div>
+<p id="voice-state" class="detail" role="status">Microphone off. Voice works only when supported locally and started by you.</p>
+<output id="universe-answer" class="answer" aria-live="polite"></output>
+</div>
+</section>
+<section class="trust" aria-label="Preview limitations">
+<p><strong>Development preview.</strong> Visual selection does not grant access to a tenant, product, model, or billing entitlement. Voice is opt-in and on-device only where supported. No conversation is persisted by this page. Account switching stops work and clears the current answer.</p>
+<a href="/security/">Security and privacy</a>
+</section>
+</main>
+</body></html>
