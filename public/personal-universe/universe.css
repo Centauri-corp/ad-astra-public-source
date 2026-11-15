@@ -82,3 +82,21 @@ body:after{content:"";pointer-events:none;position:fixed;inset:0;z-index:-1;opac
 @media(prefers-reduced-motion:no-preference){.daily-world:before{animation:universe-ambient-wave 17s ease-in-out infinite alternate}
 @keyframes universe-ambient-wave{0%{opacity:.36;transform:scale(.96) translate3d(-1%,0,0)}100%{opacity:.84;transform:scale(1.04) translate3d(1%,0,0)}}}
 @media(prefers-reduced-motion:reduce){#life-progress-chart #life-progress-path,#life-progress-chart circle{transition:none!important}.gpu-neural-field{display:none!important}}
+
+/* V5 — context-sensitive cinematic immersion; no permanent analytics dashboard. */
+.universe-enter{display:inline-flex;align-items:center;gap:18px;margin:33px 0 12px;text-decoration:none;color:var(--accent);font-size:12px;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid color-mix(in srgb,var(--accent) 60%,transparent);padding:13px 0;transition:gap .4s,opacity .4s}
+.universe-enter:hover{gap:30px}
+.world-intro .world-state{margin-top:26px}
+#daily-visual[hidden]{display:none!important}
+.data-reveal{margin-top:40px;display:flex;align-items:center}
+#reveal-progress{padding:10px 0;min-height:48px}
+.intelligence-viz{margin:55px 0 48px;background:none!important;border:0!important;box-shadow:none!important}
+.intelligence-viz svg{filter:drop-shadow(0 0 22px color-mix(in srgb,var(--accent) 17%,transparent))}
+.life-orbit{position:relative;border:0}
+.life-orbit button{transition:color .5s,border-color .5s,opacity .5s;opacity:.65}
+.life-orbit button:hover,.life-orbit button[aria-pressed=true]{opacity:1}
+.daily-world h2 em{font-style:normal;color:var(--accent)}
+.scene-actions{align-items:center}
+.scene-actions button{white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.universe-enter,.life-orbit button{transition:none!important}}
+@media(max-width:700px){.universe-enter{font-size:11px}.scene-actions{gap:15px;flex-wrap:wrap}.scene-actions button{min-height:42px}}
