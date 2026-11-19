@@ -1,0 +1,73 @@
+{
+  "schema": "ad-astra/edestra-unified-graphics-candidate/v1",
+  "date": "2026-11-19",
+  "base": {
+    "pr": 47,
+    "sha": "77b94b59a1dfd0f85ff041502466423c13abb1ac",
+    "dependsOnPublicPR": 46
+  },
+  "trackingIssue": "Centauri-corp/ad-astra-internal-source#132",
+  "release": "HOLD",
+  "defaultExperience": {
+    "renderer": "static-poster+canvas2d",
+    "networkRequests": false,
+    "requiresUserActionForMotion": true,
+    "reducedMotion": "static",
+    "customerDataAccess": false
+  },
+  "imports": [
+    {
+      "fromPR": 41,
+      "files": [
+        "lib/graphics-intelligence-core.cjs",
+        "lib/graphics-capability-contract.cjs",
+        "test/graphics-intelligence-core.test.cjs",
+        "docs/graphics-intelligence-core.md"
+      ],
+      "type": "exact-blob-copy",
+      "status": "IN_BRANCH_NOT_PRODUCTION"
+    },
+    {
+      "fromPR": 47,
+      "files": [
+        "public/life/index.html",
+        "public/life/style.css",
+        "public/life/neural-field.js",
+        "test/edestra-life-graphics.test.cjs"
+      ],
+      "type": "inherited-and-hardened",
+      "status": "IN_BRANCH_NOT_PRODUCTION"
+    }
+  ],
+  "deferred": [
+    {
+      "pr": 42,
+      "reason": "Unreal C++ build, asset rights, capture and deployment not evidenced"
+    },
+    {
+      "pr": 43,
+      "reason": "cross-route voice navigation security and device acceptance missing"
+    },
+    {
+      "pr": 44,
+      "reason": "shader native browser visual GPU and consent acceptance missing"
+    },
+    {
+      "pr": 45,
+      "reason": "homepage visuals need conflict review and independent acceptance"
+    }
+  ],
+  "qaGates": [
+    "npm test",
+    "npm run check",
+    "visual QA 320/390/768/1440",
+    "WebGL/Canvas fallback and graphics profile budget",
+    "motion opt-in and static reduced-motion",
+    "source exact SHA and asset provenance",
+    "independent source review",
+    "Supabase artifact-bound release decision"
+  ],
+  "customerActivation": false,
+  "liveBilling": false,
+  "publicPromotion": false
+}
