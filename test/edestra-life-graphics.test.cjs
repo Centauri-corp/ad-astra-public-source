@@ -38,3 +38,10 @@ test('neural field is decorative, local and bounded', () => {
   assert.match(style,/\.life-neural-field\{[^}]*pointer-events:none/);
   assert.match(style,/@media\(prefers-reduced-motion:reduce\)/);
 });
+
+test('mobile discovery is exposed through a native keyboard-operable disclosure',()=>{
+  assert.match(life,/<details class="mobile-discover">/);
+  assert.match(life,/<nav aria-label="Mobile discovery">/);
+  for(const target of ['/knowledge/','/markets/','/pricing/','/workspace/']) assert.ok(life.includes('href="'+target+'"'));
+  assert.match(style,/\.mobile-discover>summary:focus-visible/);
+});
