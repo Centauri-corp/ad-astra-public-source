@@ -79,6 +79,7 @@ test('each Life journey deep-links to its matching workspace product without byp
   assert.match(app,/new URLSearchParams\(location\.search\)\.get\('product'\)/);
   assert.match(app,/Object\.hasOwn\(definitions,requestedProduct\)/);
   assert.match(app,/if\(requestedProduct && Object\.hasOwn\(definitions,requestedProduct\)\) choose\(requestedProduct\)/);
+  assert.ok(app.includes("'sign-in-link').href='/sign-in/?return='+encodeURIComponent('/workspace/?product='+requestedProduct)"));
   assert.match(app,/await window\.adAstraVerifySession\(clerk\)/);
   assert.match(workspace,/Customer execution remains subject to release and account access checks/);
 });
