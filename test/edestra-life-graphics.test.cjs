@@ -45,3 +45,12 @@ test('mobile discovery is exposed through a native keyboard-operable disclosure'
   for(const target of ['/knowledge/','/markets/','/pricing/','/workspace/']) assert.ok(life.includes('href="'+target+'"'));
   assert.match(style,/\.mobile-discover>summary:focus-visible/);
 });
+
+test('motion resets after timeout, pause, tab hide and preference changes', () => {
+  assert.match(renderer,/function resetMotion\(\)/);
+  assert.match(renderer,/time >= stopAfter\) \{ resetMotion\(\)/);
+  assert.match(renderer,/if \(userOptedIn\) \{ resetMotion\(\); return; \}/);
+  assert.match(renderer,/document\.hidden\) resetMotion\(\)/);
+  assert.match(renderer,/addEventListener\("change", resetMotion\)/);
+  assert.match(style,/@media\(prefers-reduced-motion:reduce\)\{\.motion-toggle\{display:none\}\}/);
+});
