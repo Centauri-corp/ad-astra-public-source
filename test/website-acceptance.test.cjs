@@ -73,7 +73,7 @@ test('each Life journey deep-links to its matching workspace product without byp
   const workspace=fs.readFileSync(path.join(root,'public/workspace/index.html'),'utf8');
   const app=fs.readFileSync(path.join(root,'public/workspace/app.js'),'utf8');
   for(const [id,name] of [['day','DayFlow'],['learn','LearnPath'],['career','CareerStep']]){
-    assert.match(life,new RegExp('href="/workspace/\\\\?product='+id+'">Explore '+name));
+    assert.ok(life.includes('href="/workspace/?product='+id+'">Explore '+name), 'Missing Life product deep-link: '+id);
     assert.match(workspace,new RegExp('name="productId" value="'+id+'"'));
   }
   assert.match(app,/new URLSearchParams\(location\.search\)\.get\('product'\)/);
