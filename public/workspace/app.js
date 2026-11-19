@@ -216,6 +216,10 @@
     document.body.append(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
   async function initialize() {
+    // Only allow a known Life journey selection from the public landing page.
+    // The query never supplies identity, entitlement, or permission to execute.
+    const requestedProduct=new URLSearchParams(location.search).get('product');
+    if(requestedProduct && Object.hasOwn(definitions,requestedProduct)) choose(requestedProduct);
     clerk=window.Clerk;
     if(!clerk)throw Error('authentication_unavailable');
     await clerk.load();
