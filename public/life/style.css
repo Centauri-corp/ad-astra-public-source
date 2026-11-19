@@ -7,3 +7,15 @@
 .motion-toggle{display:inline-flex;align-items:center;gap:.65rem;background:transparent;color:#f3f5f8;border:1px solid #b9cbd080;padding:.75rem 1rem;font:inherit;font-size:.77rem;letter-spacing:.02em;cursor:pointer;position:relative;z-index:2}
 .motion-toggle:hover{background:#ffffff15}.motion-toggle:focus-visible{outline:3px solid #9edcf2;outline-offset:4px}
 .motion-toggle[aria-pressed="true"]{border-color:#d8b98a;color:#f7e4c9}
+
+/* Mobile product discovery remains available when desktop links collapse. */
+.mobile-discover{display:none}
+@media(max-width:800px){
+ .topbar{gap:.65rem}
+ .topbar nav{margin-left:auto}
+ .mobile-discover{display:block;position:relative;font-size:.8rem}
+ .mobile-discover>summary{cursor:pointer;border:1px solid #ffffff55;padding:.7rem .8rem;list-style:none}
+ .mobile-discover>summary:focus-visible{outline:3px solid var(--ice);outline-offset:3px}
+ .mobile-discover>nav{position:absolute;right:0;top:calc(100% + .5rem);min-width:min(82vw,250px);z-index:30;background:#0c1f2d;border:1px solid #ffffff40;box-shadow:0 16px 42px #0008;display:flex;flex-direction:column;gap:0}
+ .mobile-discover>nav a{display:block;padding:1rem;border-bottom:1px solid #ffffff24}
+}
