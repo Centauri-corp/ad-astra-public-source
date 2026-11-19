@@ -249,13 +249,22 @@
     if(clerk.addListener)clerk.addListener(()=>{
       if(identity()!==signedIdentity){clearPrivateView();$('auth-message').textContent='Your account changed. Reload to continue securely.';}
     });
+    // Independent read failures must not erase a legitimate direct link to a
+    // saved plan. Each request still passes authenticated, tenant-bound API checks.
     try {
       execution(await client.request({action:'status'}));
-      await loadHistory();
-      const sessionId=new URLSearchParams(location.search).get('session');
-      if(sessionId && /^[0-9a-f-]{36}$/i.test(sessionId))await loadSession(sessionId);
     } catch(error) {
-      canExecute=false;controls();$('access-status').textContent=message(error);$('history-status').textContent='Saved work could not be loaded.';
+      canExecute=false;controls();$('access-status').textContent=message(error);
+    }
+    try {
+      await loadHistory();
+    } catch(error) {
+      $('history-status').textContent='Saved work could not be listed: '+message(error);
+    }
+    const sessionId=new URLSearchParams(location.search).get('session');
+    if(sessionId && /^[0-9a-f-]{36}$/i.test(sessionId)) {
+      try {await loadSession(sessionId);}
+      catch(error) {$('request-status').textContent=message(error);}
     }
   }
   initialize().catch(error=>{
