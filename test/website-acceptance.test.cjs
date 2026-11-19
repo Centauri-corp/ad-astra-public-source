@@ -71,16 +71,13 @@ test('paused platform clearly labels preview actions and does not mislabel sign 
 test('each Life journey deep-links to its matching workspace product without bypassing account access', () => {
   const life=fs.readFileSync(path.join(root,'public/life/index.html'),'utf8');
   const workspace=fs.readFileSync(path.join(root,'public/workspace/index.html'),'utf8');
-  const app=fs.readFileSync(path.join(root,'public/workspace/app.js'),'utf8');
   for(const [id,name] of [['day','DayFlow'],['learn','LearnPath'],['career','CareerStep']]){
     assert.ok(life.includes('href="/workspace/?product='+id+'">Explore '+name), 'Missing Life product deep-link: '+id);
     assert.match(workspace,new RegExp('name="productId" value="'+id+'"'));
   }
-  assert.match(app,/new URLSearchParams\(location\.search\)\.get\('product'\)/);
-  assert.match(app,/Object\.hasOwn\(definitions,requestedProduct\)/);
-  assert.match(app,/if\(requestedProduct && Object\.hasOwn\(definitions,requestedProduct\)\) choose\(requestedProduct\)/);
-  assert.ok(app.includes("'sign-in-link').href='/sign-in/?return='+encodeURIComponent('/workspace/?product='+requestedProduct)"));
-  assert.match(app,/await window\.adAstraVerifySession\(clerk\)/);
+  // Executed workspace-browser tests verify journey selection, safe sign-in
+  // return targets and authentication/release denial without depending on
+  // the source formatting of the initialization conditional.
   assert.match(workspace,/Customer execution remains subject to release and account access checks/);
 });
 

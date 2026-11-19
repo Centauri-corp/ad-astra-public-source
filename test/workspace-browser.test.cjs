@@ -6,7 +6,7 @@ const appSource=fs.readFileSync(require.resolve('../public/workspace/app.js'),'u
 const protocol='ad-astra-customer-workspace/v1',stamp='2026-11-19T12:00:00.000Z';
 const clone=value=>JSON.parse(JSON.stringify(value));
 async function settle(){for(let i=0;i<12;i++)await new Promise(resolve=>setImmediate(resolve));}
-async function browser({canExecute=true,intercept,signedIn=true}={}){
+async function browser({canExecute=true,intercept,signedIn=true,search='',verifySession=async()=>{}}={}){
  let sequence=0,keySequence=0,listener,finishSignOut;
  const uuid=()=> '00000000-0000-4000-8000-'+String(++sequence).padStart(12,'0');
  const nodes=new Map(),all=[],downloads=[];
@@ -24,13 +24,14 @@ async function browser({canExecute=true,intercept,signedIn=true}={}){
   click(){return this.emit('click');}
   remove(){if(this.parent)this.parent.children=this.parent.children.filter(child=>child!==this);}
  }
- for(const match of html.matchAll(/<[^>]*\bid="([^"]+)"[^>]*>/g)){const element=new Element(match[1]);element.hidden=/\bhidden(?:\s|>)/.test(match[0]);element.disabled=/\bdisabled(?:\s|>)/.test(match[0]);nodes.set(match[1],element);}
+ for(const match of html.matchAll(/<[^>]*\bid="([^"]+)"[^>]*>/g)){const element=new Element(match[1]);element.hidden=/\bhidden(?:\s|>)/.test(match[0]);element.disabled=/\bdisabled(?:\s|>)/.test(match[0]);const href=match[0].match(/\bhref="([^"]*)"/);if(href)element.href=href[1];nodes.set(match[1],element);}
  const node=id=>{if(!nodes.has(id))throw Error('Missing HTML element: '+id);return nodes.get(id);};
  const radios=['day','learn','career'].map(value=>{const element=new Element('', 'INPUT');element.value=value;element.checked=value==='day';return element;});
  const connected=()=>{const result=[];function walk(element){result.push(element);element.children.forEach(walk);}for(const value of nodes.values())walk(value);return result;};
  const document={getElementById:node,createElement:tag=>new Element('',tag.toUpperCase()),body:new Element('body','BODY'),querySelectorAll:selector=>selector==='input[name="productId"]'?radios:selector==='.session-button'?connected().filter(element=>element.className==='session-button'):[]};
  node('amount').value='25';
- const location={href:'https://adastra.global/workspace/',search:''};
+ const initialUrl=new URL(search,'https://adastra.global/workspace/');
+ const location={href:initialUrl.href,search:initialUrl.search};
  const history={replaceState(_state,_title,url){location.href=new URL(url,location.href).href;location.search=new URL(location.href).search;}};
  class BrowserURL extends URL{static createObjectURL(blob){downloads.push(blob);return 'blob:synthetic-download';}static revokeObjectURL(){}}
  const clerk={session:signedIn?{id:'session-A',getToken:async()=> 'synthetic-A'}:null,user:signedIn?{id:'user-A'}:null,load:async()=>{},addListener(fn){listener=fn;},signOut:()=>new Promise(resolve=>{finishSignOut=()=>{clerk.session=null;clerk.user=null;listener?.();resolve();};})};
@@ -55,7 +56,7 @@ async function browser({canExecute=true,intercept,signedIn=true}={}){
   const turn=makeTurn(body);session.turns.push(turn);state.requests.set(key,{session,turn,fingerprint:JSON.stringify(payload)});
   return Response.json({...common(),session:pageOf(session),requestId:turn.requestId,status:'completed'});
  }
- const context={document,window:{Clerk:clerk,adAstraVerifySession:async()=>{}},location,history,URL:BrowserURL,URLSearchParams,AbortSignal,Blob,Intl,setTimeout,crypto:{randomUUID:()=> 'request-key-'+(++keySequence)},fetch:async(url,init)=>{assert.equal(url,'/api/workspace');const body=JSON.parse(init.body);state.calls.push({body,init});return intercept?intercept(body,init,respond,state):respond(body,init);}};
+ const context={document,window:{Clerk:clerk,adAstraVerifySession:verifySession},location,history,URL:BrowserURL,URLSearchParams,AbortSignal,Blob,Intl,setTimeout,crypto:{randomUUID:()=> 'request-key-'+(++keySequence)},fetch:async(url,init)=>{assert.equal(url,'/api/workspace');const body=JSON.parse(init.body);state.calls.push({body,init});return intercept?intercept(body,init,respond,state):respond(body,init);}};
  vm.runInNewContext(clientSource,context);vm.runInNewContext(appSource,context);await settle();
  return {node,radios,document,state,clerk,location,downloads,makeTurn,respond,sessionButtons:()=>document.querySelectorAll('.session-button'),finishSignOut:()=>finishSignOut?.(),changeAccount(){clerk.session={id:'session-B',getToken:async()=> 'synthetic-B'};clerk.user={id:'user-B'};listener?.();}};
 }
@@ -64,6 +65,51 @@ async function run(page,product,goal,amount){
  page.node('goal').value=goal;page.node('amount').value=String(amount);page.node('question').value='A useful context';
  await page.node('workspace-form').emit('submit');await settle();
 }
+test('Life deep links retain an allowlisted journey across sign-in without authorizing execution',async()=>{
+ for(const product of ['day','learn','career']){
+  let verifications=0;
+  const page=await browser({signedIn:false,search:'?product='+product,verifySession:async()=>{verifications++;}});
+  assert.equal(page.radios.find(radio=>radio.checked).value,product);
+  const signIn=new URL(page.node('sign-in-link').href,page.location.href);
+  assert.equal(signIn.origin,'https://adastra.global');assert.equal(signIn.pathname,'/sign-in/');
+  assert.equal(signIn.searchParams.get('return'),'/workspace/?product='+product);
+  assert.equal(page.node('workspace').hidden,true);assert.equal(page.node('run').disabled,true);
+  assert.equal(verifications,0);assert.equal(page.state.calls.length,0);
+ }
+});
+test('unrecognized and inherited product names preserve the default journey and safe return target',async()=>{
+ for(const product of ['unknown','constructor','__proto__','https://other.example/']){
+  const page=await browser({signedIn:false,search:'?product='+encodeURIComponent(product)+'&return=https://other.example/'});
+  assert.equal(page.radios.find(radio=>radio.checked).value,'day');
+  const signIn=new URL(page.node('sign-in-link').href,page.location.href);
+  assert.equal(signIn.origin,'https://adastra.global');assert.equal(signIn.pathname,'/sign-in/');
+  assert.equal(signIn.searchParams.get('return'),'/workspace/');
+  assert.equal(page.node('workspace').hidden,true);assert.equal(page.state.calls.length,0);
+ }
+});
+test('a product deep link waits for session verification before requesting workspace data',async()=>{
+ let finishVerification,verifications=0;
+ const page=await browser({search:'?product=learn',verifySession:async()=>{verifications++;await new Promise(resolve=>{finishVerification=resolve;});}});
+ assert.equal(verifications,1);assert.equal(typeof finishVerification,'function');
+ assert.equal(page.node('workspace').hidden,true);assert.equal(page.node('run').disabled,true);assert.equal(page.state.calls.length,0);
+ finishVerification();await settle();
+ assert.equal(page.node('workspace').hidden,false);assert.equal(page.radios.find(radio=>radio.checked).value,'learn');
+ assert.deepEqual(page.state.calls.map(call=>call.body.action),['status','list']);
+});
+test('failed verification keeps a product deep link closed without requesting private data',async()=>{
+ const page=await browser({search:'?product=career',verifySession:async()=>{throw Error('authentication_invalid');}});
+ assert.equal(page.node('workspace').hidden,true);assert.equal(page.node('run').disabled,true);
+ assert.equal(page.node('turns').children.length,0);assert.equal(page.state.calls.length,0);
+ assert.match(page.node('auth-message').textContent,/could not be verified/);
+});
+test('verified product selection cannot bypass denied release or account execution',async()=>{
+ const page=await browser({canExecute:false,search:'?product=career'});
+ assert.equal(page.radios.find(radio=>radio.checked).value,'career');assert.equal(page.node('run').disabled,true);
+ const reads=page.state.calls.length;
+ page.node('goal').value='A permitted input cannot override access';page.node('amount').value='8';
+ await page.node('workspace-form').emit('submit');await settle();
+ assert.equal(page.state.calls.length,reads);assert.equal(page.state.runCount,0);
+});
 test('one workspace submits all three journeys and reopens the exact saved product and inputs',async()=>{
  const page=await browser();
  assert.equal(page.node('workspace').hidden,false);assert.equal(page.node('run').disabled,false);
