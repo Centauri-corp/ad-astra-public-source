@@ -219,7 +219,12 @@
     // Only allow a known Life journey selection from the public landing page.
     // The query never supplies identity, entitlement, or permission to execute.
     const requestedProduct=new URLSearchParams(location.search).get('product');
-    if(requestedProduct && Object.hasOwn(definitions,requestedProduct)) choose(requestedProduct);
+    if(requestedProduct && Object.hasOwn(definitions,requestedProduct)) {
+      choose(requestedProduct);
+      // Keep the selected journey across the sign-in return, without trusting
+      // an arbitrary redirect or letting the URL authorize any execution.
+      $('sign-in-link').href='/sign-in/?return='+encodeURIComponent('/workspace/?product='+requestedProduct);
+    }
     clerk=window.Clerk;
     if(!clerk)throw Error('authentication_unavailable');
     await clerk.load();
