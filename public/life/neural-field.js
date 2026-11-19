@@ -66,12 +66,22 @@
     if (raf) cancelAnimationFrame(raf);
     raf = 0;
   }
+  function resetMotion() {
+    pause();
+    userOptedIn = false;
+    stopAfter = 0;
+    if (motionToggle) {
+      motionToggle.setAttribute("aria-pressed", "false");
+      motionToggle.textContent = "Play optional neural motion";
+    }
+    render(0);
+  }
   function eligible() {
     return userOptedIn && !media.matches && !document.hidden && state.visible && state.width > 0;
   }
   function loop(time) {
     if (!state.active) return;
-    if (!eligible() || time > stopAfter) { pause(); return; }
+    if (!eligible() || time >= stopAfter) { resetMotion(); return; }
     if (time - state.frame >= 33) {
       state.frame = time;
       render(time);
@@ -79,7 +89,7 @@
     raf = requestAnimationFrame(loop);
   }
   function sync() {
-    if (!eligible()) { pause(); render(0); return; }
+    if (!eligible()) { resetMotion(); return; }
     if (state.active) return;
     state.active = true;
     stopAfter = performance.now() + 12000;
@@ -98,13 +108,18 @@
     intersectionObserver.observe(hero);
   }
   if (motionToggle) motionToggle.addEventListener("click", () => {
-    userOptedIn = !userOptedIn;
-    motionToggle.setAttribute("aria-pressed", String(userOptedIn));
-    motionToggle.textContent = userOptedIn ? "Pause neural motion" : "Play optional neural motion";
+    if (userOptedIn) { resetMotion(); return; }
+    if (media.matches) { resetMotion(); return; }
+    userOptedIn = true;
+    motionToggle.setAttribute("aria-pressed", "true");
+    motionToggle.textContent = "Pause neural motion";
     sync();
   });
-  document.addEventListener("visibilitychange", sync);
-  if (media.addEventListener) media.addEventListener("change", sync);
-  else if (media.addListener) media.addListener(sync);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) resetMotion();
+    else sync();
+  });
+  if (media.addEventListener) media.addEventListener("change", resetMotion);
+  else if (media.addListener) media.addListener(resetMotion);
   sync();
 })();
