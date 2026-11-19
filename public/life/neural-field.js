@@ -6,6 +6,8 @@
   const ctx = canvas.getContext("2d", { alpha: true });
   if (!ctx) return;
   const hero = canvas.closest(".hero");
+  const motionToggle = document.getElementById("life-motion-toggle");
+  let userOptedIn = false;
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
   const coarse = window.matchMedia("(pointer: coarse)");
   const state = { width: 0, height: 0, particles: [], frame: 0, active: false, visible: true };
@@ -65,7 +67,7 @@
     raf = 0;
   }
   function eligible() {
-    return !media.matches && !document.hidden && state.visible && state.width > 0;
+    return userOptedIn && !media.matches && !document.hidden && state.visible && state.width > 0;
   }
   function loop(time) {
     if (!state.active) return;
@@ -95,6 +97,12 @@
     }, { threshold: 0.1 });
     intersectionObserver.observe(hero);
   }
+  if (motionToggle) motionToggle.addEventListener("click", () => {
+    userOptedIn = !userOptedIn;
+    motionToggle.setAttribute("aria-pressed", String(userOptedIn));
+    motionToggle.textContent = userOptedIn ? "Pause neural motion" : "Play optional neural motion";
+    sync();
+  });
   document.addEventListener("visibilitychange", sync);
   if (media.addEventListener) media.addEventListener("change", sync);
   else if (media.addListener) media.addListener(sync);
