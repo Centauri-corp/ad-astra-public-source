@@ -83,3 +83,14 @@ test('each Life journey deep-links to its matching workspace product without byp
   assert.match(app,/await window\.adAstraVerifySession\(clerk\)/);
   assert.match(workspace,/Customer execution remains subject to release and account access checks/);
 });
+
+test('authenticated workspace isolates status and history failures from saved-session recovery', () => {
+  const app=fs.readFileSync(path.join(root,'public/workspace/app.js'),'utf8');
+  assert.match(app,/try \{\s*execution\(await client\.request\(\{action:'status'\}\)\);\s*\} catch\(error\)/);
+  assert.match(app,/try \{\s*await loadHistory\(\);\s*\} catch\(error\)/);
+  assert.ok(app.includes("const sessionId=new URLSearchParams(location.search).get('session');"));
+  assert.ok(app.includes("if(sessionId && /^[0-9a-f-]{36}$/i.test(sessionId)) {"));
+  assert.ok(app.includes("try {await loadSession(sessionId);}"));
+  assert.ok(app.includes("catch(error) {$('request-status').textContent=message(error);}"));
+  assert.ok(app.includes("await window.adAstraVerifySession(clerk);"));
+});
