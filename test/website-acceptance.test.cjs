@@ -31,3 +31,17 @@ test('API and private routes remain nonindexed by deployment policy', () => {
     rule.headers.some(header => header.key === 'X-Robots-Tag' && header.value.includes('noindex'))
   ));
 });
+
+test('customer pages do not promise live intelligence while release is paused', () => {
+  const pages = ['knowledge/index.html', 'platform/index.html', 'markets/index.html', 'pricing/index.html'];
+  for (const page of pages) {
+    const content = fs.readFileSync(path.join(root, 'public', page), 'utf8');
+    assert.doesNotMatch(content, /Open the live engine|Start with the live engine|Use the live engine today/i, page);
+    assert.match(content, /name="robots" content="noindex,follow"/, page);
+    assert.match(content, /rel="canonical"/, page);
+  }
+  const knowledge = fs.readFileSync(path.join(root, 'public/knowledge/index.html'), 'utf8');
+  assert.match(knowledge, /AI responses remain paused until release checks are complete|Live responses are unavailable until release checks are completed/);
+  const pricing = fs.readFileSync(path.join(root, 'public/pricing/index.html'), 'utf8');
+  assert.match(pricing, /not available for purchase/i);
+});
