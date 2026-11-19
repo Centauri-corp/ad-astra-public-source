@@ -1,0 +1,10 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const {SYSTEMS,CORE_SCENES,compileScene,buildGraphicsAtlas,validateScene}=require('../lib/graphics-intelligence-core.cjs');
+test('AD ASTRA has seven core graphics systems independent of any customer',()=>{assert.equal(SYSTEMS.length,7);assert.equal(Object.keys(CORE_SCENES).length,7);});
+test('canonical atlas deterministically compiles every scene',()=>{const a=buildGraphicsAtlas(),b=buildGraphicsAtlas();assert.deepEqual(a,b);assert.equal(a.scenes.length,7);a.scenes.forEach(s=>assert.equal(validateScene(s),true));});
+test('all foundational scenes are accessible, static-first and non-autoplay',()=>{for(const s of buildGraphicsAtlas().scenes){assert.equal(s.interaction.defaultMode,'static');assert.equal(s.accessibility.automaticMotion,false);assert.ok(s.accessibility.label);}});
+test('scene descriptions cannot inject markup or tenant identifiers',()=>{assert.throws(()=>compileScene({id:'<script>'}));assert.throws(()=>compileScene({id:'origin',tenantId:'foo'}));});
+test('scientific data and simulation require traceability',()=>{assert.throws(()=>compileScene({id:'science',provenance:'verified-data'}));assert.throws(()=>compileScene({id:'science',provenance:'simulation'}));assert.equal(compileScene({id:'science',provenance:'simulation',modelId:'demo',assumptions:'illustrative'}).provenance.kind,'simulation');});
+test('unknown scene domains are rejected rather than silently created',()=>assert.throws(()=>compileScene({id:'unapproved'})));
+test('core specifications are immutable',()=>{const a=buildGraphicsAtlas();assert.ok(Object.isFrozen(a));assert.ok(Object.isFrozen(a.scenes[0].composition.root.children));});
