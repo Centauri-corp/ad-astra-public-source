@@ -1,15 +1,76 @@
 {
-  "release": "ad-astra-production-repair-2026-10-23",
+  "release": "ad-astra-california-canary-2026-11-11",
   "canonical": "https://adastra.global/",
+  "releaseScope": "public-site-and-governed-workspace-candidate",
+  "routeEvidenceFile": "route-release-evidence.json",
+  "publicLaunchEnabled": false,
+  "indexingPolicy": "noindex-until-page-evidence-approved",
+  "indexableRoutes": [],
+  "engineAvailable": false,
+  "customerPortal": "authenticated-preview",
+  "customerAiModel": "astra-lumen",
+  "publicModelName": "Astra Polaris",
+  "customerModes": [
+    "ask",
+    "research",
+    "create",
+    "learn",
+    "explore"
+  ],
   "filmPublicPlayback": false,
   "publicReferenceCatalog": false,
   "assetOriginDependency": false,
+  "connectedPublicModelCount": 1,
+  "marketProfileArchitecture": "one-connected-model-with-sector-profiles",
+  "marketProfileCount": 24,
   "customerAccess": "clerk-authenticated",
   "liveEngineAccess": "requires-all-verified-release-gates",
+  "customerBudgetBridge": {
+    "publicAdapter": "implemented-candidate",
+    "productionAccepted": false
+  },
+  "customerWorkspace": {
+    "route": "/workspace/",
+    "api": "/api/workspace",
+    "protocol": "ad-astra-customer-workspace/v1",
+    "products": ["day", "learn", "career"],
+    "persistence": "canonical-customer-runtime",
+    "executionAuthority": "server-verified-membership-subscription-release-and-budget",
+    "productionAccepted": false
+  },
+  "contentSurfaces": {
+    "company": "public-versioned",
+    "productsAndServices": "public-market-direction",
+    "customerPortal": "authenticated-preview",
+    "neuralArtwork": "public-static-preview-private-generation",
+    "video": "public-motion-study-premiere-gated"
+  },
+  "autonomousOperations": {
+    "mode": "private-scheduled-read-only-audit",
+    "cadence": "*/15 * * * * UTC",
+    "externalWrites": false,
+    "outboundSends": false,
+    "automaticPublication": false
+  },
+  "intelligenceLayers": {
+    "narrowAi": "guided-preview",
+    "agi": "research-direction",
+    "asi": "hypothetical-horizon",
+    "liveTelemetry": false
+  },
+  "videoBlueprint": {
+    "title": "The Architecture of Alignment",
+    "targetDurationSeconds": 60,
+    "publicPlayback": "premiere-gated",
+    "scenes": [
+      "hook",
+      "narrow-core",
+      "agi-research",
+      "asi-horizon-return"
+    ],
+    "claimBoundary": "conceptual-research-framing"
+  },
   "dailyModelBudgetUSD": 10,
   "rollbackBaseline": "dpl_GUQqWJ3jTy9f73XqfQFvmbqhnHUy",
-  "source": "isolated AD ASTRA source; see release evidence",
-  "indexableRoutes": [
-    "/"
-  ]
+  "source": "isolated AD ASTRA source; see route release evidence"
 }

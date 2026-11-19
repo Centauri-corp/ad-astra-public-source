@@ -1,14 +1,35 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "node --test test/security.test.cjs && node scripts/check-release.cjs && node scripts/redis-acceptance.cjs",
+  "buildCommand": "node --test test/*.test.cjs && node scripts/check-release.cjs && node scripts/redis-acceptance.cjs",
   "installCommand": "echo No dependencies required",
   "outputDirectory": "public",
   "functions": {
     "api/ask.js": {
+      "maxDuration": 60
+    },
+    "api/subscriptions.js": {
       "maxDuration": 30
+    },
+    "api/workspace.js": {
+      "maxDuration": 60
+    },
+    "api/status.js": {
+      "maxDuration": 20
     }
   },
+  "redirects": [
+    {
+      "source": "/platform/:path*",
+      "destination": "/workspace/",
+      "permanent": false
+    },
+    {
+      "source": "/knowledge/:path*",
+      "destination": "/workspace/",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -23,7 +44,7 @@
         },
         {
           "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
+          "value": "camera=(), microphone=(self), geolocation=()"
         },
         {
           "key": "X-Frame-Options",
@@ -54,7 +75,7 @@
       ]
     },
     {
-      "source": "/(knowledge|platform|sign-in|markets|pricing|services|company|about|film)(.*)",
+      "source": "/(workspace|knowledge|platform|sign-in|account|markets|pricing|services|company|about|film)(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",

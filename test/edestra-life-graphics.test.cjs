@@ -1,0 +1,56 @@
+'use strict';
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const root = path.join(__dirname, '..');
+const life = fs.readFileSync(path.join(root,'public/life/index.html'),'utf8');
+const style = fs.readFileSync(path.join(root,'public/life/style.css'),'utf8');
+const renderer = fs.readFileSync(path.join(root,'public/life/neural-field.js'),'utf8');
+const release = JSON.parse(fs.readFileSync(path.join(root,'public/release-manifest.json'),'utf8'));
+test('Life candidate has exactly one governed public experience and does not claim release', () => {
+  assert.match(life,/name="robots" content="noindex,follow"/);
+  assert.match(life,/Preview candidate/);
+  assert.match(life,/rel="canonical" href="https:\/\/adastra\.global\/life\/"/);
+  assert.equal(release.publicLaunchEnabled,false);
+  assert.equal(release.engineAvailable,false);
+});
+test('Life journeys route to the governed workspace', () => {
+  for (const title of ['DayFlow','LearnPath','CareerStep']) assert.match(life,new RegExp(title));
+  assert.match(life,/href="\/workspace\/"/);
+  assert.match(life,/href="\/sign-in\/"/);
+  const ids = new Set([...life.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]));
+  for (const m of life.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.has(m[1]),'Missing anchor '+m[1]);
+});
+test('neural field is decorative, local and bounded', () => {
+  assert.match(life,/<canvas[^>]*id="life-neural-field"[^>]*aria-hidden="true"/);
+  assert.match(life,/src="\/life\/neural-field\.js" defer/);
+  assert.match(renderer,/prefers-reduced-motion: reduce/);
+  assert.match(renderer,/document\.hidden/);
+  assert.match(renderer,/IntersectionObserver/);
+  assert.match(renderer,/cancelAnimationFrame/);
+  assert.match(renderer,/12000/);
+  assert.match(life,/id="life-motion-toggle"[^>]*aria-pressed="false"/);
+  assert.match(renderer,/userOptedIn = false/);
+  assert.match(renderer,/return userOptedIn && !media.matches/);
+  assert.match(renderer,/motionToggle.addEventListener\("click"/);
+  assert.doesNotMatch(renderer,/fetch\s*\(|XMLHttpRequest|WebSocket|AudioContext|getUserMedia|https?:\/\//i);
+  assert.match(style,/\.life-neural-field\{[^}]*pointer-events:none/);
+  assert.match(style,/@media\(prefers-reduced-motion:reduce\)/);
+});
+
+test('mobile discovery is exposed through a native keyboard-operable disclosure',()=>{
+  assert.match(life,/<details class="mobile-discover">/);
+  assert.match(life,/<nav aria-label="Mobile discovery">/);
+  for(const target of ['/knowledge/','/markets/','/pricing/','/workspace/']) assert.ok(life.includes('href="'+target+'"'));
+  assert.match(style,/\.mobile-discover>summary:focus-visible/);
+});
+
+test('motion resets after timeout, pause, tab hide and preference changes', () => {
+  assert.match(renderer,/function resetMotion\(\)/);
+  assert.match(renderer,/time >= stopAfter\) \{ resetMotion\(\)/);
+  assert.match(renderer,/if \(userOptedIn\) \{ resetMotion\(\); return; \}/);
+  assert.match(renderer,/document\.hidden\) resetMotion\(\)/);
+  assert.match(renderer,/addEventListener\("change", resetMotion\)/);
+  assert.match(style,/@media\(prefers-reduced-motion:reduce\)\{\.motion-toggle\{display:none\}\}/);
+});

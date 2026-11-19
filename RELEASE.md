@@ -1,17 +1,43 @@
-# AD ASTRA production repair
+# Ad Astra public site and customer workspace candidate
 
-Canonical target: Zoheb Khan team `team_5xblMPo2zEBjbz4KPmeDVHPr`, public project `prj_FX8QO3TIqUNAfFR4enz0bALmjeg1`, domain `adastra.global`.
+The public project is `prj_FX8QO3TIqUNAfFR4enz0bALmjeg1` in team `team_5xblMPo2zEBjbz4KPmeDVHPr`, with canonical domain `adastra.global`. Git deployments remain disabled. A source merge does not activate customer execution or establish production acceptance.
 
-This source was isolated from the matching live deployment `dpl_GUQqWJ3jTy9f73XqfQFvmbqhnHUy`. The 49 public files were compared byte for byte before repair. No Energy America or private Sanity source is included.
+## One customer surface
 
-Build validation runs local adversarial tests, static privacy/SEO checks, and real Redis acceptance using disposable random test keys. Tests never call a paid model. Redis tests must pass before Vercel marks the build READY. Automatic Git deployments remain disabled.
+`/workspace/` provides DayFlow (`day`), LearnPath (`learn`) and CareerStep (`career`) through one Clerk account session. Results, history, citations and provider-usage state come from the canonical customer runtime. Customers can reopen sessions, load older results and download the loaded results as text. `/platform/` and `/knowledge/` redirect to this workspace. The Astra Polaris graphics and conceptual market profiles remain available at `/agent/`; they do not establish additional live products.
 
-All five existing verification flags must be exactly true to permit a model call. Never set a flag as a substitute for evidence. Authentication uses the existing Clerk issuer and the configured `ad-astra-workspace` audience. A real signed-in Clerk acceptance test and runtime security review remain required. Synthetic unit JWTs do not complete that review.
+The browser calls `/api/workspace`. The previous `/api/ask` route is a compatibility entry into the same governed handler and now requires the same product/input contract. It has no separate model execution path. Both server routes call only the fixed `astra-customer-workspace-production` or `astra-customer-workspace-development` endpoint in the configured Supabase project, using protocol `ad-astra-customer-workspace/v1`.
 
-The owner authorized a maximum $10 daily model budget on 23 October 2026. Configure `AD_ASTRA_DAILY_BUDGET_MICRO_USD=10000000`. Reserve $0.02 per attempted call atomically in Redis, with no refunds after ambiguous provider failures. The same ledger covers all environments and deployments. Per-user quota is 12 attempts in a rolling hour from first request. Budget resets at midnight UTC using Redis time. No model retries. The only allowed model is `gpt-4.1-mini-2025-04-14`, at most 16,384 conservative input tokens and 700 output tokens. Verify current pricing before enabling; reviewed rates $0.40 input/$1.60 output per million tokens. This controls this endpoint, not other applications using the same provider account.
+The public server forwards the customer's verified Clerk JWT and a server-only `AD_ASTRA_CUSTOMER_WORKSPACE_SECRET`. The browser cannot supply a tenant, model, price, release approval or operator credential. The backend verifies the current Clerk session, binds it to canonical customer membership and checks product access, release state, model routing and budget before creating work.
 
-Stage a production build without assigning domains, verify its exact deployment, recheck current alias for concurrent changes, then promote. Preserve the prior deployment and reassert manual domain assignment. The prior live-AI deployment contains weaker controls; use it only for urgent site recovery with AI explicitly disabled and a new tested build if required.
+Both environment namespaces remain bound to the existing subscription authority in project `wewznejqpnsmiwkbozgw`. The isolated QA project `kkhnczalxgkjysuhfpmh` is for schema and function validation; it does not become customer identity or subscription authority by passing those checks. Public and backend JWT verifiers require issuer `https://clerk.adastra.global`, audience `ad-astra-workspace` and authorized party `https://adastra.global`. Ordinary preview-host Clerk tokens are rejected. Real signed-in staging acceptance therefore needs an approved same-origin setup; synthetic preview checks do not satisfy it.
 
-Home is the only indexable route in this repair. Existing customer, market and pricing pages remain accessible with noindex while approval is unresolved. Film stays withheld. Private Sanity datasets and v2 design drafts are not published.
+## Admission and recovery
 
-The GitHub verification workflow is source only until pushed to a dedicated verified repository and required branch checks are configured. It deliberately has no production deployment credential.
+New execution requires `AD_ASTRA_CUSTOMER_RUNTIME_ENABLED=true`, valid authenticated Clerk configuration, the fixed bridge configuration, durable Redis admission and all five existing verification flags:
+
+- `AD_ASTRA_ENABLE_LIVE_AI`
+- `AD_ASTRA_SPEND_BUDGET_VERIFIED`
+- `AD_ASTRA_DURABLE_RATE_LIMIT_VERIFIED`
+- `AD_ASTRA_RUNTIME_AUTH_REVIEWED`
+- `AD_ASTRA_SECURITY_REVIEW_APPROVED`
+
+The flags are necessary local controls. They cannot substitute for accepted backend release evidence. `AD_ASTRA_SUBSCRIPTION_ENVIRONMENT` must be exactly `production` or `development`; development results cannot satisfy production acceptance. The bridge secret is never emitted in the public build or responses.
+
+Every run requires an idempotency key. Before new-work admission, the public handler performs a read-only recovery with that key and the original product, session, inputs and question. Only an explicit missing-request response can proceed to a new run. An existing outcome remains recoverable during a hold without another provider execution or public quota reservation. A changed payload under the same key is a conflict. Recovery still requires the original customer's current authorized membership. The browser's **Check last request** action uses the original retained payload, including an originally absent session ID.
+
+Saved results can be read while new execution is closed, subject to current authorization. Signing out or switching accounts clears private browser state and invalidates in-flight responses. Inputs, results and tokens are not persisted in browser storage by the workspace.
+
+The existing Redis policy retains 12 attempts per customer per rolling hour and a shared maximum $10 daily public admission allowance. Its $0.02 reservation per new attempt is a conservative admission control, not an actual provider-cost receipt or a guarantee about the selected backend model. The canonical backend separately reserves against its authoritative model ledger and reconciles actual provider usage. Uncertain outcomes retain their reservation; no layer automatically retries provider generation. Provider costs displayed in the workspace are explicitly separate from customer invoices.
+
+Public run handling has a 55-second aggregate deadline inside a 60-second function. Backend reads are capped at 12 seconds per transport call; run transport uses the smaller of 50 seconds or the remaining aggregate time. A timeout is an uncertain outcome, never evidence that no work occurred. Recovery and saved history are the supported ways to check it. Responses are streamed under a 1 MiB limit and projected onto the customer contract, with at most 50 session summaries and 10 turns per history page.
+
+## Verification and release boundary
+
+`npm test` runs every public test, including adversarial authentication/admission cases, bridge validation, idempotent recovery, the three workspace journeys, history/export, pending outcomes, account changes and sign-out races. These use synthetic identities and backend fixtures. `npm run check` validates public privacy, canonical routes, index controls and retained preview boundaries. The Vercel build also runs real Redis acceptance using disposable random keys; that separate check requires the intended runtime configuration. No local test makes a paid model call.
+
+Synthetic checks do not establish real Clerk sign-in, provider settlement, subscription webhook completion, production routing or a ready customer release. Those require evidence from the exact staged release, with the matching backend, migrations, policies and runtime settings. Keep `productionAccepted`, `publicLaunchEnabled` and `engineAvailable` false until that evidence is accepted.
+
+Stage without assigning production domains, verify the exact deployment and current alias, then use the governed promotion path. Preserve the actual preceding live deployment as rollback evidence at promotion time. The old isolated repair's `dpl_GUQqWJ3jTy9f73XqfQFvmbqhnHUy` identifier is historical provenance, not a current rollback claim.
+
+Customer and supporting routes remain nonindexed while page approval is unresolved. Film playback stays withheld. Private Sanity data, operator consoles, unreleased drafts and provider credentials are outside the public surface. Public source tests and the GitHub workflow do not carry production deployment credentials.

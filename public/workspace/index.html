@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Life Workspace | Ad Astra</title>
+<meta name="description" content="A secure workspace for DayFlow, LearnPath and CareerStep. Customer execution remains subject to release and account access checks.">
+<meta name="theme-color" content="#07111c"><meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://adastra.global/workspace/">
+<link rel="stylesheet" href="/workspace/style.css">
+<script defer data-clerk-publishable-key="pk_live_Y2xlcmsuYWRhc3RyYS5nbG9iYWwk" src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@6.40.1/dist/clerk.browser.js" integrity="sha384-JcUoKGgU3fVbZOepxOhFBTSImBs/0xQTLYLqy0CLEkd2sMiA4wn5VDTC6IJYRSaj" crossorigin="anonymous"></script>
+<script defer src="/auth-navigation.js"></script>
+<script defer src="/workspace/client.js"></script>
+<script defer src="/workspace/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to workspace</a>
+<header><a class="brand" href="/">AD ASTRA<span>BEYOND THE EXPECTED</span></a><nav aria-label="Primary"><a href="/agent/">Astra Polaris</a><a href="/account/billing/">Account and billing</a><button type="button" id="sign-out" hidden>Sign out</button></nav></header>
+<main id="main">
+<section id="auth-state" class="auth-state" aria-live="polite"><h1>Your Life workspace.</h1><p id="auth-message">Checking secure sign-in…</p><a class="button" id="sign-in-link" href="/sign-in/?return=%2Fworkspace%2F">Sign in to continue</a></section>
+<div id="workspace" hidden>
+<section class="intro"><p class="eyebrow">AD ASTRA LIFE</p><h1>Make the next step<br><span>something you can return to.</span></h1><p>Plan your day, build a learning rhythm or prepare for your next role. Your saved work stays with your account.</p><p id="access-status" class="notice" role="status">Checking workspace access…</p><p id="environment-note" class="small" hidden>Development workspace. Results here do not establish a production release.</p></section>
+<div class="workspace-layout">
+<aside class="history" aria-labelledby="history-title"><div class="section-head"><h2 id="history-title">Saved work</h2><button id="refresh-history" type="button">Refresh</button></div><p id="history-status" class="small" aria-live="polite">Loading saved work…</p><ul id="session-list"></ul><button id="new-session" class="button" type="button">Start a new plan</button></aside>
+<section class="work" aria-labelledby="journey-title">
+<h2 id="journey-title">Choose a starting point.</h2>
+<form id="workspace-form">
+<fieldset class="journey-choices"><legend>Life journey</legend><label><input type="radio" name="productId" value="day" checked><strong>DayFlow</strong><span>Give today a useful focus.</span></label><label><input type="radio" name="productId" value="learn"><strong>LearnPath</strong><span>Build a learning rhythm.</span></label><label><input type="radio" name="productId" value="career"><strong>CareerStep</strong><span>Prepare for your next role.</span></label></fieldset>
+<div class="input-grid"><div><label for="goal" id="goal-label">What is your goal today?</label><input id="goal" type="text" required maxlength="160" autocomplete="off"></div><div><label for="amount" id="amount-label">Minutes available</label><input id="amount" type="number" required min="0.1" max="1440" step="any" value="25"></div></div>
+<label for="question">Context or a question <span class="small">(optional)</span></label><textarea id="question" maxlength="4000" rows="4" placeholder="Add the constraints or question you want help with."></textarea>
+<p class="small">Submit information you have permission to use. Your inputs and results are saved in this workspace. AI responses can be wrong; verify important claims.</p>
+<div class="actions"><button id="run" class="button primary" type="submit" disabled>Create and save plan</button><button id="refresh-session" type="button" hidden>Refresh this plan</button><button id="recover-request" type="button" hidden>Check last request</button></div>
+<p id="request-status" role="status" aria-live="polite"></p>
+</form>
+<section id="results" aria-labelledby="results-title" hidden><div class="section-head"><h2 id="results-title">Your saved plan</h2><button id="export-result" type="button">Download text</button></div><div id="turns"></div><button id="load-older" type="button" hidden>Load older results</button></section>
+</section>
+</div>
+</div>
+</main>
+<footer><p>Human direction. Useful work. Clear boundaries.</p><a href="/account/billing/">Manage your account</a></footer>
+<noscript><p class="notice">JavaScript is required for secure sign-in and workspace access. Customer execution remains closed without verified account and release checks.</p></noscript>
+</body>
+</html>
+

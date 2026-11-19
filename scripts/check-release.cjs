@@ -1,6 +1,12 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.join(__dirname,'..');
+const catalog=require('../lib/model-catalog');
+assert.equal(catalog.MODELS.length,1);
+assert.deepEqual(catalog.MODELS.map(m=>m.id),['astra-lumen']);
+assert.equal(catalog.MARKET_PROFILES.length,24);
+assert.equal(new Set(catalog.MARKET_PROFILES.map(profile=>profile.id)).size,catalog.MARKET_PROFILES.length);
+for(const profile of catalog.MARKET_PROFILES){assert.ok(/^Astra /.test(profile.name),`Market profile name missing Astra prefix: ${profile.id}`);}
 function walk(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);}
 if(process.env.VERCEL_PROJECT_ID)assert.equal(process.env.VERCEL_PROJECT_ID,'prj_FX8QO3TIqUNAfFR4enz0bALmjeg1');
 if(process.env.VERCEL_ORG_ID)assert.equal(process.env.VERCEL_ORG_ID,'team_5xblMPo2zEBjbz4KPmeDVHPr');
@@ -17,6 +23,59 @@ for(const f of files){
  }
 }
 const film=fs.readFileSync(path.join(root,'public/film/index.html'),'utf8');assert.ok(!/<video|<audio|<iframe/i.test(film));
-const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');assert.equal((sitemap.match(/<loc>/g)||[]).length,1);assert.ok(sitemap.includes('<loc>https://adastra.global/</loc>'));
+const homepage=fs.readFileSync(path.join(root,'public/index.html'),'utf8');
+assert.ok(homepage.includes('ad-astra-runway-orbital-motion.vtt')&&homepage.includes('ad-astra-horizon-motion.vtt'),'Public motion previews missing caption tracks');
+assert.equal((homepage.match(/class="video-transcript"/g)||[]).length,2,'Public motion previews missing text transcripts');
+for(const caption of ['ad-astra-runway-orbital-motion.vtt','ad-astra-horizon-motion.vtt']){const captionPath=path.join(root,'public/assets',caption);assert.ok(fs.existsSync(captionPath),`Missing caption track: ${caption}`);assert.ok(fs.readFileSync(captionPath,'utf8').startsWith('WEBVTT'),`Invalid caption track: ${caption}`);}
+const evidence=JSON.parse(fs.readFileSync(path.join(root,'public/route-release-evidence.json'),'utf8'));
+const sitemap=fs.readFileSync(path.join(root,'public/sitemap.xml'),'utf8');
+const sitemapRoutes=[...sitemap.matchAll(/<loc>\s*([^<]+)\s*<\/loc>/gi)].map(match=>match[1].trim());
+assert.deepEqual(sitemapRoutes,evidence.approvedRoutes.map(route=>new URL(route,'https://adastra.global').href));
 assert.equal(JSON.parse(fs.readFileSync(path.join(root,'vercel.json'))).git.deploymentEnabled,false);
-console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld indexing=home-only privacy=passed');
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'public/release-manifest.json')));
+const experience=JSON.parse(fs.readFileSync(path.join(root,'public/experience-manifest.json')));
+assert.equal(manifest.publicLaunchEnabled,false);assert.equal(manifest.engineAvailable,false);
+assert.equal(manifest.customerPortal,'authenticated-preview');
+assert.equal(manifest.customerAiModel,'astra-lumen');
+assert.equal(manifest.connectedPublicModelCount,1);
+assert.equal(manifest.publicModelName,'Astra Polaris');
+assert.equal(manifest.marketProfileArchitecture,'one-connected-model-with-sector-profiles');
+assert.equal(manifest.marketProfileCount,catalog.MARKET_PROFILES.length);
+assert.deepEqual(manifest.customerModes,['ask','research','create','learn','explore']);
+assert.deepEqual(experience.visualArchitecture.sceneOrder,['arrival','vision','approach','experiences','horizon','company','signature']);
+assert.deepEqual(experience.seo.indexableRoutes,evidence.approvedRoutes);
+assert.equal(experience.visualArchitecture.threeD.privatePreviewOnly,true);
+assert.equal(experience.growthAutomation.externalCrmWrites,false);
+assert.equal(experience.growthAutomation.outboundSends,false);
+assert.equal(experience.growthAutomation.mode,'private-scheduled-read-only-audit');
+assert.equal(manifest.autonomousOperations.mode,experience.growthAutomation.mode);
+assert.equal(manifest.autonomousOperations.cadence,experience.growthAutomation.cadence);
+assert.equal(manifest.autonomousOperations.externalWrites,false);
+assert.equal(manifest.autonomousOperations.outboundSends,false);
+assert.equal(manifest.autonomousOperations.automaticPublication,false);
+const markets=fs.readFileSync(path.join(root,'public/markets/index.html'),'utf8');
+const agent=fs.readFileSync(path.join(root,'public/agent/index.html'),'utf8');
+assert.ok(agent.includes('Astra Polaris')&&agent.includes('Astra Sirius')&&agent.includes('Astra Orion')&&agent.includes('Astra Helios')&&agent.includes('Astra Spica')&&agent.includes('Astra Lyra')&&agent.includes('Astra Rigel')&&agent.includes('Astra Electra')&&agent.includes('Astra Arcturus'),'Public star profile catalog missing');
+const preview=fs.readFileSync(path.join(root,'public/platform-preview/index.html'),'utf8');
+assert.ok(preview.includes('CUSTOMER PLATFORM MOCKUP')&&preview.includes('Astra Polaris')&&preview.includes('PREVIEW BOUNDARY'),'Customer platform preview missing boundary');
+assert.ok(preview.includes('no customer prompts')&&preview.includes('backend writes'),'Customer platform preview exposes an unsafe surface');
+assert.ok(preview.includes('/assets/astra-polaris-platform-mockup.png')&&preview.includes('global network'),'Customer platform mockup visual missing');
+for(const label of ['QUESTION STUDIO','RESEARCH ATLAS','CREATIVE ORBIT','LEARNING LENS','HORIZON SCANNER','PROJECT ORBIT','KNOWLEDGE ROOMS','SIGNAL MONITOR','PROFILE CONSTELLATIONS','GLOBAL NETWORK','ACCESS LAYER','GOVERNANCE DECK'])assert.ok(preview.includes(label),`Customer product missing: ${label}`);
+const positioning=fs.readFileSync(path.join(root,'public/markets/positioning/index.html'),'utf8');
+const microgrids=fs.readFileSync(path.join(root,'public/markets/positioning/microgrids/index.html'),'utf8');
+const pricing=fs.readFileSync(path.join(root,'public/pricing/index.html'),'utf8');
+assert.ok(markets.includes('/markets/positioning/'));
+assert.ok(!markets.includes('Use the live engine today')&&!markets.includes('Available now / first customer surfaces'));
+assert.ok(positioning.includes('name="robots" content="noindex,follow"'));
+for(const region of ['NORTH AMERICA','EUROPE + UK','MATURE APAC','EMERGING MARKETS'])assert.ok(positioning.includes(region));
+assert.ok(positioning.includes('not available for purchase')||positioning.includes('not for sale'));
+assert.ok(microgrids.includes('name="robots" content="noindex,follow"'));
+for(const region of ['NORTH AMERICA','EUROPE + UK','MATURE APAC','EMERGING MARKETS'])assert.ok(microgrids.includes(region));
+assert.ok(microgrids.includes('No autonomous energy dispatch')&&microgrids.includes('No yield or bill reduction is promised'));
+assert.ok(microgrids.includes('48-hour deployment or zero utility hookup cannot be assumed'));
+assert.ok(microgrids.includes('Project financing and hardware availability have not been independently verified'));
+assert.ok(microgrids.includes('20FT / TACTICAL MICRO-POD')&&microgrids.includes('40FT / STRATEGIC NODE'));
+assert.ok(microgrids.includes('Neither footprint bypasses municipal permission'));
+assert.ok(microgrids.includes('selenium interlayer')&&microgrids.includes('pressure-vessel safety case'));
+assert.ok(pricing.includes('For individuals')&&pricing.includes('For organizations')&&pricing.includes('No payment is requested'));
+console.log('AD_ASTRA_STATIC_RELEASE_PASS publicFiles='+files.length+' film=withheld approvedRoutes='+evidence.approvedRoutes.length+' privacy=passed');
