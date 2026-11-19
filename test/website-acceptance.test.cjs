@@ -67,3 +67,18 @@ test('paused platform clearly labels preview actions and does not mislabel sign 
   assert.match(platform, /id="platform-sign-out"><a href="\/workspace\/">Workspace access<\/a>/);
   assert.doesNotMatch(platform, /href="\/workspace\/">Sign out<\/a>/);
 });
+
+test('each Life journey deep-links to its matching workspace product without bypassing account access', () => {
+  const life=fs.readFileSync(path.join(root,'public/life/index.html'),'utf8');
+  const workspace=fs.readFileSync(path.join(root,'public/workspace/index.html'),'utf8');
+  const app=fs.readFileSync(path.join(root,'public/workspace/app.js'),'utf8');
+  for(const [id,name] of [['day','DayFlow'],['learn','LearnPath'],['career','CareerStep']]){
+    assert.match(life,new RegExp('href="/workspace/\\\\?product='+id+'">Explore '+name));
+    assert.match(workspace,new RegExp('name="productId" value="'+id+'"'));
+  }
+  assert.match(app,/new URLSearchParams\(location\.search\)\.get\('product'\)/);
+  assert.match(app,/Object\.hasOwn\(definitions,requestedProduct\)/);
+  assert.match(app,/if\(requestedProduct && Object\.hasOwn\(definitions,requestedProduct\)\) choose\(requestedProduct\)/);
+  assert.match(app,/await window\.adAstraVerifySession\(clerk\)/);
+  assert.match(workspace,/Customer execution remains subject to release and account access checks/);
+});
