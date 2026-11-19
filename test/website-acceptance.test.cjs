@@ -56,3 +56,14 @@ test('workspace manifest names the implemented products without asserting produc
   assert.equal(manifest.engineAvailable, false);
   assert.equal(manifest.publicLaunchEnabled, false);
 });
+
+test('paused platform clearly labels preview actions and does not mislabel sign out', () => {
+  const platform = fs.readFileSync(path.join(root, 'public/platform/index.html'), 'utf8');
+  assert.match(platform, /Engine paused — release checks pending/);
+  for (const mode of ['Ask', 'Research', 'Create', 'Learn', 'Explore']) {
+    assert.match(platform, new RegExp('Preview ' + mode + ' pathway'));
+    assert.doesNotMatch(platform, new RegExp('>Open ' + mode + ' ↗'));
+  }
+  assert.match(platform, /id="platform-sign-out"><a href="\/workspace\/">Workspace access<\/a>/);
+  assert.doesNotMatch(platform, /href="\/workspace\/">Sign out<\/a>/);
+});
