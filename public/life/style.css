@@ -3,3 +3,7 @@
 .life-neural-field{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1;opacity:.72;contain:strict}
 @media(max-width:800px){.life-neural-field{opacity:.45}}
 @media(prefers-reduced-motion:reduce){.life-neural-field{opacity:.35}}
+
+.motion-toggle{display:inline-flex;align-items:center;gap:.65rem;background:transparent;color:#f3f5f8;border:1px solid #b9cbd080;padding:.75rem 1rem;font:inherit;font-size:.77rem;letter-spacing:.02em;cursor:pointer;position:relative;z-index:2}
+.motion-toggle:hover{background:#ffffff15}.motion-toggle:focus-visible{outline:3px solid #9edcf2;outline-offset:4px}
+.motion-toggle[aria-pressed="true"]{border-color:#d8b98a;color:#f7e4c9}
