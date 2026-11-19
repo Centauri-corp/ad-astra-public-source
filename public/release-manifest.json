@@ -1,7 +1,7 @@
 {
   "release": "ad-astra-california-canary-2026-11-11",
   "canonical": "https://adastra.global/",
-  "releaseScope": "public-marketing-site-only",
+  "releaseScope": "public-site-and-governed-workspace-candidate",
   "routeEvidenceFile": "route-release-evidence.json",
   "publicLaunchEnabled": false,
   "indexingPolicy": "noindex-until-page-evidence-approved",
@@ -27,6 +27,15 @@
   "liveEngineAccess": "requires-all-verified-release-gates",
   "customerBudgetBridge": {
     "publicAdapter": "implemented-candidate",
+    "productionAccepted": false
+  },
+  "customerWorkspace": {
+    "route": "/workspace/",
+    "api": "/api/workspace",
+    "protocol": "ad-astra-customer-workspace/v1",
+    "products": ["day", "learn", "career"],
+    "persistence": "canonical-customer-runtime",
+    "executionAuthority": "server-verified-membership-subscription-release-and-budget",
     "productionAccepted": false
   },
   "contentSurfaces": {

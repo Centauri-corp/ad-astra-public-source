@@ -2,7 +2,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const handler=require('../api/subscription-status');
-const sharedBudget=require('../lib/shared-budget');
+const gates=require('../lib/release-gates');
 
 async function responseFor(environment,upstream){
  const oldFetch=global.fetch,oldEnvironment=process.env.AD_ASTRA_SUBSCRIPTION_ENVIRONMENT;
@@ -28,5 +28,5 @@ test('public status strips provider configuration and requires complete producti
  assert.equal(onboardingOnly.body.available,false);
  const fixture={environment:'production',checkoutEnabled:true,activationEnabled:true,frameworkDeployed:true,productAvailable:true};
  const held=await responseFor('production',fixture);assert.equal(held.body.available,false,'An unaccepted customer usage bridge must prevent availability claims');
- const original=sharedBudget.createClient;try{sharedBudget.createClient=()=>({productionAccepted:true});const ready=await responseFor('production',fixture);assert.equal(ready.body.available,true);}finally{sharedBudget.createClient=original;}
+ const original=gates.workspaceReady;try{gates.workspaceReady=()=>true;const ready=await responseFor('production',fixture);assert.equal(ready.body.available,true);}finally{gates.workspaceReady=original;}
 });

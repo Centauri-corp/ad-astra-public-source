@@ -67,7 +67,7 @@ form.addEventListener('submit', event => {
   response.hidden = false;
   window.setTimeout(() => {
     const label = response.querySelector('.eyebrow');
-    setText(label, 'ASTRA LUMEN / ' + guide.label);
+    setText(label, 'ASTRA POLARIS / ' + guide.label);
     setText(responseTitle, guide.title);
     setText(responseBody, guide.body);
     setText(responseNext, guide.next);

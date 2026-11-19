@@ -1,5 +1,5 @@
 'use strict';
-const sharedBudget=require('../lib/shared-budget');
+const gates=require('../lib/release-gates');
 
 // Public availability only; tenant records, credentials and internal gates stay private.
 module.exports=async function subscriptionStatus(req,res){
@@ -17,7 +17,7 @@ module.exports=async function subscriptionStatus(req,res){
     const status=await upstream.json();
     const available=environment==='production' && status.environment===environment && status.frameworkDeployed===true
       && status.checkoutEnabled===true && status.activationEnabled===true && status.productAvailable===true
-      && sharedBudget.createClient().productionAccepted===true;
+      && gates.workspaceReady();
     res.statusCode=200;
     res.end(JSON.stringify({market:'US-CA',environment,available,frameworkDeployed:status.frameworkDeployed===true}));
   } catch {res.statusCode=503;res.end(JSON.stringify({market:'US-CA',environment,available:false}));}

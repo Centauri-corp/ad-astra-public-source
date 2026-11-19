@@ -6,21 +6,27 @@
   "outputDirectory": "public",
   "functions": {
     "api/ask.js": {
-      "maxDuration": 30
+      "maxDuration": 60
     },
     "api/subscriptions.js": {
       "maxDuration": 30
+    },
+    "api/workspace.js": {
+      "maxDuration": 60
+    },
+    "api/status.js": {
+      "maxDuration": 20
     }
   },
   "redirects": [
     {
       "source": "/platform/:path*",
-      "destination": "/",
+      "destination": "/workspace/",
       "permanent": false
     },
     {
       "source": "/knowledge/:path*",
-      "destination": "/agent/",
+      "destination": "/workspace/",
       "permanent": false
     }
   ],
@@ -69,7 +75,7 @@
       ]
     },
     {
-      "source": "/(knowledge|platform|sign-in|account|markets|pricing|services|company|about|film)(.*)",
+      "source": "/(workspace|knowledge|platform|sign-in|account|markets|pricing|services|company|about|film)(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
