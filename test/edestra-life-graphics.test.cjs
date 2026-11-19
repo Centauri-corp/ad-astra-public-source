@@ -30,6 +30,10 @@ test('neural field is decorative, local and bounded', () => {
   assert.match(renderer,/IntersectionObserver/);
   assert.match(renderer,/cancelAnimationFrame/);
   assert.match(renderer,/12000/);
+  assert.match(life,/id="life-motion-toggle"[^>]*aria-pressed="false"/);
+  assert.match(renderer,/userOptedIn = false/);
+  assert.match(renderer,/return userOptedIn && !media.matches/);
+  assert.match(renderer,/motionToggle.addEventListener\("click"/);
   assert.doesNotMatch(renderer,/fetch\s*\(|XMLHttpRequest|WebSocket|AudioContext|getUserMedia|https?:\/\//i);
   assert.match(style,/\.life-neural-field\{[^}]*pointer-events:none/);
   assert.match(style,/@media\(prefers-reduced-motion:reduce\)/);
