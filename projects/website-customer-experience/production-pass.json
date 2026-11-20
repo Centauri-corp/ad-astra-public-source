@@ -1,0 +1,137 @@
+{
+  "schema": "ad-astra-customer-production-pass/v1",
+  "program": "AD ASTRA Universal Intelligence OS",
+  "portfolioOwner": "CRC COMMAND",
+  "publicSource": "Centauri-corp/ad-astra-public-source",
+  "publicCandidate": "codex/customer-experience-rebuild-20261113",
+  "internalSource": "Centauri-corp/ad-astra-internal-source",
+  "internalReleaseWorkstream": "PR #144",
+  "governanceHandoff": "CRC Governance Agent — Tahira Review & Final Approval",
+  "finalReleaseDecision": "Supabase project wewznejqpnsmiwkbozgw",
+  "state": "HOLD",
+  "published": false,
+  "contracts": {
+    "project": "projects/website-customer-experience/project.json",
+    "visual": "projects/website-customer-experience/visual-standard.json",
+    "assetSelection": "projects/website-customer-experience/asset-selections.json",
+    "visualApproval": "projects/website-customer-experience/visual-review.json",
+    "models": "projects/website-customer-experience/model-experience.json",
+    "catalog": "config/public-product-families.json",
+    "release": "config/production-release-source.json"
+  },
+  "tracks": [
+    {
+      "id": "products",
+      "source": "config/public-product-families.json",
+      "scope": "six existing product families",
+      "paths": [
+        "/products/",
+        "/products/core-intelligence/",
+        "/products/creative-studio/",
+        "/products/specialist-intelligence/",
+        "/products/business-commerce/",
+        "/products/developer-platform/",
+        "/products/autonomous-workflows/"
+      ],
+      "acceptance": [
+        "catalog-derived fidelity",
+        "truthful capability states",
+        "mobile route continuity",
+        "clear next action"
+      ]
+    },
+    {
+      "id": "services",
+      "source": "projects/website-customer-experience/project.json",
+      "scope": "customer, team, research and business services",
+      "paths": [
+        "/services/",
+        "/intelligence/",
+        "/agent/"
+      ],
+      "acceptance": [
+        "real product outcomes",
+        "unavailable services clearly labelled",
+        "no undocumented agents/models",
+        "safe consent and support transitions"
+      ]
+    },
+    {
+      "id": "visual-experience",
+      "source": "projects/website-customer-experience/visual-standard.json",
+      "paths": [
+        "/",
+        "/start/",
+        "/platform-preview/",
+        "/film/"
+      ],
+      "acceptance": [
+        "exact visual bundle review",
+        "desktop and 390px mobile captures",
+        "asset provenance and rights",
+        "neural motion pause/reduced-motion fallback",
+        "performance budget",
+        "voice opt-in"
+      ]
+    },
+    {
+      "id": "customer-journey",
+      "source": "projects/website-customer-experience/project.json",
+      "paths": [
+        "/sign-in/",
+        "/platform/",
+        "/pricing/",
+        "/account/billing/",
+        "/support/"
+      ],
+      "acceptance": [
+        "authenticated two-tenant test",
+        "correct entitlement and revocation",
+        "Stripe test-only lifecycle",
+        "AI metering and error handling",
+        "verified support owner"
+      ]
+    },
+    {
+      "id": "global-trust",
+      "source": "projects/website-customer-experience/project.json",
+      "paths": [
+        "/markets/",
+        "/privacy/",
+        "/terms/",
+        "/security/",
+        "/status/"
+      ],
+      "acceptance": [
+        "truthful country availability",
+        "policy/legal review",
+        "WCAG 2.2 AA manual audit",
+        "SEO control verification",
+        "status and support evidence"
+      ]
+    },
+    {
+      "id": "operations",
+      "source": "config/production-release-source.json",
+      "acceptance": [
+        "exact public/internal SHA pair",
+        "GitHub CI success",
+        "independent current-head reviews",
+        "rollback proof",
+        "Supabase candidate-bound GO after CEO approval",
+        "post-promote domain readback"
+      ]
+    }
+  ],
+  "requirements": {
+    "visualApproval": "pending",
+    "providerAcceptance": "pending",
+    "productionPromotion": "blocked",
+    "allowPublicBilling": false,
+    "allowIndexing": false,
+    "allowOutreach": false,
+    "agiCertified": false,
+    "asiCertified": false
+  },
+  "notes": "Development acceptance specification only; no customer activation or independent approval represented. Reuse existing website project and public PR #39, do not fork a new publisher."
+}
