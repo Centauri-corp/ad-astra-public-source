@@ -17,7 +17,8 @@
     "visualApproval": "projects/website-customer-experience/visual-review.json",
     "models": "projects/website-customer-experience/model-experience.json",
     "catalog": "config/public-product-families.json",
-    "release": "config/production-release-source.json"
+    "release": "config/production-release-source.json",
+    "ultraCatalog": "lib/ultra-experience-catalog.cjs"
   },
   "tracks": [
     {
@@ -133,5 +134,38 @@
     "agiCertified": false,
     "asiCertified": false
   },
-  "notes": "Development acceptance specification only; no customer activation or independent approval represented. Reuse existing website project and public PR #39, do not fork a new publisher."
+  "notes": "Development acceptance specification only; no customer activation or independent approval represented. Reuse existing website project and public PR #39, do not fork a new publisher.",
+  "ultraExperience": {
+    "source": "lib/ultra-experience-catalog.cjs",
+    "expectedEntries": 38,
+    "composition": {
+      "sectorProfiles": 24,
+      "agents": 7,
+      "offers": 4,
+      "mainOnlyWorkspaces": 3
+    },
+    "release": "HOLD",
+    "publicClaims": "catalog entries are not proven deployed offerings",
+    "mainSync": "main contains newer workspace billing and graphics code; complete semantic merge and protected customer acceptance before activation"
+  },
+  "externalIntelligence": {
+    "supabaseProject": "wewznejqpnsmiwkbozgw",
+    "registry": "astra_resource_governance.external_resources",
+    "registeredResearchCandidates": 16,
+    "productionApproved": 0,
+    "scope": "read-only source registry; do not claim live inference connections",
+    "nextAcceptance": [
+      "license and rights",
+      "API authentication",
+      "integration and tenant tests",
+      "data lineage and citation",
+      "independent admission"
+    ]
+  },
+  "sourceReconciliation": {
+    "publicMainStatus": "diverged",
+    "mainOnlyChanges": "customer-workspace, billing and graphics",
+    "conflictPolicy": "semantic-review; never blind merge",
+    "internalGovernance": "Supabase live decision required, historical draft PR #144 not an authorization"
+  }
 }
