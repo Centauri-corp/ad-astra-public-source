@@ -1,0 +1,24 @@
+/* Ad Astra public entry journeys — human-first, continuous editorial layout. */
+.public-entry{position:relative;isolation:isolate;background:#07111c;color:#f4f6f7;overflow:hidden;padding:clamp(82px,10vw,158px) clamp(22px,6vw,96px)}
+.public-entry:before{content:"";position:absolute;inset:-20% -10%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 76% 16%,rgba(68,176,218,.14),transparent 38%),radial-gradient(ellipse at 16% 84%,rgba(219,172,88,.08),transparent 38%)}
+.public-entry-inner{max-width:1430px;margin:0 auto}
+.public-entry-kicker{display:flex;gap:16px;align-items:center;font:600 11px/1.3 "DM Sans",Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#a6dbe8}
+.public-entry-kicker:before{content:"";width:42px;height:1px;background:#a6dbe8}
+.public-entry-heading{font:550 clamp(47px,7.7vw,118px)/.99 "Manrope",Arial,sans-serif;letter-spacing:-.065em;margin:clamp(24px,4vw,54px) 0 0;max-width:1100px}
+.public-entry-heading em{font-weight:400;color:#cbb784}
+.public-entry-intro{margin:24px 0 clamp(40px,7vw,90px);color:#b7cad3;max-width:650px;font:400 clamp(16px,1.5vw,21px)/1.6 "DM Sans",Arial,sans-serif}
+.public-entry-list{list-style:none;padding:0;margin:0;border-top:1px solid rgba(255,255,255,.2)}
+.public-entry-list li{border-bottom:1px solid rgba(255,255,255,.2)}
+.public-entry-link{display:grid;grid-template-columns:minmax(30px,.16fr) minmax(0,1.15fr) minmax(0,.92fr) 56px;align-items:center;gap:clamp(15px,3vw,48px);min-height:clamp(126px,14vw,190px);padding:25px 10px;text-decoration:none;color:inherit;transition:padding .3s ease,background .3s ease}
+.public-entry-link:hover,.public-entry-link:focus-visible{background:rgba(125,204,241,.055);padding-left:24px}
+.public-entry-index{font:600 11px/1 "DM Sans",Arial,sans-serif;letter-spacing:.13em;color:#87bfcf;align-self:center}
+.public-entry-name{font:550 clamp(26px,3.8vw,54px)/1.12 "Manrope",Arial,sans-serif;letter-spacing:-.045em}
+.public-entry-meta{display:flex;flex-direction:column;gap:10px;color:#b7cad3;font:400 15px/1.55 "DM Sans",Arial,sans-serif}
+.public-entry-state{color:#cbb784;font:600 10px/1.2 "DM Sans",Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase}
+.public-entry-arrow{justify-self:end;display:grid;place-items:center;width:48px;height:48px;border:1px solid rgba(255,255,255,.27);border-radius:50%;font-size:20px;transition:transform .3s ease,border-color .3s ease}
+.public-entry-link:hover .public-entry-arrow,.public-entry-link:focus-visible .public-entry-arrow{transform:translate(3px,-3px);border-color:#a6dbe8}
+.public-entry-note{display:flex;gap:16px;align-items:flex-start;margin-top:36px;max-width:790px;font:400 13px/1.7 "DM Sans",Arial,sans-serif;color:#9fb3be}
+.public-entry-note:before{content:"*";color:#cbb784;font-size:19px;line-height:1}
+@media(max-width:850px){.public-entry-link{grid-template-columns:38px minmax(0,1fr) 48px;gap:10px 16px}.public-entry-meta{grid-column:2;grid-row:2;padding-bottom:8px}.public-entry-index{grid-row:1}.public-entry-arrow{grid-column:3;grid-row:1/3}.public-entry-name{grid-column:2}}
+@media(max-width:530px){.public-entry{padding:75px 20px}.public-entry-link{grid-template-columns:26px minmax(0,1fr) 40px;padding:25px 0;min-height:0}.public-entry-link:hover{padding-left:6px}.public-entry-arrow{width:36px;height:36px;font-size:16px}.public-entry-name{font-size:clamp(26px,8.5vw,42px)}.public-entry-meta{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.public-entry-link,.public-entry-arrow{transition:none}}
