@@ -19,6 +19,7 @@ const update=value=>{
  action.href=entry.href;
 };
 for(const choice of choices)choice.addEventListener('change',()=>{if(choice.checked)update(choice.value)});
-const selected=Array.from(choices).find(x=>x.checked);
-update(selected?.value||'day');
+const syncSelection=()=>update(Array.from(choices).find(x=>x.checked)?.value||'day');
+syncSelection();
+window.addEventListener('pageshow',syncSelection);
 })();
