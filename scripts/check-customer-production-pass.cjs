@@ -7,6 +7,8 @@ const pass=load('projects/website-customer-experience/production-pass.json');
 const families=load('config/public-product-families.json').families;
 const design=load('projects/website-customer-experience/visual-standard.json');
 const review=load('projects/website-customer-experience/visual-review.json');
+const {ultraCatalog}=require('../lib/ultra-experience-catalog.cjs');
+const ultra=ultraCatalog();
 const issues=[];
 const requireCheck=(ok,message)=>{if(!ok)issues.push(message)};
 requireCheck(pass.state==='HOLD' && pass.published===false,'Production pass must remain HOLD in source');
@@ -21,6 +23,10 @@ requireCheck(tracks.length===required.length,'Unexpected acceptance track count'
 for(const id of required)requireCheck(tracks.some(t=>t.id===id && Array.isArray(t.acceptance)&&t.acceptance.length>=4),'Missing acceptance track '+id);
 for(const item of tracks){if(item.source)requireCheck(fs.existsSync(path.join(root,item.source)),'Missing live source '+item.source);}
 requireCheck(design.motion?.reducedMotion && design.motion?.pauseRequired===true,'Motion safety contract missing');
+requireCheck(ultra.totalExperiences===38 && ultra.launchApprovedCount===0,'Ultra catalog must not claim unsupported customer deployments');
+requireCheck(ultra.groups.length===4 && ultra.groups.map(g=>g.items.length).join(',')==='24,7,4,3','Actual catalog family/agent/offer/workspace counts drifted');
+requireCheck(pass.ultraExperience?.expectedEntries===ultra.totalExperiences,'Ultra production-pass inventory drift');
+requireCheck(pass.externalIntelligence?.registeredResearchCandidates===16 && pass.externalIntelligence?.productionApproved===0,'External resources must not be misrepresented as live');
 requireCheck(pass.requirements?.allowPublicBilling===false,'No public billing in draft');
 requireCheck(pass.requirements?.agiCertified===false && pass.requirements?.asiCertified===false,'No unverified AGI/ASI claims');
 requireCheck(review.decision==='pending'||review.decision==='approved'||review.decision==='rejected','Invalid visual review decision');
