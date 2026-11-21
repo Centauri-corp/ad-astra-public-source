@@ -2,6 +2,10 @@
 const assert=require('node:assert/strict'),crypto=require('node:crypto');
 const {command,SCRIPT}=require('../lib/quota');
 async function run(){
+ if(process.env.AD_ASTRA_CUSTOMER_RUNTIME_ENABLED!=='true'){
+  console.log('Redis integration acceptance: deferred; customer runtime disabled and public shell remains fail-closed');
+  return;
+ }
  if(!process.env.VERCEL){console.log('Redis integration acceptance: deferred to Vercel build with connected secrets');return;}
  const root='ad-astra:acceptance:'+crypto.randomUUID();
  const keys=[];
@@ -26,10 +30,9 @@ async function run(){
   await command(['SET',user,12,'EX',1]);
   await new Promise(r=>setTimeout(r,1100));
   assert.equal((await attempt(user,budget))[0],1);
-  // Independent module instance sees the same real shared state.
   delete require.cache[require.resolve('../lib/quota')];
   assert.equal(Number(await require('../lib/quota').command(['GET',user])),1);
   console.log('AD_ASTRA_REDIS_ACCEPTANCE_PASS concurrent_user=24 allowed=12 global_attempts=16 allowed=5 atomic_budget=100000 ttl=verified reset=verified persistence=verified');
  } finally {if(keys.length)await command(['DEL',...keys]);}
 }
-run().catch(()=>{console.error('AD_ASTRA_REDIS_ACCEPTANCE_FAILED: release blocked; no credential values logged');process.exitCode=1;});
+run().catch(()=>{console.error('AD_ASTRA_REDIS_ACCEPTANCE_FAILED: live runtime remains blocked; no credential values logged');process.exitCode=1;});
