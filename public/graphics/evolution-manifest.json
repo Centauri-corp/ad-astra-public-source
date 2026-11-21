@@ -46,8 +46,6 @@
       "runtime": "Adapter pending"
     },
     "sanity": {
-      "projectId": "6a4vgjc9",
-      "dataset": "production",
       "documentType": "astraVisualSystem",
       "role": "Public editorial and visual configuration"
     }
