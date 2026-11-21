@@ -32,6 +32,32 @@
 <script src="/journey/navigation.js" defer></script>
 <link rel="stylesheet" href="/graphics/cinematic-journey.css">
 <script src="/graphics/cinematic-journey.js" defer></script>
+  <script src="/graphics/lumen-arrival.js" defer></script>
+  <style>
+    #lumen-interaction { isolation:isolate; }
+    #lumen-interaction :is(form,h1,.lumen-links,#lumen-status,#lumen-result) { position:relative;z-index:1; }
+    #lumen-interaction [hidden] { display:none !important; }
+    .lumen-portrait { margin:0;position:absolute;pointer-events:none;left:min(57vw,750px);top:50%;width:clamp(260px,36vw,540px);transform:perspective(800px) translateY(-50%) rotateY(var(--lumen-yaw,0deg)) rotateX(var(--lumen-pitch,0deg));transition:transform .35s ease-out;mix-blend-mode:screen; }
+    .lumen-portrait img { display:block;width:100%;height:auto;mask-image:radial-gradient(ellipse at 57% 47%,#000 31%,transparent 72%); }
+    .lumen-portrait i { position:absolute;inset:19% 12% 29% 17%;border:1px solid #86dfec80;border-radius:50%;transform:rotate(-28deg); }
+    .lumen-portrait i+i { inset:17% 16% 29% 22%;transform:rotate(33deg);border-color:#dcb57e99; }
+    #lumen-interaction:is([data-state=listening],[data-state=speaking],[data-state=responding]) .lumen-portrait { filter:drop-shadow(0 0 19px #83d8ff); }
+    #lumen-interaction:is([data-state=responding],[data-state=speaking]) .lumen-portrait i { border-color:#ffd795;box-shadow:0 0 20px #ffbb6855; }
+    #lumen-interaction[data-state=speaking] .lumen-portrait i { animation:lumen-signal 1.5s ease-in-out infinite alternate; }
+    .hero:has(.motion[aria-pressed=true]) .lumen-portrait i { animation-play-state:paused!important; }
+    @keyframes lumen-signal { to { opacity:.35;scale:1.07 } }
+    #lumen-form { max-width:min(34rem,100%); }
+    #lumen-form label { display:block;margin:0 0 .45rem; }
+    .lumen-entry { display:flex;flex-wrap:wrap;gap:.4rem;padding:.45rem;background:#061726ec;border:1px solid #87b9cf8c;border-radius:12px; }
+    .lumen-entry input { flex:1 1 165px;min-width:0;padding:.65rem;background:transparent;color:#fff;border:0;font:inherit; }
+    #lumen-interaction button { font:inherit;background:#133247;color:#f3f9fb;border:1px solid #84aab57a;border-radius:8px;min-height:44px;padding:.35rem .65rem;cursor:pointer; }
+    #lumen-interaction button[aria-pressed=true] { background:#266185; }
+    .lumen-links { display:flex;align-items:center;flex-wrap:wrap;gap:1rem;margin-top:1rem; }
+    #lumen-result { max-width:min(34rem,100%);background:#061726ee;padding:.8rem 1rem;border-left:2px solid #dcb57e; }
+    #lumen-status:empty { margin:0; }
+    @media(max-width:760px) { .lumen-portrait { left:auto;right:-20vw;top:5%;width:74vw;opacity:.42;transform:translateY(-40%); } }
+    @media(prefers-reduced-motion:reduce) { .lumen-portrait,.lumen-portrait i { animation:none!important;transition:none!important; } }
+  </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -105,7 +131,26 @@
       <p class="cinematic-journey-status" data-cinematic-status role="status">Spatial scene loading · static fallback ready</p>
     </div>
     <div class="hero-shade"></div><div class="orbit-decoration" aria-hidden="true"></div>
-    <div class="hero-content"><p class="eyebrow"><span class="line"></span> AD ASTRA / UNIVERSAL STAGE</p><h1 id="hero-title">A living stage<br><em>for human direction.</em></h1><p class="hero-sub">One continuous journey across knowledge, life and possibility.</p><p class="hero-detail">From Earth to orbit. From signal to solution.<br>Your intent remains in command.</p><div class="hero-actions"><a class="button light" href="/products/">Explore Products &amp; Solutions <span aria-hidden="true">↗</span></a></div></div>
+    <div class="hero-content" id="lumen-interaction">
+      <figure class="lumen-portrait" aria-hidden="true"><img src="/assets/astra-lumen-neural-profile-canvas.png" width="545" height="700" alt=""><i></i><i></i></figure>
+      <h1 id="hero-title">What would you like<br><em>to understand?</em></h1>
+      <form id="lumen-form">
+        <label for="lumen-question">Ask Astra Lumen</label>
+        <div class="lumen-entry">
+          <input id="lumen-question" type="text" maxlength="4000" required>
+          <button id="lumen-voice" type="button" aria-pressed="false" hidden>Hey Astra</button>
+          <button type="submit">Continue</button>
+        </div>
+      </form>
+      <noscript><p><a href="/workspace/">Open the Ad Astra workspace</a></p></noscript>
+      <div class="lumen-links"><button type="button" id="lumen-example">Try an example</button><a href="/products/">Explore Products &amp; Solutions ↗</a></div>
+      <p id="lumen-status" role="status"></p>
+      <div id="lumen-result" hidden>
+        <strong id="lumen-example-label">Example response</strong><p id="lumen-reply"></p>
+        <button type="button" id="lumen-listen" hidden>Listen</button>
+        <a id="lumen-workspace" href="/workspace/" hidden>Open workspace ↗</a>
+      </div>
+    </div>
     <div class="hero-bottom"><p>BEYOND PHYSICS<span>THE META-KNOWLEDGE ENGINE</span></p><a href="#vision">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a><span class="scene-label" id="scene-label">01 / ARRIVAL</span><button class="motion" aria-pressed="false">Pause motion <span aria-hidden="true">Ⅱ</span></button><span class="motion-note" id="motion-note">Motion pauses for reduced-motion preferences · poster frames remain available</span></div>
   </section>
 <section class="neural-lab" id="neural-lab" aria-labelledby="neural-lab-title">
