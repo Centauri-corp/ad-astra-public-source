@@ -1,0 +1,155 @@
+{
+  "schema": "ad-astra/graphics-reference-atlas/v1",
+  "version": "1.0.0",
+  "status": "governed-reference-unit",
+  "purpose": "Single source for external research links, graphics technologies, and production-boundary claims used by the public Ad Astra visual system.",
+  "externalReferences": [
+    {
+      "id": "youtube-neural-rendering",
+      "category": "cinematic-workflow",
+      "title": "Neural rendering / cinematic workflow",
+      "url": "https://www.youtube.com/watch?v=LcrSp_hzYvA",
+      "usage": "research-reference",
+      "publicRuntime": false
+    },
+    {
+      "id": "rebusfarm-neural-rendering",
+      "category": "neural-rendering",
+      "title": "3D neural rendering overview",
+      "url": "https://rebusfarm.net/blog/3d-neural-rendering-and-its-real-time-power",
+      "usage": "research-reference",
+      "publicRuntime": false
+    },
+    {
+      "id": "awn-autodesk-neural-rigging",
+      "category": "neural-animation",
+      "title": "Autodesk AI rigging and neural-layer research",
+      "url": "https://www.awn.com/news/autodesk-announces-ai-rigging-and-neural-layer-flow-studio",
+      "usage": "research-reference",
+      "publicRuntime": false
+    },
+    {
+      "id": "arxiv-neural-animation",
+      "category": "neural-animation",
+      "title": "Skinning-free neural animation research",
+      "url": "https://arxiv.org/html/2606.31981v1",
+      "usage": "research-reference",
+      "publicRuntime": false
+    }
+  ],
+  "presentationResources": [
+    {
+      "id": "google-fonts-dm-sans-manrope",
+      "category": "typography",
+      "title": "DM Sans and Manrope",
+      "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;600;650;700;750;800&display=swap",
+      "usage": "font-loading",
+      "publicRuntime": true
+    }
+  ],
+  "technologies": {
+    "production": [
+      {
+        "id": "procedural-threejs-geometry",
+        "label": "Procedural Three.js geometry",
+        "status": "implemented"
+      },
+      {
+        "id": "reviewed-static-artwork",
+        "label": "Reviewed static artwork",
+        "status": "implemented"
+      },
+      {
+        "id": "bounded-motion",
+        "label": "Bounded motion studies",
+        "status": "implemented"
+      },
+      {
+        "id": "pbr-light-response",
+        "label": "PBR light response",
+        "status": "visual-criterion"
+      },
+      {
+        "id": "reduced-motion-fallback",
+        "label": "Reduced-motion static fallback",
+        "status": "implemented"
+      }
+    ],
+    "research": [
+      {
+        "id": "nerfs",
+        "label": "Neural radiance fields (NeRFs)",
+        "status": "research-reference"
+      },
+      {
+        "id": "3d-gaussian-splatting",
+        "label": "3D Gaussian Splatting",
+        "status": "research-reference"
+      },
+      {
+        "id": "neural-animation",
+        "label": "Neural animation",
+        "status": "research-reference"
+      },
+      {
+        "id": "blender-maya-unreal",
+        "label": "Blender / Maya / Unreal workflows",
+        "status": "research-reference"
+      },
+      {
+        "id": "micro-deformation",
+        "label": "Micro-deformation",
+        "status": "future-production-criterion"
+      },
+      {
+        "id": "texture-locking",
+        "label": "Texture locking",
+        "status": "future-production-criterion"
+      },
+      {
+        "id": "multimodal-input",
+        "label": "Multi-modal input",
+        "status": "future-production-criterion"
+      },
+      {
+        "id": "world-continuity",
+        "label": "World continuity",
+        "status": "future-production-criterion"
+      }
+    ]
+  },
+  "pipeline": [
+    {
+      "step": 1,
+      "id": "proxy-form",
+      "label": "Proxy form",
+      "boundary": "directable 3D structure"
+    },
+    {
+      "step": 2,
+      "id": "camera-motion",
+      "label": "Camera + motion",
+      "boundary": "physics-aware bounded motion"
+    },
+    {
+      "step": 3,
+      "id": "neural-layer-concept",
+      "label": "Neural layer concept",
+      "boundary": "research direction only"
+    },
+    {
+      "step": 4,
+      "id": "human-review",
+      "label": "Human review",
+      "boundary": "required before production use"
+    }
+  ],
+  "assetBoundary": {
+    "localAssetsOnly": true,
+    "externalCdn": false,
+    "liveTelemetry": false,
+    "tenantData": false,
+    "liveNeuralRendering": false,
+    "liveClaims": false
+  }
+}

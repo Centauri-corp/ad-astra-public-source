@@ -105,6 +105,79 @@
       "renderer": "static-css-or-scene-adapter",
       "fallback": "accessible-text-and-static-orbit",
       "liveTelemetry": false
+    },
+    "humanToHuman": {
+      "route": "/",
+      "status": "cinematic-guided-preview",
+      "journey": [
+        "arrive",
+        "neural-motion",
+        "speak-or-type",
+        "choose-direction",
+        "intelligence-layer",
+        "continue"
+      ],
+      "neuralInterface": "neural-oracle-cinematic-overlay",
+      "voice": {
+        "activation": "explicit-user-action",
+        "recognition": "browser-capability-optional",
+        "response": "local-speech-synthesis-preview",
+        "liveProvider": false,
+        "engineAdapter": "ad-astra/cinematic-intelligence-preview/v1"
+      },
+      "domainShortcuts": [
+        "daily-life",
+        "research",
+        "learning",
+        "work-markets",
+        "creative-direction",
+        "explore"
+      ],
+      "fallback": "typed-input-and-accessible-text",
+      "tenantDataInPublicScene": false,
+      "telemetry": false
+    },
+    "graphicsReferenceAtlas": {
+      "path": "/graphics-reference-atlas.json",
+      "version": "1.0.0",
+      "scope": "cinematic-global-experience",
+      "externalReferences": "reference-only",
+      "runtimeExternalGraphicsServices": false,
+      "localReviewedAssets": true,
+      "technologies": {
+        "production": [
+          "procedural-threejs-geometry",
+          "reviewed-static-artwork",
+          "bounded-motion",
+          "pbr-light-response",
+          "reduced-motion-fallback"
+        ],
+        "research": [
+          "nerfs",
+          "3d-gaussian-splatting",
+          "neural-animation",
+          "blender",
+          "maya",
+          "unreal-engine",
+          "micro-deformation",
+          "texture-locking",
+          "multimodal-input",
+          "world-continuity"
+        ]
+      },
+      "pipeline": [
+        "proxy-form",
+        "camera-motion",
+        "neural-layer-concept",
+        "human-review"
+      ],
+      "sourceLinks": [
+        "youtube-neural-rendering",
+        "rebusfarm-neural-rendering",
+        "awn-autodesk-neural-rigging",
+        "arxiv-neural-animation",
+        "google-fonts-dm-sans-manrope"
+      ]
     }
   },
   "seo": {
