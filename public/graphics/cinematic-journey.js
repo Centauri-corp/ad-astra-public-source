@@ -136,6 +136,7 @@
     scene=clamp(Number(next)||0,0,2);
     host.dataset.cinematicScene=String(scene);
     host.dataset.cinematicLabel=scenes[scene].label;
+    host.dispatchEvent(new CustomEvent('ad-astra:scene-change',{detail:{index:scene,source}}));
     buttons.forEach(button=>{
       const active=Number(button.dataset.cinematicLayer)===scene;
       button.setAttribute('aria-pressed',String(active));
