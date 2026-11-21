@@ -26,3 +26,15 @@ test('Graphics adapter cannot activate inference, billing, telemetry or public l
  assert.doesNotMatch(js,/\bfetch\s*\(|XMLHttpRequest|WebSocket|sendBeacon|localStorage|sessionStorage|eval\s*\(|Function\s*\(/);
  assert.doesNotMatch(js,/stripe|checkout|supabase|approveRelease|deployProduction|publishSite|startMicrophone/i);
 });
+
+test('Procedural orbital rendering has depth lighting, globe coordinates and stable fallback',()=>{
+ const js=load('products/graphics-adapter.js');
+ assert.match(js,/vec3 normal=normalize\(vec3\(uv\/sphereRadius,z\)\)/);
+ assert.match(js,/longitude=atan\(rotated\.z,rotated\.x\)/);
+ assert.match(js,/float lambert=max/);
+ assert.match(js,/float atmosphere=/);
+ assert.match(js,/uniform1f\(uniforms\.motif/);
+ assert.match(js,/webglcontextlost/);
+ assert.match(js,/stop\("Graphics unavailable\. Static visual restored\."\)/);
+ assert.doesNotMatch(js,/https?:\/\/|\bfetch\s*\(|localStorage|sessionStorage/);
+});
