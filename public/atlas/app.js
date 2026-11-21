@@ -1,27 +1,8 @@
 (()=>{'use strict';
-const data={
-"space-earth":["SPACE & EARTH","See the connected systems of place, planet and possibility.","A public entry for questions about our world, the wider universe and the evidence connecting them."],
-"arts-culture":["ARTS & CULTURE","Make meaning visible.","Explore creative expression, cultural context and the perspectives that shape how people understand one another."],
-"medical-health":["MEDICAL & HEALTH","Keep the human context in view.","A governed direction for health questions that keeps evidence, uncertainty and professional judgment visible."],
-"science":["SCIENCE","Follow the evidence.","Move from curiosity to clearer inquiry across the scientific disciplines."],
-"engineering":["ENGINEERING","Turn constraints into direction.","Connect systems thinking, design tradeoffs and practical next steps."],
-"geotechnology":["GEOTECHNOLOGY","Read the shape of place.","Explore geospatial systems, infrastructure and the forces that connect environment and action."],
-"education":["EDUCATION","Learn in the direction you choose.","Build context, compare perspectives and carry understanding forward."],
-"law-civic":["LAW & CIVIC","Understand the framework around action.","A public direction for civic questions, rights, responsibilities and the need for qualified review."],
-"economics":["ECONOMICS","See the relationships behind the numbers.","Connect incentives, markets, resources and decisions without hiding uncertainty."],
-"environment":["ENVIRONMENT","Hold the whole system.","Explore the relationships between people, resources, climate and the living world."],
-"technology":["TECHNOLOGY","Build with intention.","Map tools, systems and human outcomes before moving from possibility to implementation."],
-"accessibility":["ACCESSIBILITY","Make the experience belong to everyone.","Keep language, motion, contrast and control available across the journey."]
-};
-const buttons=document.querySelectorAll('[data-atlas-domain]');
-const label=document.querySelector('[data-atlas-label]');
-const title=document.querySelector('[data-atlas-title]');
-const copy=document.querySelector('[data-atlas-copy]');
-buttons.forEach(button=>button.addEventListener('click',()=>{
- const item=data[button.dataset.atlasDomain]; if(!item)return;
- buttons.forEach(b=>b.setAttribute('aria-selected',String(b===button)));
- label.textContent='ATLAS / '+item[0];
- title.textContent=item[1];
- copy.textContent=item[2]+' Choose another domain or continue into the governed products and workspace.';
-}));
+const canvas=document.querySelector('#atlas-canvas');const ctx=canvas?.getContext('2d');const stages=[...document.querySelectorAll('[data-stage]')];const dots=[...document.querySelectorAll('[data-rail]')];const progress=document.querySelector('#rail-progress');const buttons=[...document.querySelectorAll('[data-atlas-domain]')];const label=document.querySelector('[data-atlas-label]');const title=document.querySelector('[data-atlas-title]');const copy=document.querySelector('[data-atlas-copy]');
+const data={"space-earth":["SPACE & EARTH","The field opens outward.","Connect place, planet and possibility."],"arts-culture":["ARTS & CULTURE","Meaning moves between people.","Explore expression, context and perspective."],"medical-health":["MEDICAL & HEALTH","Keep the human context visible.","Evidence, uncertainty and judgment stay together."],"science":["SCIENCE","Follow the evidence.","Turn curiosity into a clearer inquiry."],"engineering":["ENGINEERING","Constraints become direction.","Connect systems, design and practical next steps."],"geotechnology":["GEOTECHNOLOGY","Read the shape of place.","See infrastructure, environment and action together."],"education":["EDUCATION","Learning stays in motion.","Build context and carry understanding forward."],"law-civic":["LAW & CIVIC","Frameworks shape action.","Keep rights, responsibilities and review visible."],"economics":["ECONOMICS","Relationships sit behind the numbers.","Connect incentives, resources and decisions."],"environment":["ENVIRONMENT","Hold the whole system.","Explore people, resources, climate and life together."],"technology":["TECHNOLOGY","Build with intention.","Map tools, systems and human outcomes before implementation."],"accessibility":["ACCESSIBILITY","The experience belongs to everyone.","Keep language, motion, contrast and control available."]};
+let active=0;function show(n){active=Math.max(0,Math.min(stages.length-1,n));stages.forEach((s,i)=>s.classList.toggle('active',i===active));dots.forEach((d,i)=>d.classList.toggle('active',i===active));if(progress)progress.style.height=(active/(stages.length-1)*100)+'%';document.querySelector('[data-stage="'+active+'"]')?.scrollIntoView({behavior:'smooth',block:'center'})}
+document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>show(Number(b.dataset.next))));
+buttons.forEach(b=>b.addEventListener('click',()=>{const item=data[b.dataset.atlasDomain];if(!item)return;buttons.forEach(x=>x.setAttribute('aria-selected',String(x===b)));if(label)label.textContent='ATLAS / '+item[0];if(title)title.textContent=item[1];if(copy)copy.textContent=item[2]+' Choose another domain or continue into the governed experience.';show(2)}));
+if(canvas&&ctx){let w=0,h=0,t=0;const particles=Array.from({length:90},(_,i)=>({a:i*0.37,r:35+(i%9)*12,s:.0007+(i%5)*.0002}));function resize(){const d=Math.min(devicePixelRatio||1,2);w=canvas.clientWidth;h=canvas.clientHeight;canvas.width=w*d;canvas.height=h*d;ctx.setTransform(d,0,0,d,0,0)}function draw(){t+=1;ctx.clearRect(0,0,w,h);const cx=w/2,cy=h/2;ctx.strokeStyle='rgba(155,223,227,.17)';ctx.lineWidth=1;[.42,.62,.82].forEach((r,i)=>{ctx.beginPath();ctx.ellipse(cx,cy,w*r/1.4,h*r,i*.7,0,Math.PI*2);ctx.stroke()});particles.forEach(p=>{const a=p.a+t*p.s*active*3;const x=cx+Math.cos(a)*p.r*(1+active*.16)+Math.sin(t*.002+p.a)*18;const y=cy+Math.sin(a)*p.r*.62*(1+active*.16);ctx.fillStyle=iColor(p.a);ctx.beginPath();ctx.arc(x,y,1.3+(active*.2),0,Math.PI*2);ctx.fill()});requestAnimationFrame(draw)}function iColor(a){return a%3<1?'rgba(155,223,227,.75)':a%3<2?'rgba(154,124,255,.7)':'rgba(233,201,144,.72)'}window.addEventListener('resize',resize);resize();draw()}
 })();
