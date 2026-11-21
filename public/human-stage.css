@@ -1,0 +1,31 @@
+.human-stage{position:relative;overflow:hidden;background:radial-gradient(circle at 70% 25%,rgba(154,124,255,.18),transparent 34%),#07111c;color:#f6f2ea;padding:clamp(5rem,10vw,10rem) 0 6rem}
+.human-stage:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(155,223,227,.06),transparent 35%,rgba(233,201,144,.06));pointer-events:none}
+.human-stage .wrap{position:relative;z-index:1}
+.human-stage-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(320px,.98fr);gap:clamp(2rem,7vw,8rem);align-items:center}
+.human-stage-copy h2{font-size:clamp(3rem,7vw,7.5rem);line-height:.92;letter-spacing:-.07em;margin:.7rem 0 1.4rem;max-width:8ch}
+.human-stage-copy h2 em{color:#9bdfe3;font-style:normal}
+.human-stage-copy .lead{max-width:38rem;font-size:clamp(1.05rem,1.6vw,1.35rem);line-height:1.55}
+.human-stage-badge{display:inline-flex;gap:.6rem;align-items:center;border:1px solid rgba(155,223,227,.35);border-radius:999px;padding:.55rem .8rem;color:#9bdfe3;font-size:.7rem;letter-spacing:.14em}
+.human-stage-badge i{width:.45rem;height:.45rem;border-radius:50%;background:#9bdfe3;box-shadow:0 0 1rem #9bdfe3}
+.human-stage-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin:2rem 0 1rem}
+.human-stage-actions button,.human-stage-actions a{font:inherit;cursor:pointer;text-decoration:none}
+.human-stage-actions .stage-primary{border:0;border-radius:999px;background:#e9c990;color:#07111c;padding:.9rem 1.2rem;font-weight:700}
+.human-stage-actions .stage-secondary{border:1px solid rgba(246,242,234,.3);border-radius:999px;background:transparent;color:#f6f2ea;padding:.9rem 1.2rem}
+.human-stage-note{color:rgba(246,242,234,.62);font-size:.82rem;line-height:1.5;max-width:38rem}
+.neural-oracle{position:relative;min-height:31rem;display:grid;place-items:center;isolation:isolate}
+.neural-oracle:before,.neural-oracle:after{content:"";position:absolute;border:1px solid rgba(155,223,227,.28);border-radius:50%;transform:rotate(-18deg);animation:oracle-orbit 18s linear infinite}
+.neural-oracle:before{width:88%;height:48%;box-shadow:0 0 5rem rgba(155,223,227,.12)}
+.neural-oracle:after{width:72%;height:66%;border-color:rgba(154,124,255,.3);animation-duration:24s;animation-direction:reverse}
+.neural-core{width:min(62vw,20rem);aspect-ratio:1;border-radius:48% 52% 45% 55%;background:radial-gradient(circle at 42% 35%,#effffb 0 2%,#9bdfe3 5%,#9a7cff 22%,#191e4b 52%,transparent 70%);filter:drop-shadow(0 0 2.5rem rgba(155,223,227,.55));position:relative;z-index:1;animation:oracle-breathe 5s ease-in-out infinite}
+.neural-core:before,.neural-core:after{content:"";position:absolute;inset:9%;border:1px solid rgba(233,201,144,.7);border-radius:47% 53% 48% 52%;transform:rotate(22deg);box-shadow:inset 0 0 2rem rgba(155,223,227,.2)}
+.neural-core:after{inset:20%;transform:rotate(-36deg);border-color:rgba(155,223,227,.7)}
+.neural-oracle .signal{position:absolute;width:.5rem;height:.5rem;border-radius:50%;background:#e9c990;box-shadow:0 0 1rem #e9c990;z-index:2;animation:signal-pulse 3s ease-in-out infinite}
+.neural-oracle .s1{top:22%;left:19%}.neural-oracle .s2{top:68%;right:18%;animation-delay:.8s}.neural-oracle .s3{bottom:13%;left:38%;animation-delay:1.5s}
+.oracle-readout{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);width:min(100%,24rem);border:1px solid rgba(246,242,234,.18);background:rgba(7,17,28,.72);backdrop-filter:blur(14px);padding:1rem;z-index:3}
+.oracle-readout small{display:block;color:#9bdfe3;letter-spacing:.13em;font-size:.62rem}.oracle-readout strong{display:block;margin-top:.4rem;font-size:1rem}
+.stage-domains{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:3rem;border-top:1px solid rgba(246,242,234,.16);padding-top:1.3rem}
+.stage-domains span{border:1px solid rgba(246,242,234,.2);border-radius:999px;padding:.45rem .7rem;color:rgba(246,242,234,.78);font-size:.75rem}
+.stage-privacy{margin-top:1rem;color:rgba(246,242,234,.52);font-size:.72rem}
+@keyframes oracle-orbit{to{transform:rotate(342deg)}}@keyframes oracle-breathe{50%{transform:scale(1.04);filter:drop-shadow(0 0 3.5rem rgba(154,124,255,.65))}}@keyframes signal-pulse{50%{transform:scale(1.8);opacity:.55}}
+@media(max-width:800px){.human-stage-grid{grid-template-columns:1fr}.neural-oracle{min-height:25rem}.human-stage-copy h2{max-width:10ch}}
+@media(prefers-reduced-motion:reduce){.neural-oracle:before,.neural-oracle:after,.neural-core,.neural-oracle .signal{animation:none}}
