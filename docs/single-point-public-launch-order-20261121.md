@@ -29,3 +29,6 @@ The new public/journey/continuity.js is a plain JS route contract, NOT an instal
 
 ## Terminal decision
 HOLD_PUBLIC_LAUNCH while source validation, QA and release case remain outstanding. No production claim from this draft.
+
+## Deployment alignment correction (2026-11-21)
+The observed Vercel staging deployment dpl_DSvDgMRe34toMaRoerFkFTqgTZ7y is READY but built from feature/universal-human-homepage-20261121 at SHA 0152b9b5674249562a5bfb508e6f8841f5c76c0d, not this consolidated PR and not internal graphics PR #159. READY is not visual acceptance. Public /products/ hosts the Universal Stage preview; /services/ is a distinct market/services route. Public journey must lead to /products/ as the primary graphics destination, and /services/ may be a secondary commercial detail path. Source currently documents seven deterministic scene descriptors but not real renderer adapters, GPU QA or signed public visuals. Only an exact candidate built after source reconciliation may be evaluated for approval. Do not promote existing staging alias as final.
