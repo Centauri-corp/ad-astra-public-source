@@ -134,6 +134,48 @@
       "fallback": "typed-input-and-accessible-text",
       "tenantDataInPublicScene": false,
       "telemetry": false
+    },
+    "graphicsReferenceAtlas": {
+      "path": "/graphics-reference-atlas.json",
+      "version": "1.0.0",
+      "scope": "products-solutions-and-public-neural-visual-experience",
+      "externalReferences": "reference-only",
+      "runtimeExternalGraphicsServices": false,
+      "localReviewedAssets": true,
+      "technologies": {
+        "production": [
+          "procedural-threejs-geometry",
+          "reviewed-static-artwork",
+          "bounded-motion",
+          "pbr-light-response",
+          "reduced-motion-fallback"
+        ],
+        "research": [
+          "nerfs",
+          "3d-gaussian-splatting",
+          "neural-animation",
+          "blender",
+          "maya",
+          "unreal-engine",
+          "micro-deformation",
+          "texture-locking",
+          "multimodal-input",
+          "world-continuity"
+        ]
+      },
+      "pipeline": [
+        "proxy-form",
+        "camera-motion",
+        "neural-layer-concept",
+        "human-review"
+      ],
+      "sourceLinks": [
+        "youtube-neural-rendering",
+        "rebusfarm-neural-rendering",
+        "awn-autodesk-neural-rigging",
+        "arxiv-neural-animation",
+        "google-fonts-dm-sans-manrope"
+      ]
     }
   },
   "seo": {
