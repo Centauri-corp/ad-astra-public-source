@@ -8,8 +8,10 @@ test('homepage human-to-human journey is explicit and fail-closed',()=>{
   const root=path.join(__dirname,'..','public');
   const manifest=JSON.parse(fs.readFileSync(path.join(root,'experience-manifest.json'),'utf8'));
   const journey=manifest.visualArchitecture.humanToHuman;
-  assert.deepEqual(journey.journey,['arrive','speak-or-type','choose-domain','receive-local-response','continue-to-workspace-or-products']);
+  assert.deepEqual(journey.journey,['arrive','neural-motion','speak-or-type','choose-direction','intelligence-layer','continue']);
+  assert.equal(journey.status,'cinematic-guided-preview');
   assert.equal(journey.voice.liveProvider,false);
+  assert.equal(journey.voice.engineAdapter,'ad-astra/cinematic-intelligence-preview/v1');
   assert.equal(journey.telemetry,false);
   assert.equal(journey.fallback,'typed-input-and-accessible-text');
   const homepage=fs.readFileSync(path.join(root,'index.html'),'utf8');

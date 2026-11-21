@@ -108,21 +108,22 @@
     },
     "humanToHuman": {
       "route": "/",
-      "status": "guided-public-preview",
+      "status": "cinematic-guided-preview",
       "journey": [
         "arrive",
+        "neural-motion",
         "speak-or-type",
-        "choose-domain",
-        "receive-local-response",
-        "continue-to-workspace-or-products"
+        "choose-direction",
+        "intelligence-layer",
+        "continue"
       ],
-      "neuralInterface": "static-neural-oracle",
+      "neuralInterface": "neural-oracle-cinematic-overlay",
       "voice": {
         "activation": "explicit-user-action",
         "recognition": "browser-capability-optional",
         "response": "local-speech-synthesis-preview",
         "liveProvider": false,
-        "engineAdapter": "ad-astra/atlas-engine-adapter/v1"
+        "engineAdapter": "ad-astra/cinematic-intelligence-preview/v1"
       },
       "domainShortcuts": [
         "daily-life",
@@ -139,7 +140,7 @@
     "graphicsReferenceAtlas": {
       "path": "/graphics-reference-atlas.json",
       "version": "1.0.0",
-      "scope": "products-solutions-and-public-neural-visual-experience",
+      "scope": "cinematic-global-experience",
       "externalReferences": "reference-only",
       "runtimeExternalGraphicsServices": false,
       "localReviewedAssets": true,
@@ -177,51 +178,6 @@
         "arxiv-neural-animation",
         "google-fonts-dm-sans-manrope"
       ]
-    },
-    "atlasUniversal": {
-      "route": "/atlas/",
-      "contract": "ad-astra/atlas-universal-platform/v1.1",
-      "status": "continuous-public-visual-preview",
-      "domains": [
-        "space-earth",
-        "arts-culture",
-        "medical-health",
-        "science",
-        "engineering",
-        "geotechnology",
-        "education",
-        "law-civic",
-        "economics",
-        "environment",
-        "technology",
-        "accessibility"
-      ],
-      "interaction": "explicit-domain-selection",
-      "renderer": "canvas-neural-journey",
-      "fallback": "accessible-domain-list",
-      "liveTelemetry": false,
-      "tenantDataInPublicScene": false,
-      "externalRuntimeGraphics": false,
-      "journeyStages": [
-        "arrive",
-        "orient",
-        "connect",
-        "understand",
-        "continue"
-      ],
-      "singleJourney": true,
-      "engineBoundary": {
-        "contract": "ad-astra/atlas-engine-adapter/v1",
-        "provider": "governed-ai-engine",
-        "mode": "fail-closed-preview",
-        "liveProvider": false,
-        "voiceConsent": "explicit-user-action",
-        "transcriptRetention": "none-by-default",
-        "sessionPersistence": "none-by-default",
-        "toolExecution": "human-confirmed",
-        "tenantDataInPublicScene": false,
-        "telemetry": false
-      }
     }
   },
   "seo": {
