@@ -10,4 +10,7 @@ test('Universal Stage declares twelve governed knowledge domains',()=>{
   assert.equal(domains.length,12);
   assert.equal(manifest.visualArchitecture.universalStage.liveTelemetry,false);
   assert.equal(manifest.visualArchitecture.universalStage.fallback,'accessible-text-and-static-orbit');
+  const products=fs.readFileSync(path.join(__dirname,'..','public','products','index.html'),'utf8');
+  assert.equal(products.includes('\\\\n<script'),false);
+  assert.equal((products.match(/<span>[^<]+<\\/span>/g)||[]).filter(x=>x.includes('&amp;')||x.includes('Science')||x.includes('Engineering')||x.includes('Education')).length>=4,true);
 });
