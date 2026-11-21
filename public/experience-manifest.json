@@ -121,7 +121,8 @@
         "activation": "explicit-user-action",
         "recognition": "browser-capability-optional",
         "response": "local-speech-synthesis-preview",
-        "liveProvider": false
+        "liveProvider": false,
+        "engineAdapter": "ad-astra/atlas-engine-adapter/v1"
       },
       "domainShortcuts": [
         "daily-life",
@@ -208,7 +209,19 @@
         "understand",
         "continue"
       ],
-      "singleJourney": true
+      "singleJourney": true,
+      "engineBoundary": {
+        "contract": "ad-astra/atlas-engine-adapter/v1",
+        "provider": "governed-ai-engine",
+        "mode": "fail-closed-preview",
+        "liveProvider": false,
+        "voiceConsent": "explicit-user-action",
+        "transcriptRetention": "none-by-default",
+        "sessionPersistence": "none-by-default",
+        "toolExecution": "human-confirmed",
+        "tenantDataInPublicScene": false,
+        "telemetry": false
+      }
     }
   },
   "seo": {
