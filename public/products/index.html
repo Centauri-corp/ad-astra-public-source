@@ -30,14 +30,19 @@
 <section id="universal-stage" class="universal-stage" aria-labelledby="stage-title">
 <div class="section-head"><div><p class="eyebrow">02 / UNIVERSAL STAGE</p><h2 id="stage-title">One platform.<br><em>Twelve ways in.</em></h2></div><p>Explore the governed knowledge domains through an explicit, accessible selection. No live telemetry or tenant data is used in this public preview.</p></div>
 <div class="stage-layout">
-<nav class="stage-controls" aria-label="Products and solutions directions">
-<button type="button" data-product-direction="beyond-physics">Beyond Physics</button>
-<button type="button" data-product-direction="astra-lumen">Astra Lumen</button>
-<button type="button" data-product-direction="neural-visual-experience">Neural Visual Experience</button>
-<button type="button" data-product-direction="governed-workflows">Governed AI Workflows</button>
-</nav>
-<div class="stage-orbit" data-product-stage aria-live="polite"><span class="orbit-ring ring-a"></span><span class="orbit-ring ring-b"></span><span class="core"></span><span class="node n1"></span><span class="node n2"></span><span class="node n3"></span></div>
-<div class="stage-readout"><p data-product-label>DISCOVERY / BEYOND PHYSICS</p><h3 data-product-title>Questions become navigable.</h3><p data-product-copy>Connect questions, evidence and perspective across disciplines.</p></div>
+<div class="stage-controls" role="tablist" aria-orientation="vertical" aria-label="Products and solutions directions">
+<button type="button" id="direction-beyond-physics" role="tab" aria-controls="panel-beyond-physics" aria-selected="true" tabindex="0" data-product-direction="beyond-physics">Beyond Physics</button>
+<button type="button" id="direction-astra-lumen" role="tab" aria-controls="panel-astra-lumen" aria-selected="false" tabindex="-1" data-product-direction="astra-lumen">Astra Lumen</button>
+<button type="button" id="direction-neural-visual-experience" role="tab" aria-controls="panel-neural-visual-experience" aria-selected="false" tabindex="-1" data-product-direction="neural-visual-experience">Neural Visual Experience</button>
+<button type="button" id="direction-governed-workflows" role="tab" aria-controls="panel-governed-workflows" aria-selected="false" tabindex="-1" data-product-direction="governed-workflows">Governed AI Workflows</button>
+</div>
+<div class="stage-orbit" data-product-stage aria-hidden="true"><span class="orbit-ring ring-a"></span><span class="orbit-ring ring-b"></span><span class="core"></span><span class="node n1"></span><span class="node n2"></span><span class="node n3"></span></div>
+<div class="stage-readout" aria-live="polite" aria-atomic="true">
+<div id="panel-beyond-physics" role="tabpanel" aria-labelledby="direction-beyond-physics" tabindex="0" data-product-panel="beyond-physics"><p data-product-label>DISCOVERY / EXPLICIT PUBLIC PREVIEW</p><h3 data-product-title>Beyond Physics</h3><p data-product-copy>Connect questions, evidence and perspective across disciplines.</p></div>
+<div id="panel-astra-lumen" role="tabpanel" aria-labelledby="direction-astra-lumen" tabindex="0" data-product-panel="astra-lumen" hidden><p data-product-label>LEARNING / EXPLICIT PUBLIC PREVIEW</p><h3 data-product-title>Astra Lumen</h3><p data-product-copy>Turn complex subjects into clearer, human-directed next steps.</p></div>
+<div id="panel-neural-visual-experience" role="tabpanel" aria-labelledby="direction-neural-visual-experience" tabindex="0" data-product-panel="neural-visual-experience" hidden><p data-product-label>VISUALIZATION / EXPLICIT PUBLIC PREVIEW</p><h3 data-product-title>Neural Visual Experience</h3><p data-product-copy>Make systems, patterns and possibilities easier to see.</p></div>
+<div id="panel-governed-workflows" role="tabpanel" aria-labelledby="direction-governed-workflows" tabindex="0" data-product-panel="governed-workflows" hidden><p data-product-label>OPERATIONS / EXPLICIT PUBLIC PREVIEW</p><h3 data-product-title>Governed AI Workflows</h3><p data-product-copy>Move from intent to action through explicit controls and review.</p></div>
+</div>
 </div>
 <div class="domain-map" aria-label="Twelve knowledge domains">
 <span>Space &amp; Earth</span><span>Arts &amp; Culture</span><span>Medical &amp; Health</span><span>Science</span><span>Engineering</span><span>Geotechnology</span><span>Education</span><span>Law &amp; Civic</span><span>Economics</span><span>Environment</span><span>Technology</span><span>Accessibility</span>
