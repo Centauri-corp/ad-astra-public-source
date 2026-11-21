@@ -69,6 +69,21 @@
         "asi-horizon-return"
       ],
       "claimBoundary": "conceptual-research-framing"
+    },
+    "productsSolutions": {
+      "route": "/products/",
+      "contract": "ad-astra/products-solutions-scene/v1",
+      "atlas": "ad-astra/products-solutions-atlas/v1",
+      "status": "staging-preview",
+      "directions": [
+        "beyond-physics",
+        "astra-lumen",
+        "neural-visual-experience",
+        "governed-workflows"
+      ],
+      "activation": "explicit",
+      "staticFallback": true,
+      "tenantDataInPublicScene": false
     }
   },
   "seo": {
@@ -88,7 +103,7 @@
   },
   "contentSurfaces": {
     "company": "public-versioned",
-    "productsAndServices": "public-market-direction",
+    "productsAndServices": "governed-graphics-preview",
     "customerPortal": "authenticated-preview",
     "neuralArtwork": "public-static-preview-private-generation",
     "video": "public-motion-study-premiere-gated"
