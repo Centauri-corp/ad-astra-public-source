@@ -176,6 +176,31 @@
         "arxiv-neural-animation",
         "google-fonts-dm-sans-manrope"
       ]
+    },
+    "atlasUniversal": {
+      "route": "/atlas/",
+      "contract": "ad-astra/atlas-universal-platform/v1",
+      "status": "public-visual-preview",
+      "domains": [
+        "space-earth",
+        "arts-culture",
+        "medical-health",
+        "science",
+        "engineering",
+        "geotechnology",
+        "education",
+        "law-civic",
+        "economics",
+        "environment",
+        "technology",
+        "accessibility"
+      ],
+      "interaction": "explicit-domain-selection",
+      "renderer": "css-neural-field",
+      "fallback": "accessible-domain-list",
+      "liveTelemetry": false,
+      "tenantDataInPublicScene": false,
+      "externalRuntimeGraphics": false
     }
   },
   "seo": {
