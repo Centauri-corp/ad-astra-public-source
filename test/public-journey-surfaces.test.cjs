@@ -7,7 +7,8 @@ const path=require('node:path');
 const surfaces=[
   ['about','arrival'],['agent','intelligence'],['company','arrival'],['film','arrival'],
   ['markets','arrival'],['platform-preview','arrival'],['pricing','arrival'],['services','arrival'],
-  ['knowledge','intelligence'],['life','life'],['products','products'],['workspace','workspace']
+  ['knowledge','intelligence'],['life','life'],['products','products'],['workspace','workspace'],
+  ['journey','arrival'],['scientific','products']
 ];
 
 test('public surfaces share one governed journey navigation',()=>{
