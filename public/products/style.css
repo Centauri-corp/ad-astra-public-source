@@ -16,3 +16,21 @@
 #stage-graphics-toggle[aria-pressed="true"]{border-color:#e9c990;color:#e9c990}
 #stage-graphics-status{color:#98b4c0;font-size:11px;line-height:1.6;max-width:36ch}
 @media(prefers-reduced-motion:reduce){.universal-stage-webgl{display:none}}
+
+/* Scientific 3D+time prototype: one cinematic field, not a dashboard of cards. */
+.scientific-lab{padding:clamp(48px,7vw,100px) 0;border-top:1px solid #9bdfe328}
+.scientific-lab-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.75fr);gap:clamp(20px,3vw,48px);align-items:center;margin-top:28px}
+.scientific-canvas-shell{background:radial-gradient(ellipse at 65% 45%,#15415d,#061522 70%);border:1px solid #9bdfe33c;min-width:0;overflow:hidden}
+#scientific-surface{display:block;width:100%;height:clamp(340px,39vw,550px)}
+.scientific-console h3{font-size:clamp(22px,2.7vw,33px);font-weight:500;margin:10px 0}
+.scientific-console p{font-size:13px;line-height:1.7;color:#afc8d4}
+.scientific-console label{display:block;margin-top:25px;font-size:13px;color:#e9c990}
+#scientific-time{width:100%;margin:14px 0;accent-color:#9bdfe3;min-height:28px}
+.scientific-actions{display:flex;gap:10px;margin:8px 0 12px}
+.scientific-actions button,#scientific-animation{border:1px solid #9bdfe369;min-height:44px;padding:10px 15px;background:#102b40;color:#eaf2f5;cursor:pointer;font:500 12px Manrope,system-ui,sans-serif}
+.scientific-actions button:hover,#scientific-animation:hover{border-color:#e9c990}
+.scientific-actions button:focus-visible,#scientific-animation:focus-visible,#scientific-time:focus-visible{outline:3px solid #9bdfe3;outline-offset:3px}
+#scientific-animation[aria-pressed=true]{border-color:#e9c990}
+.scientific-console .scientific-disclaimer{font-size:11px;color:#ddbe8d}
+@media(max-width:840px){.scientific-lab-layout{grid-template-columns:1fr}#scientific-surface{height:380px}}
+@media(max-width:470px){#scientific-surface{height:300px}.scientific-actions{flex-wrap:wrap}}
