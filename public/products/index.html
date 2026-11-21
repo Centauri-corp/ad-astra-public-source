@@ -12,6 +12,8 @@
 <script src="/graphics/core.js" defer></script>
 <script src="/graphics/atlas-controller.js" defer></script>
 <script src="graphics-adapter.js" defer></script>
+<script src="/scientific/scene-model.js" defer></script>
+<script src="/scientific/viewer.js" defer></script>
 <link rel="stylesheet" href="/journey/style.css">
 <script src="/journey/continuity.js" defer></script>
 <script src="/journey/navigation.js" defer></script>
@@ -52,6 +54,24 @@
 <div class="domain-map" aria-label="Twelve knowledge domains">
 <span>Space &amp; Earth</span><span>Arts &amp; Culture</span><span>Medical &amp; Health</span><span>Science</span><span>Engineering</span><span>Geotechnology</span><span>Education</span><span>Law &amp; Civic</span><span>Economics</span><span>Environment</span><span>Technology</span><span>Accessibility</span>
 </div>
+</section>
+<section class="scientific-lab" aria-labelledby="scientific-title">
+<div class="section-head"><div><p class="eyebrow">03 / SCIENTIFIC 3D + TIME</p><h2 id="scientific-title">Explore a model.<br><em>Change the perspective.</em></h2></div><p>This is a synthetic scientific graphics prototype demonstrating navigable spatial geometry and a time dimension. No measured Earth or geological datasets are displayed.</p></div>
+<div class="scientific-lab-layout">
+<div class="scientific-canvas-shell">
+<canvas id="scientific-surface" role="img" aria-label="Projected 3D synthetic surface grid with changing elevation across nine time states. Numerical description updates below."></canvas>
+</div>
+<div class="scientific-console">
+<p class="eyebrow">DATA PROVENANCE / SYNTHETIC</p>
+<h3>Interactive scientific field</h3>
+<p>Rotate the camera and change time to inspect a reproducible sample surface. This prototype establishes the visualization interaction contract; it is not a simulation of a real physical event.</p>
+<label for="scientific-time">Time step: <output id="scientific-time-value" for="scientific-time">0</output> of 8</label>
+<input id="scientific-time" type="range" min="0" max="8" step="1" value="0">
+<div class="scientific-actions"><button type="button" id="scientific-left">Rotate left</button><button type="button" id="scientific-right">Rotate right</button></div>
+<button type="button" id="scientific-animation" aria-pressed="false">Play time evolution</button>
+<p id="scientific-surface-caption" role="status" aria-live="polite">Synthetic model preview. Spatial and numerical controls are available without animation.</p>
+<p class="scientific-disclaimer">Synthetic demonstration · normalized illustrative units · no real-world measurements or geographic coordinates.</p>
+</div></div>
 </section>
 <p class="next-journey-wrap"><a data-next-journey href="/workspace/">Continue to customer workspace →</a></p>
 </main>
