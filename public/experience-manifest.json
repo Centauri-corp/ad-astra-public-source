@@ -179,8 +179,8 @@
     },
     "atlasUniversal": {
       "route": "/atlas/",
-      "contract": "ad-astra/atlas-universal-platform/v1",
-      "status": "public-visual-preview",
+      "contract": "ad-astra/atlas-universal-platform/v1.1",
+      "status": "continuous-public-visual-preview",
       "domains": [
         "space-earth",
         "arts-culture",
@@ -196,11 +196,19 @@
         "accessibility"
       ],
       "interaction": "explicit-domain-selection",
-      "renderer": "css-neural-field",
+      "renderer": "canvas-neural-journey",
       "fallback": "accessible-domain-list",
       "liveTelemetry": false,
       "tenantDataInPublicScene": false,
-      "externalRuntimeGraphics": false
+      "externalRuntimeGraphics": false,
+      "journeyStages": [
+        "arrive",
+        "orient",
+        "connect",
+        "understand",
+        "continue"
+      ],
+      "singleJourney": true
     }
   },
   "seo": {
