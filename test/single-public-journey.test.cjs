@@ -35,3 +35,11 @@ test('Life entry integrates public-only journey scripts and next-step link',()=>
  assert.match(adapter,/replaceChildren\(nav\)/);
  assert.doesNotMatch(adapter,/fetch\(|localStorage|stripe|supabase|checkout|eval\(/i);
 });
+
+test('graphics products destination uses canonical universal stage, not services market landing',()=>{
+  assert.equal(journey.getStep('products').href,'/products/');
+  const html=fs.readFileSync(path.join(__dirname,'../public/products/index.html'),'utf8');
+  assert.match(html,/id="universal-stage"/);
+  const life=fs.readFileSync(path.join(__dirname,'../public/life/index.html'),'utf8');
+  assert.match(life,/data-next-journey href="\/products\/"/);
+});
