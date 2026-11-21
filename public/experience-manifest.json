@@ -105,6 +105,35 @@
       "renderer": "static-css-or-scene-adapter",
       "fallback": "accessible-text-and-static-orbit",
       "liveTelemetry": false
+    },
+    "humanToHuman": {
+      "route": "/",
+      "status": "guided-public-preview",
+      "journey": [
+        "arrive",
+        "speak-or-type",
+        "choose-domain",
+        "receive-local-response",
+        "continue-to-workspace-or-products"
+      ],
+      "neuralInterface": "static-neural-oracle",
+      "voice": {
+        "activation": "explicit-user-action",
+        "recognition": "browser-capability-optional",
+        "response": "local-speech-synthesis-preview",
+        "liveProvider": false
+      },
+      "domainShortcuts": [
+        "daily-life",
+        "research",
+        "learning",
+        "work-markets",
+        "creative-direction",
+        "explore"
+      ],
+      "fallback": "typed-input-and-accessible-text",
+      "tenantDataInPublicScene": false,
+      "telemetry": false
     }
   },
   "seo": {
