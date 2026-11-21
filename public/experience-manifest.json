@@ -74,7 +74,7 @@
       "route": "/products/",
       "contract": "ad-astra/products-solutions-scene/v1",
       "atlas": "ad-astra/products-solutions-atlas/v1",
-      "status": "staging-preview",
+      "status": "universal-stage-preview",
       "directions": [
         "beyond-physics",
         "astra-lumen",
@@ -84,6 +84,27 @@
       "activation": "explicit",
       "staticFallback": true,
       "tenantDataInPublicScene": false
+    },
+    "universalStage": {
+      "route": "/products/",
+      "domains": [
+        "space-earth",
+        "arts-culture",
+        "medical-health",
+        "science",
+        "engineering",
+        "geotechnology",
+        "education",
+        "law-civic",
+        "economics",
+        "environment",
+        "technology",
+        "accessibility"
+      ],
+      "interaction": "explicit-tab-selection",
+      "renderer": "static-css-or-scene-adapter",
+      "fallback": "accessible-text-and-static-orbit",
+      "liveTelemetry": false
     }
   },
   "seo": {
