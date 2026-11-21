@@ -5,7 +5,7 @@
     { id: "arrival", label: "Earth and beyond", href: "/" },
     { id: "intelligence", label: "Explore intelligence", href: "/knowledge/" },
     { id: "life", label: "Life intelligence", href: "/life/" },
-    { id: "products", label: "Products and solutions", href: "/services/" },
+    { id: "products", label: "Products and solutions", href: "/products/" },
     { id: "workspace", label: "Customer workspace", href: "/workspace/" }
   ]);
   function getStep(id) { return steps.find(s => s.id === id) || null; }
