@@ -96,7 +96,9 @@
       gl.uniform1f(uniforms.time,now*.001);
       const direction=stage.dataset.motif||"";
       const motif=["orbital-knowledge-field","luminous-neural-core","responsive-signal-lattice","approval-control-plane"].indexOf(direction);
-      gl.uniform1f(uniforms.motif,Math.max(0,motif));
+      const systemIndex=Number(stage.dataset.graphicsSystem);
+      const canonicalSystem=Number.isSafeInteger(systemIndex)&&systemIndex>=0&&systemIndex<7?systemIndex:0;
+      gl.uniform1f(uniforms.motif,Math.max(0,motif)+canonicalSystem*.31);
       gl.drawArrays(gl.TRIANGLES,0,3);
     }
     frame=requestAnimationFrame(draw);
