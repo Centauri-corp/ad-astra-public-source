@@ -26,9 +26,9 @@
 <main>
 <div class="journey-navigation-host" data-journey-navigation data-current-journey="products"></div>
 <section class="hero" aria-labelledby="title">
-<div><p class="eyebrow">AD ASTRA / PRODUCTS &amp; SOLUTIONS</p><h1 id="title">Make the<br><em>whole system visible.</em></h1><p class="lead">A cinematic spatial stage for products, solution directions and the systems connecting them—designed for human understanding before activation.</p><a class="hero-cta" href="#universal-stage">Explore the Universal Stage ↓</a></div>
-<div class="hero-art" data-product-stage role="img" aria-label="A cinematic spatial stage representing products and solution relationships"><div class="cinematic-journey-host products-cinematic-host" data-cinematic-host data-cinematic-scene="1" aria-label="Interactive cinematic products and solutions stage">
-        <canvas class="cinematic-journey-canvas" data-cinematic-journey role="img" aria-label="Procedural 3D spatial model linking science, products and governed solutions. Drag to orbit and scroll to zoom."></canvas>
+<div><p class="eyebrow">AD ASTRA / PRODUCTS &amp; SOLUTIONS</p><h1 id="title">Make the<br><em>whole system visible.</em></h1><p class="lead">Explore four ways Ad Astra connects questions, learning, visual models and human review.</p><a class="hero-cta" href="#directions">Explore the four directions ↓</a></div>
+<div class="hero-art" data-product-stage role="group" aria-label="A cinematic spatial stage representing products and solution relationships"><div class="cinematic-journey-host products-cinematic-host" data-cinematic-host data-cinematic-scene="1" aria-label="Interactive cinematic products and solutions stage">
+        <canvas class="cinematic-journey-canvas" data-cinematic-journey role="img" aria-label="Procedural 3D spatial model linking science, products and governed solutions. Drag to orbit and Shift-scroll to zoom."></canvas>
         <div class="cinematic-journey-chrome" aria-hidden="true"><span><strong>UNIVERSAL STAGE / PRODUCTS + SOLUTIONS</strong></span><span>SPATIAL DATA LAYER</span></div>
         <div class="cinematic-journey-control-bar" aria-label="Choose products and solutions scene layer">
           <button type="button" data-cinematic-layer="0" aria-pressed="false">Arrival</button>
@@ -38,36 +38,12 @@
         <p class="cinematic-journey-status" data-cinematic-status role="status">Spatial scene loading · static fallback ready</p>
       </div><span class="core" aria-hidden="true"></span><span class="node n1" aria-hidden="true"></span><span class="node n2" aria-hidden="true"></span><span class="node n3" aria-hidden="true"></span><span class="hero-label" data-product-label>DISCOVERY / EXPLICIT PUBLIC PREVIEW</span></div>
 </section>
-<section class="atlas" aria-labelledby="atlas-title">
-<div class="section-head"><div><p class="eyebrow">01 / GRAPHICS ATLAS</p><h2 id="atlas-title">Four directions.<br>One visual language.</h2></div><p>Each surface has a clear role, provenance boundary and accessible static description. Motion and live intelligence remain opt-in.</p></div>
-<div class="grid">
-<article class="card"><span class="card-number">01</span><h3>Beyond Physics</h3><p>Connect questions, evidence and perspective across disciplines.</p><small>DISCOVERY / ORBITAL FIELD</small></article>
-<article class="card"><span class="card-number">02</span><h3>Astra Lumen</h3><p>Turn complex subjects into clearer, human-directed next steps.</p><small>LEARNING / LUMINOUS CORE</small></article>
-<article class="card"><span class="card-number">03</span><h3>Neural Visual Experience</h3><p>Make systems, patterns and possibilities easier to see.</p><small>VISUALIZATION / SIGNAL LATTICE</small></article>
-<article class="card"><span class="card-number">04</span><h3>Governed AI Workflows</h3><p>Move from intent to action through explicit controls and review.</p><small>OPERATIONS / CONTROL PLANE</small></article>
-</div>
-</section>
-<section id="universal-stage" class="universal-stage" aria-labelledby="stage-title">
-<div class="section-head"><div><p class="eyebrow">02 / UNIVERSAL STAGE</p><h2 id="stage-title">One platform.<br><em>Twelve ways in.</em></h2></div><p>Explore the governed knowledge domains through an explicit, accessible selection. No live telemetry or tenant data is used in this public preview.</p></div>
-<div data-graphics-systems class="graphics-systems-mount" aria-label="Graphics systems"></div>
-<p id="graphics-system-caption" class="graphics-system-caption" aria-live="polite">The canonical graphics system selection is available in this preview.</p>
-<div class="stage-layout">
-<nav class="stage-controls" aria-label="Products and solutions directions">
-<button type="button" data-product-direction="beyond-physics">Beyond Physics</button>
-<button type="button" data-product-direction="astra-lumen">Astra Lumen</button>
-<button type="button" data-product-direction="neural-visual-experience">Neural Visual Experience</button>
-<button type="button" data-product-direction="governed-workflows">Governed AI Workflows</button>
-</nav>
-<div class="stage-orbit" data-product-stage aria-live="polite"><span class="orbit-ring ring-a"></span><span class="orbit-ring ring-b"></span><span class="core"></span><span class="node n1"></span><span class="node n2"></span><span class="node n3"></span></div>
-<div class="stage-graphics-controls"><button type="button" id="stage-graphics-toggle" aria-pressed="false" aria-controls="universal-stage">Play optional graphics</button><p id="stage-graphics-status" role="status">Static graphics preview. Optional WebGL2 animation is off.</p></div>
-<div class="stage-readout"><p data-product-label>DISCOVERY / BEYOND PHYSICS</p><h3 data-product-title>Questions become navigable.</h3><p data-product-copy>Connect questions, evidence and perspective across disciplines.</p></div>
-</div>
-<div class="domain-map" aria-label="Twelve knowledge domains">
-<span>Space &amp; Earth</span><span>Arts &amp; Culture</span><span>Medical &amp; Health</span><span>Science</span><span>Engineering</span><span>Geotechnology</span><span>Education</span><span>Law &amp; Civic</span><span>Economics</span><span>Environment</span><span>Technology</span><span>Accessibility</span>
-</div>
-</section>
-<section class="scientific-lab" aria-labelledby="scientific-title">
-<div class="section-head"><div><p class="eyebrow">03 / SCIENTIFIC 3D + TIME</p><h2 id="scientific-title">Explore a model.<br><em>Change the perspective.</em></h2></div><p>This is a synthetic scientific graphics prototype demonstrating navigable spatial geometry and a time dimension. No measured Earth or geological datasets are displayed.</p></div>
+<section class="atlas" id="directions" aria-labelledby="atlas-title"><h2 id="atlas-title">What would you like to explore?</h2><details class="product-direction" name="product-direction" open data-product-direction="beyond-physics" data-motif="orbital-knowledge-field"><summary><span>Beyond Physics</span><small>discovery</small></summary><p>Connect questions, evidence and perspective across disciplines.</p><p class="example-question">“How do two sources explain the same observation?”</p><small>Concept preview</small></details>
+<details class="product-direction" name="product-direction" data-product-direction="astra-lumen" data-motif="luminous-neural-core"><summary><span>Astra Lumen</span><small>learning</small></summary><p>Turn complex subjects into clearer, human-directed next steps.</p><p class="example-question">“How would you explain this idea to someone learning it today?”</p><small>Concept preview</small></details>
+<details class="product-direction" name="product-direction" data-product-direction="neural-visual-experience" data-motif="responsive-signal-lattice"><summary><span>Neural Visual Experience</span><small>visualization</small></summary><p>Make systems, patterns and possibilities easier to see.</p><p class="example-question">“What changes in the surface when you advance time by one step?”</p><small>Synthetic demonstration</small></details>
+<details class="product-direction" name="product-direction" data-product-direction="governed-workflows" data-motif="approval-control-plane"><summary><span>Governed AI Workflows</span><small>operations</small></summary><p>Move from intent to action through explicit controls and review.</p><p class="example-question">“Which step in this process needs a person’s approval?”</p><small>Concept preview</small></details><a class="hero-cta" href="#science-preview">Try the scientific model ↓</a></section>
+<section class="scientific-lab" id="science-preview" aria-labelledby="scientific-title">
+<div class="section-head"><div><p class="eyebrow">Scientific preview</p><h2 id="scientific-title">Explore a model.<br><em>Change the perspective.</em></h2></div><p>Rotate the surface and compare nine time steps from the same synthetic dataset.</p></div>
 <div class="scientific-lab-layout">
 <div class="scientific-canvas-shell">
 <canvas id="scientific-surface" role="img" aria-label="Projected 3D synthetic surface grid with changing elevation across nine time states. Numerical description updates below."></canvas>
@@ -84,9 +60,24 @@
 <p class="scientific-disclaimer">Synthetic demonstration · normalized illustrative units · no real-world measurements or geographic coordinates.</p>
 </div></div>
 </section>
+<details class="technical-detail"><summary>Explore the graphics and knowledge domains</summary><section id="universal-stage" class="universal-stage" aria-labelledby="stage-title">
+<div class="section-head"><div><p class="eyebrow">02 / UNIVERSAL STAGE</p><h2 id="stage-title">One platform.<br><em>Twelve ways in.</em></h2></div><p>Select a graphics system to inspect its description. The list below shows the twelve knowledge domains.</p></div>
+<div data-graphics-systems class="graphics-systems-mount" aria-label="Graphics systems"></div>
+<p id="graphics-system-caption" class="graphics-system-caption" aria-live="polite">The canonical graphics system selection is available in this preview.</p>
+<div class="stage-layout">
+
+<div class="stage-orbit" data-product-stage aria-live="polite"><span class="orbit-ring ring-a"></span><span class="orbit-ring ring-b"></span><span class="core"></span><span class="node n1"></span><span class="node n2"></span><span class="node n3"></span></div>
+<div class="stage-graphics-controls"><button type="button" id="stage-graphics-toggle" aria-pressed="false" aria-controls="universal-stage">Play optional graphics</button><p id="stage-graphics-status" role="status">Static graphics preview. Optional WebGL2 animation is off.</p></div>
+<div class="stage-readout"><p data-product-label>DISCOVERY / BEYOND PHYSICS</p><h3 data-product-title>Questions become navigable.</h3><p data-product-copy>Connect questions, evidence and perspective across disciplines.</p></div>
+</div>
+<div class="domain-map" aria-label="Twelve knowledge domains">
+<span>Space &amp; Earth</span><span>Arts &amp; Culture</span><span>Medical &amp; Health</span><span>Science</span><span>Engineering</span><span>Geotechnology</span><span>Education</span><span>Law &amp; Civic</span><span>Economics</span><span>Environment</span><span>Technology</span><span>Accessibility</span>
+</div>
+</section>
+</details>
 <p class="next-journey-wrap"><a data-next-journey href="/workspace/">Continue to customer workspace →</a></p>
 </main>
-<footer class="governance"><span><strong>GRAPHICS CONTRACT v1.0.0</strong><br>conceptual direction · no tenant data · no live claims</span><span>STATIC FALLBACK READY<br>REDUCED MOTION SAFE</span></footer>
+<footer class="governance"><a href="/">Ad Astra</a><span>Products &amp; Solutions preview</span></footer>
 </div>
 </body>
 </html>

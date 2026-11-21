@@ -34,3 +34,16 @@
 .scientific-console .scientific-disclaimer{font-size:11px;color:#ddbe8d}
 @media(max-width:840px){.scientific-lab-layout{grid-template-columns:1fr}#scientific-surface{height:380px}}
 @media(max-width:470px){#scientific-surface{height:300px}.scientific-actions{flex-wrap:wrap}}
+
+.product-direction { padding:1.1rem 0;border-bottom:1px solid var(--line) }
+.product-direction summary,.technical-detail>summary { cursor:pointer;min-height:44px;padding:.5rem 0;color:var(--ink) }
+.product-direction summary span { font-size:clamp(1.3rem,3vw,2rem);margin-right:1em }
+.product-direction small { color:var(--cyan);text-transform:capitalize }
+.product-direction p { max-width:55ch;line-height:1.65 }
+.product-direction .example-question { color:var(--gold) }
+.atlas>.hero-cta { display:inline-block;margin-top:2rem }
+.technical-detail { border-block:1px solid var(--line);padding:1rem 0 }
+.next-journey-wrap { padding:2rem 0 }
+.hero-art .products-cinematic-host { z-index:4 }
+.hero-art .cinematic-journey-chrome { display:none }
+.hero-art .cinematic-journey-status { bottom:70px;left:18px;text-align:left }

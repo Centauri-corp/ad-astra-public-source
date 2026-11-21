@@ -142,7 +142,7 @@
     });
     setStatus(source==='scroll'
       ? labels[scene]+' · scroll-linked scene'
-      : labels[scene]+' · drag to orbit · scroll to zoom');
+      : labels[scene]+' · drag to orbit · Shift-scroll to zoom');
     draw(performance.now());
   };
   const compile=(type,source)=>{
@@ -178,7 +178,7 @@
   };
   const render=(now)=>{
     if(!frame)return;
-    if(!document.hidden&&visible&&!reduced.matches&&!saveData)draw(now);
+    if(!document.hidden&&visible&&!document.body.classList.contains('paused')&&!reduced.matches&&!saveData)draw(now);
     frame=requestAnimationFrame(render);
   };
   const start=()=>{
@@ -223,11 +223,13 @@
       const endDrag=event=>{dragging=false;canvas.releasePointerCapture?.(event.pointerId);canvas.classList.remove('is-dragging');};
       canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);
       canvas.addEventListener('wheel',event=>{
+        if (!event.shiftKey) return;
         event.preventDefault();zoom=clamp(zoom-event.deltaY*0.0008,0.72,1.42);draw(performance.now());
       },{passive:false});
-      buttons.forEach(button=>button.addEventListener('click',()=>updateScene(button.dataset.cinematicLayer)));
+      
       if('ResizeObserver' in window)new ResizeObserver(resize).observe(host);else window.addEventListener('resize',resize,{passive:true});
-      const sections=[...document.querySelectorAll('[data-scene],[data-cinematic-scene]')];
+      if ('IntersectionObserver' in window) new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(host);
+      const sections=[...document.querySelectorAll('[data-scene]')];
       if('IntersectionObserver' in window&&sections.length){
         const observer=new IntersectionObserver(entries=>{
           const current=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
@@ -246,5 +248,20 @@
       setStatus('WebGL2 is unavailable. Static cinematic fallback remains available.');
     }
   };
-  start();
+  setStatus('Still image. Select a layer to explore the scene.');
+  for (const button of buttons) {
+    button.addEventListener('click', () => {
+      if (reduced.matches || saveData) {
+        setStatus('Still image shown for your motion or data preference.');
+        return;
+      }
+      if (!gl && !host.classList.contains('cinematic-fallback')) start();
+      if (host.classList.contains('cinematic-ready') && !host.classList.contains('cinematic-fallback')) {
+        updateScene(button.dataset.cinematicLayer);
+      } else {
+        buttons.forEach(control => { control.disabled = true; });
+        setStatus('Still image. Interactive graphics are unavailable on this device.');
+      }
+    });
+  }
 })();

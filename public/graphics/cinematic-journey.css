@@ -34,3 +34,9 @@
   .hero .cinematic-journey-status{left:25px;right:auto;bottom:58px}
 }
 @media(prefers-reduced-motion:reduce){.cinematic-journey-canvas{cursor:default}.cinematic-journey-control-bar button{transition:none}}
+/* Page scrolling is the default gesture. The scene controls are independently focusable. */
+.cinematic-journey-host .cinematic-journey-control-bar { pointer-events:auto }
+.cinematic-journey-canvas { touch-action:pan-y }
+.hero .cinematic-journey-chrome { display:none }
+.cinematic-journey-control-bar button { min-height:44px }
+.hero .cinematic-journey-status { max-width:32ch }
