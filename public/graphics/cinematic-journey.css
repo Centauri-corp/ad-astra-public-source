@@ -40,3 +40,7 @@
 .hero .cinematic-journey-chrome { display:none }
 .cinematic-journey-control-bar button { min-height:44px }
 .hero .cinematic-journey-status { max-width:32ch }
+
+/* The reviewed scene registry supplies the fallback art while the spatial renderer loads. */
+.cinematic-journey-host[data-evolution-scene]{background-image:linear-gradient(100deg,#020610e8 0%,#061a2b66 46%,#0206109e 100%),var(--evolution-art);}
+.cinematic-journey-host.cinematic-fallback[data-evolution-scene]{background-image:linear-gradient(100deg,#020610b5 0%,#061a2b44 46%,#02061074 100%),var(--evolution-art);}
