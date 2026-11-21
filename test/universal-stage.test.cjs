@@ -6,11 +6,14 @@ const path=require('node:path');
 
 test('Universal Stage declares twelve governed knowledge domains',()=>{
   const manifest=JSON.parse(fs.readFileSync(path.join(__dirname,'..','public','experience-manifest.json'),'utf8'));
-  const domains=manifest.visualArchitecture.universalStage.domains;
-  assert.equal(domains.length,12);
-  assert.equal(manifest.visualArchitecture.universalStage.liveTelemetry,false);
-  assert.equal(manifest.visualArchitecture.universalStage.fallback,'accessible-text-and-static-orbit');
+  const stage=manifest.visualArchitecture.universalStage;
+  assert.equal(stage.domains.length,12);
+  assert.equal(stage.liveTelemetry,false);
+  assert.equal(stage.fallback,'accessible-text-and-static-orbit');
+
   const products=fs.readFileSync(path.join(__dirname,'..','public','products','index.html'),'utf8');
-  assert.equal(products.includes('\\\\n<script'),false);
-  assert.equal((products.match(/<span>[^<]+<\\/span>/g)||[]).filter(x=>x.includes('&amp;')||x.includes('Science')||x.includes('Engineering')||x.includes('Education')).length>=4,true);
+  assert.equal(products.includes('\\n<script'),false);
+  for(const label of ['Space &amp; Earth','Arts &amp; Culture','Medical &amp; Health','Science','Engineering','Geotechnology','Education','Law &amp; Civic','Economics','Environment','Technology','Accessibility']){
+    assert.equal(products.includes('<span>'+label+'</span>'),true);
+  }
 });
