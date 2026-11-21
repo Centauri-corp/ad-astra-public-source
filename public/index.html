@@ -57,6 +57,24 @@
     #lumen-result { max-width:min(34rem,100%);background:#061726ee;padding:.8rem 1rem;border-left:2px solid #dcb57e; }
     #lumen-status:empty { margin:0; }
     @media(max-width:760px) { .lumen-portrait { left:auto;right:-20vw;top:5%;width:74vw;opacity:.42;transform:translateY(-40%); } }
+    .hero #lumen-interaction { top:5%;left:7.1%;right:7.1%;max-width:630px; }
+    .hero #lumen-interaction h1 { font-size:clamp(45px,5vw,70px);line-height:1.08;margin:0 0 22px; }
+    #lumen-interaction .lumen-links { margin-top:12px; }
+    #lumen-interaction .lumen-portrait { left:clamp(620px,58vw,900px);top:48%; }
+    #lumen-interaction #lumen-result { margin-top:12px; }
+    @media(max-width:900px) {
+      .hero #lumen-interaction { left:6%;right:6%;top:5%;max-width:60%; }
+      .hero #lumen-interaction h1 { font-size:clamp(42px,6vw,62px); }
+      #lumen-interaction .lumen-portrait { left:76%;width:60vw; }
+    }
+    @media(max-width:640px) {
+      .hero { min-height:790px;height:auto; }
+      .hero #lumen-interaction { top:28px;left:25px;right:25px;max-width:none; }
+      .hero #lumen-interaction h1 { font-size:clamp(39px,10vw,52px);max-width:80%; }
+      #lumen-interaction .lumen-portrait { left:auto;right:-22vw;top:130px;width:73vw;opacity:.37; }
+      #lumen-interaction .lumen-entry { max-width:100%; }
+      .hero .cinematic-journey-control-bar { bottom:100px; }
+    }
     @media(prefers-reduced-motion:reduce) { .lumen-portrait,.lumen-portrait i { animation:none!important;transition:none!important; } }
   </style>
 </head>
