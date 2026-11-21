@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="style.css">
 <script src="app.js" defer></script>
+<script src="graphics-adapter.js" defer></script>
 </head>
 <body>
 <div class="shell">
@@ -37,6 +38,7 @@
 <button type="button" data-product-direction="governed-workflows">Governed AI Workflows</button>
 </nav>
 <div class="stage-orbit" data-product-stage aria-live="polite"><span class="orbit-ring ring-a"></span><span class="orbit-ring ring-b"></span><span class="core"></span><span class="node n1"></span><span class="node n2"></span><span class="node n3"></span></div>
+<div class="stage-graphics-controls"><button type="button" id="stage-graphics-toggle" aria-pressed="false" aria-controls="universal-stage">Play optional graphics</button><p id="stage-graphics-status" role="status">Static graphics preview. Optional WebGL2 animation is off.</p></div>
 <div class="stage-readout"><p data-product-label>DISCOVERY / BEYOND PHYSICS</p><h3 data-product-title>Questions become navigable.</h3><p data-product-copy>Connect questions, evidence and perspective across disciplines.</p></div>
 </div>
 <div class="domain-map" aria-label="Twelve knowledge domains">
