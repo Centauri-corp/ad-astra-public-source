@@ -21,3 +21,17 @@ test('journey cannot confer payment, release, deployment or model authority',()=
  assert.doesNotMatch(source,/fetch\(|localStorage|checkout|stripe|supabase|secret|modelCall|eval\(/i);
  assert.equal(journey.getStep('__proto__'),null);
 });
+
+test('Life entry integrates public-only journey scripts and next-step link',()=>{
+ const html=fs.readFileSync(path.join(__dirname,'../public/life/index.html'),'utf8');
+ const css=fs.readFileSync(path.join(__dirname,'../public/life/style.css'),'utf8');
+ assert.match(html,/src="\/journey\/continuity\.js"/);
+ assert.match(html,/src="\/journey\/navigation\.js"/);
+ assert.match(html,/data-current-journey="life"/);
+ assert.match(html,/data-next-journey/);
+ assert.match(css,/aria-current="step"/);
+ assert.match(html,/name="robots" content="noindex,follow"/);
+ const adapter=fs.readFileSync(path.join(__dirname,'../public/journey/navigation.js'),'utf8');
+ assert.match(adapter,/replaceChildren\(nav\)/);
+ assert.doesNotMatch(adapter,/fetch\(|localStorage|stripe|supabase|checkout|eval\(/i);
+});
