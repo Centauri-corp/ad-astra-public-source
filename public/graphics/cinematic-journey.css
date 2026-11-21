@@ -44,3 +44,9 @@
 /* The reviewed scene registry supplies the fallback art while the spatial renderer loads. */
 .cinematic-journey-host[data-evolution-scene]{background-image:linear-gradient(100deg,#020610e8 0%,#061a2b66 46%,#0206109e 100%),var(--evolution-art);}
 .cinematic-journey-host.cinematic-fallback[data-evolution-scene]{background-image:linear-gradient(100deg,#020610b5 0%,#061a2b44 46%,#02061074 100%),var(--evolution-art);}
+
+/* Keep visual controls and context separate in reviewed cinematic pages. */
+.products-cinematic-host .cinematic-journey-control-bar{bottom:22px;left:20px}
+.products-cinematic-host .cinematic-journey-status{bottom:80px;left:20px;right:20px;max-width:50ch;text-align:left}
+.hero-art:has(.products-cinematic-host)>.hero-label{display:none}
+@media(max-width:640px){.products-cinematic-host .cinematic-journey-control-bar{left:14px;bottom:18px;gap:4px}.products-cinematic-host .cinematic-journey-status{left:14px;right:14px;bottom:84px}.hero .hero-content{max-width:calc(100% - 36px)}}
