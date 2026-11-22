@@ -78,3 +78,14 @@ test('we do not mistake existing concept footage for an original approved flagsh
  assert.equal(vercel.git.deploymentEnabled,false);
  assert.equal(media.productionGates.includes('independent-Supabase-release-case'),true);
 });
+
+test('cinematic camera pass uses source-owned GPU imagery and no autonomous render loop',()=>{
+ assert.match(director,/function syncCameraPass\(\)/);
+ assert.match(director,/requestAnimationFrame\(syncCameraPass\)/);
+ assert.match(director,/addEventListener\('scroll', scheduleCameraPass, \{passive: true\}\)/);
+ assert.match(director,/disabled = reduced\.matches \|\| saveData \|\| document\.hidden/);
+ assert.match(style,/CRC CINEMATIC CAMERA PASS 2026-11-22/);
+ assert.match(style,/--cinema-lens-scale/);
+ assert.match(style,/@media\(forced-colors:active\)/);
+ assert.doesNotMatch(director,/setInterval\(|setTimeout\(|fetch\(/);
+});
