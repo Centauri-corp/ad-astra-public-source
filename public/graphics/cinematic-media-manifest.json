@@ -1,0 +1,47 @@
+{
+  "schema": "crc.ad-astra.cinematic-website-delivery/v1",
+  "status": "preview-original-media-rights-unverified",
+  "publicDomainPromotion": false,
+  "originalFileSourcesOnly": true,
+  "videoAuditedAsPremiumFlagship": false,
+  "homepage": {
+    "source": "/assets/ad-astra-horizon-motion.mp4",
+    "poster": "/assets/ad-astra-runway-horizon-poster.jpg",
+    "mode": "film-first",
+    "start": "visible-and-permitted-muted",
+    "caption": "Decorative silent film with descriptive page content; main full film has captions",
+    "fallback": "poster-first",
+    "alternate": "opt-in-WebGL2-synthetic-scene"
+  },
+  "fullFilm": {
+    "route": "/experience/",
+    "source": "/assets/ad-astra-horizon-motion.mp4",
+    "captions": "/assets/ad-astra-horizon-motion.vtt",
+    "playback": "user-opt-in-modal-native-controls"
+  },
+  "creativeReferences": [
+    "Original Ad Astra material only",
+    "DJI RS5 product-led narrative pattern, not copied",
+    "SpaceX mission-scale presentation pattern, not copied",
+    "User-supplied documentary reference is not for reuse"
+  ],
+  "approvedReferenceHomepageSha": "dfe05527e42b75ef1e4f785c1edb46cda75fa42b",
+  "runtimeOwner": {
+    "filmVisibility": "public/app.js",
+    "filmSpatialHandoff": "public/graphics/cinematic-director.js",
+    "webgl": "public/graphics/cinematic-journey.js",
+    "sceneRegistry": "public/graphics/evolution-manifest.json"
+  },
+  "caveats": [
+    "These existing MP4s are motion studies, not the planned 90-second photoreal flagship film",
+    "No licensed external footage was imported",
+    "Source rights and final public release have not been accepted"
+  ],
+  "productionGates": [
+    "original-media-rights-evidence",
+    "exact-sha-qa-and-multiple-device-visual-acceptance",
+    "production-build-staged-without-domains",
+    "independent-Supabase-release-case",
+    "rollback-and-customer-provider-security"
+  ]
+}
