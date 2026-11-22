@@ -16,7 +16,7 @@ test('shared cinematic journey is the first-class staging visual',()=>{
     assert.match(html,/data-cinematic-status/);
     assert.match(html,/Drag to orbit/);
   }
-  assert.match(home,/From Earth\\.<br><em>Beyond the expected\\./);
+  assert.match(home,/From Earth[.]<br><em>Beyond the expected[.]/);
   assert.match(home,/data-cinema-mode="film"/);
   assert.match(home,/data-cinema-switch/);
   assert.match(products,/whole system visible/);
