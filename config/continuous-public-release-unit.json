@@ -50,7 +50,8 @@
   ],
   "expandedRoutes": [
     "/journey/",
-    "/scientific/"
+    "/scientific/",
+    "/experience/"
   ],
   "sceneLayers": [
     "arrival",
@@ -70,7 +71,10 @@
     "public/graphics/cinematic-journey.js",
     "public/graphics/evolution.js",
     "public/scientific/scene-model.js",
-    "public/scientific/viewer.js"
+    "public/scientific/viewer.js",
+    "public/experience/index.html",
+    "public/experience/experience.css",
+    "public/experience/experience.js"
   ],
   "pendingProductionGates": [
     "paired exact artifact fingerprint",
@@ -87,5 +91,24 @@
     "noSyntheticReceiptsAsEvidence": true,
     "noCustomerActivations": true,
     "noAutomaticDomainPromotion": true
+  },
+  "originalCinematicExperience": {
+    "route": "/experience/",
+    "scope": "review-only",
+    "model": "original Ad Astra poster-first film and human-directed scene journey",
+    "reviewSourceSha": "dfe05527e42b75ef1e4f785c1edb46cda75fa42b",
+    "visuals": "original repo assets (media-rights attestation pending)",
+    "interactions": [
+      "opt-in accessible modal player",
+      "reduced-motion static hero",
+      "three chapter navigation",
+      "embedded synthetic 3D control plane",
+      "four product-direction visual selections"
+    ],
+    "providerExecution": false,
+    "filmContentFinalApproval": false,
+    "allDeviceQAComplete": false,
+    "finalProductionAccepted": false,
+    "approvalRule": "Visual approval of original homepage commit is preserved; this changed creative route needs exact-SHA QA and cannot imply release GO"
   }
 }
