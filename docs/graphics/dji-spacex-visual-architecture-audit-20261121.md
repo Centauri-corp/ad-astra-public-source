@@ -75,3 +75,22 @@ Audit date: 2026-11-21 (US Pacific). Scope: public-facing reference surfaces onl
 - PASS (only with evidence): verified original footage and rights, differentiated shots, correct film cutdowns, real interactive 3D where claimed, coherent transitions, desktop/mobile visual review, product proof, technical & security receipts, exact-artifact release approval.
 
 This file is a coding and visual acceptance contract for the EXISTING branch. It is not an assertion that the unrendered film or public deployment has passed.
+
+
+## Follow-up live audit — SpaceX complete launch/vehicle/mission journey
+- Independent read-only browser run completed: https://agent.tinyfish.ai/runs/265fea60-8790-46cd-9b4b-d80d1edb4a44
+- `/launches` showed a dynamic upcoming mission, ongoing missions T+ timer, summary statistics (717 completed missions / 679 landings / 641 reflights in that inspected page state), and a completed-mission table (740 result rows) with search and filters for mission/vehicle/sites/dates. These numbers are *transient observed UI values*, not timeless public facts or officially reconciled counts. Do not repeat them as source of truth.
+- `/launches/nrol136` displayed launch and backup windows, launchpad, prior booster flights, precise countdown events, flight event timings, landing-area infographic, sonic boom warnings and a webcast action. **Evidence and safety notices are integrated with the hero** rather than isolated documentation.
+- `/vehicles/falcon-9` showed a detailed system/specifications story and a downloadable 2025 Falcon User's Guide PDF; `/vehicles/falcon-heavy` similarly had launch vehicle engineering specs and downloadable guide. `/vehicles/dragon` covered crew system dimensions, overview/launch-abort/attitude control tabs, engines, parachute testing and linked videos.
+- `/humanspaceflight/overview` connected sensory mission footage, destinations, IVA/EVA suit tabs, mission/history timeline and `JOIN A MISSION` inquiry (NOT an instant reservation).
+- **Observed rendering anomaly:** In one inspected desktop session the missions/landings/reflights statistic tiles displayed `0` on multiple vehicle pages while the Launches page displayed populated values. This is not enough evidence to diagnose a SpaceX backend defect; could be lazy-load/client timing. Use as an Ad Astra regression scenario: avoid misleading zeros during async data loading; show a skeleton/last-verified timestamp/state and expose error states.
+- No mobile viewport or Web Vitals lab measurement was performed by those browser runs. No claim of validated SpaceX mobile/keyboard/performance compliance.
+- **Original business takeaway:** SpaceX landing pages are *mission-to-proof*; DJI product pages are *feature-to-proof*; both keep dense engineering/support data available without replacing the cinematic focal subject. Ad Astra must implement *visual phenomenon → actual product interaction → provenance/claim → system availability → governed conversion*.
+
+## Acceptance checklist: non-negotiable observable checks
+- Public site must not show live-looking times or fake operational counters from static/synthetic fixtures, nor silently substitute "0" for unavailable data.
+- Provide provenance-aware metrics payload contracts (value/unit/asOf/source/status), with error/unknown states that remain visually distinct.
+- Each flagship product needs its own evidence path: a named model/interaction, origin, data source, what is real vs synthetic, limitations, and an appropriate next action.
+- Video must be an original owned work, measured asset bytes and decoded quality; the 90-second film manifest alone does not prove it exists.
+- The homepage should retain cinematic original imagery while progressive interaction only starts on explicit user action or accessible screen-level affordance. Detailed catalog stays secondary, not removed.
+- Benchmark implementation may use Swiper or another accessible carousel, but observed class names do not validate which third-party version or internal JS architecture SpaceX/DJI use.
