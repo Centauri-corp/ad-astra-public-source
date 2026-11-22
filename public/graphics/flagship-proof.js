@@ -195,11 +195,15 @@
   }
   function governance(t){
     const rows=[['INTENT','INPUT'],['SCOPE','POLICY'],['HUMAN','REVIEW'],['EVIDENCE','RECEIPT']];
-    const s=Math.min((width-75)/(rows.length*1.18),height*.245),cy=height*.51;
-    const ox=(width-(rows.length-1)*s*1.18-s*.94)/2;
+    // A two-row storyboard avoids microscopic labels and off-screen cards on phones.
+    const compact=width<520;
+    const s=compact?Math.min((width-64)/2.52,height*.26):Math.min((width-75)/(rows.length*1.18),height*.245);
+    const cy=height*.51;
+    const ox=compact?(width-(s*2.08))/2:(width-(rows.length-1)*s*1.18-s*.94)/2;
     const progress=step===0?1:step===1?2:3;
     for(let i=0;i<4;i++){
-      const x=ox+i*s*1.18,y=cy-s*.47;
+      const x=compact?ox+(i%2)*s*1.18:ox+i*s*1.18;
+      const y=compact?height*.30+Math.floor(i/2)*s*1.08:cy-s*.47;
       const active=i<=progress;
       const color=i===2?'#eccb91':i===3?'#9bdccf':'#b9d9e9';
       const g=ctx.createLinearGradient(x,y,x+s,y+s);g.addColorStop(0,active?'#204456':'#0b2030');g.addColorStop(1,'#061522');
@@ -209,15 +213,15 @@
       text(x+12,y+30,String(i+1).padStart(2,'0'),14,color,'700');
       text(x+12,y+s*.59,rows[i][0],Math.max(10,Math.min(17,s*.14)),'#e0edf3','700');
       text(x+12,y+s*.77,rows[i][1],Math.max(9,Math.min(11,s*.10)),'#afcad5');
-      if(i!==3){
-        const ax=x+s*.95,bx=ax+s*.22,ay=cy;
+      if(i!==3 && (!compact || i%2===0)){
+        const ax=x+s*.95,bx=ax+s*.22,ay=compact?y+s*.47:cy;
         line(ax,ay,bx,ay,i<progress?'#f0d39a':'#627f90',.8,2);
         line(bx-8,ay-5,bx,ay,i<progress?'#f0d39a':'#627f90',.8,2);
         line(bx-8,ay+5,bx,ay,i<progress?'#f0d39a':'#627f90',.8,2);
       }
     }
-    if(step>=1)text(width*.5,cy+s*.8,'HUMAN REVIEW IS REQUIRED / NOT PERFORMED HERE',11,'#efd397','700','center');
-    if(step===2)text(width*.5,cy+s*1.02,'OUTPUT SHOWN IS A LOCAL EXAMPLE, NOT AN AUTHORIZED RECEIPT',10,'#b3d8dd','700','center');
+    if(step>=1&&!compact)text(width*.5,cy+s*.8,'HUMAN REVIEW IS REQUIRED / NOT PERFORMED HERE',11,'#efd397','700','center');
+    if(step===2&&!compact)text(width*.5,cy+s*1.02,'OUTPUT SHOWN IS A LOCAL EXAMPLE, NOT AN AUTHORIZED RECEIPT',10,'#b3d8dd','700','center');
     text(31,59,chapters[mode].readings[step],12,'#eacb91','700');
     text(31,82,'Permissions are only illustrated; production remains gated',11,'#a4c8d5');
   }
