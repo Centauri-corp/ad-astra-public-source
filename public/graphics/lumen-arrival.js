@@ -70,18 +70,24 @@
     };
     speechSynthesis.speak(words);
   });
-  const hero = panel.closest('.hero');
+  // The intelligence prompt can live in the secondary narrative, independent
+  // of the cinematic hero. Only attach spatial portrait movement when a portrait
+  // is intentionally present; never assume the form is inside .hero.
+  const motionHost = panel.closest('.lumen-intelligence-bridge') || panel.closest('.hero');
+  const portrait = panel.querySelector('.lumen-portrait');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  hero.addEventListener('pointermove', event => {
-    if (reduced.matches || event.pointerType !== 'mouse' || hero.querySelector('.motion')?.getAttribute('aria-pressed') === 'true') return;
-    const bounds = hero.getBoundingClientRect();
-    panel.style.setProperty('--lumen-yaw', ((event.clientX - bounds.left) / bounds.width - .5) * 18 + 'deg');
-    panel.style.setProperty('--lumen-pitch', (.5 - (event.clientY - bounds.top) / bounds.height) * 9 + 'deg');
-  });
-  const reset = () => {
-    panel.style.removeProperty('--lumen-yaw');
-    panel.style.removeProperty('--lumen-pitch');
-  };
-  hero.addEventListener('pointerleave', reset);
-  hero.querySelector('.motion')?.addEventListener('click', reset);
+  if (motionHost && portrait) {
+    motionHost.addEventListener('pointermove', event => {
+      if (reduced.matches || event.pointerType !== 'mouse') return;
+      const bounds = motionHost.getBoundingClientRect();
+      panel.style.setProperty('--lumen-yaw', ((event.clientX - bounds.left) / Math.max(1,bounds.width) - .5) * 18 + 'deg');
+      panel.style.setProperty('--lumen-pitch', (.5 - (event.clientY - bounds.top) / Math.max(1,bounds.height)) * 9 + 'deg');
+    });
+    const reset = () => {
+      panel.style.removeProperty('--lumen-yaw');
+      panel.style.removeProperty('--lumen-pitch');
+    };
+    motionHost.addEventListener('pointerleave', reset);
+    motionHost.querySelector('.motion')?.addEventListener('click', reset);
+  }
 })();
