@@ -3,6 +3,7 @@ const test=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
+const vm=require('node:vm');
 const root=path.join(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const home=read('public/index.html');
@@ -77,4 +78,27 @@ test('graphics still fail closed for unfinished film and unaccepted live product
  const media=JSON.parse(read('public/graphics/cinematic-media-manifest.json'));
  assert.equal(media.videoAuditedAsPremiumFlagship,false);
  assert.equal(media.publicDomainPromotion,false);
+});
+test('mobile and assistive presentation remain source-bound, keyboard-readable and motion-optional',()=>{
+ assert.doesNotThrow(()=>new vm.Script(js,{filename:'flagship-proof.js'}));
+ for(const html of [home,products]){
+  assert.match(html,/data-proof-motion aria-pressed="false"/);
+  assert.match(html,/id="proof-scene-description" data-proof-accessible/);
+  assert.match(html,/aria-describedby="proof-scene-description"/);
+  assert.match(html,/tabindex="0"/);
+ }
+ assert.match(js,/const motionControl=root\.querySelector/);
+ assert.match(js,/const accessibleSummary=root\.querySelector/);
+ assert.match(js,/motionControl\?\.addEventListener\('click'/);
+ assert.match(js,/motionControl\.setAttribute\('aria-pressed',String\(animated\)\)/);
+ assert.match(js,/accessibleSummary\.textContent=item\.name/);
+ assert.match(js,/canvas\.setAttribute\('aria-label'/);
+ assert.match(js,/const compact=width<520/);
+ assert.match(js,/width<480\?14:width<820\?18:24/);
+ assert.match(js,/width<480 && i%2===1/);
+ assert.match(js,/setMotion\(!reduced\.matches&&!saveData&&window\.innerWidth>=900\)/);
+ assert.match(js,/if\(animated && !on\)angle\+=/);
+ assert.match(css,/\.proof-visual canvas:focus-visible/);
+ assert.match(css,/\.proof-screenreader/);
+ assert.match(css,/@media\(max-width:420px\)/);
 });
