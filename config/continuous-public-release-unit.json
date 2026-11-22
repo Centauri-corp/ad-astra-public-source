@@ -74,7 +74,9 @@
     "public/scientific/viewer.js",
     "public/experience/index.html",
     "public/experience/experience.css",
-    "public/experience/experience.js"
+    "public/experience/experience.js",
+    "public/graphics/flagship-proof.js",
+    "public/graphics/flagship-proof.css"
   ],
   "pendingProductionGates": [
     "paired exact artifact fingerprint",
@@ -162,5 +164,21 @@
     "customerProductionPromotionAllowed": false,
     "sourceTest": "test/cinematic-homepage-vertical-production.test.cjs",
     "brief": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film/briefs/2"
+  },
+  "flagshipProofStudio": {
+    "home": "/#flagship-proof",
+    "products": "/products/#flagship-proof",
+    "engine": "public/graphics/flagship-proof.js",
+    "styles": "public/graphics/flagship-proof.css",
+    "source": "public/static original synthetic demonstration, 4 distinct stateful studies",
+    "integrations": [
+      "home",
+      "products",
+      "four individual product routes"
+    ],
+    "status": "FEATURE_REVIEW_NOT_PRODUCTION",
+    "creativeAcceptance": "NOT_APPROVED",
+    "rights": "Existing motion-study rights pending; new local visual code original",
+    "releaseControl": "existing CRC single independent approval workflow"
   }
 }
