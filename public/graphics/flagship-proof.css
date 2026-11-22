@@ -41,3 +41,28 @@
 @media(max-width:680px){.proof-cinema{padding:76px 18px 84px}.proof-top h2{font-size:clamp(40px,10vw,60px)}.proof-top p:not(.proof-kicker){font-size:13px}.proof-visual,.proof-visual canvas{height:400px;min-height:400px}.proof-ui{padding:29px 19px}.proof-select{grid-template-columns:1fr 1fr}.proof-select button{min-height:70px}.proof-hud{top:16px;left:16px;right:16px}.proof-hud span:last-child{font-size:8px}.proof-live-readout{bottom:19px;left:17px;right:17px}.proof-live-readout strong{font-size:22px}.proof-live-readout p{font-size:9px}.proof-disclosure{font-size:10px}}
 @media(max-width:420px){.proof-visual,.proof-visual canvas{height:320px;min-height:320px}.proof-top h2{font-size:40px}.proof-ui h3{font-size:32px}.proof-hud span:last-child{max-width:170px}.proof-live-readout{display:block}.proof-live-readout strong{display:block;margin-bottom:9px;max-width:100%}}
 @media(prefers-reduced-motion:reduce){.proof-visual canvas{cursor:default}}
+
+/* Assistive description stays in the accessible tree without adding an
+   artificial text layer over the cinematic canvas. */
+.proof-screenreader{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.proof-visual canvas:focus-visible{outline:3px solid #9ee5eb;outline-offset:-6px}
+.proof-actions button[data-proof-motion][aria-pressed="true"]{background:#215765;border-color:#f0d18c}
+.proof-actions button:disabled{opacity:.58;cursor:not-allowed}
+@media(max-width:680px){
+  .proof-hud{display:block;line-height:1.55}
+  .proof-hud span:last-child{display:block;text-align:left;margin-top:5px;max-width:none;font-size:8px}
+  .proof-visual:before{background:linear-gradient(180deg,#010a1499,transparent 40%,#020914a6)}
+  .proof-live-readout strong{max-width:100%;font-size:clamp(15px,4.4vw,22px);line-height:1.22}
+  .proof-ui{gap:16px}
+  .proof-actions{display:grid;grid-template-columns:1fr 1fr}
+  .proof-actions button{min-width:0;min-height:48px;line-height:1.4}
+  .proof-actions button[data-proof-advance]{grid-column:1/-1}
+}
+@media(max-width:420px){
+  .proof-hud{left:15px;right:15px}
+  .proof-select button{min-height:75px;padding:11px 10px}
+  .proof-select button strong{font-size:11px}
+  .proof-visual canvas{max-width:100%}
+  .proof-live-readout{bottom:14px;left:15px;right:15px}
+  .proof-live-readout strong{font-size:16px;overflow-wrap:anywhere}
+}
