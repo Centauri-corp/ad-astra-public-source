@@ -166,3 +166,78 @@
   .hero-cinema-v3 .cinematic-journey-host,
   .cinema-hero-primary,.cinema-hero-secondary{transition:none!important}
 }
+
+/* CRC CINEMATIC CAMERA PASS 2026-11-22
+ * Film-first, original optical language. Deliberate scroll dolly; no infinite
+ * transform loop or independently animated WebGL in the film mode.
+ * Asset replacement stays source-bound and rights-gated by CRC. */
+.hero.hero-cinema-v3{
+  --cinema-lens-scale:1.045;
+  --cinema-lens-offset:0px;
+  --cinema-lens-light:.68;
+}
+.hero-cinema-v3>.hero-image,
+.hero-cinema-v3>.hero-video{
+  transform:translate3d(0,var(--cinema-lens-offset),0) scale(var(--cinema-lens-scale));
+  transform-origin:64% 46%;
+  backface-visibility:hidden;
+}
+.hero-cinema-v3>.hero-image{
+  filter:contrast(1.12) saturate(.83) brightness(.88);
+}
+.hero-cinema-v3>.hero-video{
+  filter:contrast(1.10) saturate(.86) brightness(.9);
+}
+.hero.hero-cinema-v3::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 44% 63% at 83% 30%,rgba(167,214,238,.13),transparent 75%),
+    linear-gradient(104deg,transparent 45%,rgba(244,209,149,.075) 79%,transparent 95%);
+  opacity:var(--cinema-lens-light);
+  mix-blend-mode:screen;
+}
+.hero-cinema-v3 .cinema-hero-overline{display:flex;align-items:center;gap:13px}
+.hero-cinema-v3 .cinema-hero-overline::before{
+  content:"";height:1px;width:26px;background:#f4c77c;box-shadow:0 0 11px #f4c77c9e;
+}
+.hero-cinema-v3 .cinema-hero-composition h1{
+  text-shadow:0 10px 45px rgba(0,6,16,.36);
+}
+.hero-cinema-v3 .cinema-hero-subline{
+  text-wrap:pretty;
+  text-shadow:0 4px 24px rgba(0,6,16,.58);
+}
+.hero-cinema-v3 .cinema-hero-primary,
+.hero-cinema-v3 .cinema-hero-secondary{
+  box-shadow:0 10px 30px rgba(1,10,21,.28);
+}
+.hero-cinema-v3 [data-cinematic-host][aria-label]{
+  contain:layout paint;
+}
+/* Strong visible focus even in the brightest film frame. */
+.hero-cinema-v3 :where(a,button,[tabindex]):focus-visible,
+.hero-cinema-v3 :where(a,button,[tabindex]):focus{
+  outline:3px solid #b6f6ff!important;
+  outline-offset:5px!important;
+  box-shadow:0 0 0 7px #06121fe8!important;
+}
+@media(max-width:680px){
+  .hero-cinema-v3>.hero-image,
+  .hero-cinema-v3>.hero-video{transform:none}
+  .hero.hero-cinema-v3::after{opacity:.5;mix-blend-mode:normal}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-cinema-v3>.hero-image,
+  .hero-cinema-v3>.hero-video{transform:none!important;transition:none!important}
+  .hero.hero-cinema-v3::after{opacity:.3}
+}
+@media(forced-colors:active){
+  .hero-cinema-v3 :where(a,button,[tabindex]):focus-visible,
+  .hero-cinema-v3 :where(a,button,[tabindex]):focus{
+    outline:3px solid Highlight!important;box-shadow:none!important;
+  }
+}
