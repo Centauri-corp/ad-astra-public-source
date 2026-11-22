@@ -267,6 +267,8 @@
     frame=requestAnimationFrame(frameLoop);
   }
   function setMotion(on){
+    // Preserve the last viewed animation pose when visitors pause the study.
+    if(animated && !on)angle+=(performance.now()-started)/1000;
     animated=Boolean(on)&&!reduced.matches&&!saveData;
     if(motionControl){
       motionControl.setAttribute('aria-pressed',String(animated));
