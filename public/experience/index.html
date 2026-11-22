@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="/experience/experience.css">
 <script src="/journey/continuity.js" defer></script>
 <script src="/journey/navigation.js" defer></script>
+<script src="/scientific/scene-model.js" defer></script>
+<script src="/scientific/viewer.js" defer></script>
 <script src="/experience/experience.js" defer></script>
 </head>
 <body>
@@ -75,6 +77,33 @@
 <div class="feature-notes"><span>Spatial understanding</span><span>Human-directed exploration</span><span>Synthetic science preview</span></div>
 <a href="/scientific/" class="feature-link">Enter the Scientific Studio <span aria-hidden="true">↗</span></a>
 </div>
+</section>
+<section class="science-live" aria-labelledby="live-science-title">
+  <div class="science-live-heading">
+    <div><p class="small-caps">INTERACTIVE SPATIAL DEMONSTRATION / AD ASTRA</p><h2 id="live-science-title">Explore the system.<br><em>Shape the perspective.</em></h2></div>
+    <p>A working human-directed surface study, not a prerecorded film. Rotate the camera, vary time, and inspect the resulting model. Every value is synthetic and reproducible.</p>
+  </div>
+  <div class="science-live-grid">
+    <div class="science-stage">
+      <canvas id="scientific-surface" role="img" aria-label="Three-dimensional projection of a time-varying synthetic surface. Controls and a numerical description are provided alongside."></canvas>
+      <div class="science-stage-label" aria-hidden="true">SPATIAL FIELD / SYNTHETIC · 01</div>
+    </div>
+    <div class="science-controls" aria-label="Scientific surface interaction controls">
+      <p class="small-caps">MANUAL INTELLIGENCE / NO DATA TRANSFER</p>
+      <h3>Move through time.</h3>
+      <p>Unlike a rendered illustration, this scene responds to your actions. The demonstration is illustrative, not observed environmental or NASA data.</p>
+      <label for="scientific-time">Time step <output id="scientific-time-value" for="scientific-time">0</output> / 8</label>
+      <input id="scientific-time" type="range" min="0" max="8" step="1" value="0" aria-label="Synthetic simulation time step">
+      <div class="science-control-row">
+        <button type="button" id="scientific-left">Rotate left</button>
+        <button type="button" id="scientific-right">Rotate right</button>
+      </div>
+      <button type="button" id="scientific-animation" aria-pressed="false">Play time evolution</button>
+      <p id="scientific-surface-caption" class="science-caption" role="status" aria-live="polite">Synthetic surface at time step zero; projected 3D view with manual controls.</p>
+      <a href="/scientific/" class="feature-link">Enter the full Scientific Studio <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+  <p class="science-disclaimer">Illustrative model only · Normalized units · No live AI, external measurements, or customer data</p>
 </section>
 <section class="wide-cinema" aria-labelledby="interlude-title">
 <img src="/assets/astra-lumen-neural-brain.png" width="1672" height="941" loading="lazy" alt="Luminous cyan neural brain with gold orbital connections.">
