@@ -12,7 +12,7 @@ test('one continuous public release unit is review-only with no unearned rights'
  for(const key of ['publicLaunchEnabled','customerExecutionEnabled','externalCrmWritesEnabled','billingEnabled','indexingEnabled','productionPromotionAllowed'])assert.equal(unit[key],false,key);
  assert.equal(unit.reviewOnly,true);
  assert.equal(unit.chapters.length,5);
- assert.deepEqual(unit.expandedRoutes,['/journey/','/scientific/']);
+ assert.deepEqual(unit.expandedRoutes,['/journey/','/scientific/','/experience/']);
  const manifest=JSON.parse(read('public/release-manifest.json'));
  assert.equal(manifest.publicLaunchEnabled,false);
  assert.equal(manifest.engineAvailable,false);
