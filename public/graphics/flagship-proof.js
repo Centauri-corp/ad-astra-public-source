@@ -10,7 +10,7 @@
   const canvas=root?.querySelector('[data-proof-canvas]');
   if(!root||!canvas)return;
   const ctx=canvas.getContext('2d',{alpha:false});
-  if(!ctx){root.dataset.proofFallback='true';return;}
+  if(!ctx){root.dataset.proofFallback='true';canvas.hidden=true;const fallback=root.querySelector('[data-proof-accessible]');if(fallback)fallback.textContent='Interactive canvas rendering is unavailable on this device. Product details and evidence descriptions remain available below.';root.querySelectorAll('[data-proof-advance],[data-proof-reset],[data-proof-motion]').forEach(b=>{b.disabled=true;});return;}
   const buttons=[...root.querySelectorAll('[data-proof-select]')];
   const title=root.querySelector('[data-proof-title]');
   const description=root.querySelector('[data-proof-description]');
@@ -21,6 +21,8 @@
   const link=root.querySelector('[data-proof-link]');
   const advance=root.querySelector('[data-proof-advance]');
   const reset=root.querySelector('[data-proof-reset]');
+  const motionControl=root.querySelector('[data-proof-motion]');
+  const accessibleSummary=root.querySelector('[data-proof-accessible]');
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
   const saveData=Boolean(navigator.connection?.saveData);
   const chapters=Object.freeze({
@@ -58,7 +60,7 @@
     }
   });
   let mode='discovery',step=0,animated=false,visible=true,started=0,last=0,frame=0;
-  let width=1000,height=590,dpr=1,angle=0,focus=0;
+  let width=1000,height=590,dpr=1,angle=0;
   const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
   const lerp=(a,b,t)=>a+(b-a)*t;
   const keyColor=(n)=>chapters[mode].palettes[n%3];
@@ -93,6 +95,8 @@
     ctx.fillStyle=grad;ctx.fillRect(0,0,width,height);
     const cx=width*.5,cy=height*.48;glow(cx,cy,height*.78,keyColor(0),.05);
     starfield.forEach((s,i)=>{
+      // Mobile decode/GPU budgets favor fewer decorative particles.
+      if(width<480 && i%2===1)return;
       const flicker=animated?(.8+.2*Math.sin(t*.75+i*.85)):1;
       ctx.fillStyle='#b6e6f5';ctx.globalAlpha=s.a*flicker;
       ctx.beginPath();ctx.arc(s.x*width,s.y*height,s.r,0,7);ctx.fill();
@@ -153,7 +157,7 @@
     if(step===2)for(let i=0;i<3;i++)orbit(cx,cy,rad*(.8+i*.2),rad*(.8+i*.2)*ell,-.32,'#8bd7c0',.11,1);
   }
   function surface(t){
-    const cx=width*.5,cy=height*.53;const N=24;
+    const cx=width*.5,cy=height*.53;const N=width<480?14:width<820?18:24;
     const w=Math.min(width*.036,height*.055);
     const ry=step===0?.53:step===1?.78:.39;
     const yaw=step===1?.95:-.32;
@@ -234,6 +238,8 @@
     if(number)number.textContent=item.number;
     if(readout)readout.textContent=item.readings[step];
     if(phase)phase.textContent=item.steps[step]+' / '+(step+1)+' OF 3';
+    if(accessibleSummary)accessibleSummary.textContent=item.name+' — '+item.steps[step]+', step '+(step+1)+' of 3. '+item.evidence;
+    canvas.setAttribute('aria-label',item.name+', '+item.steps[step]+'. Press left or right arrow to change steps. A synthetic illustration, not measured data.');
     if(link){link.href=item.url;link.setAttribute('aria-label','Explore '+item.name+' product details');}
     buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.proofSelect===mode)));
   }
@@ -258,6 +264,12 @@
   }
   function setMotion(on){
     animated=Boolean(on)&&!reduced.matches&&!saveData;
+    if(motionControl){
+      motionControl.setAttribute('aria-pressed',String(animated));
+      motionControl.textContent=animated?'Pause scene motion':'Play scene motion';
+      motionControl.disabled=reduced.matches||saveData;
+      motionControl.title=motionControl.disabled?'Static scene required by reduced-motion or data-saver preferences':'';
+    }
     if(animated)started=performance.now();
     if(frame)cancelAnimationFrame(frame);
     frame=0;
@@ -266,6 +278,7 @@
   }
   buttons.forEach(btn=>btn.addEventListener('click',()=>change(btn.dataset.proofSelect)));
   advance?.addEventListener('click',forward);reset?.addEventListener('click',restart);
+  motionControl?.addEventListener('click',()=>setMotion(!animated));
   canvas.setAttribute('tabindex','0');
   canvas.addEventListener('keydown',ev=>{
     if(!['ArrowLeft','ArrowRight'].includes(ev.key))return;
@@ -285,6 +298,9 @@
   reduced.addEventListener?.('change',()=>setMotion(false));
   window.addEventListener('pagehide',()=>{if(frame)cancelAnimationFrame(frame)},{once:true});
   change('discovery');resize();
-  if(!reduced.matches&&!saveData)setMotion(true);
-  else if(phase)phase.textContent=chapters[mode].steps[step]+' / MOTION REDUCED';
+  // A large-screen cinematic preview can animate; mobile starts on a real,
+  // legible still, with a user-controlled Play action to avoid battery drain.
+  setMotion(!reduced.matches&&!saveData&&window.innerWidth>=900);
+  if(!animated && (reduced.matches||saveData) && phase)
+    phase.textContent=chapters[mode].steps[step]+' / MOTION REDUCED';
 })();
