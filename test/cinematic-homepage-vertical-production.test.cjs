@@ -89,3 +89,18 @@ test('cinematic camera pass uses source-owned GPU imagery and no autonomous rend
  assert.match(style,/@media\(forced-colors:active\)/);
  assert.doesNotMatch(director,/setInterval\(|setTimeout\(|fetch\(/);
 });
+
+test('cinematic review cut cannot silently replace a rights-unverified production film',()=>{
+ const shot=media.cinematicReviewCandidate;
+ assert.equal(shot.status,'RENDERED_AND_EDITED_NOT_PUBLICLY_INTEGRATED');
+ assert.equal(shot.format.width,1920);
+ assert.equal(shot.format.height,1080);
+ assert.equal(shot.editorial.exportedDurationSeconds,30);
+ assert.equal(shot.editorial.structuralCheck,'PASS');
+ assert.equal(shot.editorial.creativeAcceptance,'PENDING');
+ assert.equal(shot.rights,'PENDING_REVIEW');
+ assert.equal(shot.websiteDelivery.replacementPerformed,false);
+ assert.equal(shot.websiteDelivery.preventSignedTemporaryUrlEmbedding,true);
+ assert.equal(shot.globalProductionGate,'HOLD');
+ assert.equal(release.publicLaunchEnabled,false);
+});
