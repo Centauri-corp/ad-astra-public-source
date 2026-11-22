@@ -63,5 +63,34 @@
     }
   });
   window.addEventListener('pagehide', () => ambientFilm.pause(), {once: true});
+
+  // CRC cinematic lens pass: event-driven camera drift tied to visitor travel.
+  // No additional render loop; film playback remains wholly in public/app.js.
+  let cameraFrame = 0;
+  function syncCameraPass() {
+    cameraFrame = 0;
+    const disabled = reduced.matches || saveData || document.hidden ||
+      hero.dataset.cinemaMode !== 'film' || matchMedia('(max-width:680px)').matches;
+    if (disabled) {
+      hero.style.setProperty('--cinema-lens-scale', '1.045');
+      hero.style.setProperty('--cinema-lens-offset', '0px');
+      return;
+    }
+    const box = hero.getBoundingClientRect();
+    if (box.bottom < 0 || box.top > innerHeight) return;
+    const progress = Math.min(1, Math.max(0, -box.top / Math.max(1, box.height)));
+    hero.style.setProperty('--cinema-lens-scale', (1.045 + progress * 0.055).toFixed(3));
+    hero.style.setProperty('--cinema-lens-offset', Math.round(progress * -18) + 'px');
+  }
+  function scheduleCameraPass() {
+    if (!cameraFrame) cameraFrame = requestAnimationFrame(syncCameraPass);
+  }
+  addEventListener('scroll', scheduleCameraPass, {passive: true});
+  addEventListener('resize', scheduleCameraPass, {passive: true});
+  addEventListener('pageshow', scheduleCameraPass);
+  document.addEventListener('visibilitychange', scheduleCameraPass);
+  reduced.addEventListener?.('change', scheduleCameraPass);
+  hero.addEventListener('ad-astra:cinema-mode-change', scheduleCameraPass);
+  scheduleCameraPass();
   setMode('film', 'initial');
 })();
