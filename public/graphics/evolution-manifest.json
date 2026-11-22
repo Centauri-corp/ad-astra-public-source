@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "scenes": [
+    {
+      "id": "arrival",
+      "label": "Arrival",
+      "index": 0,
+      "asset": "/assets/astra-lumen-neural-horizon.png",
+      "source": "Ad Astra public visual manifest",
+      "kind": "authored-still",
+      "status": "public-review",
+      "alt": "Luminous neural field over an Earth horizon"
+    },
+    {
+      "id": "science",
+      "label": "Science",
+      "index": 1,
+      "asset": "/assets/astra-lumen-neural-profile-canvas.png",
+      "source": "Ad Astra public visual manifest",
+      "kind": "authored-still",
+      "status": "public-review",
+      "alt": "Cyan neural profile and connected violet field"
+    },
+    {
+      "id": "solutions",
+      "label": "Solutions",
+      "index": 2,
+      "asset": "/assets/astra-lumen-neural-concierge.png",
+      "source": "Ad Astra public visual manifest",
+      "kind": "authored-still",
+      "status": "public-review",
+      "alt": "Neural intelligence figure with cyan and gold light"
+    }
+  ],
+  "authoring": {
+    "runway": {
+      "role": "Reviewed still and video authoring",
+      "runtime": "Exported approved asset only"
+    },
+    "unreal": {
+      "role": "Optional film shot and environment authoring",
+      "runtime": "Optimized video export"
+    },
+    "three": {
+      "role": "Procedural neural geometry from private source",
+      "runtime": "Adapter pending"
+    },
+    "sanity": {
+      "documentType": "astraVisualSystem",
+      "role": "Public editorial and visual configuration"
+    }
+  }
+}

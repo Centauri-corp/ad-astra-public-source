@@ -1,0 +1,105 @@
+{
+  "schema": "ad-astra/continuous-public-release-unit/v1",
+  "purpose": "One reviewable Ad Astra homepage-to-workspace visual and product experience; production authorization remains in private CRC Command",
+  "project": "Centauri Renewables Corporation / Ad Astra",
+  "canonicalDomain": "https://adastra.global",
+  "sourceRepository": "Centauri-corp/ad-astra-public-source",
+  "reviewBranch": "review/universal-stage-lumen-homepage",
+  "privateGovernor": "Centauri-corp/ad-astra-internal-source",
+  "releaseAuthority": "Supabase ad-astra-intelligence-os",
+  "reviewOnly": true,
+  "publicLaunchEnabled": false,
+  "customerExecutionEnabled": false,
+  "externalCrmWritesEnabled": false,
+  "billingEnabled": false,
+  "indexingEnabled": false,
+  "productionPromotionAllowed": false,
+  "previewDeploymentMode": "Vercel protected non-production; exact deployment SHA verified after build",
+  "productionReleaseMode": "one composite release, pinned internal and public SHAs, immutable artifact and exact-scope Supabase authority",
+  "chapters": [
+    {
+      "id": "arrival",
+      "path": "/",
+      "view": "cinematic neuro-spatial homepage",
+      "control": "explicit 3-layer WebGL2"
+    },
+    {
+      "id": "intelligence",
+      "path": "/knowledge/",
+      "view": "knowledge",
+      "control": "governed"
+    },
+    {
+      "id": "life",
+      "path": "/life/",
+      "view": "Life Intelligence",
+      "control": "concept-preview"
+    },
+    {
+      "id": "products",
+      "path": "/products/",
+      "view": "Products & Solutions; scientific spatial preview",
+      "control": "explicit"
+    },
+    {
+      "id": "workspace",
+      "path": "/workspace/",
+      "view": "secure customer workspace",
+      "control": "release-gated"
+    }
+  ],
+  "expandedRoutes": [
+    "/journey/",
+    "/scientific/"
+  ],
+  "sceneLayers": [
+    "arrival",
+    "science",
+    "solutions"
+  ],
+  "productDirections": [
+    "beyond-physics",
+    "astra-lumen",
+    "neural-visual-experience",
+    "governed-workflows"
+  ],
+  "graphicsSource": [
+    "lib/graphics-intelligence-core.cjs",
+    "lib/products-solutions-graphics.cjs",
+    "lib/unified-product-scene.cjs",
+    "public/graphics/cinematic-journey.js",
+    "public/graphics/evolution.js",
+    "public/scientific/scene-model.js",
+    "public/scientific/viewer.js"
+  ],
+  "pendingProductionGates": [
+    "paired exact artifact fingerprint",
+    "critical route visual QA mobile and accessibility",
+    "Sanity controlled-content isolation",
+    "Catalyst + CRM tenant-negative tests",
+    "Stripe test-mode lifecycle",
+    "Supabase 8 integration acceptance receipts",
+    "one independently attested release decision and CEO MFA binding",
+    "canonical domain and verified rollback"
+  ],
+  "safety": {
+    "noFakeApproval": true,
+    "noSyntheticReceiptsAsEvidence": true,
+    "noCustomerActivations": true,
+    "noAutomaticDomainPromotion": true
+  },
+  "visualInteractionUpgrade": {
+    "version": "p2-human-controlled-cinematic",
+    "tracks": [
+      "accessible static scene selection",
+      "product-to-shared-scene synchronization",
+      "camera reset",
+      "keyboard orbit and zoom",
+      "reduced-motion and data-saver operation"
+    ],
+    "homepageToStudio": "/scientific/",
+    "releaseScope": "source-and-protected-preview-only",
+    "customerRuntimeEnabled": false,
+    "publicPromotionAllowed": false
+  }
+}

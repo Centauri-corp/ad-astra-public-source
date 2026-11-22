@@ -1,22 +1,39 @@
 'use strict';
-const directions={
-  'beyond-physics':{label:'DISCOVERY',title:'Beyond Physics',copy:'Connect questions, evidence and perspective across disciplines.',motif:'orbital-knowledge-field'},
-  'astra-lumen':{label:'LEARNING',title:'Astra Lumen',copy:'Turn complex subjects into clearer, human-directed next steps.',motif:'luminous-neural-core'},
-  'neural-visual-experience':{label:'VISUALIZATION',title:'Neural Visual Experience',copy:'Make systems, patterns and possibilities easier to see.',motif:'responsive-signal-lattice'},
-  'governed-workflows':{label:'OPERATIONS',title:'Governed AI Workflows',copy:'Move from intent to action through explicit controls and review.',motif:'approval-control-plane'}
-};
-const controls=[...document.querySelectorAll('[data-product-direction]')];
-const stage=document.querySelector('.stage-orbit');
-const title=document.querySelector('[data-product-title]');
-const copy=document.querySelector('[data-product-copy]');
-const label=document.querySelector('.stage-readout [data-product-label]');
-const heroLabel=document.querySelector('.hero-art [data-product-label]');
-function selectDirection(id){
-  const d=directions[id]; if(!d||!stage)return;
-  stage.dataset.motif=d.motif;
-  title.textContent=d.title; copy.textContent=d.copy; label.textContent=d.label+' / EXPLICIT PUBLIC PREVIEW';
-  if(heroLabel)heroLabel.textContent=d.label+' / EXPLICIT PUBLIC PREVIEW';
-  controls.forEach(b=>{const active=b.dataset.productDirection===id;b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active));});
-}
-controls.forEach(b=>b.addEventListener('click',()=>selectDirection(b.dataset.productDirection)));
-selectDirection('beyond-physics');
+// Public-only product direction to shared cinematic scene; no backend or customer data.
+(() => {
+  const stage=document.querySelector('.stage-orbit');
+  const readout=document.querySelector('.stage-readout');
+  const cinematic=document.querySelector('.products-cinematic-host');
+  const liveMode=document.querySelector('[data-product-mode]');
+  const directions=[...document.querySelectorAll('details[data-product-direction]')];
+  function showSelection(detail,fromVisitor=false){
+    if(!detail.open)return;
+    const title=detail.querySelector('summary span')?.textContent||'Product direction';
+    const role=detail.querySelector('summary small')?.textContent||'preview';
+    const copy=detail.querySelector('p')?.textContent||'';
+    if(stage)stage.dataset.motif=detail.dataset.motif;
+    if(readout){
+      const label=readout.querySelector('[data-product-label]');
+      const heading=readout.querySelector('[data-product-title]');
+      const description=readout.querySelector('[data-product-copy]');
+      if(label)label.textContent=role;
+      if(heading)heading.textContent=title;
+      if(description)description.textContent=copy;
+    }
+    if(liveMode)liveMode.textContent='Visual direction: '+title+' · '+role;
+    const index=Number(detail.dataset.cinematicTarget);
+    if(fromVisitor&&cinematic&&Number.isInteger(index)&&index>=0&&index<=2){
+      cinematic.dataset.cinematicScene=String(index);
+      cinematic.dispatchEvent(new CustomEvent('ad-astra:request-scene',{detail:{index,source:'product'}}));
+    }
+  }
+  directions.forEach(detail=>{
+    detail.querySelector('summary')?.addEventListener('click',()=>{
+      detail.dataset.userSceneIntent='yes';
+    });
+    detail.addEventListener('toggle',()=>{
+      showSelection(detail,detail.dataset.userSceneIntent==='yes');
+    });
+  });
+  showSelection(directions.find(detail=>detail.open)||directions[0]);
+})();

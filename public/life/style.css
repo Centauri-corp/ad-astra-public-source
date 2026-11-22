@@ -21,3 +21,16 @@
 }
 
 @media(prefers-reduced-motion:reduce){.motion-toggle{display:none}}
+
+/* One journey: quiet editorial navigation, not a separate dashboard. */
+.journey-navigation-host{background:#081824;padding:1.2rem 7%;border-block:1px solid #ffffff25}
+.single-journey-nav{max-width:1440px;margin:auto;overflow-x:auto}
+.single-journey-list{display:flex;align-items:stretch;gap:0;list-style:none;padding:0;margin:0;min-width:570px}
+.single-journey-list li{flex:1;min-width:0}
+.single-journey-list a{display:flex;flex-direction:column;gap:.6rem;padding:1rem .9rem;border-bottom:2px solid #ffffff2c;color:#b4cbd8;font-size:.76rem;line-height:1.4;min-height:78px}
+.single-journey-number{color:#c7a574;font-size:.66rem;letter-spacing:.14em}
+.single-journey-list a:hover{color:#fff;border-bottom-color:#9edcf2}
+.single-journey-list a[aria-current="step"]{color:#fff;border-bottom-color:#d8b98a;background:#ffffff09}
+.next-journey{display:inline-block;color:#d8b98a;text-decoration:underline;text-underline-offset:.35rem;padding:.5rem}
+.single-journey-list a:focus-visible,.next-journey:focus-visible{outline:3px solid #9edcf2;outline-offset:-3px}
+@media(max-width:600px){.journey-navigation-host{padding:0 5%}.single-journey-list a{padding:.8rem .5rem;font-size:.7rem}}

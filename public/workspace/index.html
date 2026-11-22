@@ -11,11 +11,15 @@
 <script defer src="/auth-navigation.js"></script>
 <script defer src="/workspace/client.js"></script>
 <script defer src="/workspace/app.js"></script>
+<link rel="stylesheet" href="/journey/style.css">
+<script src="/journey/continuity.js" defer></script>
+<script src="/journey/navigation.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to workspace</a>
 <header><a class="brand" href="/">AD ASTRA<span>BEYOND THE EXPECTED</span></a><nav aria-label="Primary"><a href="/agent/">Astra Polaris</a><a href="/account/billing/">Account and billing</a><button type="button" id="sign-out" hidden>Sign out</button></nav></header>
 <main id="main">
+<div class="journey-navigation-host" data-journey-navigation data-current-journey="workspace"></div>
 <section id="auth-state" class="auth-state" aria-live="polite"><h1>Your Life workspace.</h1><p id="auth-message">Checking secure sign-in…</p><a class="button" id="sign-in-link" href="/sign-in/?return=%2Fworkspace%2F">Sign in to continue</a></section>
 <div id="workspace" hidden>
 <section class="intro"><p class="eyebrow">AD ASTRA LIFE</p><h1>Make the next step<br><span>something you can return to.</span></h1><p>Plan your day, build a learning rhythm or prepare for your next role. Your saved work stays with your account.</p><p id="access-status" class="notice" role="status">Checking workspace access…</p><p id="environment-note" class="small" hidden>Development workspace. Results here do not establish a production release.</p></section>

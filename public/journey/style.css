@@ -1,0 +1,18 @@
+/* AD ASTRA continuous editorial journey: shared across public routes; never a boxed dashboard. */
+.journey-navigation-host{position:relative;z-index:4;width:100%;padding:12px clamp(16px,5vw,70px);background:linear-gradient(95deg,#07111cee,#102537f0);border-block:1px solid #9bdfe32d;color:#eaf2f5}
+.single-journey-nav{max-width:1440px;margin-inline:auto;overflow-x:auto}
+.single-journey-list{list-style:none;display:flex;align-items:stretch;gap:0;padding:0;margin:0;min-width:580px}
+.single-journey-list li{flex:1}
+.single-journey-list a{display:flex;flex-direction:column;min-height:66px;padding:10px 12px;gap:5px;border-bottom:2px solid #9bdfe32e;color:#bccdd5;text-decoration:none;font:500 12px/1.35 system-ui,sans-serif;transition:border-color .2s,color .2s}
+.single-journey-list .single-journey-number{color:#e9c990;font:11px/1.2 ui-monospace,monospace;letter-spacing:.14em}
+.single-journey-list a[aria-current="step"]{color:#fff;border-bottom-color:#e9c990;background:#ffffff08}
+.single-journey-list a:hover{color:#fff;border-bottom-color:#9bdfe3}
+.single-journey-list a:focus-visible,.next-journey-wrap a:focus-visible{outline:3px solid #9bdfe3;outline-offset:-3px}
+.next-journey-wrap{margin:24px 5%;font-size:14px}.next-journey-wrap a{color:#9bdfe3}
+.graphics-systems-mount{margin-top:24px}
+.graphics-system-controls{display:flex;flex-wrap:wrap;gap:8px}
+.graphics-system-button{border:1px solid #65d6e84d;border-radius:999px;padding:10px 14px;background:#081e30;color:#d4e4ea;font:500 12px system-ui;cursor:pointer;min-height:42px}
+.graphics-system-button[aria-pressed=true]{border-color:#e9c990;color:#fff1d1;background:#152c40}
+.graphics-system-button:focus-visible{outline:3px solid #9bdfe3;outline-offset:2px}
+.graphics-system-caption{font:12px/1.65 system-ui,sans-serif;color:#aec9d5;max-width:76ch}
+@media(prefers-reduced-motion:reduce){.single-journey-list a{transition:none}}
