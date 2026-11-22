@@ -31,6 +31,8 @@
 <script src="/journey/continuity.js" defer></script>
 <script src="/journey/navigation.js" defer></script>
 <link rel="stylesheet" href="/graphics/cinematic-journey.css">
+<link rel="stylesheet" href="/graphics/cinematic-director.css">
+<script src="/graphics/cinematic-director.js" defer></script>
 <script src="/graphics/cinematic-journey.js" defer></script>
 <script src="/graphics/evolution.js" defer></script>
   <script src="/graphics/lumen-arrival.js" defer></script>
@@ -137,23 +139,42 @@
 </nav>
 <main id="main">
 <div class="journey-navigation-host" data-journey-navigation data-current-journey="arrival"></div>
-<section class="hero" id="top" data-scene="arrival" data-scene-index="01" aria-labelledby="hero-title">
-    <img class="hero-image neural-hero" src="assets/astra-lumen-neural-brain.png" width="1672" height="941" fetchpriority="high" alt="A translucent neural brain with cyan synapses and gold orbital paths in deep space">
-    <video class="hero-video motion-video" muted playsinline preload="none" poster="assets/astra-lumen-neural-brain.png" aria-hidden="true" tabindex="-1"><source src="assets/ad-astra-runway-orbital-motion.mp4" type="video/mp4"></video>
-    <div class="cinematic-journey-host" data-cinematic-host data-cinematic-scene="arrival" aria-label="Interactive cinematic spatial stage">
-      <canvas class="cinematic-journey-canvas" data-cinematic-journey role="img" aria-label="Procedural 3D Earth and orbital knowledge field. Drag to orbit and Shift-scroll to zoom."></canvas>
-      <div class="cinematic-journey-chrome" aria-hidden="true"><span><strong>AD ASTRA / UNIVERSAL STAGE</strong></span><span>PROCEDURAL SPATIAL SCENE / PUBLIC PREVIEW</span></div>
-      <div class="cinematic-journey-control-bar" aria-label="Choose cinematic scene layer">
-        <button type="button" data-cinematic-layer="0" aria-pressed="true">Arrival</button>
+<section class="hero hero-cinema-v3" id="top" data-scene="arrival" data-scene-index="01" data-cinema-mode="film" aria-labelledby="hero-title">
+    <img class="hero-image cinematic-earth-poster" src="assets/ad-astra-runway-horizon-poster.jpg" width="1672" height="941" fetchpriority="high" alt="Original Ad Astra conceptual orbital Earth horizon artwork">
+    <video class="hero-video motion-video" data-cinema-film muted playsinline preload="none" poster="assets/ad-astra-runway-horizon-poster.jpg" aria-hidden="true" tabindex="-1"><source src="assets/ad-astra-horizon-motion.mp4" type="video/mp4"></video>
+    <div class="cinematic-journey-host" data-cinematic-host data-cinematic-scene="arrival" aria-label="Optional interactive WebGL2 spatial Earth study, concept visualization">
+      <canvas class="cinematic-journey-canvas" data-cinematic-journey role="img" aria-label="Procedural WebGL2 Earth concept model. Drag to orbit and Shift-scroll to zoom."></canvas>
+      <div class="cinematic-journey-chrome" aria-hidden="true"><span><strong>AD ASTRA / UNIVERSAL STAGE</strong></span><span>PROCEDURAL INTERACTIVE CONCEPT / NOT MEASURED SCIENCE</span></div>
+      <div class="cinematic-journey-control-bar" aria-label="Choose interactive spatial layer">
+        <button type="button" data-cinematic-layer="0" aria-pressed="true">Earth</button>
         <button type="button" data-cinematic-layer="1" aria-pressed="false">Science</button>
         <button type="button" data-cinematic-layer="2" aria-pressed="false">Solutions</button>
       </div>
-      <p class="cinematic-journey-status" data-cinematic-status role="status">Spatial scene loading · static fallback ready</p>
+      <p class="cinematic-journey-status" data-cinematic-status role="status">Interactive conceptual visualization available on request</p>
     </div>
-    <div class="hero-shade"></div><div class="orbit-decoration" aria-hidden="true"></div>
-    <div class="hero-content" id="lumen-interaction">
-      <figure class="lumen-portrait" aria-hidden="true"><img src="/assets/astra-lumen-neural-profile-canvas.png" width="545" height="700" alt=""><i></i><i></i></figure>
-      <h1 id="hero-title">A living stage<br><em>for human direction.</em></h1>
+    <div class="hero-shade"></div>
+    <div class="cinema-hero-composition">
+      <p class="cinema-hero-overline">CENTAURI RENEWABLES CORPORATION / AD ASTRA</p>
+      <h1 id="hero-title">From Earth.<br><em>Beyond the expected.</em></h1>
+      <p class="cinema-hero-subline">A visual journey through discovery, intelligence and human-directed possibility—built around real questions, transparent evidence and responsible technology.</p>
+      <div class="cinema-hero-actions">
+        <a class="cinema-hero-primary" href="/experience/">Watch the Ad Astra film <span aria-hidden="true">▶</span></a>
+        <a class="cinema-hero-secondary" href="/products/">Discover Products &amp; Solutions <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="hero-bottom cinema-hero-footer">
+      <p>ORIGIN / THE INTELLIGENCE HORIZON<span>ORIGINAL AD ASTRA VISUAL STUDY</span></p>
+      <a href="#vision">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a>
+      <button type="button" class="cinema-spatial-switch" data-cinema-switch aria-pressed="false" aria-controls="top">Explore spatial model</button>
+      <button class="motion" type="button" aria-pressed="false">Pause motion <span aria-hidden="true">Ⅱ</span></button>
+      <span class="motion-note" id="motion-note">Concept film · no sound · motion preferences respected</span>
+    </div>
+  </section>
+  <section class="lumen-intelligence-bridge" aria-labelledby="lumen-bridge-title">
+    <div class="lumen-intelligence-wrap">
+      <div class="hero-content" id="lumen-interaction">
+      
+      <p class="cinema-bridge-kicker">HUMAN-DIRECTED INTELLIGENCE / RESEARCH PREVIEW</p><h2 id="lumen-bridge-title">Ask a better question.<br><em>Explore what follows.</em></h2><p class="cinema-bridge-context">Experience a bounded example, or continue to the release-controlled workspace. The public page does not execute unapproved AI tasks.</p>
       <form id="lumen-form">
         <label for="lumen-question">What would you like to understand?</label>
         <div class="lumen-entry">
@@ -171,7 +192,7 @@
         <a id="lumen-workspace" href="/workspace/" hidden>Open workspace ↗</a>
       </div>
     </div>
-    <div class="hero-bottom"><p>BEYOND PHYSICS<span>THE META-KNOWLEDGE ENGINE</span></p><a href="#vision">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a><span class="scene-label" id="scene-label">01 / ARRIVAL</span><button class="motion" aria-pressed="false">Pause motion <span aria-hidden="true">Ⅱ</span></button><span class="motion-note" id="motion-note">Motion pauses for reduced-motion preferences · poster frames remain available</span></div>
+    </div>
   </section>
 <section class="neural-lab" id="neural-lab" aria-labelledby="neural-lab-title">
     <div class="neural-lab-grid wrap">
