@@ -16,7 +16,9 @@ test('shared cinematic journey is the first-class staging visual',()=>{
     assert.match(html,/data-cinematic-status/);
     assert.match(html,/Drag to orbit/);
   }
-  assert.match(home,/A living stage/);
+  assert.match(home,/From Earth\\.<br><em>Beyond the expected\\./);
+  assert.match(home,/data-cinema-mode="film"/);
+  assert.match(home,/data-cinema-switch/);
   assert.match(products,/whole system visible/);
   const engine=fs.readFileSync(path.join(root,'graphics','cinematic-journey.js'),'utf8');
   assert.match(engine,/getContext\('webgl2'/);
