@@ -74,3 +74,37 @@ test('new film route stays review-only and cannot enable production/customer bil
  assert.match(cinema,/No customer billing or AI execution from this film page/);
  assert.doesNotMatch(js,/fetch\(|XMLHttpRequest|sendBeacon|navigator\.mediaDevices|localStorage|sessionStorage/);
 });
+
+
+test('cinematic route contains an actual responsive, manual synthetic science viewer',()=>{
+ assert.match(cinema,/src="\/scientific\/scene-model\.js"/);
+ assert.match(cinema,/src="\/scientific\/viewer\.js"/);
+ for(const id of ['scientific-surface','scientific-time','scientific-time-value','scientific-left','scientific-right','scientific-animation','scientific-surface-caption'])
+   assert.match(cinema,new RegExp('id="'+id+'"'));
+ const model=read('public/scientific/scene-model.js');
+ const viewer=read('public/scientific/viewer.js');
+ assert.match(model,/source:"synthetic-illustrative"/);
+ assert.match(model,/measured:false/);
+ assert.match(viewer,/buildFrame\(step,22\)/);
+ assert.match(viewer,/getContext\("2d"\)/);
+ assert.match(css,/\.science-live-grid/);
+ assert.match(css,/@media\(max-width:580px\)/);
+});
+test('product-story graphics selector has reviewed local assets, one state controller and accessible keyboard paths',()=>{
+ for(const id of ['discovery','learning','visualize','govern'])
+   assert.match(cinema,new RegExp('data-experience-product="'+id+'"'));
+ assert.match(cinema,/data-product-preview/);
+ assert.match(cinema,/data-product-art/);
+ assert.match(js,/Object\.hasOwn\(productDirections, id\)/);
+ assert.match(js,/button\.addEventListener\('keydown'/);
+ for(const key of ['ArrowRight','ArrowLeft','ArrowDown','ArrowUp','Home','End'])
+   assert.ok(js.includes(key),key);
+ assert.match(js,/aria-pressed/);
+ assert.match(css,/\.product-explorer-grid/);
+ assert.match(css,/@media\(max-width:650px\)/);
+ for(const image of [
+ 'astra-lumen-neural-horizon.png','astra-lumen-neural-brain.png',
+ 'astra-lumen-neural-profile-canvas.png','astra-lumen-neural-concierge.png'])
+   assert.match(js,new RegExp('\\/assets\\/'+image.replace('.','\\.')));
+ assert.doesNotMatch(js,/XMLHttpRequest|sendBeacon|fetch\(|navigator\.mediaDevices|localStorage|sessionStorage/);
+});
