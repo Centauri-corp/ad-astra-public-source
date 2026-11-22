@@ -188,10 +188,15 @@
       "publicSource": "Centauri-corp/ad-astra-public-source",
       "publicPr": 61,
       "privateReleaseController": "Centauri-corp/ad-astra-internal-source",
-      "privatePr": 160,
+      "privatePr": 161,
       "supabaseProject": "wewznejqpnsmiwkbozgw",
       "independentReleaseCaseRequired": true,
-      "additionalApprovalLanes": false
+      "additionalApprovalLanes": false,
+      "privateCandidateBranch": "upgrade/ad-astra-one-production-flow-20261121",
+      "supersededPrivatePrs": [
+        160
+      ],
+      "privateSourceOfTruth": "config/one-production-flow.json in internal PR #161, the incumbent exact-source paired production controller; closed PR #160 is historical"
     },
     "creative": {
       "homepage": "/",
