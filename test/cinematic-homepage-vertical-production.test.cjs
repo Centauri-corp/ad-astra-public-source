@@ -19,6 +19,7 @@ test('cinematic original media is now the hero and the spatial globe is optional
  assert.match(html,/class="hero hero-cinema-v3"/);
  assert.match(html,/data-cinema-mode="film"/);
  assert.match(html,/class="hero-video motion-video" data-cinema-film/);
+ assert.match(html,/data-cinema-film muted playsinline loop preload="none"/);
  assert.match(html,/src="assets\/ad-astra-horizon-motion\.mp4"/);
  assert.match(html,/src="assets\/ad-astra-runway-horizon-poster\.jpg"/);
  assert.match(html,/From Earth\.<br><em>Beyond the expected\./);
