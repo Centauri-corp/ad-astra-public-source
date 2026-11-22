@@ -43,5 +43,27 @@
     "production-build-staged-without-domains",
     "independent-Supabase-release-case",
     "rollback-and-customer-provider-security"
-  ]
+  ],
+  "productProofStudio": {
+    "entrypoints": [
+      "/",
+      "#flagship-proof",
+      "/products/"
+    ],
+    "source": "/graphics/flagship-proof.js",
+    "style": "/graphics/flagship-proof.css",
+    "runtime": "Canvas2D original procedural visualization; locally calculated, not real-world measured data",
+    "modes": [
+      "discovery",
+      "learning",
+      "visualize",
+      "govern"
+    ],
+    "networkCalls": false,
+    "customerExecution": false,
+    "licenseState": "source original; use unchanged current media until rights cleared",
+    "visualAcceptance": "PENDING",
+    "mobileAcceptance": "PENDING",
+    "flagshipCGIFilm": "NOT_RENDERED"
+  }
 }
