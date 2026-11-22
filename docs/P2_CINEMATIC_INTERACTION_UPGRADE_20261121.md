@@ -17,3 +17,6 @@ Parent: Centauri Renewables Corporation (CRC). Existing consolidated public cand
 Run `node --test test/*.test.cjs`, `node scripts/check-release.cjs` and the protected Vercel preview build against the **exact** branch SHA. Perform real browser desktop/mobile visual and accessibility acceptance; verify static fallback on no-WebGL, data-saving and reduced-motion devices. Preserve `publicLaunchEnabled=false`, noindex policy, no customer activation, billing or CRM writes until Supabase independent source-bound approval and CEO MFA decision.
 
 No production domain, DNS, secret, backend, legal or payment change is authorized by this source upgrade.
+
+## Scientific Studio correction after browser QA
+The 2026-11-22 read-only browser review covered the homepage, products, continuous journey and scientific studio and identified one missing explicit reset in the standalone scientific controls. Added `scientific-reset` to both the full studio and the embedded Products preview, wired to cancel animation, restore default yaw and time step 0, redraw, and announce the change through the existing accessible live readout. This is a client-only visual correction; measurements remain explicitly synthetic and all release gates stay off.

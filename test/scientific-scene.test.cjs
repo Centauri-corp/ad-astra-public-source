@@ -20,7 +20,7 @@ test('scientific scene is deterministic, spatial, bounded and explicitly synthet
 });
 test('scientific viewport has keyboard, time and numeric alternative with no live-data claims',()=>{
  const html=read('products/index.html'), js=read('scientific/viewer.js');
- for(const token of ['id="scientific-surface"','id="scientific-time"','id="scientific-left"','id="scientific-right"','id="scientific-animation"','id="scientific-surface-caption"'])
+ for(const token of ['id="scientific-surface"','id="scientific-time"','id="scientific-left"','id="scientific-right"','id="scientific-reset"','id="scientific-animation"','id="scientific-surface-caption"'])
  assert.ok(html.includes(token),token);
  assert.match(html,/synthetic scientific graphics prototype/);
  assert.match(html,/role="status" aria-live="polite"/);
@@ -30,4 +30,13 @@ test('scientific viewport has keyboard, time and numeric alternative with no liv
  assert.doesNotMatch(js,/fetch\s*\(|XMLHttpRequest|WebSocket|localStorage|sessionStorage|sendBeacon/);
  const source=read('scientific/scene-model.js');
  assert.doesNotMatch(source,/fetch\s*\(|XMLHttpRequest|WebSocket|localStorage|sessionStorage|sendBeacon/);
+});
+
+test('scientific route and products inline studio share a stop-and-reset controller',()=>{
+ const html=read('scientific/index.html'),product=read('products/index.html'),js=read('scientific/viewer.js');
+ for(const page of [html,product])assert.match(page,/id="scientific-reset" aria-label="Reset synthetic scientific camera and time"/);
+ assert.match(js,/reset\?\.addEventListener\("click"/);
+ assert.match(js,/stop\(\);yaw=\.58;step=0;time\.value="0";draw\(\)/);
+ assert.match(js,/View reset to time step 0/);
+ assert.doesNotMatch(js,/fetch\s*\(|XMLHttpRequest|WebSocket|localStorage|sessionStorage|sendBeacon/);
 });

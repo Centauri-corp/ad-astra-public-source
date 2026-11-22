@@ -10,6 +10,7 @@
   const timeValue=document.getElementById("scientific-time-value");
   const rotateLeft=document.getElementById("scientific-left");
   const rotateRight=document.getElementById("scientific-right");
+  const reset=document.getElementById("scientific-reset");
   const toggle=document.getElementById("scientific-animation");
   if(!model||!canvas||!caption||!time||!timeValue||!rotateLeft||!rotateRight||!toggle)return;
   const ctx=canvas.getContext("2d");
@@ -86,6 +87,10 @@
   time.addEventListener("input",()=>{stop();step=Number(time.value);draw();});
   rotateLeft.addEventListener("click",()=>{yaw=Math.max(-3.1,yaw-.25);draw();});
   rotateRight.addEventListener("click",()=>{yaw=Math.min(3.1,yaw+.25);draw();});
+  reset?.addEventListener("click",()=>{
+    stop();yaw=.58;step=0;time.value="0";draw();
+    caption.textContent+=" View reset to time step 0 and original rotation.";
+  });
   toggle.addEventListener("click",()=>{
     if(playing){stop();return;}
     if(motion.matches||saveData){caption.textContent="Animation disabled by reduced-motion or data-saver preference. Manual time controls remain available.";return;}
