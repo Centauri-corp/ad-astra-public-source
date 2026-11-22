@@ -180,7 +180,8 @@
   </div>
   <div class="proof-stage">
     <div class="proof-visual" role="group" aria-label="Original locally rendered interactive product visualization">
-      <canvas data-proof-canvas role="img" aria-label="An interactive visual study of the selected Ad Astra product direction. Use the accessible chapter and step controls alongside the scene."></canvas>
+      <canvas data-proof-canvas role="img" tabindex="0" aria-describedby="proof-scene-description" aria-label="Beyond Physics synthetic orbital illustration. Press left or right arrow to change study step."></canvas>
+      <p class="proof-screenreader" id="proof-scene-description" data-proof-accessible>Beyond Physics — Observation, step 1 of 3. Synthetic illustrative orbital evidence; no real telescope feed or AI inference.</p>
       <div class="proof-hud"><span data-proof-number>01 / DISCOVERY</span><span>ORIGINAL INTERACTIVE VISUALIZATION<br>NO MEASURED OR CUSTOMER DATA</span></div>
       <div class="proof-live-readout"><p data-proof-phase>Observation / 1 OF 3</p><strong data-proof-readout>OBSERVATION / ORBITAL SIGNAL</strong></div>
     </div>
@@ -197,6 +198,7 @@
       <div class="proof-actions">
         <button type="button" data-proof-advance>Advance the demonstration →</button>
         <button type="button" data-proof-reset>Reset study</button>
+        <button type="button" data-proof-motion aria-pressed="false">Play scene motion</button>
       </div>
       <p class="proof-evidence" data-proof-evidence role="status" aria-live="polite">Illustrative science visualization; no measured environmental data or live model inference.</p>
       <a data-proof-link href="/products/beyond-physics/">Explore the product <span aria-hidden="true">↗</span></a>
