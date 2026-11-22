@@ -3,7 +3,6 @@
   const hosts = [...document.querySelectorAll('[data-cinematic-host]')];
   if (!hosts.length) return;
   const storageKey = 'ad-astra-graphics-scene-v1';
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let sceneId;
   try { sceneId = sessionStorage.getItem(storageKey); } catch {}
   function activate(host, scene) {
@@ -29,8 +28,8 @@
         const initial = scenes.find(scene => scene.index === Number(host.dataset.cinematicScene));
         const selected = current || initial || scenes[0];
         activate(host, selected);
-        if (current && !reducedMotion.matches) {
-          host.querySelector('[data-cinematic-layer="' + current.index + '"]')?.click();
+        if (current) {
+          host.dispatchEvent(new CustomEvent('ad-astra:request-scene',{detail:{index:current.index,source:'restore'}}));
         }
         host.addEventListener('ad-astra:scene-change', event => {
           const next = scenes.find(scene => scene.index === event.detail.index);

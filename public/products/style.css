@@ -47,3 +47,8 @@
 .hero-art .products-cinematic-host { z-index:4 }
 .hero-art .cinematic-journey-chrome { display:none }
 .hero-art .cinematic-journey-status { bottom:70px;left:18px;text-align:left }
+
+/* Active direction is visible even with WebGL2 blocked or reduced motion. */
+.product-visual-selection{display:inline-flex;align-items:center;gap:9px;margin:18px 0 22px;padding:9px 0;color:#d3c49e;font:600 11px/1.6 Manrope,system-ui,sans-serif;letter-spacing:.07em;border-bottom:1px solid #e9c9905a;max-width:100%}
+.product-visual-selection:before{content:'';width:6px;height:6px;flex:none;background:#b6ebed;border-radius:50%;box-shadow:0 0 16px #83ddff80}
+@media(max-width:720px){.product-visual-selection{display:flex;letter-spacing:.03em;max-width:44ch}}

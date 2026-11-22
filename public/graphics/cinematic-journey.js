@@ -6,6 +6,7 @@
 
   const status = host.querySelector('[data-cinematic-status]');
   const buttons = [...host.querySelectorAll('[data-cinematic-layer]')];
+  const resetButton = host.querySelector('[data-cinematic-reset]');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const saveData = !!navigator.connection?.saveData;
   const labels = [
@@ -140,7 +141,9 @@
     if(status)status.textContent=message;
   };
   const updateScene=(next,source='control')=>{
-    scene=clamp(Number(next)||0,0,2);
+    const index=Number(next);
+    if(!Number.isInteger(index)||index<0||index>2)return false;
+    scene=index;
     host.dataset.cinematicScene=String(scene);
     host.dataset.cinematicLabel=scenes[scene].label;
     host.dispatchEvent(new CustomEvent('ad-astra:scene-change',{detail:{index:scene,source}}));
@@ -148,11 +151,37 @@
       const active=Number(button.dataset.cinematicLayer)===scene;
       button.setAttribute('aria-pressed',String(active));
     });
-    setStatus(source==='scroll'
-      ? labels[scene]+' · scroll-linked scene'
-      : labels[scene]+' · drag to orbit · Shift-scroll to zoom');
+    const still=!gl||reduced.matches||saveData||host.classList.contains('cinematic-fallback');
+    setStatus(still
+      ? labels[scene]+' · static preview · choose a scene'
+      : source==='scroll'
+        ? labels[scene]+' · scroll-linked scene'
+        : labels[scene]+' · drag or use arrow keys to orbit · Shift-scroll to zoom');
     draw(performance.now());
+    return true;
   };
+  const resetView=()=>{
+    yaw=-0.16;pitch=0.06;zoom=1.0;energy=0.4;
+    updateScene(scene,'reset');
+  };
+  canvas.addEventListener('keydown',event=>{
+    const key=event.key;
+    if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-','Home'].includes(key))return;
+    event.preventDefault();
+    if(key==='Home'){resetView();return;}
+    if(!gl){
+      if(key==='ArrowLeft'||key==='ArrowRight')updateScene((scene+(key==='ArrowRight'?1:2))%3,'keyboard');
+      else setStatus(labels[scene]+' · still preview · select a scene or activate WebGL2');
+      return;
+    }
+    if(key==='ArrowLeft')yaw-=0.12;
+    if(key==='ArrowRight')yaw+=0.12;
+    if(key==='ArrowUp')pitch=clamp(pitch-0.1,-0.72,0.72);
+    if(key==='ArrowDown')pitch=clamp(pitch+0.1,-0.72,0.72);
+    if(key==='+'||key==='=')zoom=clamp(zoom+0.08,0.72,1.42);
+    if(key==='-')zoom=clamp(zoom-0.08,0.72,1.42);
+    draw(performance.now());
+  });
   const compile=(type,source)=>{
     const shader=gl.createShader(type);
     if(!shader)throw Error('shader unavailable');
@@ -256,20 +285,18 @@
       setStatus('WebGL2 is unavailable. Static cinematic fallback remains available.');
     }
   };
-  setStatus('Still image. Select a layer to explore the scene.');
+  // Scene selection remains functional with static art, reduced motion or no WebGL2.
+  updateScene(host.dataset.cinematicScene||'0','static');
+  host.addEventListener('ad-astra:request-scene',event=>{
+    const index=event?.detail?.index;
+    if(Number.isInteger(index)&&index>=0&&index<=2)updateScene(index,'product');
+  });
   for (const button of buttons) {
-    button.addEventListener('click', () => {
-      if (reduced.matches || saveData) {
-        setStatus('Still image shown for your motion or data preference.');
-        return;
-      }
-      if (!gl && !host.classList.contains('cinematic-fallback')) start();
-      if (host.classList.contains('cinematic-ready') && !host.classList.contains('cinematic-fallback')) {
-        updateScene(button.dataset.cinematicLayer);
-      } else {
-        buttons.forEach(control => { control.disabled = true; });
-        setStatus('Still image. Interactive graphics are unavailable on this device.');
-      }
+    button.addEventListener('click',()=>{
+      const index=Number(button.dataset.cinematicLayer);
+      if(!reduced.matches&&!saveData&&!gl&&!host.classList.contains('cinematic-fallback'))start();
+      updateScene(index,'control');
     });
   }
+  resetButton?.addEventListener('click',resetView);
 })();

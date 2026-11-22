@@ -87,5 +87,19 @@
     "noSyntheticReceiptsAsEvidence": true,
     "noCustomerActivations": true,
     "noAutomaticDomainPromotion": true
+  },
+  "visualInteractionUpgrade": {
+    "version": "p2-human-controlled-cinematic",
+    "tracks": [
+      "accessible static scene selection",
+      "product-to-shared-scene synchronization",
+      "camera reset",
+      "keyboard orbit and zoom",
+      "reduced-motion and data-saver operation"
+    ],
+    "homepageToStudio": "/scientific/",
+    "releaseScope": "source-and-protected-preview-only",
+    "customerRuntimeEnabled": false,
+    "publicPromotionAllowed": false
   }
 }

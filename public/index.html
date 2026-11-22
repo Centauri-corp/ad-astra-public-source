@@ -141,12 +141,13 @@
     <img class="hero-image neural-hero" src="assets/astra-lumen-neural-brain.png" width="1672" height="941" fetchpriority="high" alt="A translucent neural brain with cyan synapses and gold orbital paths in deep space">
     <video class="hero-video motion-video" muted playsinline preload="none" poster="assets/astra-lumen-neural-brain.png" aria-hidden="true" tabindex="-1"><source src="assets/ad-astra-runway-orbital-motion.mp4" type="video/mp4"></video>
     <div class="cinematic-journey-host" data-cinematic-host data-cinematic-scene="arrival" aria-label="Interactive cinematic spatial stage">
-      <canvas class="cinematic-journey-canvas" data-cinematic-journey role="img" aria-label="Procedural 3D Earth and orbital knowledge field. Drag to orbit and Shift-scroll to zoom."></canvas>
+      <canvas class="cinematic-journey-canvas" data-cinematic-journey role="img" tabindex="0" aria-label="Procedural 3D Earth and orbital knowledge field. Drag to orbit and Shift-scroll to zoom."></canvas>
       <div class="cinematic-journey-chrome" aria-hidden="true"><span><strong>AD ASTRA / UNIVERSAL STAGE</strong></span><span>PROCEDURAL SPATIAL SCENE / PUBLIC PREVIEW</span></div>
       <div class="cinematic-journey-control-bar" aria-label="Choose cinematic scene layer">
         <button type="button" data-cinematic-layer="0" aria-pressed="true">Arrival</button>
         <button type="button" data-cinematic-layer="1" aria-pressed="false">Science</button>
         <button type="button" data-cinematic-layer="2" aria-pressed="false">Solutions</button>
+        <button type="button" data-cinematic-reset aria-label="Reset spatial camera and perspective">Reset view</button>
       </div>
       <p class="cinematic-journey-status" data-cinematic-status role="status">Spatial scene loading · static fallback ready</p>
     </div>
@@ -163,7 +164,7 @@
         </div>
       </form>
       <noscript><p><a href="/workspace/">Open the Ad Astra workspace</a></p></noscript>
-      <div class="lumen-links"><button type="button" id="lumen-example">Try an example</button><a href="/journey/">Explore the full journey ↗</a><a href="/products/">Products &amp; Solutions ↗</a></div>
+      <div class="lumen-links"><button type="button" id="lumen-example">Try an example</button><a href="/journey/">Explore the full journey ↗</a><a href="/products/">Products &amp; Solutions ↗</a><a href="/scientific/">3D Scientific Studio ↗</a></div>
       <p id="lumen-status" role="status"></p>
       <div id="lumen-result" hidden>
         <strong id="lumen-example-label">Example response</strong><p id="lumen-reply"></p>

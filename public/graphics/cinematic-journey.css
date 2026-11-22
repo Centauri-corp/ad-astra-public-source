@@ -50,3 +50,15 @@
 .products-cinematic-host .cinematic-journey-status{bottom:80px;left:20px;right:20px;max-width:50ch;text-align:left}
 .hero-art:has(.products-cinematic-host)>.hero-label{display:none}
 @media(max-width:640px){.products-cinematic-host .cinematic-journey-control-bar{left:14px;bottom:18px;gap:4px}.products-cinematic-host .cinematic-journey-status{left:14px;right:14px;bottom:84px}.hero .hero-content{max-width:calc(100% - 36px)}}
+
+/* P2: human-directed stage controls and accessible camera resets, no GPU required. */
+.cinematic-journey-control-bar [data-cinematic-reset]{border-color:#e9c99077;color:#fff3d7;background:#102231d9}
+.cinematic-journey-control-bar [data-cinematic-reset]:hover,.cinematic-journey-control-bar [data-cinematic-reset]:focus-visible{border-color:#efd19a;background:#263c4d}
+.cinematic-journey-canvas:focus-visible{outline:2px solid #efd19a;outline-offset:-6px}
+@media(max-width:640px){
+  .hero .cinematic-journey-control-bar{bottom:104px;max-width:min(352px,calc(100% - 50px));gap:5px}
+  .hero .cinematic-journey-status{bottom:58px;max-width:42ch}
+  .products-cinematic-host .cinematic-journey-control-bar{max-width:calc(100% - 28px);gap:5px}
+  .products-cinematic-host .cinematic-journey-status{bottom:92px}
+}
+@media(prefers-reduced-motion:reduce){.cinematic-journey-control-bar button{scroll-behavior:auto}}
