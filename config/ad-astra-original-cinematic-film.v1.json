@@ -1,0 +1,200 @@
+{
+  "schema": "crc.ad-astra.original-cinematic-film/v1",
+  "status": "ARCHITECTURE_ONLY_NOT_RENDERED",
+  "scope": "One original Ad Astra flagship film aligned with documentary-scale astronomy and DJI-style product storytelling",
+  "referenceEvidence": {
+    "uploadedReference": "59.70 second 910x512 30 fps H.264 phone recording of a television displaying third-party documentary material",
+    "rights": "REFERENCE_ONLY_NO_REUSE",
+    "thirdPartyFootageAllowed": false,
+    "thirdPartyNarrationOrMusicAllowed": false,
+    "djiProductPage": "https://www.dji.com/rs-5",
+    "djiMediaAllowed": false
+  },
+  "creative": {
+    "filmDurationSeconds": 90,
+    "filmFPS": 24,
+    "artDirection": "photoreal astronomy to tactile product demonstrations; no generic glowing-head loop",
+    "colorArc": [
+      "deep-black-amber-solar",
+      "photoreal-earth-blue",
+      "neutral-human-systems",
+      "warm-resolved-brand"
+    ],
+    "camera": "one choreographed visual grammar across all chapters",
+    "reducedMotionRequired": true
+  },
+  "shots": [
+    {
+      "id": "F01",
+      "start": 0,
+      "end": 10,
+      "chapter": "Origin of energy",
+      "visual": "A nearly black frame reveals a newly simulated corona from a distant star; no inherited title or footage",
+      "camera": "Slow macro pullback with slight roll and physically consistent highlights",
+      "newAssets": [
+        "procedural_star_corona",
+        "particle_plasma"
+      ],
+      "product": "origin",
+      "voiceDirection": "Human curiosity begins with perspective.",
+      "audioDirection": "Low evolving subharmonic; restrained; no licensed documentary score",
+      "handoff": "sun"
+    },
+    {
+      "id": "F02",
+      "start": 10,
+      "end": 21,
+      "chapter": "Earth as a system",
+      "visual": "One continuous camera passage from stellar light across the atmosphere of a photoreal original Earth asset",
+      "camera": "Long focal-length orbital arc and atmospheric transition; keep horizon curvature physically plausible",
+      "newAssets": [
+        "earth_pbr",
+        "atmosphere_volumetrics",
+        "cloud_layers",
+        "sunlight"
+      ],
+      "product": "origin",
+      "voiceDirection": "We make the complex world easier to see.",
+      "audioDirection": "First harmonic rise and cinematic air movement",
+      "handoff": "earth"
+    },
+    {
+      "id": "F03",
+      "start": 21,
+      "end": 31,
+      "chapter": "From scale to human intent",
+      "visual": "Orbital trajectories become evidence marks and a human-directed interface, never a random light tunnel",
+      "camera": "Single directed push-in that resolves celestial scale into a readable product plane",
+      "newAssets": [
+        "orbit_paths",
+        "evidence_interface_ui",
+        "depth_field"
+      ],
+      "product": "platform",
+      "voiceDirection": "Discovery matters when it becomes understanding.",
+      "audioDirection": "Rhythmic motive enters beneath original narration",
+      "handoff": "evidence"
+    },
+    {
+      "id": "F04",
+      "start": 31,
+      "end": 43,
+      "chapter": "Beyond Physics",
+      "visual": "Original scientific workbench showing one bounded inquiry, competing hypotheses and their evidentiary limitations",
+      "camera": "Macro glide across a high-fidelity spatial dataset; one focal point and deliberate eye-line",
+      "newAssets": [
+        "science_workbench",
+        "synthetic_orbital_model",
+        "hypothesis_overlay"
+      ],
+      "product": "beyond-physics",
+      "voiceDirection": "Compare what we know with what remains uncertain.",
+      "audioDirection": "Precise sonic accents synchronized to evidence changes",
+      "handoff": "science"
+    },
+    {
+      "id": "F05",
+      "start": 43,
+      "end": 54,
+      "chapter": "Astra Lumen",
+      "visual": "An actual learning interaction in a tactile, believable environment; staged demo clearly marked illustrative",
+      "camera": "Human-scale dolly through layers of a concept into a guided learning outcome",
+      "newAssets": [
+        "learning_environment",
+        "learning_path_ui",
+        "human_context"
+      ],
+      "product": "astra-lumen",
+      "voiceDirection": "Knowledge gains power when it becomes accessible.",
+      "audioDirection": "Warm melodic lift, no narration masking",
+      "handoff": "learning"
+    },
+    {
+      "id": "F06",
+      "start": 54,
+      "end": 66,
+      "chapter": "Neural Visual Experience",
+      "visual": "An accurately labeled synthetic 3D model changes with direct time/rotation controls; physical surface and UI have matched state",
+      "camera": "Full orbit of a real 3D mesh, then align to corresponding web camera keyframe",
+      "newAssets": [
+        "scientific_glb",
+        "interaction_control_surface",
+        "matched_cam_poses"
+      ],
+      "product": "neural-visual-experience",
+      "voiceDirection": "Explore relationships, and control the perspective.",
+      "audioDirection": "Clear interaction tones and controlled texture",
+      "handoff": "scientific"
+    },
+    {
+      "id": "F07",
+      "start": 66,
+      "end": 79,
+      "chapter": "Governed AI Workflows",
+      "visual": "One realistic permission decision flows through a human approval, tenant boundary and receipt; synthetic demo, no false production claim",
+      "camera": "Lateral single-take tracing one authorized action rather than generic neural-avatar imagery",
+      "newAssets": [
+        "workflow_environment",
+        "auth_boundary_ui",
+        "receipt_preview"
+      ],
+      "product": "governed-workflows",
+      "voiceDirection": "Intelligence must remain accountable to people.",
+      "audioDirection": "Minimal confident rhythm; no artificial success signal",
+      "handoff": "governance"
+    },
+    {
+      "id": "F08",
+      "start": 79,
+      "end": 90,
+      "chapter": "Ad Astra reveal",
+      "visual": "The four differentiated product worlds resolve into one restrained Ad Astra mark and a single intentional explore CTA",
+      "camera": "Measured pullback into original Earth horizon visual with 2-second legible title hold",
+      "newAssets": [
+        "ad_astra_brand_original",
+        "final_earth_horizon",
+        "cta_titles"
+      ],
+      "product": "portfolio",
+      "voiceDirection": "Ad Astra. Beyond the expected. Human-directed.",
+      "audioDirection": "Resolved orchestral swell and quiet 2-second tail",
+      "handoff": "products"
+    }
+  ],
+  "production": {
+    "authoring": "Unreal Engine Sequencer offline cinematic shots, Houdini procedural plasma where needed, original modeled/rigged assets, color-managed finishing",
+    "render": "4K 3840x2160 24 fps 10-bit or EXR production master; ACES/linear scene work with SDR Rec.709 delivery grade",
+    "audio": "Original voice and commissioned score only; target web mix approx -16 LUFS integrated and <= -1 dBTP (targets not source measurements)",
+    "deliverables": [
+      "private_mezzanine_master",
+      "1080p_web_encode",
+      "720p_low_bandwidth_encode",
+      "9x16_reframed_edit",
+      "poster_avif",
+      "captions_vtt",
+      "audio_description_or_equivalent_descriptive_transcript",
+      "source_and_rights_registry"
+    ],
+    "web": "Opt-in film modal and poster first, responsive media selection, caption accessibility, pause on close/tab hidden, bounded GPU scenes, fallback stills",
+    "sceneHandoff": "Offline cinematic camera pose and semantic scene IDs feed web ExperienceDirector; WebGL2 mesh handoff at selected shot boundaries, not a claim that film frames are interactive",
+    "separation": "Do not ship production-source assets, raw footage, unreleased movie, private content or rights evidence in public repo"
+  },
+  "release": {
+    "publicPlaybackAllowed": false,
+    "publicPromotionAllowed": false,
+    "commercialActivationAllowed": false,
+    "existingApprovalAuthority": "CRC Supabase independent exact-build release case",
+    "requires": [
+      "source-rights-proof",
+      "director-rendered-visual-review",
+      "authentic-product-claim-review",
+      "desktop-tablet-390px-visual-QA",
+      "captions-audio-and-motion-accessibility",
+      "performance-budgets",
+      "exact-build-deployment-and-rollback",
+      "Supabase-independent-release-authority"
+    ],
+    "noExtraApprovalLedger": true
+  },
+  "noUserVideoUploadToRepo": true
+}
