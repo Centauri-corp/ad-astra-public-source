@@ -17,7 +17,9 @@ test('one complete CRC public launch train, not separate launch approvals',()=>{
  assert.deepEqual(train.phases.map(p=>p.id),Array.from({length:10},(_,i)=>'L'+String(i).padStart(2,'0')));
  assert.equal(train.authority.publicSource,'Centauri-corp/ad-astra-public-source');
  assert.equal(train.authority.publicPr,61);
- assert.equal(train.authority.privatePr,160);
+ assert.equal(train.authority.privatePr,161);
+ assert.equal(train.authority.privateCandidateBranch,'upgrade/ad-astra-one-production-flow-20261121');
+ assert.deepEqual(train.authority.supersededPrivatePrs,[160]);
  assert.equal(train.authority.additionalApprovalLanes,false);
  assert.equal(train.authority.independentReleaseCaseRequired,true);
  assert.ok(train.phases.some(p=>p.name.includes('Original film')));
