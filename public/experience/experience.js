@@ -131,26 +131,18 @@
     }, { threshold: 0.08 }).observe(hero);
     if (sections.length) {
       const visible = new Map();
-      new IntersectionObserver(entries => {
+      const observer = new IntersectionObserver(entries => {
         for (const entry of entries) {
           if (entry.isIntersecting) visible.set(entry.target.id, entry.intersectionRatio);
           else visible.delete(entry.target.id);
-        }
-        const best = [...visible].sort((a, b) => b[1] - a[1])[0];
-        if (best) selectChapter(best[0]);
-      }, { threshold: [0.15, 0.35, 0.65] }).observe(sections[0]);
-      // Use one observer for all chapters to keep a coherent readout.
-      const chapterObserver = new IntersectionObserver(entries => {
-        for (const entry of entries) {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
-            selectChapter(entry.target.id);
-          }
           if (entry.target.classList.contains('feature') && entry.isIntersecting) {
             entry.target.classList.add('in-view');
           }
         }
-      }, { threshold: [0.15, 0.45] });
-      sections.forEach(section => chapterObserver.observe(section));
+        const best = [...visible].sort((a, b) => b[1] - a[1])[0];
+        if (best) selectChapter(best[0]);
+      }, { threshold: [0.15, 0.35, 0.65] });
+      sections.forEach(section => observer.observe(section));
     }
   } else {
     sections.forEach(section => section.classList.add('in-view'));
