@@ -147,4 +147,84 @@
   } else {
     sections.forEach(section => section.classList.add('in-view'));
   }
+  // One local, bounded product-story controller. No model calls or billing
+  // requests: scene and copy are static reviewed creative assets only.
+  const productDirections = Object.freeze({
+    discovery: Object.freeze({
+      title: 'Beyond Physics',
+      overline: 'FROM QUESTIONS TO CONNECTIONS',
+      description: 'Explore how different disciplines interpret the same question, and distinguish evidence from possibility.',
+      label: 'DISCOVERY / CONCEPTUAL VISUAL',
+      image: '/assets/astra-lumen-neural-horizon.png',
+      alt: 'Ad Astra conceptual orbital intelligence field over an Earth horizon'
+    }),
+    learning: Object.freeze({
+      title: 'Astra Lumen',
+      overline: 'FROM COMPLEXITY TO LEARNING',
+      description: 'Follow a human-directed explanation of a difficult idea, with the intention of keeping the learner in control of the next step.',
+      label: 'LEARNING / CONCEPTUAL VISUAL',
+      image: '/assets/astra-lumen-neural-brain.png',
+      alt: 'Luminous cyan neural network with golden orbital connections'
+    }),
+    visualize: Object.freeze({
+      title: 'Neural Visual Experience',
+      overline: 'FROM INFORMATION TO SPATIAL UNDERSTANDING',
+      description: 'Make relationships and time-varying models easier to inspect. Try the synthetic scientific surface to experience direct controls.',
+      label: 'VISUALIZATION / SYNTHETIC STUDY',
+      image: '/assets/astra-lumen-neural-profile-canvas.png',
+      alt: 'Cyan neural silhouette with connected violet signal geometry'
+    }),
+    govern: Object.freeze({
+      title: 'Governed AI Workflows',
+      overline: 'FROM INTENT TO HUMAN REVIEW',
+      description: 'Explore how decision points, authorization boundaries and review steps fit into a governed operating process.',
+      label: 'GOVERNANCE / CONCEPTUAL VISUAL',
+      image: '/assets/astra-lumen-neural-concierge.png',
+      alt: 'Conceptual neural figure in cyan and gold, representing a governed interface'
+    })
+  });
+  const productButtons = [...document.querySelectorAll('[data-experience-product]')];
+  const productPreview = document.querySelector('[data-product-preview]');
+  function selectProduct(id) {
+    if (!Object.hasOwn(productDirections, id) || !productPreview) return;
+    const data = productDirections[id];
+    const art = productPreview.querySelector('[data-product-art]');
+    if (art) {
+      art.src = data.image;
+      art.alt = data.alt;
+    }
+    const textFields = {
+      '[data-product-title]': data.title,
+      '[data-product-overline]': data.overline,
+      '[data-product-description]': data.description,
+      '[data-product-label]': data.label,
+      '[data-product-status]': 'Concept demonstration. No customer data, AI model, or external sources are accessed by this selector.'
+    };
+    for (const [selector, value] of Object.entries(textFields)) {
+      const element = productPreview.querySelector(selector);
+      if (element) element.textContent = value;
+    }
+    productPreview.dataset.productActive = id;
+    productButtons.forEach(button => {
+      const active = button.dataset.experienceProduct === id;
+      button.setAttribute('aria-pressed', String(active));
+      button.classList.toggle('is-selected', active);
+    });
+  }
+  productButtons.forEach((button, index) => {
+    button.addEventListener('click', () => selectProduct(button.dataset.experienceProduct));
+    button.addEventListener('keydown', event => {
+      const { key } = event;
+      if (!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp','Home','End'].includes(key)) return;
+      event.preventDefault();
+      const delta = key === 'ArrowRight' || key === 'ArrowDown' ? 1 : -1;
+      const next = key === 'Home' ? 0
+        : key === 'End' ? productButtons.length-1
+        : (index + delta + productButtons.length) % productButtons.length;
+      productButtons[next].focus();
+      selectProduct(productButtons[next].dataset.experienceProduct);
+    });
+  });
+  if (productButtons.length) selectProduct('discovery');
+
 })();
