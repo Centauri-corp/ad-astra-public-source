@@ -211,7 +211,16 @@
       "commercial30sExportCard": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film/notebook/seq-18.1",
       "commercialCutdownRightsAccepted": false,
       "flagshipProofSource": "public/graphics/flagship-proof.js",
-      "flagshipProofStatus": "4 locally rendered synthetic product demonstrations, desktop QA PASS, DJI-level cinematic acceptance FAIL"
+      "flagshipProofStatus": "4 locally rendered synthetic product demonstrations, desktop QA PASS, DJI-level cinematic acceptance FAIL",
+      "commercial30sStatus": "EXPORTED_1080P_REVIEW_CUT__NOT_CREATIVE_OR_RIGHTS_APPROVED",
+      "commercial30sExportEvidence": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film/notebook/seq-18.1",
+      "commercial30sEditQC": {
+        "structuralCheck": "PASS",
+        "compositeFrameCapture": "COMPLETE",
+        "soundtrack": "SILENT",
+        "originalMasterUnchanged": true
+      },
+      "proofPlacement": "Shared component on homepage and Products & Solutions index, not yet embedded in every individual product detail page"
     },
     "fullstack": {
       "api": [
@@ -249,7 +258,9 @@
       "supabaseNeedsEvidence": 5,
       "supabaseAuthorities": 0,
       "releaseCases": 0,
-      "domainVerified": false
+      "domainVerified": false,
+      "latestStageEvidenceRecordedAsOf": "2026-11-22T08:18:00Z",
+      "latestStageSourceShaIsPriorCandidate": true
     },
     "phases": [
       {
@@ -263,7 +274,7 @@
         "id": "L01",
         "name": "Original film and commercial media",
         "state": "PARTIAL",
-        "evidence": "Existing invideo 40s master and 15.5s loop; 30s reviewed edit in same video project; 90s photoreal master NOT RENDERED",
+        "evidence": "Existing 40s master preserved, separate original-material 30s cut exported 1080p and structurally checked; 90s high-fidelity flagship not rendered, media rights and visual approval pending",
         "blocksPromotion": true
       },
       {
