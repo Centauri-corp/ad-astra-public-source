@@ -65,5 +65,43 @@
     "visualAcceptance": "PENDING",
     "mobileAcceptance": "PENDING",
     "flagshipCGIFilm": "NOT_RENDERED"
+  },
+  "cinematicReviewCandidate": {
+    "status": "RENDERED_AND_EDITED_NOT_PUBLICLY_INTEGRATED",
+    "origin": "original Ad Astra conceptual film generated for CRC 2026-11-22",
+    "renderer": "Runway connected workspace",
+    "sourceTaskId": "eb2ff683-1030-4b13-a16e-d10431668e85",
+    "format": {
+      "durationSeconds": 15.041,
+      "width": 1920,
+      "height": 1080,
+      "aspectRatio": "16:9",
+      "audio": false
+    },
+    "scenes": [
+      "Precision titanium-sapphire optical concept, studio macro",
+      "Human scientific adjustment of optical concept",
+      "Orbital observatory and Earth curvature"
+    ],
+    "editorial": {
+      "existingProject": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film",
+      "timeline": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film/tree/crc-ad-astra-photoreal-cinematic-product-proof-2026-11-22/seq-6.1",
+      "export": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film/notebook/seq-20.1",
+      "exportedDurationSeconds": 30,
+      "dimensions": "1920x1080",
+      "fps": 24,
+      "structuralCheck": "PASS",
+      "creativeAcceptance": "PENDING"
+    },
+    "websiteDelivery": {
+      "status": "PENDING_FIRST_PARTY_ASSET_AND_CREATIVE_ACCEPTANCE",
+      "currentHeroMp4": "/assets/ad-astra-horizon-motion.mp4",
+      "replacementPerformed": false,
+      "preventSignedTemporaryUrlEmbedding": true,
+      "noThirdPartyClipAsProductProof": true
+    },
+    "rights": "PENDING_REVIEW",
+    "globalProductionGate": "HOLD",
+    "statement": "Optical hardware is a designed conceptual visual object, not an existing, certified or shipping product"
   }
 }
