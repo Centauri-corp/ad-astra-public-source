@@ -1,0 +1,168 @@
+/* CRC original cinema director — one coordinated hero, optional real WebGL2,
+   and a separate human-directed intelligence interaction. REVIEW ONLY. */
+.hero.hero-cinema-v3 {
+  isolation:isolate;
+  min-height:min(870px,calc(100svh - var(--header)));
+  height:calc(100svh - var(--header));
+  max-height:1100px;
+  background:#030c16;
+  color:#f5f9fb;
+}
+.hero-cinema-v3>.hero-image,.hero-cinema-v3>.hero-video {
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:62% 50%;pointer-events:none;
+}
+.hero-cinema-v3>.hero-image{z-index:-4;filter:contrast(1.1) saturate(.95)}
+.hero-cinema-v3>.hero-video{z-index:-3;filter:saturate(.99) contrast(1.08);transition:opacity 1s ease}
+.hero-cinema-v3>.hero-shade{
+  z-index:1;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(2,8,16,.97) 0%,rgba(2,9,18,.79) 33%,rgba(2,9,18,.16) 75%),
+    linear-gradient(0deg,rgba(2,8,15,.84),transparent 34%),
+    linear-gradient(180deg,rgba(2,8,16,.48),transparent 20%);
+}
+.hero-cinema-v3 .cinematic-journey-host{
+  z-index:0;visibility:hidden;opacity:0;transition:opacity .65s ease,visibility .65s ease;
+}
+.hero-cinema-v3 .cinematic-journey-host:before{background:linear-gradient(90deg,#020812ef 0%,#0208129a 37%,#02081220 78%)}
+.hero-cinema-v3[data-cinema-mode="spatial"] .cinematic-journey-host{visibility:visible;opacity:1;z-index:2}
+.hero-cinema-v3[data-cinema-mode="spatial"]>.hero-video{opacity:0!important}
+.hero-cinema-v3 .cinematic-journey-canvas{pointer-events:none}
+.hero-cinema-v3[data-cinema-mode="spatial"] .cinematic-journey-canvas{pointer-events:auto}
+.hero-cinema-v3 .cinematic-journey-control-bar{
+  left:7%;bottom:113px;right:auto;z-index:3;pointer-events:auto
+}
+.hero-cinema-v3 .cinematic-journey-status{
+  right:7%;bottom:124px;max-width:34ch;z-index:3;color:#d5e6ed;
+  font-size:10px;text-align:right
+}
+.hero-cinema-v3 .cinematic-journey-control-bar button{
+  border:1px solid #b7c4cc80;background:#0b2836d8;
+  font-size:10px;letter-spacing:.1em;padding:11px 16px;min-height:44px
+}
+.hero-cinema-v3 .cinema-hero-composition{
+  position:absolute;top:50%;left:7%;max-width:min(810px,70vw);z-index:5;
+  transform:translateY(-51%);pointer-events:none;
+}
+.hero-cinema-v3 .cinema-hero-composition a{pointer-events:auto}
+.cinema-hero-overline,.cinema-bridge-kicker{
+  color:#efcf91;font-family:Manrope,system-ui,sans-serif;
+  font-size:11px;font-weight:750;letter-spacing:.2em;text-transform:uppercase
+}
+.hero-cinema-v3 .cinema-hero-composition h1{
+  font-family:Manrope,system-ui,sans-serif;font-weight:500;
+  font-size:clamp(56px,7.2vw,113px);letter-spacing:-.07em;line-height:1.065;
+  margin:25px 0 24px
+}
+.hero-cinema-v3 .cinema-hero-composition h1 em{font-style:normal;color:#a6dfe6}
+.cinema-hero-subline{
+  font:400 clamp(16px,1.45vw,20px)/1.75 "DM Sans",system-ui,sans-serif;
+  max-width:56ch;color:#d0dfe5
+}
+.cinema-hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:34px}
+.cinema-hero-primary,.cinema-hero-secondary{
+  display:inline-flex;justify-content:center;align-items:center;min-height:54px;
+  padding:16px 22px;gap:20px;text-decoration:none;cursor:pointer;
+  font:700 12px Manrope,system-ui,sans-serif;
+  transition:background .2s,transform .2s,border-color .2s
+}
+.cinema-hero-primary{color:#071420;background:#f5f8f9;border:1px solid #f5f8f9}
+.cinema-hero-secondary{color:#f0f8fa;background:#0b23318c;border:1px solid #d2e5e5a6}
+.cinema-hero-primary:hover{background:#a9e2e8;transform:translateY(-2px)}
+.cinema-hero-secondary:hover{background:#194556;transform:translateY(-2px)}
+.hero-cinema-v3 .cinema-hero-footer{
+  left:7%;right:7%;bottom:24px;display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;z-index:8;gap:15px
+}
+.hero-cinema-v3 .cinema-hero-footer p{font:700 10px/1.5 Manrope,sans-serif;color:#e5d0ac}
+.hero-cinema-v3 .cinema-hero-footer p span{font:600 9px Manrope,sans-serif;margin-top:5px;color:#b8d1dd}
+.hero-cinema-v3 .cinema-hero-footer>a{font:700 9px Manrope,sans-serif}
+.hero-cinema-v3 .cinema-hero-footer .motion-note{font-size:9px;color:#bdd0dc;max-width:270px}
+.cinema-spatial-switch{
+  background:#0c2a3be0;border:1px solid #c6dee7b7;color:#f6fafb;
+  font:700 11px Manrope,sans-serif;padding:12px 17px;min-height:44px;cursor:pointer
+}
+.cinema-spatial-switch:hover,.cinema-spatial-switch[aria-pressed="true"]{
+  background:#23495c;color:#f1d7a3;border-color:#efcf91
+}
+.hero-cinema-v3 .motion{min-height:44px;color:#dcebf1;font-weight:650}
+.lumen-intelligence-bridge{
+  background:radial-gradient(ellipse at 86% 25%,#174354b8,transparent 63%),#071522;
+  color:#f0f7fa;padding:clamp(70px,8vw,135px) clamp(22px,7vw,108px);
+  border-top:1px solid #82aab32c;border-bottom:1px solid #82aab32c
+}
+.lumen-intelligence-wrap{width:min(100%,1450px);margin:0 auto}
+.lumen-intelligence-bridge #lumen-interaction{
+  position:relative;top:auto;left:auto;right:auto;max-width:780px;min-width:0;
+  color:#e7f3f7;z-index:1
+}
+.lumen-intelligence-bridge #lumen-interaction h2{
+  font:500 clamp(39px,5.1vw,74px)/1.08 Manrope,system-ui,sans-serif;
+  letter-spacing:-.06em;margin:22px 0
+}
+.lumen-intelligence-bridge #lumen-interaction h2 em{font-style:normal;color:#b0e8ed}
+.cinema-bridge-context{color:#b8ced9;font:400 15px/1.78 "DM Sans",sans-serif;max-width:65ch;margin:0 0 31px}
+.lumen-intelligence-bridge #lumen-form label{
+  color:#eef7f7;font:600 13px Manrope,sans-serif;margin-bottom:12px
+}
+.lumen-intelligence-bridge .lumen-entry{max-width:750px;min-height:67px;border:1px solid #a3bdc57e;background:#0d2b3d}
+.lumen-intelligence-bridge .lumen-entry input{color:#eef8fb;font-size:15px;min-width:120px}
+.lumen-intelligence-bridge .lumen-entry input::placeholder{color:#aac3d0}
+.lumen-intelligence-bridge #lumen-interaction button{
+  background:#21516a;border-color:#b4dbe17f;color:#f4f9fa;min-height:45px
+}
+.lumen-intelligence-bridge #lumen-interaction button:hover{background:#2b7188}
+.lumen-intelligence-bridge .lumen-links a{color:#b6edf1;text-decoration:underline;text-underline-offset:4px;font-size:12px}
+.lumen-intelligence-bridge #lumen-result{
+  background:#0d3040;border-left:3px solid #e9c990;max-width:740px
+}
+.hero-cinema-v3 a:focus-visible,.hero-cinema-v3 button:focus-visible,
+.lumen-intelligence-bridge a:focus-visible,.lumen-intelligence-bridge button:focus-visible,
+.lumen-intelligence-bridge input:focus-visible{
+  outline:3px solid #9ceaf1;outline-offset:4px
+}
+@media(max-width:1000px){
+  .hero-cinema-v3 .cinema-hero-composition{max-width:75vw;left:6%}
+  .hero-cinema-v3 .cinema-hero-footer{left:6%;right:6%}
+  .hero-cinema-v3 .cinematic-journey-control-bar{left:6%}
+  .hero-cinema-v3 .cinematic-journey-status{right:6%}
+}
+@media(max-width:680px){
+  .hero.hero-cinema-v3{height:auto;max-height:none;min-height:760px}
+  .hero-cinema-v3>.hero-image,.hero-cinema-v3>.hero-video{object-position:67% center}
+  .hero-cinema-v3>.hero-shade{
+    background:linear-gradient(90deg,#030d19e8,#030e1b8c),linear-gradient(0deg,#030b16f0,transparent 48%)
+  }
+  .hero-cinema-v3 .cinema-hero-composition{
+    top:72px;left:22px;right:22px;max-width:none;transform:none
+  }
+  .hero-cinema-v3 .cinema-hero-composition h1{
+    font-size:clamp(44px,11vw,65px);max-width:12ch;margin:18px 0
+  }
+  .hero-cinema-v3 .cinema-hero-subline{font-size:15px;max-width:43ch}
+  .hero-cinema-v3 .cinema-hero-actions{gap:11px;margin-top:24px}
+  .hero-cinema-v3 .cinema-hero-actions a{width:100%;min-height:49px;font-size:11px}
+  .hero-cinema-v3 .cinema-hero-footer{
+    left:22px;right:22px;bottom:20px;align-items:flex-start;justify-content:flex-start
+  }
+  .hero-cinema-v3 .cinema-hero-footer p{width:100%}
+  .hero-cinema-v3 .cinema-hero-footer>a{display:none}
+  .hero-cinema-v3 .cinema-hero-footer .motion-note{display:none}
+  .hero-cinema-v3 .cinema-hero-footer button{font-size:10px}
+  .hero-cinema-v3 .cinematic-journey-control-bar{left:22px;bottom:174px;right:22px}
+  .hero-cinema-v3 .cinematic-journey-status{
+    left:22px;right:22px;bottom:133px;text-align:left;max-width:95%;font-size:10px
+  }
+  .lumen-intelligence-bridge{padding:67px 22px}
+  .lumen-intelligence-bridge #lumen-interaction h2{font-size:clamp(37px,9vw,56px)}
+}
+@media(max-width:390px){
+  .hero.hero-cinema-v3{min-height:810px}
+  .hero-cinema-v3 .cinema-hero-composition h1{font-size:44px}
+  .hero-cinema-v3 .cinema-hero-footer{gap:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-cinema-v3>.hero-video{display:none}
+  .hero-cinema-v3 .cinematic-journey-host,
+  .cinema-hero-primary,.cinema-hero-secondary{transition:none!important}
+}
