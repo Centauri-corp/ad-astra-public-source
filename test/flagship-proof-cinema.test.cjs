@@ -46,7 +46,7 @@ test('four real local simulation modes are distinct, interactive and release tru
  assert.match(js,/aria-pressed/);
  assert.match(js,/data-proof-cinema/);
  assert.match(js,/ArrowRight/);
- assert.match(js,/role=/); // comment or DOM content may include accessible metadata
+ assert.match(js,/canvas\.setAttribute\('tabindex','0'\)/);
  assert.doesNotMatch(js,/\bfetch\s*\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|navigator\.mediaDevices|speechSynthesis/);
 });
 
