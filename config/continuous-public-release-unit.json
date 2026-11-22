@@ -110,5 +110,36 @@
     "allDeviceQAComplete": false,
     "finalProductionAccepted": false,
     "approvalRule": "Visual approval of original homepage commit is preserved; this changed creative route needs exact-SHA QA and cannot imply release GO"
+  },
+  "productsSolutionsVertical": {
+    "schema": "ad-astra/products-solutions-portfolio/v1",
+    "registry": "public/products/portfolio.json",
+    "entry": "/products/",
+    "flagshipRoutes": [
+      "/products/beyond-physics/",
+      "/products/astra-lumen/",
+      "/products/neural-visual-experience/",
+      "/products/governed-workflows/"
+    ],
+    "flagshipCount": 4,
+    "capabilityPreviewCount": 12,
+    "lifeCandidateCount": 3,
+    "marketResearchDirectionsCount": 15,
+    "visualStorytelling": "/experience/#product-demos",
+    "scientificInteractivePreview": "/scientific/",
+    "customerJourney": [
+      "/products/",
+      "/products/beyond-physics/",
+      "/pricing/",
+      "/workspace/",
+      "/account/billing/"
+    ],
+    "pricingAuthority": "server-verified; all public offers remain drafts",
+    "backend": "existing /api/workspace, /api/subscriptions and /api/status with server-side auth and release gates",
+    "reviewOnly": true,
+    "productionAccepted": false,
+    "noLiveCheckout": true,
+    "seoIndexingEnabled": false,
+    "finalAcceptance": "Exact SHA paired CI + mobile browser QA + backend tenant-negative tests + Stripe sandbox lifecycle + authenticated independent Supabase release case; no separate product approval gate"
   }
 }
