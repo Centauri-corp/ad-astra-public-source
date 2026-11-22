@@ -180,5 +180,153 @@
     "creativeAcceptance": "NOT_APPROVED",
     "rights": "Existing motion-study rights pending; new local visual code original",
     "releaseControl": "existing CRC single independent approval workflow"
+  },
+  "singleProductionLaunchTrain": {
+    "schema": "crc.ad-astra.website-single-launch-train/v1",
+    "direction": "ONE chronological source-to-public-launch train for graphics, homepage, full product vertical, films, frontend, backend, SEO/CRM, payments and CRC governance",
+    "authority": {
+      "publicSource": "Centauri-corp/ad-astra-public-source",
+      "publicPr": 61,
+      "privateReleaseController": "Centauri-corp/ad-astra-internal-source",
+      "privatePr": 160,
+      "supabaseProject": "wewznejqpnsmiwkbozgw",
+      "independentReleaseCaseRequired": true,
+      "additionalApprovalLanes": false
+    },
+    "creative": {
+      "homepage": "/",
+      "experience": "/experience/",
+      "products": "/products/",
+      "scientific": "/scientific/",
+      "flagship4": [
+        "/products/beyond-physics/",
+        "/products/astra-lumen/",
+        "/products/neural-visual-experience/",
+        "/products/governed-workflows/"
+      ],
+      "original90sManifest": "config/ad-astra-original-cinematic-film.v1.json",
+      "original90sFilmRendered": false,
+      "existingFilmProject": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film",
+      "commercial30sTimeline": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film/tree/crc-ad-astra-30s-cinematic-commercial-cut-original-existing/seq-6.1",
+      "commercial30sExportCard": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film/notebook/seq-18.1",
+      "commercialCutdownRightsAccepted": false,
+      "flagshipProofSource": "public/graphics/flagship-proof.js",
+      "flagshipProofStatus": "4 locally rendered synthetic product demonstrations, desktop QA PASS, DJI-level cinematic acceptance FAIL"
+    },
+    "fullstack": {
+      "api": [
+        "api/status.js",
+        "api/workspace.js",
+        "api/subscriptions.js",
+        "api/ask.js"
+      ],
+      "identity": "lib/auth.js",
+      "releaseGates": "lib/release-gates.js",
+      "releaseFlags": "public/release-manifest.json",
+      "subscriptionPlans": "public/products/portfolio.json",
+      "customerPath": [
+        "/products/",
+        "/pricing/",
+        "/workspace/",
+        "/account/billing/"
+      ],
+      "crm": "Zoho CRM/Catalyst test evidence pending",
+      "seo": "Noindex until approved; 15-sector taxonomy is not live regional offers",
+      "billing": "Stripe sandbox only; checkout inactive",
+      "restrictedContent": "Sanity access protection incomplete"
+    },
+    "observations": {
+      "latestStageSourceSha": "8b0acd9ec6a7ad804f9fdea4ada740f22740df22",
+      "latestStagePreviewId": "dpl_9LbuSSBtkpTkKBun2nYMUvjBmdhW",
+      "latestStageUrl": "https://ad-astra-public-source-n34gf39ny-zohebkhanfiji-2530.vercel.app/",
+      "githubCi": "Both verification workflows SUCCESS for prior exact-stage SHA",
+      "readOnlyBrowserRun": "e578a8da-9e18-4de7-b58f-9fddde283eee",
+      "mobile390": "NOT_TESTED",
+      "keyboard": "NOT_TESTED",
+      "realCustomerAuth": "NOT_TESTED",
+      "supabasePass": 0,
+      "supabaseBlocked": 3,
+      "supabaseNeedsEvidence": 5,
+      "supabaseAuthorities": 0,
+      "releaseCases": 0,
+      "domainVerified": false
+    },
+    "phases": [
+      {
+        "id": "L00",
+        "name": "Authoritative source, product scope and rights",
+        "state": "PARTIAL",
+        "evidence": "Single public PR #61; current original film rights and exact rendered film hashes pending",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L01",
+        "name": "Original film and commercial media",
+        "state": "PARTIAL",
+        "evidence": "Existing invideo 40s master and 15.5s loop; 30s reviewed edit in same video project; 90s photoreal master NOT RENDERED",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L02",
+        "name": "Homepage film, spatial scene and product entry",
+        "state": "STAGING_PASS",
+        "evidence": "Vercel exact-commit staging + one film-to-WebGL mode controller; first scene remains stylized",
+        "blocksPromotion": false
+      },
+      {
+        "id": "L03",
+        "name": "Products & Solutions flagship experiences",
+        "state": "DESKTOP_PREVIEW_PASS",
+        "evidence": "4 original local interactive proof studies on / and /products/ + 4 dedicated product pages; not live fulfillment",
+        "blocksPromotion": false
+      },
+      {
+        "id": "L04",
+        "name": "Rendered creative and accessibility acceptance",
+        "state": "NEEDS_EVIDENCE",
+        "evidence": "390px phone and tablet render, keyboard and screen reader, low-GPU FPS, caption/fallback, video-first film quality and product identity",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L05",
+        "name": "Identity, tenant isolation and customer API QA",
+        "state": "NEEDS_EVIDENCE",
+        "evidence": "Clerk/Supabase auth + server-side API deny tests for /api/workspace, /api/subscriptions, /api/status and rollback",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L06",
+        "name": "Commercial revenue operations",
+        "state": "NEEDS_EVIDENCE",
+        "evidence": "Stripe test payment and webhook lifecycle, Zoho CRM/Catalyst negative tests, regional pricing and claims, SEO after authorization",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L07",
+        "name": "Controlled data and security",
+        "state": "BLOCKED",
+        "evidence": "Sanity private-intended datasets not isolated from public; verify provider ACL/migration and independent security review",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L08",
+        "name": "Independent CRC release authority and receipts",
+        "state": "BLOCKED",
+        "evidence": "Supabase 0/8 accepted integration gates; 0 release authorities and 0 exact-candidate release cases on last provider read",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L09",
+        "name": "Immutable production artifact, DNS and global promotion",
+        "state": "BLOCKED",
+        "evidence": "adastra.global ownership TXT unverified; stage production without domain, exact build testing and rollback first; promote only after independent CRC release decision",
+        "blocksPromotion": true
+      }
+    ],
+    "finalDisposition": "PUBLIC_PRODUCTION_HOLD",
+    "releasePolicy": "One exact Git SHA candidate -> staged production artifact without domain -> provider and rendered evidence -> one independent Supabase CRC release decision -> same-artifact promotion and rollback readiness. No automatic charges, outreach or customer AI before authorization.",
+    "automaticallyPromote": false,
+    "noSyntheticReceipts": true,
+    "noReusedDJISpaceXOrDocumentaryFootage": true
   }
 }
