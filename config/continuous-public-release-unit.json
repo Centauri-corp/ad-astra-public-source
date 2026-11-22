@@ -141,5 +141,26 @@
     "noLiveCheckout": true,
     "seoIndexingEnabled": false,
     "finalAcceptance": "Exact SHA paired CI + mobile browser QA + backend tenant-negative tests + Stripe sandbox lifecycle + authenticated independent Supabase release case; no separate product approval gate"
+  },
+  "cinematicHomepageUpgrade": {
+    "schema": "crc.ad-astra.cinematic-website-delivery/v1",
+    "src": "public/graphics/cinematic-media-manifest.json",
+    "designBaselineApprovedExactSha": "dfe05527e42b75ef1e4f785c1edb46cda75fa42b",
+    "thisRevisionVisualApproval": "NOT_YET_GRANTED",
+    "heroFilm": "public/assets/ad-astra-horizon-motion.mp4",
+    "heroPoster": "public/assets/ad-astra-runway-horizon-poster.jpg",
+    "heroSpatialMode": "explicit-opt-in-WebGL2",
+    "oneRuntimeOwner": "public/app.js plus public/graphics/cinematic-director.js",
+    "filmFullExperience": "/experience/",
+    "productVertical": "/products/",
+    "interactiveInquiry": "second section, release-controlled",
+    "flagship90SecondFilm": "ARCHITECTURE_ONLY_NOT_RENDERED",
+    "cdnMediaAdaptation": "NOT_VERIFIED",
+    "dataRightProof": "PENDING",
+    "performanceMobileVoiceAcceptance": "NOT_VERIFIED",
+    "independentFinalRelease": "SUPABASE_HOLD",
+    "customerProductionPromotionAllowed": false,
+    "sourceTest": "test/cinematic-homepage-vertical-production.test.cjs",
+    "brief": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film/briefs/2"
   }
 }
