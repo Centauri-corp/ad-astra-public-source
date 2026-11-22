@@ -46,7 +46,7 @@ test('approved existing graphics and full product catalog remain functional but 
   }
   for(const value of ['data-cinematic-host','data-cinematic-journey','data-cinematic-status','data-cinematic-layer="0"','data-cinematic-layer="1"','data-cinematic-layer="2"'])assert.ok(html.includes(value),value);
   for(const id of ['science-preview','scientific-time','scientific-surface','portfolio-catalog','capability-catalog','life-products','market-solutions'])assert.ok(html.includes('id="'+id+'"'),id);
-  assert.equal((html.match(/data-portfolio-card\\b/g)||[]).length,4);
+  assert.equal((html.match(/data-portfolio-card\b/g)||[]).length,4);
   assert.equal(catalog.capabilities.length,12);
   assert.equal(catalog.life.length,3);
   assert.equal(catalog.markets.length,15);
