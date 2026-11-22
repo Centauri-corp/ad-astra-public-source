@@ -67,3 +67,14 @@ Automated DOM/CI tests can assert structure and behavior; **they cannot establis
 The acceptable status vocabulary is **implemented**, **CI passed**, **browser-verified**, **visual-review accepted**, **production authorized**. Never collapse these statuses into one "100%" indicator.
 
 **When blocked, report exact evidence, not a reassuring approximation.**
+
+## Code Review Rules
+
+### P0 — Visual acceptance must not be inferred from successful code checks
+- Flag any change that labels the website "DJI-level", "visual PASS" or "100% production" solely from GitHub CI or Vercel READY. A passing deployment proves code availability, not realistic media, direction, or observed mobile quality. The safe path is evidence from the rendered exact-SHA candidate and the existing CRC release case.
+
+### P1 — Do not revert the customer experience to a card-first catalog
+- Flag movement of the 4 flagship product stories or original cinematic hero below the 4+12+3+15-card technical index, or replacing distinct product-specific storytelling with repeated generic glowing-head art. The safe path is hero → four immersive editorial chapters → product details, with the dense taxonomy available only on demand in the secondary atlas.
+
+### P1 — Preserve the governed execution boundary
+- Flag any film, scene, product link or client-side script that activates production AI, checkout, CRM, private Sanity data or releases permissions without server-side entitlement, tenant authorization and the existing Supabase release decision. The safe path is opt-in local demonstrations and independently authorized backend operations only.
