@@ -50,6 +50,6 @@ test('four product directions select one of the existing three approved cinemati
  const controller=read('public/products/app.js');
  assert.match(controller,/ad-astra:request-scene/);
  assert.match(controller,/fromVisitor&&cinematic/);
- assert.match(controller,/data-cinematic-target/);
+ assert.match(controller,/dataset\.cinematicTarget/);
  assert.doesNotMatch(controller,/fetch\(|XMLHttpRequest|WebSocket|sendBeacon|localStorage|sessionStorage|eval\(/);
 });
