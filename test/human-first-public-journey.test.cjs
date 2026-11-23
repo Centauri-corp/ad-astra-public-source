@@ -56,3 +56,17 @@ test('linked public launch routes exist within the exact build tree',()=>{
   assert.match(fs.readFileSync(file,'utf8'),/name="robots" content="noindex,follow"/);
  }
 });
+
+test('the three cinematic story stages can be explicitly selected by touch and keyboard',()=>{
+ assert.match(home,/class="human-stage-controls" aria-label="Choose the next chapter"/);
+ for(const id of ['0','1','2']){
+   assert.match(home,new RegExp('id="human-stage-'+id+'"'));
+   assert.match(home,new RegExp('data-human-step="'+id+'"'));
+ }
+ assert.match(controller,/querySelectorAll\('\[data-human-step\]'\)/);
+ assert.match(controller,/setAttribute\('aria-current','step'\)/);
+ assert.match(controller,/selectors\.forEach\(\(link,index\) => link\.addEventListener\('click'/);
+ assert.match(stylesheet,/CRC human journey explicit stage controls/);
+ assert.match(stylesheet,/body :where\(a,button,summary,input,textarea,select,\[tabindex\]\):focus/);
+ assert.match(stylesheet,/@media\(forced-colors:active\)/);
+});
