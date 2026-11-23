@@ -11,6 +11,29 @@ function walk(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.
 if(process.env.VERCEL_PROJECT_ID)assert.equal(process.env.VERCEL_PROJECT_ID,'prj_p5ZKa0UsRpxtNU6hdNzvHvhZuOOc');
 if(process.env.VERCEL_ORG_ID)assert.equal(process.env.VERCEL_ORG_ID,'team_Sth5QRQV27xdek3gwROdfjSJ');
 const files=walk(path.join(root,'public'));
+// All local CSS and JS references in every HTML route must exist in the
+// exact source tree. Vercel's static build does not catch 404 dependencies.
+const scanLocalPageDependencies = () => {
+  const publicDir=path.join(root,'public');
+  const pageFiles=walk(publicDir).filter(file=>file.endsWith('.html'));
+  for(const pageFile of pageFiles){
+    const html=fs.readFileSync(pageFile,'utf8');
+    const pagePath='/'+path.relative(publicDir,pageFile).replaceAll('\\','/');
+    const tags=html.match(/<(?:script|link)\b[^>]*>/gi)||[];
+    for(const tag of tags){
+      const isScript=/^<script\b/i.test(tag);
+      if(!isScript && !/\brel\s*=\s*["']stylesheet["']/i.test(tag))continue;
+      const attribute=isScript?'src':'href';
+      const value=tag.match(new RegExp('\\b'+attribute+'\\s*=\\s*["\\x27]([^"\\x27]+)["\\x27]','i'))?.[1];
+      if(!value || /^(?:https?:|data:|blob:|\/\/)/i.test(value))continue;
+      const assetPath=new URL(value,'https://adastra.global'+pagePath).pathname;
+      assert.ok(!assetPath.includes('..'),'Unsafe local dependency in '+pagePath+': '+value);
+      assert.ok(fs.existsSync(path.join(publicDir,assetPath.slice(1))),
+        'Missing local page dependency: '+pagePath+' -> '+assetPath);
+    }
+  }
+};
+scanLocalPageDependencies();
 for(const f of files){
  const rel=path.relative(path.join(root,'public'),f).replaceAll('\\','/');
  assert.ok(!/(catalog\.json|\.map$|\.env|\.git|ad-astra-cognitive|company-film|preview-v2\.mp4)/i.test(rel),rel);
