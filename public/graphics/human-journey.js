@@ -8,6 +8,8 @@
   const chapters = Array.from(journey.querySelectorAll('[data-human-chapter]'));
   const label = journey.querySelector('[data-human-scene-label]');
   const count = journey.querySelector('[data-human-scene-count]');
+  const selectors = Array.from(journey.querySelectorAll('[data-human-step]'));
+
   if (chapters.length !== 3 || !label || !count) return;
 
   const labels = ['HUMAN CURIOSITY','CONNECTED EVIDENCE','A WORLD OF POSSIBILITY'];
@@ -22,6 +24,10 @@
     });
     label.textContent = labels[index];
     count.textContent = String(index + 1).padStart(2,'0') + ' / 03';
+    selectors.forEach((link, i) => {
+      if(i === index) link.setAttribute('aria-current','step');
+      else link.removeAttribute('aria-current');
+    });
   };
 
   const computeNearest = () => {
@@ -54,5 +60,7 @@
   window.addEventListener('resize', onTravel, {passive:true});
   window.addEventListener('pageshow', onTravel);
   chapters.forEach((chapter,index) => chapter.addEventListener('focusin', () => setScene(index)));
+  selectors.forEach((link,index) => link.addEventListener('click', () => setScene(index)));
+
   onTravel();
 })();
