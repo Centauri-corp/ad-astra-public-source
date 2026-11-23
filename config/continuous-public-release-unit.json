@@ -1,0 +1,348 @@
+{
+  "schema": "ad-astra/continuous-public-release-unit/v1",
+  "purpose": "One reviewable Ad Astra homepage-to-workspace visual and product experience; production authorization remains in private CRC Command",
+  "project": "Centauri Renewables Corporation / Ad Astra",
+  "canonicalDomain": "https://adastra.global",
+  "sourceRepository": "Centauri-corp/ad-astra-public-source",
+  "reviewBranch": "review/universal-stage-lumen-homepage",
+  "privateGovernor": "Centauri-corp/ad-astra-internal-source",
+  "releaseAuthority": "Supabase ad-astra-intelligence-os",
+  "reviewOnly": true,
+  "publicLaunchEnabled": false,
+  "customerExecutionEnabled": false,
+  "externalCrmWritesEnabled": false,
+  "billingEnabled": false,
+  "indexingEnabled": false,
+  "productionPromotionAllowed": false,
+  "previewDeploymentMode": "Vercel protected non-production; exact deployment SHA verified after build",
+  "productionReleaseMode": "one composite release, pinned internal and public SHAs, immutable artifact and exact-scope Supabase authority",
+  "chapters": [
+    {
+      "id": "arrival",
+      "path": "/",
+      "view": "cinematic neuro-spatial homepage",
+      "control": "explicit 3-layer WebGL2"
+    },
+    {
+      "id": "intelligence",
+      "path": "/knowledge/",
+      "view": "knowledge",
+      "control": "governed"
+    },
+    {
+      "id": "life",
+      "path": "/life/",
+      "view": "Life Intelligence",
+      "control": "concept-preview"
+    },
+    {
+      "id": "products",
+      "path": "/products/",
+      "view": "Products & Solutions; scientific spatial preview",
+      "control": "explicit"
+    },
+    {
+      "id": "workspace",
+      "path": "/workspace/",
+      "view": "secure customer workspace",
+      "control": "release-gated"
+    }
+  ],
+  "expandedRoutes": [
+    "/journey/",
+    "/scientific/",
+    "/experience/"
+  ],
+  "sceneLayers": [
+    "arrival",
+    "science",
+    "solutions"
+  ],
+  "productDirections": [
+    "beyond-physics",
+    "astra-lumen",
+    "neural-visual-experience",
+    "governed-workflows"
+  ],
+  "graphicsSource": [
+    "lib/graphics-intelligence-core.cjs",
+    "lib/products-solutions-graphics.cjs",
+    "lib/unified-product-scene.cjs",
+    "public/graphics/cinematic-journey.js",
+    "public/graphics/evolution.js",
+    "public/scientific/scene-model.js",
+    "public/scientific/viewer.js",
+    "public/experience/index.html",
+    "public/experience/experience.css",
+    "public/experience/experience.js",
+    "public/graphics/flagship-proof.js",
+    "public/graphics/flagship-proof.css"
+  ],
+  "pendingProductionGates": [
+    "paired exact artifact fingerprint",
+    "critical route visual QA mobile and accessibility",
+    "Sanity controlled-content isolation",
+    "Catalyst + CRM tenant-negative tests",
+    "Stripe test-mode lifecycle",
+    "Supabase 8 integration acceptance receipts",
+    "one independently attested release decision and CEO MFA binding",
+    "canonical domain and verified rollback"
+  ],
+  "safety": {
+    "noFakeApproval": true,
+    "noSyntheticReceiptsAsEvidence": true,
+    "noCustomerActivations": true,
+    "noAutomaticDomainPromotion": true
+  },
+  "originalCinematicExperience": {
+    "route": "/experience/",
+    "scope": "review-only",
+    "model": "original Ad Astra poster-first film and human-directed scene journey",
+    "reviewSourceSha": "dfe05527e42b75ef1e4f785c1edb46cda75fa42b",
+    "visuals": "original repo assets (media-rights attestation pending)",
+    "interactions": [
+      "opt-in accessible modal player",
+      "reduced-motion static hero",
+      "three chapter navigation",
+      "embedded synthetic 3D control plane",
+      "four product-direction visual selections"
+    ],
+    "providerExecution": false,
+    "filmContentFinalApproval": false,
+    "allDeviceQAComplete": false,
+    "finalProductionAccepted": false,
+    "approvalRule": "Visual approval of original homepage commit is preserved; this changed creative route needs exact-SHA QA and cannot imply release GO"
+  },
+  "productsSolutionsVertical": {
+    "schema": "ad-astra/products-solutions-portfolio/v1",
+    "registry": "public/products/portfolio.json",
+    "entry": "/products/",
+    "flagshipRoutes": [
+      "/products/beyond-physics/",
+      "/products/astra-lumen/",
+      "/products/neural-visual-experience/",
+      "/products/governed-workflows/"
+    ],
+    "flagshipCount": 4,
+    "capabilityPreviewCount": 12,
+    "lifeCandidateCount": 3,
+    "marketResearchDirectionsCount": 15,
+    "visualStorytelling": "/experience/#product-demos",
+    "scientificInteractivePreview": "/scientific/",
+    "customerJourney": [
+      "/products/",
+      "/products/beyond-physics/",
+      "/pricing/",
+      "/workspace/",
+      "/account/billing/"
+    ],
+    "pricingAuthority": "server-verified; all public offers remain drafts",
+    "backend": "existing /api/workspace, /api/subscriptions and /api/status with server-side auth and release gates",
+    "reviewOnly": true,
+    "productionAccepted": false,
+    "noLiveCheckout": true,
+    "seoIndexingEnabled": false,
+    "finalAcceptance": "Exact SHA paired CI + mobile browser QA + backend tenant-negative tests + Stripe sandbox lifecycle + authenticated independent Supabase release case; no separate product approval gate"
+  },
+  "cinematicHomepageUpgrade": {
+    "schema": "crc.ad-astra.cinematic-website-delivery/v1",
+    "src": "public/graphics/cinematic-media-manifest.json",
+    "designBaselineApprovedExactSha": "dfe05527e42b75ef1e4f785c1edb46cda75fa42b",
+    "thisRevisionVisualApproval": "NOT_YET_GRANTED",
+    "heroFilm": "public/assets/ad-astra-horizon-motion.mp4",
+    "heroPoster": "public/assets/ad-astra-runway-horizon-poster.jpg",
+    "heroSpatialMode": "explicit-opt-in-WebGL2",
+    "oneRuntimeOwner": "public/app.js plus public/graphics/cinematic-director.js",
+    "filmFullExperience": "/experience/",
+    "productVertical": "/products/",
+    "interactiveInquiry": "second section, release-controlled",
+    "flagship90SecondFilm": "ARCHITECTURE_ONLY_NOT_RENDERED",
+    "cdnMediaAdaptation": "NOT_VERIFIED",
+    "dataRightProof": "PENDING",
+    "performanceMobileVoiceAcceptance": "NOT_VERIFIED",
+    "independentFinalRelease": "SUPABASE_HOLD",
+    "customerProductionPromotionAllowed": false,
+    "sourceTest": "test/cinematic-homepage-vertical-production.test.cjs",
+    "brief": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film/briefs/2"
+  },
+  "flagshipProofStudio": {
+    "home": "/#flagship-proof",
+    "products": "/products/#flagship-proof",
+    "engine": "public/graphics/flagship-proof.js",
+    "styles": "public/graphics/flagship-proof.css",
+    "source": "public/static original synthetic demonstration, 4 distinct stateful studies",
+    "integrations": [
+      "home",
+      "products",
+      "four individual product routes"
+    ],
+    "status": "FEATURE_REVIEW_NOT_PRODUCTION",
+    "creativeAcceptance": "NOT_APPROVED",
+    "rights": "Existing motion-study rights pending; new local visual code original",
+    "releaseControl": "existing CRC single independent approval workflow"
+  },
+  "singleProductionLaunchTrain": {
+    "schema": "crc.ad-astra.website-single-launch-train/v1",
+    "direction": "ONE chronological source-to-public-launch train for graphics, homepage, full product vertical, films, frontend, backend, SEO/CRM, payments and CRC governance",
+    "authority": {
+      "publicSource": "Centauri-corp/ad-astra-public-source",
+      "publicPr": 61,
+      "privateReleaseController": "Centauri-corp/ad-astra-internal-source",
+      "privatePr": 161,
+      "supabaseProject": "wewznejqpnsmiwkbozgw",
+      "independentReleaseCaseRequired": true,
+      "additionalApprovalLanes": false,
+      "privateCandidateBranch": "upgrade/ad-astra-one-production-flow-20261121",
+      "supersededPrivatePrs": [
+        160
+      ],
+      "privateSourceOfTruth": "config/one-production-flow.json in internal PR #161, the incumbent exact-source paired production controller; closed PR #160 is historical"
+    },
+    "creative": {
+      "homepage": "/",
+      "experience": "/experience/",
+      "products": "/products/",
+      "scientific": "/scientific/",
+      "flagship4": [
+        "/products/beyond-physics/",
+        "/products/astra-lumen/",
+        "/products/neural-visual-experience/",
+        "/products/governed-workflows/"
+      ],
+      "original90sManifest": "config/ad-astra-original-cinematic-film.v1.json",
+      "original90sFilmRendered": false,
+      "existingFilmProject": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film",
+      "commercial30sTimeline": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film/tree/crc-ad-astra-30s-cinematic-commercial-cut-original-existing/seq-6.1",
+      "commercial30sExportCard": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film/notebook/seq-18.1",
+      "commercialCutdownRightsAccepted": false,
+      "flagshipProofSource": "public/graphics/flagship-proof.js",
+      "flagshipProofStatus": "4 locally rendered synthetic product demonstrations, desktop QA PASS, DJI-level cinematic acceptance FAIL",
+      "commercial30sStatus": "EXPORTED_1080P_REVIEW_CUT__NOT_CREATIVE_OR_RIGHTS_APPROVED",
+      "commercial30sExportEvidence": "https://invideo.io/@zoheb-943543/ad-astra-intelligence-beyond-limits-homepage-film/notebook/seq-18.1",
+      "commercial30sEditQC": {
+        "structuralCheck": "PASS",
+        "compositeFrameCapture": "COMPLETE",
+        "soundtrack": "SILENT",
+        "originalMasterUnchanged": true
+      },
+      "proofPlacement": "Shared component on homepage and Products & Solutions index, not yet embedded in every individual product detail page"
+    },
+    "fullstack": {
+      "api": [
+        "api/status.js",
+        "api/workspace.js",
+        "api/subscriptions.js",
+        "api/ask.js"
+      ],
+      "identity": "lib/auth.js",
+      "releaseGates": "lib/release-gates.js",
+      "releaseFlags": "public/release-manifest.json",
+      "subscriptionPlans": "public/products/portfolio.json",
+      "customerPath": [
+        "/products/",
+        "/pricing/",
+        "/workspace/",
+        "/account/billing/"
+      ],
+      "crm": "Zoho CRM/Catalyst test evidence pending",
+      "seo": "Noindex until approved; 15-sector taxonomy is not live regional offers",
+      "billing": "Stripe sandbox only; checkout inactive",
+      "restrictedContent": "Sanity access protection incomplete"
+    },
+    "observations": {
+      "latestStageSourceSha": "8b0acd9ec6a7ad804f9fdea4ada740f22740df22",
+      "latestStagePreviewId": "dpl_9LbuSSBtkpTkKBun2nYMUvjBmdhW",
+      "latestStageUrl": "https://ad-astra-public-source-n34gf39ny-zohebkhanfiji-2530.vercel.app/",
+      "githubCi": "Both verification workflows SUCCESS for prior exact-stage SHA",
+      "readOnlyBrowserRun": "e578a8da-9e18-4de7-b58f-9fddde283eee",
+      "mobile390": "NOT_TESTED",
+      "keyboard": "NOT_TESTED",
+      "realCustomerAuth": "NOT_TESTED",
+      "supabasePass": 0,
+      "supabaseBlocked": 3,
+      "supabaseNeedsEvidence": 5,
+      "supabaseAuthorities": 0,
+      "releaseCases": 0,
+      "domainVerified": false,
+      "latestStageEvidenceRecordedAsOf": "2026-11-22T08:18:00Z",
+      "latestStageSourceShaIsPriorCandidate": true
+    },
+    "phases": [
+      {
+        "id": "L00",
+        "name": "Authoritative source, product scope and rights",
+        "state": "PARTIAL",
+        "evidence": "Single public PR #61; current original film rights and exact rendered film hashes pending",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L01",
+        "name": "Original film and commercial media",
+        "state": "PARTIAL",
+        "evidence": "Existing 40s master preserved, separate original-material 30s cut exported 1080p and structurally checked; 90s high-fidelity flagship not rendered, media rights and visual approval pending",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L02",
+        "name": "Homepage film, spatial scene and product entry",
+        "state": "STAGING_PASS",
+        "evidence": "Vercel exact-commit staging + one film-to-WebGL mode controller; first scene remains stylized",
+        "blocksPromotion": false
+      },
+      {
+        "id": "L03",
+        "name": "Products & Solutions flagship experiences",
+        "state": "DESKTOP_PREVIEW_PASS",
+        "evidence": "4 original local interactive proof studies on / and /products/ + 4 dedicated product pages; not live fulfillment",
+        "blocksPromotion": false
+      },
+      {
+        "id": "L04",
+        "name": "Rendered creative and accessibility acceptance",
+        "state": "NEEDS_EVIDENCE",
+        "evidence": "390px phone and tablet render, keyboard and screen reader, low-GPU FPS, caption/fallback, video-first film quality and product identity",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L05",
+        "name": "Identity, tenant isolation and customer API QA",
+        "state": "NEEDS_EVIDENCE",
+        "evidence": "Clerk/Supabase auth + server-side API deny tests for /api/workspace, /api/subscriptions, /api/status and rollback",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L06",
+        "name": "Commercial revenue operations",
+        "state": "NEEDS_EVIDENCE",
+        "evidence": "Stripe test payment and webhook lifecycle, Zoho CRM/Catalyst negative tests, regional pricing and claims, SEO after authorization",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L07",
+        "name": "Controlled data and security",
+        "state": "BLOCKED",
+        "evidence": "Sanity private-intended datasets not isolated from public; verify provider ACL/migration and independent security review",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L08",
+        "name": "Independent CRC release authority and receipts",
+        "state": "BLOCKED",
+        "evidence": "Supabase 0/8 accepted integration gates; 0 release authorities and 0 exact-candidate release cases on last provider read",
+        "blocksPromotion": true
+      },
+      {
+        "id": "L09",
+        "name": "Immutable production artifact, DNS and global promotion",
+        "state": "BLOCKED",
+        "evidence": "adastra.global ownership TXT unverified; stage production without domain, exact build testing and rollback first; promote only after independent CRC release decision",
+        "blocksPromotion": true
+      }
+    ],
+    "finalDisposition": "PUBLIC_PRODUCTION_HOLD",
+    "releasePolicy": "One exact Git SHA candidate -> staged production artifact without domain -> provider and rendered evidence -> one independent Supabase CRC release decision -> same-artifact promotion and rollback readiness. No automatic charges, outreach or customer AI before authorization.",
+    "automaticallyPromote": false,
+    "noSyntheticReceipts": true,
+    "noReusedDJISpaceXOrDocumentaryFootage": true
+  }
+}

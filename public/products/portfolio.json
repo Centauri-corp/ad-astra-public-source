@@ -1,0 +1,429 @@
+{
+  "schema": "ad-astra/products-solutions-portfolio/v1",
+  "version": "2026-11-21",
+  "owner": "Centauri Renewables Corporation / Ad Astra",
+  "canonical": "/products/",
+  "sourceOfTruth": "This static registry is the reviewed public-website offer/taxonomy map; actual access, subscriptions and entitlements are determined by the server-side governed runtime and Supabase release case.",
+  "release": {
+    "publicLaunchEnabled": false,
+    "checkoutEnabled": false,
+    "crmOutboundEnabled": false,
+    "seoIndexingEnabled": false,
+    "realTimeModelDemonstrationAccepted": false
+  },
+  "flagship": [
+    {
+      "id": "beyond-physics",
+      "name": "Beyond Physics",
+      "label": "DISCOVERY / EVIDENCE",
+      "hero": "See beyond a single explanation.",
+      "summary": "Compare scientific ideas, evidence and uncertainty across disciplines without presenting speculative results as facts.",
+      "image": "/assets/astra-lumen-neural-horizon.png",
+      "alt": "An original Ad Astra orbital intelligence study extending over a luminous horizon",
+      "status": "concept-preview",
+      "audiences": [
+        "research",
+        "education",
+        "professional"
+      ],
+      "capabilities": [
+        "ask",
+        "research",
+        "explore",
+        "review"
+      ],
+      "proof": "Example briefs and conceptual product interface only; no independently verified scientific answer engine.",
+      "outcome": "A question framed with competing explanations, uncertainty and source requirements.",
+      "steps": [
+        "Frame an inquiry and its evidence standard",
+        "Compare explanatory approaches and known uncertainties",
+        "Produce a human-reviewable investigation brief"
+      ],
+      "demo": "/experience/#product-demos",
+      "primary": "/products/beyond-physics/",
+      "workspace": "/workspace/",
+      "market": "/markets/science-research/",
+      "price": "Not yet offered for purchase"
+    },
+    {
+      "id": "astra-lumen",
+      "name": "Astra Lumen",
+      "label": "LEARNING / INTELLIGENCE",
+      "hero": "Turn complexity into understanding.",
+      "summary": "Guide learners through difficult subjects using clear explanations and human-directed next steps.",
+      "image": "/assets/astra-lumen-neural-brain.png",
+      "alt": "Original Ad Astra luminous neural-network concept with gold orbital arcs",
+      "status": "concept-preview",
+      "audiences": [
+        "education",
+        "consumer",
+        "professional"
+      ],
+      "capabilities": [
+        "learn",
+        "ask",
+        "create",
+        "include"
+      ],
+      "proof": "Learning experience is a governed product direction; live model reliability and entitlements are not release-accepted.",
+      "outcome": "A learning pathway with explanation, practice and a review checkpoint.",
+      "steps": [
+        "Set a subject and desired learning outcome",
+        "Explore an example and compare interpretations",
+        "Review understanding before selecting the next step"
+      ],
+      "demo": "/experience/#product-demos",
+      "primary": "/products/astra-lumen/",
+      "workspace": "/workspace/",
+      "market": "/markets/education-learning/",
+      "price": "Plan eligibility and pricing are unfinalized"
+    },
+    {
+      "id": "neural-visual-experience",
+      "name": "Neural Visual Experience",
+      "label": "VISUALIZE / SYNTHETIC MODELS",
+      "hero": "Make complex systems visible.",
+      "summary": "Explore relationships, spatial projections and time-varying models using explicit visual controls.",
+      "image": "/assets/astra-lumen-neural-profile-canvas.png",
+      "alt": "Original Ad Astra cyan and violet neural silhouette used as an illustrative visual",
+      "status": "interactive-synthetic-preview",
+      "audiences": [
+        "research",
+        "education",
+        "creative"
+      ],
+      "capabilities": [
+        "explore",
+        "create",
+        "watch",
+        "include"
+      ],
+      "proof": "Interactive 3D-projected time demo is synthetic illustration, not real measured data or an external simulation.",
+      "outcome": "A reproducible synthetic surface that changes under manual rotation and time controls.",
+      "steps": [
+        "Choose an illustrative model and review its provenance",
+        "Change the camera and time state directly",
+        "Inspect the updated numerical explanation and static fallback"
+      ],
+      "demo": "/scientific/",
+      "primary": "/products/neural-visual-experience/",
+      "workspace": "/workspace/",
+      "market": "/markets/science-research/",
+      "price": "No public subscription entitlement activated"
+    },
+    {
+      "id": "governed-workflows",
+      "name": "Governed AI Workflows",
+      "label": "OPERATE / OVERSIGHT",
+      "hero": "From intention to accountable execution.",
+      "summary": "Design human-controlled task flows with permissions, checkpoints and independently verified outcome receipts.",
+      "image": "/assets/astra-lumen-neural-concierge.png",
+      "alt": "Original Ad Astra cyan-and-gold conceptual intelligence silhouette",
+      "status": "concept-preview",
+      "audiences": [
+        "professional",
+        "business",
+        "institutional"
+      ],
+      "capabilities": [
+        "plan",
+        "collaborate",
+        "review",
+        "specialize"
+      ],
+      "proof": "Governance architecture is under controlled testing; this preview does not execute tasks or claim an approved enterprise SLA.",
+      "outcome": "A process map describing roles, authorization boundaries and reviewable evidence.",
+      "steps": [
+        "Describe the process and who may authorize changes",
+        "Define permissions, failure behavior and evidence requirements",
+        "Review a bounded plan before any external execution"
+      ],
+      "demo": "/experience/#product-demos",
+      "primary": "/products/governed-workflows/",
+      "workspace": "/workspace/",
+      "market": "/markets/business-professional-services/",
+      "price": "Enterprise pricing and contractual terms under review"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "ask",
+      "name": "Ask",
+      "code": "Question Studio",
+      "route": "/platform-preview/",
+      "status": "visual-preview"
+    },
+    {
+      "id": "research",
+      "name": "Research",
+      "code": "Research Atlas",
+      "route": "/platform-preview/",
+      "status": "visual-preview"
+    },
+    {
+      "id": "create",
+      "name": "Create",
+      "code": "Creative Orbit",
+      "route": "/platform-preview/",
+      "status": "visual-preview"
+    },
+    {
+      "id": "learn",
+      "name": "Learn",
+      "code": "Learning Lens",
+      "route": "/platform-preview/",
+      "status": "visual-preview"
+    },
+    {
+      "id": "explore",
+      "name": "Explore",
+      "code": "Horizon Scanner",
+      "route": "/platform-preview/",
+      "status": "visual-preview"
+    },
+    {
+      "id": "plan",
+      "name": "Plan",
+      "code": "Project Orbit",
+      "route": "/platform-preview/",
+      "status": "visual-preview"
+    },
+    {
+      "id": "collaborate",
+      "name": "Collaborate",
+      "code": "Knowledge Rooms",
+      "route": "/platform-preview/",
+      "status": "visual-preview"
+    },
+    {
+      "id": "watch",
+      "name": "Watch",
+      "code": "Signal Monitor",
+      "route": "/platform-preview/",
+      "status": "visual-preview"
+    },
+    {
+      "id": "specialize",
+      "name": "Specialize",
+      "code": "Profile Constellations",
+      "route": "/platform-preview/",
+      "status": "visual-preview"
+    },
+    {
+      "id": "localize",
+      "name": "Localize",
+      "code": "Global Network",
+      "route": "/platform-preview/",
+      "status": "visual-preview"
+    },
+    {
+      "id": "include",
+      "name": "Include",
+      "code": "Accessibility Layer",
+      "route": "/platform-preview/",
+      "status": "visual-preview"
+    },
+    {
+      "id": "review",
+      "name": "Review",
+      "code": "Governance Deck",
+      "route": "/platform-preview/",
+      "status": "visual-preview"
+    }
+  ],
+  "life": [
+    {
+      "id": "day",
+      "name": "DayFlow",
+      "description": "Plan today's next steps",
+      "route": "/life/",
+      "workspace": "/workspace/",
+      "status": "governed-workspace-candidate"
+    },
+    {
+      "id": "learn",
+      "name": "LearnPath",
+      "description": "Build a learning rhythm",
+      "route": "/life/",
+      "workspace": "/workspace/",
+      "status": "governed-workspace-candidate"
+    },
+    {
+      "id": "career",
+      "name": "CareerStep",
+      "description": "Prepare for career progress",
+      "route": "/life/",
+      "workspace": "/workspace/",
+      "status": "governed-workspace-candidate"
+    }
+  ],
+  "markets": [
+    {
+      "id": "consumer-personal-ai",
+      "name": "Consumer & Personal AI",
+      "route": "/markets/consumer-personal-ai/",
+      "stage": "research-priority",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "education-learning",
+      "name": "Education & Learning",
+      "route": "/markets/education-learning/",
+      "stage": "research-priority",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "business-professional-services",
+      "name": "Business & Professional Services",
+      "route": "/markets/business-professional-services/",
+      "stage": "research-priority",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "creative-industries-media",
+      "name": "Creative Industries & Media",
+      "route": "/markets/creative-industries-media/",
+      "stage": "research-priority",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "science-research",
+      "name": "Science & Research",
+      "route": "/markets/science-research/",
+      "stage": "research-priority",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "digital-commerce",
+      "name": "Digital Commerce",
+      "route": "/markets/digital-commerce/",
+      "stage": "research-priority",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "healthcare-wellness",
+      "name": "Healthcare & Wellness",
+      "route": "/markets/healthcare-wellness/",
+      "stage": "governed-proposal",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "finance-economics",
+      "name": "Finance & Economics",
+      "route": "/markets/finance-economics/",
+      "stage": "governed-proposal",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "manufacturing-energy",
+      "name": "Manufacturing & Energy",
+      "route": "/markets/manufacturing-energy/",
+      "stage": "governed-proposal",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "logistics-supply-chain",
+      "name": "Logistics & Supply Chain",
+      "route": "/markets/logistics-supply-chain/",
+      "stage": "governed-proposal",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "agriculture-food",
+      "name": "Agriculture & Food",
+      "route": "/markets/agriculture-food/",
+      "stage": "governed-proposal",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "government-public-services",
+      "name": "Government & Public Services",
+      "route": "/markets/government-public-services/",
+      "stage": "institutional-concept",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "legal-compliance",
+      "name": "Legal & Compliance",
+      "route": "/markets/legal-compliance/",
+      "stage": "institutional-concept",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "travel-hospitality",
+      "name": "Travel & Hospitality",
+      "route": "/markets/travel-hospitality/",
+      "stage": "institutional-concept",
+      "status": "no-signed-live-offer"
+    },
+    {
+      "id": "real-estate-construction",
+      "name": "Real Estate & Construction",
+      "route": "/markets/real-estate-construction/",
+      "stage": "institutional-concept",
+      "status": "no-signed-live-offer"
+    }
+  ],
+  "plans": [
+    {
+      "name": "Free",
+      "state": "draft-not-for-sale",
+      "url": "/pricing/"
+    },
+    {
+      "name": "Plus",
+      "state": "draft-not-for-sale",
+      "url": "/pricing/"
+    },
+    {
+      "name": "Pro",
+      "state": "draft-not-for-sale",
+      "url": "/pricing/"
+    },
+    {
+      "name": "Team",
+      "state": "draft-not-for-sale",
+      "url": "/pricing/"
+    },
+    {
+      "name": "Enterprise",
+      "state": "draft-not-for-sale",
+      "url": "/pricing/"
+    }
+  ],
+  "customerJourney": [
+    "/products/",
+    "/products/beyond-physics/",
+    "/experience/",
+    "/scientific/",
+    "/pricing/",
+    "/workspace/",
+    "/account/billing/"
+  ],
+  "governance": {
+    "identity": "Clerk, verified server-side before customer work",
+    "subscription": "server-authorized entitlements and Stripe test verification; checkout not active",
+    "crm": "Zoho/Catalyst integration proof pending",
+    "data": "private-intended Sanity dataset access unresolved; do not place private records in public Content Lake",
+    "approval": "Existing Supabase independent CRC release case; visual approval alone is insufficient",
+    "noNewApprovalProcess": true
+  },
+  "affiliateDirections": [
+    {
+      "id": "energy-manufacturing",
+      "name": "CRC Energy & Manufacturing",
+      "route": "/markets/manufacturing-energy/",
+      "status": "sector-research-only-not-ad-astra-billable-offer"
+    },
+    {
+      "id": "escrow",
+      "name": "Escrow & Transaction Governance",
+      "status": "not-published-license-and-regulatory-review-needed"
+    },
+    {
+      "id": "bioscience",
+      "name": "Centauri Bio Science",
+      "status": "not-published-separately-governed"
+    }
+  ]
+}

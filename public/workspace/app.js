@@ -262,6 +262,16 @@
       $('history-status').textContent='Saved work could not be listed: '+message(error);
     }
     const sessionId=new URLSearchParams(location.search).get('session');
+    if(!sessionId) {
+      try {
+        const homeQuestion=sessionStorage.getItem('ad-astra-home-question');
+        if(homeQuestion && homeQuestion.length<=4000 && !$('question').value) {
+          $('question').value=homeQuestion;
+          sessionStorage.removeItem('ad-astra-home-question');
+          $('request-status').textContent='Your question from the homepage is ready to review before you submit.';
+        }
+      } catch {}
+    }
     if(sessionId && /^[0-9a-f-]{36}$/i.test(sessionId)) {
       try {await loadSession(sessionId);}
       catch(error) {$('request-status').textContent=message(error);}

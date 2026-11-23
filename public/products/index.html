@@ -2,49 +2,256 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Products &amp; Solutions | Ad Astra</title>
-<meta name="description" content="Ad Astra products and solution directions rendered through a governed visual architecture.">
+<title>Products &amp; Solutions — Cinematic Product Journey | Ad Astra</title>
+<meta name="description" content="Explore four Ad Astra product directions through an original cinematic, human-directed product journey.">
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://adastra.global/products/">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/products/portfolio.css">
+<link rel="stylesheet" href="/products/editorial-journey.css">
+<link rel="stylesheet" href="/graphics/flagship-proof.css">
+<script src="/graphics/flagship-proof.js" defer></script>
+<script src="/products/editorial-journey.js" defer></script>
+<script src="/products/portfolio.js" defer></script>
 <script src="app.js" defer></script>
+<script src="/graphics/core.js" defer></script>
+<script src="/graphics/atlas-controller.js" defer></script>
+<script src="graphics-adapter.js" defer></script>
+<script src="/scientific/scene-model.js" defer></script>
+<script src="/scientific/viewer.js" defer></script>
+<link rel="stylesheet" href="/journey/style.css">
+<script src="/journey/continuity.js" defer></script>
+<script src="/journey/navigation.js" defer></script>
+<link rel="stylesheet" href="/graphics/cinematic-journey.css">
+<script src="/graphics/cinematic-journey.js" defer></script>
+<script src="/graphics/evolution.js" defer></script>
 </head>
 <body>
 <div class="shell">
 <header class="topbar"><a class="brand" href="/">AD ASTRA</a><a class="back" href="/services/">Services &amp; markets ↗</a></header>
 <main>
-<section class="hero" aria-labelledby="title">
-<div><p class="eyebrow">AD ASTRA / PRODUCTS &amp; SOLUTIONS</p><h1 id="title">Make the<br><em>complex visible.</em></h1><p class="lead">A governed visual architecture for products, solution directions and the systems connecting them—designed for understanding before activation.</p><a class="hero-cta" href="#universal-stage">Explore the Universal Stage ↓</a></div>
-<div class="hero-art" data-product-stage role="img" aria-label="A static orbital knowledge field representing products and solution relationships"><span class="core" aria-hidden="true"></span><span class="node n1" aria-hidden="true"></span><span class="node n2" aria-hidden="true"></span><span class="node n3" aria-hidden="true"></span><span class="hero-label" data-product-label>DISCOVERY / EXPLICIT PUBLIC PREVIEW</span></div>
+<div class="journey-navigation-host" data-journey-navigation data-current-journey="products"></div>
+<section class="hero" id="product-opening" aria-labelledby="title" data-cinematic-chapter="origin">
+  <div class="editorial-hero-media" aria-hidden="true">
+    <img src="/assets/astra-lumen-neural-horizon.png" alt="" fetchpriority="high" width="1672" height="941">
+    <video class="editorial-hero-film" muted playsinline loop preload="none" poster="/assets/astra-lumen-neural-horizon.png" tabindex="-1" aria-hidden="true">
+      <source src="/assets/ad-astra-horizon-motion.mp4" type="video/mp4">
+    </video>
+    <div class="editorial-hero-shade"></div>
+  </div>
+  <div class="editorial-hero-copy">
+    <p class="eyebrow">AD ASTRA / THE PRODUCT EXPERIENCE</p>
+    <h1 id="title">Make the <em>whole system visible.</em></h1>
+    <p class="editorial-hero-lead">One horizon. Four human-directed directions. Discover what intelligence can make understandable—through science, learning, visualization and governed action.</p>
+    <div class="editorial-actions">
+      <a class="editorial-primary" href="#flagship-proof">Enter the experience <span aria-hidden="true">↓</span></a>
+      <a class="editorial-secondary" href="/experience/">Watch the original film <span aria-hidden="true">▶</span></a>
+    </div>
+  </div>
+  <div class="editorial-hero-footer"><span>01 / ORIGIN</span><span>FOUR DIRECTIONS · ONE HUMAN EXPERIENCE</span><button type="button" class="editorial-motion-button" data-editorial-motion aria-pressed="false">Enable ambient motion</button></div>
 </section>
-<section class="atlas" aria-labelledby="atlas-title">
-<div class="section-head"><div><p class="eyebrow">01 / GRAPHICS ATLAS</p><h2 id="atlas-title">Four directions.<br>One visual language.</h2></div><p>Each surface has a clear role, provenance boundary and accessible static description. Motion and live intelligence remain opt-in.</p></div>
-<div class="grid">
-<article class="card"><span class="card-number">01</span><h3>Beyond Physics</h3><p>Connect questions, evidence and perspective across disciplines.</p><small>DISCOVERY / ORBITAL FIELD</small></article>
-<article class="card"><span class="card-number">02</span><h3>Astra Lumen</h3><p>Turn complex subjects into clearer, human-directed next steps.</p><small>LEARNING / LUMINOUS CORE</small></article>
-<article class="card"><span class="card-number">03</span><h3>Neural Visual Experience</h3><p>Make systems, patterns and possibilities easier to see.</p><small>VISUALIZATION / SIGNAL LATTICE</small></article>
-<article class="card"><span class="card-number">04</span><h3>Governed AI Workflows</h3><p>Move from intent to action through explicit controls and review.</p><small>OPERATIONS / CONTROL PLANE</small></article>
+<section class="proof-cinema" id="flagship-proof" data-proof-cinema data-proof-active="discovery" aria-labelledby="proof-title">
+  <div class="proof-top">
+    <div><p class="proof-kicker">THE AD ASTRA PRODUCT EXPERIENCE / FOUR ORIGINAL STUDIES</p>
+      <h2 id="proof-title">See intelligence.<br><em>In action.</em></h2></div>
+    <p>Move from our cinematic horizon into four different, human-directed experiences. Every model below runs locally and shows its limits; no public AI, customer data, or financial transactions are executed.</p>
+  </div>
+  <div class="proof-stage">
+    <div class="proof-visual" role="group" aria-label="Original locally rendered interactive product visualization">
+      <canvas data-proof-canvas role="img" tabindex="0" aria-describedby="proof-scene-description" aria-label="Beyond Physics synthetic orbital illustration. Press left or right arrow to change study step."></canvas>
+      <p class="proof-screenreader" id="proof-scene-description" data-proof-accessible>Beyond Physics — Observation, step 1 of 3. Synthetic illustrative orbital evidence; no real telescope feed or AI inference.</p>
+      <div class="proof-hud"><span data-proof-number>01 / DISCOVERY</span><span>ORIGINAL INTERACTIVE VISUALIZATION<br>NO MEASURED OR CUSTOMER DATA</span></div>
+      <div class="proof-live-readout"><p data-proof-phase>Observation / 1 OF 3</p><strong data-proof-readout>OBSERVATION / ORBITAL SIGNAL</strong></div>
+    </div>
+    <div class="proof-ui">
+      <p class="proof-kicker">FOUR DIRECTIONS / ONE HUMAN-DIRECTED SYSTEM</p>
+      <h3 data-proof-title>Beyond Physics</h3>
+      <p data-proof-description>Compare illustrative explanations and examine evidence before choosing what to investigate next.</p>
+      <div class="proof-select" role="group" aria-label="Choose an Ad Astra product demonstration">
+        <button type="button" data-proof-select="discovery" aria-pressed="true"><span>01 / DISCOVER</span><strong>Beyond Physics</strong></button>
+        <button type="button" data-proof-select="learning" aria-pressed="false"><span>02 / LEARN</span><strong>Astra Lumen</strong></button>
+        <button type="button" data-proof-select="visualize" aria-pressed="false"><span>03 / VISUALIZE</span><strong>Neural Visual</strong></button>
+        <button type="button" data-proof-select="govern" aria-pressed="false"><span>04 / OPERATE</span><strong>Governed Workflows</strong></button>
+      </div>
+      <div class="proof-actions">
+        <button type="button" data-proof-advance>Advance the demonstration →</button>
+        <button type="button" data-proof-reset>Reset study</button>
+        <button type="button" data-proof-motion aria-pressed="false">Play scene motion</button>
+      </div>
+      <p class="proof-evidence" data-proof-evidence role="status" aria-live="polite">Illustrative science visualization; no measured environmental data or live model inference.</p>
+      <a data-proof-link href="/products/beyond-physics/">Explore the product <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+  <p class="proof-disclosure">PROVENANCE / Synthetic locally rendered studies. The commercial 90-second flagship film remains in production; these demonstrations do not represent released customer AI services.</p>
+</section>
+<div class="editorial-chapter-rail" role="navigation" aria-label="Cinematic product chapters">
+  <span>EXPLORE THE SYSTEM</span>
+  <a href="#chapter-discovery" data-editorial-link="discovery" aria-current="location">01 / Discover</a>
+  <a href="#chapter-learning" data-editorial-link="learning">02 / Learn</a>
+  <a href="#chapter-visualization" data-editorial-link="visualization">03 / Visualize</a>
+  <a href="#chapter-governance" data-editorial-link="governance">04 / Operate</a>
+  <a href="#technical-foundation" class="editorial-data-link">Technical atlas ↗</a>
 </div>
+<section class="editorial-statement" aria-labelledby="statement-title">
+  <p class="eyebrow">THE JOURNEY / FOUR INTERCONNECTED DIRECTIONS</p>
+  <h2 id="statement-title">Not another catalog.<br><em>An experience of possibility.</em></h2>
+  <p>Every scene explores a different human purpose. Products shown here are concepts or controlled previews—not claims of unrestricted live AI, measured scientific data or activated commerce.</p>
 </section>
-<section id="universal-stage" class="universal-stage" aria-labelledby="stage-title">
-<div class="section-head"><div><p class="eyebrow">02 / UNIVERSAL STAGE</p><h2 id="stage-title">One platform.<br><em>Twelve ways in.</em></h2></div><p>Explore the governed knowledge domains through an explicit, accessible selection. No live telemetry or tenant data is used in this public preview.</p></div>
+<section id="product-film-story" class="editorial-product-film" aria-label="Four cinematic Ad Astra product narratives">
+  <article class="editorial-chapter" id="chapter-discovery" data-cinematic-chapter="discovery" aria-labelledby="discovery-title">
+    <div class="editorial-chapter-media"><img src="/assets/astra-lumen-neural-horizon.png" alt="An original Ad Astra orbital field above a luminous Earth horizon" loading="lazy" width="1672" height="941"></div>
+    <div class="editorial-chapter-copy">
+      <p class="editorial-kicker">01 / DISCOVER · BEYOND PHYSICS</p><h2 id="discovery-title">Every question<br><em>opens a universe.</em></h2>
+      <p>Compare explanations, evidence and uncertainty before choosing what to investigate next.</p>
+      <div class="editorial-proof"><span>Evidence before speculation</span><span>Human review first</span></div>
+      <a class="editorial-chapter-cta" href="/products/beyond-physics/">Explore Beyond Physics <span aria-hidden="true">↗</span></a>
+    </div>
+  </article>
+  <article class="editorial-chapter editorial-chapter-reverse" id="chapter-learning" data-cinematic-chapter="learning" aria-labelledby="learning-title">
+    <div class="editorial-chapter-media"><img src="/assets/astra-lumen-neural-brain.png" alt="Original Ad Astra luminous connected intelligence concept study" loading="lazy" width="1672" height="941"></div>
+    <div class="editorial-chapter-copy">
+      <p class="editorial-kicker">02 / LEARN · ASTRA LUMEN</p><h2 id="learning-title">Complexity,<br><em>made navigable.</em></h2>
+      <p>Explore a clear learning journey that puts the learner—not the machine—in charge.</p>
+      <div class="editorial-proof"><span>Guided exploration</span><span>Understanding over automation</span></div>
+      <a class="editorial-chapter-cta" href="/products/astra-lumen/">Explore Astra Lumen <span aria-hidden="true">↗</span></a>
+    </div>
+  </article>
+  <article class="editorial-chapter" id="chapter-visualization" data-cinematic-chapter="visualization" aria-labelledby="visualization-title">
+    <div class="editorial-chapter-media"><img src="/assets/astra-lumen-neural-profile-canvas.png" alt="Original Ad Astra cyan and violet conceptual neural visualization" loading="lazy" width="1672" height="941"></div>
+    <div class="editorial-chapter-copy">
+      <p class="editorial-kicker">03 / VISUALIZE · NEURAL VISUAL EXPERIENCE</p><h2 id="visualization-title">Ideas become<br><em>spatial.</em></h2>
+      <p>Move through a time-varying synthetic model and change perspective with direct controls.</p>
+      <div class="editorial-proof"><span>Time and camera controls</span><span>Clearly synthetic provenance</span></div>
+      <a class="editorial-chapter-cta" href="/products/neural-visual-experience/">Open Neural Visual Experience <span aria-hidden="true">↗</span></a>
+    </div>
+  </article>
+  <article class="editorial-chapter editorial-chapter-reverse" id="chapter-governance" data-cinematic-chapter="governance" aria-labelledby="governance-title">
+    <div class="editorial-chapter-media"><img src="/assets/astra-lumen-neural-concierge.png" alt="Original Ad Astra cyan-gold conceptual interface with a human-like neural silhouette" loading="lazy" width="1672" height="941"></div>
+    <div class="editorial-chapter-copy">
+      <p class="editorial-kicker">04 / OPERATE · GOVERNED WORKFLOWS</p><h2 id="governance-title">Power should<br><em>remain accountable.</em></h2>
+      <p>Understand the permissions, people and evidence needed before systems act.</p>
+      <div class="editorial-proof"><span>Permission boundaries</span><span>Reviewable outcomes</span></div>
+      <a class="editorial-chapter-cta" href="/products/governed-workflows/">Explore Governed Workflows <span aria-hidden="true">↗</span></a>
+    </div>
+  </article>
+</section>
+<section class="editorial-next" aria-labelledby="next-title">
+  <p class="eyebrow">THE CONTINUOUS AD ASTRA JOURNEY</p>
+  <h2 id="next-title">From understanding<br><em>to your next direction.</em></h2>
+  <p>Explore the original cinematic film, experiment with the scientific studio, or continue to the product portfolio and governed workspace.</p>
+  <div class="editorial-actions"><a class="editorial-primary" href="/experience/">Watch the film <span aria-hidden="true">▶</span></a><a class="editorial-secondary" href="/scientific/">Explore science ↗</a><a class="editorial-secondary" href="/workspace/">Workspace access ↗</a></div>
+</section>
+<details class="editorial-technical" id="technical-foundation">
+<summary><span>Explore the technical atlas</span><small>Graphics engine · research directions · detailed portfolio and markets</small></summary>
+<div class="editorial-technical-inner">
+<section class="editorial-scene-system" aria-label="Existing WebGL scene workbench"><div class="hero-art" data-product-stage role="group" aria-label="An interactive spatial stage representing products and solutions"><div class="cinematic-journey-host products-cinematic-host" data-cinematic-host data-cinematic-scene="1" aria-label="Interactive cinematic product scene"><canvas class="cinematic-journey-canvas" data-cinematic-journey role="img" aria-label="Procedural 3D spatial model linking science, products and governed solutions. Drag to orbit and Shift-scroll to zoom."></canvas><div class="cinematic-journey-chrome" aria-hidden="true"><span>UNIVERSAL STAGE / GRAPHICS ENGINE</span></div><div class="cinematic-journey-control-bar"><button type="button" data-cinematic-layer="0" aria-pressed="false">Arrival</button><button type="button" data-cinematic-layer="1" aria-pressed="true">Science</button><button type="button" data-cinematic-layer="2" aria-pressed="false">Solutions</button></div><p class="cinematic-journey-status" data-cinematic-status role="status">Spatial scene loading · static fallback ready</p></div></div></section>
+<section class="atlas" id="directions" aria-labelledby="atlas-title"><h2 id="atlas-title">What would you like to explore?</h2><details class="product-direction" name="product-direction" open data-product-direction="beyond-physics" data-motif="orbital-knowledge-field"><summary><span>Beyond Physics</span><small>discovery</small></summary><p>Connect questions, evidence and perspective across disciplines.</p><p class="example-question">“How do two sources explain the same observation?”</p><small>Concept preview</small></details>
+<details class="product-direction" name="product-direction" data-product-direction="astra-lumen" data-motif="luminous-neural-core"><summary><span>Astra Lumen</span><small>learning</small></summary><p>Turn complex subjects into clearer, human-directed next steps.</p><p class="example-question">“How would you explain this idea to someone learning it today?”</p><small>Concept preview</small></details>
+<details class="product-direction" name="product-direction" data-product-direction="neural-visual-experience" data-motif="responsive-signal-lattice"><summary><span>Neural Visual Experience</span><small>visualization</small></summary><p>Make systems, patterns and possibilities easier to see.</p><p class="example-question">“What changes in the surface when you advance time by one step?”</p><small>Synthetic demonstration</small></details>
+<details class="product-direction" name="product-direction" data-product-direction="governed-workflows" data-motif="approval-control-plane"><summary><span>Governed AI Workflows</span><small>operations</small></summary><p>Move from intent to action through explicit controls and review.</p><p class="example-question">“Which step in this process needs a person’s approval?”</p><small>Concept preview</small></details><a class="hero-cta" href="#science-preview">Try the scientific model ↓</a> <a class="hero-cta" href="/scientific/">Open full scientific studio ↗</a> <a class="hero-cta" href="/experience/">Watch the Ad Astra film ▶</a></section>
+<section class="scientific-lab" id="science-preview" aria-labelledby="scientific-title">
+<div class="section-head"><div><p class="eyebrow">Scientific preview</p><h2 id="scientific-title">Explore a model.<br><em>Change the perspective.</em></h2></div><p>Rotate the surface and compare nine time steps in this synthetic scientific graphics prototype.</p></div>
+<div class="scientific-lab-layout">
+<div class="scientific-canvas-shell">
+<canvas id="scientific-surface" role="img" aria-label="Projected 3D synthetic surface grid with changing elevation across nine time states. Numerical description updates below."></canvas>
+</div>
+<div class="scientific-console">
+<p class="eyebrow">DATA PROVENANCE / SYNTHETIC</p>
+<h3>Interactive scientific field</h3>
+<p>Rotate the camera and change time to inspect a reproducible sample surface. This prototype establishes the visualization interaction contract; it is not a simulation of a real physical event.</p>
+<label for="scientific-time">Time step: <output id="scientific-time-value" for="scientific-time">0</output> of 8</label>
+<input id="scientific-time" type="range" min="0" max="8" step="1" value="0">
+<div class="scientific-actions"><button type="button" id="scientific-left">Rotate left</button><button type="button" id="scientific-right">Rotate right</button></div>
+<button type="button" id="scientific-animation" aria-pressed="false">Play time evolution</button>
+<p id="scientific-surface-caption" role="status" aria-live="polite">Synthetic model preview. Spatial and numerical controls are available without animation.</p>
+<p class="scientific-disclaimer">Synthetic demonstration · normalized illustrative units · no real-world measurements or geographic coordinates.</p>
+</div></div>
+</section>
+<details class="technical-detail"><summary>Explore the graphics and knowledge domains</summary><section id="universal-stage" class="universal-stage" aria-labelledby="stage-title">
+<div class="section-head"><div><p class="eyebrow">02 / UNIVERSAL STAGE</p><h2 id="stage-title">One platform.<br><em>Twelve ways in.</em></h2></div><p>Select a graphics system to inspect its description. The list below shows the twelve knowledge domains.</p></div>
+<div data-graphics-systems class="graphics-systems-mount" aria-label="Graphics systems"></div>
+<p id="graphics-system-caption" class="graphics-system-caption" aria-live="polite">The canonical graphics system selection is available in this preview.</p>
 <div class="stage-layout">
-<nav class="stage-controls" aria-label="Products and solutions directions">
-<button type="button" data-product-direction="beyond-physics">Beyond Physics</button>
-<button type="button" data-product-direction="astra-lumen">Astra Lumen</button>
-<button type="button" data-product-direction="neural-visual-experience">Neural Visual Experience</button>
-<button type="button" data-product-direction="governed-workflows">Governed AI Workflows</button>
-</nav>
+
 <div class="stage-orbit" data-product-stage aria-live="polite"><span class="orbit-ring ring-a"></span><span class="orbit-ring ring-b"></span><span class="core"></span><span class="node n1"></span><span class="node n2"></span><span class="node n3"></span></div>
+<div class="stage-graphics-controls"><button type="button" id="stage-graphics-toggle" aria-pressed="false" aria-controls="universal-stage">Play optional graphics</button><p id="stage-graphics-status" role="status">Static graphics preview. Optional WebGL2 animation is off.</p></div>
 <div class="stage-readout"><p data-product-label>DISCOVERY / BEYOND PHYSICS</p><h3 data-product-title>Questions become navigable.</h3><p data-product-copy>Connect questions, evidence and perspective across disciplines.</p></div>
 </div>
 <div class="domain-map" aria-label="Twelve knowledge domains">
 <span>Space &amp; Earth</span><span>Arts &amp; Culture</span><span>Medical &amp; Health</span><span>Science</span><span>Engineering</span><span>Geotechnology</span><span>Education</span><span>Law &amp; Civic</span><span>Economics</span><span>Environment</span><span>Technology</span><span>Accessibility</span>
 </div>
 </section>
+</details>
+
+
+<section class="portfolio-section" id="portfolio-catalog" aria-labelledby="portfolio-title">
+<p class="portfolio-eyebrow">AD ASTRA / AUTHORITATIVE PUBLIC PORTFOLIO</p>
+<h2 id="portfolio-title">Products, solutions<br><em>and connected directions.</em></h2>
+<p class="portfolio-intro">A single catalog links flagship product experiences, the twelve conceptual platform capabilities, three Life workspace candidates and fifteen market research directions. Everything here is clearly labeled by its current availability; customer transactions and AI execution remain release-gated.</p>
+<div class="portfolio-filter" role="group" aria-label="Filter flagship product directions">
+<button type="button" aria-pressed="true" data-portfolio-filter="all">All four</button>
+<button type="button" aria-pressed="false" data-portfolio-filter="research">Research</button>
+<button type="button" aria-pressed="false" data-portfolio-filter="education">Education</button>
+<button type="button" aria-pressed="false" data-portfolio-filter="professional">Professional</button>
+</div>
+<p class="portfolio-intro" data-portfolio-count role="status" aria-live="polite">4 of 4 flagship product directions shown. Concept previews, not live offers.</p>
+<div class="portfolio-grid"><article class="portfolio-product" data-portfolio-card data-audiences="research education professional">
+<div class="portfolio-product-art"><img src="/assets/astra-lumen-neural-horizon.png" alt="An original Ad Astra orbital intelligence study extending over a luminous horizon" width="1672" height="941" loading="lazy"><span class="portfolio-product-index">PRODUCT 01 / DISCOVERY / EVIDENCE</span></div>
+<div class="portfolio-product-body"><p class="portfolio-status">concept preview</p><h3>Beyond Physics</h3><p>Compare scientific ideas, evidence and uncertainty across disciplines without presenting speculative results as facts.</p><div class="portfolio-product-audience"><span>research</span><span>education</span><span>professional</span></div><a href="/products/beyond-physics/">Explore Beyond Physics <span aria-hidden="true">↗</span></a></div></article>
+<article class="portfolio-product" data-portfolio-card data-audiences="education consumer professional">
+<div class="portfolio-product-art"><img src="/assets/astra-lumen-neural-brain.png" alt="Original Ad Astra luminous neural-network concept with gold orbital arcs" width="1672" height="941" loading="lazy"><span class="portfolio-product-index">PRODUCT 02 / LEARNING / INTELLIGENCE</span></div>
+<div class="portfolio-product-body"><p class="portfolio-status">concept preview</p><h3>Astra Lumen</h3><p>Guide learners through difficult subjects using clear explanations and human-directed next steps.</p><div class="portfolio-product-audience"><span>education</span><span>consumer</span><span>professional</span></div><a href="/products/astra-lumen/">Explore Astra Lumen <span aria-hidden="true">↗</span></a></div></article>
+<article class="portfolio-product" data-portfolio-card data-audiences="research education creative">
+<div class="portfolio-product-art"><img src="/assets/astra-lumen-neural-profile-canvas.png" alt="Original Ad Astra cyan and violet neural silhouette used as an illustrative visual" width="1672" height="941" loading="lazy"><span class="portfolio-product-index">PRODUCT 03 / VISUALIZE / SYNTHETIC MODELS</span></div>
+<div class="portfolio-product-body"><p class="portfolio-status">interactive synthetic preview</p><h3>Neural Visual Experience</h3><p>Explore relationships, spatial projections and time-varying models using explicit visual controls.</p><div class="portfolio-product-audience"><span>research</span><span>education</span><span>creative</span></div><a href="/products/neural-visual-experience/">Explore Neural Visual Experience <span aria-hidden="true">↗</span></a></div></article>
+<article class="portfolio-product" data-portfolio-card data-audiences="professional business institutional">
+<div class="portfolio-product-art"><img src="/assets/astra-lumen-neural-concierge.png" alt="Original Ad Astra cyan-and-gold conceptual intelligence silhouette" width="1672" height="941" loading="lazy"><span class="portfolio-product-index">PRODUCT 04 / OPERATE / OVERSIGHT</span></div>
+<div class="portfolio-product-body"><p class="portfolio-status">concept preview</p><h3>Governed AI Workflows</h3><p>Design human-controlled task flows with permissions, checkpoints and independently verified outcome receipts.</p><div class="portfolio-product-audience"><span>professional</span><span>business</span><span>institutional</span></div><a href="/products/governed-workflows/">Explore Governed AI Workflows <span aria-hidden="true">↗</span></a></div></article></div>
+<div class="portfolio-group-head" id="capability-catalog"><h3>Twelve platform capabilities</h3><p>Preview taxonomy, not twelve independently deployed products. Explore the customer platform mockup for the visual direction.</p></div>
+<div class="portfolio-capabilities"><article class="portfolio-capability"><span class="portfolio-cap-id">01 / QUESTION STUDIO</span><strong>Ask</strong><span>Conceptual capability · public mockup</span></article>
+<article class="portfolio-capability"><span class="portfolio-cap-id">02 / RESEARCH ATLAS</span><strong>Research</strong><span>Conceptual capability · public mockup</span></article>
+<article class="portfolio-capability"><span class="portfolio-cap-id">03 / CREATIVE ORBIT</span><strong>Create</strong><span>Conceptual capability · public mockup</span></article>
+<article class="portfolio-capability"><span class="portfolio-cap-id">04 / LEARNING LENS</span><strong>Learn</strong><span>Conceptual capability · public mockup</span></article>
+<article class="portfolio-capability"><span class="portfolio-cap-id">05 / HORIZON SCANNER</span><strong>Explore</strong><span>Conceptual capability · public mockup</span></article>
+<article class="portfolio-capability"><span class="portfolio-cap-id">06 / PROJECT ORBIT</span><strong>Plan</strong><span>Conceptual capability · public mockup</span></article>
+<article class="portfolio-capability"><span class="portfolio-cap-id">07 / KNOWLEDGE ROOMS</span><strong>Collaborate</strong><span>Conceptual capability · public mockup</span></article>
+<article class="portfolio-capability"><span class="portfolio-cap-id">08 / SIGNAL MONITOR</span><strong>Watch</strong><span>Conceptual capability · public mockup</span></article>
+<article class="portfolio-capability"><span class="portfolio-cap-id">09 / PROFILE CONSTELLATIONS</span><strong>Specialize</strong><span>Conceptual capability · public mockup</span></article>
+<article class="portfolio-capability"><span class="portfolio-cap-id">10 / GLOBAL NETWORK</span><strong>Localize</strong><span>Conceptual capability · public mockup</span></article>
+<article class="portfolio-capability"><span class="portfolio-cap-id">11 / ACCESSIBILITY LAYER</span><strong>Include</strong><span>Conceptual capability · public mockup</span></article>
+<article class="portfolio-capability"><span class="portfolio-cap-id">12 / GOVERNANCE DECK</span><strong>Review</strong><span>Conceptual capability · public mockup</span></article></div>
+<div class="portfolio-group-head" id="life-products"><h3>Daily Life Intelligence</h3><p>Three governed workspace candidates. Customer access and entitlement acceptance are pending.</p></div>
+<div class="portfolio-life"><article><p class="portfolio-eyebrow">LIFE / WORKSPACE CANDIDATE</p><h4>DayFlow</h4><p>Plan today's next steps</p><a href="/life/">Explore this Life direction ↗</a></article>
+<article><p class="portfolio-eyebrow">LIFE / WORKSPACE CANDIDATE</p><h4>LearnPath</h4><p>Build a learning rhythm</p><a href="/life/">Explore this Life direction ↗</a></article>
+<article><p class="portfolio-eyebrow">LIFE / WORKSPACE CANDIDATE</p><h4>CareerStep</h4><p>Prepare for career progress</p><a href="/life/">Explore this Life direction ↗</a></article></div>
+<div class="portfolio-group-head" id="market-solutions"><h3>Solutions by market</h3><p>Fifteen sector research directions. Specific regional commercial offers and compliance are not approved.</p></div>
+<div class="portfolio-market-list"><article class="portfolio-market"><a href="/markets/consumer-personal-ai/">Consumer &amp; Personal AI <span aria-hidden="true">↗</span></a><small>research priority · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/education-learning/">Education &amp; Learning <span aria-hidden="true">↗</span></a><small>research priority · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/business-professional-services/">Business &amp; Professional Services <span aria-hidden="true">↗</span></a><small>research priority · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/creative-industries-media/">Creative Industries &amp; Media <span aria-hidden="true">↗</span></a><small>research priority · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/science-research/">Science &amp; Research <span aria-hidden="true">↗</span></a><small>research priority · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/digital-commerce/">Digital Commerce <span aria-hidden="true">↗</span></a><small>research priority · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/healthcare-wellness/">Healthcare &amp; Wellness <span aria-hidden="true">↗</span></a><small>governed proposal · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/finance-economics/">Finance &amp; Economics <span aria-hidden="true">↗</span></a><small>governed proposal · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/manufacturing-energy/">Manufacturing &amp; Energy <span aria-hidden="true">↗</span></a><small>governed proposal · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/logistics-supply-chain/">Logistics &amp; Supply Chain <span aria-hidden="true">↗</span></a><small>governed proposal · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/agriculture-food/">Agriculture &amp; Food <span aria-hidden="true">↗</span></a><small>governed proposal · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/government-public-services/">Government &amp; Public Services <span aria-hidden="true">↗</span></a><small>institutional concept · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/legal-compliance/">Legal &amp; Compliance <span aria-hidden="true">↗</span></a><small>institutional concept · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/travel-hospitality/">Travel &amp; Hospitality <span aria-hidden="true">↗</span></a><small>institutional concept · not an activated offer</small></article>
+<article class="portfolio-market"><a href="/markets/real-estate-construction/">Real Estate &amp; Construction <span aria-hidden="true">↗</span></a><small>institutional concept · not an activated offer</small></article></div>
+<div class="portfolio-commerce" id="product-availability">
+<div><p class="portfolio-eyebrow">PRODUCT-TO-CUSTOMER OPERATING JOURNEY</p><h3>Explore freely. Activate responsibly.</h3><p>Plans remain drafts, checkout is disabled, and access is independently verified. Review the proposed pricing and gated workspace; there is no automatic billing or public AI activation from this catalog.</p></div>
+<div class="portfolio-commerce-actions"><a class="portfolio-link" href="/pricing/">View planned plans <span aria-hidden="true">↗</span></a><a class="portfolio-link alt" href="/workspace/">Check workspace access</a></div></div>
+</section>
+
+
+</div>
+</details>
+<p class="next-journey-wrap"><a data-next-journey href="/workspace/">Continue to customer workspace →</a></p>
 </main>
-<footer class="governance"><span><strong>GRAPHICS CONTRACT v1.0.0</strong><br>conceptual direction · no tenant data · no live claims</span><span>STATIC FALLBACK READY<br>REDUCED MOTION SAFE</span></footer>
+<footer class="governance"><a href="/">Ad Astra</a><span>Products &amp; Solutions preview</span></footer>
 </div>
 </body>
 </html>

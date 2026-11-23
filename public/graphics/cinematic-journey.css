@@ -1,0 +1,52 @@
+:root{--cinematic-cyan:#9be9f3;--cinematic-gold:#efd19a;--cinematic-violet:#a88cff}
+.cinematic-journey-host{position:relative;isolation:isolate;overflow:hidden;background-image:linear-gradient(100deg,#020610e8 0%,#061a2b66 46%,#0206109e 100%),url('/assets/astra-lumen-neural-horizon.png');background-size:cover;background-position:center;background-color:#020610;color:#e8f6f8}
+.cinematic-journey-host:before{content:'';position:absolute;inset:0;background:linear-gradient(110deg,#020610e8 0%,#02061054 43%,#02061016 70%,#020610b8 100%);z-index:2;pointer-events:none}
+.cinematic-journey-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;touch-action:none;cursor:grab}
+.cinematic-journey-canvas.is-dragging{cursor:grabbing}
+.cinematic-journey-chrome{position:absolute;top:22px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:center;gap:18px;z-index:3;pointer-events:none;color:#9bd6e3;font:8px/1.4 ui-monospace,monospace;letter-spacing:1.6px;text-transform:uppercase}
+.cinematic-journey-chrome strong{color:#efd19a;font-weight:500}
+.cinematic-journey-control-bar{position:absolute;left:24px;bottom:24px;display:flex;gap:7px;flex-wrap:wrap;z-index:4}
+.cinematic-journey-control-bar button{min-height:34px;padding:7px 10px;border:1px solid #9bdfe35c;background:#061522c9;color:#bfdce4;font:8px/1.2 Manrope,system-ui,sans-serif;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
+.cinematic-journey-control-bar button:hover,.cinematic-journey-control-bar button:focus-visible{border-color:var(--cinematic-cyan);color:#f2fbfc}
+.cinematic-journey-control-bar button[aria-pressed=true]{border-color:var(--cinematic-gold);color:var(--cinematic-gold);background:#12293bcf}
+.cinematic-journey-status{position:absolute;right:24px;bottom:27px;max-width:270px;margin:0;z-index:4;color:#9db8c4;font:8px/1.5 ui-monospace,monospace;letter-spacing:.8px;text-align:right;pointer-events:none}
+.hero .cinematic-journey-host{position:absolute;inset:0;z-index:2;min-height:100%;pointer-events:none}
+.hero .cinematic-journey-canvas{pointer-events:auto}
+.hero .cinematic-journey-host:before{background:linear-gradient(90deg,#020610e3 0%,#02061066 44%,#02061018 74%,#0206109e 100%)}
+.hero .cinematic-journey-chrome{top:112px;left:5.5%;right:5.5%}
+.hero .cinematic-journey-control-bar{left:5.5%;bottom:72px}
+.hero .cinematic-journey-status{right:5.5%;bottom:74px}
+.hero .hero-content,.hero .hero-bottom{position:relative;z-index:5}
+.products-cinematic-host{position:absolute;inset:0;z-index:3;min-height:100%;pointer-events:none}
+.products-cinematic-host .cinematic-journey-canvas{pointer-events:auto}
+.products-cinematic-host .cinematic-journey-control-bar{left:18px;bottom:18px}
+.products-cinematic-host .cinematic-journey-status{right:18px;bottom:19px;max-width:210px}
+.products-cinematic-host .cinematic-journey-chrome{top:18px;left:18px;right:18px}
+.hero-art:has(.products-cinematic-host)>span{opacity:.16}
+ .cinematic-fallback .cinematic-journey-canvas{opacity:0}
+.cinematic-fallback{background-image:linear-gradient(100deg,#020610b5 0%,#061a2b44 46%,#02061074 100%),url('/assets/astra-lumen-neural-horizon.png')}
+@media(max-width:720px){
+  .cinematic-journey-chrome{left:16px;right:16px;top:16px;letter-spacing:1px}
+  .cinematic-journey-control-bar{left:16px;bottom:16px}
+  .cinematic-journey-status{left:16px;right:auto;bottom:64px;text-align:left;max-width:240px}
+  .hero .cinematic-journey-chrome{top:92px;left:25px;right:25px}
+  .hero .cinematic-journey-control-bar{left:25px;bottom:94px}
+  .hero .cinematic-journey-status{left:25px;right:auto;bottom:58px}
+}
+@media(prefers-reduced-motion:reduce){.cinematic-journey-canvas{cursor:default}.cinematic-journey-control-bar button{transition:none}}
+/* Page scrolling is the default gesture. The scene controls are independently focusable. */
+.cinematic-journey-host .cinematic-journey-control-bar { pointer-events:auto }
+.cinematic-journey-canvas { touch-action:pan-y }
+.hero .cinematic-journey-chrome { display:none }
+.cinematic-journey-control-bar button { min-height:44px }
+.hero .cinematic-journey-status { max-width:32ch }
+
+/* The reviewed scene registry supplies the fallback art while the spatial renderer loads. */
+.cinematic-journey-host[data-evolution-scene]{background-image:linear-gradient(100deg,#020610e8 0%,#061a2b66 46%,#0206109e 100%),var(--evolution-art);}
+.cinematic-journey-host.cinematic-fallback[data-evolution-scene]{background-image:linear-gradient(100deg,#020610b5 0%,#061a2b44 46%,#02061074 100%),var(--evolution-art);}
+
+/* Keep visual controls and context separate in reviewed cinematic pages. */
+.products-cinematic-host .cinematic-journey-control-bar{bottom:22px;left:20px}
+.products-cinematic-host .cinematic-journey-status{bottom:80px;left:20px;right:20px;max-width:50ch;text-align:left}
+.hero-art:has(.products-cinematic-host)>.hero-label{display:none}
+@media(max-width:640px){.products-cinematic-host .cinematic-journey-control-bar{left:14px;bottom:18px;gap:4px}.products-cinematic-host .cinematic-journey-status{left:14px;right:14px;bottom:84px}.hero .hero-content{max-width:calc(100% - 36px)}}

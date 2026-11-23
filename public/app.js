@@ -102,7 +102,9 @@ function syncMotion() {
   const permitted = !motionPaused && !document.hidden && !(filmDialog && filmDialog.open);
   document.body.classList.toggle('motion-suspended', !permitted);
   motionVideos.forEach(video => {
-    if (!permitted || !visibleVideos.has(video) || video.dataset.failed === 'true') {video.pause(); return;}
+    const spatialMode = video.hasAttribute('data-cinema-film') &&
+      document.querySelector('.hero-cinema-v3')?.dataset.cinemaMode === 'spatial';
+    if (!permitted || spatialMode || !visibleVideos.has(video) || video.dataset.failed === 'true') {video.pause(); return;}
     // The Runway hero is a camera approach, not a seamless loop. Hold its last frame.
     if (video.ended && !video.loop) return;
     video.play().catch(error => {
@@ -131,6 +133,7 @@ motionButton.addEventListener('click', () => {
 });
 reducedMotion.addEventListener('change', event => {motionPaused = event.matches; syncMotion();});
 document.addEventListener('visibilitychange', syncMotion);
+document.addEventListener('ad-astra:cinema-mode-change', syncMotion);
 syncMotion();
 
 // Film premiere is withheld until final audiovisual acceptance.

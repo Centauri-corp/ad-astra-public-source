@@ -1,0 +1,105 @@
+
+/* AD ASTRA / Products & Solutions — canonical portfolio surfaces.
+   Static content first. Filters and motion are optional progressive enhancement. */
+:root{--p-bg:#06101b;--p-ink:#f1f7f8;--p-cyan:#9bdfe3;--p-gold:#e9c990;--p-muted:#a8c1cc;--p-line:#658da14d;--p-violet:#9a7cff}
+.portfolio-section,.product-detail-page{font-family:Manrope,system-ui,sans-serif;color:var(--p-ink)}
+.portfolio-section{padding:clamp(62px,8vw,126px) 0;border-top:1px solid var(--p-line);position:relative;isolation:isolate}
+.portfolio-section:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 84% 6%,#22618438,transparent 57%)}
+.portfolio-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--p-gold);text-transform:uppercase}
+.portfolio-section h2,.product-detail-page h1,.product-detail-page h2{font-weight:500;letter-spacing:-.055em}
+.portfolio-section h2{font-size:clamp(36px,5.5vw,72px);line-height:1.1;margin:16px 0 24px}
+.portfolio-section h2 em,.product-detail-page h1 em,.product-detail-page h2 em{font-style:normal;color:var(--p-cyan)}
+.portfolio-intro{color:var(--p-muted);font:400 15px/1.85 Manrope,system-ui,sans-serif;max-width:76ch}
+.portfolio-filter{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:34px 0 24px}
+.portfolio-filter button{appearance:none;min-height:46px;padding:12px 19px;border:1px solid #6f9aaa77;background:#102a3a;color:var(--p-ink);cursor:pointer;font:600 12px Manrope,sans-serif}
+.portfolio-filter button[aria-pressed=true],.portfolio-filter button:hover{background:#21485a;border-color:var(--p-gold)}
+.portfolio-filter button:focus-visible,.portfolio-product a:focus-visible,.portfolio-market a:focus-visible,.product-detail-page a:focus-visible,.product-detail-page button:focus-visible{outline:3px solid var(--p-cyan);outline-offset:3px}
+.portfolio-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;background:#547b8a4f;border:1px solid #547b8a4f}
+.portfolio-product{display:grid;grid-template-rows:auto 1fr;min-width:0;background:#091d2a}
+.portfolio-product[hidden]{display:none!important}
+.portfolio-product-art{position:relative;min-height:230px;overflow:hidden;background:#0c2434}
+.portfolio-product-art img{width:100%;height:100%;max-height:340px;min-height:230px;object-fit:cover;object-position:50% 40%;display:block;transition:transform .5s}
+.portfolio-product:hover .portfolio-product-art img{transform:scale(1.035)}
+.portfolio-product-art:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#06111a94,transparent 55%);pointer-events:none}
+.portfolio-product-index{position:absolute;left:22px;bottom:20px;color:#e8f4f7;font-size:10px;letter-spacing:.14em;font-weight:700;z-index:1}
+.portfolio-product-body{padding:clamp(23px,3.5vw,43px);display:flex;flex-direction:column;min-height:300px}
+.portfolio-status{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--p-gold);margin:0}
+.portfolio-status:before{content:"";width:7px;height:7px;background:var(--p-gold);border-radius:50%}
+.portfolio-product-body h3{font-weight:550;font-size:clamp(23px,2.65vw,36px);line-height:1.2;letter-spacing:-.04em;margin:19px 0 12px}
+.portfolio-product-body p:not(.portfolio-status){font-size:13px;color:var(--p-muted);line-height:1.8;margin:0}
+.portfolio-product-audience{display:flex;gap:7px;flex-wrap:wrap;margin:24px 0}
+.portfolio-product-audience span{font-size:10px;color:#c0d3df;border:1px solid #6b90a05e;padding:8px 10px}
+.portfolio-product-body a{align-self:flex-start;text-decoration:none;border-bottom:1px solid var(--p-gold);padding:12px 0;font-size:12px;font-weight:750;color:var(--p-ink);margin-top:auto}
+.portfolio-product-body a:hover{color:var(--p-gold)}
+.portfolio-group-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:65px 0 25px}
+.portfolio-group-head h3{font-size:clamp(24px,3.3vw,43px);font-weight:550;letter-spacing:-.04em;margin:0}
+.portfolio-group-head p{font:400 12px/1.7 Manrope,sans-serif;color:var(--p-muted);margin:0;max-width:44ch}
+.portfolio-capabilities{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#456c8450;border:1px solid #456c8450}
+.portfolio-capability{padding:25px 17px;min-height:128px;background:#0a2331;display:flex;flex-direction:column;gap:12px}
+.portfolio-capability .portfolio-cap-id{font-size:10px;font-weight:700;color:var(--p-gold);letter-spacing:.15em}
+.portfolio-capability strong{font-size:20px;font-weight:600}
+.portfolio-capability span:last-child{font-size:11px;color:var(--p-muted);line-height:1.5}
+.portfolio-life{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#466d8059;border:1px solid #466d8059}
+.portfolio-life article{padding:30px;min-height:185px;background:linear-gradient(135deg,#102e3c,#071825);display:flex;flex-direction:column;gap:12px}
+.portfolio-life h4{font-size:25px;font-weight:550;letter-spacing:-.03em;margin:0}
+.portfolio-life p{font-size:13px;line-height:1.7;color:var(--p-muted);margin:0}
+.portfolio-life a{font-size:12px;color:var(--p-cyan);margin-top:auto}
+.portfolio-market-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.portfolio-market{padding:18px 20px;min-height:96px;border:1px solid var(--p-line);background:#0b202f;display:flex;flex-direction:column;justify-content:space-between;gap:12px}
+.portfolio-market a{color:#e8f5f7;font-size:13px;font-weight:550;text-decoration:none}
+.portfolio-market a:hover{color:var(--p-cyan)}
+.portfolio-market small{color:var(--p-muted);font-size:10px}
+.portfolio-commerce{margin-top:70px;border-block:1px solid #809caa76;padding:39px 0;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.portfolio-commerce h3{margin:0 0 13px;font-size:clamp(22px,3vw,39px);font-weight:550;letter-spacing:-.04em}
+.portfolio-commerce p{font-size:13px;line-height:1.7;color:var(--p-muted);margin:0;max-width:65ch}
+.portfolio-commerce-actions{display:flex;gap:10px;flex-wrap:wrap}
+.portfolio-link{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 20px;background:#f0f6f6;color:#061421!important;font:700 12px Manrope,sans-serif;text-decoration:none;white-space:nowrap}
+.portfolio-link.alt{background:transparent;color:var(--p-ink)!important;border:1px solid #91acbb88}
+.portfolio-link:hover{background:var(--p-cyan)}
+/* Individual flagship pages — a vertical product journey and honest availability. */
+.product-detail-page{background:#05121d;min-height:100vh}
+.product-detail-page *{box-sizing:border-box}
+.product-detail-header{height:76px;padding:0 clamp(20px,6vw,100px);display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid #ffffff30}
+.product-detail-header a{color:var(--p-ink);text-decoration:none;font-size:12px}
+.product-detail-header .brand{font-weight:800;letter-spacing:.27em}
+.product-detail-header nav{display:flex;gap:25px;align-items:center}
+.product-detail-header nav a:hover{color:var(--p-cyan)}
+.product-detail-subnav{position:sticky;top:0;z-index:12;min-height:50px;padding:13px clamp(20px,6vw,100px);background:#0b1e2bfa;backdrop-filter:blur(16px);border-bottom:1px solid #ffffff28;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.product-detail-subnav strong{font-size:11px;letter-spacing:.12em}
+.product-detail-subnav nav{display:flex;flex-wrap:wrap;gap:23px}
+.product-detail-subnav a{font-size:11px;text-decoration:none;color:var(--p-muted)}
+.product-detail-subnav a:hover{color:var(--p-ink)}
+.product-detail-hero{min-height:min(760px,84svh);position:relative;isolation:isolate;display:flex;align-items:center;overflow:hidden;background:#081c2a}
+.product-detail-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% center;z-index:-2}
+.product-detail-hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#030a15f8,#061323d5 42%,#06172552 73%,#05101a6d),linear-gradient(0deg,#05111ae6,transparent 32%)}
+.product-detail-hero-inner{padding:80px clamp(20px,7vw,110px);max-width:890px}
+.product-detail-hero h1{font-size:clamp(52px,7.3vw,108px);line-height:1.02;margin:23px 0 20px}
+.product-detail-hero p:not(.portfolio-eyebrow){max-width:55ch;font-size:clamp(16px,1.6vw,20px);line-height:1.8;color:#dfedf2}
+.product-detail-hero .portfolio-status{margin:0 0 17px}
+.product-detail-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:35px}
+.product-detail-inner{width:min(1400px,calc(100% - 2*clamp(18px,6vw,90px)));margin:auto}
+.product-detail-section{padding:clamp(65px,8vw,116px) 0;border-bottom:1px solid var(--p-line)}
+.product-detail-section h2{font-size:clamp(35px,4.6vw,69px);line-height:1.12;margin:15px 0 25px}
+.product-detail-section>p:not(.portfolio-eyebrow){max-width:80ch;color:var(--p-muted);font-size:15px;line-height:1.85}
+.product-detail-split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(25px,5vw,90px);align-items:center}
+.product-detail-split img{width:100%;height:auto;max-height:460px;object-fit:cover;display:block;border:1px solid #7e9dac44}
+.product-detail-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#4f819456;margin-top:40px;border:1px solid #4f819456}
+.product-detail-steps article{background:#0b2231;padding:30px;min-height:210px}
+.product-detail-steps span{font-size:11px;color:var(--p-gold);font-weight:700}
+.product-detail-steps h3{font-weight:500;font-size:21px;line-height:1.35;margin:22px 0 0}
+.product-detail-specs{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#547d8b62;border:1px solid #547d8b62;margin-top:32px}
+.product-detail-specs div{background:#09212f;padding:25px}
+.product-detail-specs dt{color:var(--p-gold);font-size:11px;text-transform:uppercase;letter-spacing:.12em;margin:0 0 10px}
+.product-detail-specs dd{color:#d8eaf0;font-size:14px;line-height:1.7;margin:0}
+.product-detail-audience{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.product-detail-audience span{padding:12px 16px;border:1px solid #7da7b468;font-size:12px;text-transform:capitalize;color:#e4edf2}
+.product-detail-cta{background:radial-gradient(ellipse at 60% 10%,#16576962,transparent 65%),#081d2b;padding:clamp(65px,9vw,130px) clamp(20px,7vw,110px);text-align:center}
+.product-detail-cta h2{font-size:clamp(34px,5vw,70px);margin:18px 0}
+.product-detail-cta p{max-width:68ch;margin:0 auto 28px;color:var(--p-muted);font-size:14px;line-height:1.8}
+.product-detail-cta .product-detail-hero-actions{justify-content:center}
+.product-detail-footer{padding:32px clamp(20px,6vw,100px);display:flex;align-items:center;justify-content:space-between;gap:22px;color:var(--p-muted);font-size:11px}
+.product-detail-footer a{color:var(--p-cyan)}
+@media(max-width:900px){.portfolio-capabilities{grid-template-columns:repeat(3,1fr)}.portfolio-market-list{grid-template-columns:repeat(2,1fr)}.product-detail-hero{min-height:650px}}
+@media(max-width:700px){.portfolio-grid{grid-template-columns:1fr}.portfolio-life{grid-template-columns:1fr}.portfolio-capabilities{grid-template-columns:repeat(2,1fr)}.portfolio-market-list{grid-template-columns:1fr}.portfolio-group-head,.portfolio-commerce{display:block}.portfolio-commerce-actions{margin-top:20px}.product-detail-header{height:auto;min-height:72px;flex-wrap:wrap;padding-block:15px}.product-detail-header nav{gap:15px;flex-wrap:wrap}.product-detail-subnav{display:block}.product-detail-subnav nav{margin-top:13px}.product-detail-hero{min-height:680px;align-items:flex-start}.product-detail-hero-inner{padding:90px 22px}.product-detail-hero h1{font-size:clamp(45px,11vw,72px)}.product-detail-split{grid-template-columns:1fr}.product-detail-steps{grid-template-columns:1fr}.product-detail-specs{grid-template-columns:1fr}.product-detail-footer{display:block}.product-detail-footer a{display:block;margin-top:17px}}
+@media(max-width:420px){.portfolio-filter button{padding:10px 13px;min-height:44px;font-size:11px}.portfolio-section h2{font-size:37px}.portfolio-product-body h3{font-size:25px}.portfolio-capability{min-height:107px;padding:17px 14px}.portfolio-capability strong{font-size:17px}.product-detail-hero-inner{padding-top:70px}.product-detail-hero h1{font-size:45px}}
+@media(prefers-reduced-motion:reduce){.portfolio-product-art img{transition:none}.portfolio-product:hover .portfolio-product-art img{transform:none}}
