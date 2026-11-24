@@ -8,8 +8,8 @@ assert.equal(catalog.MARKET_PROFILES.length,24);
 assert.equal(new Set(catalog.MARKET_PROFILES.map(profile=>profile.id)).size,catalog.MARKET_PROFILES.length);
 for(const profile of catalog.MARKET_PROFILES){assert.ok(/^Astra /.test(profile.name),`Market profile name missing Astra prefix: ${profile.id}`);}
 function walk(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);}
-if(process.env.VERCEL_PROJECT_ID)assert.equal(process.env.VERCEL_PROJECT_ID,'prj_p5ZKa0UsRpxtNU6hdNzvHvhZuOOc');
-if(process.env.VERCEL_ORG_ID)assert.equal(process.env.VERCEL_ORG_ID,'team_Sth5QRQV27xdek3gwROdfjSJ');
+if(process.env.VERCEL_PROJECT_ID)assert.equal(process.env.VERCEL_PROJECT_ID,'prj_FX8QO3TIqUNAfFR4enz0bALmjeg1');
+if(process.env.VERCEL_ORG_ID)assert.equal(process.env.VERCEL_ORG_ID,'team_5xblMPo2zEBjbz4KPmeDVHPr');
 const files=walk(path.join(root,'public'));
 for(const f of files){
  const rel=path.relative(path.join(root,'public'),f).replaceAll('\\','/');
