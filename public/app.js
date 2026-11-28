@@ -8,7 +8,7 @@ const modes = {
   learn: {number:'04 / LEARN', title:['Understand more.','Keep going further.'], description:'Approach a complex subject through questions, explanations and connections. Build understanding at a pace that supports deeper thought.', example:'“Explain orbital mechanics through everyday experiences.”', image:'astra-lumen-neural-brain.png', alt:'A translucent neural brain with cyan synapses and gold orbital paths'},
   explore: {number:'05 / EXPLORE', title:['Look beyond','the familiar.'], description:'Follow an idea across science, technology and human experience. Discover new perspectives and questions worth pursuing.', example:'“What could living beyond Earth teach us about life here?”', image:'astra-lumen-neural-horizon.png', alt:'A neural intelligence lattice rising over an illuminated Earth horizon'}
 };
-const tabs = [...document.querySelectorAll('[role="tab"]')];
+const tabs = [...document.querySelectorAll('#possibilities [role="tab"][data-mode]')];
 const experienceImage = document.getElementById('experience-image');
 function selectMode(tab) {
   const mode = modes[tab?.dataset.mode];
@@ -216,6 +216,31 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     3: ['ASI / HYPOTHETICAL HORIZON', 'A denser visual horizon for multi-threaded possibility.']
   };
   let tier = 1, activity = 0, targetActivity = 0, visible = true, frame = 0, started = performance.now();
+  // Each tablist owns its selection and keyboard focus, including static fallback.
+  function setTier(next) {
+    if (!Object.hasOwn(labels, next)) return;
+    tier = next;
+    section.dataset.tier = String(tier);
+    tabs.forEach(tab => {
+      const active = Number(tab.dataset.tier) === tier;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+    });
+    const current = labels[tier]; label.textContent = current[0]; value.textContent = current[1];
+    targetActivity = Math.max(targetActivity, tier * .45);
+  }
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => setTier(Number(tab.dataset.tier)));
+    tab.addEventListener('keydown', event => {
+      const next = {ArrowRight:(index+1)%tabs.length, ArrowLeft:(index+tabs.length-1)%tabs.length, Home:0, End:tabs.length-1}[event.key];
+      if (next === undefined) return;
+      event.preventDefault();
+      setTier(Number(tabs[next].dataset.tier));
+      tabs[next].focus();
+    });
+  });
+  setTier(tier);
   const gl = canvas.getContext('webgl', { alpha: true, antialias: false, powerPreference: 'low-power' });
   if (!gl) {
     canvas.hidden = true;
@@ -316,21 +341,28 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     if (canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; gl.viewport(0, 0, width, height); }
   }
   let audioContext = null, audioAnalyser = null, audioStream = null, audioData = null, amplitude = 0;
-  async function startAudioMeter() {
+  async function startAudioMeter(isCurrent) {
     if (audioAnalyser || !navigator.mediaDevices?.getUserMedia) return false;
+    let stream = null, context = null;
     try {
-      audioStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false });
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      audioAnalyser = audioContext.createAnalyser(); audioAnalyser.fftSize = 512; audioAnalyser.smoothingTimeConstant = .78;
-      audioData = new Uint8Array(audioAnalyser.fftSize);
-      audioContext.createMediaStreamSource(audioStream).connect(audioAnalyser);
+      stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false });
+      if (!isCurrent() || document.hidden) { stream.getTracks().forEach(track => track.stop()); return false; }
+      context = new (window.AudioContext || window.webkitAudioContext)();
+      const analyser = context.createAnalyser(); analyser.fftSize = 512; analyser.smoothingTimeConstant = .78;
+      const data = new Uint8Array(analyser.fftSize);
+      context.createMediaStreamSource(stream).connect(analyser);
+      audioStream = stream; audioContext = context; audioAnalyser = analyser; audioData = data;
       return true;
-    } catch { audioStream?.getTracks().forEach(track => track.stop()); audioStream = null; return false; }
+    } catch {
+      stream?.getTracks().forEach(track => track.stop());
+      await context?.close()?.catch(() => {});
+      return false;
+    }
   }
   function stopAudioMeter() {
     audioStream?.getTracks().forEach(track => track.stop()); audioStream = null;
     audioAnalyser?.disconnect(); audioAnalyser = null; audioData = null;
-    audioContext?.close(); audioContext = null; amplitude = 0;
+    audioContext?.close()?.catch(() => {}); audioContext = null; amplitude = 0;
   }
   function sampleAudio() {
     if (!audioAnalyser || !audioData || reducedMotion.matches) { amplitude *= .9; return amplitude; }
@@ -377,14 +409,6 @@ document.getElementById('save-launch').addEventListener('click', async () => {
       gl.useProgram(program);
     }
   }
-  function setTier(next) {
-    tier = next;
-    section.dataset.tier = String(tier);
-    tabs.forEach(tab => { const active = Number(tab.dataset.tier) === tier; tab.classList.toggle('active', active); tab.setAttribute('aria-selected', String(active)); });
-    const current = labels[tier]; label.textContent = current[0]; value.textContent = current[1];
-    targetActivity = Math.max(targetActivity, tier * .45);
-  }
-  tabs.forEach(tab => tab.addEventListener('click', () => setTier(Number(tab.dataset.tier))));
   input?.addEventListener('input', () => { targetActivity = Math.min(3, .35 + input.value.length / 45); activityLabel.textContent = 'LOCAL SIMULATION / RIPPLE INTENSITY ' + Math.round(targetActivity * 33) + '%'; });
   form?.addEventListener('submit', event => { event.preventDefault(); targetActivity = 3; activityLabel.textContent = 'LOCAL SIMULATION / RIPPLE REGISTERED'; setTimeout(() => { activityLabel.textContent = 'LOCAL SIMULATION / NO PROMPT IS SENT'; }, 1400); });
   const voiceButton = document.getElementById('voice-command');
@@ -404,7 +428,8 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     voiceState.textContent = state.label;
     activityLabel.textContent = transcript ? `${state.message} / “${transcript.slice(0, 54)}”` : state.message;
     targetActivity = Math.max(targetActivity, state.intensity);
-    if (next !== 'idle') { clearTimeout(voiceTimer); voiceTimer = setTimeout(() => setVoiceState('idle'), 3600); }
+    clearTimeout(voiceTimer); voiceTimer = 0;
+    if (next !== 'idle' || transcript) voiceTimer = setTimeout(() => setVoiceState('idle'), 3600);
   }
   function classifyVoice(text) {
     const valueText = String(text || '').toLowerCase();
@@ -413,26 +438,91 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     if (/\b(speak|answer|respond|output)\b/.test(valueText)) return 'speaking';
     return 'thinking';
   }
-  if (!SpeechRecognition) {
-    voiceButton?.setAttribute('disabled', '');
-    voiceHelp.textContent = 'Voice commands are unavailable in this browser. Use the local visual prompt above.';
-  } else {
-    recognition = new SpeechRecognition();
-    recognition.continuous = false; recognition.interimResults = true; recognition.lang = 'en-US';
-    recognition.onstart = () => { voiceButton.setAttribute('aria-pressed', 'true'); setVoiceState('listening'); };
-    recognition.onresult = event => {
-      const transcript = Array.from(event.results).map(result => result[0]?.transcript || '').join(' ').trim();
-      setVoiceState(classifyVoice(transcript), transcript);
-    };
-    recognition.onerror = () => { voiceButton.setAttribute('aria-pressed', 'false'); setVoiceState('idle'); voiceHelp.textContent = 'No audio left this browser. Try the local visual prompt above.'; };
-    recognition.onend = () => { voiceButton.setAttribute('aria-pressed', 'false'); stopAudioMeter(); };
-    voiceButton?.addEventListener('click', async () => {
-      if (voiceButton.getAttribute('aria-pressed') === 'true') { recognition.stop(); setVoiceState('idle'); return; }
-      const audioReady = await startAudioMeter();
-      voiceHelp.textContent = audioReady ? 'LOCAL AUDIO REACTIVITY / amplitude drives the neural field in this browser.' : 'Microphone access was unavailable. Voice intent can still use the browser speech interface.';
-      try { recognition.start(); } catch { stopAudioMeter(); setVoiceState('idle'); }
-    });
+  // Never fall back to a browser's remote recognizer or install language packs.
+  let voiceReady = false, voiceStarting = false, voiceActive = false, voiceAttempt = 0;
+  const localVoiceUnavailable = 'On-device voice is unavailable. Use the typed visual prompt above.';
+  function disableVoice() {
+    voiceReady = false;
+    if (voiceButton) voiceButton.disabled = true;
+    voiceHelp.textContent = localVoiceUnavailable;
   }
+  function localRecognizer() {
+    if (!SpeechRecognition || typeof SpeechRecognition.available !== 'function') throw Error('local_voice_unavailable');
+    const candidate = new SpeechRecognition();
+    if (!('processLocally' in candidate)) throw Error('local_voice_unavailable');
+    candidate.processLocally = true;
+    candidate.continuous = false; candidate.interimResults = true; candidate.lang = 'en-US';
+    return candidate;
+  }
+  async function hasLocalVoice(candidate) {
+    return candidate.processLocally === true &&
+      await SpeechRecognition.available({langs:['en-US'], processLocally:true}) === 'available';
+  }
+  function stopVoice({preserveFeedback = false} = {}) {
+    const previous = recognition;
+    recognition = null; voiceAttempt++; voiceStarting = false; voiceActive = false;
+    try { previous?.abort?.(); } catch {}
+    stopAudioMeter();
+    if (voiceButton) { voiceButton.setAttribute('aria-pressed', 'false'); voiceButton.disabled = !voiceReady; }
+    if (voiceReady) voiceHelp.textContent = 'On-device speech is ready. Say “listen”, “think”, “speak” or “idle”.';
+    if (!preserveFeedback) setVoiceState('idle');
+  }
+  disableVoice();
+  (async () => {
+    try {
+      if (!await hasLocalVoice(localRecognizer())) return;
+      voiceReady = true; voiceButton.disabled = false;
+      voiceHelp.textContent = 'On-device speech is ready. Say “listen”, “think”, “speak” or “idle”.';
+      voiceButton.addEventListener('click', async () => {
+        if (!voiceReady || voiceStarting || document.hidden) return;
+        if (voiceActive) { stopVoice(); return; }
+        const attempt = ++voiceAttempt;
+        let candidate = null, startRequested = false, hasResult = false;
+        voiceStarting = true; voiceButton.disabled = true;
+        const isCurrent = () => attempt === voiceAttempt && recognition === candidate;
+        try {
+          // A fresh instance keeps late events from an aborted attempt isolated.
+          candidate = localRecognizer(); recognition = candidate;
+          candidate.onstart = () => {
+            if (!isCurrent()) return;
+            if (document.hidden) { stopVoice(); return; }
+            voiceStarting = false; voiceActive = true; voiceButton.disabled = false;
+            voiceButton.setAttribute('aria-pressed', 'true'); setVoiceState('listening');
+            voiceHelp.textContent = 'On-device speech recognition is active. Audio level reacts locally.';
+          };
+          candidate.onresult = event => {
+            if (!isCurrent() || !voiceActive) return;
+            const transcript = Array.from(event.results).map(result => result[0]?.transcript || '').join(' ').trim();
+            if (!transcript) return;
+            hasResult = true;
+            setVoiceState(classifyVoice(transcript), transcript);
+          };
+          candidate.onerror = () => {
+            if (!isCurrent()) return;
+            stopVoice(); voiceHelp.textContent = localVoiceUnavailable;
+          };
+          candidate.onend = () => { if (isCurrent()) stopVoice({preserveFeedback:hasResult}); };
+          if (!await hasLocalVoice(candidate)) { if (isCurrent()) disableVoice(); return; }
+          if (!isCurrent() || document.hidden) return;
+          const audioReady = await startAudioMeter(isCurrent);
+          if (!isCurrent() || document.hidden) return;
+          if (!audioReady) throw Error('microphone_unavailable');
+          // Reassert the local-only requirement immediately before start().
+          candidate.processLocally = true;
+          if (candidate.processLocally !== true) { disableVoice(); return; }
+          voiceHelp.textContent = 'Starting on-device speech recognition…';
+          candidate.start(); startRequested = true;
+          // start() returns before onstart; keep the lock until a lifecycle event.
+        } catch {
+          if (isCurrent()) { stopVoice(); voiceHelp.textContent = localVoiceUnavailable; }
+        } finally {
+          if (!startRequested && isCurrent()) stopVoice();
+        }
+      });
+    } catch { disableVoice(); }
+  })();
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopVoice(); });
+  window.addEventListener('pagehide', stopVoice);
   if ('IntersectionObserver' in window) new IntersectionObserver(entries => { visible = entries.some(entry => entry.isIntersecting); }, { threshold: .01 }).observe(section);
   if (reducedMotion.matches) { targetActivity = .2; }
   resize(); render(performance.now());
