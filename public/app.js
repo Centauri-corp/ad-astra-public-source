@@ -428,7 +428,8 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     voiceState.textContent = state.label;
     activityLabel.textContent = transcript ? `${state.message} / “${transcript.slice(0, 54)}”` : state.message;
     targetActivity = Math.max(targetActivity, state.intensity);
-    if (next !== 'idle') { clearTimeout(voiceTimer); voiceTimer = setTimeout(() => setVoiceState('idle'), 3600); }
+    clearTimeout(voiceTimer); voiceTimer = 0;
+    if (next !== 'idle' || transcript) voiceTimer = setTimeout(() => setVoiceState('idle'), 3600);
   }
   function classifyVoice(text) {
     const valueText = String(text || '').toLowerCase();
@@ -457,13 +458,14 @@ document.getElementById('save-launch').addEventListener('click', async () => {
     return candidate.processLocally === true &&
       await SpeechRecognition.available({langs:['en-US'], processLocally:true}) === 'available';
   }
-  function stopVoice() {
+  function stopVoice({preserveFeedback = false} = {}) {
     const previous = recognition;
     recognition = null; voiceAttempt++; voiceStarting = false; voiceActive = false;
     try { previous?.abort?.(); } catch {}
     stopAudioMeter();
     if (voiceButton) { voiceButton.setAttribute('aria-pressed', 'false'); voiceButton.disabled = !voiceReady; }
-    setVoiceState('idle');
+    if (voiceReady) voiceHelp.textContent = 'On-device speech is ready. Say “listen”, “think”, “speak” or “idle”.';
+    if (!preserveFeedback) setVoiceState('idle');
   }
   disableVoice();
   (async () => {
@@ -475,7 +477,7 @@ document.getElementById('save-launch').addEventListener('click', async () => {
         if (!voiceReady || voiceStarting || document.hidden) return;
         if (voiceActive) { stopVoice(); return; }
         const attempt = ++voiceAttempt;
-        let candidate = null, startRequested = false;
+        let candidate = null, startRequested = false, hasResult = false;
         voiceStarting = true; voiceButton.disabled = true;
         const isCurrent = () => attempt === voiceAttempt && recognition === candidate;
         try {
@@ -491,13 +493,15 @@ document.getElementById('save-launch').addEventListener('click', async () => {
           candidate.onresult = event => {
             if (!isCurrent() || !voiceActive) return;
             const transcript = Array.from(event.results).map(result => result[0]?.transcript || '').join(' ').trim();
+            if (!transcript) return;
+            hasResult = true;
             setVoiceState(classifyVoice(transcript), transcript);
           };
           candidate.onerror = () => {
             if (!isCurrent()) return;
             stopVoice(); voiceHelp.textContent = localVoiceUnavailable;
           };
-          candidate.onend = () => { if (isCurrent()) stopVoice(); };
+          candidate.onend = () => { if (isCurrent()) stopVoice({preserveFeedback:hasResult}); };
           if (!await hasLocalVoice(candidate)) { if (isCurrent()) disableVoice(); return; }
           if (!isCurrent() || document.hidden) return;
           const audioReady = await startAudioMeter(isCurrent);

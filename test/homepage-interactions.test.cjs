@@ -11,6 +11,19 @@ async function settle() { for (let i = 0; i < 8; i++) await new Promise(resolve 
 // The GPU is a no-op fixture: these tests cover interaction/privacy boundaries, not rendering.
 async function browser(options = {}) {
   let focused = null;
+  let now = 0, nextTimer = 0;
+  const timers = new Map();
+  const setTimer = (callback, delay = 0) => { const id = ++nextTimer; timers.set(id, {callback, due:now + delay}); return id; };
+  const clearTimer = id => timers.delete(id);
+  function advance(milliseconds) {
+    const target = now + milliseconds;
+    for (;;) {
+      const next = [...timers].filter(([, timer]) => timer.due <= target).sort((a, b) => a[1].due - b[1].due || a[0] - b[0])[0];
+      if (!next) break;
+      now = next[1].due; timers.delete(next[0]); next[1].callback();
+    }
+    now = target;
+  }
   class Element {
     constructor(id = '') { this.id = id; this.handlers = {}; this.attributes = {}; this.dataset = {}; this.style = {setProperty(){}}; this.hidden = false; this.disabled = false; this.tabIndex = 0; this.textContent = ''; this.children = []; this.value = ''; this.classList = {toggle(){}, add(){}, remove(){}}; }
     setAttribute(key, value) { this.attributes[key] = String(value); if (key === 'tabindex') this.tabIndex = Number(value); if (key === 'disabled') this.disabled = true; }
@@ -71,10 +84,10 @@ async function browser(options = {}) {
     const stream = {getTracks:() => [{stop:() => { calls.stoppedTracks++; calls.stoppedStreamIds.push(id); }}]};
     return options.microphone ? options.microphone(stream, id) : stream;
   }}};
-  const context = {document, window, navigator, location:{hash:''}, matchMedia:() => ({matches:false, addEventListener(){}}), performance:{now:() => 0}, innerHeight:800, scrollY:0, devicePixelRatio:1, requestAnimationFrame:() => 1, setTimeout:() => 1, clearTimeout(){}, console};
+  const context = {document, window, navigator, location:{hash:''}, matchMedia:() => ({matches:false, addEventListener(){}}), performance:{now:() => now}, innerHeight:800, scrollY:0, devicePixelRatio:1, requestAnimationFrame:() => 1, setTimeout:setTimer, clearTimeout:clearTimer, console};
   vm.runInNewContext(source, context, {filename:'public/app.js'});
   await settle();
-  return {node, experience, intelligence, document, window, calls, recognizer:() => recognizer, focused:() => focused};
+  return {node, experience, intelligence, document, window, calls, advance, recognizer:() => recognizer, focused:() => focused};
 }
 
 test('experience tabs and intelligence tabs retain independent selections and keyboard focus', async () => {
@@ -233,4 +246,41 @@ for (const [name, options] of [
   assert.equal(page.node('voice-command').disabled, false);
   assert.match(page.node('voice-help').textContent, /unavailable/);
   if (options.audioContext === false) assert.deepEqual(page.calls.stoppedStreamIds, [1]);
+});
+
+test('normal asynchronous completion preserves a recognized command for 3.6 seconds from its result', async () => {
+  for (const [command, state] of [['speak', 'speaking'], ['idle', 'idle']]) {
+    const page = await browser({asyncStart:true});
+    await page.node('voice-command').emit('click');
+    page.advance(200); page.recognizer().deliverStart();
+    page.advance(400); page.recognizer().onresult({results:[[{transcript:command}]]});
+    const feedback = page.node('intelligence-activity').textContent;
+    assert.ok(feedback.includes('“' + command + '”'));
+    page.advance(100); page.recognizer().onend();
+    assert.equal(page.node('voice-command').getAttribute('aria-pressed'), 'false');
+    assert.equal(page.node('voice-command').disabled, false);
+    assert.ok(page.calls.stoppedTracks > 0);
+    assert.equal(page.node('intelligence-layer').dataset.voiceState, state);
+    assert.equal(page.node('intelligence-activity').textContent, feedback);
+    page.advance(3499);
+    assert.equal(page.node('intelligence-activity').textContent, feedback);
+    page.advance(1);
+    assert.equal(page.node('intelligence-layer').dataset.voiceState, 'idle');
+    assert.equal(page.node('intelligence-activity').textContent, 'LOCAL VISUAL / IDLE FIELD');
+  }
+});
+
+for (const reason of ['cancel', 'error']) test(reason + ' still clears recognized feedback and releases audio immediately', async () => {
+  const page = await browser({asyncStart:true});
+  await page.node('voice-command').emit('click'); page.recognizer().deliverStart();
+  page.recognizer().onresult({results:[[{transcript:'speak'}]]});
+  page.advance(100);
+  if (reason === 'cancel') await page.window.emit('pagehide');
+  else page.recognizer().onerror({error:'network'});
+  assert.equal(page.node('intelligence-layer').dataset.voiceState, 'idle');
+  assert.equal(page.node('intelligence-activity').textContent, 'LOCAL VISUAL / IDLE FIELD');
+  assert.equal(page.node('voice-command').getAttribute('aria-pressed'), 'false');
+  assert.ok(page.calls.stoppedTracks > 0);
+  page.advance(4000);
+  assert.equal(page.node('intelligence-activity').textContent, 'LOCAL VISUAL / IDLE FIELD');
 });
