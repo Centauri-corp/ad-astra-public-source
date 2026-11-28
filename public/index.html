@@ -128,13 +128,13 @@
         <h2 id="intelligence-layer-title">Choose the state<br><em>you want to explore.</em></h2>
         <p class="lead">A local visual model for how an intelligence interface might change as its reasoning surface expands. It is a visual simulation — not live model telemetry and not a claim that AGI or ASI is deployed.</p>
         <div class="intelligence-tabs" role="tablist" aria-label="Intelligence layer visual states">
-          <button class="intelligence-tab active" role="tab" aria-selected="true" data-tier="1"><span>01</span><b>Narrow AI</b><small>Guided preview</small></button>
-          <button class="intelligence-tab" role="tab" aria-selected="false" data-tier="2"><span>02</span><b>AGI</b><small>Research direction</small></button>
-          <button class="intelligence-tab" role="tab" aria-selected="false" data-tier="3"><span>03</span><b>ASI</b><small>Hypothetical horizon</small></button>
+          <button class="intelligence-tab active" role="tab" aria-selected="true" tabindex="0" data-tier="1"><span>01</span><b>Narrow AI</b><small>Guided preview</small></button>
+          <button class="intelligence-tab" role="tab" aria-selected="false" tabindex="-1" data-tier="2"><span>02</span><b>AGI</b><small>Research direction</small></button>
+          <button class="intelligence-tab" role="tab" aria-selected="false" tabindex="-1" data-tier="3"><span>03</span><b>ASI</b><small>Hypothetical horizon</small></button>
         </div>
         <div class="intelligence-readout"><span id="intelligence-readout-label">NARROW AI / BOUNDED SIGNAL FLOW</span><strong id="intelligence-readout-value">A clean, predictable field for focused tasks.</strong></div>
         <form class="prompt-surface" id="intelligence-prompt"><label for="intelligence-input">Shape the visual field</label><div><input id="intelligence-input" maxlength="240" placeholder="Type a question to create a local ripple…" autocomplete="off"><button type="submit" aria-label="Create local visual ripple"><span aria-hidden="true">↗</span></button></div><small id="intelligence-activity">LOCAL SIMULATION / NO PROMPT IS SENT</small></form>
-        <div class="voice-concierge" aria-live="polite"><div><span class="voice-dot" aria-hidden="true"></span><span id="voice-state">VOICE CONCIERGE / IDLE</span></div><button id="voice-command" type="button" aria-pressed="false"><span aria-hidden="true">◉</span> Activate local voice command</button><small id="voice-help">Say “listen”, “think”, “speak”, “diagnostics” or “idle”. Audio stays in this browser.</small></div>
+        <div class="voice-concierge" aria-live="polite"><div><span class="voice-dot" aria-hidden="true"></span><span id="voice-state">VOICE CONCIERGE / IDLE</span></div><button id="voice-command" type="button" aria-pressed="false" disabled><span aria-hidden="true">◉</span> Activate on-device voice command</button><small id="voice-help">Voice commands require on-device speech already available in your browser. Otherwise use the typed visual prompt.</small></div>
       </div>
       <div class="intelligence-orb-wrap" aria-hidden="true"><div class="intelligence-orb"><span></span><span></span><span></span><i></i><b>ALIGNMENT<br>CORE</b></div><p>STATE ORB / VISUAL MODEL ONLY</p></div>
     </div>
